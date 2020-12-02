@@ -9,10 +9,13 @@
 - team
 
 ## Todo
+
 - [ ] setup linting
 - [ ] setup prettier
 - [ ] create react app for all apps
 - [ ] move examples to this repo 
 - [ ] setup github pages for every app
 
+## Important
 
+- Use environment vars for apiKeys etc
