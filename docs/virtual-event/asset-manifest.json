@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/website-react-examples/virtual-event/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/website-react-examples/virtual-event/static/js/main.83997fbf.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event/static/js/main.83997fbf.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.ecd56828.js",
+    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.ecd56828.js.map",
+    "static/js/2.89132913.chunk.js": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js",
+    "static/js/2.89132913.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js.map",
+    "static/js/3.c36ffe61.chunk.js": "/website-react-examples/virtual-event/static/js/3.c36ffe61.chunk.js",
+    "static/js/3.c36ffe61.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.c36ffe61.chunk.js.map",
+    "index.html": "/website-react-examples/virtual-event/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/website-react-examples/virtual-event/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.89132913.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/website-react-examples/virtual-event/static/media/logo.6ce24c58.svg"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.ecd56828.js",
+    "static/js/2.89132913.chunk.js",
+    "static/css/main.ab7136cd.chunk.css",
+    "static/js/main.83997fbf.chunk.js"
+  ]
+}
