@@ -8,8 +8,6 @@
 - gaming-livestream
 - team
 
-testing
-
 ## Todo
 
 - [ ] setup linting
