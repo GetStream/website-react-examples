@@ -1,21 +1,21 @@
 {
   "files": {
-    "main.css": "/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/static/js/main.6d73fbba.chunk.js",
-    "main.js.map": "/static/js/main.6d73fbba.chunk.js.map",
-    "runtime-main.js": "/static/js/runtime-main.92ec38c3.js",
-    "runtime-main.js.map": "/static/js/runtime-main.92ec38c3.js.map",
-    "static/js/2.29361302.chunk.js": "/static/js/2.29361302.chunk.js",
-    "static/js/2.29361302.chunk.js.map": "/static/js/2.29361302.chunk.js.map",
-    "static/js/3.504e181e.chunk.js": "/static/js/3.504e181e.chunk.js",
-    "static/js/3.504e181e.chunk.js.map": "/static/js/3.504e181e.chunk.js.map",
-    "index.html": "/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.29361302.chunk.js.LICENSE.txt": "/static/js/2.29361302.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/static/media/logo.6ce24c58.svg"
+    "main.css": "/website-react-examples/social-messenger/static/css/main.ab7136cd.chunk.css",
+    "main.js": "/website-react-examples/social-messenger/static/js/main.6d73fbba.chunk.js",
+    "main.js.map": "/website-react-examples/social-messenger/static/js/main.6d73fbba.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/social-messenger/static/js/runtime-main.c5bdf40c.js",
+    "runtime-main.js.map": "/website-react-examples/social-messenger/static/js/runtime-main.c5bdf40c.js.map",
+    "static/js/2.29361302.chunk.js": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js",
+    "static/js/2.29361302.chunk.js.map": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js.map",
+    "static/js/3.504e181e.chunk.js": "/website-react-examples/social-messenger/static/js/3.504e181e.chunk.js",
+    "static/js/3.504e181e.chunk.js.map": "/website-react-examples/social-messenger/static/js/3.504e181e.chunk.js.map",
+    "index.html": "/website-react-examples/social-messenger/index.html",
+    "static/css/main.ab7136cd.chunk.css.map": "/website-react-examples/social-messenger/static/css/main.ab7136cd.chunk.css.map",
+    "static/js/2.29361302.chunk.js.LICENSE.txt": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js.LICENSE.txt",
+    "static/media/logo.6ce24c58.svg": "/website-react-examples/social-messenger/static/media/logo.6ce24c58.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.92ec38c3.js",
+    "static/js/runtime-main.c5bdf40c.js",
     "static/js/2.29361302.chunk.js",
     "static/css/main.ab7136cd.chunk.css",
     "static/js/main.6d73fbba.chunk.js"
