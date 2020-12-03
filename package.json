@@ -9,6 +9,7 @@
 		"build:cs": "cd customer-support && yarn build && rm -rf ../docs/customer-support/* && mv build/* ../docs/customer-support",
 		"build:sm": "cd social-messenger && yarn build && rm -rf ../docs/social-messenger/* && mv build/* ../docs/social-messenger",
 		"build:ve": "cd virtual-event && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
-		"build:all": "yarn build:cs && yarn build:sm && yarn build:ve"
+		"build:t": "cd team && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
+		"build:all": "yarn build:cs && yarn build:sm && yarn build:ve && build:t"
 	}
 }
