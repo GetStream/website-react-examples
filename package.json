@@ -1,0 +1,11 @@
+{
+  "name": "website-react-examples",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:GetStream/website-react-examples.git",
+  "author": "Jaap <jaap@getstream.io>",
+  "license": "MIT",
+	"scripts": {
+					"build:all": "cd customer-support && yarn build && mv build ../apps/customer-support"
+	}
+}
