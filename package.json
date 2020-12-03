@@ -6,6 +6,6 @@
   "author": "Jaap <jaap@getstream.io>",
   "license": "MIT",
 	"scripts": {
-					"build:all": "cd customer-support && yarn build && mv build/* ../apps/customer-support"
+					"build:all": "cd customer-support && yarn build && mv build/* ../docs/customer-support"
 	}
 }
