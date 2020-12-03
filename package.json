@@ -11,6 +11,30 @@
 		"build:ve": "cd virtual-event && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
 		"build:t": "cd team && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
 		"build:gl": "cd gaming-livestream && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
-		"build:all": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl"
-	}
+    "build:all": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl",
+    "lint": "eslint",
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+  },
+  "devDependencies": {
+    "eslint": "^7.6.0",
+    "eslint-config-airbnb-base": "^14.2.0",
+    "eslint-config-prettier": "^6.11.0",
+    "eslint-import-resolver-alias": "^1.1.2",
+    "eslint-loader": "^4.0.2",
+    "eslint-plugin-babel": "^5.3.1",
+    "eslint-plugin-cypress": "^2.11.2",
+    "eslint-plugin-flowtype": "^5.2.0",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jest": "^23.20.0",
+    "eslint-plugin-jest-dom": "^3.2.2",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-node": "^11.1.0",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-promise": "^4.2.1",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.0.8",
+    "eslint-plugin-sonarjs": "^0.5.0",
+    "prettier": "^2.0.5"
+
+  }
 }
