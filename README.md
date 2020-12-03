@@ -10,11 +10,11 @@
 
 ## Todo
 
-- [ ] setup linting
-- [ ] setup prettier
-- [ ] create react app for all apps
+- [x] setup linting
+- [x] setup prettier
+- [x] create react app for all apps
 - [ ] move examples to this repo
-- [ ] setup github pages for every app
+- [x] setup github pages for every app
 
 ## Important
 
