@@ -10,6 +10,7 @@
 		"build:sm": "cd social-messenger && yarn build && rm -rf ../docs/social-messenger/* && mv build/* ../docs/social-messenger",
 		"build:ve": "cd virtual-event && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
 		"build:t": "cd team && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
-		"build:all": "yarn build:cs && yarn build:sm && yarn build:ve && build:t"
+		"build:gl": "cd gaming-livestream && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
+		"build:all": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl"
 	}
 }
