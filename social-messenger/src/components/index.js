@@ -3,3 +3,4 @@ export { default as MessagingChannelHeader } from './MessagingChannelHeader/Mess
 export { default as MessagingChannelList } from './MessagingChannelList/MessagingChannelList';
 export { default as MessagingChannelPreview } from './MessagingChannelPreview/MessagingChannelPreview';
 export { default as MessagingInput } from './MessagingInput/MessagingInput';
+export { default as WindowControls } from './WindowControls/WindowControls';

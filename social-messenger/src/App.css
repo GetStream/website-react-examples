@@ -7,15 +7,23 @@ body {
 
 #root {
   height: 100%;
+}
+
+.str-chat.str-chat-channel.messaging {
   border-radius: 16px;
 }
 
+.str-chat.str-chat-channel-list.messaging {
+  border-top-left-radius: 16px;
+  border-bottom-left-radius: 16px;
+}
+
 .str-chat-channel-list {
-  height: 100%;
+  height: 800px;
 }
 
 .str-chat-channel {
-  height: 100%;
+  height: 800px;
 }
 
 .messaging.str-chat.dark .str-chat__list {
@@ -24,16 +32,14 @@ body {
 }
 
 .str-chat-channel.messaging .str-chat__main-panel {
-  padding: 20px 20px 0 0px;
+  padding: 30px 30px 0 0px;
 }
 
 .str-chat-channel.messaging .str-chat__main-panel:not(:last-child) {
   padding: 20px 0 0 0px;
 }
 
-.str-chat-channel.messaging
-  .str-chat__main-panel:not(:last-child)
-  .messaging__channel-header {
+.str-chat-channel.messaging .str-chat__main-panel:not(:last-child) .messaging__channel-header {
   border-radius: 10px 0px 0px 0px;
 }
 
@@ -170,16 +176,8 @@ body {
 
 /* MESSAGE ACTIONS */
 
-.str-chat.dark
-  .str-chat__message
-  .str-chat__message-simple__actions__action--options
-  .str-chat__message-actions-box--mine {
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.0001) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    ),
-    rgba(0, 0, 0, 0.7);
+.str-chat.dark .str-chat__message .str-chat__message-simple__actions__action--options .str-chat__message-actions-box--mine {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%), rgba(0, 0, 0, 0.7);
   box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
 }
@@ -250,9 +248,7 @@ body {
   display: none;
 }
 
-.str-chat__edit-message-form
-  .str-chat__message-team-form-footer
-  button[type='submit'] {
+.str-chat__edit-message-form .str-chat__message-team-form-footer button[type='submit'] {
   padding-right: 0;
 }
 
@@ -267,12 +263,7 @@ body {
 }
 
 .str-chat.dark .str-chat__reaction-selector {
-  background: linear-gradient(
-      180deg,
-      rgba(0, 0, 0, 0.0001) 0%,
-      rgba(0, 0, 0, 0.5) 100%
-    ),
-    rgba(0, 0, 0, 0.7);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%), rgba(0, 0, 0, 0.7);
   box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.15);
 }
 
