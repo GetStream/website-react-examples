@@ -1,0 +1,19 @@
+.channel__container {
+  height: 100%;
+  width: 100%;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+}
+
+.str-chat__thread-list .str-chat__message-team {
+  border-left: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.str-chat__thread .str-chat__square-button {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+}
+
+.str-chat__thread .str-chat__square-button:active {
+  background: #fff;
+}
