@@ -7,9 +7,12 @@
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
+    "node-sass": "4.14.1",
     "react": "^17.0.1",
     "react-dom": "^17.0.1",
     "react-scripts": "4.0.1",
+    "stream-chat": "^2.9.0",
+    "stream-chat-react": "^3.3.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

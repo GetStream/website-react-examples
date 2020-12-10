@@ -1,0 +1,116 @@
+@import 'variables';
+
+header {
+  align-items: center;
+  background-color: $component-background;
+  border-bottom: 1px solid $border-color;
+  display: flex;
+  justify-content: space-between;
+  padding: .5rem;
+  transition: all 1s;
+
+  &.show-members {
+    padding-right: 26%;
+
+    >.stream-details {
+      >.info {
+        >p {
+          width: 80%
+        }
+      }
+    }
+  }
+
+  &.full-screen {
+    padding: .5rem;
+  }
+
+  >.stream-details {
+    align-items: center;
+    display: flex;
+
+    >svg {
+      margin-right: .5rem;
+    }
+
+    >.info {
+      width: 100%;
+
+      >p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+      }
+
+      >.info-separator {
+        display: flex;
+        margin-top: .3rem;
+
+        >div {
+          align-items: center;
+          display: flex;
+          margin-right: 1rem;
+
+          >svg {
+            margin-right: .5rem;
+          }
+        }
+      }
+    }
+  }
+
+  >.stream-involvement {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    >div {
+      overflow: hidden;
+      transition: all .5s;
+      width: 4rem;
+
+      &.shrink {
+        width: 1rem;
+
+        >p {
+          width: 0;
+          height: 0;
+          visibility: hidden;
+        }
+
+        >svg {
+          margin-right: 0;
+        }
+      }
+    }
+
+    >.watchers-container {
+      align-items: center;
+      display: flex;
+
+      >svg {
+        margin-right: .5rem;
+      }
+    }
+
+    >.follows-container {
+      align-items: center;
+      display: flex;
+      margin-left: 1rem;
+
+      >svg {
+        margin-right: .5rem;
+      }
+    }
+
+    >.subs-container {
+      align-items: center;
+      display: flex;
+      margin-left: 1rem;
+
+      >svg {
+        margin-right: .5rem;
+      }
+    }
+  }
+}

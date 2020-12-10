@@ -1,0 +1,55 @@
+@import 'variables';
+
+html {
+  box-sizing: border-box;
+  scroll-behavior: smooth;
+}
+
+*,
+*:before,
+*:after {
+  box-sizing: inherit;
+}
+
+body {
+  margin: 0;
+  box-sizing: border-box;
+  -webkit-box-sizing: border-box;
+  -moz-box-sizing: border-box;
+
+  p {
+    color: $foreground;
+    margin: 0;
+  }
+
+  button {
+    background-color: $button-background;
+    border: none;
+    border-radius: .5rem;
+    color: $foreground;
+    padding: .75rem;
+    transition: all .2s;
+
+    &:hover {
+      background-color: $button-background-hover;
+    }
+
+    &:focus {
+      outline: none; // check if we care about a11y
+    }
+
+    &:active {
+      background-color: $button-background;
+    }
+  }
+
+  input {
+    background-color: $background;
+    border: 1px solid $border-color-secondary;
+    border-radius: .5rem;
+    color: $foreground;
+    height: 2.5rem;
+    padding-left: .5rem;
+    width: 100%;
+  }
+}

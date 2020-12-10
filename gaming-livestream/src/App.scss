@@ -1,0 +1,106 @@
+@import '../src/styles/variables';
+
+main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+  padding: 5rem;
+
+  >.live-stream {
+    background-color: $background;
+    border-radius: 1rem;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+    width: 1130px;
+
+    >.separator {
+      display: flex;
+      flex-direction: column;
+      flex: 3;
+      justify-content: space-between;
+      width: 75%;
+      transition: all 1s;
+
+      &.show-members {
+        width: 34rem;
+      }
+
+      >.header-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        >Header {
+          width: 75%;
+          height: 3.75rem;
+
+          &.full-screen {
+            width: 75%;
+          }
+        }
+
+        >.sub-header {
+          align-items: center;
+          background-color: $component-background;
+          border-bottom: 1px solid $border-color;
+          border-left: 1px solid $border-color;
+          border-top-right-radius: 1rem;
+          display: flex;
+          height: 3.75rem;
+          justify-content: space-between;
+          width: 0;
+          transition: all .5s;
+
+          >button {
+            height: 2.5rem;
+            visibility: hidden;
+            width: 2.5rem;
+          }
+
+          >p {
+            font-size: 0;
+            visibility: hidden;
+          }
+
+          >div {
+            height: 2.5rem;
+            width: 2.5rem;
+          }
+
+          &.hide {
+            border: none;
+            border: none;
+            padding: 0;
+            width: 0;
+          }
+
+          &.show {
+            width: 25%;
+            padding: .5rem;
+
+            >button {
+              background-image: url(/assets/icons/arrow.svg);
+              background-position: center;
+              background-size: 50%;
+              background-repeat: no-repeat;
+              border-radius: .5rem;
+              height: 2.5rem;
+              visibility: visible;
+              width: 2.5rem;
+              transition: all 0;
+            }
+
+            >p {
+              font-size: 1rem;
+              visibility: visible;
+            }
+          }
+        }
+      }
+    }
+  }
+}
