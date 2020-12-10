@@ -68,7 +68,7 @@
 .str-chat__message-replies-count-button {
   z-index: 2;
   display: flex;
-  justify-content: flex-end;
+  /* justify-content: flex-end; */
   font-family: Helvetica Neue, sans-serif;
   font-style: normal;
   font-weight: bold;
@@ -195,9 +195,7 @@ ul.str-chat__simple-reactions-list:hover {
 
 .str-chat__message-team--editing {
   background: #e9e9ea;
-  box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.06),
-    inset 0 1px 0 0 rgb(var(--primary-color)),
-    inset 0 -1px 0 0 rgb(var(--primary-color));
+  box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.06), inset 0 1px 0 0 rgb(var(--primary-color)), inset 0 -1px 0 0 rgb(var(--primary-color));
   padding: 15px 20px;
 }
 
@@ -205,9 +203,7 @@ ul.str-chat__simple-reactions-list:hover {
   padding: 10px 0 0;
 }
 
-.str-chat__edit-message-form
-  .str-chat__message-team-form-footer
-  button[type='submit'] {
+.str-chat__edit-message-form .str-chat__message-team-form-footer button[type='submit'] {
   color: rgb(var(--primary-color));
 }
 
