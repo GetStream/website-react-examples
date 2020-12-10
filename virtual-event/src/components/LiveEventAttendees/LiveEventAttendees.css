@@ -1,0 +1,17 @@
+.live-event-attendees__container {
+  background-color: #f1faff;
+  height: 735px;
+  border-radius: 0px 0px 16px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.str-chat.dark .live-event-attendees__container {
+  background-color: #1a1c1e;
+  height: 735px;
+  border-radius: 0px 0px 16px 0px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}

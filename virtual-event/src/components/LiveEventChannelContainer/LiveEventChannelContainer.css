@@ -1,0 +1,28 @@
+.livestream.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+  background: #f1faff;
+  padding: 0px;
+  height: 735px;
+  width: 320px;
+}
+
+.pinned-messages__container .str-chat__reverse-infinite-scroll {
+  background: #f1faff;
+  padding-top: 0px;
+  height: 735px;
+  width: 320px;
+}
+.pinned-messages__container {
+  background: #f1faff;
+  padding-top: 0px;
+  height: 735px;
+  width: 320px;
+}
+.pinned-messages__container .pin-icon {
+  display: none;
+}
+.str-chat.dark .pinned-messages__container {
+  background: #1a1a1a;
+}
+.str-chat.dark .pinned-messages__container .str-chat__reverse-infinite-scroll {
+  background: #1a1a1a;
+}
