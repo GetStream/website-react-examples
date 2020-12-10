@@ -17,3 +17,11 @@
 .str-chat__thread .str-chat__square-button:active {
   background: #fff;
 }
+
+.str-chat__list .str-chat__reverse-infinite-scroll {
+  padding-top: 0px;
+}
+
+.str-chat__date-separator {
+  padding: 20px 40px;
+}

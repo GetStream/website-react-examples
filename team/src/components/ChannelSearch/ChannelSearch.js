@@ -79,19 +79,12 @@ export const ChannelSearch = () => {
         { limit: 6 },
       );
 
-      const userResponse = client.queryUsers(
-        { id: { $ne: client.userID }, name: { $autocomplete: text } },
-        { id: 1 },
-        { limit: 6 },
-      );
+      const userResponse = client.queryUsers({ id: { $ne: client.userID }, name: { $autocomplete: text } }, { id: 1 }, { limit: 6 });
 
-      const [channels, { users }] = await Promise.all([
-        channelResponse,
-        userResponse,
-      ]);
+      const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
 
-      setTeamChannels(channels);
-      setDirectChannels(users);
+      if (channels.length) setTeamChannels(channels);
+      if (users.length) setDirectChannels(users);
       setAllChannels(channels.concat(users));
     } catch (e) {
       setQuery('');
@@ -117,18 +110,12 @@ export const ChannelSearch = () => {
   };
 
   return (
-    <div className="channel-search__container">
-      <div className="channel-search__input__wrapper">
-        <div className="channel-search__input__icon">
+    <div className='channel-search__container'>
+      <div className='channel-search__input__wrapper'>
+        <div className='channel-search__input__icon'>
           <SearchIcon />
         </div>
-        <input
-          className="channel-search__input__text"
-          onChange={onSearch}
-          placeholder="Search"
-          type="text"
-          value={query}
-        />
+        <input className='channel-search__input__text' onChange={onSearch} placeholder='Search' type='text' value={query} />
       </div>
       {query && (
         <ResultsDropdown
