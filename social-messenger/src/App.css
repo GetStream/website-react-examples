@@ -11,11 +11,23 @@ body {
 
 .str-chat.str-chat-channel.messaging {
   border-radius: 16px;
+  background: #fafafa;
+  box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.06), 0px 2px 30px rgba(0, 0, 0, 0.1);
+}
+
+.dark.str-chat.str-chat-channel.messaging {
+  background: #212326;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
 }
 
 .str-chat.str-chat-channel-list.messaging {
   border-top-left-radius: 16px;
   border-bottom-left-radius: 16px;
+  background: #fafafa;
+}
+
+.dark.str-chat.str-chat-channel-list.messaging {
+  background: #212326 !important;
 }
 
 .str-chat-channel-list {
@@ -24,6 +36,18 @@ body {
 
 .str-chat-channel {
   height: 800px;
+}
+
+.str-chat-channel .str-chat__container {
+  padding: 30px 30px 0 0;
+}
+
+.str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0 !important;
+}
+
+.messaging.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+  padding-top: 0;
 }
 
 .messaging.str-chat.dark .str-chat__list {
@@ -64,6 +88,10 @@ body {
 }
 
 /*  THREAD STYLES */
+
+.messaging.str-chat .str-chat__thread {
+  margin: 0;
+}
 
 .messaging.str-chat .str-chat__thread-header {
   border: none;

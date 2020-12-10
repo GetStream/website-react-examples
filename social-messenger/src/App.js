@@ -20,7 +20,7 @@ const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 
 const filters = { type: 'messaging', members: { $in: [user] } };
-const options = { state: true, watch: true, presence: true, limit: 10 };
+const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
   updated_at: -1,

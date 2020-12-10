@@ -12,13 +12,23 @@
 }
 
 .channel-preview__container:hover {
-  background: #2c2c30;
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.07);
   transition: background 0.1s ease-in-out;
 }
 
-.channel-preview__container.selected {
+.str-chat.dark .channel-preview__container:hover {
   background: #2c2c30;
+}
+
+.channel-preview__container.selected {
+  background: #ffffff;
+  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.07);
   transition: background 0.1s ease-in-out;
+}
+
+.str-chat.dark .channel-preview__container.selected {
+  background: #2c2c30;
 }
 
 .channel-preview__content-wrapper {
@@ -43,12 +53,16 @@
   font-family: Helvetica Neue, sans-serif;
   font-weight: 500;
   font-size: 15px;
-  color: #ffffff;
+  color: #000000;
   margin: 0;
   max-width: 158px;
   overflow: hidden;
   text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+.str-chat.dark .channel-preview__content-name {
+  color: #ffffff;
 }
 
 .channel-preview__content-time {

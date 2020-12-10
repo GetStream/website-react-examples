@@ -31,7 +31,7 @@ const CreateChannel = ({ onClose, visible }) => {
               name: { $autocomplete: inputText },
             },
             { id: 1 },
-            { limit: 10 },
+            { limit: 6 },
           );
 
           setResultsOpen(true);
@@ -43,6 +43,7 @@ const CreateChannel = ({ onClose, visible }) => {
         setSearching(false);
       }
     };
+
     if (inputText) {
       findUsers();
     }
@@ -100,21 +101,15 @@ const CreateChannel = ({ onClose, visible }) => {
   if (!visible) return null;
 
   return (
-    <div className="messaging-create-channel">
+    <div className='messaging-create-channel'>
       <header>
-        <div className="messaging-create-channel__left">
-          <div className="messaging-create-channel__left-text">To: </div>
+        <div className='messaging-create-channel__left'>
+          <div className='messaging-create-channel__left-text'>To: </div>
           {!!selectedUsers?.length && (
-            <div className="messaging-create-channel__users">
+            <div className='messaging-create-channel__users'>
               {selectedUsers.map((user) => (
-                <div
-                  className="messaging-create-channel__user"
-                  onClick={() => removeUser(user)}
-                  key={user.id}
-                >
-                  <div className="messaging-create-channel__user-text">
-                    {user.name}
-                  </div>
+                <div className='messaging-create-channel__user' onClick={() => removeUser(user)} key={user.id}>
+                  <div className='messaging-create-channel__user-text'>{user.name}</div>
                   <XButton />
                 </div>
               ))}
@@ -126,26 +121,23 @@ const CreateChannel = ({ onClose, visible }) => {
               ref={inputRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              type="text"
-              className="messaging-create-channel__input"
+              placeholder='Start typing for suggestions'
+              type='text'
+              className='messaging-create-channel__input'
             />
           </form>
         </div>
-        <button className="create-channel-button" onClick={createChannel}>
+        <button className='create-channel-button' onClick={createChannel}>
           Start chat
         </button>
       </header>
       {inputText && (
         <main>
-          <ul className="messaging-create-channel__user-results">
+          <ul className='messaging-create-channel__user-results'>
             {!!users?.length && (
               <div>
                 {users.map((user) => (
-                  <div
-                    className="messaging-create-channel__user-result"
-                    onClick={() => addUser(user)}
-                    key={user.id}
-                  >
+                  <div className='messaging-create-channel__user-result' onClick={() => addUser(user)} key={user.id}>
                     <UserResult user={user} />
                   </div>
                 ))}
@@ -159,16 +151,15 @@ const CreateChannel = ({ onClose, visible }) => {
 };
 
 const UserResult = ({ user }) => {
+  console.log('🚀 ~ file: CreateChannel.js ~ line 154 ~ UserResult ~ user', user);
   return (
-    <li className="messaging-create-channel__user-result">
-      <div className="messaging-create-channel__user-result__avatar">
-        <Avatar image={user.image} size="40" />
+    <li className='messaging-create-channel__user-result'>
+      <div className='messaging-create-channel__user-result__avatar'>
+        <Avatar image={user.image} size='40' />
       </div>
-      <div className="messaging-create-channel__user-result__details">
+      <div className='messaging-create-channel__user-result__details'>
         <span>{user.name}</span>
-        <span className="messaging-create-channel__user-result__details__last-seen">
-          {user.online}
-        </span>
+        <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span>
       </div>
     </li>
   );
