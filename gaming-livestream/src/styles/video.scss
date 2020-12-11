@@ -1,7 +1,10 @@
 .video-container {
   max-height: 30rem !important;
+
   // just for empty video 
   height: 30rem;
+  // just for empty video, you can remove when there's an actual video ^
+
   margin-right: 25%;
   transition: all 1s;
 
