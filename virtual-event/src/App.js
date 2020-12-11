@@ -57,24 +57,24 @@ const App = () => {
               className='main-container-inner__left'
               style={currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }}
             >
-              <div className='main-container-inner__left-content'>
-                <div>
-                  {/* <div className="live-video-icon">
+              <div style={{ height: '100%', width: '100%' }}>
+                {/* <div className="live-video-icon">
                   <LiveVideoIcon />
                 </div> */}
-                  <iframe
-                    title='science'
-                    width='810px'
-                    height='473px'
-                    src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1'
-                    frameBorder='0px'
-                    allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
-                    allowFullScreen
-                  ></iframe>
-                </div>
+                <iframe
+                  title='science'
+                  width='100%'
+                  height='100%'
+                  src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1'
+                  frameBorder='0px'
+                  allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
+                  allowFullScreen
+                ></iframe>
+              </div>
+              <div>
                 <img
                   alt=''
-                  style={{ height: '295px', width: '810px' }}
+                  style={{ maxHeight: '100%', maxWidth: '100%' }}
                   src={currentTheme === 'light' ? require('./assets/VideoFooter.png') : require('./assets/VideoFooterDark.png')}
                 ></img>
               </div>

@@ -1,5 +1,6 @@
 .live-event-footer__container {
   display: flex;
+  position: relative;
   flex-direction: column;
   height: 129px;
   width: 320px;

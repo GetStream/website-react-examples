@@ -8,7 +8,7 @@ body {
   width: 100%;
 }
 
-.example-video-container {
+/* .example-video-container {
   flex: 1;
   align-items: center;
   justify-content: center;
@@ -24,27 +24,27 @@ body {
   border-radius: 5px;
   overflow: hidden;
   background: white;
-}
+} */
 
-.example-video img {
+/* .example-video img {
   width: inherit;
   height: inherit;
   object-fit: cover;
-}
+} */
 
-.str-chat__container {
+/* .str-chat__container {
   width: 500px;
   max-width: 100%;
-}
+} */
 
-.dark.str-chat {
+/* .dark.str-chat {
   background: #1a1a1a;
   img {
     color: white;
   }
-}
+} */
 
-@media screen and (max-width: 960px) {
+/* @media screen and (max-width: 960px) {
   .str-chat__container {
     max-width: 375px;
   }
@@ -57,7 +57,7 @@ body {
   .str-chat__container {
     max-width: 640px;
   }
-}
+} */
 
 .str-chat__list {
   max-height: 608px;
@@ -70,13 +70,16 @@ body {
 
 .main-container {
   display: flex;
-  height: 800px;
-  width: 1130px;
+  align-items: stretch;
+  max-height: 800px;
+  max-width: 1130px;
   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
   border-radius: 16px;
 }
 
 .main-container-inner {
+  width: 100%;
+  height: 100%;
   display: flex;
   flex-direction: row;
   border-radius: 16px;
@@ -85,21 +88,17 @@ body {
 
 .main-container-inner__left {
   display: flex;
+  flex-grow: 1;
   flex-direction: column;
 }
 
-.main-container-inner__left-content {
-  height: 800px;
-  width: 810px;
-  overflow: hidden;
-}
-
 .main-container-inner__right {
-  height: 800px;
-  width: 320px;
+  display: flex;
+  flex: 1;
+  max-height: 800px;
+  min-width: 320px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0px 16px 16px 0px;
-  overflow: hidden;
 }
 
 /* ----------------------------------------- Message Threads ----------------------------------------- */
@@ -218,10 +217,7 @@ body {
 .livestream.str-chat.dark .str-chat__li:hover {
   background: #1a1c1e;
 }
-.livestream.dark.str-chat
-  .str-chat__message-livestream:hover
-  .str-chat.livestream.dark
-  .str-chat__message-livestream--initial-message {
+.livestream.dark.str-chat .str-chat__message-livestream:hover .str-chat.livestream.dark .str-chat__message-livestream--initial-message {
   background: #1a1c1e;
 }
 .livestream.str-chat.dark .str-chat__list .str-chat__reverse-infinite-scroll {
@@ -369,9 +365,7 @@ body {
 }
 
 /* ----------------------------------------- Thread Actions Box ----------------------------------------- */
-.str-chat__list--thread
-  .str-chat__message-simple__actions__action--options
-  .str-chat__message-actions-box {
+.str-chat__list--thread .str-chat__message-simple__actions__action--options .str-chat__message-actions-box {
   left: 0%;
   margin-left: 190px;
   border-radius: 8px;
@@ -390,21 +384,14 @@ body {
   margin: 0;
 }
 
-.livestream.str-chat
-  .str-chat__thread-list
-  .new-actions
-  .str-chat__message-simple__actions__action
-  svg {
+.livestream.str-chat .str-chat__thread-list .new-actions .str-chat__message-simple__actions__action svg {
   position: absolute;
   top: -0.9px;
   left: 279.5px;
   z-index: 3;
 }
 
-.str-chat
-  .str-chat__list--thread
-  .str-chat__message-actions-list
-  button:first-child {
+.str-chat .str-chat__list--thread .str-chat__message-actions-list button:first-child {
   display: none;
 }
 
