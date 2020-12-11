@@ -49,7 +49,7 @@ const App = () => {
   return (
     <>
       <GlobalColor color={primaryColor} />
-      <ColorSlider {...{ primaryColor, setPrimaryColor }} />
+      {/* <ColorSlider {...{ primaryColor, setPrimaryColor }} /> */}
       <div className="app__wrapper">
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
           <ChannelListContainer

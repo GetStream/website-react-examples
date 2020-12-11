@@ -1,6 +1,5 @@
 .channel-list__container {
   display: flex;
-  height: 800px;
   box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
@@ -9,8 +8,6 @@
   background: linear-gradient(0deg, rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2)),
     rgb(var(--primary-color));
   box-shadow: 1px 0px 0px rgba(0, 0, 0, 0.25);
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
 }
 
 .channel-list__sidebar__icon1 {
