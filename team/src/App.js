@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useRef, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 import { createGlobalStyle } from 'styled-components';
@@ -26,7 +26,7 @@ const i18nInstance = new Streami18n({
 
 const GlobalColor = createGlobalStyle`
   body {
-    --primary-color: ${(props) => props.color};
+    --primary-color: ${(props) => props.color.current};
   }
 `;
 
@@ -41,12 +41,13 @@ const App = () => {
   const [createType, setCreateType] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
-  const [primaryColor, setPrimaryColor] = useState('78, 29, 157');
+
+  const primaryColor = useRef('78, 29, 157');
 
   return (
     <>
       <GlobalColor color={primaryColor} />
-      <ColorSlider {...{ primaryColor, setPrimaryColor }} />
+      <ColorSlider {...{ primaryColor }} />
       <div className='app__wrapper'>
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
           <ChannelListContainer
