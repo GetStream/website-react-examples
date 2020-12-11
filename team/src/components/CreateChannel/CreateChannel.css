@@ -1,6 +1,7 @@
 .create-channel__container {
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .create-channel__header {
@@ -71,11 +72,6 @@
   align-items: center;
   justify-content: flex-end;
   border-bottom-right-radius: 16px;
-}
-
-.create-channel__button-wrapper.messaging {
-  position: relative;
-  top: 169px;
 }
 
 .create-channel__button-wrapper p {

@@ -8,8 +8,7 @@
   align-items: center;
   justify-content: space-between;
   height: 62px;
-  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1),
-    inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1), inset 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
 .pinned-messages__header-text {
@@ -23,7 +22,8 @@
 .pinned-messages__list {
   padding-top: 20px;
   box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
-  height: 738px;
+  /* height: 738px; */
+  height: 100%;
 }
 
 .pinned-messages__list .str-chat__message-team-actions {

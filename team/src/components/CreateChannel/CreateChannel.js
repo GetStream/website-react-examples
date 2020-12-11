@@ -14,14 +14,9 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   };
 
   return (
-    <div className="channel-name-input__wrapper">
+    <div className='channel-name-input__wrapper'>
       <p>Name</p>
-      <input
-        onChange={handleChange}
-        placeholder="channel-name"
-        type="text"
-        value={channelName}
-      />
+      <input onChange={handleChange} placeholder='channel-name' type='text' value={channelName} />
       <p>Add Members</p>
     </div>
   );
@@ -50,26 +45,15 @@ export const CreateChannel = ({ createType, filters, setIsCreating }) => {
   };
 
   return (
-    <div className="create-channel__container">
-      <div className="create-channel__header">
-        <p>
-          {createType === 'team'
-            ? 'Create a New Channel'
-            : 'Send a Direct Message'}
-        </p>
+    <div className='create-channel__container'>
+      <div className='create-channel__header'>
+        <p>{createType === 'team' ? 'Create a New Channel' : 'Send a Direct Message'}</p>
         <CloseCreateChannel {...{ setIsCreating }} />
       </div>
-      {createType === 'team' && (
-        <ChannelNameInput {...{ channelName, setChannelName }} />
-      )}
+      {createType === 'team' && <ChannelNameInput {...{ channelName, setChannelName }} />}
       <UserList {...{ filters, setSelectedUsers }} />
-      <div
-        className={`create-channel__button-wrapper ${createType}`}
-        onClick={createChannel}
-      >
-        <p>
-          {createType === 'team' ? 'Create Channel' : 'Create Message Group'}
-        </p>
+      <div className='create-channel__button-wrapper' onClick={createChannel}>
+        <p>{createType === 'team' ? 'Create Channel' : 'Create Message Group'}</p>
       </div>
     </div>
   );

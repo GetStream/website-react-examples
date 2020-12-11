@@ -10,11 +10,11 @@ export const TeamTypingIndicator = ({ type }) => {
 
   if (type === 'list') {
     return (
-      <div className="typing-indicator__list">
-        <div className="dots">
-          <div className="dot" />
-          <div className="dot" />
-          <div className="dot" />
+      <div className='typing-indicator__list'>
+        <div className='dots'>
+          <div className='dot' />
+          <div className='dot' />
+          <div className='dot' />
         </div>
       </div>
     );
@@ -37,13 +37,13 @@ export const TeamTypingIndicator = ({ type }) => {
   }
 
   return (
-    <div className="typing-indicator__input">
-      <div className="dots">
-        <div className="dot" />
-        <div className="dot" />
-        <div className="dot" />
+    <div className='typing-indicator__input'>
+      <div className='dots'>
+        <div className='dot' />
+        <div className='dot' />
+        <div className='dot' />
       </div>
-      <div className="typing-indicator__input__text">{text}</div>
+      <div className='typing-indicator__input__text'>{text}</div>
     </div>
   );
 };
