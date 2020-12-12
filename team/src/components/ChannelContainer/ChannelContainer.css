@@ -1,7 +1,6 @@
 .channel__container {
   height: 100%;
   width: 100%;
-  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
 }
 
 .str-chat__thread-list .str-chat__message-team {
