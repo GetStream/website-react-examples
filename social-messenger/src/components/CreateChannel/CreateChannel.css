@@ -49,11 +49,6 @@
 
 .messaging-create-channel main {
   flex: 1;
-  background: white;
-}
-
-.str-chat.dark .messaging-create-channel main {
-  background: rgba(255, 255, 255, 0.04);
 }
 
 .messaging-create-channel__users {
@@ -150,6 +145,14 @@
   margin: 0;
   padding: 8px 8px;
   cursor: pointer;
+}
+
+.messaging-create-channel__user-result.empty {
+  padding-left: 16px;
+}
+
+.str-chat.dark .messaging-create-channel__user-result.empty {
+  color: #ffffff;
 }
 
 .messaging-create-channel__user-result-online {

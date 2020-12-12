@@ -6,20 +6,44 @@ import { XButton } from '../../assets';
 
 import './CreateChannel.css';
 
+const UserResult = ({ user }) => (
+  <li className='messaging-create-channel__user-result'>
+    <Avatar image={user.image} size={40} />
+    {user.online && <div className='messaging-create-channel__user-result-online' />}
+    <div className='messaging-create-channel__user-result__details'>
+      <span>{user.name}</span>
+      {/* <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span> */}
+    </div>
+  </li>
+);
+
 const CreateChannel = ({ onClose, visible }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
 
   const [inputText, setInputText] = useState('');
   const [resultsOpen, setResultsOpen] = useState(false);
+  const [searchEmpty, setSearchEmpty] = useState(false);
   const [searching, setSearching] = useState(false);
   const [selectedUsers, setSelectedUsers] = useState([]);
   const [users, setUsers] = useState([]);
 
   const inputRef = useRef();
 
-  document.addEventListener('click', () => {
-    if (resultsOpen) setInputText('');
-  });
+  const clearState = () => {
+    setInputText('');
+    setResultsOpen(false);
+    setSearchEmpty(false);
+  };
+
+  useEffect(() => {
+    const clickListener = () => {
+      if (resultsOpen) clearState();
+    };
+
+    document.addEventListener('click', clickListener);
+
+    return () => document.removeEventListener('click', clickListener);
+  }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   const findUsers = async () => {
     if (searching) return;
@@ -34,8 +58,14 @@ const CreateChannel = ({ onClose, visible }) => {
         { limit: 6 },
       );
 
+      if (!response.users.length) {
+        setSearchEmpty(true);
+      } else {
+        setSearchEmpty(false);
+        setUsers(response.users);
+      }
+
       setResultsOpen(true);
-      setUsers(response.users);
     } catch (error) {
       console.log({ error });
     }
@@ -138,7 +168,7 @@ const CreateChannel = ({ onClose, visible }) => {
       {inputText && (
         <main>
           <ul className='messaging-create-channel__user-results'>
-            {!!users?.length && (
+            {!!users?.length && !searchEmpty && (
               <div>
                 {users.map((user) => (
                   <div className='messaging-create-channel__user-result' onClick={() => addUser(user)} key={user.id}>
@@ -147,23 +177,21 @@ const CreateChannel = ({ onClose, visible }) => {
                 ))}
               </div>
             )}
+            {searchEmpty && (
+              <div
+                onClick={() => {
+                  inputRef.current.focus();
+                  clearState();
+                }}
+                className='messaging-create-channel__user-result empty'
+              >
+                No people found...
+              </div>
+            )}
           </ul>
         </main>
       )}
     </div>
-  );
-};
-
-const UserResult = ({ user }) => {
-  return (
-    <li className='messaging-create-channel__user-result'>
-      <Avatar image={user.image} size='40' />
-      {user.online && <div className='messaging-create-channel__user-result-online' />}
-      <div className='messaging-create-channel__user-result__details'>
-        <span>{user.name}</span>
-        {/* <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span> */}
-      </div>
-    </li>
   );
 };
 
