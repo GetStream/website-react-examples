@@ -1,5 +1,6 @@
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import { Avatar, ChatContext } from 'stream-chat-react';
+import _debounce from 'lodash.debounce';
 
 import { XButton } from '../../assets';
 
@@ -20,32 +21,35 @@ const CreateChannel = ({ onClose, visible }) => {
     if (resultsOpen) setInputText('');
   });
 
+  const findUsers = async () => {
+    if (searching) return;
+    setSearching(true);
+
+    try {
+      const response = await client.queryUsers(
+        {
+          name: { $autocomplete: inputText },
+        },
+        { id: 1 },
+        { limit: 6 },
+      );
+
+      setResultsOpen(true);
+      setUsers(response.users);
+    } catch (error) {
+      console.log({ error });
+    }
+
+    setSearching(false);
+  };
+
+  const findUsersDebounce = _debounce(findUsers, 100, {
+    trailing: true,
+  });
+
   useEffect(() => {
-    const findUsers = async () => {
-      if (!searching) {
-        setSearching(true);
-
-        try {
-          const response = await client.queryUsers(
-            {
-              name: { $autocomplete: inputText },
-            },
-            { id: 1 },
-            { limit: 6 },
-          );
-
-          setResultsOpen(true);
-          setUsers(response.users);
-        } catch (error) {
-          console.log({ error });
-        }
-
-        setSearching(false);
-      }
-    };
-
     if (inputText) {
-      findUsers();
+      findUsersDebounce();
     }
   }, [inputText]); // eslint-disable-line react-hooks/exhaustive-deps
 
