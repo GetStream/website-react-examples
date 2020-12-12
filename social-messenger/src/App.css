@@ -10,7 +10,7 @@ body {
 }
 
 .str-chat.str-chat-channel.messaging {
-  border-radius: 16px;
+  /* border-radius: 16px; */
   background: #fafafa;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.06), 0px 2px 30px rgba(0, 0, 0, 0.1);
 }
@@ -21,8 +21,8 @@ body {
 }
 
 .str-chat.str-chat-channel-list.messaging {
-  border-top-left-radius: 16px;
-  border-bottom-left-radius: 16px;
+  /* border-top-left-radius: 16px; */
+  /* border-bottom-left-radius: 16px; */
   background: #fafafa;
 }
 
@@ -31,11 +31,11 @@ body {
 }
 
 .str-chat-channel-list {
-  height: 800px;
+  /* height: 800px; */
 }
 
 .str-chat-channel {
-  height: 800px;
+  /* height: 800px; */
 }
 
 .str-chat-channel .str-chat__container {

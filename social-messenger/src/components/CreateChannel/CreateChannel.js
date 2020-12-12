@@ -155,15 +155,13 @@ const CreateChannel = ({ onClose, visible }) => {
 };
 
 const UserResult = ({ user }) => {
-  console.log('🚀 ~ file: CreateChannel.js ~ line 154 ~ UserResult ~ user', user);
   return (
     <li className='messaging-create-channel__user-result'>
-      <div className='messaging-create-channel__user-result__avatar'>
-        <Avatar image={user.image} size='40' />
-      </div>
+      <Avatar image={user.image} size='40' />
+      {user.online && <div className='messaging-create-channel__user-result-online' />}
       <div className='messaging-create-channel__user-result__details'>
         <span>{user.name}</span>
-        <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span>
+        {/* <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span> */}
       </div>
     </li>
   );
