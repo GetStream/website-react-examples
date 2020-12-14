@@ -122,18 +122,7 @@ const MessagingChannelHeader = () => {
       {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
       <div className='messaging__channel-header__right'>
         <TypingIndicator />
-        <div
-          onClick={() => {
-            if (edited || isEditing) {
-              setIsEditing(false);
-              setEdited(false);
-            } else {
-              setIsEditing(true);
-            }
-          }}
-        >
-          {!isEditing ? <ChannelInfoIcon /> : <ChannelSaveIcon />}
-        </div>
+        {!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />}
       </div>
     </div>
   );
