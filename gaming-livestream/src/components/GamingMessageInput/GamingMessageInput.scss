@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+
+.channel-footer {
+  background-color: $component-background;
+  border-top: 1px solid $border-color;
+  display: flex;
+  flex-direction: column;
+  padding: 1rem;
+
+  .str-chat__input {
+    padding: 0;
+    background: none;
+
+    textarea {
+      background-color: $background;
+      border-color: $border-color;
+      color: $foreground;
+      max-height: 2.5rem;
+    }
+  }
+
+  .str-chat__input-footer {
+    display: none;
+  }
+
+  > .channel-footer-separator {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    margin-top: 0.5rem;
+
+    > .watcher-count {
+      align-items: center;
+      background-color: $button-background;
+      border: none;
+      border-radius: 0.5rem;
+      color: $foreground;
+      display: flex;
+      justify-content: space-between;
+      padding: 0.5rem;
+      height: 2.5rem;
+      width: 4rem;
+
+      > p {
+        font-size: 0.75rem;
+      }
+    }
+
+    > .typing-indicators {
+      align-items: center;
+      display: flex;
+
+      > .indicators {
+        display: flex;
+        margin-right: 0.25rem;
+
+        > .dot {
+          animation: chat 1s infinite;
+          background-color: $foreground;
+          border-radius: 50%;
+          height: 0.25rem;
+          margin-right: 0.25rem;
+          transition: all 1s;
+          width: 0.25rem;
+        }
+      }
+
+      > p {
+        color: rgba($color: $foreground, $alpha: 0.5);
+        font-size: 0.75rem;
+      }
+    }
+
+    > button {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+}
