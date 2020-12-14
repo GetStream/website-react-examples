@@ -155,7 +155,7 @@ const CreateChannel = ({ onClose, visible }) => {
               ref={inputRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder='Start typing for suggestions'
+              placeholder={!selectedUsers.length && 'Start typing for suggestions'}
               type='text'
               className='messaging-create-channel__input'
             />

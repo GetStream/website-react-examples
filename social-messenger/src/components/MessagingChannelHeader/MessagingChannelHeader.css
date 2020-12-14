@@ -10,11 +10,9 @@
 }
 
 .messaging__channel-header .channel-header__name {
-  height: 15px;
   flex: 1;
   font-weight: bold;
   font-size: 15px;
-  line-height: 100%;
   color: rgba(0, 0, 0, 0.9);
   white-space: nowrap;
   overflow: hidden;

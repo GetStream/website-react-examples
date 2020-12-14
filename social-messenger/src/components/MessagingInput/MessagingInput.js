@@ -1,12 +1,7 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
 import { logChatPromiseExecution } from 'stream-chat';
-import {
-  ChannelContext,
-  ChatAutoComplete,
-  EmojiPicker,
-  useMessageInput,
-} from 'stream-chat-react';
+import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 
 import './MessagingInput.css';
 
@@ -19,19 +14,14 @@ import {
 import { UploadsPreview } from './UploadsPreview';
 
 const GiphyIcon = () => (
-  <div className="giphy-icon__wrapper">
+  <div className='giphy-icon__wrapper'>
     <LightningBoltSmall />
-    <p className="giphy-icon__text">GIPHY</p>
+    <p className='giphy-icon__text'>GIPHY</p>
   </div>
 );
 
 const MessagingInput = (props) => {
-  const {
-    acceptedFiles,
-    maxNumberOfFiles,
-    multipleUploads,
-    sendMessage,
-  } = useContext(ChannelContext);
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads, sendMessage } = useContext(ChannelContext);
 
   const [giphyState, setGiphyState] = useState(false);
 
@@ -59,18 +49,13 @@ const MessagingInput = (props) => {
   const onChange = useCallback(
     (e) => {
       const { value } = e.target;
-      const deletePressed =
-        e.nativeEvent?.inputType === 'deleteContentBackward';
+      const deletePressed = e.nativeEvent?.inputType === 'deleteContentBackward';
 
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);
       }
 
-      if (
-        !giphyState &&
-        messageInput.text.startsWith('/giphy') &&
-        !messageInput.numberOfUploads
-      ) {
+      if (!giphyState && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
         e.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
@@ -89,11 +74,11 @@ const MessagingInput = (props) => {
   // };
 
   return (
-    <div className="str-chat__messaging-input">
+    <div className='str-chat__messaging-input'>
       <div
-        className="messaging-input__button"
-        role="button"
-        aria-roledescription="button"
+        className='messaging-input__button'
+        role='button'
+        aria-roledescription='button'
         onClick={messageInput.openEmojiPicker}
         ref={messageInput.emojiPickerRef}
       >
@@ -111,13 +96,9 @@ const MessagingInput = (props) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={
-          (maxNumberOfFiles !== undefined &&
-            messageInput.numberOfUploads >= maxNumberOfFiles) ||
-          giphyState
-        }
+        disabled={(maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) || giphyState}
       >
-        <div className="messaging-input__input-wrapper">
+        <div className='messaging-input__input-wrapper'>
           {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
           <UploadsPreview {...messageInput} />
           <ChatAutoComplete
@@ -129,7 +110,7 @@ const MessagingInput = (props) => {
             value={messageInput.text}
             rows={1}
             maxRows={props.maxRows}
-            placeholder="Send a message"
+            placeholder='Send a message'
             onPaste={messageInput.onPaste}
             triggers={props.autocompleteTriggers}
             grow={props.grow}
@@ -138,12 +119,7 @@ const MessagingInput = (props) => {
           />
         </div>
       </ImageDropzone>
-      <div
-        className="messaging-input__button"
-        role="button"
-        aria-roledescription="button"
-        onClick={messageInput.handleSubmit}
-      >
+      <div className='messaging-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
         <SendIcon />
       </div>
       <EmojiPicker {...messageInput} />

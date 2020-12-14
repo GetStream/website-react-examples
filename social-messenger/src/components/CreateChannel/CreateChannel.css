@@ -91,7 +91,7 @@
 }
 
 .messaging-create-channel__input {
-  height: 40px;
+  line-height: 40px;
   background: none;
   border: none;
   outline: none;

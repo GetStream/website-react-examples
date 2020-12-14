@@ -136,3 +136,45 @@ div.rfu-dropzone:focus {
 .rfu-image-previewer__image {
   margin-bottom: 0;
 }
+
+div.rta__autocomplete.str-chat__emojisearch {
+  z-index: 10;
+  position: absolute;
+  width: 30%;
+  background: #fafafa;
+  margin: 4px 10px;
+  border-radius: 16px !important;
+}
+
+.str-chat__user-item {
+  background: #ffffff;
+  color: #000000;
+}
+
+.str-chat.dark .str-chat__user-item {
+  background: rgba(46, 48, 51, 0.98);
+  color: #ffffff;
+}
+
+.str-chat__user-item:hover {
+  background: #005fff !important;
+  color: #ffffff;
+  cursor: pointer;
+}
+
+.rta__entity--selected {
+  background: #005fff;
+}
+
+.str-chat__slash-command:hover {
+  background: #005fff;
+  cursor: pointer;
+}
+
+.rta__list-header {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 14px;
+  line-height: 16px;
+  color: rgba(0, 0, 0, 0.9);
+  mix-blend-mode: normal;
+}
