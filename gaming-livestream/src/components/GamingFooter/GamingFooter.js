@@ -1,34 +1,33 @@
-import React, { } from 'react';
-import '../styles/footer.scss'
+import React from 'react';
+import './GamingFooter.scss';
 
-import { ReactComponent as CheckSVG } from '../assets/icons/check.svg';
-import { ReactComponent as ClockSVG } from '../assets/icons/clock.svg';
-import { ReactComponent as AlarmSVG } from '../assets/icons/alarm.svg';
-import { ReactComponent as FollowersSVG } from '../assets/icons/followers.svg';
-import { ReactComponent as SubsSVG } from '../assets/icons/subs.svg';
-import { ReactComponent as UpVoteSVG } from '../assets/icons/upvote.svg';
-import { ReactComponent as DownVoteSVG } from '../assets/icons/downvote.svg';
+import CheckIcon from '../../assets/icons/CheckIcon';
+import ClockIcon from '../../assets/icons/ClockIcon';
+import AlarmIcon from '../../assets/icons/AlarmIcon';
+import FollowersIcon from '../../assets/icons/FollowersIcon';
+import SubsIcon from '../../assets/icons/SubsIcon';
+import UpVoteIcon from '../../assets/icons/UpVoteIcon';
+import DownVoteIcon from '../../assets/icons/DownVoteIcon';
 
-const Footer = props => {
-
+export const GamingFooter = (props) => {
   const showLastLi = () => {
     if (props.showMembers) {
       return null;
     }
     return <li>Shooter</li>;
-  }
+  };
 
   return (
     <footer className={`${props.showMembers ? 'show-members' : ''} ${props.isFullScreen ? 'full-screen' : ''}`}>
-      <div className="streamer-details-container">
-        <div className="streamer-details-separator">
-          <div className="avatar"></div>
-          <div className="streamer-container">
-            <div className="streamer-name">
+      <div className='streamer-details-container'>
+        <div className='streamer-details-separator'>
+          <div className='avatar'></div>
+          <div className='streamer-container'>
+            <div className='streamer-name'>
               <p>PolarBear</p>
-              <CheckSVG />
+              <CheckIcon />
             </div>
-            <ul className="streamer-details">
+            <ul className='streamer-details'>
               <li>English</li>
               <li>FPS</li>
               {showLastLi()}
@@ -36,39 +35,39 @@ const Footer = props => {
           </div>
         </div>
       </div>
-      <div className="user-interaction-container">
-        <div className="timer-container">
+      <div className='user-interaction-container'>
+        <div className='timer-container'>
           <div>
             <p>2:54:38</p>
-            <ClockSVG />
+            <ClockIcon />
           </div>
           <div>
             <p>-00:34:22</p>
-            <AlarmSVG />
+            <AlarmIcon />
           </div>
         </div>
         <button className={`follow-btn ${!props.isFullScreen && props.showMembers ? 'shrink' : ''}`}>
           <div>
-            <FollowersSVG />
+            <FollowersIcon />
             <p>Follow</p>
           </div>
         </button>
         <button className={`sub-btn ${!props.isFullScreen && props.showMembers ? 'shrink' : ''}`}>
           <div>
-            <SubsSVG />
+            <SubsIcon />
             <p>Subscribe</p>
           </div>
         </button>
-        <div className="btn-group">
+        <div className='btn-group'>
           <button className={`${!props.isFullScreen && props.showMembers ? 'shrink' : ''}`}>
             <div>
-              <UpVoteSVG />
+              <UpVoteIcon />
               <p>325K</p>
             </div>
           </button>
           <button className={`${!props.isFullScreen && props.showMembers ? 'shrink' : ''}`}>
             <div>
-              <DownVoteSVG />
+              <DownVoteIcon />
               <p>9.5K</p>
             </div>
           </button>
@@ -76,6 +75,4 @@ const Footer = props => {
       </div>
     </footer>
   );
-}
-
-export default Footer
+};

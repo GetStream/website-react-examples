@@ -1,4 +1,4 @@
-@import 'variables';
+@import '../../styles/variables';
 
 footer {
   background-color: $component-background;
@@ -6,7 +6,7 @@ footer {
   display: flex;
   height: 3.75rem;
   justify-content: space-between;
-  padding: .5rem;
+  padding: 0.5rem;
   padding-right: 26%;
   transition: all 1s;
 
@@ -15,132 +15,128 @@ footer {
   }
 
   &.full-screen {
-    padding-right: .5rem;
+    padding-right: 0.5rem;
   }
 
-  >.streamer-details-container {
+  > .streamer-details-container {
     display: flex;
 
-    >.streamer-details-separator {
+    > .streamer-details-separator {
       align-items: center;
       display: flex;
 
-      >.avatar {
+      > .avatar {
         background-image: url(/assets/images/Avatar.png);
         background-position: center;
         background-repeat: no-repeat;
         background-size: cover;
         border-radius: 50%;
         height: 3rem;
-        margin-right: .5rem;
+        margin-right: 0.5rem;
         width: 3rem;
       }
 
-      >.streamer-container {
-        >.streamer-name {
+      > .streamer-container {
+        > .streamer-name {
           align-items: center;
           display: flex;
 
-          >p {
-            margin-right: .5rem;
+          > p {
+            margin-right: 0.5rem;
           }
         }
 
-        >.streamer-details {
+        > .streamer-details {
           display: flex;
           list-style: none;
           margin: 0;
           padding: 0;
 
-          >li {
+          > li {
             background-color: $button-background;
             border-radius: 1rem;
             color: $foreground;
-            font-size: .75rem;
-            margin-right: .5rem;
-            padding: .25rem .5rem;
+            font-size: 0.75rem;
+            margin-right: 0.5rem;
+            padding: 0.25rem 0.5rem;
           }
         }
       }
     }
-
   }
 
-  >.user-interaction-container {
+  > .user-interaction-container {
     align-items: center;
     display: flex;
     justify-content: flex-end;
 
-    >.timer-container {
+    > .timer-container {
       margin-right: 1rem;
 
-      >div {
+      > div {
         align-items: center;
         display: flex;
         justify-content: flex-end;
 
-        >p {
-          margin-right: .5rem;
+        > p {
+          margin-right: 0.5rem;
           // text-align: end;
         }
       }
     }
 
-
-
-    >button,
-    >.btn-group>button {
+    > button,
+    > .btn-group > button {
       transition: all 1s;
       width: 7.5rem;
 
       &.shrink {
         width: 3rem;
 
-        >div {
-          >p {
+        > div {
+          > p {
             height: 0;
             width: 0;
             visibility: hidden;
           }
 
-          >svg {
+          > svg {
             margin: 0;
           }
         }
       }
     }
 
-    >.follow-btn {
+    > .follow-btn {
       margin-right: 1rem;
       overflow: hidden;
 
-      >div {
+      > div {
         display: flex;
         justify-content: center;
 
-        >svg {
-          margin-right: .5rem;
+        > svg {
+          margin-right: 0.5rem;
         }
       }
     }
 
-    >.sub-btn {
+    > .sub-btn {
       margin-right: 1rem;
       overflow: hidden;
 
-      >div {
+      > div {
         display: flex;
         justify-content: center;
 
-        >svg {
-          margin-right: .5rem;
+        > svg {
+          margin-right: 0.5rem;
         }
       }
     }
 
-    >.btn-group {
-
-      >button {
+    > .btn-group {
+      > button {
         overflow: hidden;
         width: 5rem;
       }
@@ -149,12 +145,12 @@ footer {
         border-top-right-radius: 0;
         border-bottom-right-radius: 0;
 
-        >div {
+        > div {
           display: flex;
           justify-content: center;
 
-          >svg {
-            margin-right: .5rem;
+          > svg {
+            margin-right: 0.5rem;
           }
         }
       }
@@ -163,12 +159,12 @@ footer {
         border-top-left-radius: 0;
         border-bottom-left-radius: 0;
 
-        >div {
+        > div {
           display: flex;
           justify-content: center;
 
-          >svg {
-            margin-right: .5rem;
+          > svg {
+            margin-right: 0.5rem;
           }
         }
       }
