@@ -101,6 +101,9 @@ const CreateChannel = ({ onClose, visible }) => {
   };
 
   const addUser = (u) => {
+    const isAlreadyAdded = selectedUsers.find((user) => user.id === u.id);
+    if (isAlreadyAdded) return;
+
     setSelectedUsers([...selectedUsers, u]);
     setResultsOpen(false);
     setInputText('');
@@ -155,7 +158,7 @@ const CreateChannel = ({ onClose, visible }) => {
               ref={inputRef}
               value={inputText}
               onChange={(e) => setInputText(e.target.value)}
-              placeholder={!selectedUsers.length && 'Start typing for suggestions'}
+              placeholder={!selectedUsers.length ? 'Start typing for suggestions' : ''}
               type='text'
               className='messaging-create-channel__input'
             />

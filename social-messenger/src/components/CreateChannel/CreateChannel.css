@@ -21,7 +21,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 64px;
+  height: 60px;
   padding: 0 10px 0 25px;
 }
 
@@ -35,14 +35,20 @@
 .messaging-create-channel__left {
   display: flex;
   align-items: center;
-  justify-content: center;
+  height: 60px;
+  max-width: 85%;
+}
+
+.messaging-create-channel__left form {
+  height: 60px;
+  display: flex;
+  align-items: center;
 }
 
 .messaging-create-channel__left-text {
   margin-right: 10px;
   font-family: Helvetica Neue, sans-serif;
   font-size: 17px;
-  line-height: 20px;
   color: #000000;
   opacity: 0.5;
 }
@@ -52,8 +58,14 @@
 }
 
 .messaging-create-channel__users {
-  display: flex;
+  display: -webkit-inline-box;
   margin: 0 8px;
+  max-width: 60%;
+  overflow-x: scroll;
+}
+
+.messaging-create-channel__users::-webkit-scrollbar {
+  display: none;
 }
 
 .messaging-create-channel__user {
@@ -91,7 +103,6 @@
 }
 
 .messaging-create-channel__input {
-  line-height: 40px;
   background: none;
   border: none;
   outline: none;
@@ -229,6 +240,8 @@
 }
 
 .create-channel-button {
+  position: absolute;
+  right: 10px;
   width: 111px;
   height: 40px;
   border: none;
@@ -239,10 +252,6 @@
   font-weight: bold;
   font-size: 15px;
   line-height: 18px;
-  display: flex;
-  align-items: center;
-  text-align: center;
-  justify-content: center;
   color: #ffffff;
   cursor: pointer;
 }

@@ -7,6 +7,7 @@ import './App.css';
 
 import {
   CreateChannel,
+  CustomMessage,
   MessagingChannelHeader,
   MessagingChannelList,
   MessagingChannelPreview,
@@ -49,7 +50,7 @@ const App = () => {
           <CreateChannel onClose={() => setIsCreating(false)} visible={isCreating} />
           <Window>
             <MessagingChannelHeader />
-            <MessageList TypingIndicator={() => null} />
+            <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>
           <Thread

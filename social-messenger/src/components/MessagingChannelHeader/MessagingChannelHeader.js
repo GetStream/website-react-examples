@@ -65,7 +65,6 @@ const MessagingChannelHeader = () => {
   const { channel, client } = useContext(ChannelContext);
 
   const [channelName, setChannelName] = useState(channel?.data.name || '');
-  const [edited, setEdited] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState('');
 
@@ -80,7 +79,6 @@ const MessagingChannelHeader = () => {
       await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
     }
 
-    setEdited(true);
     setIsEditing(false);
   };
 
