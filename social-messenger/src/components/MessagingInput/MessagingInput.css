@@ -111,9 +111,8 @@
   margin-left: 8px;
 }
 
-.str-chat.dark .giphy-icon__text {
+.giphy-icon__text {
   font-family: Helvetica Neue, sans-serif;
-  font-style: normal;
   font-weight: bold;
   font-size: 11px;
   line-height: 8px;
