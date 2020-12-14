@@ -4,13 +4,11 @@ import { Chat, Channel, Thread, Window } from 'stream-chat-react';
 import { MessageList } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
 
-import StreamerIcon from '../../assets/icons/StreamerIcon';
-import ModeratorIcon from '../../assets/icons/ModeratorIcon';
-import VIPIcon from '../../assets/icons/VIPIcon';
 import UserIcon from '../../assets/icons/UserIcon';
 
 import 'stream-chat-react/dist/css/index.css';
 import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
+import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
 
 const chatClient = new StreamChat('gx5a64bj4ptz');
 const userToken =
@@ -36,21 +34,6 @@ const colors = ['#5096ff', '#e60053', '#00ddb5', '#dde100', '#8458ff', '#ffa800'
 
 const getColor = () => {
   return colors[Math.floor(Math.random() * colors.length)];
-};
-
-const getIcon = (type) => {
-  switch (type) {
-    case 'streamer':
-      return <StreamerIcon />;
-    case 'moderator':
-      return <ModeratorIcon />;
-    case 'VIP':
-      return <VIPIcon />;
-    case 'user':
-      return <UserIcon />;
-    default:
-      break;
-  }
 };
 
 export const GamingChat = (props) => {
@@ -88,7 +71,6 @@ export const GamingChat = (props) => {
     ],
   });
 
-  const [searchInput, setSearchInput] = useState('');
   const [isTyping, setIsTyping] = useState(false);
 
   channel.on('typing.start', (event) => {
@@ -100,23 +82,6 @@ export const GamingChat = (props) => {
     setTimeout(() => {
       setIsTyping(false);
     }, 1000);
-  });
-
-  const onChangeHandler = (e) => {
-    setSearchInput(e.target.value);
-  };
-
-  const participantFilter = { ...participants };
-
-  Object.keys(participants).forEach((category) => {
-    participantFilter[category] = participantFilter[category].filter((part) => {
-      let lowerCaseName = part.name.toLowerCase();
-      if (lowerCaseName.includes(searchInput.toLowerCase())) {
-        return part;
-      } else {
-        return null;
-      }
-    });
   });
 
   return (
@@ -170,40 +135,7 @@ export const GamingChat = (props) => {
           </Chat>
         </div>
       )}
-      <div className={`members-container ${props.showMembers ? 'show' : 'hide'}`}>
-        <div className='members-header'>
-          <button
-            className='close-participants-btn'
-            onClick={() => {
-              props.setShowMembers(false);
-            }}
-          ></button>
-          <p>Participants (458K)</p>
-          <div></div>
-        </div>
-        <div className='list-container'>
-          <input placeholder='Search' value={searchInput} type='text' onChange={(e) => onChangeHandler(e)} />
-          {Object.keys(participantFilter).map((category) => {
-            return (
-              <div className='list-separator'>
-                <div className='list-header'>
-                  <p>{category}</p>
-                </div>
-                <ul>
-                  {participantFilter[category].map((participant) => {
-                    return (
-                      <li>
-                        {getIcon(participant.type)}
-                        <p style={{ color: participant.color }}>{participant.name}</p>
-                      </li>
-                    );
-                  })}
-                </ul>
-              </div>
-            );
-          })}
-        </div>
-      </div>
+      <GamingParticipants participants={participants} props setShowMembers={props.setShowMembers} />
     </section>
   );
 };
