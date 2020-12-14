@@ -5,12 +5,12 @@ import './MessagingChannelHeader.css';
 
 import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
 
-import { ChannelEditIcon } from '../../assets';
+import { ChannelInfoIcon, ChannelSaveIcon } from '../../assets';
 
 const getAvatarGroup = (members) => {
   if (members.length === 1) {
     return (
-      <div className="messaging__channel-header__avatars">
+      <div className='messaging__channel-header__avatars'>
         <Avatar image={members[0]?.user.image || undefined} size={40} />;
       </div>
     );
@@ -18,20 +18,12 @@ const getAvatarGroup = (members) => {
 
   if (members.length === 2) {
     return (
-      <div className="messaging__channel-header__avatars two">
+      <div className='messaging__channel-header__avatars two'>
         <span>
-          <Avatar
-            image={members[0]?.user.image || undefined}
-            shape="square"
-            size={40}
-          />
+          <Avatar image={members[0]?.user.image || undefined} shape='square' size={40} />
         </span>
         <span>
-          <Avatar
-            image={members[1]?.user.image || undefined}
-            shape="square"
-            size={40}
-          />
+          <Avatar image={members[1]?.user.image || undefined} shape='square' size={40} />
         </span>
       </div>
     );
@@ -39,25 +31,13 @@ const getAvatarGroup = (members) => {
 
   if (members.length === 3) {
     return (
-      <div className="messaging__channel-header__avatars three">
+      <div className='messaging__channel-header__avatars three'>
         <span>
-          <Avatar
-            image={members[0]?.user.image || undefined}
-            shape="square"
-            size={40}
-          />
+          <Avatar image={members[0]?.user.image || undefined} shape='square' size={40} />
         </span>
         <span>
-          <Avatar
-            image={members[1]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
-          <Avatar
-            image={members[2]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
+          <Avatar image={members[1]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[2]?.user.image || undefined} shape='square' size={20} />
         </span>
       </div>
     );
@@ -65,30 +45,14 @@ const getAvatarGroup = (members) => {
 
   if (members.length >= 4) {
     return (
-      <div className="messaging__channel-header__avatars four">
+      <div className='messaging__channel-header__avatars four'>
         <span>
-          <Avatar
-            image={members[0]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
-          <Avatar
-            image={members[1]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
+          <Avatar image={members[0]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[1]?.user.image || undefined} shape='square' size={20} />
         </span>
         <span>
-          <Avatar
-            image={members[2]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
-          <Avatar
-            image={members[3]?.user.image || undefined}
-            shape="square"
-            size={20}
-          />
+          <Avatar image={members[2]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[3]?.user.image || undefined} shape='square' size={20} />
         </span>
       </div>
     );
@@ -107,18 +71,13 @@ const MessagingChannelHeader = () => {
 
   const inputRef = useRef();
 
-  const members = Object.values(channel.state?.members || {}).filter(
-    (member) => member.user?.id !== client?.user?.id,
-  );
+  const members = Object.values(channel.state?.members || {}).filter((member) => member.user?.id !== client?.user?.id);
 
   const updateChannel = async (e) => {
     if (e) e.preventDefault();
 
     if (channelName && channelName !== channel.data.name) {
-      await channel.update(
-        { name: channelName },
-        { text: `Channel name changed to ${channelName}` },
-      );
+      await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
     }
 
     setEdited(true);
@@ -133,13 +92,7 @@ const MessagingChannelHeader = () => {
 
   useEffect(() => {
     if (!channelName) {
-      setTitle(
-        members
-          .map(
-            (member) => member.user?.name || member.user?.id || 'Unnamed User',
-          )
-          .join(', '),
-      );
+      setTitle(members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '));
     }
   }, [channelName, members]);
 
@@ -153,10 +106,10 @@ const MessagingChannelHeader = () => {
     >
       <input
         autoFocus
-        className="channel-header__edit-input"
+        className='channel-header__edit-input'
         onBlur={updateChannel}
         onChange={(e) => setChannelName(e.target.value)}
-        placeholder="Type a new name for the chat"
+        placeholder='Type a new name for the chat'
         ref={inputRef}
         value={channelName}
       />
@@ -164,14 +117,10 @@ const MessagingChannelHeader = () => {
   );
 
   return (
-    <div className="messaging__channel-header">
+    <div className='messaging__channel-header'>
       {getAvatarGroup(members)}
-      {!isEditing ? (
-        <div className="channel-header__name">{channelName || title}</div>
-      ) : (
-        <EditHeader />
-      )}
-      <div className="messaging__channel-header__right">
+      {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
+      <div className='messaging__channel-header__right'>
         <TypingIndicator />
         <div
           onClick={() => {
@@ -183,7 +132,7 @@ const MessagingChannelHeader = () => {
             }
           }}
         >
-          <ChannelEditIcon />
+          {!isEditing ? <ChannelInfoIcon /> : <ChannelSaveIcon />}
         </div>
       </div>
     </div>

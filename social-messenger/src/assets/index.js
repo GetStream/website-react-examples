@@ -1,4 +1,5 @@
-export { ChannelEditIcon } from './ChannelEditIcon';
+export { ChannelInfoIcon } from './ChannelInfoIcon';
+export { ChannelSaveIcon } from './ChannelSaveIcon';
 export { CommandIcon } from './CommandIcon';
 export { CreateChannelIcon } from './CreateChannelIcon';
 export { EmojiIcon } from './EmojiIcon';

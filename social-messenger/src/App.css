@@ -153,7 +153,7 @@ body {
 
 .str-chat__thread-header-details {
   display: flex;
-  align-items: center;
+  align-items: flex-end;
 }
 
 .str-chat__thread-header-details strong {
@@ -347,4 +347,8 @@ body {
 .str-chat__reaction-selector li span span {
   height: 24px !important;
   width: 24px !important;
+}
+
+span.react-images__footer__count.react-images__footer__count--isModal {
+  font-family: Helvetica Neue, sans-serif;
 }

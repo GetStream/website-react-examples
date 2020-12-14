@@ -91,7 +91,7 @@
 }
 
 .messaging-create-channel__input {
-  height: 100%;
+  height: 40px;
   background: none;
   border: none;
   outline: none;
@@ -99,11 +99,7 @@
 }
 
 .str-chat.dark .messaging-create-channel__input {
-  height: 100%;
-  background: none;
-  border: none;
   color: rgba(255, 255, 255, 0.9);
-  outline: none;
 }
 
 .messaging-create-channel__input::placeholder {
