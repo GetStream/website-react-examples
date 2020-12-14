@@ -1,14 +1,31 @@
 import React from 'react';
-import { MessageInput } from 'stream-chat-react';
+import { ChatAutoComplete, useMessageInput } from 'stream-chat-react';
 import SendIcon from '../../assets/icons/SendIcon';
 import StarIcon from '../../assets/icons/StarIcon';
 
 import './GamingMessageInput.scss';
 
-export const GamingMessageInput = ({ isTyping }) => {
+export const GamingMessageInput = (props) => {
+  const { isTyping } = props;
+
+  const messageInput = useMessageInput(props);
+
   return (
     <div className='channel-footer'>
-      <MessageInput />
+      <ChatAutoComplete
+        innerRef={messageInput.textareaRef}
+        handleSubmit={messageInput.handleSubmit}
+        onSelectItem={messageInput.onSelectItem}
+        value={messageInput.text}
+        maxRows={props.maxRows}
+        placeholder='Say something'
+        onChange={messageInput.handleChange}
+        onPaste={messageInput.onPaste}
+        triggers={props.autocompleteTriggers}
+        grow={props.grow}
+        disabled={props.disabled}
+        additionalTextareaProps={props.additionalTextareaProps}
+      />
       <div className='channel-footer-separator'>
         <div className='watcher-count'>
           <StarIcon />
@@ -24,7 +41,7 @@ export const GamingMessageInput = ({ isTyping }) => {
             <p>a member is typing</p>
           </div>
         )}
-        <button>
+        <button onClick={messageInput.handleSubmit}>
           <SendIcon />
         </button>
       </div>

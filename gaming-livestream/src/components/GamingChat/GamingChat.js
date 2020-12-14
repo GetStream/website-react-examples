@@ -128,7 +128,7 @@ export const GamingChat = (props) => {
                     );
                   }}
                 />
-                <GamingMessageInput isTyping={isTyping} />
+                <GamingMessageInput focus isTyping={isTyping} />
               </Window>
               <Thread />
             </Channel>
