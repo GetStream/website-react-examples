@@ -17,6 +17,10 @@
   padding: 0px 4px;
   height: 21px;
 }
+
+.live-event__simple-reactions-list li {
+  position: relative;
+}
 .live-event__simple-reactions-list-item__border {
   display: flex;
   flex-direction: row;

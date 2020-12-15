@@ -57,10 +57,7 @@
   color: #19a0ff;
 }
 .live-event-message-input__wrapper .str-chat__input--emojipicker {
-  z-index: 3;
-  bottom: calc(100% - 850px + 72px);
-  right: 275px;
-  width: 238px;
+  z-index: 9;
 }
 
 .emoji-mart .emoji-mart-emoji:focus {

@@ -8,7 +8,7 @@
 .pinned-messages__container .str-chat__reverse-infinite-scroll {
   background: #f1faff;
   padding-top: 0px;
-  height: 735px;
+  height: 735px !important;
   width: 320px;
 }
 .pinned-messages__container {
@@ -17,6 +17,7 @@
   height: 735px;
   width: 320px;
 }
+
 .pinned-messages__container .pin-icon {
   display: none;
 }

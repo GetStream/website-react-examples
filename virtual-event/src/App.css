@@ -8,6 +8,14 @@ body {
   width: 100%;
 }
 
+.str-chat-channel {
+  height: 100%;
+}
+
+.str-chat {
+  height: 100%;
+}
+
 /* .example-video-container {
   flex: 1;
   align-items: center;
@@ -60,7 +68,7 @@ body {
 } */
 
 .str-chat__list {
-  max-height: 608px;
+  max-height: 735px;
   background-color: #f1faff;
 }
 
@@ -99,6 +107,10 @@ body {
   min-width: 320px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.2);
   border-radius: 0px 16px 16px 0px;
+}
+
+.pinned-messages__container .livestream.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+  max-height: 735px !important;
 }
 
 /* ----------------------------------------- Message Threads ----------------------------------------- */
@@ -143,7 +155,7 @@ body {
   font-family: Helvetica Neue, sans-serif;
   display: flex;
   flex-direction: row;
-  width: 147px;
+  width: 128px;
   justify-content: space-around;
   align-items: center;
 }
@@ -353,7 +365,7 @@ body {
   padding: 0 4px;
   position: absolute;
   top: -12px;
-  right: 0;
+  right: -18px;
   border-radius: 24px;
   display: none;
   align-items: center;
@@ -363,13 +375,16 @@ body {
   fill: #000;
   opacity: 0.5;
 }
+.str-chat__message-livestream-actions {
+  right: -18px;
+}
 
 /* ----------------------------------------- Thread Actions Box ----------------------------------------- */
 .str-chat__list--thread .str-chat__message-simple__actions__action--options .str-chat__message-actions-box {
   left: 0%;
-  margin-left: 190px;
+  margin-left: 175px;
   border-radius: 8px;
-  margin-bottom: 26px;
+  margin-bottom: 34px;
   z-index: 9;
 }
 
@@ -386,17 +401,12 @@ body {
 
 .livestream.str-chat .str-chat__thread-list .new-actions .str-chat__message-simple__actions__action svg {
   position: absolute;
+  opacity: 0;
   top: -0.9px;
-  left: 279.5px;
+  left: 267px;
   z-index: 3;
 }
 
 .str-chat .str-chat__list--thread .str-chat__message-actions-list button:first-child {
-  display: none;
-}
-
-/* ----------------------------------------- Tool Tip Popup ----------------------------------------- */
-
-.str-chat__simple-reactions-list-tooltip {
   display: none;
 }
