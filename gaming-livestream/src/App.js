@@ -8,6 +8,7 @@ import { GamingChat } from './components/GamingChat/GamingChat';
 const App = () => {
   const [showMembers, setShowMembers] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [showUpgrade, setShowUpgrade] = useState(false);
 
   return (
     <main className='App'>
@@ -38,7 +39,22 @@ const App = () => {
           setShowMembers={setShowMembers}
           isFullScreen={isFullScreen}
           setIsFullScreen={setIsFullScreen}
+          showUpgrade={showUpgrade}
+          setShowUpgrade={setShowUpgrade}
         />
+        {showUpgrade &&
+          <div className="upgrade-container">
+            <div className="upgrade-header">
+              <button
+                onClick={() => {
+                  setShowUpgrade(false);
+                }}
+              ></button>
+              <p>Upgrade</p>
+              <div></div>
+            </div>
+          </div>
+        }
       </div>
     </main>
   );

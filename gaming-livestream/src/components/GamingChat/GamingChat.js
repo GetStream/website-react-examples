@@ -89,6 +89,8 @@ export const GamingChat = (props) => {
     <section
       className={`chat-members-container ${props.showMembers ? 'show-members' : 'hide-members'} ${
         props.isFullScreen ? 'full-screen' : 'in-screen'
+        } ${
+        props.showUpgrade ? 'show-upgrade' : ''
         }`}
     >
       {channel && (
@@ -121,7 +123,10 @@ export const GamingChat = (props) => {
                         props.setShowMembers(true);
                         setOptionsSelected(false);
                       }}>Show Participants</li>
-                      <li>Upgrade</li>
+                      <li onClick={() => {
+                        props.setShowUpgrade(true);
+                        setOptionsSelected(false);
+                      }}>Upgrade</li>
                     </ul>
                   }
                 </div>

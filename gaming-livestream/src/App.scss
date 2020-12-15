@@ -7,7 +7,7 @@ main {
   justify-content: center;
   padding: 5rem;
 
-  > .live-stream {
+  >.live-stream {
     background-color: $background;
     border-radius: 1rem;
     display: flex;
@@ -17,7 +17,7 @@ main {
     width: 100%;
     width: 1130px;
 
-    > .separator {
+    >.separator {
       display: flex;
       flex-direction: column;
       flex: 3;
@@ -29,12 +29,12 @@ main {
         width: 34rem;
       }
 
-      > .header-container {
+      >.header-container {
         display: flex;
         flex-direction: row;
         width: 100%;
 
-        > Header {
+        >Header {
           width: 75%;
           height: 3.75rem;
 
@@ -43,7 +43,7 @@ main {
           }
         }
 
-        > .sub-header {
+        >.sub-header {
           align-items: center;
           background-color: $component-background;
           border-bottom: 1px solid $border-color;
@@ -55,18 +55,18 @@ main {
           width: 0;
           transition: all 0.5s;
 
-          > button {
+          >button {
             height: 2.5rem;
             visibility: hidden;
             width: 2.5rem;
           }
 
-          > p {
+          >p {
             font-size: 0;
             visibility: hidden;
           }
 
-          > div {
+          >div {
             height: 2.5rem;
             width: 2.5rem;
           }
@@ -82,7 +82,7 @@ main {
             width: 25%;
             padding: 0.5rem;
 
-            > button {
+            >button {
               background-image: url(/assets/icons/arrow.svg);
               background-position: center;
               background-size: 50%;
@@ -94,11 +94,59 @@ main {
               transition: all 0;
             }
 
-            > p {
+            >p {
               font-size: 1rem;
               visibility: visible;
             }
           }
+        }
+      }
+    }
+
+    >.upgrade-container {
+      border: 1px solid $border-color;
+      background-color: transparent;
+      border-top-right-radius: 1rem;
+      border-bottom-right-radius: 1rem;
+      display: flex;
+      flex: 1;
+      height: 100%;
+      justify-content: space-between;
+      position: absolute;
+      right: 0;
+      transition: all 1s;
+      width: 25%;
+
+      >.upgrade-header {
+        align-items: center;
+        background-color: $component-background;
+        border-bottom: 1px solid $border-color;
+        border-top-right-radius: 1rem;
+        display: flex;
+        height: 3.75rem;
+        justify-content: space-between;
+        padding: 0.5rem;
+        width: 100%;
+        transition: all 0.5s;
+
+        >button {
+          background-image: url(/assets/icons/close.svg);
+          background-position: center;
+          background-size: 50%;
+          background-repeat: no-repeat;
+          border-radius: 0.5rem;
+          height: 2.5rem;
+          visibility: visible;
+          width: 2.5rem;
+        }
+
+        >p {
+          font-size: 1rem;
+        }
+
+        >div {
+          height: 2.5rem;
+          width: 2.5rem;
         }
       }
     }

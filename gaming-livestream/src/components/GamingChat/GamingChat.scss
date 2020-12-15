@@ -118,7 +118,8 @@ section.chat-members-container {
     }
   }
 
-  &.full-screen {
+  &.full-screen,
+  &.show-upgrade {
     border: none;
     flex: 0;
     width: 0;
