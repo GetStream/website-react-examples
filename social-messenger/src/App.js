@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelList, MessageList, MessageInput, Window, Thread } from 'stream-chat-react';
+import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/index.css';
 import './App.css';
@@ -12,6 +12,7 @@ import {
   MessagingChannelList,
   MessagingChannelPreview,
   MessagingInput,
+  MessagingThread,
   WindowControls,
 } from './components';
 
@@ -53,12 +54,7 @@ const App = () => {
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>
-          <Thread
-            Message={CustomMessage}
-            additionalMessageInputProps={{
-              Input: MessagingInput,
-            }}
-          />
+          <MessagingThread />
         </Channel>
       </Chat>
     </div>
