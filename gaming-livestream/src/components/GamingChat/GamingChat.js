@@ -39,7 +39,7 @@ const getColor = () => {
 export const GamingChat = (props) => {
   channel.watch();
 
-  const [participants, setParticipants] = useState({
+  const [participants] = useState({
     Streamers: [{ name: 'PolarBear', color: '#5096ff', type: 'streamer' }],
     Moderators: [
       { name: 'Nava99', color: '#e60053', type: 'moderator' },
@@ -124,6 +124,7 @@ export const GamingChat = (props) => {
                         setOptionsSelected(false);
                       }}>Show Participants</li>
                       <li onClick={() => {
+                        props.setShowMembers(false);
                         props.setShowUpgrade(true);
                         setOptionsSelected(false);
                       }}>Upgrade</li>

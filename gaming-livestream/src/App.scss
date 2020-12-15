@@ -104,12 +104,11 @@ main {
     }
 
     >.upgrade-container {
+      animation: slideRight 1s forwards;
       border: 1px solid $border-color;
       background-color: transparent;
       border-top-right-radius: 1rem;
       border-bottom-right-radius: 1rem;
-      display: flex;
-      flex: 1;
       height: 100%;
       justify-content: space-between;
       position: absolute;
@@ -149,6 +148,60 @@ main {
           width: 2.5rem;
         }
       }
+
+      >ul {
+        margin: 0;
+        padding: .5rem;
+
+        >li {
+          align-items: center;
+          background-color: $component-background;
+          border: 1px solid $border-color;
+          border-radius: 1rem;
+          display: flex;
+          margin-top: 1rem;
+          padding: .5rem;
+          width: 100%;
+
+          &:first-of-type {
+            border: 5px solid $attendees;
+          }
+
+          >svg {
+            margin-right: .5rem;
+          }
+
+          >.description-container {
+            p {
+              font-size: .9rem;
+
+              &:first-of-type {
+                font-weight: bold;
+              }
+            }
+          }
+        }
+      }
+
+      >button {
+        bottom: .5rem;
+        left: 0;
+        margin-left: auto;
+        margin-right: auto;
+        position: absolute;
+        right: 0;
+        width: 94%;
+      }
     }
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateY(-2rem);
+  }
+
+  to {
+    transform: translateX(0);
   }
 }

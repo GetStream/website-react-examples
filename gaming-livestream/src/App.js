@@ -5,10 +5,38 @@ import { GamingVideo } from './components/GamingVideo/GamingVideo';
 import { GamingFooter } from './components/GamingFooter/GamingFooter';
 import { GamingChat } from './components/GamingChat/GamingChat';
 
+import InfiniteIcon from './assets/icons/InfiniteIcon';
+import MemberIcon from './assets/icons/MemberIcon';
+import BellIcon from './assets/icons/BellIcon';
+import HandIcon from './assets/icons/HandIcon';
+
 const App = () => {
   const [showMembers, setShowMembers] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [showUpgrade, setShowUpgrade] = useState(false);
+
+  const [upgrades] = useState([
+    { name: 'Unlimited Karma', description: 'Subscribe for $3 / month', active: true, img: 'infinite' },
+    { name: 'Karma +10', description: 'Activate mobile notifications', active: false, img: 'bell' },
+    { name: 'Karma +10', description: 'Allow livestream in AdBlock', active: false, img: 'hand' },
+    { name: 'Karma +10', description: 'Be a member for 100 days', active: false, img: 'member' },
+  ])
+
+  const getImage = (type) => {
+    switch (type) {
+      case 'infinite':
+        return <InfiniteIcon />
+      case 'bell':
+        return <BellIcon />
+      case 'hand':
+        return <HandIcon />
+      case 'member':
+        return <MemberIcon />
+
+      default:
+        break;
+    }
+  }
 
   return (
     <main className='App'>
@@ -53,6 +81,18 @@ const App = () => {
               <p>Upgrade</p>
               <div></div>
             </div>
+            <ul>
+              {upgrades.map((option, i) => (
+                <li key={i}>
+                  {getImage(option.img)}
+                  <div className="description-container">
+                    <p>{option.name}</p>
+                    <p>{option.description}</p>
+                  </div>
+                </li>
+              ))}
+            </ul>
+            <button>Next</button>
           </div>
         }
       </div>
