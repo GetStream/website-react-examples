@@ -72,6 +72,7 @@ export const GamingChat = (props) => {
   });
 
   const [isTyping, setIsTyping] = useState(false);
+  const [optionsSelected, setOptionsSelected] = useState(false);
 
   channel.on('typing.start', (event) => {
     let isUser = event.user.id === userID;
@@ -88,7 +89,7 @@ export const GamingChat = (props) => {
     <section
       className={`chat-members-container ${props.showMembers ? 'show-members' : 'hide-members'} ${
         props.isFullScreen ? 'full-screen' : 'in-screen'
-      }`}
+        }`}
     >
       {channel && (
         <div className='chat-container'>
@@ -111,9 +112,18 @@ export const GamingChat = (props) => {
                   <button
                     className='options-btn'
                     onClick={() => {
-                      props.setShowMembers(true);
+                      setOptionsSelected(!optionsSelected);
                     }}
                   ></button>
+                  {optionsSelected &&
+                    <ul className="options-container">
+                      <li onClick={() => {
+                        props.setShowMembers(true);
+                        setOptionsSelected(false);
+                      }}>Show Participants</li>
+                      <li>Upgrade</li>
+                    </ul>
+                  }
                 </div>
                 <MessageList
                   Message={(props) => {
