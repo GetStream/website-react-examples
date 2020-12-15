@@ -12,18 +12,18 @@ export const LiveEventChannelFooter = () => {
   const [toggleSwitchPosition, setToggleSwitchPosition] = useState(false);
 
   return (
-    <div className="live-event-footer__container">
-      <div className="live-event-footer__top">
-        <div className="live-event-footer__avatar">
+    <div className='live-event-footer__container'>
+      <div className='live-event-footer__top'>
+        <div className='live-event-footer__avatar'>
           <AvatarRobert />
         </div>
-        <div className="live-event-footer__input">
+        <div className='live-event-footer__input'>
           <LiveEventMessageInput focus sloMoDelay={sloMoDelay} />
         </div>
       </div>
-      <div className="live-event-footer__bottom">
-        <div className="live-event-footer__bottom-left">
-          <div className="live-event-footer__bottom-badge">
+      <div className='live-event-footer__bottom'>
+        <div className='live-event-footer__bottom-left'>
+          <div className='live-event-footer__bottom-badge'>
             <AdminBadge />
           </div>
           <h3>Moderator Controls</h3>
@@ -31,12 +31,13 @@ export const LiveEventChannelFooter = () => {
         {showModal && (
           <SloMoModal
             setToggleSwitchPosition={setToggleSwitchPosition}
+            setShowModal={setShowModal}
             sloMoDelay={sloMoDelay}
             setSloMoDelay={setSloMoDelay}
             toggleSwitchPosition={toggleSwitchPosition}
           />
         )}
-        <div onClick={() => setShowModal(!showModal)}>
+        <div style={{ cursor: 'pointer' }} onClick={() => setShowModal(!showModal)}>
           <MeatballMenu />
         </div>
       </div>
