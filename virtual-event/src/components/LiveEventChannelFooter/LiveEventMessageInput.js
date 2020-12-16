@@ -1,11 +1,6 @@
 import React, { useContext, useRef, useState } from 'react';
 import { FileUploadButton } from 'react-file-utils';
-import {
-  ChannelContext,
-  ChatAutoComplete,
-  EmojiPicker,
-  useMessageInput,
-} from 'stream-chat-react';
+import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 import { SmileyFace } from '../../assets/SmileyFace';
 import { PaperClip } from '../../assets/PaperClip';
 
@@ -30,18 +25,15 @@ export const LiveEventMessageInput = (props) => {
     if (canSend) {
       messageInput.handleSubmit(e);
       setCanSend(false);
-      canSendTimer.current = setTimeout(
-        () => setCanSend(true),
-        props.sloMoDelay * 1000,
-      );
+      canSendTimer.current = setTimeout(() => setCanSend(true), props.sloMoDelay * 1000);
     } else {
       e.preventDefault();
     }
   };
 
   return (
-    <div className="live-event-message-input__wrapper">
-      <div className="live-event-message-input__input">
+    <div className='live-event-message-input__wrapper'>
+      <div className='live-event-message-input__input'>
         <EmojiPicker {...messageInput} onSelectEmoji={selectEmoji} />
         <ChatAutoComplete
           innerRef={messageInput.textareaRef}
@@ -52,15 +44,15 @@ export const LiveEventMessageInput = (props) => {
           placeholder={'Send a message'}
           onPaste={messageInput.onPaste}
         />
-      </div>
-      <div className="live-event-message-input__input-buttons">
-        <div style={{ height: '18px' }}>
-          <FileUploadButton handleFiles={messageInput.uploadNewFiles}>
-            <PaperClip />
-          </FileUploadButton>
-        </div>
-        <div style={{ height: '18px' }} onClick={messageInput.openEmojiPicker}>
-          <SmileyFace />
+        <div className='live-event-message-input__input-buttons'>
+          <div style={{ height: '18px' }}>
+            <FileUploadButton handleFiles={messageInput.uploadNewFiles}>
+              <PaperClip />
+            </FileUploadButton>
+          </div>
+          <div style={{ height: '18px', marginLeft: '11px' }} onClick={messageInput.openEmojiPicker}>
+            <SmileyFace />
+          </div>
         </div>
       </div>
     </div>

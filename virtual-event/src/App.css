@@ -391,6 +391,7 @@ body {
 .livestream.str-chat .str-chat__list {
   padding: 0px;
   padding-top: 12px;
+  max-height: 608px;
 }
 .str-chat__typing-indicator {
   display: none;

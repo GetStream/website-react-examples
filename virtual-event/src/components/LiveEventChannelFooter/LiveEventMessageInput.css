@@ -1,21 +1,24 @@
 .live-event-message-input__wrapper {
-  width: 238px !important;
+  /* width: 238px !important;
   height: 52px !important;
   border-radius: 8px;
   display: flex;
   flex-direction: row;
   justify-content: space-evenly;
   border: 1px solid #19a0ff;
-  background-color: #f1faff;
+  background-color: #f1faff; */
 }
 .live-event-message-input__input {
+  /* position: absolute;
+  display: flex;
+
   height: 100%;
   background-color: #f1faff;
   border: none;
-  flex: 4;
+
   border-radius: 8px;
   align-items: center;
-  margin-left: 6px;
+  margin-left: 6px; */
 }
 
 .str-chat.dark .live-event-message-input__input {
@@ -23,36 +26,60 @@
 }
 
 .live-event-message-input__input-buttons {
+  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  flex: 1;
-  padding-right: 18px;
+  top: 32px;
+  right: 20px;
 }
+
 .str-chat__textarea {
+  color: #19a0ff;
+  line-height: 150%;
+  position: relative;
   border: none;
-  height: 100%;
+  height: 52px;
+  width: 238px;
   display: flex;
   align-items: center;
+  background: #ffffff;
+  border: 1px solid #bed5e4;
+  border-radius: 8px;
 }
-.str-chat__textarea:focus {
-  border: none;
-  outline: none;
-  color: #19a0ff;
+
+.str-chat__textarea:focus-within {
+  background: #f1faff;
+  border: 1px solid #00a3ff;
 }
 .str-chat__textarea textarea {
   border: none;
-  background-color: #f1faff;
-  color: #19a0ff;
-  line-height: 150%;
+  outline: none;
+  box-shadow: none;
+  background: #ffffff;
+  max-width: 180px;
 }
 .str-chat__textarea textarea:focus {
   border: none;
   outline: none;
   box-shadow: none;
-  background-color: #f1faff;
+  background: #f1faff;
 }
+
+.str-chat.dark .str-chat__textarea {
+  background: #1a1c1e;
+  border: 1px solid #2c3134;
+}
+.str-chat.dark .str-chat__textarea:focus-within {
+  border: 1px solid #00a3ff;
+}
+
+.str-chat.dark .str-chat__textarea textarea {
+  color: #19a0ff;
+  background: #1a1c1e;
+}
+
 .str-chat__textarea textarea::placeholder {
   color: #19a0ff;
 }

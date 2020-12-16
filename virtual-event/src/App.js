@@ -36,7 +36,7 @@ const App = () => {
       const channelCreator = await chatClient.channel('livestream', channelName, {
         image:
           'https://images.unsplash.com/photo-1512138664757-360e0aad5132?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80',
-        name: 'The water cooler',
+        name: 'Example User',
         example: 1,
       });
       await channelCreator.watch();
