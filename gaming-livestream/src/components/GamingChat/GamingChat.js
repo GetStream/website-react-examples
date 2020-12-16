@@ -5,11 +5,12 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './GamingChat.scss';
 
+import { GamingChatHeader } from './GamingChatHeader';
+import { GamingMessage } from '../GamingMessage/GamingMessage';
 import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
 
-import UserIcon from '../../assets/icons/UserIcon';
-import { getColor, participants } from '../../assets/data';
+import { participants } from '../../assets/data';
 
 const chatClient = new StreamChat('gx5a64bj4ptz');
 const userToken =
@@ -17,8 +18,9 @@ const userToken =
 const userID = 'restless-cherry-5';
 
 export const GamingChat = (props) => {
+  const { isFullScreen, setShowMembers, showMembers, showUpgrade } = props;
+
   const [channel, setChannel] = useState(null);
-  const [optionsSelected, setOptionsSelected] = useState(false);
 
   useEffect(() => {
     const loadChat = async () => {
@@ -45,67 +47,17 @@ export const GamingChat = (props) => {
 
   return (
     <section
-      className={`chat-members-container ${props.showMembers ? 'show-members' : 'hide-members'} ${
-        props.isFullScreen ? 'full-screen' : 'in-screen'
-      } ${props.showUpgrade ? 'show-upgrade' : ''}`}
+      className={`chat-members-container ${showMembers ? 'show-members' : 'hide-members'} ${isFullScreen ? 'full-screen' : 'in-screen'} ${
+        showUpgrade ? 'show-upgrade' : ''
+      }`}
     >
       {channel && (
         <div className='chat-container'>
           <Chat client={chatClient}>
             <Channel channel={channel}>
               <Window>
-                <div className='channel-header'>
-                  <button
-                    className='hide-btn'
-                    onClick={() => {
-                      if (props.showMembers) {
-                        props.setShowMembers(false);
-                      }
-                      props.setIsFullScreen((prevState) => !prevState);
-                    }}
-                  ></button>
-                  <p>Live Chat</p>
-                  <button
-                    className='options-btn'
-                    onClick={() => {
-                      setOptionsSelected(!optionsSelected);
-                    }}
-                  ></button>
-                  {optionsSelected && (
-                    <ul className='options-container'>
-                      <li
-                        onClick={() => {
-                          props.setShowMembers(true);
-                          setOptionsSelected(false);
-                        }}
-                      >
-                        Show Participants
-                      </li>
-                      <li
-                        onClick={() => {
-                          props.setShowMembers(false);
-                          props.setShowUpgrade(true);
-                          setOptionsSelected(false);
-                        }}
-                      >
-                        Upgrade
-                      </li>
-                    </ul>
-                  )}
-                </div>
-                <MessageList
-                  Message={(props) => {
-                    return (
-                      <div className='custom-message'>
-                        <UserIcon />
-                        <p className='message-owner' style={{ color: getColor() }}>
-                          {props.message.user.id}
-                        </p>
-                        <p className='message'>{props.message.text}</p>
-                      </div>
-                    );
-                  }}
-                />
+                <GamingChatHeader {...props} />
+                <MessageList Message={GamingMessage} />
                 <GamingMessageInput focus />
               </Window>
               <Thread />
@@ -113,7 +65,7 @@ export const GamingChat = (props) => {
           </Chat>
         </div>
       )}
-      <GamingParticipants participants={participants} props setShowMembers={props.setShowMembers} />
+      <GamingParticipants {...{ participants, showMembers, setShowMembers }} />
     </section>
   );
 };

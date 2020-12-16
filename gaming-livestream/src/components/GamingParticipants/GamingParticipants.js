@@ -3,7 +3,8 @@ import React, { useState } from 'react';
 import { getIcon } from '../../assets/data';
 
 export const GamingParticipants = (props) => {
-  const { participants } = props;
+  const { participants, setShowMembers, showMembers } = props;
+
   const [searchInput, setSearchInput] = useState('');
 
   const onChangeHandler = (e) => {
@@ -24,14 +25,9 @@ export const GamingParticipants = (props) => {
   });
 
   return (
-    <div className={`members-container ${props.showMembers ? 'show' : 'hide'}`}>
+    <div className={`members-container ${showMembers ? 'show' : 'hide'}`}>
       <div className='members-header'>
-        <button
-          className='close-participants-btn'
-          onClick={() => {
-            props.setShowMembers(false);
-          }}
-        ></button>
+        <button className='close-participants-btn' onClick={() => setShowMembers(false)}></button>
         <p>Participants (458K)</p>
         <div></div>
       </div>

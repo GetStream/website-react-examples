@@ -93,17 +93,6 @@ section.chat-members-container {
       background-color: rgba($color: $background, $alpha: 0.7);
     }
 
-    .custom-message {
-      display: flex;
-      flex-wrap: wrap;
-      margin-top: 0.5rem;
-
-      > svg,
-      > .message-owner {
-        margin-right: 0.5rem;
-      }
-    }
-
     .str-chat__main-panel {
       padding: 0;
 

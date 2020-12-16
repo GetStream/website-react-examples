@@ -1,0 +1,32 @@
+@import '../../styles/variables';
+
+section.chat-members-container {
+  .custom-message {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    margin-top: 0.5rem;
+
+    > svg,
+    > .message-owner {
+      margin-right: 0.5rem;
+      font-family: Helvetica Neue, sans-serif;
+      font-weight: bold;
+      font-size: 13px;
+    }
+
+    > .message {
+      font-family: Helvetica Neue, sans-serif;
+      font-size: 13px;
+      color: #ffffff;
+      mix-blend-mode: normal;
+    }
+  }
+
+  .str-chat__li--single,
+  .str-chat__li--top,
+  .str-chat__li--bottom {
+    margin-top: 12px;
+    margin-bottom: 12px;
+  }
+}
