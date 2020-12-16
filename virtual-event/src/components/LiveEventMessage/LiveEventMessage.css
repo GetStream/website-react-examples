@@ -55,6 +55,11 @@
 .live-event-message__container__pinned {
   background: rgba(255, 199, 0, 0.15);
 }
+
+.pinned-messages__container .live-event-message__container__pinned {
+  background: #f1faff;
+}
+
 .pin-icon {
   margin-left: 60px !important;
 }

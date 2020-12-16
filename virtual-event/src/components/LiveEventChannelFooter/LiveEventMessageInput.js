@@ -36,6 +36,7 @@ export const LiveEventMessageInput = (props) => {
       <div className='live-event-message-input__input'>
         <EmojiPicker {...messageInput} onSelectEmoji={selectEmoji} />
         <ChatAutoComplete
+          commands={messageInput.getCommands()}
           innerRef={messageInput.textareaRef}
           handleSubmit={handleSubmitDelayed}
           onChange={messageInput.handleChange}

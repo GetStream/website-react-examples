@@ -109,7 +109,7 @@ body {
   border-radius: 0px 16px 16px 0px;
 }
 
-.pinned-messages__container .livestream.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+.pinned-messages__container .str-chat__list {
   max-height: 735px !important;
 }
 

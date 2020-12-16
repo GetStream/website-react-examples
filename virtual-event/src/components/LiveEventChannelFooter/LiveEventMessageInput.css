@@ -100,3 +100,12 @@
 .str-chat.dark .str-chat__textarea {
   background-color: #1a1c1e;
 }
+
+div.rta__autocomplete.str-chat__emojisearch {
+  z-index: 10;
+  display: flex;
+  background: white;
+  color: black;
+  line-height: 1.4;
+  border-radius: 8px;
+}
