@@ -13,6 +13,7 @@ export const GamingMessageInput = (props) => {
   return (
     <div className='channel-footer'>
       <ChatAutoComplete
+        commands={messageInput.getCommands()}
         innerRef={messageInput.textareaRef}
         handleSubmit={messageInput.handleSubmit}
         onSelectItem={messageInput.onSelectItem}
@@ -31,7 +32,7 @@ export const GamingMessageInput = (props) => {
           <StarIcon />
           <p>68</p>
         </div>
-        {Object.keys(typing).length && (
+        {!!Object.keys(typing).length && (
           <div className='typing-indicators'>
             <div className='indicators'>
               {[1, 2, 3].map((item, i) => (

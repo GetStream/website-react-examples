@@ -2,9 +2,9 @@
 
 section.chat-members-container {
   border: 1px solid $border-color;
+  border-top: 0;
+  border-bottom: 0;
   background-color: transparent;
-  border-top-right-radius: 1rem;
-  border-bottom-right-radius: 1rem;
   display: flex;
   flex: 1;
   justify-content: space-between;
@@ -18,8 +18,6 @@ section.chat-members-container {
     align-items: center;
     background-color: $background;
     border-left: 1px solid $border-color;
-    border-top-right-radius: 1rem;
-    border-bottom-right-radius: 1rem;
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -159,7 +157,7 @@ section.chat-members-container {
     background-color: $component-background;
     border-bottom: 1px solid $border-color;
     display: flex;
-    height: 3.7rem;
+    height: 3.75rem;
     justify-content: space-between;
     padding: 0.5rem;
     position: relative;

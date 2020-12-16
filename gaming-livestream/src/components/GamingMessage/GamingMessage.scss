@@ -6,6 +6,11 @@ section.chat-members-container {
     align-items: center;
     flex-wrap: wrap;
     margin-top: 0.5rem;
+    padding: 6px 0;
+
+    &:hover {
+      // background: #ffffff;
+    }
 
     > svg,
     > .message-owner {
@@ -26,7 +31,7 @@ section.chat-members-container {
   .str-chat__li--single,
   .str-chat__li--top,
   .str-chat__li--bottom {
-    margin-top: 12px;
-    margin-bottom: 12px;
+    margin-top: 6px;
+    margin-bottom: 6px;
   }
 }
