@@ -52,11 +52,7 @@ const App = () => {
               className={`sub-header ${isFullScreen ? 'full-screen' : ''}`}
             />
             <div className={`sub-header ${isFullScreen ? 'show' : 'hide'}`}>
-              <button
-                onClick={() => {
-                  setIsFullScreen(false);
-                }}
-              ></button>
+              <button onClick={() => setIsFullScreen(!isFullScreen)}></button>
               <p>Live Chat</p>
               <div></div>
             </div>

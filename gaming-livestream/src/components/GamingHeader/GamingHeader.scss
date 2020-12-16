@@ -9,22 +9,25 @@ header {
   padding: 0.5rem;
   transition: all 1s;
 
-  &.show-members {
-    padding-right: 26%;
-
-    > .stream-details {
-      > .info {
-        > p {
-          font-family: Helvetica Neue, sans-serif;
-          font-weight: bold;
-          font-size: 15px;
-          line-height: 18px;
-          display: flex;
-          align-items: center;
-          color: #ffffff;
-        }
+  > .stream-details {
+    > .info {
+      > p {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        font-family: Helvetica Neue, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+        line-height: 18px;
+        display: flex;
+        align-items: center;
+        color: #ffffff;
       }
     }
+  }
+
+  &.show-members {
+    padding-right: 26%;
   }
 
   &.full-screen {
@@ -43,12 +46,6 @@ header {
 
     > .info {
       width: 100%;
-
-      > p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
-      }
 
       > .info-separator {
         display: flex;

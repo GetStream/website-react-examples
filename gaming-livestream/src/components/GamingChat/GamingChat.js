@@ -1,14 +1,14 @@
 import React, { useState } from 'react';
-import './GamingChat.scss';
-import { Chat, Channel, Thread, Window } from 'stream-chat-react';
-import { MessageList } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
-
-import UserIcon from '../../assets/icons/UserIcon';
-
+import { Chat, Channel, MessageList, Thread, Window } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
+
+import './GamingChat.scss';
+
 import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
+
+import UserIcon from '../../assets/icons/UserIcon';
 
 const chatClient = new StreamChat('gx5a64bj4ptz');
 const userToken =
@@ -89,9 +89,7 @@ export const GamingChat = (props) => {
     <section
       className={`chat-members-container ${props.showMembers ? 'show-members' : 'hide-members'} ${
         props.isFullScreen ? 'full-screen' : 'in-screen'
-        } ${
-        props.showUpgrade ? 'show-upgrade' : ''
-        }`}
+      } ${props.showUpgrade ? 'show-upgrade' : ''}`}
     >
       {channel && (
         <div className='chat-container'>
@@ -104,10 +102,8 @@ export const GamingChat = (props) => {
                     onClick={() => {
                       if (props.showMembers) {
                         props.setShowMembers(false);
-                        props.setIsFullScreen(true);
-                      } else {
-                        props.setIsFullScreen(true);
                       }
+                      props.setIsFullScreen((prevState) => !prevState);
                     }}
                   ></button>
                   <p>Live Chat</p>
@@ -117,19 +113,27 @@ export const GamingChat = (props) => {
                       setOptionsSelected(!optionsSelected);
                     }}
                   ></button>
-                  {optionsSelected &&
-                    <ul className="options-container">
-                      <li onClick={() => {
-                        props.setShowMembers(true);
-                        setOptionsSelected(false);
-                      }}>Show Participants</li>
-                      <li onClick={() => {
-                        props.setShowMembers(false);
-                        props.setShowUpgrade(true);
-                        setOptionsSelected(false);
-                      }}>Upgrade</li>
+                  {optionsSelected && (
+                    <ul className='options-container'>
+                      <li
+                        onClick={() => {
+                          props.setShowMembers(true);
+                          setOptionsSelected(false);
+                        }}
+                      >
+                        Show Participants
+                      </li>
+                      <li
+                        onClick={() => {
+                          props.setShowMembers(false);
+                          props.setShowUpgrade(true);
+                          setOptionsSelected(false);
+                        }}
+                      >
+                        Upgrade
+                      </li>
                     </ul>
-                  }
+                  )}
                 </div>
                 <MessageList
                   Message={(props) => {
