@@ -12,8 +12,9 @@ section.chat-members-container {
   right: 0;
   transition: all 1s;
   width: 25%;
+  min-width: 300px;
 
-  >.members-container {
+  > .members-container {
     align-items: center;
     background-color: $background;
     border-left: 1px solid $border-color;
@@ -25,13 +26,13 @@ section.chat-members-container {
     transition: width 0.5s linear;
     width: 0;
 
-    >.list-container {
+    > .list-container {
       overflow: auto;
       padding: 1rem 1rem 0 1rem;
       width: 100%;
 
-      >.list-separator {
-        >.list-header {
+      > .list-separator {
+        > .list-header {
           background-color: $component-background;
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
@@ -42,16 +43,16 @@ section.chat-members-container {
           padding-left: 1.5rem;
         }
 
-        >ul {
+        > ul {
           list-style: none;
           margin: 0;
           padding: 0;
 
-          >li {
+          > li {
             display: flex;
             margin: 0.3rem 0;
 
-            >svg {
+            > svg {
               margin-right: 0.5rem;
             }
           }
@@ -60,17 +61,16 @@ section.chat-members-container {
     }
   }
 
-  >.chat-container {
+  > .chat-container {
     background-color: transparent;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
     transition: width 0.5s alternate;
     width: 100%;
 
-    >.str-chat {
+    > .str-chat {
       background-color: transparent;
       background-color: rgba($color: $background, $alpha: 0.7);
-      height: 83%;
     }
 
     .custom-message {
@@ -78,8 +78,8 @@ section.chat-members-container {
       flex-wrap: wrap;
       margin-top: 0.5rem;
 
-      >svg,
-      >.message-owner {
+      > svg,
+      > .message-owner {
         margin-right: 0.5rem;
       }
     }
@@ -98,14 +98,14 @@ section.chat-members-container {
     flex: 2;
     width: 50%;
 
-    >.chat-container {
+    > .chat-container {
       border-top-right-radius: 0;
       border-bottom-right-radius: 0;
       transition: width 0.5s 0.2s;
       width: 50%;
     }
 
-    >.members-container {
+    > .members-container {
       opacity: 1;
       transition: width 0.2s 0.5s;
       width: 50%;
@@ -113,7 +113,7 @@ section.chat-members-container {
   }
 
   &.hide-members {
-    >.members-container {
+    > .members-container {
       transition: width 0.2s 0s;
     }
   }
@@ -125,12 +125,12 @@ section.chat-members-container {
     width: 0;
     transition-delay: 0.2s;
 
-    >.chat-container {
+    > .chat-container {
       width: 0;
       opacity: 0;
     }
 
-    >.members-container {
+    > .members-container {
       width: 0;
       opacity: 0;
     }
@@ -148,7 +148,7 @@ section.chat-members-container {
     position: relative;
     width: 100%;
 
-    >button {
+    > button {
       background-size: 50%;
       background-position: center;
       background-repeat: no-repeat;
@@ -169,27 +169,27 @@ section.chat-members-container {
       }
     }
 
-    >p {
+    > p {
       font-size: 1rem;
     }
 
-    >.options-container {
+    > .options-container {
       background-color: $component-background;
       border: 1px solid $border-color;
-      border-radius: .5rem;
+      border-radius: 0.5rem;
       list-style: none;
       margin: 0;
       overflow: hidden;
       padding: 0;
       position: absolute;
-      right: .5rem;
+      right: 0.5rem;
       top: 4.2rem;
       z-index: 1;
 
-      >li {
+      > li {
         color: $foreground;
         cursor: pointer;
-        padding: .5rem;
+        padding: 0.5rem;
 
         &:hover {
           background-color: $button-background-hover;

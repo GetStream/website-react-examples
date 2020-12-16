@@ -7,7 +7,7 @@ import './GamingVideo.scss';
 
 export const GamingVideo = (props) => {
   return (
-    <video autoPlay muted loop controls className={`video-container ${props.isFullScreen ? 'full-screen' : ''}`}>
+    <video autoPlay muted loop controls className={`video-container ${props.isFullScreen ? 'full-screen' : 'clipped'}`}>
       <source src={''} />
     </video>
   );

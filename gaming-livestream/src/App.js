@@ -1,5 +1,7 @@
-import './App.scss';
 import React, { useState } from 'react';
+
+import './App.scss';
+
 import { GamingHeader } from './components/GamingHeader/GamingHeader';
 import { GamingVideo } from './components/GamingVideo/GamingVideo';
 import { GamingFooter } from './components/GamingFooter/GamingFooter';
@@ -20,23 +22,23 @@ const App = () => {
     { name: 'Karma +10', description: 'Activate mobile notifications', active: false, img: 'bell' },
     { name: 'Karma +10', description: 'Allow livestream in AdBlock', active: false, img: 'hand' },
     { name: 'Karma +10', description: 'Be a member for 100 days', active: false, img: 'member' },
-  ])
+  ]);
 
   const getImage = (type) => {
     switch (type) {
       case 'infinite':
-        return <InfiniteIcon />
+        return <InfiniteIcon />;
       case 'bell':
-        return <BellIcon />
+        return <BellIcon />;
       case 'hand':
-        return <HandIcon />
+        return <HandIcon />;
       case 'member':
-        return <MemberIcon />
+        return <MemberIcon />;
 
       default:
         break;
     }
-  }
+  };
 
   return (
     <main className='App'>
@@ -70,9 +72,9 @@ const App = () => {
           showUpgrade={showUpgrade}
           setShowUpgrade={setShowUpgrade}
         />
-        {showUpgrade &&
-          <div className="upgrade-container">
-            <div className="upgrade-header">
+        {showUpgrade && (
+          <div className='upgrade-container'>
+            <div className='upgrade-header'>
               <button
                 onClick={() => {
                   setShowUpgrade(false);
@@ -85,7 +87,7 @@ const App = () => {
               {upgrades.map((option, i) => (
                 <li key={i}>
                   {getImage(option.img)}
-                  <div className="description-container">
+                  <div className='description-container'>
                     <p>{option.name}</p>
                     <p>{option.description}</p>
                   </div>
@@ -94,7 +96,7 @@ const App = () => {
             </ul>
             <button>Next</button>
           </div>
-        }
+        )}
       </div>
     </main>
   );

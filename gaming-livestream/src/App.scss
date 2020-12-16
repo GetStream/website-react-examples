@@ -5,19 +5,16 @@ main {
   display: flex;
   height: 100vh;
   justify-content: center;
-  padding: 5rem;
 
-  >.live-stream {
+  > .live-stream {
     background-color: $background;
-    border-radius: 1rem;
     display: flex;
     height: 100%;
     overflow: hidden;
     position: relative;
     width: 100%;
-    width: 1130px;
 
-    >.separator {
+    > .separator {
       display: flex;
       flex-direction: column;
       flex: 3;
@@ -29,12 +26,12 @@ main {
         width: 34rem;
       }
 
-      >.header-container {
+      > .header-container {
         display: flex;
         flex-direction: row;
         width: 100%;
 
-        >Header {
+        > Header {
           width: 75%;
           height: 3.75rem;
 
@@ -43,7 +40,7 @@ main {
           }
         }
 
-        >.sub-header {
+        > .sub-header {
           align-items: center;
           background-color: $component-background;
           border-bottom: 1px solid $border-color;
@@ -55,18 +52,18 @@ main {
           width: 0;
           transition: all 0.5s;
 
-          >button {
+          > button {
             height: 2.5rem;
             visibility: hidden;
             width: 2.5rem;
           }
 
-          >p {
+          > p {
             font-size: 0;
             visibility: hidden;
           }
 
-          >div {
+          > div {
             height: 2.5rem;
             width: 2.5rem;
           }
@@ -82,7 +79,7 @@ main {
             width: 25%;
             padding: 0.5rem;
 
-            >button {
+            > button {
               background-image: url(/assets/icons/arrow.svg);
               background-position: center;
               background-size: 50%;
@@ -94,7 +91,7 @@ main {
               transition: all 0;
             }
 
-            >p {
+            > p {
               font-size: 1rem;
               visibility: visible;
             }
@@ -103,7 +100,7 @@ main {
       }
     }
 
-    >.upgrade-container {
+    > .upgrade-container {
       animation: slideRight 1s forwards;
       border: 1px solid $border-color;
       background-color: transparent;
@@ -116,7 +113,7 @@ main {
       transition: all 1s;
       width: 25%;
 
-      >.upgrade-header {
+      > .upgrade-header {
         align-items: center;
         background-color: $component-background;
         border-bottom: 1px solid $border-color;
@@ -128,7 +125,7 @@ main {
         width: 100%;
         transition: all 0.5s;
 
-        >button {
+        > button {
           background-image: url(/assets/icons/close.svg);
           background-position: center;
           background-size: 50%;
@@ -139,41 +136,41 @@ main {
           width: 2.5rem;
         }
 
-        >p {
+        > p {
           font-size: 1rem;
         }
 
-        >div {
+        > div {
           height: 2.5rem;
           width: 2.5rem;
         }
       }
 
-      >ul {
+      > ul {
         margin: 0;
-        padding: .5rem;
+        padding: 0.5rem;
 
-        >li {
+        > li {
           align-items: center;
           background-color: $component-background;
           border: 1px solid $border-color;
           border-radius: 1rem;
           display: flex;
           margin-top: 1rem;
-          padding: .5rem;
+          padding: 0.5rem;
           width: 100%;
 
           &:first-of-type {
             border: 5px solid $attendees;
           }
 
-          >svg {
-            margin-right: .5rem;
+          > svg {
+            margin-right: 0.5rem;
           }
 
-          >.description-container {
+          > .description-container {
             p {
-              font-size: .9rem;
+              font-size: 0.9rem;
 
               &:first-of-type {
                 font-weight: bold;
@@ -183,8 +180,8 @@ main {
         }
       }
 
-      >button {
-        bottom: .5rem;
+      > button {
+        bottom: 0.5rem;
         left: 0;
         margin-left: auto;
         margin-right: auto;
