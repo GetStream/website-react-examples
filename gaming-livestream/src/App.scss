@@ -53,6 +53,7 @@ main {
           transition: all 0.5s;
 
           > button {
+            cursor: pointer;
             height: 2.5rem;
             visibility: hidden;
             width: 2.5rem;

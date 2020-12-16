@@ -15,7 +15,13 @@ header {
     > .stream-details {
       > .info {
         > p {
-          width: 80%;
+          font-family: Helvetica Neue, sans-serif;
+          font-weight: bold;
+          font-size: 15px;
+          line-height: 18px;
+          display: flex;
+          align-items: center;
+          color: #ffffff;
         }
       }
     }
@@ -31,6 +37,8 @@ header {
 
     > svg {
       margin-right: 0.5rem;
+      height: 40px;
+      width: 41px;
     }
 
     > .info {
@@ -53,6 +61,15 @@ header {
 
           > svg {
             margin-right: 0.5rem;
+          }
+
+          > p {
+            font-family: Helvetica Neue, sans-serif;
+            font-size: 13px;
+            line-height: 16px;
+            display: flex;
+            align-items: center;
+            color: #ffffff;
           }
         }
       }
@@ -111,6 +128,12 @@ header {
       > svg {
         margin-right: 0.5rem;
       }
+    }
+
+    p {
+      font-family: Helvetica Neue, sans-serif;
+      font-size: 13px;
+      color: #ffffff;
     }
   }
 }

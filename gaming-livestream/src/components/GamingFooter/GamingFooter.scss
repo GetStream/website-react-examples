@@ -20,9 +20,9 @@ footer {
 
   > .streamer-details-container {
     display: flex;
+    align-items: center;
 
     > .streamer-details-separator {
-      align-items: center;
       display: flex;
 
       > .avatar {
@@ -37,12 +37,22 @@ footer {
       }
 
       > .streamer-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        height: 50px;
+
         > .streamer-name {
           align-items: center;
           display: flex;
 
           > p {
             margin-right: 0.5rem;
+            font-family: Helvetica Neue, sans-serif;
+            font-weight: bold;
+            font-size: 17px;
+            line-height: 21px;
+            color: #ffffff;
           }
         }
 
@@ -56,9 +66,10 @@ footer {
             background-color: $button-background;
             border-radius: 1rem;
             color: $foreground;
-            font-size: 0.75rem;
             margin-right: 0.5rem;
             padding: 0.25rem 0.5rem;
+            font-family: Helvetica Neue, sans-serif;
+            font-size: 11px;
           }
         }
       }
@@ -80,7 +91,17 @@ footer {
 
         > p {
           margin-right: 0.5rem;
-          // text-align: end;
+          font-family: Helvetica Neue, sans-serif;
+          font-size: 15px;
+          line-height: 18px;
+          color: #ffffff;
+        }
+      }
+
+      > div:nth-child(2) {
+        > p {
+          font-size: 11px;
+          opacity: 0.5;
         }
       }
     }

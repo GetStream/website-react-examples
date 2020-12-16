@@ -1,5 +1,7 @@
 import React from 'react';
+
 import './GamingHeader.scss';
+
 import LiveIcon from '../../assets/icons/LiveIcon';
 import ControllerIcon from '../../assets/icons/ControllerIcon';
 import PeopleIcon from '../../assets/icons/PeopleIcon';
@@ -11,7 +13,7 @@ export const GamingHeader = (props) => {
   return (
     <header className={`${props.showMembers ? 'show-members' : ''} ${props.isFullScreen ? 'full-screen' : ''}`}>
       <div className='stream-details'>
-        <LiveIcon style={{ height: '3rem' }} />
+        <LiveIcon />
         <div className='info'>
           <p>2200+ Wins, #1 Warzone Battle Royale All Platforms Wins</p>
           <div className='info-separator'>

@@ -53,7 +53,13 @@ export const GamingParticipants = (props) => {
         <div></div>
       </div>
       <div className='list-container'>
-        <input placeholder='Search' value={searchInput} type='text' onChange={(e) => onChangeHandler(e)} />
+        <input
+          className='members-container-input'
+          placeholder='Search'
+          value={searchInput}
+          type='text'
+          onChange={(e) => onChangeHandler(e)}
+        />
         {Object.keys(participantFilter).map((category, i) => {
           return (
             <div key={i} className='list-separator'>
