@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, MessageList, Thread, Window } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
@@ -16,36 +16,32 @@ const userToken =
   'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoicmVzdGxlc3MtY2hlcnJ5LTUifQ.E6gVPqi-lhm-sUkpSyqf0VVtK1M6BsF3s8IAp2diS-g';
 const userID = 'restless-cherry-5';
 
-chatClient.setUser(
-  {
-    id: userID,
-    name: 'Restless cherry',
-    image: 'https://getstream.io/random_png/?id=restless-cherry-5&name=Restless+cherry',
-  },
-  userToken,
-);
-
-const channel = chatClient.channel('gaming', 'godevs', {
-  image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
-  name: 'Talk about Go',
-});
-
 export const GamingChat = (props) => {
-  channel.watch();
-
-  const [isTyping, setIsTyping] = useState(false);
+  const [channel, setChannel] = useState(null);
   const [optionsSelected, setOptionsSelected] = useState(false);
 
-  channel.on('typing.start', (event) => {
-    let isUser = event.user.id === userID;
-    return !isUser ? setIsTyping(true) : null;
-  });
+  useEffect(() => {
+    const loadChat = async () => {
+      await chatClient.setUser(
+        {
+          id: userID,
+          name: 'Restless cherry',
+          image: 'https://getstream.io/random_png/?id=restless-cherry-5&name=Restless+cherry',
+        },
+        userToken,
+      );
 
-  channel.on('typing.stop', (event) => {
-    setTimeout(() => {
-      setIsTyping(false);
-    }, 1000);
-  });
+      const channel = await chatClient.channel('gaming', 'godevs', {
+        image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
+        name: 'Talk about Go',
+      });
+
+      await channel.watch();
+      setChannel(channel);
+    };
+
+    loadChat();
+  }, []);
 
   return (
     <section
@@ -110,7 +106,7 @@ export const GamingChat = (props) => {
                     );
                   }}
                 />
-                <GamingMessageInput focus isTyping={isTyping} />
+                <GamingMessageInput focus />
               </Window>
               <Thread />
             </Channel>

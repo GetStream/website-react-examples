@@ -1,13 +1,13 @@
-import React from 'react';
-import { ChatAutoComplete, useMessageInput } from 'stream-chat-react';
+import React, { useContext } from 'react';
+import { ChatAutoComplete, ChannelContext, useMessageInput } from 'stream-chat-react';
+
 import SendIcon from '../../assets/icons/SendIcon';
 import StarIcon from '../../assets/icons/StarIcon';
 
 import './GamingMessageInput.scss';
 
 export const GamingMessageInput = (props) => {
-  const { isTyping } = props;
-
+  const { typing } = useContext(ChannelContext);
   const messageInput = useMessageInput(props);
 
   return (
@@ -31,7 +31,7 @@ export const GamingMessageInput = (props) => {
           <StarIcon />
           <p>68</p>
         </div>
-        {isTyping && (
+        {Object.keys(typing).length && (
           <div className='typing-indicators'>
             <div className='indicators'>
               {[1, 2, 3].map((item, i) => (
