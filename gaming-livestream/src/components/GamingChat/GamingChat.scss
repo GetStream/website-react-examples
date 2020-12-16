@@ -112,6 +112,14 @@ section.chat-members-container {
         padding: 0 1rem 0;
       }
     }
+
+    .str-chat__date-separator {
+      display: none;
+    }
+
+    .messaging.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
+      padding-top: 0;
+    }
   }
 
   &.show-members {

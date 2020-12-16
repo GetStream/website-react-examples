@@ -1,23 +1,6 @@
 import React, { useState } from 'react';
-import ModeratorIcon from '../../assets/icons/ModeratorIcon';
-import StreamerIcon from '../../assets/icons/StreamerIcon';
-import UserIcon from '../../assets/icons/UserIcon';
-import VIPIcon from '../../assets/icons/VIPIcon';
 
-const getIcon = (type) => {
-  switch (type) {
-    case 'streamer':
-      return <StreamerIcon />;
-    case 'moderator':
-      return <ModeratorIcon />;
-    case 'VIP':
-      return <VIPIcon />;
-    case 'user':
-      return <UserIcon />;
-    default:
-      break;
-  }
-};
+import { getIcon } from '../../assets/data';
 
 export const GamingParticipants = (props) => {
   const { participants } = props;
