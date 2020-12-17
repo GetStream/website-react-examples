@@ -1,38 +1,211 @@
-.App {
-  text-align: center;
+html,
+body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  box-sizing: border-box;
+}
+*,
+*:after,
+*:before {
+  box-sizing: inherit;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
+#root {
+  width: 100%;
+  height: 100%;
 }
 
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
+.agent-wrapper {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  background: #fff;
+  border-radius: 16px;
+  height: 100vh;
+  width: 740px;
 }
 
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.agent-channel-wrapper {
+  display: flex;
+  width: 100%;
+}
+
+.agent-wrapper .str-chat.messaging,
+.str-chat.commerce {
+  height: auto;
+  border-bottom-left-radius: 16px;
+  border-bottom-right-radius: 16px;
+}
+
+.agent-wrapper .str-chat-channel.messaging .str-chat__main-panel {
+  padding: 0;
+  background: #ffffff;
+  border-bottom-right-radius: 16px;
+}
+
+.customer-wrapper {
+  position: absolute;
+  bottom: 16px;
+  left: 16px;
   display: flex;
   flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 340px;
+}
+
+.customer-wrapper--open .str-chat {
+  height: 100%;
+  width: 340px;
+  display: flex;
+  align-items: flex-start;
+  border-radius: 32px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+}
+
+.customer-wrapper .str-chat {
+  height: 100%;
+  border-radius: 32px;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+}
+
+.customer-wrapper .str-chat__container {
+  border-radius: 32px;
+}
+
+.customer-wrapper .str-chat__list {
+  height: 400px;
+  width: 340px;
+  background: #ffffff;
+  border-top-left-radius: 32px;
+  border-top-right-radius: 32px;
+}
+
+.toggle-button {
+  margin-top: 16px;
+  display: flex;
   align-items: center;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  border-radius: 30px;
+  cursor: pointer;
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
+    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
 }
 
-.App-link {
-  color: #61dafb;
+.toggle-button.close-button svg {
+  opacity: 0.8;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
+.toggle-button:hover svg {
+  opacity: 1;
+}
+
+@media screen and (max-width: 414px) {
+  .str-chat-channel .str-chat__container {
+    width: 360px;
   }
 }
+
+.str-chat__date-separator {
+  padding: 0;
+}
+
+.commerce.str-chat .str-chat__date-separator {
+  padding: 0;
+}
+
+.str-chat__date-separator-date {
+  font-family: Inter, sans-serif;
+  font-style: normal;
+  font-weight: normal;
+  font-size: 11px;
+  line-height: 120%;
+  color: #858688;
+}
+
+.str-chat__date-separator-line {
+  background: #e9e9ea;
+}
+
+.str-chat__message-commerce-text-inner--is-emoji {
+  padding: 10px 4px;
+}
+
+.str-chat__message-commerce--right.str-chat__message-commerce
+  .str-chat__message-commerce-text-inner--is-emoji {
+  background: #fff;
+}
+
+.str-chat__message-commerce-text-inner.str-chat__message-commerce-text-inner--is-emoji {
+  margin: 0;
+}
+
+.str-chat__message-commerce__actions {
+  display: none;
+}
+
+.str-chat__message-commerce--right.str-chat__message-commerce
+  .str-chat__message-commerce-data {
+  display: none;
+}
+
+.str-chat__message-commerce-text-inner p {
+  max-width: 220px;
+}
+
+.str-chat__typing-indicator {
+  z-index: 100;
+}
+
+.agent-channel-wrapper .str-chat__message-commerce-data {
+  display: none;
+}
+
+.agent-wrapper .str-chat.messaging, .str-chat.commerce{
+  width: 100%;
+}
+
+.agent-wrapper
+  .messaging.str-chat
+  .str-chat__list
+  .str-chat__reverse-infinite-scroll {
+
+
+}
+
+.customer-wrapper
+  .commerce.str-chat
+  .str-chat__list
+  .str-chat__reverse-infinite-scroll {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+  padding-top: 85%;
+}
+
+.str-chat__typing-indicator {
+  position: relative;
+  bottom: 8px;
+  height: 30px;
+}
+
+.str-chat__typing-indicator__dot {
+  background: #858688;
+}
+
+@media screen and (max-width: 960px) {
+.str-chat-channel-list.messaging, .str-chat-channel-list.team, .str-chat-channel-list.commerce {
+    position: unset;
+    left: unset;
+    top: unset;
+    z-index: unset;
+    min-height: unset;
+    overflow-y: unset;
+    box-shadow: unset;
+    transition: unset;
+  }
+}
+
