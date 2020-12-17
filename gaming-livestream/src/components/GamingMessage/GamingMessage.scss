@@ -15,16 +15,13 @@ section.chat-members-container {
     }
 
     .custom-message__content {
-      // display: flex;
-      // align-items: center;
-      // flex-wrap: wrap;
-
       > svg {
         float: left;
         margin-right: 0.5rem;
       }
 
       > .message-owner {
+        display: inline;
         margin-right: 0.5rem;
         font-family: Helvetica Neue, sans-serif;
         font-weight: bold;
@@ -67,10 +64,6 @@ section.chat-members-container {
 
     > p {
       font-size: 12px;
-    }
-
-    > p:nth-child(2) {
-      // margin-right: 8px;
     }
   }
 
