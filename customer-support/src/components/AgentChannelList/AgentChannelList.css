@@ -1,6 +1,5 @@
 .agent-channel-list {
   background: #001537;
-  height: 640px;
   display: flex;
   flex-direction: column;
   border-bottom-left-radius: 16px;
