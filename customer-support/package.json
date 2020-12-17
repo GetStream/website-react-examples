@@ -1,16 +1,17 @@
 {
-  "name": "customer-support",
+  "name": "commerce",
   "version": "0.1.0",
   "private": true,
   "homepage": "/website-react-examples/customer-support",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
-    "web-vitals": "^0.2.4"
+    "eslint-plugin-import": "^2.22.1",
+    "react": "^16.12.0",
+    "react-dom": "^16.12.0",
+    "react-file-utils": "^0.4.0",
+    "react-scripts": "3.4.3",
+    "stream-chat": "^2.6.0",
+    "stream-chat-react": "^3.1.2",
+    "uuid": "^8.3.1"
   },
   "scripts": {
     "start": "react-scripts start",
@@ -19,21 +20,13 @@
     "eject": "react-scripts eject"
   },
   "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+    "extends": "react-app"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
-  }
+  "homepage": "./",
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }
