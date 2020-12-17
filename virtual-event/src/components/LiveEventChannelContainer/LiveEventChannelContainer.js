@@ -16,7 +16,7 @@ export const LiveEventChannelContainer = ({ tab }) => {
     switch (tab) {
       case 1:
         return (
-          <div>
+          <>
             <MessageList
               noGroupByUser
               Message={(props) => (
@@ -29,7 +29,7 @@ export const LiveEventChannelContainer = ({ tab }) => {
               )}
             />
             <LiveEventChannelFooter />
-          </div>
+          </>
         );
       case 2:
         return (
@@ -37,13 +37,7 @@ export const LiveEventChannelContainer = ({ tab }) => {
             <MessageList
               noGroupByUser
               messages={pinnedMessagesArray}
-              Message={(props) => (
-                <LiveEventMessage
-                  {...props}
-                  setPinnedMessages={setPinnedMessages}
-                  pinnedMessages={pinnedMessages}
-                />
-              )}
+              Message={(props) => <LiveEventMessage {...props} setPinnedMessages={setPinnedMessages} pinnedMessages={pinnedMessages} />}
             />
           </div>
         );
@@ -54,5 +48,5 @@ export const LiveEventChannelContainer = ({ tab }) => {
     }
   };
 
-  return <div>{selectedComponent()}</div>;
+  return <>{selectedComponent()}</>;
 };

@@ -10,6 +10,8 @@ import { LiveEventChannelSwitch } from './components/LiveEventChannelSwitch/Live
 import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage';
 import { LiveEventWindowControls } from './components/LiveEventWindowControls/LiveEventWindowControls';
 
+import { LiveVideoIcon } from './assets/LiveVideoIcon';
+
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const channelName = urlParams.get('channel') || 'demo';
@@ -48,7 +50,7 @@ const App = () => {
   }, []);
 
   return (
-    <div>
+    <>
       <LiveEventWindowControls currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
       <div className='main-container'>
         <Chat client={chatClient} i18nInstance={i18nInstance} theme={`livestream ${currentTheme}`}>
@@ -57,15 +59,15 @@ const App = () => {
               className='main-container-inner__left'
               style={currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }}
             >
-              <div style={{ height: '100%', width: '100%' }}>
-                {/* <div className="live-video-icon">
+              <div style={{ height: '100%', width: '100%', position: 'relative', pointerEvents: 'none' }}>
+                <div className='live-video-icon'>
                   <LiveVideoIcon />
-                </div> */}
+                </div>
                 <iframe
                   title='science'
                   width='100%'
                   height='100%'
-                  src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1'
+                  src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1&modestbranding=1&controls=0'
                   frameBorder='0px'
                   allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
                   allowFullScreen
@@ -96,7 +98,7 @@ const App = () => {
           </div>
         </Chat>
       </div>
-    </div>
+    </>
   );
 };
 

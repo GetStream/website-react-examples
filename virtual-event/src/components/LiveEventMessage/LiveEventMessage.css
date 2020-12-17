@@ -56,6 +56,10 @@
   background: rgba(255, 199, 0, 0.15);
 }
 
+.pinned-messages__container .str-chat__list {
+  /* max-height: 100% !important; */
+}
+
 .pinned-messages__container .live-event-message__container__pinned {
   background: #f1faff;
 }
@@ -179,9 +183,6 @@
 
 .livestream.str-chat .str-chat__list {
   width: 320px;
-}
-.livestream.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
-  height: 609px !important;
 }
 
 .str-chat__square-button {

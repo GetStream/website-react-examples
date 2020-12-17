@@ -1,26 +1,3 @@
-.live-event-message-input__wrapper {
-  /* width: 238px !important;
-  height: 52px !important;
-  border-radius: 8px;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-evenly;
-  border: 1px solid #19a0ff;
-  background-color: #f1faff; */
-}
-.live-event-message-input__input {
-  /* position: absolute;
-  display: flex;
-
-  height: 100%;
-  background-color: #f1faff;
-  border: none;
-
-  border-radius: 8px;
-  align-items: center;
-  margin-left: 6px; */
-}
-
 .str-chat.dark .live-event-message-input__input {
   background-color: #1a1c1e;
 }

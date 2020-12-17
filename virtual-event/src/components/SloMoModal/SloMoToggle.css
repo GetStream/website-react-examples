@@ -1,31 +1,3 @@
-/* .slo-mo-toggle__container__right {
-  background: #20e070;
-  border-radius: 9999px;
-  width: 64px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-end;
-  transition: background 0.2s;
-}
-.slo-mo-toggle__container__left {
-  background: #dddddd;
-  border-radius: 9999px;
-  width: 64px;
-  height: 34px;
-  display: flex;
-  align-items: center;
-  justify-content: flex-start;
-}
-.slo-mo-toggle__switch {
-  background: #ffffff;
-  box-shadow: 0px 3px 8px rgba(0, 0, 0, 0.2);
-  border-radius: 99999px;
-  height: 30px;
-  width: 30px;
-  margin-left: 2px;
-  margin-right: 2px;
-} */
 .react-switch-checkbox {
   height: 0;
   width: 0;
@@ -97,9 +69,7 @@
   box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
-.slo-mo-toggle__container:checked
-  + .slo-mo-toggle__label
-  .slo-mo-toggle__button {
+.slo-mo-toggle__container:checked + .slo-mo-toggle__label .slo-mo-toggle__button {
   left: calc(100% - 2px);
   transform: translateX(-100%);
 }
