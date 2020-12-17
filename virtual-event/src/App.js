@@ -11,6 +11,7 @@ import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage
 import { LiveEventWindowControls } from './components/LiveEventWindowControls/LiveEventWindowControls';
 
 import { LiveVideoIcon } from './assets/LiveVideoIcon';
+import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -59,7 +60,7 @@ const App = () => {
               className='main-container-inner__left'
               style={currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }}
             >
-              <div style={{ height: '100%', width: '100%', position: 'relative', pointerEvents: 'none' }}>
+              <div style={{ height: '100%', width: '100%', position: 'relative', flex: '0 0 55%' }}>
                 <div className='live-video-icon'>
                   <LiveVideoIcon />
                 </div>
@@ -67,18 +68,14 @@ const App = () => {
                   title='science'
                   width='100%'
                   height='100%'
-                  src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1&modestbranding=1&controls=0'
+                  src='https://www.youtube.com/embed/_J4QPz52Sfo?autoplay=1&mute=1&modestbranding=1'
                   frameBorder='0px'
                   allow='accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture'
                   allowFullScreen
                 ></iframe>
               </div>
-              <div>
-                <img
-                  alt=''
-                  style={{ maxHeight: '100%', maxWidth: '100%' }}
-                  src={currentTheme === 'light' ? require('./assets/VideoFooter.png') : require('./assets/VideoFooterDark.png')}
-                ></img>
+              <div style={{ flex: '0 0 45%' }}>
+                <LiveEventPanelists />
               </div>
             </div>
             <div className='main-container-inner__right'>
