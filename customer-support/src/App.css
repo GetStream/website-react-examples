@@ -18,23 +18,22 @@ body {
 
 .agent-wrapper {
   position: absolute;
-  bottom: 60px;
-  right: 60px;
+  bottom: 0;
+  right: 0;
   background: #fff;
   border-radius: 16px;
-  height: 800px;
-  width: 800px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+  height: 100vh;
+  width: 740px;
 }
 
 .agent-channel-wrapper {
-  width: 540px;
+  display: flex;
+  width: 100%;
 }
 
 .agent-wrapper .str-chat.messaging,
 .str-chat.commerce {
-  height: 740px;
+  height: auto;
   border-bottom-left-radius: 16px;
   border-bottom-right-radius: 16px;
 }
@@ -47,12 +46,12 @@ body {
 
 .customer-wrapper {
   position: absolute;
-  bottom: 60px;
-  left: 60px;
+  bottom: 16px;
+  left: 16px;
   display: flex;
   flex-direction: column;
-  align-items: flex-end;
-  justify-content: flex-end;
+  align-items: flex-start;
+  justify-content: flex-start;
   width: 340px;
 }
 
@@ -60,7 +59,7 @@ body {
   height: 100%;
   width: 340px;
   display: flex;
-  align-items: flex-end;
+  align-items: flex-start;
   border-radius: 32px;
   box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
     inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
@@ -165,15 +164,16 @@ body {
   display: none;
 }
 
+.agent-wrapper .str-chat.messaging, .str-chat.commerce{
+  width: 100%;;
+}
+
 .agent-wrapper
   .messaging.str-chat
   .str-chat__list
   .str-chat__reverse-infinite-scroll {
-  display: flex;
-  flex-direction: column;
-  justify-content: flex-end;
-  position: relative;
-  top: 280px;
+
+
 }
 
 .customer-wrapper
@@ -182,7 +182,7 @@ body {
   .str-chat__reverse-infinite-scroll {
   display: flex;
   flex-direction: column;
-  justify-content: flex-end;
+  justify-content: flex-start;
   padding-top: 85%;
 }
 

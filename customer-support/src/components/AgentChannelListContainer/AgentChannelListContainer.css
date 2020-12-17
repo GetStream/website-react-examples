@@ -1,8 +1,8 @@
 .agent-channel-list__container {
   display: flex;
   flex-direction: column;
-  height: 740px;
-  width: 260px;
+  height: auto;
+  flex: 1 0 260px;
   background: #001537;
   border-bottom-left-radius: 16px;
 }

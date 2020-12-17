@@ -1,13 +1,13 @@
 .agent-message-input__wrapper {
   display: flex;
-  justify-content: center;
+  justify-content: stretch;
   align-items: flex-start;
-  margin-bottom: 20px;
+  padding: 20px;
   background: #fff;
 }
 
 .agent-message-input__input {
-  width: 500px;
+  width: 100%;
   min-height: 50px;
   display: flex;
   flex-direction: column;
@@ -29,7 +29,7 @@
 }
 
 .agent-message-input__wrapper div.rfu-dropzone {
-  width: 500px;
+  width: 100%;
 }
 
 .agent-message-input__wrapper .str-chat__textarea {

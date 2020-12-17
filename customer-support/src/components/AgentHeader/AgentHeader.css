@@ -1,6 +1,6 @@
 .agent-header__container {
   height: 60px;
-  width: 800px;
+  width: 100%;
   background: #0040a8;
   box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.05);
   border-top-right-radius: 16px;

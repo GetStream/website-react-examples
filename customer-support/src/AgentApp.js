@@ -12,7 +12,7 @@ import { AgentChannelHeader } from './components/AgentChannelHeader/AgentChannel
 import { AgentMessageInput } from './components/MessageInput/AgentMessageInput';
 
 export const AgentApp = ({ agentChannelId, customerChannelId }) => (
-  <div style={{ display: 'flex' }}>
+  <div style={{ display: 'flex', height: 'calc(100vh - 60px)' }}>
     <AgentChannelListContainer {...{ agentChannelId, customerChannelId }} />
     <div className="agent-channel-wrapper">
       <Channel>

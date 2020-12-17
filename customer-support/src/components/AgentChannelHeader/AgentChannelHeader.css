@@ -16,7 +16,6 @@
   font-size: 16px;
   color: #2c2c30;
   margin-left: 10px;
-  width: 406px;
 }
 
 .agent-channel-header__top__circle {
@@ -30,6 +29,7 @@
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  margin-left: auto;
 }
 
 .agent-channel-header__top__dot {
