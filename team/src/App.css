@@ -48,3 +48,17 @@ body {
   background: var(--primary-color);
   cursor: pointer;
 }
+
+
+@media screen and (max-width: 960px) {
+  .str-chat-channel-list.messaging, .str-chat-channel-list.team, .str-chat-channel-list.commerce {
+    position: unset;
+    left: unset;
+    top: unset;
+    z-index: unset;
+    min-height: unset;
+    overflow-y: unset;
+    box-shadow: unset;
+    transition: unset;
+  }
+}
