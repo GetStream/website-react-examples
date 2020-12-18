@@ -35,6 +35,7 @@
   font-weight: 400;
   font-size: 14px;
   line-height: 120%;
+  padding: 5px 10px 5px 0;
   color: #2c2c30;
 }
 .str-chat.dark .str-chat__message-livestream-content {
