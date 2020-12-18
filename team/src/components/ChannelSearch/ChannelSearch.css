@@ -102,7 +102,7 @@
 .result-hashtag {
   height: 24px;
   width: 28px;
-  background: rgb(var(--primary-color));
+  background: var(--primary-color);
   border-radius: 24px;
   margin: 12px;
   display: flex;

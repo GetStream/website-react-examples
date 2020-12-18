@@ -4,7 +4,7 @@
   background: #f7f6f8;
   padding: 15px 20px 28px;
   width: 100%;
-  border-bottom-right-radius: 16px;
+  /* border-bottom-right-radius: 16px; */
 }
 
 .team-message-input__wrapper.thread-open {
@@ -17,7 +17,7 @@
 }
 
 .team-message-input__input:focus-within {
-  border-color: rgb(var(--primary-color));
+  border-color: var(--primary-color);
 }
 
 .team-message-input__top {
@@ -36,7 +36,7 @@
   justify-content: space-evenly;
   height: 24px;
   width: 63px;
-  background: rgb(var(--primary-color));
+  background: var(--primary-color);
   border-radius: 12px;
   margin-left: 8px;
 }
@@ -67,7 +67,7 @@
 }
 
 .team-message-input__input:focus-within .team-message-input__button path {
-  fill: rgb(var(--primary-color));
+  fill: var(--primary-color);
   fill-opacity: 1;
 }
 
@@ -114,7 +114,7 @@
 }
 
 .team-message-input__icons svg:hover path {
-  fill: rgb(var(--primary-color));
+  fill: var(--primary-color);
   fill-opacity: 1;
 }
 
@@ -130,7 +130,8 @@
 
 .team-message-input__wrapper .str-chat__input--emojipicker {
   z-index: 3;
-  bottom: calc(100% - 800px + 33px);
+  position: absolute;
+  bottom: 33px;
   left: 332px;
   width: 338px;
 }
@@ -163,11 +164,11 @@ div.rta__autocomplete.str-chat__emojisearch {
 }
 
 .rta__entity--selected {
-  background: rgb(var(--primary-color));
+  background: var(--primary-color);
 }
 
 .str-chat__slash-command:hover {
-  background: rgb(var(--primary-color));
+  background: var(--primary-color);
   cursor: pointer;
 }
 

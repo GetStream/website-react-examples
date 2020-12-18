@@ -42,7 +42,7 @@
 }
 
 .channel-empty__first .channel-empty__user-name {
-  color: rgb(var(--primary-color));
+  color: var(--primary-color);
 }
 
 .channel-empty__second {
