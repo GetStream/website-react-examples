@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useContext, useMemo, useState } from 'react';
+import { ChannelContext } from 'stream-chat-react';
 
 import './GamingMessage.scss';
 
@@ -13,42 +14,52 @@ import { getColor } from '../../assets/data';
 export const GamingMessage = (props) => {
   const { message } = props;
 
-  // const hasVotes = message.upVotes > 0 || message.downVotes > 0;
-  const hasVotes = true;
+  const { openThread } = useContext(ChannelContext);
+
+  const onOpenThread = () => {
+    const chatPanel = document.querySelector('.str-chat__main-panel');
+    chatPanel.style.display = 'none';
+    openThread(message);
+  };
+
+  const color = useMemo(() => {
+    return getColor();
+  }, [message.id]); // eslint-disable-line
+
+  const [downVotes, setDownVotes] = useState(0);
+  const [upVotes, setUpVotes] = useState(0);
+
+  const hasVotes = upVotes > 0 || downVotes > 0;
 
   return (
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
         <UserIcon />
-        <p className='message-owner' style={{ color: getColor() }}>
+        <p className='message-owner' style={{ color }}>
           {props.message.user.id}
         </p>
         <p className='message'>{props.message.text}</p>
       </div>
       {hasVotes && (
         <div className='custom-message__reaction-list'>
-          {/* {message.upVotes > 0 && ( */}
-          {
+          {upVotes > 0 && (
             <>
               <ReactionUpVote />
-              <p>10</p>
-              {/* <p>message.upVotes</p> */}
+              <p>{upVotes}</p>
             </>
-          }
-          {/* {message.downVotes > 0 && ( */}
-          {
+          )}
+          {downVotes > 0 && (
             <>
               <ReactionDownVote />
-              <p>8</p>
-              {/* <p>message.downVotes</p> */}
+              <p>{downVotes}</p>
             </>
-          }
+          )}
         </div>
       )}
       <div className='custom-message__actions-wrapper'>
-        <ActionUpVote />
-        <ActionDownVote />
-        <ActionThread />
+        <ActionUpVote upVote={() => setUpVotes((prev) => prev + 1)} />
+        <ActionDownVote downVote={() => setDownVotes((prev) => prev + 1)} />
+        <ActionThread openThread={onOpenThread} />
       </div>
     </div>
   );

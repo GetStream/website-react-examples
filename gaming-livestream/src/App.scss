@@ -32,7 +32,7 @@ main {
         width: 100%;
 
         > Header {
-          width: 75%;
+          width: calc(100vw - 320px);
           height: 3.75rem;
 
           &.full-screen {
@@ -115,7 +115,7 @@ main {
       position: absolute;
       right: 0;
       transition: all 1s;
-      width: 25%;
+      width: 320px;
 
       > .upgrade-header {
         align-items: center;
@@ -124,7 +124,7 @@ main {
         display: flex;
         height: 3.75rem;
         justify-content: space-between;
-        padding: 0.5rem;
+        padding: 0 10px;
         width: 100%;
         transition: all 0.5s;
 

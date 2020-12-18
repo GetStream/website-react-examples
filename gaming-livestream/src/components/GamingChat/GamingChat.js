@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, MessageList, Thread, Window } from 'stream-chat-react';
+import { Chat, Channel, MessageList, Window } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
 
 import './GamingChat.scss';
@@ -9,6 +9,7 @@ import { GamingChatHeader } from './GamingChatHeader';
 import { GamingMessage } from '../GamingMessage/GamingMessage';
 import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
+import { GamingThread } from '../GamingThread/GamingThread';
 
 import { participants } from '../../assets/data';
 
@@ -60,7 +61,7 @@ export const GamingChat = (props) => {
                 <MessageList Message={GamingMessage} />
                 <GamingMessageInput focus />
               </Window>
-              <Thread />
+              <GamingThread />
             </Channel>
           </Chat>
         </div>

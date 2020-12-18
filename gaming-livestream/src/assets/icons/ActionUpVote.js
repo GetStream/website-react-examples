@@ -1,7 +1,15 @@
 import React from 'react';
 
-const ActionUpVote = () => (
-  <svg className='action-up-vote' width='15' height='15' viewBox='0 0 15 15' fill='none' xmlns='http://www.w3.org/2000/svg'>
+const ActionUpVote = ({ upVote }) => (
+  <svg
+    className='action-up-vote'
+    width='15'
+    height='15'
+    viewBox='0 0 15 15'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+    onClick={upVote}
+  >
     <path
       d='M14 6.79773C14 6.17752 13.7123 5.5924 13.221 5.21374L7.96556 1.16246C7.68525 0.945847 7.31313 0.945847 7.03444 1.16246L1.77895 5.21374C1.28774 5.5924 1 6.17752 1 6.79773V8L7.5 2.98753L14 8V6.79773Z'
       fill='white'

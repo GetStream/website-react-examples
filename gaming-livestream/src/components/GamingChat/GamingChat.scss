@@ -11,8 +11,7 @@ section.chat-members-container {
   position: absolute;
   right: 0;
   transition: all 1s;
-  width: 25%;
-  min-width: 300px;
+  width: 320px;
 
   > .members-container {
     align-items: center;
@@ -159,7 +158,7 @@ section.chat-members-container {
     display: flex;
     height: 3.75rem;
     justify-content: space-between;
-    padding: 0.5rem;
+    padding: 0 10px;
     position: relative;
     width: 100%;
 
