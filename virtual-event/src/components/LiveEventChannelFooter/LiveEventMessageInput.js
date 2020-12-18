@@ -1,8 +1,9 @@
 import React, { useContext, useRef, useState } from 'react';
-import { FileUploadButton } from 'react-file-utils';
+import { ImageDropzone, FileUploadButton } from 'react-file-utils';
 import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 import { SmileyFace } from '../../assets/SmileyFace';
 import { PaperClip } from '../../assets/PaperClip';
+import { UploadsPreview } from './UploadsPreview';
 
 import './LiveEventMessageInput.css';
 
@@ -32,9 +33,10 @@ export const LiveEventMessageInput = (props) => {
   };
 
   return (
-    <div className='live-event-message-input__wrapper'>
-      <div className='live-event-message-input__input'>
-        <EmojiPicker {...messageInput} onSelectEmoji={selectEmoji} />
+    <div className='live-event-message-input__input'>
+      <EmojiPicker {...messageInput} onSelectEmoji={selectEmoji} />
+      <ImageDropzone disabled={messageInput.numberOfUploads >= 2} handleFiles={messageInput.uploadNewFiles}>
+        <UploadsPreview {...messageInput} />
         <ChatAutoComplete
           commands={messageInput.getCommands()}
           innerRef={messageInput.textareaRef}
@@ -45,15 +47,17 @@ export const LiveEventMessageInput = (props) => {
           placeholder={'Send a message'}
           onPaste={messageInput.onPaste}
         />
-        <div className='live-event-message-input__input-buttons'>
-          <div style={{ height: '18px' }}>
+      </ImageDropzone>
+      <div className='live-event-message-input__input-buttons'>
+        <div style={{ height: '18px' }}>
+          {messageInput.numberOfUploads < 2 && (
             <FileUploadButton handleFiles={messageInput.uploadNewFiles}>
               <PaperClip />
             </FileUploadButton>
-          </div>
-          <div style={{ height: '18px', marginLeft: '11px' }} onClick={messageInput.openEmojiPicker}>
-            <SmileyFace />
-          </div>
+          )}
+        </div>
+        <div style={{ height: '18px', marginLeft: '11px' }} onClick={messageInput.openEmojiPicker}>
+          <SmileyFace />
         </div>
       </div>
     </div>

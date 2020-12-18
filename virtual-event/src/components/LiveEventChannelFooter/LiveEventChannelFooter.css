@@ -2,7 +2,7 @@
   display: flex;
   position: relative;
   flex-direction: column;
-  height: 129px;
+
   width: 320px;
   justify-content: space-between;
   border-top: 1px solid #bed5e4;
@@ -14,7 +14,7 @@
 .live-event-footer__top {
   display: flex;
   flex-direction: row;
-  flex: 2;
+  flex: 0 0 55%;
   justify-content: space-around;
   padding-top: 15px;
   align-items: center;
@@ -23,13 +23,9 @@
   display: flex;
   justify-content: space-around;
   align-items: center;
-  flex: 1;
+  flex: 0 0 45%;
 }
 
-.live-event-footer__input {
-  height: 52px;
-  width: 238px;
-}
 .live-event-footer__bottom-left {
   display: flex;
   align-items: center;

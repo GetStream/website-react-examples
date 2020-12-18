@@ -3,21 +3,18 @@
 }
 
 .live-event-message-input__input-buttons {
-  position: absolute;
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
-  top: 32px;
-  right: 20px;
+  margin: 0 10px 0 5px;
 }
 
-.str-chat__textarea {
+.live-event-message-input__input {
   color: #19a0ff;
   line-height: 150%;
   position: relative;
   border: none;
-  height: 52px;
   width: 238px;
   display: flex;
   align-items: center;
@@ -26,9 +23,59 @@
   border-radius: 8px;
 }
 
-.str-chat__textarea:focus-within {
+.str-chat.dark .live-event-message-input__input {
+  border: 1px solid #2c3134;
+}
+
+.live-event-message-input__input:focus-within {
   background: #f1faff;
   border: 1px solid #00a3ff;
+}
+
+.str-chat.dark .live-event-message-input__input:focus-within {
+  background: #f1faff;
+  border: 1px solid #00a3ff;
+  background: #1a1c1e;
+}
+
+.rfu-dropzone {
+  display: flex;
+  flex-direction: column;
+}
+
+.rfu-image-upload-button {
+  display: none;
+}
+
+.rfu-image-previewer {
+  height: fit-content;
+  width: fit-content;
+  margin: 0;
+}
+
+.rfu-image-previewer__image {
+  margin: 0;
+}
+
+.rfu-image-previewer__image .rfu-thumbnail__wrapper {
+  width: 42px !important;
+  height: 42px !important;
+}
+
+.rfu-image-previewer__image .rfu-thumbnail__wrapper .rfu-thumbnail__overlay svg,
+.rfu-image-previewer__image .rfu-thumbnail__wrapper .rfu-icon-button svg {
+  height: 15px;
+  width: 15px;
+}
+
+.str-chat__textarea {
+  display: flex;
+}
+
+.str-chat__textarea:focus-within {
+  background: #f1faff;
+  border: none;
+  border-radius: 8px;
 }
 .str-chat__textarea textarea {
   border: none;
@@ -36,6 +83,7 @@
   box-shadow: none;
   background: #ffffff;
   max-width: 180px;
+  border-radius: 8px;
 }
 .str-chat__textarea textarea:focus {
   border: none;
@@ -46,10 +94,7 @@
 
 .str-chat.dark .str-chat__textarea {
   background: #1a1c1e;
-  border: 1px solid #2c3134;
-}
-.str-chat.dark .str-chat__textarea:focus-within {
-  border: 1px solid #00a3ff;
+  border-radius: 8px;
 }
 
 .str-chat.dark .str-chat__textarea textarea {

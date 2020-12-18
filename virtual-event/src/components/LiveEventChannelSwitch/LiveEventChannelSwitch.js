@@ -13,19 +13,13 @@ export const LiveEventChannelSwitch = () => {
   const [tab, setTab] = useState(1);
 
   return (
-    <div>
-      <div className="live-event-channel-switch__container">
-        <div onClick={() => setTab(1)}>
-          {tab === 1 ? <LiveChatBlue /> : <LiveChat />}
-        </div>
-        <div onClick={() => setTab(2)}>
-          {tab === 2 ? <PinsBlue /> : <Pins />}
-        </div>
-        <div onClick={() => setTab(3)}>
-          {tab === 3 ? <AttendeesBlue /> : <Attendees />}
-        </div>
+    <>
+      <div className='live-event-channel-switch__container'>
+        <div onClick={() => setTab(1)}>{tab === 1 ? <LiveChatBlue /> : <LiveChat />}</div>
+        <div onClick={() => setTab(2)}>{tab === 2 ? <PinsBlue /> : <Pins />}</div>
+        <div onClick={() => setTab(3)}>{tab === 3 ? <AttendeesBlue /> : <Attendees />}</div>
       </div>
       <LiveEventChannelContainer tab={tab} />
-    </div>
+    </>
   );
 };

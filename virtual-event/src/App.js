@@ -35,7 +35,7 @@ const App = () => {
 
   useEffect(() => {
     const getChannel = async () => {
-      await chatClient.setUser({ id: user }, userToken);
+      await chatClient.setUser({ id: user, image: require('./assets/UserPic.png') }, userToken);
       const channelCreator = await chatClient.channel('livestream', channelName, {
         image:
           'https://images.unsplash.com/photo-1512138664757-360e0aad5132?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80',
