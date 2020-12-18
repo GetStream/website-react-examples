@@ -29,6 +29,11 @@ const sort = {
   cid: 1,
 };
 
+const changeTheme = (e, setTheme) => {
+  console.log(e);
+  setTheme(e.data)
+}
+
 const chatClient = new StreamChat(apiKey);
 chatClient.setUser({ id: user }, userToken);
 
@@ -36,14 +41,12 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
 
-  const changeTheme = (e) => {
-    setTheme(e.data)
-  }
+  
 
   useEffect(() => {
-    window.addEventListener('message', changeTheme)
+    window.addEventListener('message', (e) => changeTheme(e, setTheme))
     return (
-      window.removeEventListener('message', changeTheme)
+      window.removeEventListener('message', (e) => changeTheme(e, setTheme))
     );
   },[])
 
