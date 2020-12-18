@@ -29,7 +29,7 @@ section.chat-members-container {
         mix-blend-mode: normal;
         margin-right: 4px;
         position: relative;
-        bottom: 3px;
+        bottom: 2px;
       }
 
       > .message-owner {
@@ -40,7 +40,7 @@ section.chat-members-container {
         font-size: 13px;
         min-width: fit-content;
         position: relative;
-        bottom: 3px;
+        bottom: 2px;
       }
 
       > .message {
@@ -50,7 +50,7 @@ section.chat-members-container {
         color: $foreground;
         mix-blend-mode: normal;
         position: relative;
-        bottom: 3px;
+        bottom: 2px;
       }
     }
   }
