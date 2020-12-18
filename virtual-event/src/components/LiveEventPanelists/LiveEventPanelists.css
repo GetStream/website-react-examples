@@ -5,6 +5,13 @@
   width: 100%;
 }
 
+.panelists-container-dark {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
+
 .panelists-top {
   display: flex;
   flex: 0 0 60%;
@@ -29,6 +36,9 @@
   font-weight: 700;
   color: #2c2c30;
   margin-bottom: 10px;
+}
+.panelists-container-dark .panelists-top__left-title {
+  color: white;
 }
 
 .panelists-top__left-tags {
@@ -70,6 +80,10 @@
   color: #2c2c30;
 }
 
+.panelists-container-dark .panelists-bottom__title {
+  color: white;
+}
+
 .panelists-bottom__panelists {
   display: flex;
   justify-content: flex-start;
@@ -87,6 +101,13 @@
   background: #ffffff;
   border: 1px solid #bed5e4;
   margin-right: 10px;
+}
+
+.panelists-container-dark .panelists-bottom__panelist {
+  color: white;
+  background: black;
+  box-shadow: 0px 3px 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid #2c3134;
 }
 
 .panelists-bottom__panelist-left {

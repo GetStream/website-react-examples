@@ -1,10 +1,13 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ChatContext } from 'stream-chat-react';
 
 import './LiveEventAttendees.css';
 
 export const LiveEventAttendees = () => {
+  const { theme } = useContext(ChatContext);
+
   return (
-    <div className='live-event-attendees__container'>
+    <div className={theme === 'livestream-light' ? 'live-event-attendees__container' : 'live-event-attendees__container-dark'}>
       <div className='live-event-attendees__title'>Moderators</div>
       <div className='live-event-attendees__moderators'>
         <div className='live-event-attendees__moderator'>

@@ -1,12 +1,15 @@
-import React from 'react';
+import React, { useContext } from 'react';
+import { ChatContext } from 'stream-chat-react';
 import { LinkedInLogo } from '../../assets/LinkedInLogo';
 import { TwitterLogo } from '../../assets/TwitterLogo';
 
 import './LiveEventPanelists.css';
 
 export const LiveEventPanelists = () => {
+  const { theme } = useContext(ChatContext);
+  console.log({ theme });
   return (
-    <div className='panelists-container'>
+    <div className={theme === 'livestream light' ? 'panelists-container' : 'panelists-container-dark'}>
       <div className='panelists-top'>
         <div className='panelists-top__left'>
           <div className='panelists-top__left-title'>The Storytelling of Science</div>

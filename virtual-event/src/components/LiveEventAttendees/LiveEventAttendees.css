@@ -4,6 +4,12 @@
   height: 100%;
   width: 100%;
 }
+.live-event-attendees__container-dark {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  width: 100%;
+}
 
 .live-event-attendees__title {
   font-family: Helvetica Neue;
@@ -12,6 +18,10 @@
   font-size: 16px;
   color: #2c2c30;
   margin: 15px 0 10px 15px;
+}
+
+.live-event-attendees__container-dark .live-event-attendees__title {
+  color: white;
 }
 
 .live-event-attendees__moderators {
@@ -34,6 +44,12 @@
   border: 1px solid rgba(123, 160, 187, 0.25);
 }
 
+.live-event-attendees__container-dark .live-event-attendees__moderator {
+  background: black;
+  box-shadow: 0px 3px 8px rgba(255, 255, 255, 0.1);
+  border: 1px solid rgba(123, 160, 187, 0.25);
+}
+
 .live-event-attendees__moderator-name {
   font-family: Helvetica Neue;
   font-style: normal;
@@ -43,6 +59,10 @@
   width: 100px;
   margin-top: 10px;
   text-align: center;
+}
+
+.live-event-attendees__container-dark .live-event-attendees__moderator-name {
+  color: white;
 }
 
 .live-event-attendees__audience-member {
@@ -63,6 +83,10 @@
   font-weight: 500;
   font-size: 14px;
   color: #2c2c30;
+}
+
+.live-event-attendees__container-dark .live-event-attendees__audience-member__left-name {
+  color: white;
 }
 
 .live-event-attendees__audience-member__right {
