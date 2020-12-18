@@ -42,8 +42,6 @@ const setColor = (color) => {
   root.style.setProperty('--primary-color', color);
 }
 
-window.setColor = setColor;
-
 window.addEventListener("message", function(event) {
   setColor(event.data)
 });
