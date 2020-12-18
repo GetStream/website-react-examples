@@ -11,6 +11,30 @@ import ReactionUpVote from '../../assets/icons/ReactionUpVote';
 import UserIcon from '../../assets/icons/UserIcon';
 import { getColor } from '../../assets/data';
 
+const getTimeStamp = (message) => {
+  let lastHours = message.created_at?.getHours();
+  let lastMinutes = message.created_at?.getMinutes();
+  let half = 'AM';
+
+  if (lastHours === undefined || lastMinutes === undefined) {
+    return '';
+  }
+
+  if (lastHours > 12) {
+    lastHours = lastHours - 12;
+    half = 'PM';
+  }
+
+  if (lastHours === 0) lastHours = 12;
+  if (lastHours === 12) half = 'PM';
+
+  if (lastMinutes.toString().length === 1) {
+    lastMinutes = `0${lastMinutes}`;
+  }
+
+  return `${lastHours}:${lastMinutes} ${half}`;
+};
+
 export const GamingMessage = (props) => {
   const { message } = props;
 
@@ -24,7 +48,7 @@ export const GamingMessage = (props) => {
 
   const color = useMemo(() => {
     return getColor();
-  }, [message.id]); // eslint-disable-line
+  }, [message?.id]); // eslint-disable-line
 
   const [downVotes, setDownVotes] = useState(0);
   const [upVotes, setUpVotes] = useState(0);
@@ -35,10 +59,11 @@ export const GamingMessage = (props) => {
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
         <UserIcon />
+        <span className='timestamp'>{getTimeStamp(message)}</span>
         <p className='message-owner' style={{ color }}>
-          {props.message.user.id}
+          {message.user.name}
         </p>
-        <p className='message'>{props.message.text}</p>
+        <p className='message'>{message.text}</p>
       </div>
       {hasVotes && (
         <div className='custom-message__reaction-list'>

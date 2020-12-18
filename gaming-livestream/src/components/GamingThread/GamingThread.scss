@@ -39,6 +39,10 @@
       left: 10px;
     }
 
+    > svg:first-child:hover path:first-child {
+      fill: $button-background-hover;
+    }
+
     > p {
       font-family: Helvetica Neue, sans-serif;
       font-weight: bold;

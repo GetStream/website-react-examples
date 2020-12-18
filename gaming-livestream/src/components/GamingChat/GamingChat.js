@@ -22,6 +22,7 @@ export const GamingChat = (props) => {
   const { isFullScreen, setShowMembers, showMembers, showUpgrade } = props;
 
   const [channel, setChannel] = useState(null);
+  const [timestamp, setTimestamp] = useState(false);
 
   useEffect(() => {
     const loadChat = async () => {
@@ -57,7 +58,7 @@ export const GamingChat = (props) => {
           <Chat client={chatClient}>
             <Channel channel={channel}>
               <Window>
-                <GamingChatHeader {...props} />
+                <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
                 <MessageList Message={GamingMessage} />
                 <GamingMessageInput focus />
               </Window>

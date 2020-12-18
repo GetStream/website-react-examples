@@ -20,6 +20,16 @@ section.chat-members-container {
         margin-right: 0.5rem;
       }
 
+      > .timestamp {
+        display: none;
+        font-family: Helvetica Neue, sans-serif;
+        font-size: 11px;
+        line-height: 13px;
+        color: #858688;
+        mix-blend-mode: normal;
+        margin-right: 0.5rem;
+      }
+
       > .message-owner {
         display: inline;
         margin-right: 0.5rem;

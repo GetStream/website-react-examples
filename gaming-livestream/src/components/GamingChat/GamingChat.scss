@@ -200,17 +200,21 @@ section.chat-members-container {
       overflow: hidden;
       padding: 0;
       position: absolute;
-      right: 0.5rem;
-      top: 4.2rem;
+      right: 10px;
+      top: 3.75rem;
       z-index: 1;
+      width: 140px;
 
       > li {
         font-family: Helvetica Neue, sans-serif;
-        font-weight: bold;
-        font-size: 15px;
+        font-size: 13px;
         color: $foreground;
         cursor: pointer;
-        padding: 0.5rem;
+        padding: 0.5rem 1rem 0.5rem 0rem;
+        display: flex;
+        align-items: center;
+        justify-content: flex-end;
+        height: 36px;
 
         &:hover {
           background-color: $button-background-hover;
