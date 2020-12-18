@@ -16,6 +16,10 @@
     > div:first-child {
       border-bottom: 1px solid $border-color;
     }
+
+    .custom-message__bottom-wrapper {
+      display: none;
+    }
   }
 
   .str-chat__thread-list .custom-message__actions-wrapper,
