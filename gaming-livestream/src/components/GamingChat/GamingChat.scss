@@ -205,6 +205,9 @@ section.chat-members-container {
       z-index: 1;
 
       > li {
+        font-family: Helvetica Neue, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
         color: $foreground;
         cursor: pointer;
         padding: 0.5rem;

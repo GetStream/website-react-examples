@@ -96,7 +96,7 @@ main {
               font-family: Helvetica Neue, sans-serif;
               font-weight: bold;
               font-size: 15px;
-              color: #ffffff;
+              color: $foreground;
               visibility: visible;
             }
           }
@@ -137,10 +137,14 @@ main {
           height: 2.5rem;
           visibility: visible;
           width: 2.5rem;
+          cursor: pointer;
         }
 
         > p {
-          font-size: 1rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-weight: bold;
+          font-size: 15px;
+          color: $foreground;
         }
 
         > div {
@@ -151,29 +155,49 @@ main {
 
       > ul {
         margin: 0;
-        padding: 0.5rem;
+        padding: 0 16px;
 
         > li {
           align-items: center;
           background-color: $component-background;
-          border: 1px solid $border-color;
+          border: 5px solid $border-color;
           border-radius: 1rem;
           display: flex;
           margin-top: 1rem;
           padding: 0.5rem;
           width: 100%;
+          cursor: pointer;
+          transition: 0.2s border-color ease-in-out;
 
-          &:first-of-type {
+          &:hover {
             border: 5px solid $attendees;
+
+            > svg {
+              > path {
+                transition: 0.2s fill ease-in-out;
+                fill: $attendees;
+              }
+            }
           }
 
           > svg {
             margin-right: 0.5rem;
+
+            > path {
+              transition: 0.2s fill ease-in-out;
+            }
           }
 
           > .description-container {
+            height: 2.5rem;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-around;
+
             p {
-              font-size: 0.9rem;
+              font-family: Helvetica Neue;
+              font-size: 13px;
+              color: $foreground;
 
               &:first-of-type {
                 font-weight: bold;

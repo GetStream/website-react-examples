@@ -50,5 +50,20 @@
 
   .channel-footer {
     border-bottom: 1px solid $border-color;
+    align-items: center;
+    flex-direction: row;
+
+    > .rta.str-chat__textarea {
+      height: 41px;
+      margin-right: 10px;
+    }
+
+    > .channel-footer-separator {
+      margin-top: 0;
+
+      > .watcher-count {
+        display: none;
+      }
+    }
   }
 }
