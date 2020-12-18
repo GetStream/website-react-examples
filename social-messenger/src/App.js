@@ -39,10 +39,6 @@ const App = () => {
 
   useEffect(() => {
     window.addEventListener('message', (e) => setTheme(e.data))
-
-    return () => {
-      window.removeEventListener('message', (e) => setTheme(e.data))
-    }
   },[])
 
   return (
