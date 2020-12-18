@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 
@@ -36,9 +36,17 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
 
+
+  useEffect(() => {
+    window.addEventListener('message', (e) => setTheme(e.data))
+
+    return () => {
+      window.removeEventListener('message', (e) => setTheme(e.data))
+    }
+  },[])
+
   return (
     <div>
-      <WindowControls {...{ theme, setTheme }} />
       <Chat client={chatClient} theme={`messaging ${theme}`}>
         <ChannelList
           filters={filters}
