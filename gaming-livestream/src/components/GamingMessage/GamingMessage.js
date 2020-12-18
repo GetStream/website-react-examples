@@ -35,6 +35,12 @@ const getTimeStamp = (message) => {
   return `${lastHours}:${lastMinutes} ${half}`;
 };
 
+const getReplyCount = (message) => {
+  if (!message?.reply_count) return '';
+  if (message.reply_count === 1) return '1 reply';
+  return `${message.reply_count} Replies`;
+};
+
 export const GamingMessage = (props) => {
   const { message } = props;
 
@@ -65,22 +71,29 @@ export const GamingMessage = (props) => {
         </p>
         <p className='message'>{message.text}</p>
       </div>
-      {hasVotes && (
-        <div className='custom-message__reaction-list'>
-          {upVotes > 0 && (
-            <>
-              <ReactionUpVote />
-              <p>{upVotes}</p>
-            </>
-          )}
-          {downVotes > 0 && (
-            <>
-              <ReactionDownVote />
-              <p>{downVotes}</p>
-            </>
-          )}
-        </div>
-      )}
+      <div className='custom-message__bottom-wrapper'>
+        {hasVotes && (
+          <div className='custom-message__reaction-list'>
+            {upVotes > 0 && (
+              <>
+                <ReactionUpVote />
+                <p>{upVotes}</p>
+              </>
+            )}
+            {downVotes > 0 && (
+              <>
+                <ReactionDownVote />
+                <p>{downVotes}</p>
+              </>
+            )}
+          </div>
+        )}
+        {!!message.reply_count && (
+          <p onClick={onOpenThread} className='custom-message__reply-count'>
+            {getReplyCount(message)}
+          </p>
+        )}
+      </div>
       <div className='custom-message__actions-wrapper'>
         <ActionUpVote upVote={() => setUpVotes((prev) => prev + 1)} />
         <ActionDownVote downVote={() => setDownVotes((prev) => prev + 1)} />
