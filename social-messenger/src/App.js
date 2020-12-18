@@ -36,9 +36,15 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
 
+  const changeTheme = (e) => {
+    setTheme(e.data)
+  }
 
   useEffect(() => {
-    window.addEventListener('message', (e) => setTheme(e.data))
+    window.addEventListener('message', changeTheme)
+    return (
+      window.removeEventListener('message', changeTheme)
+    );
   },[])
 
   return (
