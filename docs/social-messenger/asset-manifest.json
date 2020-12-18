@@ -1,23 +1,26 @@
 {
   "files": {
-    "main.css": "/website-react-examples/social-messenger/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/website-react-examples/social-messenger/static/js/main.6d73fbba.chunk.js",
-    "main.js.map": "/website-react-examples/social-messenger/static/js/main.6d73fbba.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/social-messenger/static/js/runtime-main.c5bdf40c.js",
-    "runtime-main.js.map": "/website-react-examples/social-messenger/static/js/runtime-main.c5bdf40c.js.map",
-    "static/js/2.29361302.chunk.js": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js",
-    "static/js/2.29361302.chunk.js.map": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js.map",
-    "static/js/3.504e181e.chunk.js": "/website-react-examples/social-messenger/static/js/3.504e181e.chunk.js",
-    "static/js/3.504e181e.chunk.js.map": "/website-react-examples/social-messenger/static/js/3.504e181e.chunk.js.map",
-    "index.html": "/website-react-examples/social-messenger/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/website-react-examples/social-messenger/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.29361302.chunk.js.LICENSE.txt": "/website-react-examples/social-messenger/static/js/2.29361302.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/website-react-examples/social-messenger/static/media/logo.6ce24c58.svg"
+    "main.css": "./static/css/main.e7ee6d5e.chunk.css",
+    "main.js": "./static/js/main.af3b3a2c.chunk.js",
+    "main.js.map": "./static/js/main.af3b3a2c.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.dd7aa980.js",
+    "runtime-main.js.map": "./static/js/runtime-main.dd7aa980.js.map",
+    "static/css/2.a7159ab6.chunk.css": "./static/css/2.a7159ab6.chunk.css",
+    "static/js/2.589b03de.chunk.js": "./static/js/2.589b03de.chunk.js",
+    "static/js/2.589b03de.chunk.js.map": "./static/js/2.589b03de.chunk.js.map",
+    "index.html": "./index.html",
+    "precache-manifest.b30289ac65b287d93f5b70079ec4b776.js": "./precache-manifest.b30289ac65b287d93f5b70079ec4b776.js",
+    "service-worker.js": "./service-worker.js",
+    "static/css/2.a7159ab6.chunk.css.map": "./static/css/2.a7159ab6.chunk.css.map",
+    "static/css/main.e7ee6d5e.chunk.css.map": "./static/css/main.e7ee6d5e.chunk.css.map",
+    "static/js/2.589b03de.chunk.js.LICENSE": "./static/js/2.589b03de.chunk.js.LICENSE",
+    "static/media/stream.png": "./static/media/stream.ce7bf370.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.c5bdf40c.js",
-    "static/js/2.29361302.chunk.js",
-    "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.6d73fbba.chunk.js"
+    "static/js/runtime-main.dd7aa980.js",
+    "static/css/2.a7159ab6.chunk.css",
+    "static/js/2.589b03de.chunk.js",
+    "static/css/main.e7ee6d5e.chunk.css",
+    "static/js/main.af3b3a2c.chunk.js"
   ]
 }
