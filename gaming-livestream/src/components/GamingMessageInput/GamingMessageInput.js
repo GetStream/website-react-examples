@@ -7,6 +7,8 @@ import StarIcon from '../../assets/icons/StarIcon';
 import './GamingMessageInput.scss';
 
 export const GamingMessageInput = (props) => {
+  const { setShowUpgrade } = props;
+
   const { typing } = useContext(ChannelContext);
   const messageInput = useMessageInput(props);
 
@@ -28,7 +30,7 @@ export const GamingMessageInput = (props) => {
         additionalTextareaProps={props.additionalTextareaProps}
       />
       <div className='channel-footer-separator'>
-        <div className='watcher-count'>
+        <div onClick={() => setShowUpgrade(true)} className='watcher-count'>
           <StarIcon />
           <p>68</p>
         </div>

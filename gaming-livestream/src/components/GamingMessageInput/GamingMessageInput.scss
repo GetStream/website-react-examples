@@ -1,7 +1,7 @@
 @import '../../styles/variables';
 
 .channel-footer {
-  background-color: $component-background;
+  background: $component-background;
   border-top: 1px solid $border-color;
   display: flex;
   flex-direction: column;
@@ -12,7 +12,7 @@
     background: none;
 
     textarea {
-      background-color: $background;
+      background: $background;
       border-color: $border-color;
       color: $foreground;
       max-height: 2.5rem;
@@ -27,11 +27,11 @@
     align-items: center;
     display: flex;
     justify-content: space-between;
-    margin-top: 0.5rem;
+    margin-top: 14px;
 
     > .watcher-count {
       align-items: center;
-      background-color: $button-background;
+      background: $button-background;
       border: none;
       border-radius: 0.5rem;
       color: $foreground;
@@ -40,6 +40,12 @@
       padding: 0.5rem;
       height: 2.5rem;
       width: 4rem;
+      cursor: pointer;
+      transition: all 0.2s;
+
+      &:hover {
+        background: $button-background-hover;
+      }
 
       > p {
         font-size: 0.75rem;
@@ -56,7 +62,7 @@
 
         > .dot {
           animation: chat 1s infinite;
-          background-color: $foreground;
+          background: $foreground;
           border-radius: 50%;
           height: 0.25rem;
           margin-right: 0.25rem;

@@ -4,7 +4,7 @@ section.chat-members-container {
   .custom-message__wrapper {
     display: flex;
     flex-direction: column;
-    padding: 10px;
+    padding: 6px 10px 4px;
 
     &:hover {
       background: $component-background;
@@ -17,7 +17,7 @@ section.chat-members-container {
     .custom-message__content {
       > svg {
         float: left;
-        margin-right: 0.5rem;
+        margin-right: 4px;
       }
 
       > .timestamp {
@@ -27,16 +27,20 @@ section.chat-members-container {
         line-height: 13px;
         color: #858688;
         mix-blend-mode: normal;
-        margin-right: 0.5rem;
+        margin-right: 4px;
+        position: relative;
+        bottom: 3px;
       }
 
       > .message-owner {
         display: inline;
-        margin-right: 0.5rem;
+        margin-right: 4px;
         font-family: Helvetica Neue, sans-serif;
         font-weight: bold;
         font-size: 13px;
         min-width: fit-content;
+        position: relative;
+        bottom: 3px;
       }
 
       > .message {
@@ -45,6 +49,8 @@ section.chat-members-container {
         font-size: 13px;
         color: $foreground;
         mix-blend-mode: normal;
+        position: relative;
+        bottom: 3px;
       }
     }
   }
@@ -66,6 +72,8 @@ section.chat-members-container {
     align-items: center;
     justify-content: space-evenly;
     border: 1px solid $border-color;
+    background: $background;
+
     border-radius: 20px;
     border-top-left-radius: 0;
     width: fit-content;
@@ -98,12 +106,13 @@ section.chat-members-container {
     box-sizing: border-box;
     border-radius: 0px 10px 10px 10px;
     padding: 0 8px;
+    background: $background;
   }
 
   .custom-message__actions-wrapper {
     position: absolute;
-    right: 5px;
-    top: 5px;
+    right: 4px;
+    top: 4px;
     opacity: 0;
     display: flex;
     justify-content: space-evenly;

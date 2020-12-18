@@ -110,6 +110,7 @@ footer {
     > .btn-group > button {
       transition: all 1s;
       width: 7.5rem;
+      cursor: pointer;
 
       &.shrink {
         width: 3rem;

@@ -19,7 +19,7 @@ const userToken =
 const userID = 'restless-cherry-5';
 
 export const GamingChat = (props) => {
-  const { isFullScreen, setShowMembers, showMembers, showUpgrade } = props;
+  const { isFullScreen, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
 
   const [channel, setChannel] = useState(null);
   const [timestamp, setTimestamp] = useState(false);
@@ -60,7 +60,7 @@ export const GamingChat = (props) => {
               <Window>
                 <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
                 <MessageList Message={GamingMessage} />
-                <GamingMessageInput focus />
+                <GamingMessageInput focus {...{ setShowUpgrade }} />
               </Window>
               <GamingThread />
             </Channel>
