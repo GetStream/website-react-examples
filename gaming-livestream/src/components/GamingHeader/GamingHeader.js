@@ -38,7 +38,7 @@ export const GamingHeader = (props) => {
           <p className='title-text'>1.2K</p>
         </div>
         <div className={`subs-container ${!props.isFullScreen && props.showMembers ? 'shrink' : 'grow'}`}>
-          <SubIcon style={{ color: '#ffe500' }} />
+          <SubIcon />
           <p className='title-text'>250</p>
         </div>
       </div>

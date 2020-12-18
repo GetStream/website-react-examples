@@ -55,19 +55,17 @@ export const GamingFooter = (props) => {
   return (
     <footer className={`${showMembers ? 'show-members' : ''} ${isFullScreen ? 'full-screen' : ''}`}>
       <div className='streamer-details-container'>
-        <div className='streamer-details-separator'>
-          <div className='avatar'></div>
-          <div className='streamer-container'>
-            <div className='streamer-name'>
-              <p>PolarBear</p>
-              <CheckIcon />
-            </div>
-            <ul className='streamer-details'>
-              <li>English</li>
-              <li>FPS</li>
-              {showLastLi()}
-            </ul>
+        <div className='avatar'></div>
+        <div className='streamer-container'>
+          <div className='streamer-name'>
+            <p>PolarBear</p>
+            <CheckIcon />
           </div>
+          <ul className='streamer-details'>
+            <li>English</li>
+            <li>FPS</li>
+            {showLastLi()}
+          </ul>
         </div>
       </div>
       <div className='user-interaction-container'>

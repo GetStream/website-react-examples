@@ -12,9 +12,6 @@ header {
   > .stream-details {
     > .info {
       > p {
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
         font-family: Helvetica Neue, sans-serif;
         font-weight: bold;
         font-size: 15px;
@@ -22,6 +19,13 @@ header {
         display: flex;
         align-items: center;
         color: #ffffff;
+      }
+
+      > p:first-child {
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        min-width: 200px;
       }
     }
   }

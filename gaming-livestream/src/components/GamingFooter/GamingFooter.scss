@@ -22,55 +22,55 @@ footer {
     display: flex;
     align-items: center;
 
-    > .streamer-details-separator {
-      display: flex;
+    > .avatar {
+      background-image: url(/assets/images/Avatar.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+      height: 3.5rem;
+      margin-right: 0.5rem;
+      width: 3.5rem;
+      margin-bottom: 0.25rem;
+    }
 
-      > .avatar {
-        background-image: url(/assets/images/Avatar.png);
-        background-position: center;
-        background-repeat: no-repeat;
-        background-size: cover;
-        border-radius: 50%;
-        height: 3rem;
-        margin-right: 0.5rem;
-        width: 3rem;
+    > .streamer-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 60px;
+
+      > .streamer-name {
+        align-items: center;
+        display: flex;
+
+        > p {
+          margin-right: 0.5rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-weight: bold;
+          font-size: 17px;
+          line-height: 21px;
+          color: #ffffff;
+        }
       }
 
-      > .streamer-container {
+      > .streamer-details {
         display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        height: 50px;
+        list-style: none;
+        margin: 0;
+        padding: 0;
 
-        > .streamer-name {
+        > li {
+          background-color: $button-background;
+          border-radius: 1rem;
+          color: $foreground;
+          margin-right: 0.5rem;
+          padding: 0rem 0.5rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-size: 11px;
+          display: flex;
           align-items: center;
-          display: flex;
-
-          > p {
-            margin-right: 0.5rem;
-            font-family: Helvetica Neue, sans-serif;
-            font-weight: bold;
-            font-size: 17px;
-            line-height: 21px;
-            color: #ffffff;
-          }
-        }
-
-        > .streamer-details {
-          display: flex;
-          list-style: none;
-          margin: 0;
-          padding: 0;
-
-          > li {
-            background-color: $button-background;
-            border-radius: 1rem;
-            color: $foreground;
-            margin-right: 0.5rem;
-            padding: 0.25rem 0.5rem;
-            font-family: Helvetica Neue, sans-serif;
-            font-size: 11px;
-          }
+          height: 16px;
         }
       }
     }
@@ -188,6 +188,14 @@ footer {
             margin-right: 0.5rem;
           }
         }
+      }
+    }
+
+    .btn-group > button:first-child {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), $button-background;
+
+      &:hover {
+        background: $button-background-hover;
       }
     }
   }

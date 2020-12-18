@@ -75,6 +75,15 @@
       cursor: pointer;
       height: 2.5rem;
       width: 2.5rem;
+      transition: all 0.2s;
+
+      &:hover path {
+        fill: $foreground;
+      }
+    }
+
+    > button.text {
+      background: $button-background-hover;
     }
   }
 }
