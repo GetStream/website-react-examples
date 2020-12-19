@@ -10,7 +10,7 @@ import './GamingMessageInput.scss';
 export const GamingMessageInput = React.memo((props) => {
   const { setShowUpgrade } = props;
 
-  const { typing } = useContext(ChannelContext);
+  const { thread, typing } = useContext(ChannelContext);
   const messageInput = useMessageInput(props);
 
   const openPicker = async () => {
@@ -57,7 +57,7 @@ export const GamingMessageInput = React.memo((props) => {
           disabled={props.disabled}
           additionalTextareaProps={props.additionalTextareaProps}
         />
-        <EmojiIcon openEmojiPicker={openPicker} />
+        {!thread && <EmojiIcon openEmojiPicker={openPicker} />}
       </div>
       <div className='channel-footer__bottom'>
         <div onClick={() => setShowUpgrade(true)} className='watcher-count'>
@@ -78,7 +78,7 @@ export const GamingMessageInput = React.memo((props) => {
           <SendIcon text={messageInput.text} />
         </button>
       </div>
-      <EmojiPicker emojiPickerIsOpen={messageInput.emojiPickerIsOpen} onSelectEmoji={selectEmoji} />
+      {!thread && <EmojiPicker emojiPickerIsOpen={messageInput.emojiPickerIsOpen} onSelectEmoji={selectEmoji} />}
     </div>
   );
 });
