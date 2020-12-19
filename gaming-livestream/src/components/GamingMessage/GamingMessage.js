@@ -53,8 +53,7 @@ export const GamingMessage = (props) => {
   };
 
   const color = useMemo(() => {
-    if (message.user?.color) return message.user.color;
-    return getColor();
+    return message.user?.color || getColor();
   }, [message?.id]); // eslint-disable-line
 
   const [downVotes, setDownVotes] = useState(0);

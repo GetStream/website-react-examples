@@ -23,7 +23,56 @@
     display: none;
   }
 
-  > .channel-footer-separator {
+  .str-chat__input--emojipicker {
+    z-index: 10;
+    bottom: 116px;
+
+    > section {
+      width: 320px !important;
+      background: $background;
+      border-color: $border-color;
+
+      .emoji-mart-category-label span {
+        background: none;
+        color: $foreground;
+      }
+
+      .emoji-mart-search input {
+        border-color: $border-color;
+      }
+
+      .emoji-mart-bar {
+        border: none;
+      }
+
+      li:hover span {
+        cursor: pointer;
+      }
+
+      button:hover {
+        background: none;
+        cursor: pointer;
+      }
+    }
+  }
+
+  > .channel-footer__top {
+    position: relative;
+    display: flex;
+    align-items: center;
+
+    > div > svg {
+      position: absolute;
+      bottom: 0.85rem;
+      right: 0.75rem;
+
+      &:hover {
+        fill-opacity: 1;
+      }
+    }
+  }
+
+  > .channel-footer__bottom {
     align-items: center;
     display: flex;
     justify-content: space-between;
