@@ -11,12 +11,14 @@ import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
 import { GamingThread } from '../GamingThread/GamingThread';
 
-import { participants } from '../../assets/data';
+import { getColor, participants } from '../../assets/data';
 
-const chatClient = new StreamChat('gx5a64bj4ptz');
-const userToken =
-  'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJ1c2VyX2lkIjoicmVzdGxlc3MtY2hlcnJ5LTUifQ.E6gVPqi-lhm-sUkpSyqf0VVtK1M6BsF3s8IAp2diS-g';
-const userID = 'restless-cherry-5';
+const urlParams = new URLSearchParams(window.location.search);
+const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
+const userID = urlParams.get('user') || process.env.REACT_APP_USER_ID;
+const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+
+const chatClient = new StreamChat(apiKey);
 
 export const GamingChat = (props) => {
   const { isFullScreen, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
@@ -30,15 +32,12 @@ export const GamingChat = (props) => {
         {
           id: userID,
           name: 'Restless cherry',
-          image: 'https://getstream.io/random_png/?id=restless-cherry-5&name=Restless+cherry',
+          color: getColor(),
         },
         userToken,
       );
 
-      const channel = await chatClient.channel('gaming', 'godevs', {
-        image: 'https://cdn.chrisshort.net/testing-certificate-chains-in-go/GOPHER_MIC_DROP.png',
-        name: 'Talk about Go',
-      });
+      const channel = await chatClient.channel('gaming', 'godevs', { name: 'Talk about Go' });
 
       await channel.watch();
       setChannel(channel);

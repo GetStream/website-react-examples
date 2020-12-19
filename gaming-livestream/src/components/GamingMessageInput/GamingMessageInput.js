@@ -44,7 +44,7 @@ export const GamingMessageInput = (props) => {
             <p>a member is typing</p>
           </div>
         )}
-        <button className={!!messageInput.text && 'text'} onClick={messageInput.handleSubmit}>
+        <button className={messageInput.text ? 'text' : ''} onClick={messageInput.handleSubmit}>
           <SendIcon text={messageInput.text} />
         </button>
       </div>
