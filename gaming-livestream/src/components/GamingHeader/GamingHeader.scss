@@ -88,17 +88,26 @@ header {
       width: 3.5rem;
 
       &.shrink {
-        width: 1rem;
+        display: none;
+        // width: 1rem;
 
-        > p {
-          width: 0;
-          height: 0;
-          visibility: hidden;
-        }
+        // > p {
+        //   width: 0;
+        //   height: 0;
+        //   visibility: hidden;
+        // }
 
-        > svg {
-          margin-right: 0;
-        }
+        // > svg {
+        //   margin-right: 0;
+        // }
+
+        // @media (max-width: 1220px) {
+        //   display: none;
+        // }
+      }
+
+      @media (max-width: 1100px) {
+        width: 24px;
       }
     }
 
@@ -135,9 +144,13 @@ header {
       font-family: Helvetica Neue, sans-serif;
       font-size: 13px;
       color: #ffffff;
+
+      @media (max-width: 1100px) {
+        display: none;
+      }
     }
 
-    @media (max-width: 1010px) {
+    @media (max-width: 950px) {
       display: none;
     }
   }
