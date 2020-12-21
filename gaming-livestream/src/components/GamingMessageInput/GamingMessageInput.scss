@@ -1,5 +1,44 @@
 @import '../../styles/variables';
 
+div.rta__autocomplete.str-chat__emojisearch {
+  z-index: 10;
+  position: absolute;
+  width: 100%;
+  background: $background;
+  border: 1px solid $border-color;
+  margin: 16px 0;
+  border-radius: 16px;
+  color: $foreground;
+  max-height: fit-content;
+}
+
+.rta__entity--selected {
+  background: $button-background-hover;
+}
+
+.str-chat__slash-command {
+  cursor: pointer;
+  transition: 0.1s all;
+
+  &-description {
+    color: $foreground;
+  }
+
+  &:hover {
+    background: $button-background-hover;
+  }
+}
+
+.rta__list-header {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 16px;
+  color: $foreground;
+  mix-blend-mode: normal;
+  background: $component-background;
+}
+
 .channel-footer {
   background: $component-background;
   border-top: 1px solid $border-color;
@@ -25,12 +64,14 @@
 
   .str-chat__input--emojipicker {
     z-index: 1;
-    bottom: 116px;
+    bottom: 131px;
+    margin-right: 17px;
 
     > section {
-      width: 320px !important;
+      width: 285px !important;
       background: $background;
       border-color: $border-color;
+      border-radius: 16px;
 
       .emoji-mart-category-label span {
         background: none;
