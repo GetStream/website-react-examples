@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { logChatPromiseExecution } from 'stream-chat';
 import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 
 import EmojiIcon from '../../assets/icons/EmojiIcon';
@@ -10,8 +11,28 @@ import './GamingMessageInput.scss';
 export const GamingMessageInput = React.memo((props) => {
   const { setShowUpgrade } = props;
 
-  const { thread, typing } = useContext(ChannelContext);
-  const messageInput = useMessageInput(props);
+  const { sendMessage, thread, typing } = useContext(ChannelContext);
+
+  const overrideSubmitHandler = (message) => {
+    const { text } = message;
+
+    if (text.startsWith('/ban')) {
+      return;
+    } else if (text.startsWith('/flag')) {
+      return;
+    } else if (text.startsWith('/mute')) {
+      return;
+    } else if (text.startsWith('/unban')) {
+      return;
+    } else if (text.startsWith('/unmute')) {
+      return;
+    }
+
+    const sendMessagePromise = sendMessage(message);
+    logChatPromiseExecution(sendMessagePromise, 'send message');
+  };
+
+  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
 
   const openPicker = async () => {
     const picker = document.querySelector('.str-chat__input--emojipicker');
