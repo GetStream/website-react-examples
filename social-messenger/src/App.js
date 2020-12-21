@@ -42,7 +42,7 @@ const App = () => {
 
   useEffect(() => {
     window.addEventListener('message', (e) => changeTheme(e, setTheme));
-    return window.removeEventListener('message', (e) => changeTheme(e, setTheme));
+    return () => window.removeEventListener('message', (e) => changeTheme(e, setTheme));
   }, []);
 
   return (
