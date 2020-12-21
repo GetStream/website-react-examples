@@ -61,34 +61,36 @@ export const GamingMessage = (props) => {
 
   const hasVotes = upVotes > 0 || downVotes > 0;
 
+  const ReactionList = () => (
+    <div className='custom-message__reaction-list'>
+      {upVotes > 0 && (
+        <>
+          <ReactionUpVote />
+          <p>{upVotes}</p>
+        </>
+      )}
+      {downVotes > 0 && (
+        <>
+          <ReactionDownVote />
+          <p>{downVotes}</p>
+        </>
+      )}
+    </div>
+  );
+
   return (
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
         <UserIcon />
         <span className='timestamp'>{getTimeStamp(message)}</span>
         <p className='message-owner' style={{ color }}>
-          {message.user.name}
+          {message.user.name || message.user.id}
         </p>
         <p className='message'>{message.text}</p>
       </div>
       {message?.attachments && <Attachment attachments={message.attachments} actionHandler={handleAction} />}
       <div className='custom-message__bottom-wrapper'>
-        {hasVotes && (
-          <div className='custom-message__reaction-list'>
-            {upVotes > 0 && (
-              <>
-                <ReactionUpVote />
-                <p>{upVotes}</p>
-              </>
-            )}
-            {downVotes > 0 && (
-              <>
-                <ReactionDownVote />
-                <p>{downVotes}</p>
-              </>
-            )}
-          </div>
-        )}
+        {hasVotes && <ReactionList />}
         {!!message.reply_count && (
           <p onClick={onOpenThread} className='custom-message__reply-count'>
             {getReplyCount(message)}
