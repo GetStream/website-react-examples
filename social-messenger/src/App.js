@@ -56,7 +56,7 @@ const App = () => {
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          <CreateChannel onClose={() => setIsCreating(false)} visible={isCreating} />
+          {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
           <Window>
             <MessagingChannelHeader />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
