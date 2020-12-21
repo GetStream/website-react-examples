@@ -58,7 +58,7 @@ export const GamingChat = (props) => {
             <Channel channel={channel}>
               <Window>
                 <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
-                <MessageList Message={GamingMessage} />
+                <MessageList Message={(props) => <GamingMessage {...props} {...{ timestamp }} />} />
                 <GamingMessageInput focus {...{ setPopUpText, setShowPopUp, setShowUpgrade }} />
               </Window>
               <GamingThread />

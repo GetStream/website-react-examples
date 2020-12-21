@@ -40,6 +40,7 @@ const App = () => {
             <div className={`sub-header ${isFullScreen ? 'show' : 'hide'}`}>
               <button onClick={() => setIsFullScreen(!isFullScreen)}></button>
               <p>Live Chat</p>
+              <div /> {/* keep for flex */}
             </div>
           </div>
           <GamingVideo isFullScreen={isFullScreen} />

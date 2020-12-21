@@ -42,7 +42,7 @@ const getReplyCount = (message) => {
 };
 
 export const GamingMessage = (props) => {
-  const { handleAction, message } = props;
+  const { handleAction, message, timestamp } = props;
 
   const { openThread } = useContext(ChannelContext);
 
@@ -82,7 +82,9 @@ export const GamingMessage = (props) => {
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
         <UserIcon />
-        <span className='timestamp'>{getTimeStamp(message)}</span>
+        <span className='timestamp' style={timestamp ? { display: 'inline' } : {}}>
+          {getTimeStamp(message)}
+        </span>
         <p className='message-owner' style={{ color }}>
           {message.user.name || message.user.id}
         </p>
