@@ -1,10 +1,20 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import './ChatUpgrades.scss';
 
 import { getImage, upgrades } from '../../assets/data';
 
-export const ChatUpgrades = ({ setShowUpgrade }) => {
+export const ChatUpgrades = ({ setPopUpText, setShowUpgrade, setShowPopUp }) => {
+  const [upgradeSelected, setUpgradeSelected] = useState([]);
+
+  const upgradeSelector = (index) => {
+    if (upgradeSelected.includes(index)) {
+      setUpgradeSelected(upgradeSelected.filter((item) => item !== index));
+    } else {
+      setUpgradeSelected((oldArr) => [...oldArr, index]);
+    }
+  };
+
   return (
     <div className='upgrade-container'>
       <div className='upgrade-header'>
@@ -14,7 +24,7 @@ export const ChatUpgrades = ({ setShowUpgrade }) => {
       </div>
       <ul>
         {upgrades.map((option, i) => (
-          <li key={i}>
+          <li className={upgradeSelected.includes(i) ? 'selected-button' : ''} onClick={() => upgradeSelector(i)} key={i}>
             {getImage(option.img)}
             <div className='description-container'>
               <p>{option.name}</p>
@@ -23,7 +33,17 @@ export const ChatUpgrades = ({ setShowUpgrade }) => {
           </li>
         ))}
       </ul>
-      <button onClick={() => setShowUpgrade(false)}>Next</button>
+      <button
+        onClick={() => {
+          if (upgradeSelected.length) {
+            setPopUpText('Thanks for upgrading!');
+            setShowPopUp(true);
+          }
+          setShowUpgrade(false);
+        }}
+      >
+        Next
+      </button>
     </div>
   );
 };

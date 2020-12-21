@@ -101,6 +101,15 @@
         }
       }
     }
+    > .selected-button {
+      border: 5px solid $attendees;
+
+      > svg {
+        > path {
+          fill: $attendees;
+        }
+      }
+    }
   }
 
   > button {

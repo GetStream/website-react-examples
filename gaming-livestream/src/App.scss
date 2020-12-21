@@ -104,6 +104,25 @@ main {
       }
     }
   }
+
+  .gaming-popup {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    position: absolute;
+    width: 317px;
+    height: 100px;
+    z-index: 11;
+    bottom: 132px;
+    right: 1px;
+    background: $button-background;
+    border-radius: 16px;
+    font-family: Helvetica Neue, sans-serif;
+    font-weight: bold;
+    font-size: 15px;
+    color: $foreground;
+    opacity: 80%;
+  }
 }
 
 @keyframes slideRight {
