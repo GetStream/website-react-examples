@@ -6,8 +6,10 @@ import AlarmIcon from '../../assets/icons/AlarmIcon';
 import CheckIcon from '../../assets/icons/CheckIcon';
 import ClockIcon from '../../assets/icons/ClockIcon';
 import DownVoteIcon from '../../assets/icons/DownVoteIcon';
-import FollowersIcon from '../../assets/icons/FollowersIcon';
-import SubsIcon from '../../assets/icons/SubsIcon';
+import HeartFullIcon from '../../assets/icons/HeartFullIcon';
+import HeartHollowIcon from '../../assets/icons/HeartHollowIcon';
+import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
+import SubscribeHollowIcon from '../../assets/icons/SubscribeHollowIcon';
 import UpVoteIcon from '../../assets/icons/UpVoteIcon';
 
 export const GamingFooter = (props) => {
@@ -15,6 +17,8 @@ export const GamingFooter = (props) => {
 
   const [countDown, setCountDown] = useState('00:00:00');
   const [countUp, setCountUp] = useState('00:00:00');
+  const [followed, setFollowed] = useState(false);
+  const [subscribed, setSubscribed] = useState(false);
 
   let totalSeconds = 0;
   const deadline = new Date();
@@ -68,44 +72,48 @@ export const GamingFooter = (props) => {
           </ul>
         </div>
       </div>
-      <div className='user-interaction-container'>
-        <div className='timer-container'>
-          <div>
-            <p>{countDown}</p>
-            <ClockIcon />
-          </div>
-          <div>
-            <p>-{countUp}</p>
-            <AlarmIcon />
-          </div>
-        </div>
-        <button className={`follow-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}>
-          <div>
-            <FollowersIcon />
-            <p>Follow</p>
-          </div>
-        </button>
-        <button className={`sub-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}>
-          <div>
-            <SubsIcon />
-            <p>Subscribe</p>
-          </div>
-        </button>
-        <div className='btn-group'>
-          <button className={`${!isFullScreen && showMembers ? 'shrink' : ''}`}>
+      {window.innerWidth > 920 && (
+        <div className='user-interaction-container'>
+          <div className='timer-container'>
             <div>
-              <UpVoteIcon />
-              <p>325K</p>
+              <p>{countDown}</p>
+              <ClockIcon />
+            </div>
+            <div>
+              <p>-{countUp}</p>
+              <AlarmIcon />
+            </div>
+          </div>
+          <button className={`follow-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}>
+            <div onClick={() => setFollowed(!followed)}>
+              {followed ? <HeartFullIcon /> : <HeartHollowIcon />}
+              <p>Follow</p>
             </div>
           </button>
-          <button className={`${!isFullScreen && showMembers ? 'shrink' : ''}`}>
-            <div>
-              <DownVoteIcon />
-              <p>9.5K</p>
+          <button className={`sub-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}>
+            <div onClick={() => setSubscribed(!subscribed)}>
+              {subscribed ? <SubscribeFullIcon /> : <SubscribeHollowIcon />}
+              <p>Subscribe</p>
             </div>
           </button>
+          {window.innerWidth > 1100 && (
+            <div className='btn-group'>
+              <button className={`${!isFullScreen && showMembers ? 'shrink' : ''}`}>
+                <div>
+                  <UpVoteIcon />
+                  <p>325K</p>
+                </div>
+              </button>
+              <button className={`${!isFullScreen && showMembers ? 'shrink' : ''}`}>
+                <div>
+                  <DownVoteIcon />
+                  <p>9.5K</p>
+                </div>
+              </button>
+            </div>
+          )}
         </div>
-      </div>
+      )}
     </footer>
   );
 };
