@@ -14,6 +14,63 @@ section.chat-members-container {
       opacity: 1;
     }
 
+    .str-chat__message-attachment-card.str-chat__message-attachment-card--giphy {
+      border-color: $border-color;
+      border-radius: 16px;
+      width: 75%;
+
+      .str-chat__message-attachment-card--header {
+        background: $background;
+      }
+
+      .str-chat__message-attachment-card--content {
+        margin: 0;
+        padding: 1px 16px 4px;
+        background: $background;
+
+        .str-chat__message-attachment-card--flex {
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          width: 100%;
+
+          .str-chat__message-attachment-card--title {
+            color: $foreground;
+          }
+        }
+      }
+
+      .str-chat__message-attachment-card--content > * {
+        margin: 0;
+      }
+
+      .str-chat__message-attachment-card--content > img {
+        display: none;
+      }
+
+      .str-chat__message-attachment-card--url {
+        color: $foreground;
+      }
+    }
+
+    .str-chat__message-attachment .str-chat__message-attachment-actions {
+      .str-chat__message-attachment-actions-form button {
+        cursor: pointer;
+        background: $button-background;
+        border: none;
+        box-shadow: none;
+
+        &:hover {
+          background: $button-background-hover;
+        }
+
+        &:focus {
+          border: none;
+          box-shadow: none;
+        }
+      }
+    }
+
     .custom-message__content {
       > svg {
         float: left;

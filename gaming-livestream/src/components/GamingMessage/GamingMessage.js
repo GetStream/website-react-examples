@@ -1,5 +1,5 @@
 import React, { useContext, useMemo, useState } from 'react';
-import { ChannelContext } from 'stream-chat-react';
+import { Attachment, ChannelContext } from 'stream-chat-react';
 
 import './GamingMessage.scss';
 
@@ -42,7 +42,7 @@ const getReplyCount = (message) => {
 };
 
 export const GamingMessage = (props) => {
-  const { message } = props;
+  const { handleAction, message } = props;
 
   const { openThread } = useContext(ChannelContext);
 
@@ -71,6 +71,7 @@ export const GamingMessage = (props) => {
         </p>
         <p className='message'>{message.text}</p>
       </div>
+      {message?.attachments && <Attachment attachments={message.attachments} actionHandler={handleAction} />}
       <div className='custom-message__bottom-wrapper'>
         {hasVotes && (
           <div className='custom-message__reaction-list'>

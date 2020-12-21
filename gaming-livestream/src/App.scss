@@ -102,26 +102,26 @@ main {
           }
         }
       }
-    }
-  }
 
-  .gaming-popup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 320px;
-    height: 100px;
-    z-index: 11;
-    bottom: 132px;
-    right: 0;
-    background: $button-background;
-    border-radius: 16px;
-    font-family: Helvetica Neue, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    color: $foreground;
-    animation: fade 3s linear;
+      > .gaming-popup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 320px;
+        height: 100px;
+        z-index: 11;
+        bottom: 132px;
+        right: 0;
+        background: $button-background;
+        border-radius: 16px;
+        font-family: Helvetica Neue, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+        color: $foreground;
+        animation: fade 3s linear;
+      }
+    }
   }
 }
 
