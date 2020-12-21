@@ -9,7 +9,7 @@ import StarIcon from '../../assets/icons/StarIcon';
 import './GamingMessageInput.scss';
 
 export const GamingMessageInput = React.memo((props) => {
-  const { setShowUpgrade } = props;
+  const { setPopUpText, setShowPopUp, setShowUpgrade } = props;
 
   const { sendMessage, thread, typing } = useContext(ChannelContext);
 
@@ -17,15 +17,20 @@ export const GamingMessageInput = React.memo((props) => {
     const { text } = message;
 
     if (text.startsWith('/ban')) {
-      return;
+      setPopUpText('User banned');
+      return setShowPopUp(true);
     } else if (text.startsWith('/flag')) {
-      return;
+      setPopUpText('User flagged');
+      return setShowPopUp(true);
     } else if (text.startsWith('/mute')) {
-      return;
+      setPopUpText('User muted');
+      return setShowPopUp(true);
     } else if (text.startsWith('/unban')) {
-      return;
+      setPopUpText('User unbanned');
+      return setShowPopUp(true);
     } else if (text.startsWith('/unmute')) {
-      return;
+      setPopUpText('User unmuted');
+      return setShowPopUp(true);
     }
 
     const sendMessagePromise = sendMessage(message);

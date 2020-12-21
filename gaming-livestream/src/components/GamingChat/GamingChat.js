@@ -21,7 +21,7 @@ const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKE
 const chatClient = new StreamChat(apiKey);
 
 export const GamingChat = (props) => {
-  const { isFullScreen, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
+  const { isFullScreen, setPopUpText, setShowPopUp, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
 
   const [channel, setChannel] = useState(null);
   const [timestamp, setTimestamp] = useState(false);
@@ -59,7 +59,7 @@ export const GamingChat = (props) => {
               <Window>
                 <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
                 <MessageList Message={GamingMessage} />
-                <GamingMessageInput focus {...{ setShowUpgrade }} />
+                <GamingMessageInput focus {...{ setPopUpText, setShowPopUp, setShowUpgrade }} />
               </Window>
               <GamingThread />
             </Channel>

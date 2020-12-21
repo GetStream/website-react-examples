@@ -3,18 +3,18 @@ import React, { useEffect, useState } from 'react';
 import './App.scss';
 
 import { ChatUpgrades } from './components/ChatUpgrades/ChatUpgrades';
-import { GamingHeader } from './components/GamingHeader/GamingHeader';
-import { GamingVideo } from './components/GamingVideo/GamingVideo';
-import { GamingFooter } from './components/GamingFooter/GamingFooter';
 import { GamingChat } from './components/GamingChat/GamingChat';
 import { GamingChatPopUp } from './components/GamingChat/GamingChatPopUp';
+import { GamingFooter } from './components/GamingFooter/GamingFooter';
+import { GamingHeader } from './components/GamingHeader/GamingHeader';
+import { GamingVideo } from './components/GamingVideo/GamingVideo';
 
 const App = () => {
-  const [showMembers, setShowMembers] = useState(false);
   const [isFullScreen, setIsFullScreen] = useState(false);
+  const [popUpText, setPopUpText] = useState('');
+  const [showMembers, setShowMembers] = useState(false);
   const [showUpgrade, setShowUpgrade] = useState(false);
   const [showPopUp, setShowPopUp] = useState(false);
-  const [popUpText, setPopUpText] = useState('');
 
   useEffect(() => {
     const popUpTimer = () => {
@@ -49,7 +49,9 @@ const App = () => {
         <GamingChat
           isFullScreen={isFullScreen}
           setIsFullScreen={setIsFullScreen}
+          setPopUpText={setPopUpText}
           setShowMembers={setShowMembers}
+          setShowPopUp={setShowPopUp}
           setShowUpgrade={setShowUpgrade}
           showMembers={showMembers}
           showUpgrade={showUpgrade}

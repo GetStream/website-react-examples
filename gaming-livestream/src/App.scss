@@ -110,18 +110,29 @@ main {
     justify-content: center;
     align-items: center;
     position: absolute;
-    width: 317px;
+    width: 320px;
     height: 100px;
     z-index: 11;
     bottom: 132px;
-    right: 1px;
+    right: 0;
     background: $button-background;
     border-radius: 16px;
     font-family: Helvetica Neue, sans-serif;
     font-weight: bold;
     font-size: 15px;
     color: $foreground;
-    opacity: 80%;
+    animation: fade 3s linear;
+  }
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  20%,
+  60% {
+    opacity: 0.8;
   }
 }
 
