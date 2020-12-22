@@ -15,8 +15,8 @@
 .panelists-top {
   display: flex;
   flex: 0 0 60%;
-  background-image: url(../../assets/Map.png);
-  background-size: cover;
+  background: url(../../assets/Map.png) right bottom no-repeat;
+  background-size: 811px 420px;
 }
 
 .panelists-bottom {
@@ -138,4 +138,8 @@
   align-items: center;
   margin-right: 15px;
   justify-content: space-between;
+}
+
+.panelists-bottom__panelist-right svg {
+  opacity: 0.5;
 }
