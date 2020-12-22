@@ -7,7 +7,7 @@ export const LiveEventAttendees = () => {
   const { theme } = useContext(ChatContext);
 
   return (
-    <div className={theme === 'livestream-light' ? 'live-event-attendees__container' : 'live-event-attendees__container-dark'}>
+    <div className={theme === 'livestream light' ? 'live-event-attendees__container' : 'live-event-attendees__container-dark'}>
       <div className='live-event-attendees__title'>Moderators</div>
       <div className='live-event-attendees__moderators'>
         <div className='live-event-attendees__moderator'>
