@@ -31,7 +31,6 @@ export const GamingChat = (props) => {
       await chatClient.setUser(
         {
           id: userID,
-          name: 'Restless cherry',
           color: getColor(),
         },
         userToken,

@@ -86,7 +86,7 @@ export const GamingMessage = (props) => {
           {getTimeStamp(message)}
         </span>
         <p className='message-owner' style={{ color }}>
-          {message.user.name || message.user.id}
+          {message.user.id}
         </p>
         <p className='message'>{message.text}</p>
       </div>
