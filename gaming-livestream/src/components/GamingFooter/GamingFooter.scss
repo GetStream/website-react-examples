@@ -12,6 +12,12 @@ footer {
 
   &.show-members {
     padding-right: 51%;
+
+    > .user-interaction-container {
+      @media (max-width: 1250px) {
+        display: none;
+      }
+    }
   }
 
   &.full-screen {

@@ -2,12 +2,12 @@ import React from 'react';
 
 import './GamingHeader.scss';
 
-import LiveIcon from '../../assets/icons/LiveIcon';
 import ControllerIcon from '../../assets/icons/ControllerIcon';
-import PeopleIcon from '../../assets/icons/PeopleIcon';
-import WatcherIcon from '../../assets/icons/WatcherIcon';
 import HeartFullIcon from '../../assets/icons/HeartFullIcon';
+import LiveIcon from '../../assets/icons/LiveIcon';
+import PeopleIcon from '../../assets/icons/PeopleIcon';
 import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
+import WatcherIcon from '../../assets/icons/WatcherIcon';
 
 export const GamingHeader = (props) => (
   <header className={`${props.showMembers ? 'show-members' : ''} ${props.isFullScreen ? 'full-screen' : ''}`}>

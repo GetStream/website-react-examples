@@ -9,9 +9,10 @@
   &.full-screen {
     max-height: 40rem !important;
     margin: 0;
+    width: 100%;
   }
 
   &.clipped {
-    max-width: calc(100vw - 320px);
+    width: calc(100vw - 320px);
   }
 }
