@@ -8,8 +8,8 @@ import ActionThread from '../../assets/icons/ActionThread';
 import ActionUpVote from '../../assets/icons/ActionUpVote';
 import ReactionDownVote from '../../assets/icons/ReactionDownVote';
 import ReactionUpVote from '../../assets/icons/ReactionUpVote';
-import UserIcon from '../../assets/icons/UserIcon';
-import { getColor } from '../../assets/data';
+
+import { getColor, getIcon } from '../../assets/data';
 
 const getTimeStamp = (message) => {
   let lastHours = message.created_at?.getHours();
@@ -81,7 +81,7 @@ export const GamingMessage = (props) => {
   return (
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
-        <UserIcon />
+        {getIcon(message.user.role)}
         <span className='timestamp' style={timestamp ? { display: 'inline' } : {}}>
           {getTimeStamp(message)}
         </span>

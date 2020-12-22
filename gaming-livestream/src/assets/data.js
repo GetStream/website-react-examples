@@ -38,10 +38,8 @@ export const getIcon = (type) => {
       return <ModeratorIcon />;
     case 'VIP':
       return <VIPIcon />;
-    case 'user':
-      return <UserIcon />;
     default:
-      break;
+      return <UserIcon />;
   }
 };
 
