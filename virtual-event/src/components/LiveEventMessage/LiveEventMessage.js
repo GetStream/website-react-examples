@@ -41,15 +41,15 @@ export const LiveEventMessage = (props) => {
       <div className='pin-icon' style={{ marginLeft: '15px' }} onClick={pinChecker}>
         {isPinned ? theme === 'livestream light' ? <PinIcon /> : <PinIconDark /> : null}
       </div>
-      <div className='new-actions'>
-        <MessageActions {...props} handleMute={pinChecker} getMessageActions={getMessageActions} />
-      </div>
-      <div>
+      <div style={{ position: 'relative' }}>
         {onlineStatus && (
           <div className='online-indicator'>
             <OnlineIndicator />
           </div>
         )}
+        <div className='new-actions'>
+          <MessageActions {...props} handleMute={pinChecker} getMessageActions={getMessageActions} />
+        </div>
         <MessageLivestream {...props} ReactionsList={LiveEventReactions} />
       </div>
     </div>

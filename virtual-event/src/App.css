@@ -306,27 +306,12 @@ body {
 }
 
 /* ----------------------------------------- Thread Actions Box ----------------------------------------- */
-.str-chat__list--thread .str-chat__message-simple__actions__action--options .str-chat__message-actions-box {
-  left: 0%;
-  margin-left: 175px;
-  border-radius: 8px;
-  margin-bottom: 34px;
-  z-index: 9;
-}
 
 .str-chat__typing-indicator {
   display: none;
 }
 .str-chat__li--bottom {
   margin: 0;
-}
-
-.livestream.str-chat .str-chat__thread-list .new-actions .str-chat__message-simple__actions__action svg {
-  position: absolute;
-  opacity: 0;
-  top: -0.9px;
-  left: 267px;
-  z-index: 3;
 }
 
 .str-chat .str-chat__list--thread .str-chat__message-actions-list button:first-child {
