@@ -37,7 +37,7 @@ export const GamingChat = (props) => {
         userToken,
       );
 
-      const channel = await chatClient.channel('gaming', 'godevs', { name: 'Talk about Go' });
+      const channel = await chatClient.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });
 
       await channel.watch();
       setChannel(channel);
