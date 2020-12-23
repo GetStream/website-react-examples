@@ -1,10 +1,10 @@
 .team-message-input__wrapper {
+  position: relative;
   display: flex;
   flex-direction: column;
   background: #f7f6f8;
   padding: 15px 20px 28px;
   width: 100%;
-  /* border-bottom-right-radius: 16px; */
 }
 
 .team-message-input__wrapper.thread-open {
@@ -131,8 +131,8 @@
 .team-message-input__wrapper .str-chat__input--emojipicker {
   z-index: 3;
   position: absolute;
-  bottom: 33px;
-  left: 332px;
+  bottom: 112px;
+  left: 20px;
   width: 338px;
 }
 

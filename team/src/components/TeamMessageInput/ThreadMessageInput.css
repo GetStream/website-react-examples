@@ -166,7 +166,6 @@
   justify-content: space-around;
   align-items: center;
   width: 30px;
-  /* width: 60px; */
   padding-right: 6px;
 }
 
@@ -181,8 +180,8 @@
 
 .thread-message-input__wrapper .str-chat__input--emojipicker {
   z-index: 3;
-  bottom: calc(100% - 800px + 72px);
-  right: 0px;
+  top: 183px;
+  right: 299px;
   width: 338px;
 }
 
