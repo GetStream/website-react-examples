@@ -1,0 +1,32 @@
+.team-channel-list {
+  width: 100%;
+}
+
+.team-channel-list__message {
+  color: #ffffff;
+  padding: 0 16px;
+}
+
+.team-channel-list__message.loading {
+  height: 115px;
+}
+
+.team-channel-list__header {
+  padding: 0 16px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.team-channel-list__header svg {
+  cursor: pointer;
+}
+
+.team-channel-list__header__title {
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 13px;
+  line-height: 16px;
+  height: 16px;
+  color: rgba(255, 255, 255, 0.66);
+  margin-bottom: 10px;
+}

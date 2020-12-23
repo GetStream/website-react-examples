@@ -4,12 +4,14 @@
   "private": true,
   "homepage": "/website-react-examples/virtual-event",
   "dependencies": {
-    "@testing-library/jest-dom": "^5.11.4",
-    "@testing-library/react": "^11.1.0",
-    "@testing-library/user-event": "^12.1.10",
-    "react": "^17.0.1",
-    "react-dom": "^17.0.1",
-    "react-scripts": "4.0.1",
+    "emoji-mart": "3.0.0",
+    "react": "16.12.0",
+    "react-dom": "16.12.0",
+    "react-file-utils": "^0.4.0",
+    "react-native-animated-emoji": "0.1.4",
+    "react-scripts": "3.4.3",
+    "stream-chat": "2.6.0^",
+    "stream-chat-react": "3.1.2^",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
