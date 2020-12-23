@@ -8,7 +8,6 @@ import './App.css';
 import { LiveEventChannelFooter } from './components/LiveEventChannelFooter/LiveEventChannelFooter';
 import { LiveEventChannelSwitch } from './components/LiveEventChannelSwitch/LiveEventChannelSwitch';
 import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage';
-import { LiveEventWindowControls } from './components/LiveEventWindowControls/LiveEventWindowControls';
 
 import { LiveVideoIcon } from './assets/LiveVideoIcon';
 import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
@@ -28,6 +27,12 @@ const i18nInstance = new Streami18n({
   },
 });
 const chatClient = new StreamChat(apiKey);
+
+
+const changeTheme = (e, setTheme) => {
+  setTheme(e.data);
+};
+
 
 const App = () => {
   const [channel, setChannel] = useState(null);
@@ -50,9 +55,14 @@ const App = () => {
     }
   }, []);
 
+  useEffect(() => {
+    window.addEventListener('message', (e) => changeTheme(e, setCurrentTheme));
+    return () => window.removeEventListener('message', (e) => changeTheme(e, setCurrentTheme));
+  }, []);
+
   return (
     <>
-      <LiveEventWindowControls currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} />
+      {/* <LiveEventWindowControls currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} /> */}
       <div className='main-container'>
         <Chat client={chatClient} i18nInstance={i18nInstance} theme={`livestream ${currentTheme}`}>
           <div className='main-container-inner'>

@@ -6,12 +6,13 @@ body {
 }
 
 #root {
-  height: 100%;
+  height: 100vh;
 }
 
 .main-container {
   display: flex;
   box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.2);
+  height: 100%;
 }
 
 .main-container-inner {
@@ -19,6 +20,7 @@ body {
   flex-direction: row;
   overflow: hidden;
   width: 100%;
+  height: 100%;
 }
 
 .main-container-inner__left {
