@@ -1,23 +1,34 @@
 {
   "files": {
-    "main.css": "/website-react-examples/virtual-event/static/css/main.ab7136cd.chunk.css",
-    "main.js": "/website-react-examples/virtual-event/static/js/main.83997fbf.chunk.js",
-    "main.js.map": "/website-react-examples/virtual-event/static/js/main.83997fbf.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.ecd56828.js",
-    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.ecd56828.js.map",
-    "static/js/2.89132913.chunk.js": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js",
-    "static/js/2.89132913.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js.map",
-    "static/js/3.c36ffe61.chunk.js": "/website-react-examples/virtual-event/static/js/3.c36ffe61.chunk.js",
-    "static/js/3.c36ffe61.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.c36ffe61.chunk.js.map",
+    "main.css": "/website-react-examples/virtual-event/static/css/main.4305f982.chunk.css",
+    "main.js": "/website-react-examples/virtual-event/static/js/main.ff81e383.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event/static/js/main.ff81e383.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.565777c2.js",
+    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.565777c2.js.map",
+    "static/css/2.3bb807d9.chunk.css": "/website-react-examples/virtual-event/static/css/2.3bb807d9.chunk.css",
+    "static/js/2.b1f7d828.chunk.js": "/website-react-examples/virtual-event/static/js/2.b1f7d828.chunk.js",
+    "static/js/2.b1f7d828.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.b1f7d828.chunk.js.map",
+    "static/js/3.2bf5c9f9.chunk.js": "/website-react-examples/virtual-event/static/js/3.2bf5c9f9.chunk.js",
+    "static/js/3.2bf5c9f9.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.2bf5c9f9.chunk.js.map",
     "index.html": "/website-react-examples/virtual-event/index.html",
-    "static/css/main.ab7136cd.chunk.css.map": "/website-react-examples/virtual-event/static/css/main.ab7136cd.chunk.css.map",
-    "static/js/2.89132913.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.89132913.chunk.js.LICENSE.txt",
-    "static/media/logo.6ce24c58.svg": "/website-react-examples/virtual-event/static/media/logo.6ce24c58.svg"
+    "precache-manifest.32ab8b83ecf3dca21df90cc321992748.js": "/website-react-examples/virtual-event/precache-manifest.32ab8b83ecf3dca21df90cc321992748.js",
+    "service-worker.js": "/website-react-examples/virtual-event/service-worker.js",
+    "static/css/2.3bb807d9.chunk.css.map": "/website-react-examples/virtual-event/static/css/2.3bb807d9.chunk.css.map",
+    "static/css/main.4305f982.chunk.css.map": "/website-react-examples/virtual-event/static/css/main.4305f982.chunk.css.map",
+    "static/js/2.b1f7d828.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.b1f7d828.chunk.js.LICENSE.txt",
+    "static/media/Amanda.png": "/website-react-examples/virtual-event/static/media/Amanda.587b9cd7.png",
+    "static/media/BillNye.png": "/website-react-examples/virtual-event/static/media/BillNye.e603796e.png",
+    "static/media/BrianGreene.png": "/website-react-examples/virtual-event/static/media/BrianGreene.34a6f383.png",
+    "static/media/LiveEventPanelists.css": "/website-react-examples/virtual-event/static/media/Map.dc797d30.png",
+    "static/media/NDT.png": "/website-react-examples/virtual-event/static/media/NDT.baffa578.png",
+    "static/media/Robert.png": "/website-react-examples/virtual-event/static/media/Robert.e6a1fa70.png",
+    "static/media/UserPic.png": "/website-react-examples/virtual-event/static/media/UserPic.1f5824f5.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.ecd56828.js",
-    "static/js/2.89132913.chunk.js",
-    "static/css/main.ab7136cd.chunk.css",
-    "static/js/main.83997fbf.chunk.js"
+    "static/js/runtime-main.565777c2.js",
+    "static/css/2.3bb807d9.chunk.css",
+    "static/js/2.b1f7d828.chunk.js",
+    "static/css/main.4305f982.chunk.css",
+    "static/js/main.ff81e383.chunk.js"
   ]
 }
