@@ -1,0 +1,85 @@
+.agent-message-input__wrapper {
+  display: flex;
+  justify-content: stretch;
+  align-items: flex-start;
+  padding: 20px;
+  background: #fff;
+}
+
+.agent-message-input__input {
+  width: 100%;
+  min-height: 50px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  border: 1px solid transparent;
+  background: rgba(0, 0, 0, 0.05);
+  border-radius: 12px;
+  padding-right: 20px;
+}
+
+.agent-message-input__input:focus-within {
+  background: #fff;
+  border: 1px solid #005fff;
+}
+
+.agent-message-input__input-wrapper {
+  display: flex;
+  align-items: center;
+}
+
+.agent-message-input__wrapper div.rfu-dropzone {
+  width: 100%;
+}
+
+.agent-message-input__wrapper .str-chat__textarea {
+  height: 100%;
+  display: flex;
+  align-items: center;
+}
+
+.agent-message-input__wrapper .str-chat__textarea textarea {
+  border: none;
+  font-family: Helvetica Neue, sans-serif;
+  font-size: 17px;
+  border-radius: 12px;
+  line-height: 160%;
+  background: rgba(0, 0, 0, 0);
+}
+
+.agent-message-input__wrapper .str-chat__textarea textarea:focus {
+  border: none;
+  box-shadow: none;
+}
+
+.agent-message-input__wrapper .str-chat__textarea textarea::placeholder {
+  color: rgba(0, 0, 0, 0.2);
+}
+
+.agent-message-input__wrapper .str-chat__input--emojipicker {
+  position: absolute;
+  bottom: 70px;
+  right: 20px;
+  z-index: 10;
+}
+
+.emoji-mart .emoji-mart-emoji:focus {
+  outline: none;
+}
+
+.agent-message-input__wrapper svg:hover {
+  cursor: pointer;
+}
+
+.agent-message-input__wrapper div.rfu-dropzone:focus {
+  outline: none;
+}
+
+.agent-message-input__wrapper .rfu-image-previewer {
+  flex: none;
+  margin-left: 12px;
+}
+
+.agent-message-input__wrapper .rfu-image-previewer__image {
+  margin-bottom: 0;
+}
