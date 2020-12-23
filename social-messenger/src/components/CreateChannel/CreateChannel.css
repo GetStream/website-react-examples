@@ -154,6 +154,14 @@
   cursor: pointer;
 }
 
+.messaging-create-channel__user-result.focused {
+  background: #ffffff;
+}
+
+.str-chat.dark .messaging-create-channel__user-result.focused {
+  background: #3e3e41;
+}
+
 .messaging-create-channel__user-result.empty {
   padding-left: 16px;
 }

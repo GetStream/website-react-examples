@@ -1,4 +1,4 @@
-import React, { useContext, useEffect, useRef, useState } from 'react';
+import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
 import { Avatar, ChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
@@ -17,9 +17,10 @@ const UserResult = ({ user }) => (
   </li>
 );
 
-const CreateChannel = ({ onClose, visible }) => {
+const CreateChannel = ({ onClose }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
 
+  const [focusedUser, setFocusedUser] = useState(undefined);
   const [inputText, setInputText] = useState('');
   const [resultsOpen, setResultsOpen] = useState(false);
   const [searchEmpty, setSearchEmpty] = useState(false);
@@ -116,26 +117,37 @@ const CreateChannel = ({ onClose, visible }) => {
     inputRef.current.focus();
   };
 
-  // const handleKeyDown = useCallback((e) => {
-  //   // check for up(38) or down(40) key
-  //   if (e.which === 38) {
-  //     console.log('1 user up');
-  //   }
-  //   if (e.which === 40) {
-  //     console.log('1 user down');
-  //   }
-  //   if (e.which === 13) {
-  //     console.log('submit selected user');
-  //     addUser();
-  //   }
-  // }, []);
+  const handleKeyDown = useCallback(
+    (e) => {
+      console.log({ focusedUser });
+      // check for up(38) or down(40) key
+      if (e.which === 38) {
+        setFocusedUser((prevFocused) => {
+          if (prevFocused === undefined) return 0;
+          return prevFocused === 0 ? users.length - 1 : prevFocused - 1;
+        });
+      }
+      if (e.which === 40) {
+        setFocusedUser((prevFocused) => {
+          if (prevFocused === undefined) return 0;
+          return prevFocused === users.length - 1 ? 0 : prevFocused + 1;
+        });
+      }
+      if (e.which === 13) {
+        e.preventDefault();
+        if (focusedUser !== undefined) {
+          addUser(users[focusedUser]);
+          return setFocusedUser(undefined);
+        }
+      }
+    },
+    [users, focusedUser], // eslint-disable-line
+  );
 
-  // useEffect(() => {
-  //   document.addEventListener('keydown', handleKeyDown, false);
-  //   return () => document.removeEventListener('keydown', handleKeyDown);
-  // }, [handleKeyDown]);
-
-  if (!visible) return null;
+  useEffect(() => {
+    document.addEventListener('keydown', handleKeyDown, false);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [handleKeyDown]);
 
   return (
     <div className='messaging-create-channel'>
@@ -173,8 +185,12 @@ const CreateChannel = ({ onClose, visible }) => {
           <ul className='messaging-create-channel__user-results'>
             {!!users?.length && !searchEmpty && (
               <div>
-                {users.map((user) => (
-                  <div className='messaging-create-channel__user-result' onClick={() => addUser(user)} key={user.id}>
+                {users.map((user, i) => (
+                  <div
+                    className={`messaging-create-channel__user-result ${focusedUser === i && 'focused'}`}
+                    onClick={() => addUser(user)}
+                    key={user.id}
+                  >
                     <UserResult user={user} />
                   </div>
                 ))}
