@@ -1,0 +1,214 @@
+@import '../../styles/variables';
+
+section.chat-members-container {
+  .custom-message__wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 6px 10px 4px;
+
+    &:hover {
+      background: $component-background;
+    }
+
+    &:hover .custom-message__actions-wrapper {
+      opacity: 1;
+    }
+
+    .custom-message__content {
+      > svg {
+        float: left;
+        margin-right: 4px;
+      }
+
+      > .timestamp {
+        display: none;
+        font-family: Helvetica Neue, sans-serif;
+        font-size: 11px;
+        line-height: 13px;
+        color: #858688;
+        mix-blend-mode: normal;
+        margin-right: 4px;
+        position: relative;
+        bottom: 2px;
+      }
+
+      > .message-owner {
+        display: inline;
+        margin-right: 4px;
+        font-family: Helvetica Neue, sans-serif;
+        font-weight: bold;
+        font-size: 13px;
+        min-width: fit-content;
+        position: relative;
+        bottom: 2px;
+      }
+
+      > .message {
+        display: inline;
+        font-family: Helvetica Neue, sans-serif;
+        font-size: 13px;
+        color: $foreground;
+        mix-blend-mode: normal;
+        position: relative;
+        bottom: 2px;
+      }
+    }
+  }
+
+  .str-chat__li--single,
+  .str-chat__li--top,
+  .str-chat__li--bottom {
+    margin: 0;
+  }
+
+  .custom-message__bottom-wrapper {
+    display: flex;
+    align-items: center;
+    margin-top: 4px;
+  }
+
+  .custom-message__reaction-list {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    border: 1px solid $border-color;
+    background: $background;
+
+    border-radius: 20px;
+    border-top-left-radius: 0;
+    width: fit-content;
+    max-width: 100px;
+    height: 20px;
+    padding-right: 8px;
+    margin-right: 8px;
+
+    > svg {
+      margin: 0 6px;
+    }
+
+    > p {
+      display: inline;
+      font-family: Helvetica Neue, sans-serif;
+      font-size: 12px;
+      color: $foreground;
+    }
+  }
+
+  .custom-message__reply-count {
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 12px;
+    color: $foreground;
+    height: 20px;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    border: 1px solid $border-color;
+    box-sizing: border-box;
+    border-radius: 0px 10px 10px 10px;
+    padding: 0 8px;
+    background: $background;
+  }
+
+  .custom-message__actions-wrapper {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    opacity: 0;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 25px;
+    width: 86px;
+    background: $background;
+    border: 1px solid $border-color;
+    border-radius: 99999px;
+
+    > svg {
+      cursor: pointer;
+
+      &:hover path {
+        fill-opacity: 1;
+      }
+    }
+  }
+
+  .str-chat__message-attachment-card.str-chat__message-attachment-card--giphy,
+  .str-chat__message-attachment-card.str-chat__message-attachment-card--image {
+    border-color: $border-color;
+    border-radius: 16px;
+    width: 75%;
+
+    .str-chat__message-attachment-card--header {
+      background: $background;
+    }
+
+    .str-chat__message-attachment-card--content {
+      margin: 0;
+      padding: 2px 16px 4px;
+      background: $background;
+
+      .str-chat__message-attachment-card--flex {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        width: 100%;
+
+        .str-chat__message-attachment-card--title {
+          color: $foreground;
+          margin-right: 2px;
+        }
+      }
+    }
+
+    .str-chat__message-attachment-card--content > * {
+      margin: 0;
+    }
+
+    .str-chat__message-attachment-card--content > img {
+      display: none;
+    }
+
+    .str-chat__message-attachment-card--url {
+      color: $foreground;
+    }
+  }
+
+  .str-chat__message-attachment--card.str-chat__message-attachment--undefined.str-chat__message-attachment--card--no-image {
+    .str-chat__message-attachment-card--undefined {
+      background: $background;
+      border: 1px solid $border-color;
+      border-radius: 16px;
+      margin: 0;
+    }
+
+    .str-chat__message-attachment-card--content {
+      background: $background;
+    }
+
+    .str-chat__message-attachment-card--title {
+      color: $foreground;
+    }
+
+    .str-chat__message-attachment-card--url {
+      color: $foreground;
+    }
+  }
+
+  .str-chat__message-attachment .str-chat__message-attachment-actions {
+    .str-chat__message-attachment-actions-form button {
+      cursor: pointer;
+      background: $button-background;
+      border: none;
+      box-shadow: none;
+
+      &:hover {
+        background: $button-background-hover;
+      }
+
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+}

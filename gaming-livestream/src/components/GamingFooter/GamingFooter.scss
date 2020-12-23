@@ -1,0 +1,208 @@
+@import '../../styles/variables';
+
+footer {
+  background-color: $component-background;
+  border-top: 1px solid $border-color;
+  display: flex;
+  height: 3.75rem;
+  justify-content: space-between;
+  padding: 0.5rem;
+  padding-right: 330px;
+  transition: all 1s;
+
+  &.show-members {
+    padding-right: 51%;
+
+    > .user-interaction-container {
+      @media (max-width: 1250px) {
+        display: none;
+      }
+    }
+  }
+
+  &.full-screen {
+    padding-right: 0.5rem;
+  }
+
+  > .streamer-details-container {
+    display: flex;
+    align-items: center;
+
+    > .avatar {
+      background-image: url(/assets/images/Avatar.png);
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: cover;
+      border-radius: 50%;
+      height: 2.5rem;
+      margin-right: 0.5rem;
+      width: 2.5rem;
+    }
+
+    > .streamer-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      height: 60px;
+
+      > .streamer-name {
+        align-items: center;
+        display: flex;
+
+        > p {
+          margin-right: 0.5rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-weight: bold;
+          font-size: 17px;
+          line-height: 21px;
+          color: #ffffff;
+        }
+      }
+
+      > .streamer-details {
+        display: flex;
+        list-style: none;
+        margin: 0;
+        padding: 0;
+
+        > li {
+          background-color: $button-background;
+          border-radius: 1rem;
+          color: $foreground;
+          margin-right: 0.5rem;
+          padding: 0rem 0.5rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-size: 11px;
+          display: flex;
+          align-items: center;
+          height: 16px;
+        }
+      }
+    }
+  }
+
+  > .user-interaction-container {
+    align-items: center;
+    display: flex;
+    justify-content: flex-end;
+
+    > .timer-container {
+      margin-right: 1rem;
+
+      > div {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+
+        > p {
+          margin-right: 0.5rem;
+          font-family: Helvetica Neue, sans-serif;
+          font-size: 15px;
+          line-height: 18px;
+          color: #ffffff;
+        }
+      }
+
+      > div:nth-child(2) {
+        > p {
+          font-size: 11px;
+          opacity: 0.5;
+        }
+      }
+    }
+
+    > button,
+    > .btn-group > button {
+      transition: all 1s;
+      width: 7.5rem;
+      cursor: pointer;
+
+      &.shrink {
+        width: 3rem;
+
+        > div {
+          > p {
+            height: 0;
+            width: 0;
+            visibility: hidden;
+          }
+
+          > svg {
+            margin: 0;
+          }
+        }
+      }
+    }
+
+    > .follow-btn {
+      margin-right: 1rem;
+      overflow: hidden;
+
+      > div {
+        display: flex;
+        justify-content: center;
+
+        > svg {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    > .sub-btn {
+      margin-right: 1rem;
+      overflow: hidden;
+
+      > div {
+        display: flex;
+        justify-content: center;
+
+        > svg {
+          margin-right: 0.5rem;
+        }
+      }
+    }
+
+    > .btn-group {
+      > button {
+        overflow: hidden;
+        width: 5rem;
+      }
+
+      :nth-child(1) {
+        border-top-right-radius: 0;
+        border-bottom-right-radius: 0;
+
+        > div {
+          display: flex;
+          justify-content: center;
+
+          > svg {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+
+      :nth-child(2) {
+        border-top-left-radius: 0;
+        border-bottom-left-radius: 0;
+
+        > div {
+          display: flex;
+          justify-content: center;
+
+          > svg {
+            margin-right: 0.5rem;
+          }
+        }
+      }
+    }
+
+    .btn-group > button:first-child {
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), $button-background;
+
+      &:hover {
+        background: $button-background-hover;
+      }
+    }
+  }
+}

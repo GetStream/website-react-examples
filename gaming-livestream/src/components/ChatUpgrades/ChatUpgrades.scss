@@ -1,0 +1,125 @@
+@import '../../styles/variables';
+
+.upgrade-container {
+  animation: slideRight 1s forwards;
+  border: 1px solid $border-color;
+  border-top: 0;
+  border-bottom: 0;
+  background-color: transparent;
+  height: 100%;
+  justify-content: space-between;
+  position: absolute;
+  right: 0;
+  transition: all 1s;
+  width: 320px;
+
+  > .upgrade-header {
+    align-items: center;
+    background-color: $component-background;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    height: 3.75rem;
+    justify-content: space-between;
+    padding: 0 10px;
+    width: 100%;
+    transition: all 0.5s;
+
+    > button {
+      background-image: url(/assets/icons/close.svg);
+      background-position: center;
+      background-size: 50%;
+      background-repeat: no-repeat;
+      border-radius: 0.5rem;
+      height: 2.5rem;
+      visibility: visible;
+      width: 2.5rem;
+      cursor: pointer;
+    }
+
+    > p {
+      font-family: Helvetica Neue, sans-serif;
+      font-weight: bold;
+      font-size: 15px;
+      color: $foreground;
+    }
+
+    > div {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+  }
+
+  > ul {
+    margin: 0;
+    padding: 0 16px;
+
+    > li {
+      align-items: center;
+      background-color: $component-background;
+      border: 5px solid $border-color;
+      border-radius: 1rem;
+      display: flex;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      width: 100%;
+      cursor: pointer;
+      transition: 0.2s border-color ease-in-out;
+
+      &:hover {
+        border: 5px solid $attendees;
+
+        > svg {
+          > path {
+            transition: 0.2s fill ease-in-out;
+            fill: $attendees;
+          }
+        }
+      }
+
+      > svg {
+        margin-right: 0.5rem;
+
+        > path {
+          transition: 0.2s fill ease-in-out;
+        }
+      }
+
+      > .description-container {
+        height: 2.5rem;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+
+        p {
+          font-family: Helvetica Neue;
+          font-size: 13px;
+          color: $foreground;
+
+          &:first-of-type {
+            font-weight: bold;
+          }
+        }
+      }
+    }
+    > .selected-button {
+      border: 5px solid $attendees;
+
+      > svg {
+        > path {
+          fill: $attendees;
+        }
+      }
+    }
+  }
+
+  > button {
+    bottom: 0.5rem;
+    left: 0;
+    margin-left: auto;
+    margin-right: auto;
+    position: absolute;
+    right: 0;
+    width: 94%;
+    cursor: pointer;
+  }
+}

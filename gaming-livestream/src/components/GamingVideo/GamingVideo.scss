@@ -1,0 +1,18 @@
+.video-container {
+  // just for empty video
+  height: 30rem;
+  // just for empty video, you can remove when there's an actual video ^
+
+  max-height: 30rem !important;
+  transition: all 1s;
+
+  &.full-screen {
+    max-height: 40rem !important;
+    margin: 0;
+    width: 100%;
+  }
+
+  &.clipped {
+    width: calc(100vw - 320px);
+  }
+}

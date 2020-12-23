@@ -1,0 +1,79 @@
+@import '../../styles/variables';
+
+.messaging.str-chat .str-chat__thread {
+  position: absolute;
+  margin: 0;
+  border-radius: 0;
+  width: 320px;
+  max-width: 320px;
+  transition: all 1s;
+  animation: slideRight 1s forwards;
+  background: $background;
+
+  .str-chat__thread-list {
+    padding: 0;
+
+    > div:first-child {
+      border-bottom: 1px solid $border-color;
+    }
+
+    .custom-message__bottom-wrapper {
+      display: none;
+    }
+  }
+
+  .str-chat__thread-list .custom-message__actions-wrapper,
+  .custom-message__reaction-list,
+  .str-chat__thread-start {
+    display: none;
+  }
+
+  .thread-header__wrapper {
+    height: 3.75rem;
+    background-color: $component-background;
+    border-bottom: 1px solid $border-color;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 0 10px;
+
+    > svg {
+      cursor: pointer;
+      position: absolute;
+      left: 10px;
+    }
+
+    > svg:first-child:hover path:first-child {
+      fill: $button-background-hover;
+    }
+
+    > p {
+      font-family: Helvetica Neue, sans-serif;
+      font-weight: bold;
+      font-size: 15px;
+      line-height: 24px;
+      color: #ffffff;
+    }
+  }
+
+  .channel-footer {
+    border-bottom: 1px solid $border-color;
+    align-items: center;
+    flex-direction: row;
+
+    > .channel-footer__top {
+      width: 100%;
+      height: 41px;
+      margin-right: 10px;
+    }
+
+    > .channel-footer__bottom {
+      margin-top: 0;
+      margin-bottom: 2px;
+
+      > .watcher-count {
+        display: none;
+      }
+    }
+  }
+}

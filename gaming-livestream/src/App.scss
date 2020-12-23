@@ -1,0 +1,147 @@
+@import '../src/styles/variables';
+
+main {
+  align-items: center;
+  display: flex;
+  height: 100vh;
+  justify-content: center;
+
+  > .live-stream {
+    background-color: $background;
+    display: flex;
+    height: 100%;
+    overflow: hidden;
+    position: relative;
+    width: 100%;
+
+    > .separator {
+      display: flex;
+      flex-direction: column;
+      flex: 3;
+      justify-content: space-between;
+      width: 75%;
+      transition: all 1s;
+
+      &.show-members {
+        width: 34rem;
+      }
+
+      > .header-container {
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+
+        > Header {
+          width: calc(100vw - 320px);
+          height: 3.75rem;
+
+          &.full-screen {
+            width: 75%;
+          }
+        }
+
+        > .sub-header {
+          align-items: center;
+          background-color: $component-background;
+          border-bottom: 1px solid $border-color;
+          border-left: 1px solid $border-color;
+          border-top-right-radius: 1rem;
+          display: flex;
+          height: 3.75rem;
+          justify-content: space-between;
+          width: 0;
+          transition: all 0.5s;
+
+          > button {
+            cursor: pointer;
+            height: 2.5rem;
+            visibility: hidden;
+            width: 2.5rem;
+          }
+
+          > p {
+            font-size: 0;
+            visibility: hidden;
+          }
+
+          > div {
+            height: 2.5rem;
+            width: 2.5rem;
+          }
+
+          &.hide {
+            border: none;
+            border: none;
+            padding: 0;
+            width: 0;
+          }
+
+          &.show {
+            width: 25%;
+            padding: 0.5rem;
+
+            > button {
+              background-image: url(/assets/icons/arrow.svg);
+              background-position: center;
+              background-size: 50%;
+              background-repeat: no-repeat;
+              border-radius: 0.5rem;
+              height: 2.5rem;
+              visibility: visible;
+              width: 2.5rem;
+              transition: all 0;
+            }
+
+            > p {
+              font-family: Helvetica Neue, sans-serif;
+              font-weight: bold;
+              font-size: 15px;
+              color: $foreground;
+              visibility: visible;
+            }
+          }
+        }
+      }
+
+      > .gaming-popup {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: absolute;
+        width: 320px;
+        height: 100px;
+        z-index: 11;
+        bottom: 132px;
+        right: 0;
+        background: $button-background;
+        border-radius: 16px;
+        font-family: Helvetica Neue, sans-serif;
+        font-weight: bold;
+        font-size: 15px;
+        color: $foreground;
+        animation: fade 3s linear;
+      }
+    }
+  }
+}
+
+@keyframes fade {
+  0%,
+  100% {
+    opacity: 0;
+  }
+  20%,
+  60% {
+    opacity: 0.8;
+  }
+}
+
+@keyframes slideRight {
+  from {
+    transform: translateY(-2rem);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}

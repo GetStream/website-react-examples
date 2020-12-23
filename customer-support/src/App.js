@@ -93,18 +93,14 @@ const App = () => {
       });
 
       await initialChannel.sendMessage({
-        text:
-          'My company is looking to upgrade our account to Enterprise. Can you provide me with some additional pricing information?',
+        text: 'My company is looking to upgrade our account to Enterprise. Can you provide me with some additional pricing information?',
       });
 
       await initialChannel.stopWatching();
       await initialClient.disconnect();
 
       const client = new StreamChat(apiKey);
-      await client.setUser(
-        { id: agentUserId, image: require('./assets/user1.png') },
-        agentUserToken,
-      );
+      await client.setUser({ id: agentUserId, image: require('./assets/user1.png') }, agentUserToken);
 
       const [existingChannel] = await client.queryChannels({
         id: agentChannelId,
@@ -122,7 +118,7 @@ const App = () => {
 
   return (
     <>
-      <div className="agent-wrapper">
+      <div className='agent-wrapper'>
         <AgentHeader />
         {agentClient ? (
           <Chat client={agentClient}>
