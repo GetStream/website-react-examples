@@ -85,11 +85,11 @@
   height: 48px;
   display: flex;
   align-items: center;
-  background: rgba(var(--primary-color), 0.1);
+  background: var(--primary-color-alpha);
 }
 
 .channel-search__result-container:hover {
-  background: rgba(var(--primary-color), 0.1);
+  background: var(--primary-color-alpha);
   cursor: pointer;
 }
 

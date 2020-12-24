@@ -1,14 +1,14 @@
-import React, { useRef, useState } from 'react';
+import React, { useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
-import { createGlobalStyle } from 'styled-components';
+// import { createGlobalStyle } from 'styled-components';
 import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
 
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
-import { ColorSlider } from './components/ColorSlider/ColorSlider';
+// import { ColorSlider } from './components/ColorSlider/ColorSlider';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -40,10 +40,11 @@ client.setUser({ id: user }, userToken);
 const setColor = (color) => {
   const root = document.documentElement;
   root.style.setProperty('--primary-color', color);
-}
+  root.style.setProperty('--primary-color-alpha', `${color}1A`);
+};
 
-window.addEventListener("message", function(event) {
-  setColor(event.data)
+window.addEventListener('message', function (event) {
+  setColor(event.data);
 });
 
 const App = () => {
