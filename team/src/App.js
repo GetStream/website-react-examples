@@ -40,7 +40,9 @@ client.setUser({ id: user }, userToken);
 const setColor = (color) => {
   const root = document.documentElement;
   root.style.setProperty('--primary-color', color);
-  root.style.setProperty('--primary-color-alpha', `${color}1A`);
+  if (color) {
+    root.style.setProperty('--primary-color-alpha', `${color}1A`);
+  }
 };
 
 window.addEventListener('message', function (event) {
