@@ -7,6 +7,10 @@
   border-left: 1px solid rgba(0, 0, 0, 0.1);
 }
 
+.str-chat__thread-list .str-chat__message-actions-list button:first-child {
+  display: none;
+}
+
 .str-chat__list .str-chat__reverse-infinite-scroll {
   padding-top: 0px;
 }
