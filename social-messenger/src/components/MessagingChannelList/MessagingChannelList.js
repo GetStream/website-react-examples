@@ -1,35 +1,32 @@
-import React, { useContext } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { Avatar, ChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
 
 import { CreateChannelIcon } from '../../assets';
 
-const MessagingChannelList = ({
-  children,
-  error = false,
-  loading,
-  onCreateChannel,
-}) => {
+const MessagingChannelList = ({ children, error = false, loading, onCreateChannel }) => {
   const { client } = useContext(ChatContext);
-  const {
-    id,
-    image = require('../../assets/stream.png'),
-    name = 'Example User',
-  } = client.user || {};
+  const { id, image = require('../../assets/stream.png'), name = 'Example User' } = client.user || {};
+
+  useEffect(() => {
+    const getDemoChannel = async (client) => {
+      const channel = await client.channel('messaging', 'first', { name: 'Social Demo' });
+      await channel.addMembers([client.user.id]);
+    };
+
+    if (!loading && !children?.props?.children?.length) {
+      getDemoChannel(client);
+    }
+  }, [loading]); // eslint-disable-line
 
   const ListHeaderWrapper = ({ children }) => {
     return (
-      <div className="messaging__channel-list">
-        <div className="messaging__channel-list__header">
+      <div className='messaging__channel-list'>
+        <div className='messaging__channel-list__header'>
           <Avatar image={image} name={name} size={40} />
-          <div className="messaging__channel-list__header__name">
-            {name || id}
-          </div>
-          <button
-            className="messaging__channel-list__header__button"
-            onClick={onCreateChannel}
-          >
+          <div className='messaging__channel-list__header__name'>{name || id}</div>
+          <button className='messaging__channel-list__header__button' onClick={onCreateChannel}>
             <CreateChannelIcon />
           </button>
         </div>
@@ -41,9 +38,7 @@ const MessagingChannelList = ({
   if (error) {
     return (
       <ListHeaderWrapper>
-        <div className="messaging__channel-list__message">
-          Error loading conversations, please try again momentarily.
-        </div>
+        <div className='messaging__channel-list__message'>Error loading conversations, please try again momentarily.</div>
       </ListHeaderWrapper>
     );
   }
@@ -51,9 +46,7 @@ const MessagingChannelList = ({
   if (loading) {
     return (
       <ListHeaderWrapper>
-        <div className="messaging__channel-list__message">
-          Loading conversations...
-        </div>
+        <div className='messaging__channel-list__message'>Loading conversations...</div>
       </ListHeaderWrapper>
     );
   }

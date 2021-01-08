@@ -29,9 +29,7 @@ const sort = {
   cid: 1,
 };
 
-const changeTheme = (e, setTheme) => {
-  setTheme(e.data);
-};
+const changeTheme = (e, setTheme) => setTheme(e.data);
 
 const chatClient = new StreamChat(apiKey);
 chatClient.setUser({ id: user }, userToken);

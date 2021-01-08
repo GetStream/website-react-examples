@@ -119,7 +119,6 @@ const CreateChannel = ({ onClose }) => {
 
   const handleKeyDown = useCallback(
     (e) => {
-      console.log({ focusedUser });
       // check for up(38) or down(40) key
       if (e.which === 38) {
         setFocusedUser((prevFocused) => {
