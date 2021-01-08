@@ -1,5 +1,6 @@
 import React, { useContext } from 'react';
 import { ChatContext } from 'stream-chat-react';
+
 import { LinkedInLogo } from '../../assets/LinkedInLogo';
 import { TwitterLogo } from '../../assets/TwitterLogo';
 
@@ -7,7 +8,7 @@ import './LiveEventPanelists.css';
 
 export const LiveEventPanelists = () => {
   const { theme } = useContext(ChatContext);
-  console.log({ theme });
+
   return (
     <div className={theme === 'livestream light' ? 'panelists-container' : 'panelists-container-dark'}>
       <div className='panelists-top'>
@@ -25,12 +26,12 @@ export const LiveEventPanelists = () => {
             </div>
           </div>
           <div className='panelists-top__left-description'>
-            Join us in watching experts at Arizona State University discuss the science and furture of storytelling.
+            Join us in watching experts at Arizona State University discuss the science and future of storytelling.
           </div>
         </div>
       </div>
       <div className='panelists-bottom'>
-        <div className='panelists-bottom__title'>Panellists</div>
+        <div className='panelists-bottom__title'>Panelists</div>
         <div className='panelists-bottom__panelists'>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>

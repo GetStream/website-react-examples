@@ -3,19 +3,20 @@ import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, Window, Thread, Streami18n, enTranslations } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
+
 import './App.css';
-// import { LiveVideoIcon } from './assets/LiveVideoIcon';
+
 import { LiveEventChannelFooter } from './components/LiveEventChannelFooter/LiveEventChannelFooter';
 import { LiveEventChannelSwitch } from './components/LiveEventChannelSwitch/LiveEventChannelSwitch';
 import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage';
+import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
 
 import { LiveVideoIcon } from './assets/LiveVideoIcon';
-import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const channelName = urlParams.get('channel') || 'demo';
-const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
+const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 
 const i18nInstance = new Streami18n({
@@ -26,13 +27,10 @@ const i18nInstance = new Streami18n({
     Unmute: 'Unpin Message',
   },
 });
+
 const chatClient = new StreamChat(apiKey);
 
-
-const changeTheme = (e, setTheme) => {
-  setTheme(e.data);
-};
-
+const changeTheme = (e, setTheme) => setTheme(e.data);
 
 const App = () => {
   const [channel, setChannel] = useState(null);
@@ -40,19 +38,19 @@ const App = () => {
 
   useEffect(() => {
     const getChannel = async () => {
-      await chatClient.setUser({ id: user, image: require('./assets/UserPic.png') }, userToken);
-      const channelCreator = await chatClient.channel('livestream', channelName, {
-        image:
-          'https://images.unsplash.com/photo-1512138664757-360e0aad5132?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=2851&q=80',
-        name: 'Example User',
-        example: 1,
+      await chatClient.setUser({ id: userId, image: require('./assets/UserPic.png') }, userToken);
+
+      const newChannel = await chatClient.channel('livestream', channelName, {
+        name: 'Virtual Event Demo',
       });
-      await channelCreator.watch();
-      setChannel(channelCreator);
+
+      if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
+
+      await newChannel.watch();
+      setChannel(newChannel);
     };
-    if (chatClient) {
-      getChannel();
-    }
+
+    getChannel();
   }, []);
 
   useEffect(() => {
