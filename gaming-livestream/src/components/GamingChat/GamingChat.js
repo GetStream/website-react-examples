@@ -11,11 +11,11 @@ import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
 import { GamingThread } from '../GamingThread/GamingThread';
 
-import { getColor, participants } from '../../assets/data';
+import { getColor, getRandomUserRole, participants } from '../../assets/data';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
-const userID = urlParams.get('user') || process.env.REACT_APP_USER_ID;
+const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 
 const chatClient = new StreamChat(apiKey);
@@ -30,13 +30,16 @@ export const GamingChat = (props) => {
     const loadChat = async () => {
       await chatClient.setUser(
         {
-          id: userID,
+          id: userId,
           color: getColor(),
+          userRole: getRandomUserRole(),
         },
         userToken,
       );
 
       const channel = await chatClient.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });
+
+      if (!channel.state.members[userId]) await channel.addMembers([userId]);
 
       await channel.watch();
       setChannel(channel);

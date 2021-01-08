@@ -43,6 +43,14 @@ export const getIcon = (type) => {
   }
 };
 
+export const getRandomUserRole = () => {
+  const index = Math.random();
+  if (index > 0.95) return 'streamer';
+  if (index > 0.85) return 'VIP';
+  if (index > 0.75) return 'moderator';
+  return 'default';
+};
+
 const colors = ['#5096ff', '#e60053', '#00ddb5', '#dde100', '#8458ff', '#ffa800'];
 
 export const getColor = () => {

@@ -81,7 +81,7 @@ export const GamingMessage = (props) => {
   return (
     <div className='custom-message__wrapper'>
       <div className='custom-message__content'>
-        {getIcon(message.user.role)}
+        {getIcon(message.user.userRole)}
         <span className='timestamp' style={timestamp ? { display: 'inline' } : {}}>
           {getTimeStamp(message)}
         </span>
