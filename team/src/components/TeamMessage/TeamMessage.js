@@ -30,7 +30,7 @@ export const TeamMessage = (props) => {
       }));
     }
 
-    await client.updateMessage({ ...message, pinned: Math.random() });
+    await client.updateMessage({ ...message, pinned: true });
   };
 
   const getMessageActions = () => {
@@ -48,15 +48,12 @@ export const TeamMessage = (props) => {
   return (
     <div className={isPinned ? 'pinned-message' : 'unpinned-message'}>
       {isPinned && (
-        <div className="pin-icon__wrapper">
+        <div className='pin-icon__wrapper'>
           <PinIconSmall />
-          <p className="pin-icon__text">Pinned</p>
+          <p className='pin-icon__text'>Pinned</p>
         </div>
       )}
-      <MessageTeam
-        {...props}
-        {...{ handleFlag, handleOpenThread, getMessageActions }}
-      />
+      <MessageTeam {...props} {...{ handleFlag, handleOpenThread, getMessageActions }} />
       {/** potentially add replies component here */}
     </div>
   );

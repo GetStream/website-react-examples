@@ -12,38 +12,34 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
   const teamHeader = `# ${channel.data.name || channel.data.id || 'random'}`;
 
   const getMessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(
-      ({ user }) => user.id !== client.userID,
-    );
+    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
     const additionalMembers = members.length - 4;
 
     if (!members.length) {
       return (
-        <div className="team-channel-header__name-wrapper">
+        <div className='team-channel-header__name-wrapper'>
           <Avatar image={null} size={32} />
-          <p className="team-channel-header__name user">Johnny Blaze</p>
+          <p className='team-channel-header__name user'>Johnny Blaze</p>
         </div>
       );
     }
 
     return (
-      <div className="team-channel-header__name-wrapper">
+      <div className='team-channel-header__name-wrapper'>
         {members.map(({ user }, i) => {
           if (i > 3) return null;
           const addComma = members.length - 1 !== i && i < 3;
           return (
-            <div key={i} className="team-channel-header__name-multi">
+            <div key={i} className='team-channel-header__name-multi'>
               <Avatar image={user.image} size={32} />
-              <p className="team-channel-header__name user">
-                {user.name || 'Johnny Blaze'}
+              <p className='team-channel-header__name user'>
+                {user.name || user.id || 'Johnny Blaze'}
                 {addComma && ','}
               </p>
             </div>
           );
         })}
-        {additionalMembers > 0 && (
-          <p className="team-channel-header__name user">{`, and ${additionalMembers} more`}</p>
-        )}
+        {additionalMembers > 0 && <p className='team-channel-header__name user'>{`, and ${additionalMembers} more`}</p>}
       </div>
     );
   };
@@ -55,30 +51,28 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
   };
 
   return (
-    <div className="team-channel-header__container">
+    <div className='team-channel-header__container'>
       {channel.type === 'messaging' ? (
         getMessagingHeader()
       ) : (
-        <div className="team-channel-header__channel-wrapper">
-          <p className="team-channel-header__name">{teamHeader}</p>
+        <div className='team-channel-header__channel-wrapper'>
+          <p className='team-channel-header__name'>{teamHeader}</p>
           <span style={{ display: 'flex' }} onClick={() => setIsEditing(true)}>
             <ChannelInfo />
           </span>
         </div>
       )}
-      <div className="team-channel-header__right">
-        <p className="team-channel-header__right-text">
-          {getWatcherText(watcher_count)}
-        </p>
+      <div className='team-channel-header__right'>
+        <p className='team-channel-header__right-text'>{getWatcherText(watcher_count)}</p>
         <div
-          className="team-channel-header__right-pin-wrapper"
+          className='team-channel-header__right-pin-wrapper'
           onClick={(e) => {
             closeThread(e);
             setPinsOpen((prevState) => !prevState);
           }}
         >
           <PinIcon />
-          <p className="team-channel-header__right-text">Pins</p>
+          <p className='team-channel-header__right-text'>Pins</p>
         </div>
       </div>
     </div>
