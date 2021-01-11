@@ -88,7 +88,15 @@
 }
 
 .str-chat__input--emojipicker {
-  z-index: 1;
+  z-index: 100;
+  left: 36px;
+}
+
+.str-chat__thread .str-chat__input--emojipicker {
+  position: fixed;
+  top: 25% !important;
+  right: 330px;
+  left: auto;
 }
 
 .str-chat__messaging-input .emoji-mart-bar,
