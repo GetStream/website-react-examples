@@ -1,11 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import { ImageDropzone, FileUploadButton } from 'react-file-utils';
-import {
-  ChannelContext,
-  ChatAutoComplete,
-  EmojiPicker,
-  useMessageInput,
-} from 'stream-chat-react';
+import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 
 import './CustomerMessageInput.css';
 
@@ -18,9 +13,7 @@ export const CustomerMessageInput = (props) => {
 
   const messageInput = useMessageInput(props);
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useContext(
-    ChannelContext,
-  );
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useContext(ChannelContext);
 
   useEffect(() => {
     if (open) {
@@ -36,30 +29,35 @@ export const CustomerMessageInput = (props) => {
     }
   }, [messageInput.text, setOpen]);
 
+  const handleSubmit = (event) => {
+    if (messageInput.text.startsWith('/')) {
+      event.target.value = '';
+      return messageInput.handleChange(event);
+    }
+    messageInput.handleSubmit(event);
+  };
+
   return (
-    <div className="support-message-input__wrapper">
+    <div className='support-message-input__wrapper'>
       <ImageDropzone
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={
-          maxNumberOfFiles !== undefined &&
-          messageInput.numberOfUploads >= maxNumberOfFiles
-        }
+        disabled={maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles}
       >
-        <div className="support-message-input__input">
+        <div className='support-message-input__input'>
           <UploadsPreview {...messageInput} />
-          <div className="support-message-input__input-wrapper">
+          <div className='support-message-input__input-wrapper'>
             <ChatAutoComplete
               commands={messageInput.getCommands()}
               innerRef={messageInput.textareaRef}
-              handleSubmit={messageInput.handleSubmit}
+              handleSubmit={handleSubmit}
               onSelectItem={messageInput.onSelectItem}
               onChange={messageInput.handleChange}
               value={messageInput.text}
               rows={1}
               maxRows={props.maxRows}
-              placeholder="Ask us a question"
+              placeholder='Ask us a question'
               onPaste={messageInput.onPaste}
               triggers={props.autocompleteTriggers}
               grow={props.grow}
