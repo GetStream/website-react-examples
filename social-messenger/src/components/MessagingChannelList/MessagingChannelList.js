@@ -6,13 +6,14 @@ import './MessagingChannelList.css';
 import { CreateChannelIcon } from '../../assets';
 
 const MessagingChannelList = ({ children, error = false, loading, onCreateChannel }) => {
-  const { client } = useContext(ChatContext);
+  const { client, setActiveChannel } = useContext(ChatContext);
   const { id, image = require('../../assets/stream.png'), name = 'Example User' } = client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (client) => {
       const channel = await client.channel('messaging', 'first', { name: 'Social Demo' });
       await channel.addMembers([client.user.id]);
+      setActiveChannel(channel);
     };
 
     if (!loading && !children?.props?.children?.length) {

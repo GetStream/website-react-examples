@@ -16,6 +16,8 @@ import {
   WindowControls,
 } from './components';
 
+import { getRandomImage } from './assets';
+
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
@@ -32,7 +34,7 @@ const sort = {
 const changeTheme = (e, setTheme) => setTheme(e.data);
 
 const chatClient = new StreamChat(apiKey);
-chatClient.setUser({ id: user }, userToken);
+chatClient.setUser({ id: user, image: getRandomImage() }, userToken);
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
