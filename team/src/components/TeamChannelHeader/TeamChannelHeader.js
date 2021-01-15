@@ -39,7 +39,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
             </div>
           );
         })}
-        {additionalMembers > 0 && <p className='team-channel-header__name user'>{`, and ${additionalMembers} more`}</p>}
+        {additionalMembers > 0 && <p className='team-channel-header__name user'>{` and ${additionalMembers} more`}</p>}
       </div>
     );
   };
