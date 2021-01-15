@@ -1,21 +1,29 @@
 import React, { useContext, useState } from 'react';
+import { Avatar, ChatContext, MessageActions, MessageLivestream } from 'stream-chat-react';
 
-import { MessageLivestream, MessageActions, ChatContext } from 'stream-chat-react';
+import { LiveEventReactions } from '../LiveEventReactions/LiveEventReactions';
+
 import { OnlineIndicator } from '../../assets/OnlineIndicator';
 import { PinIcon } from '../../assets/PinIcon';
 import { PinIconDark } from '../../assets/PinIconDark';
-import { LiveEventReactions } from '../LiveEventReactions/LiveEventReactions';
 
 import './LiveEventMessage.css';
 
 export const LiveEventMessage = (props) => {
-  const { message, pinnedMessagesIds, setPinnedMessages } = props;
+  const { isMyMessage, message, pinnedMessagesIds, setPinnedMessages } = props;
   const isMessagePinned = pinnedMessagesIds?.find((id) => id === message.id);
   const [isPinned, setIsPinned] = useState(isMessagePinned);
 
   const { theme } = useContext(ChatContext);
 
-  const onlineStatus = props.message.user.online;
+  const onlineStatus = props.message.user.id === 'avatar-robert';
+
+  const MyUserAvatar = (props) => {
+    if (isMyMessage()) {
+      return <Avatar {...props} image={require('../../assets/AvatarRobertImg.png')} name={'Robert'} />;
+    }
+    return <Avatar {...props} />;
+  };
 
   const pinChecker = () => {
     if (!isPinned) {
@@ -50,7 +58,7 @@ export const LiveEventMessage = (props) => {
         <div className='new-actions'>
           <MessageActions {...props} handleMute={pinChecker} getMessageActions={getMessageActions} />
         </div>
-        <MessageLivestream {...props} ReactionsList={LiveEventReactions} />
+        <MessageLivestream {...props} Avatar={MyUserAvatar} ReactionsList={LiveEventReactions} />
       </div>
     </div>
   );
