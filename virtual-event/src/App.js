@@ -12,6 +12,7 @@ import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage
 import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
 
 import { LiveVideoIcon } from './assets/LiveVideoIcon';
+import { getRandomImage } from './assets/getRandomImage';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -38,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     const getChannel = async () => {
-      await chatClient.setUser({ id: userId, image: require('./assets/UserPic.png') }, userToken);
+      await chatClient.setUser({ id: userId, image: getRandomImage() }, userToken);
 
       const newChannel = await chatClient.channel('livestream', channelName, {
         name: 'Virtual Event Demo',
