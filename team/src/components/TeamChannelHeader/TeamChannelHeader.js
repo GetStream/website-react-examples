@@ -13,7 +13,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
 
   const getMessagingHeader = () => {
     const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
-    const additionalMembers = members.length - 4;
+    const additionalMembers = members.length - 3;
 
     if (!members.length) {
       return (
@@ -27,8 +27,8 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
     return (
       <div className='team-channel-header__name-wrapper'>
         {members.map(({ user }, i) => {
-          if (i > 3) return null;
-          const addComma = members.length - 1 !== i && i < 3;
+          if (i > 2) return null;
+          const addComma = members.length - 1 !== i && i < 2;
           return (
             <div key={i} className='team-channel-header__name-multi'>
               <Avatar image={user.image} size={32} />
@@ -39,7 +39,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
             </div>
           );
         })}
-        {additionalMembers > 0 && <p className='team-channel-header__name user'>{` and ${additionalMembers} more`}</p>}
+        {additionalMembers > 0 && <p className='team-channel-header__name user'>{`and ${additionalMembers} more`}</p>}
       </div>
     );
   };
