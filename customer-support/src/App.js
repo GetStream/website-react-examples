@@ -13,19 +13,20 @@ import { AgentHeader } from './components/AgentHeader/AgentHeader';
 import { AgentLoading } from './components/AgentLoading/AgentLoading';
 import { CustomerApp } from './CustomerApp';
 
-const apiKey = process.env.REACT_APP_STREAM_KEY;
+const urlParams = new URLSearchParams(window.location.search);
+const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const agentChannelId = `agent-demo-${uuidv4()}`;
 const customerChannelId = `customer-demo-${uuidv4()}`;
 const theme = 'light';
 
-const agentUserId = process.env.REACT_APP_AGENT_ID;
-const agentUserToken = process.env.REACT_APP_AGENT_TOKEN;
+const previousUserId = urlParams.get('user1') || process.env.REACT_APP_PREVIOUS_ID;
+const previousUserToken = urlParams.get('user1_token') || process.env.REACT_APP_PREVIOUS_TOKEN;
 
-const customerUserId = process.env.REACT_APP_CUSTOMER_ID;
-const customerUserToken = process.env.REACT_APP_CUSTOMER_TOKEN;
+const agentUserId = urlParams.get('user2') || process.env.REACT_APP_AGENT_ID;
+const agentUserToken = urlParams.get('user2_token') || process.env.REACT_APP_AGENT_TOKEN;
 
-const previousUserId = process.env.REACT_APP_PREVIOUS_ID;
-const previousUserToken = process.env.REACT_APP_PREVIOUS_TOKEN;
+const customerUserId = urlParams.get('user3') || process.env.REACT_APP_CUSTOMER_ID;
+const customerUserToken = urlParams.get('user3_token') || process.env.REACT_APP_CUSTOMER_TOKEN;
 
 const customerClient = new StreamChat(apiKey);
 customerClient.setUser(
@@ -100,7 +101,7 @@ const App = () => {
       await initialClient.disconnect();
 
       const client = new StreamChat(apiKey);
-      await client.setUser({ id: agentUserId, image: require('./assets/user1.png') }, agentUserToken);
+      await client.setUser({ id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') }, agentUserToken);
 
       const [existingChannel] = await client.queryChannels({
         id: agentChannelId,

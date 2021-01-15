@@ -10,6 +10,8 @@ import { ChannelContainer } from './components/ChannelContainer/ChannelContainer
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
 // import { ColorSlider } from './components/ColorSlider/ColorSlider';
 
+import { getRandomImage } from './assets';
+
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
@@ -35,12 +37,12 @@ const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort = { last_message_at: -1, updated_at: -1 };
 
 const client = new StreamChat(apiKey);
-client.setUser({ id: user }, userToken);
+client.setUser({ id: user, image: getRandomImage() }, userToken);
 
 const setColor = (color) => {
   const root = document.documentElement;
-  root.style.setProperty('--primary-color', color);
   if (color) {
+    root.style.setProperty('--primary-color', color);
     root.style.setProperty('--primary-color-alpha', `${color}1A`);
   }
 };
