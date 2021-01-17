@@ -13,7 +13,7 @@ import {
   MessagingChannelPreview,
   MessagingInput,
   MessagingThread,
-  WindowControls,
+  // WindowControls,
 } from './components';
 
 import { getRandomImage } from './assets';
@@ -31,8 +31,6 @@ const sort = {
   cid: 1,
 };
 
-const changeTheme = (e, setTheme) => setTheme(e.data);
-
 const chatClient = new StreamChat(apiKey);
 chatClient.setUser({ id: user, image: getRandomImage() }, userToken);
 
@@ -41,8 +39,14 @@ const App = () => {
   const [theme, setTheme] = useState('dark');
 
   useEffect(() => {
-    window.addEventListener('message', (e) => changeTheme(e, setTheme));
-    return () => window.removeEventListener('message', (e) => changeTheme(e, setTheme));
+    const handleThemeChange = (event) => {
+      if (event === 'light' || event === 'dark') {
+        setTheme(event);
+      }
+    };
+
+    window.addEventListener('message', (event) => handleThemeChange(event.data));
+    return () => window.removeEventListener('message', (event) => handleThemeChange(event.data));
   }, []);
 
   return (

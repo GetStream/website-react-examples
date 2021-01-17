@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 // import { createGlobalStyle } from 'styled-components';
@@ -39,24 +39,25 @@ const sort = { last_message_at: -1, updated_at: -1 };
 const client = new StreamChat(apiKey);
 client.setUser({ id: user, image: getRandomImage() }, userToken);
 
-const setColor = (color) => {
-  const root = document.documentElement;
-  if (color) {
-    root.style.setProperty('--primary-color', color);
-    root.style.setProperty('--primary-color-alpha', `${color}1A`);
-  }
-};
-
-window.addEventListener('message', function (event) {
-  setColor(event.data);
-});
-
 const App = () => {
   const [createType, setCreateType] = useState('');
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
   // const primaryColor = useRef('78, 29, 157');
+
+  useEffect(() => {
+    const handleColorChange = (color) => {
+      const root = document.documentElement;
+      if (color.length && color.length === 6) {
+        root.style.setProperty('--primary-color', color);
+        root.style.setProperty('--primary-color-alpha', `${color}1A`);
+      }
+    };
+
+    window.addEventListener('message', (event) => handleColorChange(event.data));
+    return () => window.removeEventListener('message', (event) => handleColorChange(event.data));
+  }, []);
 
   return (
     <>
