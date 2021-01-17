@@ -49,7 +49,7 @@ const App = () => {
   useEffect(() => {
     const handleColorChange = (color) => {
       const root = document.documentElement;
-      if (color.length && color.length === 6) {
+      if (color.length && color.length === 7) {
         root.style.setProperty('--primary-color', color);
         root.style.setProperty('--primary-color-alpha', `${color}1A`);
       }
