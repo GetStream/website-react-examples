@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "0f74c97cf3367897b6c3423cb96d4c4e",
+    "revision": "6322a52dc5b9265412cf22e116530c10",
     "url": "/website-react-examples/virtual-event/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/website-react-examples/virtual-event/static/css/2.3a6d258b.chunk.css"
   },
   {
-    "revision": "0b224fb6a8c93fcdd7f0",
+    "revision": "cceb2b9296e1dddd3f6d",
     "url": "/website-react-examples/virtual-event/static/css/main.b50adbf4.chunk.css"
   },
   {
@@ -24,8 +24,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/website-react-examples/virtual-event/static/js/3.2bf5c9f9.chunk.js"
   },
   {
-    "revision": "0b224fb6a8c93fcdd7f0",
-    "url": "/website-react-examples/virtual-event/static/js/main.584d7244.chunk.js"
+    "revision": "cceb2b9296e1dddd3f6d",
+    "url": "/website-react-examples/virtual-event/static/js/main.00674a22.chunk.js"
   },
   {
     "revision": "9cffe01795fb70dadc3a",
