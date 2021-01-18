@@ -31,8 +31,6 @@ const i18nInstance = new Streami18n({
 
 const chatClient = new StreamChat(apiKey);
 
-const changeTheme = (e, setTheme) => setTheme(e.data);
-
 const App = () => {
   const [channel, setChannel] = useState(null);
   const [currentTheme, setCurrentTheme] = useState('light');
@@ -55,8 +53,14 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    window.addEventListener('message', (e) => changeTheme(e, setCurrentTheme));
-    return () => window.removeEventListener('message', (e) => changeTheme(e, setCurrentTheme));
+    const handleThemeChange = (e) => {
+      if (e === 'light' || e === 'dark') {
+        setCurrentTheme(e);
+      }
+    };
+
+    window.addEventListener('message', (e) => handleThemeChange(e.data));
+    return () => window.removeEventListener('message', (e) => handleThemeChange(e.data));
   }, []);
 
   return (
