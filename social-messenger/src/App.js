@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
 import './App.css';
@@ -22,6 +23,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const filters = { type: 'messaging', members: { $in: [user] } };
 const options = { state: true, watch: true, presence: true, limit: 8 };
@@ -38,15 +40,20 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
 
+  useChecklist(chatClient, targetOrigin);
+
   useEffect(() => {
-    const handleThemeChange = (event) => {
-      if (event === 'light' || event === 'dark') {
-        setTheme(event);
+    const handleThemeChange = ({ data, origin }) => {
+      // handle events only from trusted origin
+      if (origin === targetOrigin) {
+        if (data === 'light' || data === 'dark') {
+          setTheme(data);
+        }
       }
     };
 
-    window.addEventListener('message', (event) => handleThemeChange(event.data));
-    return () => window.removeEventListener('message', (event) => handleThemeChange(event.data));
+    window.addEventListener('message', handleThemeChange);
+    return () => window.removeEventListener('message', handleThemeChange);
   }, []);
 
   return (
