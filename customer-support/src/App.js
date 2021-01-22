@@ -8,6 +8,7 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
 
+import { useChecklist } from './ChecklistTasks';
 import { AgentApp } from './AgentApp';
 import { AgentHeader } from './components/AgentHeader/AgentHeader';
 import { AgentLoading } from './components/AgentLoading/AgentLoading';
@@ -27,6 +28,8 @@ const agentUserToken = urlParams.get('user2_token') || process.env.REACT_APP_AGE
 
 const customerUserId = urlParams.get('user3') || process.env.REACT_APP_CUSTOMER_ID;
 const customerUserToken = urlParams.get('user3_token') || process.env.REACT_APP_CUSTOMER_TOKEN;
+
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const customerClient = new StreamChat(apiKey);
 customerClient.setUser(
@@ -116,6 +119,8 @@ const App = () => {
       sendMessages();
     }
   }, [initialChannel]); // eslint-disable-line react-hooks/exhaustive-deps
+
+  useChecklist(customerClient, targetOrigin);
 
   return (
     <>
