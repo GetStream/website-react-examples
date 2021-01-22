@@ -5,6 +5,7 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './GamingChat.scss';
 
+import { useChecklist } from '../../ChecklistTasks';
 import { GamingChatHeader } from './GamingChatHeader';
 import { GamingMessage } from '../GamingMessage/GamingMessage';
 import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
@@ -17,6 +18,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const chatClient = new StreamChat(apiKey);
 
@@ -47,6 +49,8 @@ export const GamingChat = (props) => {
 
     loadChat();
   }, []);
+
+  useChecklist(chatClient, targetOrigin);
 
   return (
     <section
