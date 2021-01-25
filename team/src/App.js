@@ -6,6 +6,7 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
 
+import { useChecklist } from './ChecklistTasks';
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
 // import { ColorSlider } from './components/ColorSlider/ColorSlider';
@@ -17,6 +18,7 @@ const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const theme = urlParams.get('theme') || 'light';
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const i18nInstance = new Streami18n({
   language: 'en',
@@ -44,6 +46,7 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
+  useChecklist(client, targetOrigin);
   // const primaryColor = useRef('78, 29, 157');
 
   useEffect(() => {

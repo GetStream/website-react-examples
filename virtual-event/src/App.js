@@ -6,6 +6,7 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
 
+import { useChecklist } from './ChecklistTasks';
 import { LiveEventChannelFooter } from './components/LiveEventChannelFooter/LiveEventChannelFooter';
 import { LiveEventChannelSwitch } from './components/LiveEventChannelSwitch/LiveEventChannelSwitch';
 import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage';
@@ -19,6 +20,7 @@ const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const channelName = urlParams.get('channel') || 'demo';
 const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const i18nInstance = new Streami18n({
   language: 'en',
@@ -62,6 +64,8 @@ const App = () => {
     window.addEventListener('message', (e) => handleThemeChange(e.data));
     return () => window.removeEventListener('message', (e) => handleThemeChange(e.data));
   }, []);
+
+  useChecklist(chatClient, targetOrigin);
 
   return (
     <>
