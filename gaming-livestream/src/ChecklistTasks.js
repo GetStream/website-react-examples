@@ -12,8 +12,8 @@ const [RUN_GIPHY, REPLY_MESSAGE, SEND_MESSAGE] = [
 ];
 
 export const useChecklist = (chatClient, targetOrigin) => {
-  const notify = notifyParent(targetOrigin);
   useEffect(() => {
+    const notify = notifyParent(targetOrigin);
     const handleNewEvent = ({ type, message }) => {
       switch(type) {
         case 'message.new':
@@ -35,5 +35,5 @@ export const useChecklist = (chatClient, targetOrigin) => {
       chatClient.on(handleNewEvent);
     }
     return () => chatClient?.off(handleNewEvent);
-  })
+  }, [chatClient, targetOrigin]);
 };

@@ -10,8 +10,8 @@ const [SEND_MESSAGE] = [
 ];
 
 export const useChecklist = (customerClient, targetOrigin) => {
-  const notify = notifyParent(targetOrigin);
   useEffect(() => {
+    const notify = notifyParent(targetOrigin);
     const handleNewEvent = ({ type }) => {
       switch(type) {
         case 'message.new':
@@ -25,5 +25,5 @@ export const useChecklist = (customerClient, targetOrigin) => {
       customerClient.on(handleNewEvent);
     }
     return () => customerClient?.off(handleNewEvent);
-  })
+  }, [customerClient, targetOrigin]);
 };
