@@ -11,7 +11,8 @@ const MessagingChannelList = ({ children, error = false, loading, onCreateChanne
 
   useEffect(() => {
     const getDemoChannel = async (client) => {
-      const channel = await client.channel('messaging', 'first', { name: 'Social Demo' });
+      const channel = client.channel('messaging', 'first', { name: 'Social Demo' });
+      await channel.watch();
       await channel.addMembers([client.user.id]);
       setActiveChannel(channel);
     };

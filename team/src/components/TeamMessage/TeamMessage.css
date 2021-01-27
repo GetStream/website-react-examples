@@ -274,3 +274,7 @@ ul.str-chat__simple-reactions-list:hover {
   height: 24px !important;
   width: 24px !important;
 }
+
+.str-chat__message-team-content--single:not(.str-chat__message-team-content--image)::before {
+  display: none;
+}

@@ -16,14 +16,30 @@ body {
   height: 100%;
 }
 
+body::-webkit-scrollbar {
+  background: transparent;
+}
+
+body {
+  scrollbar-color: transparent transparent;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
 .agent-wrapper {
   position: absolute;
   bottom: 0;
   right: 0;
   background: #fff;
   border-radius: 16px;
-  height: 100vh;
   width: 740px;
+  box-shadow: 0px 2px 30px rgba(0, 0, 0, 0.1);
 }
 
 .agent-channel-wrapper {
@@ -61,15 +77,13 @@ body {
   display: flex;
   align-items: flex-start;
   border-radius: 32px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
 }
 
 .customer-wrapper .str-chat {
   height: 100%;
   border-radius: 32px;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
 }
 
 .customer-wrapper .str-chat__container {
@@ -91,8 +105,7 @@ body {
   justify-content: center;
   border-radius: 30px;
   cursor: pointer;
-  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3),
-    inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
+  box-shadow: 0 2px 12px 0 rgba(0, 0, 0, 0.3), inset 0 1px 0 0 rgba(255, 255, 255, 0.18);
 }
 
 .toggle-button.close-button svg {
@@ -134,8 +147,7 @@ body {
   padding: 10px 4px;
 }
 
-.str-chat__message-commerce--right.str-chat__message-commerce
-  .str-chat__message-commerce-text-inner--is-emoji {
+.str-chat__message-commerce--right.str-chat__message-commerce .str-chat__message-commerce-text-inner--is-emoji {
   background: #fff;
 }
 
@@ -147,8 +159,7 @@ body {
   display: none;
 }
 
-.str-chat__message-commerce--right.str-chat__message-commerce
-  .str-chat__message-commerce-data {
+.str-chat__message-commerce--right.str-chat__message-commerce .str-chat__message-commerce-data {
   display: none;
 }
 
@@ -164,22 +175,15 @@ body {
   display: none;
 }
 
-.agent-wrapper .str-chat.messaging, .str-chat.commerce{
+.agent-wrapper .str-chat.messaging,
+.str-chat.commerce {
   width: 100%;
 }
 
-.agent-wrapper
-  .messaging.str-chat
-  .str-chat__list
-  .str-chat__reverse-infinite-scroll {
-
-
+.agent-wrapper .messaging.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
 }
 
-.customer-wrapper
-  .commerce.str-chat
-  .str-chat__list
-  .str-chat__reverse-infinite-scroll {
+.customer-wrapper .commerce.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
@@ -197,7 +201,9 @@ body {
 }
 
 @media screen and (max-width: 960px) {
-.str-chat-channel-list.messaging, .str-chat-channel-list.team, .str-chat-channel-list.commerce {
+  .str-chat-channel-list.messaging,
+  .str-chat-channel-list.team,
+  .str-chat-channel-list.commerce {
     position: unset;
     left: unset;
     top: unset;
@@ -208,4 +214,3 @@ body {
     transition: unset;
   }
 }
-

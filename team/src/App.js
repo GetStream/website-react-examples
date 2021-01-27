@@ -39,7 +39,7 @@ const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort = { last_message_at: -1, updated_at: -1 };
 
 const client = new StreamChat(apiKey);
-client.setUser({ id: user, image: getRandomImage() }, userToken);
+client.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
   const [createType, setCreateType] = useState('');

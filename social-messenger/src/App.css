@@ -5,6 +5,22 @@ body {
   height: 100%;
 }
 
+body::-webkit-scrollbar {
+  background: transparent;
+}
+
+body {
+  scrollbar-color: transparent transparent;
+}
+
+body::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+
 #root {
   height: 100%;
 }
