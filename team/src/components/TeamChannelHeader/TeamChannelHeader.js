@@ -28,13 +28,13 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
       <div className='team-channel-header__name-wrapper'>
         {members.map(({ user }, i) => {
           if (i > 2) return null;
-          const addComma = members.length - 1 !== i && i < 2;
+          // const addComma = members.length - 1 !== i && i < 2;
           return (
             <div key={i} className='team-channel-header__name-multi'>
               <Avatar image={user.image} size={32} />
               <p className='team-channel-header__name user'>
                 {user.name || user.id || 'Johnny Blaze'}
-                {addComma && ','}
+                {/* {addComma && ','} */}
               </p>
             </div>
           );
