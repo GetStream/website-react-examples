@@ -2,6 +2,7 @@ import React, { useContext, useEffect } from 'react';
 import { Avatar, ChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
+import { SkeletonLoader } from './SkeletonLoader';
 
 import { CreateChannelIcon } from '../../assets';
 
@@ -48,7 +49,9 @@ const MessagingChannelList = ({ children, error = false, loading, onCreateChanne
   if (loading) {
     return (
       <ListHeaderWrapper>
-        <div className='messaging__channel-list__message'>Loading conversations...</div>
+        <div className='messaging__channel-list__message'>
+          <SkeletonLoader />
+        </div>
       </ListHeaderWrapper>
     );
   }
