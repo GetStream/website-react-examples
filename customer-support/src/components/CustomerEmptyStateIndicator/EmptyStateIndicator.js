@@ -10,22 +10,18 @@ const openingPrompts = [
 ];
 
 export const EmptyStateIndicator = ({ channel }) => {
-  const sendInitialMessage = (prompt) => {
-    channel.sendMessage({ text: prompt });
+  const sendInitialMessage = (prompt, index) => {
+    channel.sendMessage({ text: prompt, index });
   };
 
   return (
-    <div className="empty-state__container">
-      <p className="empty-state__heading">How may we assist you?</p>
-      <div className="empty-state__responses">
+    <div className='empty-state__container'>
+      <p className='empty-state__heading'>How may we assist you?</p>
+      <div className='empty-state__responses'>
         {openingPrompts.map((prompt, i) => {
           return (
-            <div
-              className="empty-state__response__wrapper"
-              key={i}
-              onClick={() => sendInitialMessage(prompt)}
-            >
-              <p className="empty-state__response__text">{prompt}</p>
+            <div className='empty-state__response__wrapper' key={i} onClick={() => sendInitialMessage(prompt, i)}>
+              <p className='empty-state__response__text'>{prompt}</p>
             </div>
           );
         })}
