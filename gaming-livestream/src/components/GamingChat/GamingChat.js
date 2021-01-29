@@ -20,7 +20,7 @@ const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const chatClient = new StreamChat(apiKey);
+const chatClient = StreamChat.getInstance(apiKey);
 
 export const GamingChat = (props) => {
   const { isFullScreen, setPopUpText, setShowPopUp, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
@@ -30,7 +30,7 @@ export const GamingChat = (props) => {
 
   useEffect(() => {
     const loadChat = async () => {
-      await chatClient.setUser(
+      await chatClient.connectUser(
         {
           id: userId,
           color: getColor(),
