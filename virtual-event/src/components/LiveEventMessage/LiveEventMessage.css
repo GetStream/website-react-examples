@@ -300,6 +300,9 @@
 
 .str-chat__simple-reactions-list-tooltip {
   white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  left: 100%;
   z-index: 10;
 }
 
