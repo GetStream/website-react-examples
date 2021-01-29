@@ -18,6 +18,7 @@ const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const agentChannelId = `agent-demo-${uuidv4()}`;
 const customerChannelId = `customer-demo-${uuidv4()}`;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 const theme = 'light';
 
 const previousUserId = urlParams.get('user1') || process.env.REACT_APP_PREVIOUS_ID;
@@ -29,10 +30,8 @@ const agentUserToken = urlParams.get('user2_token') || process.env.REACT_APP_AGE
 const customerUserId = urlParams.get('user3') || process.env.REACT_APP_CUSTOMER_ID;
 const customerUserToken = urlParams.get('user3_token') || process.env.REACT_APP_CUSTOMER_TOKEN;
 
-const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
-
-const customerClient = new StreamChat(apiKey);
-customerClient.setUser(
+const customerClient = StreamChat.getInstance(apiKey);
+customerClient.connectUser(
   {
     id: customerUserId,
     name: 'Kevin Rosen',
@@ -53,8 +52,8 @@ const App = () => {
    */
   useEffect(() => {
     const getInitialChannel = async () => {
-      const client = new StreamChat(apiKey);
-      await client.setUser(
+      const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
+      await client.connectUser(
         {
           id: previousUserId,
           name: 'Jen Alexander',
@@ -103,8 +102,8 @@ const App = () => {
       await initialChannel.stopWatching();
       await initialClient.disconnect();
 
-      const client = new StreamChat(apiKey);
-      await client.setUser({ id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') }, agentUserToken);
+      const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
+      await client.connectUser({ id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') }, agentUserToken);
 
       const [existingChannel] = await client.queryChannels({
         id: agentChannelId,
