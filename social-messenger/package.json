@@ -10,7 +10,7 @@
     "react-dom": "^16.12.0",
     "react-file-utils": "^0.4.0",
     "react-scripts": "3.3.0",
-    "stream-chat": "^2.3.0",
+    "stream-chat": "^2.12.0",
     "stream-chat-react": "^3.0.1"
   },
   "scripts": {
