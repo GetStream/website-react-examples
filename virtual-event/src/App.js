@@ -31,7 +31,7 @@ const i18nInstance = new Streami18n({
   },
 });
 
-const chatClient = new StreamChat(apiKey);
+const chatClient = StreamChat.getInstance(apiKey);
 
 const App = () => {
   const [channel, setChannel] = useState(null);
@@ -39,7 +39,7 @@ const App = () => {
 
   useEffect(() => {
     const getChannel = async () => {
-      await chatClient.setUser({ id: userId, image: getRandomImage() }, userToken);
+      await chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
 
       const newChannel = await chatClient.channel('livestream', channelName, {
         name: 'Virtual Event Demo',
