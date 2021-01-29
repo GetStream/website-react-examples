@@ -38,7 +38,7 @@ const filters = [{ type: 'team' }, { type: 'messaging' }];
 const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort = { last_message_at: -1, updated_at: -1 };
 
-const client = new StreamChat(apiKey);
+const client = StreamChat.getInstance(apiKey);
 client.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
