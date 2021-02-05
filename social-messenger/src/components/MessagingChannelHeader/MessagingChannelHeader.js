@@ -47,12 +47,12 @@ const getAvatarGroup = (members) => {
     return (
       <div className='messaging__channel-header__avatars four'>
         <span>
-          <Avatar image={members[0]?.user.image || undefined} shape='square' size={20} />
-          <Avatar image={members[1]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[members.length - 1]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[members.length - 2]?.user.image || undefined} shape='square' size={20} />
         </span>
         <span>
-          <Avatar image={members[2]?.user.image || undefined} shape='square' size={20} />
-          <Avatar image={members[3]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[members.length - 3]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={members[members.length - 4]?.user.image || undefined} shape='square' size={20} />
         </span>
       </div>
     );
