@@ -14,11 +14,11 @@ import {
   MessagingChannelPreview,
   MessagingInput,
   MessagingThread,
-  // WindowControls,
 } from './components';
 
 import { getRandomImage } from './assets';
 
+const image = require('./assets/stream.png');
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
@@ -36,11 +36,27 @@ const sort = {
 const chatClient = StreamChat.getInstance(apiKey);
 chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
 
+function getWindowWidth() {
+  const { innerWidth: width } = window;
+  return width;
+}
+
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
+  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
+  const [showMessages, setShowMessages] = useState(false);
 
   useChecklist(chatClient, targetOrigin);
+
+  useEffect(() => {
+    function handleResize() {
+      setWindowWidth(getWindowWidth());
+    }
+    window.addEventListener('resize', handleResize);
+
+    return () => window.removeEventListener('resize', handleResize);
+  }, [windowWidth]);
 
   useEffect(() => {
     const handleThemeChange = ({ data, origin }) => {
@@ -56,27 +72,84 @@ const App = () => {
     return () => window.removeEventListener('message', handleThemeChange);
   }, []);
 
-  return (
-    <div>
-      <Chat client={chatClient} theme={`messaging ${theme}`}>
-        <ChannelList
-          filters={filters}
-          sort={sort}
-          options={options}
-          List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
-          Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
+  const getMobileView = () => {
+    console.log('in get mobile view');
+    if (isCreating) {
+      return (
+        <div>
+          <div id="content-mobile" onClick={() => {
+            setIsCreating(false);
+            setShowMessages(false);
+          }}>
+            This is the content that will display on MOBILE DEVICES.
+          </div>
+          <Channel maxNumberOfFiles={10} multipleUploads={true}>
+            <CreateChannel onClose={() => setIsCreating(false)} />
+          </Channel>
+        </div>
+      )
+    }
+
+    if (showMessages) {
+      console.log('asdfasdfasdf');
+      return (
+        <div>
+          <div id="content-mobile" onClick={() => {
+            setShowMessages(false);
+            setIsCreating(false);
+          }}>
+            This is the content that will display on MOBILE DEVICES.
+          </div>
+          <Channel maxNumberOfFiles={10} multipleUploads={true}>
+            <Window>
+              <MessagingChannelHeader />
+              <MessageList Message={CustomMessage} TypingIndicator={() => null} />
+              <MessageInput focus Input={MessagingInput} />
+            </Window>
+            <MessagingThread />
+          </Channel>
+        </div>
+      )
+    }
+
+    return (
+      <div onClick={() => setShowMessages(true)}>
+      <ChannelList
+        filters={filters}
+        sort={sort}
+        options={options}
+        List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
+        Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
-        <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
-          <Window>
-            <MessagingChannelHeader />
-            <MessageList Message={CustomMessage} TypingIndicator={() => null} />
-            <MessageInput focus Input={MessagingInput} />
-          </Window>
-          <MessagingThread />
-        </Channel>
+      </div>
+
+    )
+  }
+
+  return (
+      <Chat client={chatClient} theme={`messaging ${theme}`}>
+        {windowWidth > 640 ?
+        <div>
+          <ChannelList
+            filters={filters}
+            sort={sort}
+            options={options}
+            List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
+            Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
+          />
+          <Channel maxNumberOfFiles={10} multipleUploads={true}>
+            {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
+            <Window>
+              <MessagingChannelHeader />
+              <MessageList Message={CustomMessage} TypingIndicator={() => null} />
+              <MessageInput focus Input={MessagingInput} />
+            </Window>
+            <MessagingThread />
+          </Channel>
+        </div> : 
+        getMobileView()
+        }
       </Chat>
-    </div>
   );
 };
 
