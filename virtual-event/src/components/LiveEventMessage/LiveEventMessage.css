@@ -201,6 +201,13 @@
 .new-actions .str-chat__message-actions-box--open {
   display: block;
   border-radius: 8px;
+  bottom: -42px;
+}
+
+.new-actions .str-chat__message-actions-box--open.str-chat__message-actions-box--mine {
+  display: block;
+  border-radius: 8px;
+  bottom: -108px;
 }
 
 .str-chat__list--thread .new-actions .str-chat__message-actions-box--open {
