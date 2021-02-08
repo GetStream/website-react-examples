@@ -120,7 +120,7 @@ const MessagingChannelHeader = () => {
       {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
       <div className='messaging__channel-header__right'>
         <TypingIndicator />
-        {!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />}
+        {channelName !== 'Social Demo' && (!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />)}
       </div>
     </div>
   );
