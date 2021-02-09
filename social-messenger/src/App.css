@@ -44,9 +44,9 @@ body::-webkit-scrollbar-thumb {
   background: #212326 !important;
 }
 
-.str-chat-channel .str-chat__container {
+/* .str-chat-channel .str-chat__container {
   padding: 30px 30px 0 0;
-}
+} */
 
 .str-chat-channel.messaging .str-chat__main-panel {
   padding: 0 !important;
@@ -101,30 +101,14 @@ div #content-mobile {
 
 div #content-mobile {
     display: block;
-    color:white;
+    /* position: fixed; */
+    top: 0;
+    width: 100%
 }
 
-/* .str-chat-channel .str-chat__container .initial-mobile {
-  padding: 0px;
-} */
-
-.str-chat .str-chat-channel-list .messaging .initial-mobile {
-  position: unset;
-  left: unset;
-  width: 100%;
-  top: unset;
-  z-index: unset;
-  min-height: unset;
-  overflow-y: unset;
-  box-shadow: unset;
-}
-
-div .dark .str-chat .str-chat-channel .messaging .initial-mobile {
-  display: none !important;
-}
-
-.messaging-create-channel.mobile-create {
-  display: block;
+div.str-chat__avatar.str-chat__avatar--circle {
+  padding-top: 10px;
+  padding-left:10px;
 }
 
 /* To fix inherited styles */

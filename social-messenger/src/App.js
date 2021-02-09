@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { Avatar, Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -73,7 +73,6 @@ const App = () => {
   }, []);
 
   const getMobileView = () => {
-    console.log('in get mobile view');
     if (isCreating) {
       return (
         <div>
@@ -81,7 +80,7 @@ const App = () => {
             setIsCreating(false);
             setShowMessages(false);
           }}>
-            This is the content that will display on MOBILE DEVICES.
+            <Avatar className='mobile-header-image' image={image} size={40} />
           </div>
           <Channel maxNumberOfFiles={10} multipleUploads={true}>
             <CreateChannel onClose={() => setIsCreating(false)} />
@@ -91,16 +90,15 @@ const App = () => {
     }
 
     if (showMessages) {
-      console.log('asdfasdfasdf');
       return (
         <div>
           <div id="content-mobile" onClick={() => {
             setShowMessages(false);
             setIsCreating(false);
           }}>
-            This is the content that will display on MOBILE DEVICES.
+            <Avatar className='mobile-header-image' image={image} size={40} />
           </div>
-          <Channel maxNumberOfFiles={10} multipleUploads={true}>
+          <Channel className='mobile' maxNumberOfFiles={10} multipleUploads={true}>
             <Window>
               <MessagingChannelHeader />
               <MessageList Message={CustomMessage} TypingIndicator={() => null} />
