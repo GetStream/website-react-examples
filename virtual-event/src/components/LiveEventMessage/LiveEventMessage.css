@@ -148,6 +148,13 @@
 .new-actions .str-chat__message-simple__actions__action--options:hover svg {
   opacity: 1;
 }
+.pinned-messages__container .str-chat__message-livestream-actions span:nth-child(3) {
+  display: none;
+}
+
+.pinned-messages__container .new-actions .str-chat__message-simple__actions__action--options {
+  left: 265px;
+}
 
 .str-chat.dark .new-actions .str-chat__message-simple__actions__action--options:hover svg {
   fill: white;
