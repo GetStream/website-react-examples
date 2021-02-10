@@ -5,7 +5,7 @@ import './MessagingChannelHeader.css';
 
 import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
 
-import { ChannelInfoIcon, ChannelSaveIcon } from '../../assets';
+import { ChannelInfoIcon, ChannelSaveIcon, HamburgerIcon } from '../../assets';
 
 const getAvatarGroup = (members) => {
   if (members.length === 1) {
@@ -61,7 +61,7 @@ const getAvatarGroup = (members) => {
   return null;
 };
 
-const MessagingChannelHeader = () => {
+const MessagingChannelHeader = (props) => {
   const { channel, client } = useContext(ChannelContext);
 
   const [channelName, setChannelName] = useState(channel?.data.name || '');
@@ -116,6 +116,9 @@ const MessagingChannelHeader = () => {
 
   return (
     <div className='messaging__channel-header'>
+      <div onClick={() => props.toggled()}>
+        <HamburgerIcon id="mobile-nav-icon" />
+      </div>
       {getAvatarGroup(members)}
       {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
       <div className='messaging__channel-header__right'>

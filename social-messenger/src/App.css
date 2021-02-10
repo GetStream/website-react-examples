@@ -94,23 +94,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 /* Mobile View */
-#mobileHeader {
-  display: none;
-}
-
 @media screen and (max-width: 640px) {
-  #mobileHeader {
-    display: flex;
-    color: white;
-    cursor: pointer;
-    margin: 10px;
-  }
-
   .str-chat-channel-list.messaging {
     float: unset;
   }
 
-  #mobileChannelList {
+  #mobile-channel-list {
     width: 100vw;
     height: 100vh;
     background-color: #FFE600;
@@ -121,7 +110,7 @@ body::-webkit-scrollbar-thumb {
     transition: transform .3s cubic-bezier(0, .52, 0, 1);
   }
   
-  #mobileChannelList.show {
+  #mobile-channel-list.show {
     transform: translate3d(0vw, 0, 0);
     z-index: 10;
   }

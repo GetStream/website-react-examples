@@ -1,13 +1,8 @@
 {
   "files": {
     "main.css": "/website-react-examples/gaming-livestream/static/css/main.e9c58a3f.chunk.css",
-<<<<<<< HEAD
-    "main.js": "/website-react-examples/gaming-livestream/static/js/main.7cc37e41.chunk.js",
-    "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.7cc37e41.chunk.js.map",
-=======
     "main.js": "/website-react-examples/gaming-livestream/static/js/main.321872d7.chunk.js",
     "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.321872d7.chunk.js.map",
->>>>>>> master
     "runtime-main.js": "/website-react-examples/gaming-livestream/static/js/runtime-main.930cf9b1.js",
     "runtime-main.js.map": "/website-react-examples/gaming-livestream/static/js/runtime-main.930cf9b1.js.map",
     "static/css/2.29f2dcf7.chunk.css": "/website-react-examples/gaming-livestream/static/css/2.29f2dcf7.chunk.css",
@@ -27,10 +22,6 @@
     "static/css/2.29f2dcf7.chunk.css",
     "static/js/2.3904e523.chunk.js",
     "static/css/main.e9c58a3f.chunk.css",
-<<<<<<< HEAD
-    "static/js/main.7cc37e41.chunk.js"
-=======
     "static/js/main.321872d7.chunk.js"
->>>>>>> master
   ]
 }

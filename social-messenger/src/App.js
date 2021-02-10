@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Avatar, Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -25,7 +25,6 @@ const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKE
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const filters = { type: 'messaging', name: 'Social Demo' };
-const mobileNavImage = require('./assets/stream.png');
 const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
@@ -58,23 +57,26 @@ const App = () => {
   }, []);
 
   useEffect(() => {
-    if (!isMobileNavVisible) {
-      const mobileChannelList = document.querySelector('#mobileChannelList');
+    if (isMobileNavVisible) {
+      const mobileChannelList = document.querySelector('#mobile-channel-list');
+      mobileChannelList.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    } else {
+      const mobileChannelList = document.querySelector('#mobile-channel-list');
       mobileChannelList.classList.remove('show');
       document.body.style.overflow = 'auto';
-    } else {
-      const mobileButton = document.querySelector('#mobileHeader');
-      mobileButton.addEventListener('click', function() {
-        const mobileChannelList = document.querySelector('#mobileChannelList');
-        mobileChannelList.classList.add('show');
-        document.body.style.overflow = 'hidden';
-      }, false)
-    };
+    }
+
   }, [isMobileNavVisible]);
+
+  const toggleMobile = () => {
+    const isVisible = isMobileNavVisible;
+    setMobileNav(!isVisible);
+  }
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div id="mobileChannelList" onClick={() => setMobileNav(!isMobileNavVisible)}>
+      <div id="mobile-channel-list" onClick={() => toggleMobile()}>
         <ChannelList
           filters={filters}
           sort={sort}
@@ -84,13 +86,10 @@ const App = () => {
         />
       </div>
       <div>
-        <div id="mobileHeader" onClick={() => setMobileNav(!isMobileNavVisible)}>
-          <Avatar image={mobileNavImage} size={40} />
-        </div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
           {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
           <Window>
-            <MessagingChannelHeader />
+            <MessagingChannelHeader toggled={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>

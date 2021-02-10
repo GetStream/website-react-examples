@@ -71,6 +71,20 @@
   right: 14px;
 }
 
+#mobile-nav-icon {
+  display: none;
+}
+
+@media screen and (max-width: 640px) {
+  #mobile-nav-icon {
+    display: unset;
+  }
+
+  .messaging__channel-header__avatars {
+    margin-left: unset;
+  }
+}
+
 .channel-header__edit-input {
   width: 100%;
   font-family: Helvetica Neue, sans-serif;
