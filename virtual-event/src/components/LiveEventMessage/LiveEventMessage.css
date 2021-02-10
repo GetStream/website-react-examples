@@ -148,6 +148,13 @@
 .new-actions .str-chat__message-simple__actions__action--options:hover svg {
   opacity: 1;
 }
+.pinned-messages__container .str-chat__message-livestream-actions span:nth-child(3) {
+  display: none;
+}
+
+.pinned-messages__container .new-actions .str-chat__message-simple__actions__action--options {
+  left: 265px;
+}
 
 .str-chat.dark .new-actions .str-chat__message-simple__actions__action--options:hover svg {
   fill: white;
@@ -201,6 +208,13 @@
 .new-actions .str-chat__message-actions-box--open {
   display: block;
   border-radius: 8px;
+  bottom: -42px;
+}
+
+.new-actions .str-chat__message-actions-box--open.str-chat__message-actions-box--mine {
+  display: block;
+  border-radius: 8px;
+  bottom: -108px;
 }
 
 .str-chat__list--thread .new-actions .str-chat__message-actions-box--open {

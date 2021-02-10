@@ -42,7 +42,12 @@ export const LiveEventMessage = (props) => {
     }
   };
 
-  const getMessageActions = () => ['edit', 'delete', 'react', 'reply', 'mute'];
+  const getMessageActions = () => {
+    if (props.isMyMessage()) {
+      return ['edit', 'delete', 'react', 'reply', 'mute'];
+    }
+    return ['react', 'reply', 'mute'];
+  };
 
   return (
     <div className={isPinned ? 'live-event-message__container__pinned' : 'live-event-message__container__unpinned'}>
