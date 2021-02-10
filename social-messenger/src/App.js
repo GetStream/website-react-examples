@@ -59,12 +59,10 @@ const App = () => {
 
   useEffect(() => {
     if (!isMobileNavVisible) {
-      console.log('in the false')
       const mobileChannelList = document.querySelector('#mobileChannelList');
       mobileChannelList.classList.remove('show');
       document.body.style.overflow = 'auto';
     } else {
-      console.log('in the true true true ')
       const mobileButton = document.querySelector('#mobileHeader');
       mobileButton.addEventListener('click', function() {
         const mobileChannelList = document.querySelector('#mobileChannelList');
