@@ -151,7 +151,6 @@ const CreateChannel = ({ onClose }) => {
 
   return (
     <div className='messaging-create-channel'>
-
       <header>
         <div className='messaging-create-channel__left'>
           <div className='messaging-create-channel__left-text'>To: </div>
@@ -181,7 +180,6 @@ const CreateChannel = ({ onClose }) => {
           Start chat
         </button>
       </header>
-
       {inputText && (
         <main>
           <ul className='messaging-create-channel__user-results'>
