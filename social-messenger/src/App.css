@@ -100,8 +100,10 @@ body::-webkit-scrollbar-thumb {
 
 @media screen and (max-width: 640px) {
   #mobileHeader {
-    display: block;
+    display: flex;
     color: white;
+    cursor: pointer;
+    margin: 10px;
   }
 
   .str-chat-channel-list.messaging {

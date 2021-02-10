@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { Avatar, Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -25,6 +25,7 @@ const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKE
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const filters = { type: 'messaging', name: 'Social Demo' };
+const mobileNavImage = require('./assets/stream.png');
 const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
@@ -34,7 +35,6 @@ const sort = {
 
 const chatClient = StreamChat.getInstance(apiKey);
 chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
-
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
@@ -59,15 +59,12 @@ const App = () => {
 
   useEffect(() => {
     if (!isMobileNavVisible) {
-      // setTimeout(() => { 
-      //   setMobileNav(false), 650
-      // });
+      console.log('in the false')
       const mobileChannelList = document.querySelector('#mobileChannelList');
       mobileChannelList.classList.remove('show');
       document.body.style.overflow = 'auto';
-    }
-    else { 
-      // setMobileNav(true);
+    } else {
+      console.log('in the true true true ')
       const mobileButton = document.querySelector('#mobileHeader');
       mobileButton.addEventListener('click', function() {
         const mobileChannelList = document.querySelector('#mobileChannelList');
@@ -78,31 +75,31 @@ const App = () => {
   }, [isMobileNavVisible]);
 
   return (
-      <Chat client={chatClient} theme={`messaging ${theme}`}>
-        <div id="mobileChannelList" onClick={() => setMobileNav(false)}>
-          <ChannelList
-            filters={filters}
-            sort={sort}
-            options={options}
-            List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
-            Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
-          />
+    <Chat client={chatClient} theme={`messaging ${theme}`}>
+      <div id="mobileChannelList" onClick={() => setMobileNav(!isMobileNavVisible)}>
+        <ChannelList
+          filters={filters}
+          sort={sort}
+          options={options}
+          List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
+          Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
+        />
+      </div>
+      <div>
+        <div id="mobileHeader" onClick={() => setMobileNav(!isMobileNavVisible)}>
+          <Avatar image={mobileNavImage} size={40} />
         </div>
-        <div>
-          <div id="mobileHeader" onClick={() => setMobileNav(!isMobileNavVisible)}>
-            Mobile Header HERE
-          </div>
-          <Channel maxNumberOfFiles={10} multipleUploads={true}>
-            {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
-            <Window>
-              <MessagingChannelHeader />
-              <MessageList Message={CustomMessage} TypingIndicator={() => null} />
-              <MessageInput focus Input={MessagingInput} />
-            </Window>
-            <MessagingThread />
-          </Channel>
-        </div>
-      </Chat>
+        <Channel maxNumberOfFiles={10} multipleUploads={true}>
+          {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
+          <Window>
+            <MessagingChannelHeader />
+            <MessageList Message={CustomMessage} TypingIndicator={() => null} />
+            <MessageInput focus Input={MessagingInput} />
+          </Window>
+          <MessagingThread />
+        </Channel>
+      </div>
+    </Chat>
   );
 };
 
