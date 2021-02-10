@@ -116,8 +116,8 @@ const MessagingChannelHeader = (props) => {
 
   return (
     <div className='messaging__channel-header'>
-      <div onClick={() => props.toggled()}>
-        <HamburgerIcon id="mobile-nav-icon" />
+      <div id="mobile-nav-icon" onClick={() => props.toggled()}>
+        <HamburgerIcon />
       </div>
       {getAvatarGroup(members)}
       {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}

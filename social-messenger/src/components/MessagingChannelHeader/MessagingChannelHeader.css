@@ -77,11 +77,11 @@
 
 @media screen and (max-width: 640px) {
   #mobile-nav-icon {
-    display: unset;
+    display: block;
   }
 
   .messaging__channel-header__avatars {
-    margin-left: unset;
+    margin-left: 10px;
   }
 }
 
