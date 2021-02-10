@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Avatar, Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -18,7 +18,6 @@ import {
 
 import { getRandomImage } from './assets';
 
-const image = require('./assets/stream.png');
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
@@ -36,27 +35,13 @@ const sort = {
 const chatClient = StreamChat.getInstance(apiKey);
 chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
 
-function getWindowWidth() {
-  const { innerWidth: width } = window;
-  return width;
-}
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [theme, setTheme] = useState('dark');
-  const [windowWidth, setWindowWidth] = useState(getWindowWidth());
-  const [showMessages, setShowMessages] = useState(false);
+  const [isMobileNavVisible, setMobileNav] = useState(false);
 
   useChecklist(chatClient, targetOrigin);
-
-  useEffect(() => {
-    function handleResize() {
-      setWindowWidth(getWindowWidth());
-    }
-    window.addEventListener('resize', handleResize);
-
-    return () => window.removeEventListener('resize', handleResize);
-  }, [windowWidth]);
 
   useEffect(() => {
     const handleThemeChange = ({ data, origin }) => {
@@ -72,62 +57,29 @@ const App = () => {
     return () => window.removeEventListener('message', handleThemeChange);
   }, []);
 
-  const getMobileView = () => {
-    if (isCreating) {
-      return (
-        <div>
-          <div id="content-mobile" onClick={() => {
-            setIsCreating(false);
-            setShowMessages(false);
-          }}>
-            <Avatar className='mobile-header-image' image={image} size={40} />
-          </div>
-          <Channel maxNumberOfFiles={10} multipleUploads={true}>
-            <CreateChannel onClose={() => setIsCreating(false)} />
-          </Channel>
-        </div>
-      )
+  useEffect(() => {
+    if (!isMobileNavVisible) {
+      // setTimeout(() => { 
+      //   setMobileNav(false), 650
+      // });
+      const mobileChannelList = document.querySelector('#mobileChannelList');
+      mobileChannelList.classList.remove('show');
+      document.body.style.overflow = 'auto';
     }
-
-    if (showMessages) {
-      return (
-        <div>
-          <div id="content-mobile" onClick={() => {
-            setShowMessages(false);
-            setIsCreating(false);
-          }}>
-            <Avatar className='mobile-header-image' image={image} size={40} />
-          </div>
-          <Channel className='mobile' maxNumberOfFiles={10} multipleUploads={true}>
-            <Window>
-              <MessagingChannelHeader />
-              <MessageList Message={CustomMessage} TypingIndicator={() => null} />
-              <MessageInput focus Input={MessagingInput} />
-            </Window>
-            <MessagingThread />
-          </Channel>
-        </div>
-      )
-    }
-
-    return (
-      <div onClick={() => setShowMessages(true)}>
-      <ChannelList
-        filters={filters}
-        sort={sort}
-        options={options}
-        List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
-        Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
-        />
-      </div>
-
-    )
-  }
+    else { 
+      // setMobileNav(true);
+      const mobileButton = document.querySelector('#mobileHeader');
+      mobileButton.addEventListener('click', function() {
+        const mobileChannelList = document.querySelector('#mobileChannelList');
+        mobileChannelList.classList.add('show');
+        document.body.style.overflow = 'hidden';
+      }, false)
+    };
+  }, [isMobileNavVisible]);
 
   return (
       <Chat client={chatClient} theme={`messaging ${theme}`}>
-        {windowWidth > 640 ?
-        <div>
+        <div id="mobileChannelList" onClick={() => setMobileNav(false)}>
           <ChannelList
             filters={filters}
             sort={sort}
@@ -135,6 +87,11 @@ const App = () => {
             List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
             Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
           />
+        </div>
+        <div>
+          <div id="mobileHeader" onClick={() => setMobileNav(!isMobileNavVisible)}>
+            Mobile Header HERE
+          </div>
           <Channel maxNumberOfFiles={10} multipleUploads={true}>
             {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
             <Window>
@@ -144,9 +101,7 @@ const App = () => {
             </Window>
             <MessagingThread />
           </Channel>
-        </div> : 
-        getMobileView()
-        }
+        </div>
       </Chat>
   );
 };

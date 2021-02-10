@@ -93,25 +93,39 @@ body::-webkit-scrollbar-thumb {
   padding: 20px;
 }
 
-/* All of the mobile Stuff */
-
-div #content-mobile { 
+/* Mobile View */
+#mobileHeader {
   display: none;
 }
 
-div #content-mobile {
+@media screen and (max-width: 640px) {
+  #mobileHeader {
     display: block;
-    /* position: fixed; */
+    color: white;
+  }
+
+  .str-chat-channel-list.messaging {
+    float: unset;
+  }
+
+  #mobileChannelList {
+    width: 100vw;
+    height: 100vh;
+    background-color: #FFE600;
+    position: fixed;
     top: 0;
-    width: 100%
+    left: 0;
+    transform: translate3d(-100vw, 0, 0);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+  }
+  
+  #mobileChannelList.show {
+    transform: translate3d(0vw, 0, 0);
+    z-index: 10;
+  }
 }
 
-div.str-chat__avatar.str-chat__avatar--circle {
-  padding-top: 10px;
-  padding-left:10px;
-}
-
-/* To fix inherited styles */
+/* To fix inherited styles (as per Team and Customer Support apps */
 @media screen and (max-width: 960px) {
   .str-chat-channel-list.messaging {
     position: unset;
