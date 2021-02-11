@@ -14,7 +14,6 @@ import {
   MessagingChannelPreview,
   MessagingInput,
   MessagingThread,
-  // WindowControls,
 } from './components';
 
 import { getRandomImage } from './assets';
@@ -39,6 +38,7 @@ chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userTo
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
+  const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   useChecklist(chatClient, targetOrigin);
@@ -57,9 +57,26 @@ const App = () => {
     return () => window.removeEventListener('message', handleThemeChange);
   }, []);
 
+  useEffect(() => {
+    const mobileChannelList = document.querySelector('#mobile-channel-list');
+    if (isMobileNavVisible) {
+      mobileChannelList.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    } else {
+      mobileChannelList.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+
+  }, [isMobileNavVisible]);
+
+  const toggleMobile = () => {
+    const isVisible = isMobileNavVisible;
+    setMobileNav(!isVisible);
+  }
+
   return (
-    <div>
-      <Chat client={chatClient} theme={`messaging ${theme}`}>
+    <Chat client={chatClient} theme={`messaging ${theme}`}>
+      <div id="mobile-channel-list" onClick={() => toggleMobile()}>
         <ChannelList
           filters={filters}
           sort={sort}
@@ -67,17 +84,19 @@ const App = () => {
           List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
+      </div>
+      <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
           {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
           <Window>
-            <MessagingChannelHeader />
+            <MessagingChannelHeader toggled={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>
           <MessagingThread />
         </Channel>
-      </Chat>
-    </div>
+      </div>
+    </Chat>
   );
 };
 
