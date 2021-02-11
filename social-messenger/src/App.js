@@ -70,8 +70,7 @@ const App = () => {
   }, [isMobileNavVisible]);
 
   const toggleMobile = () => {
-    const isVisible = isMobileNavVisible;
-    setMobileNav(!isVisible);
+    setMobileNav(isMobileNavVisible => !isMobileNavVisible);
   }
 
   return (
