@@ -102,7 +102,6 @@ body::-webkit-scrollbar-thumb {
   #mobile-channel-list {
     width: 100vw;
     height: 100vh;
-    background-color: #FFE600;
     position: fixed;
     top: 0;
     left: 0;
@@ -112,7 +111,7 @@ body::-webkit-scrollbar-thumb {
   
   #mobile-channel-list.show {
     transform: translate3d(0vw, 0, 0);
-    z-index: 10;
+    z-index: 1000;
   }
 }
 
