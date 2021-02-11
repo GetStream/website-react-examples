@@ -25,7 +25,8 @@ const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const filters = { type: 'messaging', name: 'Social Demo' };
+const filters =
+  user === 'summer-brook-2' ? { type: 'messaging', members: { $in: ['summer-brook-2'] } } : { type: 'messaging', name: 'Social Demo' };
 const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
