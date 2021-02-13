@@ -18,10 +18,11 @@
   box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.03);
   transform: matrix(1, 0, 0, 1, 0, 0);
   border-radius: 10px 10px 0px 0px;
-  align-items: center;
   display: flex;
-  padding: 0 10px 0 25px;
   justify-content: space-between;
+  align-items: center;
+  height: 60px;
+  padding: 0 10px 0 25px;
 }
 
 .str-chat.dark .messaging-create-channel header {
@@ -29,11 +30,13 @@
   box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.03);
   color: rgba(255, 255, 255, 0.9);
   border-radius: 10px 10px 0px 0px;
+  height: 60px;
 }
 
 .messaging-create-channel__left {
   display: flex;
   align-items: center;
+  height: 60px;
   max-width: 85%;
 }
 
@@ -56,10 +59,10 @@
 }
 
 .messaging-create-channel__users {
-  display: flex;
-  flex-wrap: wrap;
+  display: -webkit-inline-box;
   margin: 0 8px;
-  max-width: 85%;
+  max-width: 60%;
+  overflow-x: scroll;
 }
 
 .messaging-create-channel__users::-webkit-scrollbar {
@@ -245,6 +248,7 @@
 }
 
 .create-channel-button {
+  position: absolute;
   right: 10px;
   width: 111px;
   height: 40px;
@@ -260,20 +264,44 @@
   cursor: pointer;
 }
 
+.mobile-input-container {
+  display: flex;
+  flex-wrap: wrap;
+}
+
 @media screen and (max-width: 640px) {
-  .messaging-create-channel__user-results {
-    max-width: unset;
+  .str-chat.dark .messaging-create-channel header {
+    height: unset;
+  }
+  .messaging-create-channel header {
+    display: block;
+    height: unset;
+  }
+
+  .mobile-input-container {
+    display: unset;
+    flex-wrap: unset;
   }
 
   .messaging-create-channel__left {
     max-width: unset;
+    height: unset;
   }
 
-  .messaging-create-channel header {
-    display: block;
+  .messaging-create-channel__users {
+    display: flex;
+    flex-wrap: wrap;
+    margin: 0 8px;
+    max-width: 85%;
+    overflow-x: unset;
   }
 
   .create-channel-button {
     margin-bottom: 10px;
+    position: unset;
+  }
+
+  .messaging-create-channel__user-results {
+    max-width: unset;
   }
 }

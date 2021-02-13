@@ -154,7 +154,7 @@ const CreateChannel = ({ onClose }) => {
       <header>
         <div className='messaging-create-channel__left'>
           <div className='messaging-create-channel__left-text'>To: </div>
-          <div>
+          <div className='mobile-input-container'>
             {!!selectedUsers?.length && (
               <div className='messaging-create-channel__users'>
                 {selectedUsers.map((user) => (
