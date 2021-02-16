@@ -86,7 +86,7 @@ const App = () => {
       </div>
       <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
+          {isCreating && <CreateChannel toggled={toggleMobile} onClose={() => setIsCreating(false)} />}
           <Window>
             <MessagingChannelHeader toggled={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />

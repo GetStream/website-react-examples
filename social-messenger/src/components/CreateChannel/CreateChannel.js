@@ -17,7 +17,7 @@ const UserResult = ({ user }) => (
   </li>
 );
 
-const CreateChannel = ({ onClose }) => {
+const CreateChannel = ({ onClose, toggled }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
 
   const [focusedUser, setFocusedUser] = useState(undefined);
@@ -154,7 +154,7 @@ const CreateChannel = ({ onClose }) => {
       <header>
         <div className='messaging-create-channel__left'>
           <div className='messaging-create-channel__left-text'>To: </div>
-          <div className='mobile-input-container'>
+          <div className='users-input-container'>
             {!!selectedUsers?.length && (
               <div className='messaging-create-channel__users'>
                 {selectedUsers.map((user) => (
@@ -176,6 +176,9 @@ const CreateChannel = ({ onClose }) => {
                 className='messaging-create-channel__input'
               />
             </form>
+          </div>
+          <div className='close-mobile-create' onClick={() => toggled()}>
+            <XButton />
           </div>
         </div>
         <button className='create-channel-button' onClick={createChannel}>
