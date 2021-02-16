@@ -76,7 +76,7 @@ const MessagingInput = (props) => {
   return (
     <div className='str-chat__messaging-input'>
       <div
-        className='messaging-input__button'
+        className='messaging-input__button emoji-button'
         role='button'
         aria-roledescription='button'
         onClick={messageInput.openEmojiPicker}

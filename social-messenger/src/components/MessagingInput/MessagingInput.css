@@ -185,3 +185,13 @@ div.rta__autocomplete.str-chat__emojisearch {
   color: rgba(0, 0, 0, 0.9);
   mix-blend-mode: normal;
 }
+
+@media screen and (max-width: 640px) {
+  div.rta__autocomplete.str-chat__emojisearch {
+    width: unset;
+  }
+
+  div.messaging-input__button.emoji-button {
+    display: none;
+  }
+}
