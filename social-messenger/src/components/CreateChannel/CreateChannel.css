@@ -35,9 +35,8 @@
 
 .messaging-create-channel__left {
   display: flex;
+  flex: 1;
   align-items: center;
-  /* height: 60px;
-  max-width: 85%; */
 }
 
 .messaging-create-channel__left form {
@@ -59,9 +58,9 @@
 }
 
 .messaging-create-channel__users {
-  display: -webkit-inline-box;
+  display: flex;
   margin: 0 8px;
-  max-width: 85%;
+  max-width: 95%;
   flex-wrap: wrap;
 }
 
@@ -248,9 +247,8 @@
 }
 
 .create-channel-button {
-  position: absolute;
   right: 10px;
-  width: 111px;
+  max-width: 111px;
   height: 40px;
   border: none;
   outline: none;
@@ -262,6 +260,7 @@
   line-height: 18px;
   color: #ffffff;
   cursor: pointer;
+  flex: 1;
 }
 
 .users-input-container {
@@ -276,6 +275,7 @@
   .str-chat.dark .messaging-create-channel header {
     height: unset;
   }
+
   .messaging-create-channel header {
     display: block;
     height: unset;
@@ -298,22 +298,22 @@
     flex-wrap: wrap;
     margin: 0 8px;
     max-width: 90%;
-    overflow-x: unset;
   }
 
   .create-channel-button {
     margin-bottom: 10px;
-    position: unset;
+    width: 100%;
   }
 
   .messaging-create-channel__user-results {
     max-width: unset;
+    flex: unset;
   }
 
   .close-mobile-create {
     display: unset;
     margin-top: 20px;
-    min-width: 15px;
     cursor: pointer;
+    flex: 1;
   }
 }

@@ -8,6 +8,7 @@ export { HamburgerIcon } from './HamburgerIcon';
 export { LightningBoltSmall } from './LightningBoltSmall';
 export { SendIcon } from './SendIcon';
 export { XButton } from './XButton';
+export { XButtonBackground } from './XButtonBackground';
 
 const randomImages = [
   require('./userImages/photo-1438761681033-6461ffad8d80.jpeg'),

@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { Avatar, ChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
-import { XButton } from '../../assets';
+import { XButton, XButtonBackground } from '../../assets';
 
 import './CreateChannel.css';
 
@@ -178,7 +178,7 @@ const CreateChannel = ({ onClose, toggled }) => {
             </form>
           </div>
           <div className='close-mobile-create' onClick={() => toggled()}>
-            <XButton />
+            <XButtonBackground />
           </div>
         </div>
         <button className='create-channel-button' onClick={createChannel}>
