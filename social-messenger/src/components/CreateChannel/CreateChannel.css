@@ -290,6 +290,14 @@
     justify-content: space-evenly;
   }
 
+  .users-input-container {
+    margin-bottom: unset;
+  }
+
+  .messaging-create-channel__left form {
+    padding-bottom: unset;
+  }
+
   .messaging-create-channel__left-text {
     margin-top: 20px;
   }
