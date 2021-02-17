@@ -17,7 +17,7 @@ const UserResult = ({ user }) => (
   </li>
 );
 
-const CreateChannel = ({ onClose, toggled }) => {
+const CreateChannel = ({ onClose, toggleMobile }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
 
   const [focusedUser, setFocusedUser] = useState(undefined);
@@ -177,7 +177,7 @@ const CreateChannel = ({ onClose, toggled }) => {
               />
             </form>
           </div>
-          <div className='close-mobile-create' onClick={() => toggled()}>
+          <div className='close-mobile-create' onClick={() => toggleMobile()}>
             <XButtonBackground />
           </div>
         </div>

@@ -190,8 +190,4 @@ div.rta__autocomplete.str-chat__emojisearch {
   div.rta__autocomplete.str-chat__emojisearch {
     width: unset;
   }
-
-  div.messaging-input__button.emoji-button {
-    display: none;
-  }
 }

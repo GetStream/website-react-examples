@@ -75,7 +75,7 @@ const App = () => {
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div id="mobile-channel-list" onClick={() => toggleMobile()}>
+      <div id="mobile-channel-list" onClick={toggleMobile}>
         <ChannelList
           filters={filters}
           sort={sort}
@@ -86,9 +86,9 @@ const App = () => {
       </div>
       <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel toggled={toggleMobile} onClose={() => setIsCreating(false)} />}
+          {isCreating && <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />}
           <Window>
-            <MessagingChannelHeader toggled={toggleMobile} />
+            <MessagingChannelHeader toggleMobile={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>

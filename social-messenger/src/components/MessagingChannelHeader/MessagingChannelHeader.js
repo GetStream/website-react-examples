@@ -116,7 +116,7 @@ const MessagingChannelHeader = (props) => {
 
   return (
     <div className='messaging__channel-header'>
-      <div id="mobile-nav-icon" onClick={() => props.toggled()}>
+      <div id="mobile-nav-icon" onClick={() => props.toggleMobile()}>
         <HamburgerIcon />
       </div>
       {getAvatarGroup(members)}
