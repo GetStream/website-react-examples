@@ -21,7 +21,6 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  height: 60px;
   padding: 0 10px 0 25px;
 }
 
@@ -40,9 +39,10 @@
 }
 
 .messaging-create-channel__left form {
-  height: 60px;
+  height: 50px;
   display: flex;
   align-items: center;
+  padding-bottom: 6px;
 }
 
 .messaging-create-channel__left-text {
@@ -264,7 +264,9 @@
 }
 
 .users-input-container {
-  min-width: 85%
+  min-width: 85%;
+  margin-top: 6px;
+  margin-bottom: -6px;
 }
 
 .close-mobile-create {
