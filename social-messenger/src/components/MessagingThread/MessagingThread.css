@@ -127,7 +127,7 @@
 }
 
 @media screen and (max-width: 640px) {
-  .str-chat__thread .str-chat__messaging-input .messaging-input__button .emoji-button {
+  .str-chat__thread .str-chat__messaging-input .messaging-input__button.emoji-button {
     display: none;
   }
 }
