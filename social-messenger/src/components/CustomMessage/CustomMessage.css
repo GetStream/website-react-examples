@@ -166,6 +166,7 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 
   .str-chat__message-simple__actions__action--options {
     display: unset;
+    margin-top: 2px;
   }
 
   .str-chat__message--me .str-chat__message-inner > .str-chat__message-simple__actions, .str-chat__message-simple--me .str-chat__message-inner > .str-chat__message-simple__actions {
