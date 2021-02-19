@@ -1,21 +1,22 @@
 import React, { useContext } from 'react';
 import { Avatar, ChatContext } from 'stream-chat-react';
+import { getCleanImage } from '../../assets';
 
 import './MessagingChannelPreview.css';
 
 const getAvatarGroup = (members) => {
   if (members.length === 1) {
-    return <Avatar image={members[0]?.user.image || undefined} size={40} />;
+    return <Avatar image={getCleanImage(members[0])} size={40} />;
   }
 
   if (members.length === 2) {
     return (
       <div className='channel-preview__avatars two'>
         <span>
-          <Avatar image={members[0]?.user.image || undefined} shape='square' size={40} />
+          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
         </span>
         <span>
-          <Avatar image={members[1]?.user.image || undefined} shape='square' size={40} />
+          <Avatar image={getCleanImage(members[1])} shape='square' size={40} />
         </span>
       </div>
     );
@@ -25,11 +26,11 @@ const getAvatarGroup = (members) => {
     return (
       <div className='channel-preview__avatars three'>
         <span>
-          <Avatar image={members[0]?.user.image || undefined} shape='square' size={40} />
+          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
         </span>
         <span>
-          <Avatar image={members[1]?.user.image || undefined} shape='square' size={20} />
-          <Avatar image={members[2]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[1])} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[2])} shape='square' size={20} />
         </span>
       </div>
     );
@@ -39,12 +40,12 @@ const getAvatarGroup = (members) => {
     return (
       <div className='channel-preview__avatars'>
         <span>
-          <Avatar image={members[members.length - 1]?.user.image || undefined} shape='square' size={20} />
-          <Avatar image={members[members.length - 2]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[members.length - 1])} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[members.length - 2])} shape='square' size={20} />
         </span>
         <span>
-          <Avatar image={members[members.length - 3]?.user.image || undefined} shape='square' size={20} />
-          <Avatar image={members[members.length - 4]?.user.image || undefined} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[members.length - 3])} shape='square' size={20} />
+          <Avatar image={getCleanImage(members[members.length - 4])} shape='square' size={20} />
         </span>
       </div>
     );

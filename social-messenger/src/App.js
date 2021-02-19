@@ -23,7 +23,7 @@ const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
-const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false
+const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
 
 const filters = noChannelNameFilter ? { type: 'messaging', members: { $in: [user] } } : { type: 'messaging', name: 'Social Demo' };
 const options = { state: true, watch: true, presence: true, limit: 8 };
@@ -66,16 +66,13 @@ const App = () => {
       mobileChannelList.classList.remove('show');
       document.body.style.overflow = 'auto';
     }
-
   }, [isMobileNavVisible]);
 
-  const toggleMobile = () => {
-    setMobileNav(isMobileNavVisible => !isMobileNavVisible);
-  }
+  const toggleMobile = () => setMobileNav(!isMobileNavVisible);
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div id="mobile-channel-list" onClick={toggleMobile}>
+      <div id='mobile-channel-list' onClick={toggleMobile}>
         <ChannelList
           filters={filters}
           sort={sort}

@@ -42,3 +42,13 @@ export const getRandomImage = () => {
   const index = Math.floor(Math.random() * 24);
   return randomImages[index];
 };
+
+export const getCleanImage = (member) => {
+  if (!member?.user.image) return getRandomImage();
+
+  if (member?.user.image.includes('jen-avatar')) {
+    return randomImages[11];
+  }
+
+  return member.user.image;
+};
