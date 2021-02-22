@@ -59,10 +59,10 @@ const App = () => {
 
   useEffect(() => {
     const mobileChannelList = document.querySelector('#mobile-channel-list');
-    if (isMobileNavVisible) {
+    if (isMobileNavVisible && mobileChannelList) {
       mobileChannelList.classList.add('show');
       document.body.style.overflow = 'hidden';
-    } else {
+    } else if (!isMobileNavVisible && mobileChannelList) {
       mobileChannelList.classList.remove('show');
       document.body.style.overflow = 'auto';
     }
