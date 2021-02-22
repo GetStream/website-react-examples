@@ -323,7 +323,7 @@
 /* ----------------------------------------- Emoji Reaction Selector ----------------------------------------- */
 
 .str-chat__message-livestream .str-chat__reaction-selector {
-  top: -54px;
+  top: -52px;
   max-height: 40px;
   border-radius: 10px;
   background: white;
