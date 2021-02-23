@@ -53,7 +53,7 @@ const App = () => {
     const handleColorChange = (color) => {
       const root = document.documentElement;
       if (color.length && color.length === 7) {
-        root.style.setProperty('--primary-color', color);
+        root.style.setProperty('--primary-color', `${color}E6`);
         root.style.setProperty('--primary-color-alpha', `${color}1A`);
       }
     };
