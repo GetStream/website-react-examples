@@ -92,3 +92,17 @@
 .str-chat.dark .channel-header__edit-input {
   color: #ffffff;
 }
+
+#mobile-nav-icon {
+  display: none;
+}
+
+@media screen and (max-width: 640px) {
+  #mobile-nav-icon {
+    display: block;
+  }
+
+  .messaging__channel-header__avatars {
+    margin-left: 10px;
+  }
+}

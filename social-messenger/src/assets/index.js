@@ -4,9 +4,11 @@ export { CloseThreadIcon } from './CloseThreadIcon';
 export { CommandIcon } from './CommandIcon';
 export { CreateChannelIcon } from './CreateChannelIcon';
 export { EmojiIcon } from './EmojiIcon';
+export { HamburgerIcon } from './HamburgerIcon';
 export { LightningBoltSmall } from './LightningBoltSmall';
 export { SendIcon } from './SendIcon';
 export { XButton } from './XButton';
+export { XButtonBackground } from './XButtonBackground';
 
 const randomImages = [
   require('./userImages/photo-1438761681033-6461ffad8d80.jpeg'),
@@ -39,4 +41,14 @@ const randomImages = [
 export const getRandomImage = () => {
   const index = Math.floor(Math.random() * 24);
   return randomImages[index];
+};
+
+export const getCleanImage = (member) => {
+  if (!member?.user.image) return getRandomImage();
+
+  if (member?.user.image.includes('jen-avatar')) {
+    return randomImages[11];
+  }
+
+  return member.user.image;
 };

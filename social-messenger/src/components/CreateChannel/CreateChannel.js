@@ -2,7 +2,7 @@ import React, { useCallback, useContext, useEffect, useRef, useState } from 'rea
 import { Avatar, ChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
-import { XButton } from '../../assets';
+import { XButton, XButtonBackground } from '../../assets';
 
 import './CreateChannel.css';
 
@@ -17,7 +17,7 @@ const UserResult = ({ user }) => (
   </li>
 );
 
-const CreateChannel = ({ onClose }) => {
+const CreateChannel = ({ onClose, toggleMobile }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
 
   const [focusedUser, setFocusedUser] = useState(undefined);
@@ -154,27 +154,32 @@ const CreateChannel = ({ onClose }) => {
       <header>
         <div className='messaging-create-channel__left'>
           <div className='messaging-create-channel__left-text'>To: </div>
-          {!!selectedUsers?.length && (
-            <div className='messaging-create-channel__users'>
-              {selectedUsers.map((user) => (
-                <div className='messaging-create-channel__user' onClick={() => removeUser(user)} key={user.id}>
-                  <div className='messaging-create-channel__user-text'>{user.name}</div>
-                  <XButton />
-                </div>
-              ))}
-            </div>
-          )}
-          <form onSubmit={addUser}>
-            <input
-              autoFocus
-              ref={inputRef}
-              value={inputText}
-              onChange={(e) => setInputText(e.target.value)}
-              placeholder={!selectedUsers.length ? 'Start typing for suggestions' : ''}
-              type='text'
-              className='messaging-create-channel__input'
-            />
-          </form>
+          <div className='users-input-container'>
+            {!!selectedUsers?.length && (
+              <div className='messaging-create-channel__users'>
+                {selectedUsers.map((user) => (
+                  <div className='messaging-create-channel__user' onClick={() => removeUser(user)} key={user.id}>
+                    <div className='messaging-create-channel__user-text'>{user.name}</div>
+                    <XButton />
+                  </div>
+                ))}
+              </div>
+            )}
+            <form onSubmit={addUser}>
+              <input
+                autoFocus
+                ref={inputRef}
+                value={inputText}
+                onChange={(e) => setInputText(e.target.value)}
+                placeholder={!selectedUsers.length ? 'Start typing for suggestions' : ''}
+                type='text'
+                className='messaging-create-channel__input'
+              />
+            </form>
+          </div>
+          <div className='close-mobile-create' onClick={() => toggleMobile()}>
+            <XButtonBackground />
+          </div>
         </div>
         <button className='create-channel-button' onClick={createChannel}>
           Start chat

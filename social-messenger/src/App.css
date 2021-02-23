@@ -27,7 +27,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .str-chat.str-chat-channel.messaging {
-  /* border-radius: 16px; */
   background: #fafafa;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.06), 0px 2px 30px rgba(0, 0, 0, 0.1);
 }
@@ -38,8 +37,6 @@ body::-webkit-scrollbar-thumb {
 }
 
 .str-chat.str-chat-channel-list.messaging {
-  /* border-top-left-radius: 16px; */
-  /* border-bottom-left-radius: 16px; */
   background: #fafafa;
 }
 
@@ -47,17 +44,9 @@ body::-webkit-scrollbar-thumb {
   background: #212326 !important;
 }
 
-.str-chat-channel-list {
-  /* height: 800px; */
-}
-
-.str-chat-channel {
-  /* height: 800px; */
-}
-
-.str-chat-channel .str-chat__container {
+/* .str-chat-channel .str-chat__container {
   padding: 30px 30px 0 0;
-}
+} */
 
 .str-chat-channel.messaging .str-chat__main-panel {
   padding: 0 !important;
@@ -102,4 +91,40 @@ body::-webkit-scrollbar-thumb {
 
 .str-chat__message--system {
   padding: 20px;
+}
+
+/* Mobile View */
+@media screen and (max-width: 640px) {
+  .str-chat-channel-list.messaging {
+    float: unset;
+  }
+
+  #mobile-channel-list {
+    width: 100vw;
+    height: 100vh;
+    position: fixed;
+    top: 0;
+    left: 0;
+    transform: translate3d(-100vw, 0, 0);
+    transition: transform .3s cubic-bezier(0, .52, 0, 1);
+  }
+  
+  #mobile-channel-list.show {
+    transform: translate3d(0vw, 0, 0);
+    z-index: 1000;
+  }
+}
+
+/* To fix inherited styles (as per Team and Customer Support apps */
+@media screen and (max-width: 960px) {
+  .str-chat-channel-list.messaging {
+    position: unset;
+    left: unset;
+    top: unset;
+    z-index: unset;
+    min-height: unset;
+    overflow-y: unset;
+    box-shadow: unset;
+    transition: unset;
+  }
 }

@@ -14,7 +14,6 @@ import {
   MessagingChannelPreview,
   MessagingInput,
   MessagingThread,
-  // WindowControls,
 } from './components';
 
 import { getRandomImage } from './assets';
@@ -24,7 +23,7 @@ const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
-const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false
+const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
 
 const filters = noChannelNameFilter ? { type: 'messaging', members: { $in: [user] } } : { type: 'messaging', name: 'Social Demo' };
 const options = { state: true, watch: true, presence: true, limit: 8 };
@@ -39,6 +38,7 @@ chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userTo
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
+  const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   useChecklist(chatClient, targetOrigin);
@@ -57,9 +57,22 @@ const App = () => {
     return () => window.removeEventListener('message', handleThemeChange);
   }, []);
 
+  useEffect(() => {
+    const mobileChannelList = document.querySelector('#mobile-channel-list');
+    if (isMobileNavVisible && mobileChannelList) {
+      mobileChannelList.classList.add('show');
+      document.body.style.overflow = 'hidden';
+    } else if (!isMobileNavVisible && mobileChannelList) {
+      mobileChannelList.classList.remove('show');
+      document.body.style.overflow = 'auto';
+    }
+  }, [isMobileNavVisible]);
+
+  const toggleMobile = () => setMobileNav(!isMobileNavVisible);
+
   return (
-    <div>
-      <Chat client={chatClient} theme={`messaging ${theme}`}>
+    <Chat client={chatClient} theme={`messaging ${theme}`}>
+      <div id='mobile-channel-list' onClick={toggleMobile}>
         <ChannelList
           filters={filters}
           sort={sort}
@@ -67,17 +80,19 @@ const App = () => {
           List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
+      </div>
+      <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel onClose={() => setIsCreating(false)} />}
+          {isCreating && <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />}
           <Window>
-            <MessagingChannelHeader />
+            <MessagingChannelHeader toggleMobile={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>
           <MessagingThread />
         </Channel>
-      </Chat>
-    </div>
+      </div>
+    </Chat>
   );
 };
 
