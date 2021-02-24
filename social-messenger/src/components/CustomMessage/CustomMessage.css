@@ -161,7 +161,7 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 
 @media screen and (max-width: 640px) {
   /* REACTIONS */
-  
+
   .str-chat__message-simple__actions__action--thread, .str-chat__message-simple__actions__action--reactions {
     display: flex;
   }
@@ -182,6 +182,10 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 
   /* EDIT MESSAGE */
 
+  .str-chat__modal.str-chat__modal--open {
+    padding-top: 200px;
+  }
+
   .str-chat__modal__inner {
     max-width: 80vw;
   }
@@ -193,13 +197,5 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 
   .str-chat__modal__close-button {
     left: 75vw;
-  }
-
-  .str-chat__message-team-form-footer {
-    justify-content: flex-end;
-  }
-
-  .str-chat__edit-message-form-options {
-    display: none;
   }
 }

@@ -85,7 +85,7 @@ const App = () => {
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
           {isCreating && <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />}
           <Window>
-            <MessagingChannelHeader toggleMobile={toggleMobile} />
+            <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />
             <MessageInput focus Input={MessagingInput} />
           </Window>
