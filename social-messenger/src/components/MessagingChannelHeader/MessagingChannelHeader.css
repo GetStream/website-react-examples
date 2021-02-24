@@ -100,6 +100,13 @@
 @media screen and (max-width: 640px) {
   #mobile-nav-icon {
     display: block;
+    padding-left: 5px;
+  }
+
+  #mobile-nav-icon.light svg path {
+    fill: darkslategrey;
+    stroke: darkslategrey;
+    fill-opacity: 60%;
   }
 
   .messaging__channel-header__avatars {
