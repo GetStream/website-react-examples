@@ -76,7 +76,7 @@ export const ChannelSearch = () => {
           name: { $autocomplete: text },
         },
         {},
-        { limit: 6 },
+        { limit: 5 },
       );
 
       const userResponse = client.queryUsers(
@@ -85,7 +85,7 @@ export const ChannelSearch = () => {
           $and: [{ name: { $autocomplete: text } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
         },
         { id: 1 },
-        { limit: 6 },
+        { limit: 5 },
       );
 
       const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
