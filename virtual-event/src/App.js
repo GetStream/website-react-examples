@@ -32,27 +32,27 @@ const i18nInstance = new Streami18n({
 });
 
 const chatClient = StreamChat.getInstance(apiKey);
-
+chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
 const App = () => {
   const [channel, setChannel] = useState(null);
   const [currentTheme, setCurrentTheme] = useState('light');
 
   useEffect(() => {
-    const getChannel = async () => {
-      await chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
+    if (!channel) {
+      const getChannel = async () => {
+        const newChannel = await chatClient.channel('livestream', channelName, {
+          name: 'Virtual Event Demo',
+        });
 
-      const newChannel = await chatClient.channel('livestream', channelName, {
-        name: 'Virtual Event Demo',
-      });
+        if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
 
-      if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
+        await newChannel.watch();
+        setChannel(newChannel);
+      };
 
-      await newChannel.watch();
-      setChannel(newChannel);
-    };
-
-    getChannel();
-  }, []);
+      getChannel();
+    }
+  }, [channel]);
 
   useEffect(() => {
     const handleThemeChange = (e) => {
