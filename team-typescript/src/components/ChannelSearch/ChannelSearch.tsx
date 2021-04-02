@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import { useCallback, useEffect, useState } from 'react';
+import { useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
 import './ChannelSearch.css';
@@ -7,15 +7,17 @@ import './ChannelSearch.css';
 import { ResultsDropdown } from './ResultsDropdown';
 
 import { SearchIcon } from '../../assets';
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type { Channel, UserResponse } from 'stream-chat';
 
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useContext(ChatContext);
+  const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
-  const [allChannels, setAllChannels] = useState([]);
-  const [teamChannels, setTeamChannels] = useState([]);
-  const [directChannels, setDirectChannels] = useState([]);
+  const [allChannels, setAllChannels] = useState<(Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> & UserResponse<TeamUserType>)[] | undefined>();
+  const [teamChannels, setTeamChannels] = useState<Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>[] | undefined>();
+  const [directChannels, setDirectChannels] = useState<UserResponse<TeamUserType>[] | undefined>();
 
-  const [focused, setFocused] = useState(undefined);
+  const [focused, setFocused] = useState<number>();
   const [focusedId, setFocusedId] = useState('');
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
@@ -24,17 +26,17 @@ export const ChannelSearch = () => {
     (event) => {
       if (event.key === 'ArrowDown') {
         setFocused((prevFocused) => {
-          if (prevFocused === undefined) return 0;
+          if (prevFocused === undefined || allChannels === undefined) return 0;
           return prevFocused === allChannels.length - 1 ? 0 : prevFocused + 1;
         });
       } else if (event.key === 'ArrowUp') {
         setFocused((prevFocused) => {
-          if (prevFocused === undefined) return 0;
+          if (prevFocused === undefined || allChannels === undefined) return 0;
           return prevFocused === 0 ? allChannels.length - 1 : prevFocused - 1;
         });
       } else if (event.keyCode === 13) {
         event.preventDefault();
-        setActiveChannel(allChannels[focused]);
+        if (allChannels !== undefined && focused !== undefined) setActiveChannel(allChannels[focused]);
         setFocused(undefined);
         setFocusedId('');
         setQuery('');
@@ -58,17 +60,17 @@ export const ChannelSearch = () => {
   }, [query]);
 
   useEffect(() => {
-    if (focused >= 0) {
-      setFocusedId(allChannels[focused]?.id);
+    if ((focused && focused >= 0) && allChannels) {
+      setFocusedId(allChannels[focused].id || '');
     }
   }, [allChannels, focused]);
 
-  const setChannel = (channel) => {
+  const setChannel = (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>) => {
     setQuery('');
     setActiveChannel(channel);
   };
 
-  const getChannels = async (text) => {
+  const getChannels = async (text: string) => {
     try {
       const channelResponse = client.queryChannels(
         {
@@ -81,7 +83,7 @@ export const ChannelSearch = () => {
 
       const userResponse = client.queryUsers(
         {
-          id: { $ne: client.userID },
+          id: { $ne: client.userID || '' },
           $and: [{ name: { $autocomplete: text } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
         },
         { id: 1 },
@@ -105,7 +107,7 @@ export const ChannelSearch = () => {
     trailing: true,
   });
 
-  const onSearch = (event) => {
+  const onSearch = (event: any) => {
     event.preventDefault();
 
     setLoading(true);

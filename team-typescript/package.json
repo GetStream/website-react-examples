@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@types/emoji-mart": "^3.0.4",
+    "@types/lodash.debounce": "^4.0.6",
     "@types/react-dom": "^17.0.3",
     "lodash.debounce": "^4.0.8",
     "react": "^17.0.1",
@@ -37,4 +38,3 @@
     "@types/styled-components": "^5.1.9"
   }
 }
-
