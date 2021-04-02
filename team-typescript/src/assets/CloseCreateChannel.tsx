@@ -1,6 +1,11 @@
-import React from 'react';
+type CloseCreateChannelProps = {
+  setIsCreating?: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditing?: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
-export const CloseCreateChannel = ({ setIsCreating, setIsEditing }) => (
+export const CloseCreateChannel = (props: CloseCreateChannelProps) => {
+  const { setIsCreating, setIsEditing } = props;
+  return (
   <svg
     width="32"
     height="32"
@@ -17,4 +22,5 @@ export const CloseCreateChannel = ({ setIsCreating, setIsEditing }) => (
       fill="var(--primary-color)"
     />
   </svg>
-);
+  )
+};

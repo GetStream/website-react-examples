@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import { MessageList, Thread, Window } from 'stream-chat-react';
+import React, { SetStateAction, useState } from 'react';
+import { MessageList, Thread, ThreadHeaderProps, Window } from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
@@ -10,7 +10,18 @@ import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 
 import { CloseThreadIcon } from '../../assets';
 
-const ThreadHeader = ({ closeThread, setPinsOpen, thread }) => {
+type ChannelInnerProps = {
+  pinsOpen?: boolean;
+  setIsEditing?: React.Dispatch<SetStateAction<boolean>>;
+  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+}
+
+type TeamThreadHeaderProps = ThreadHeaderProps & {
+  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+}
+
+const ThreadHeader = (props: TeamThreadHeaderProps) => {
+  const { closeThread, setPinsOpen, thread } = props;
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
     if (thread.reply_count === 1) return '1 reply';
@@ -28,7 +39,7 @@ const ThreadHeader = ({ closeThread, setPinsOpen, thread }) => {
   );
 };
 
-export const ChannelInner = (props) => {
+export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
 
   const [pinnedMessages, setPinnedMessages] = useState({});

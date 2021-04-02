@@ -1,10 +1,19 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import './TeamChannelList.css';
 
 import { AddChannel } from '../../assets';
 
-const ChannelList = (props) => {
+import type { ChannelListTeamProps } from 'stream-chat-react';
+
+export type TeamChannelListProps = ChannelListTeamProps & {
+  setCreateType: React.Dispatch<React.SetStateAction<string>>;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  type: string;
+}
+
+const ChannelList: React.FC<PropsWithChildren<TeamChannelListProps>> = (props) => {
   const {
     children,
     error = false,
@@ -21,21 +30,27 @@ const ChannelList = (props) => {
    * which by default adds the channel in question to children on each list.
    */
   let newChildren = children;
-  let childArray;
+  let childArray: React.ReactNode;
 
   if (type === 'team') {
+    // TODO: set up event listener on new.message, check channel type to add to appropriate channel type
+    // @ts-expect-error
     childArray = newChildren?.props?.children?.filter(
+      // @ts-expect-error
       (child) => child.props.channel.type === 'team',
     );
   }
 
   if (type === 'messaging') {
+    // @ts-expect-error
     childArray = newChildren?.props?.children?.filter(
+      // @ts-expect-error
       (child) => child.props.channel.type === 'messaging',
     );
   }
 
   newChildren = {
+    // @ts-expect-error
     ...newChildren,
     props: {
       children: childArray,

@@ -1,5 +1,5 @@
-import React, { useEffect, useState } from 'react';
-import { StreamChat } from 'stream-chat';
+import { useEffect, useState } from 'react';
+import { LiteralStringForUnion, StreamChat, ChannelFilters, ChannelSort } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
 
@@ -26,11 +26,19 @@ const i18nInstance = new Streami18n({
   },
 });
 
-const filters = [{ type: 'team' }, { type: 'messaging' }];
-const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort = { last_message_at: -1, updated_at: -1 };
+export type TeamAttachmentType = Record<string, unknown>;
+export type TeamChannelType = Record<string, unknown>;
+export type TeamCommandType = LiteralStringForUnion;
+export type TeamEventType = Record<string, unknown>;
+export type TeamMessageType = Record<string, unknown>;
+export type TeamReactionType = Record<string, unknown>;
+export type TeamUserType = Record<string, unknown>;
 
-const client = StreamChat.getInstance(apiKey!);
+const filters: ChannelFilters[] = [{ type: 'team' }, { type: 'messaging' }];
+const options = { state: true, watch: true, presence: true, limit: 3 };
+const sort: ChannelSort<TeamChannelType> = { last_message_at: -1, updated_at: -1 };
+
+const client = StreamChat.getInstance<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>(apiKey!);
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
@@ -57,8 +65,7 @@ const App = () => {
     <>
       <div className='app__wrapper'>
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
-          <ChannelListContainer
-            {...{
+          <ChannelListContainer {...{
               isCreating,
               filters,
               options,

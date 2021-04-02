@@ -1,5 +1,5 @@
-import React from 'react';
-import { ChannelList } from 'stream-chat-react';
+import type { ChannelFilters } from 'stream-chat';
+import { ChannelList, ChannelListProps } from 'stream-chat-react';
 
 import './ChannelListContainer.css';
 
@@ -8,6 +8,13 @@ import { TeamChannelList } from '../TeamChannelList/TeamChannelList';
 import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
 
 import { SideBarFlag, SideBarLogo } from '../../assets';
+
+type ChannelListTeamsProps = Omit<ChannelListProps, 'filters'> & {
+  setCreateType: React.Dispatch<React.SetStateAction<string>>;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  filters: ChannelFilters[];
+}
 
 const SideBar = () => (
   <div className="channel-list__sidebar">
@@ -30,7 +37,7 @@ const CompanyHeader = () => (
   </div>
 );
 
-export const ChannelListContainer = (props) => {
+export const ChannelListContainer: React.FC<ChannelListTeamsProps> = (props) => {
   const {
     filters,
     options,

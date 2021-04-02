@@ -1,11 +1,8 @@
-import React from 'react';
+import type { TeamChannelListProps } from '../components/TeamChannelList/TeamChannelList';
 
-export const AddChannel = ({
-  setCreateType,
-  setIsCreating,
-  setIsEditing,
-  type,
-}) => (
+export const AddChannel = (props: TeamChannelListProps) => {
+  const { setCreateType, setIsCreating, setIsEditing, type } = props;
+  return (
   <svg
     width="14"
     height="14"
@@ -23,5 +20,5 @@ export const AddChannel = ({
       fill="white"
       fillOpacity="0.66"
     />
-  </svg>
-);
+  </svg>)
+};

@@ -1,14 +1,28 @@
-import React, { useContext, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React, { useState } from 'react';
+import type { ChannelFilters } from 'stream-chat';
+import { useChatContext } from 'stream-chat-react';
 
 import './CreateChannel.css';
 
 import { UserList } from './UserList';
 
 import { CloseCreateChannel } from '../../assets';
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
-const ChannelNameInput = ({ channelName = '', setChannelName }) => {
-  const handleChange = (event) => {
+type CreateChannelProps = {
+  createType: string;
+  filters: ChannelFilters[];
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+type ChannelNameInputProps = {
+  channelName: string;
+  setChannelName: (value: React.SetStateAction<string>) => void;
+}
+
+const ChannelNameInput = (props: ChannelNameInputProps) => {
+  const { channelName = '', setChannelName } = props;
+  const handleChange = (event: { preventDefault: () => void; target: { value: any; }; }) => {
     event.preventDefault();
     setChannelName(event.target.value);
   };
@@ -22,14 +36,16 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   );
 };
 
-export const CreateChannel = ({ createType, filters, setIsCreating }) => {
-  const { client, setActiveChannel } = useContext(ChatContext);
+export const CreateChannel = (props: CreateChannelProps) => {
+  const { createType, filters, setIsCreating } = props;
+  const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   const [channelName, setChannelName] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState([client.userID]);
+  const [selectedUsers, setSelectedUsers] = useState([client.userID || '']);
 
-  const createChannel = async (event) => {
+  const createChannel = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
+    if (!selectedUsers.length) return;
 
     const newChannel = await client.channel(createType, channelName, {
       name: channelName,
@@ -40,7 +56,7 @@ export const CreateChannel = ({ createType, filters, setIsCreating }) => {
 
     setChannelName('');
     setIsCreating(false);
-    setSelectedUsers([client.userID]);
+    setSelectedUsers([client.userID || '']);
     setActiveChannel(newChannel);
   };
 
