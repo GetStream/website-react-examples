@@ -1,10 +1,10 @@
-import React, { useContext } from 'react';
-import { ChannelContext } from 'stream-chat-react';
+import { useChannelContext } from 'stream-chat-react';
 
 import './TeamTypingIndicator.css';
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
-export const TeamTypingIndicator = ({ type }) => {
-  const { client, typing } = useContext(ChannelContext);
+export const TeamTypingIndicator = (type: string) => {
+  const { client, typing } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   if (!client || !typing) return null;
 
@@ -22,7 +22,7 @@ export const TeamTypingIndicator = ({ type }) => {
 
   const users = Object.values(typing)
     .filter(({ user }) => user?.id !== client.user?.id)
-    .map(({ user }) => user.name || user.id);
+    .map(({ user }) => user?.name || user?.id);
 
   if (!users.length) return null;
 
