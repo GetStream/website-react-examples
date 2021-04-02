@@ -28,7 +28,7 @@ const SearchResult = (props: SearchResultProps) => {
         className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
       >
         <div className='result-hashtag'>#</div>
-        <p className='channel-search__result-text'>{channel.data.name}</p>
+        {/* <p className='channel-search__result-text'>{channel.data.name}</p> */}
       </div>
     );
   }
@@ -58,7 +58,7 @@ const SearchResult = (props: SearchResultProps) => {
     >
       <div className='channel-search__result-user'>
         <Avatar image={undefined} size={24} />     
-        <p className='channel-search__result-text'>{channel.name || channel.id || 'Johnny Blaze'}</p>
+        {/* <p className='channel-search__result-text'>{channel.name || channel.id || 'Johnny Blaze'}</p> */}
       </div>
     </div>
   );

@@ -67,7 +67,7 @@ export const ChannelSearch = () => {
 
   const setChannel = (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>) => {
     setQuery('');
-    setActiveChannel(channel);
+    setActiveChannel(channel as Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>);
   };
 
   const getChannels = async (text: string) => {
@@ -94,6 +94,7 @@ export const ChannelSearch = () => {
 
       if (channels.length) setTeamChannels(channels);
       if (users.length) setDirectChannels(users);
+      // @ts-expect-error 
       setAllChannels(channels.concat(users));
     } catch (e) {
       setQuery('');
