@@ -55,4 +55,6 @@
   .close-thread-icon {
     cursor: pointer;
     margin-right: 10px;
+    border-radius: 50%;
+    border: 0;
   }

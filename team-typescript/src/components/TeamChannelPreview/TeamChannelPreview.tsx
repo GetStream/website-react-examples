@@ -4,7 +4,7 @@ import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventTyp
 
 import './TeamChannelPreview.css';
 
-// import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
+import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
 type TeamChannelPreviewProps = ChannelPreviewProps<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
@@ -29,7 +29,7 @@ export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
         <div className='channel-preview__item single'>
           <Avatar image={member?.user?.image || undefined} size={24} />
           <p>{members[0]?.user?.name || members[0]?.user?.id || defaultName}</p>
-          {/* <TeamTypingIndicator type='list' /> */}
+          <TeamTypingIndicator type='list' />
         </div>
       );
     }

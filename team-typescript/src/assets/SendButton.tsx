@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const SendButton = () => (
   <svg
     width="14"

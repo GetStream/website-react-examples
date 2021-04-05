@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const ChannelInfo = () => (
   <svg
     width="18"

@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const PinIcon = () => (
   <svg
     width="14"

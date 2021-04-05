@@ -1,5 +1,3 @@
-import React from 'react';
-
 export const InviteIcon = () => (
   <div style={{ marginLeft: '2px' }}>
     <svg
