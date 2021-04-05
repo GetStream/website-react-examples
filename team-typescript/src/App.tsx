@@ -32,7 +32,7 @@ export type TeamCommandType = LiteralStringForUnion;
 export type TeamEventType = Record<string, unknown>;
 export type TeamMessageType = Record<string, unknown>;
 export type TeamReactionType = Record<string, unknown>;
-export type TeamUserType = Record<string, unknown>;
+export type TeamUserType = { image?: string };
 
 const filters: ChannelFilters[] = [{ type: 'team' }, { type: 'messaging' }];
 const options = { state: true, watch: true, presence: true, limit: 3 };

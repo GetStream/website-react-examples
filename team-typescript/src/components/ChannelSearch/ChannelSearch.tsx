@@ -13,7 +13,7 @@ import type { Channel, UserResponse } from 'stream-chat';
 export const ChannelSearch = () => {
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
-  const [allChannels, setAllChannels] = useState<(Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> & UserResponse<TeamUserType>)[] | undefined>();
+  const [allChannels, setAllChannels] = useState<(ConcatArray<Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>>) | undefined>();
   const [teamChannels, setTeamChannels] = useState<Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>[] | undefined>();
   const [directChannels, setDirectChannels] = useState<UserResponse<TeamUserType>[] | undefined>();
 
@@ -36,6 +36,7 @@ export const ChannelSearch = () => {
         });
       } else if (event.keyCode === 13) {
         event.preventDefault();
+        // @ts-expect-error
         if (allChannels !== undefined && focused !== undefined) setActiveChannel(allChannels[focused]);
         setFocused(undefined);
         setFocusedId('');
@@ -94,7 +95,7 @@ export const ChannelSearch = () => {
 
       if (channels.length) setTeamChannels(channels);
       if (users.length) setDirectChannels(users);
-      // @ts-expect-error 
+      // @ts-expect-error
       setAllChannels(channels.concat(users));
     } catch (e) {
       setQuery('');
