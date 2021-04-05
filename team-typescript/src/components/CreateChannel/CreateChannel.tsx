@@ -22,7 +22,7 @@ type ChannelNameInputProps = {
 
 const ChannelNameInput = (props: ChannelNameInputProps) => {
   const { channelName = '', setChannelName } = props;
-  const handleChange = (event: { preventDefault: () => void; target: { value: any; }; }) => {
+  const handleChange = (event: { preventDefault: () => void; target: { value: string; }; }) => {
     event.preventDefault();
     setChannelName(event.target.value);
   };
