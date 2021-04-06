@@ -3,7 +3,7 @@ import { Avatar, ChannelPreviewUIComponentProps, ChatContext, ChatContextValue }
 
 import './MessagingChannelPreview.css';
 
-import { Channel, ChannelMemberResponse } from 'stream-chat';
+import type { Channel, ChannelMemberResponse } from 'stream-chat';
 
 import { getCleanImage } from '../../assets';
 

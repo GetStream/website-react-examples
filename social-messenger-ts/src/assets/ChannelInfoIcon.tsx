@@ -1,5 +1,3 @@
-import React from 'react';
-
 type ChannelInfoIconProps = {
   isEditing: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;

@@ -6,7 +6,7 @@ import { XButton, XButtonBackground } from '../../assets';
 
 import './CreateChannel.css';
 import type { AttachmentType, ChannelType, CommandType, EventType, MessageType, ReactionType, UserType } from '../../App';
-import { UserResponse } from 'stream-chat';
+import type { UserResponse } from 'stream-chat';
 
 const UserResult = ({ user }: { user: UserResponse<UserType> }) => (
   <li className='messaging-create-channel__user-result'>
@@ -179,6 +179,7 @@ const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleM
                 ))}
               </div>
             )}
+            {/* @ts-expect-error */}
             <form onSubmit={() => addUser()}>
               <input
                 autoFocus
