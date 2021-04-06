@@ -10,7 +10,7 @@ import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventTyp
 
 type UserListProps = {
   filters: ChannelFilters[]
-  setSelectedUsers: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
 }
 
 interface ListContainerProps { };
@@ -32,7 +32,7 @@ const ListContainer = (props: PropsWithChildren<ListContainerProps>) => {
 
 type UserItemProps = {
   index: number;
-  setSelectedUsers: React.Dispatch<React.SetStateAction<string[]>>;
+  setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   user: UserResponse<TeamUserType>;
 }
 
@@ -60,9 +60,9 @@ const UserItem = (props: UserItemProps) => {
 
   const handleClick = () => {
     if (selected) {
-      setSelectedUsers((prevUsers) => prevUsers.filter((prevUser) => prevUser !== user.id));
+      setSelectedUsers((prevUsers) => prevUsers?.filter((prevUser) => prevUser !== user.id));
     } else {
-      setSelectedUsers((prevUsers) => [...prevUsers, user.id]);
+      setSelectedUsers((prevUsers) => prevUsers ? [...prevUsers, user.id] : [user.id]);
     }
     setSelected(!selected);
   };

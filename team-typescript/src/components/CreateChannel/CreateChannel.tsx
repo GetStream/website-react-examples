@@ -41,11 +41,11 @@ export const CreateChannel = (props: CreateChannelProps) => {
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   const [channelName, setChannelName] = useState('');
-  const [selectedUsers, setSelectedUsers] = useState([client.userID || '']);
+  const [selectedUsers, setSelectedUsers] = useState<string[] | undefined>([client.userID || '']);
 
   const createChannel = async (event: { preventDefault: () => void; }) => {
     event.preventDefault();
-    if (!selectedUsers.length) return;
+    if (!selectedUsers?.length) return;
 
     const newChannel = await client.channel(createType, channelName, {
       name: channelName,

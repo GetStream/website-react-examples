@@ -44,7 +44,7 @@ export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
   }
 
   if (isEditing) {
-    const filters = {};
+    const filters: ChannelFilters[] = [];
 
     if (channel?.state?.members) {
       const channelMembers = Object.keys(channel.state.members);

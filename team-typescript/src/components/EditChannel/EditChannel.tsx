@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import type { ChannelFilters, UserResponse } from 'stream-chat';
+import type { ChannelFilters } from 'stream-chat';
 import { useChatContext } from 'stream-chat-react';
 
 import './EditChannel.css';
@@ -43,7 +43,7 @@ export const EditChannel = (props: EditChannelProps) => {
   const { channel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   const [channelName, setChannelName] = useState<string>(channel?.data?.name || channel?.data?.id as string);
-  const [selectedUsers, setSelectedUsers] = useState<UserResponse<TeamUserType>[] | undefined>();
+  const [selectedUsers, setSelectedUsers] = useState<string[] | undefined>();
 
   const updateChannel = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
     event.preventDefault();
@@ -55,7 +55,7 @@ export const EditChannel = (props: EditChannelProps) => {
     }
 
     if (selectedUsers?.length) {
-      const users = selectedUsers.map((user) => user?.id);
+      const users = selectedUsers.map((user) => user);
       await channel?.addMembers(users);
     }
 
