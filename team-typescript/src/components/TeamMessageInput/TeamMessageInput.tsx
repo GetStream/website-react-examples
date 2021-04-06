@@ -20,11 +20,11 @@ import {
   StrikeThroughIcon,
 } from '../../assets';
 
-type TeamMessageInputProps = MessageInputProps & {
+export type TeamMessageInputProps = MessageInputProps & {
   pinsOpen: boolean;
 }
 
-type MessageToOverride = {
+export type MessageToOverride = {
   attachments: Attachment[];
   mentioned_users: UserResponse[];
   text: string;

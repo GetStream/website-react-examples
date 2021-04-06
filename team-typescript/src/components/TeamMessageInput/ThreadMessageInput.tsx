@@ -1,41 +1,54 @@
-import React, { useCallback, useContext, useState } from 'react';
+import { useCallback, useState } from 'react';
 import { logChatPromiseExecution } from 'stream-chat';
 import {
-  ChannelContext,
+  useChannelContext,
   ChatAutoComplete,
   EmojiPicker,
   useMessageInput,
+  MessageInputProps,
 } from 'stream-chat-react';
+
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+
+import type { MessageToOverride } from './TeamMessageInput';
 
 import './ThreadMessageInput.css';
 
 import {
-  // LightningBolt,
   LightningBoltSmall,
   SendButton,
   SmileyFace,
 } from '../../assets';
 
-export const ThreadMessageInput = (props) => {
-  const { sendMessage } = useContext(ChannelContext);
+export const ThreadMessageInput = (props: MessageInputProps) => {
+  const { additionalTextareaProps, autocompleteTriggers, disabled, grow, maxRows } = props;
+
+  const { sendMessage } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
   const [giphyState, setGiphyState] = useState(false);
 
-  const overrideSubmitHandler = (message) => {
-    let updatedMessage;
+  const overrideSubmitHandler = (message: MessageToOverride) => {
+    let updatedMessage = {
+      attachments: message.attachments,
+      mentioned_users: message.mentioned_users,
+      parent_id: message.parent?.id,
+      text: message.text
+    };
 
     if (giphyState) {
       const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...message, text: updatedText };
+      updatedMessage = { ...updatedMessage, text: updatedText };
     }
 
-    const sendMessagePromise = sendMessage(updatedMessage || message);
-    logChatPromiseExecution(sendMessagePromise, 'send message');
-    setGiphyState(false);
+    if (sendMessage) {
+      const sendMessagePromise = sendMessage(updatedMessage);
+      logChatPromiseExecution(sendMessagePromise, 'send message');
+      setGiphyState(false);
+    }
   };
 
   const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
 
-  const onChange = useCallback(
+  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined = useCallback(
     (e) => {
       if (
         messageInput.text.length === 1 &&
@@ -72,24 +85,24 @@ export const ThreadMessageInput = (props) => {
           onChange={onChange}
           value={messageInput.text}
           rows={1}
-          maxRows={props.maxRows}
+          maxRows={maxRows}
           placeholder="Reply"
           onPaste={messageInput.onPaste}
-          triggers={props.autocompleteTriggers}
-          grow={props.grow}
-          disabled={props.disabled}
+          triggers={autocompleteTriggers}
+          grow={grow}
+          disabled={disabled}
           additionalTextareaProps={{
-            ...props.additionalTextareaProps,
+            ...additionalTextareaProps,
           }}
         />
         <div className="thread-message-input__icons">
           <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
-          {/* <LightningBolt {...{ giphyState }} /> */}
         </div>
         <div
           className="thread-message-input__button"
           role="button"
           aria-roledescription="button"
+          // @ts-expect-error - TODO: type of the onClick needs to be updated in stream-chat-react
           onClick={messageInput.handleSubmit}
         >
           <SendButton />
