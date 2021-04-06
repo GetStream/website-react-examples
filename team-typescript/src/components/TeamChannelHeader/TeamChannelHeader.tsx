@@ -5,14 +5,21 @@ import './TeamChannelHeader.css';
 
 import { ChannelInfo, PinIcon } from '../../assets';
 
-export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
+type TeamChannelHeaderProps = {
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
+  const { setIsEditing, setPinsOpen } = props;
+
   const { client } = useContext(ChatContext);
   const { channel, closeThread, watcher_count } = useContext(ChannelContext);
 
-  const teamHeader = `# ${channel.data.name || channel.data.id || 'random'}`;
+  const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
 
   const getMessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
     const additionalMembers = members.length - 3;
 
     if (!members.length) {
@@ -31,9 +38,9 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
           // const addComma = members.length - 1 !== i && i < 2;
           return (
             <div key={i} className='team-channel-header__name-multi'>
-              <Avatar image={user.image} size={32} />
+              <Avatar image={user?.image} size={32} />
               <p className='team-channel-header__name user'>
-                {user.name || user.id || 'Johnny Blaze'}
+                {user?.name || user?.id || 'Johnny Blaze'}
                 {/* {addComma && ','} */}
               </p>
             </div>
@@ -44,7 +51,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
     );
   };
 
-  const getWatcherText = (watchers) => {
+  const getWatcherText = (watchers: number | undefined) => {
     if (!watchers) return 'No users online';
     if (watchers === 1) return '1 user online';
     return `${watchers} users online`;
@@ -67,7 +74,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
         <div
           className='team-channel-header__right-pin-wrapper'
           onClick={(e) => {
-            closeThread(e);
+            if (closeThread) closeThread(e);
             setPinsOpen((prevState) => !prevState);
           }}
         >

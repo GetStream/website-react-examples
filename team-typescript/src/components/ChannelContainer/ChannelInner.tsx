@@ -12,8 +12,8 @@ import { CloseThreadIcon } from '../../assets';
 
 type ChannelInnerProps = {
   pinsOpen?: boolean;
-  setIsEditing?: React.Dispatch<SetStateAction<boolean>>;
-  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+  setIsEditing: React.Dispatch<SetStateAction<boolean>>;
+  setPinsOpen: React.Dispatch<SetStateAction<boolean>>;
 }
 
 type TeamThreadHeaderProps = ThreadHeaderProps & {
@@ -58,7 +58,7 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
       </Window>
       <Thread
         additionalMessageListProps={{ TypingIndicator: () => null }}
-        Message={TeamMessage}
+        Message={(messageProps) => <TeamMessage {...messageProps} />}
         MessageInput={ThreadMessageInput}
         ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
       />
