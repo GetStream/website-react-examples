@@ -2,7 +2,6 @@ import React, { SetStateAction, useState } from 'react';
 import { MessageList, Thread, ThreadHeaderProps, Window } from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
-import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
@@ -62,7 +61,7 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
         MessageInput={ThreadMessageInput}
         ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
       />
-      {pinsOpen && <PinnedMessageList {...{ pinnedMessages, setPinsOpen }} />}
+      {/* {pinsOpen && <PinnedMessageList {...{ pinnedMessages, setPinsOpen }} />} */}
     </div>
   );
 };
