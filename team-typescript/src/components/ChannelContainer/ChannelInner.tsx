@@ -11,7 +11,7 @@ import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 import { CloseThreadIcon } from '../../assets';
 
 type ChannelInnerProps = {
-  pinsOpen?: boolean;
+  pinsOpen: boolean;
   setIsEditing: React.Dispatch<SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<SetStateAction<boolean>>;
 }
@@ -54,7 +54,7 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
           Message={(messageProps) => <TeamMessage {...messageProps} {...{ pinnedMessagesIds, setPinnedMessages, setPinsOpen }} />}
           TypingIndicator={() => null}
         />
-        <TeamMessageInput focus {...{ pinsOpen }} />
+        <TeamMessageInput {...{ pinsOpen }} />
       </Window>
       <Thread
         additionalMessageListProps={{ TypingIndicator: () => null }}

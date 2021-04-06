@@ -28,7 +28,7 @@ export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
       return (
         <div className='channel-preview__item single'>
           <Avatar image={member?.user?.image || undefined} size={24} />
-          <p>{members[0]?.user?.name || members[0]?.user?.id || defaultName}</p>
+          <p>{member?.user?.name || member?.user?.id || defaultName}</p>
           <TeamTypingIndicator type='list' />
         </div>
       );

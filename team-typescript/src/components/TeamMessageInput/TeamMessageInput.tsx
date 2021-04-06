@@ -1,9 +1,11 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-import { logChatPromiseExecution } from 'stream-chat';
-import { ChannelContext, ChatAutoComplete, ChatContext, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import { Attachment, logChatPromiseExecution, UserResponse } from 'stream-chat';
+import { ChatAutoComplete, EmojiPicker, MessageInputProps, useChannelContext, useChatContext, useMessageInput, StreamMessage } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
+
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 import { UploadsPreview } from './UploadsPreview';
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
@@ -12,18 +14,28 @@ import {
   BoldIcon,
   CodeSnippet,
   ItalicsIcon,
-  // LightningBolt,
   LightningBoltSmall,
   SendButton,
   SmileyFace,
   StrikeThroughIcon,
 } from '../../assets';
 
-export const TeamMessageInput = (props) => {
-  const { pinsOpen } = props;
+type TeamMessageInputProps = MessageInputProps & {
+  pinsOpen: boolean;
+}
 
-  const { acceptedFiles, channel, maxNumberOfFiles, multipleUploads, sendMessage, thread } = useContext(ChannelContext);
-  const { client } = useContext(ChatContext);
+type MessageToOverride = {
+  attachments: Attachment[];
+  mentioned_users: UserResponse[];
+  text: string;
+  parent?: StreamMessage;
+}
+
+export const TeamMessageInput = (props: TeamMessageInputProps) => {
+  const { additionalTextareaProps, autocompleteTriggers, disabled, grow, maxRows, pinsOpen } = props;
+
+  const { acceptedFiles, channel, maxNumberOfFiles, multipleUploads, sendMessage, thread } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   const [boldState, setBoldState] = useState(false);
   const [codeState, setCodeState] = useState(false);
@@ -40,53 +52,60 @@ export const TeamMessageInput = (props) => {
 
   const getPlaceholder = () => {
     if (channel.type === 'team') {
-      return `#${channel.data.name || channel.data.id || 'random'}`;
+      return `#${channel?.data?.name || channel?.data?.id || 'random'}`;
     }
 
-    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
 
     if (!members.length || members.length === 1) {
-      return members[0]?.user.name || members[0]?.user.id || 'Johnny Blaze';
+      return members[0]?.user?.name || members[0]?.user?.id || 'Johnny Blaze';
     }
 
     return 'the group';
   };
 
-  const overrideSubmitHandler = (message) => {
-    let updatedMessage;
+  const overrideSubmitHandler = (message: MessageToOverride) => {
+    let updatedMessage = {
+        attachments: message.attachments,
+        mentioned_users: message.mentioned_users,
+        parent_id: message.parent?.id,
+        text: message.text
+      };
 
-    if (message.attachments.length && message.text.startsWith('/giphy')) {
+    if (message?.attachments?.length && message?.text?.startsWith('/giphy')) {
       const updatedText = message.text.replace('/giphy', '');
-      updatedMessage = { ...message, text: updatedText };
+      updatedMessage = { ...updatedMessage, text: updatedText };
     }
 
     if (giphyState) {
       const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...message, text: updatedText };
+      updatedMessage = { ...updatedMessage, text: updatedText };
     } else {
-      if (boldState && !message.text.startsWith('**')) {
+      if (boldState && !message.text?.startsWith('**')) {
         const updatedText = `**${message.text}**`;
-        updatedMessage = { ...message, text: updatedText };
+        updatedMessage = { ...updatedMessage, text: updatedText };
       }
 
-      if (codeState && !message.text.startsWith('`')) {
+      if (codeState && !message.text?.startsWith('`')) {
         const updatedText = `\`${message.text}\``;
-        updatedMessage = { ...message, text: updatedText };
+        updatedMessage = { ...updatedMessage, text: updatedText };
       }
 
-      if (italicState && !message.text.startsWith('*')) {
+      if (italicState && !message?.text?.startsWith('*')) {
         const updatedText = `*${message.text}*`;
-        updatedMessage = { ...message, text: updatedText };
+        updatedMessage = { ...updatedMessage, text: updatedText };
       }
 
-      if (strikeThroughState && !message.text.startsWith('~~')) {
+      if (strikeThroughState && !message.text?.startsWith('~~')) {
         const updatedText = `~~${message.text}~~`;
-        updatedMessage = { ...message, text: updatedText };
+        updatedMessage = { ...updatedMessage, text: updatedText };
       }
     }
 
-    const sendMessagePromise = sendMessage(updatedMessage || message);
-    logChatPromiseExecution(sendMessagePromise, 'send message');
+    if (sendMessage) {
+      const sendMessagePromise = sendMessage(updatedMessage);
+      logChatPromiseExecution(sendMessagePromise, 'send message');
+    }
 
     setGiphyState(false);
     resetIconState();
@@ -139,27 +158,6 @@ export const TeamMessageInput = (props) => {
     [boldState, codeState, giphyState, italicState, messageInput, strikeThroughState],
   );
 
-  // const onCommandClick = (event) => {
-  //   event.preventDefault();
-  //   messageInput.textareaRef.current.focus();
-
-  //   messageInput.textareaRef.current.addEventListener('change', () => {
-  //     messageInput.textareaRef.current.textContent = '/';
-  //   });
-
-  //   const newEvent = new Event('change', { bubbles: true });
-
-  //   messageInput.textareaRef.current.dispatchEvent(newEvent);
-
-  //   const dispatchedEvent = {
-  //     ...newEvent,
-  //     preventDefault: () => null,
-  //     target: { value: '/' },
-  //   };
-
-  //   messageInput.handleChange(dispatchedEvent);
-  // };
-
   const GiphyIcon = () => (
     <div className='giphy-icon__wrapper'>
       <LightningBoltSmall />
@@ -187,24 +185,24 @@ export const TeamMessageInput = (props) => {
               onChange={onChange}
               value={messageInput.text}
               rows={1}
-              maxRows={props.maxRows}
+              maxRows={maxRows}
               placeholder={`Message ${getPlaceholder()}`}
               onPaste={messageInput.onPaste}
-              triggers={props.autocompleteTriggers}
-              grow={props.grow}
-              disabled={props.disabled}
+              triggers={autocompleteTriggers}
+              grow={grow}
+              disabled={disabled}
               additionalTextareaProps={{
-                ...props.additionalTextareaProps,
+                ...additionalTextareaProps,
               }}
             />
+            {// @ts-expect-error - TODO: type of the onClick needs to be updated in stream-chat-react
             <div className='team-message-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
               <SendButton />
-            </div>
+            </div>}
           </div>
           <div className='team-message-input__bottom'>
             <div className='team-message-input__icons'>
               <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
-              {/* <LightningBolt {...{ giphyState, onCommandClick }} /> */}
               <div className='icon-divider'></div>
               <BoldIcon {...{ boldState, resetIconState, setBoldState }} />
               <ItalicsIcon {...{ italicState, resetIconState, setItalicState }} />
