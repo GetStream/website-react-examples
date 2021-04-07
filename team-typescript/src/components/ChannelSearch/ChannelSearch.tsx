@@ -23,7 +23,7 @@ export const ChannelSearch = () => {
   const [query, setQuery] = useState('');
 
   const handleKeyDown = useCallback(
-    (event) => {
+    (event: KeyboardEvent) => {
       if (event.key === 'ArrowDown') {
         setFocused((prevFocused) => {
           if (prevFocused === undefined || allChannels === undefined) return 0;
@@ -34,7 +34,7 @@ export const ChannelSearch = () => {
           if (prevFocused === undefined || allChannels === undefined) return 0;
           return prevFocused === 0 ? allChannels.length - 1 : prevFocused - 1;
         });
-      } else if (event.keyCode === 13) {
+      } else if (event.key === '13') {
         event.preventDefault();
         // @ts-expect-error
         if (allChannels !== undefined && focused !== undefined) setActiveChannel(allChannels[focused]);
@@ -66,9 +66,9 @@ export const ChannelSearch = () => {
     }
   }, [allChannels, focused]);
 
-  const setChannel = (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>) => {
+  const setChannel = (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>) => {
     setQuery('');
-    setActiveChannel(channel as Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>);
+    setActiveChannel(channel);
   };
 
   const getChannels = async (text: string) => {
@@ -109,7 +109,7 @@ export const ChannelSearch = () => {
     trailing: true,
   });
 
-  const onSearch = (event: any) => {
+  const onSearch = (event: React.ChangeEvent<HTMLInputElement>) => {
     event.preventDefault();
 
     setLoading(true);
