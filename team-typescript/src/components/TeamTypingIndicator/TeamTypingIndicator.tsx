@@ -1,10 +1,12 @@
 import { useChannelContext } from 'stream-chat-react';
 
 import './TeamTypingIndicator.css';
+
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 export const TeamTypingIndicator = (props: { type: string }) => {
   const { type } = props;
+  
   const { client, typing } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   if (!client || !typing) return null;

@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import type { ChannelFilters } from 'stream-chat';
 import { Channel, useChatContext } from 'stream-chat-react';

@@ -95,8 +95,7 @@ export const ChannelSearch = () => {
 
       if (channels.length) setTeamChannels(channels);
       if (users.length) setDirectChannels(users);
-      // @ts-expect-error
-      setAllChannels(channels.concat(users));
+      setAllChannels([...channels, ...users]);
     } catch (e) {
       setQuery('');
       console.log(e);

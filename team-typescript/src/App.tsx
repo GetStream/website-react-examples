@@ -1,8 +1,9 @@
 import { useEffect, useState } from 'react';
+
 import { LiteralStringForUnion, StreamChat, ChannelFilters, ChannelSort } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/index.css';
 
+import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
 import { useChecklist } from './ChecklistTasks';
@@ -46,7 +47,7 @@ const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isEditing, setIsEditing] = useState(false);
 
-  useChecklist(client, targetOrigin);
+  useChecklist({ chatClient: client, targetOrigin: targetOrigin! });
 
   useEffect(() => {
     const handleColorChange = (color: string) => {

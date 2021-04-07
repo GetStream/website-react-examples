@@ -18,7 +18,8 @@ type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> 
 }
 
 const SearchResult = (props: SearchResultProps) => {
-  const { result, focusedId, setChannel, type } = props;
+  const { focusedId, result, setChannel, type } = props;
+
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   if (type === 'channel') {

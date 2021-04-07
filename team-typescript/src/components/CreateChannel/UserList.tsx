@@ -1,12 +1,13 @@
 import {PropsWithChildren, useEffect, useState } from 'react';
+
 import type { ChannelFilters, UserResponse } from 'stream-chat';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './UserList.css';
 
-import { InviteIcon } from '../../assets';
-
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+
+import { InviteIcon } from '../../assets';
 
 type UserListProps = {
   filters: ChannelFilters[]

@@ -1,6 +1,10 @@
 import { useEffect } from 'react';
 
-const notifyParent = (parent) => (message) => {
+import type { Event, StreamChat } from 'stream-chat';
+
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from './App';
+
+const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
 }
 
@@ -16,20 +20,30 @@ const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_
   'send-message',
 ];
 
-export const useChecklist = (chatClient, targetOrigin) => {
+type ChecklistTaskProps = {
+  chatClient: StreamChat<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>;
+  targetOrigin: string;
+}
+
+export const useChecklist = (props: ChecklistTaskProps): void => {
+  const { chatClient, targetOrigin } = props;
+
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
-    const handleNewEvent = ({ type, message }) => {
+
+    const handleNewEvent = (props: Event<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>) => {
+      const { message, type } = props;
+
       switch(type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
         case 'message.new':
-          if (message.command === 'giphy') {
+          if (message?.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
           };
-          if (message.attachments.length) {
+          if (message?.attachments?.length) {
             if (message.attachments[0].type === 'video' && message.attachments[0].og_scrape_url === YOUTUBE_LINK) {
               notify(SEND_YOUTUBE);
               break;
@@ -39,7 +53,7 @@ export const useChecklist = (chatClient, targetOrigin) => {
               break
             }
           }
-          if (message.parent_id) {
+          if (message?.parent_id) {
             notify(START_THREAD);
             break;
           }
@@ -55,3 +69,4 @@ export const useChecklist = (chatClient, targetOrigin) => {
     return () => chatClient?.off(handleNewEvent);
   }, [chatClient, targetOrigin]);
 };
+

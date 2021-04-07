@@ -1,4 +1,5 @@
-import React, { useContext } from 'react';
+import { useContext } from 'react';
+
 import { Avatar, ChannelContext, ChatContext } from 'stream-chat-react';
 
 import './TeamChannelHeader.css';

@@ -1,11 +1,12 @@
-import React, { SetStateAction, useState } from 'react';
+import { SetStateAction, useState } from 'react';
+
 import { MessageList, Thread, ThreadHeaderProps, Window } from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
-import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
+import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 
 import { CloseThreadIcon } from '../../assets';
 

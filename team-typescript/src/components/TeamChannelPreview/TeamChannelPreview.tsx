@@ -1,10 +1,10 @@
 import { Avatar, ChannelPreviewProps, useChatContext } from 'stream-chat-react';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
-
 import './TeamChannelPreview.css';
 
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
+
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 type TeamChannelPreviewProps = ChannelPreviewProps<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;

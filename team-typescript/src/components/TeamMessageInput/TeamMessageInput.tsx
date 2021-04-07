@@ -1,14 +1,15 @@
-import React, { useCallback, useState } from 'react';
+import { useCallback, useState } from 'react';
+
 import { ImageDropzone } from 'react-file-utils';
 import { Attachment, logChatPromiseExecution, UserResponse } from 'stream-chat';
 import { ChatAutoComplete, EmojiPicker, MessageInputProps, useChannelContext, useChatContext, useMessageInput, StreamMessage } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
-
 import { UploadsPreview } from './UploadsPreview';
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
+
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 import {
   BoldIcon,
@@ -113,9 +114,10 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
 
   const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
 
-  const onChange = useCallback(
-    (e) => {
+  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined = useCallback(
+    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
       const { value } = e.target;
+      // @ts-expect-error
       const deletePressed = e.nativeEvent?.inputType === 'deleteContentBackward';
 
       if (messageInput.text.length === 1 && deletePressed) {
