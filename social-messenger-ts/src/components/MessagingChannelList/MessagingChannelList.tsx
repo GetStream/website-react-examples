@@ -67,7 +67,7 @@ const MessagingChannelList: React.FC<MessagingChannelListProps> = (props) => {
     if (!loading && !children?.props?.children?.length) {
       getDemoChannel(client);
     }
-  }, [loading]);
+  }, [loading]); // eslint-disable-line
 
   const ListHeaderWrapper: React.FC = ({ children }) => {
     return (

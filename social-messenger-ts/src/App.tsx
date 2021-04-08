@@ -19,13 +19,15 @@ import {
 import { getRandomImage } from './assets';
 
 const urlParams = new URLSearchParams(window.location.search);
-const apiKey = process.env.REACT_APP_STREAM_KEY_YETI || '';
-const user = urlParams.get('user') || process.env.REACT_APP_USER_ID || '';
-const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN || '';
-const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN || '';
+const apiKey = process.env.REACT_APP_STREAM_KEY_YETI;
+const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
+const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
 
-const filters = noChannelNameFilter ? { type: 'messaging', members: { $in: [user] } } : { type: 'messaging', name: 'Social Demo' };
+const filters = noChannelNameFilter
+  ? { type: 'messaging', members: { $in: [user!] } }
+  : { type: 'messaging', name: 'Social Demo' };
 const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort: ChannelSort = {
   last_message_at: -1,
@@ -41,15 +43,23 @@ export type MessageType = {};
 export type ReactionType = {};
 export type UserType = { image?: string };
 
-const chatClient = StreamChat.getInstance<AttachmentType, ChannelType, CommandType, EventType, MessageType, ReactionType, UserType>(apiKey);
-chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
+const chatClient = StreamChat.getInstance<
+  AttachmentType,
+  ChannelType,
+  CommandType,
+  EventType,
+  MessageType,
+  ReactionType,
+  UserType
+>(apiKey!);
+chatClient.connectUser({ id: user!, name: user!, image: getRandomImage() }, userToken);
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
   const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
 
-  useChecklist(chatClient, targetOrigin);
+  useChecklist(chatClient, targetOrigin!);
 
   useEffect(() => {
     const handleThemeChange = ({ data, origin }: { data: string; origin: string }) => {
@@ -85,13 +95,17 @@ const App = () => {
           filters={filters}
           sort={sort}
           options={options}
-          List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
+          List={(props) => (
+            <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />
+          )}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
       </div>
       <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />}
+          {isCreating && (
+            <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+          )}
           <Window>
             <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
             <MessageList Message={CustomMessage} TypingIndicator={() => null} />

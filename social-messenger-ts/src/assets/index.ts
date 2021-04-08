@@ -1,3 +1,7 @@
+import type { ChannelMemberResponse } from 'stream-chat';
+
+import type { UserType } from '../App';
+
 export { ChannelInfoIcon } from './ChannelInfoIcon';
 export { ChannelSaveIcon } from './ChannelSaveIcon';
 export { CloseThreadIcon } from './CloseThreadIcon';
@@ -40,15 +44,24 @@ const randomImages = [
 
 export const getRandomImage = () => {
   const index = Math.floor(Math.random() * 24);
-  return randomImages[index] as string;
+  const randomImage = randomImages[index];
+
+  if (typeof randomImage === 'string') {
+    return randomImage;
+  }
+
+  if (randomImage.default) {
+    return randomImage.default as string;
+  }
+
+  return '';
 };
 
-//@ts-expect-error
-export const getCleanImage = (member) => {
-  if (!member?.user.image) return getRandomImage();
+export const getCleanImage = (member: ChannelMemberResponse<UserType>) => {
+  if (!member?.user?.image) return getRandomImage();
 
-  if (member?.user.image.includes('jen-avatar')) {
-    return randomImages[11];
+  if (typeof member.user?.image === 'string' && member.user?.image?.includes('jen-avatar')) {
+    return randomImages[11] as string;
   }
 
   return member.user.image;

@@ -1,5 +1,4 @@
-import React from 'react';
-import { Thread } from 'stream-chat-react';
+import { Thread, ThreadHeaderProps } from 'stream-chat-react';
 
 import './MessagingThread.css';
 
@@ -7,7 +6,7 @@ import { CustomMessage, MessagingInput } from '../index';
 
 import { CloseThreadIcon } from '../../assets';
 
-const ThreadHeader = ({ closeThread, thread }) => {
+const ThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
     if (thread.reply_count === 1) return '1 reply';
@@ -26,7 +25,9 @@ const ThreadHeader = ({ closeThread, thread }) => {
 };
 
 const MessagingThread = () => {
-  return <Thread Message={CustomMessage} MessageInput={MessagingInput} ThreadHeader={ThreadHeader} />;
+  return (
+    <Thread Message={CustomMessage} MessageInput={MessagingInput} ThreadHeader={ThreadHeader} />
+  );
 };
 
 export default MessagingThread;
