@@ -1,6 +1,8 @@
 import { Avatar, useChatContext } from 'stream-chat-react';
 import type { Channel, ChannelFilters, UserResponse } from 'stream-chat';
 
+import { isChannel } from './utils';
+
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 type ResultsDropdownProps = {
@@ -14,15 +16,14 @@ type ResultsDropdownProps = {
 
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
   result: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>;
-  type: string;
 }
 
 const SearchResult = (props: SearchResultProps) => {
-  const { focusedId, result, setChannel, type } = props;
+  const { focusedId, result, setChannel } = props;
 
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
-  if (type === 'channel') {
+  if (isChannel(result)) {
     const channel = result as Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>
 
     return (
@@ -87,7 +88,7 @@ export const ResultsDropdown = (props: ResultsDropdownProps) => {
         </p>
       ) : (
         teamChannels?.map((channel, i) => (
-          <SearchResult result={channel} focusedId={focusedId} key={i} setChannel={setChannel} type='channel' />
+          <SearchResult result={channel} focusedId={focusedId} key={i} setChannel={setChannel} />
         ))
       )}
       <p className='channel-search__results-header'>Users</p>
@@ -102,7 +103,7 @@ export const ResultsDropdown = (props: ResultsDropdownProps) => {
         </p>
       ) : (
         directChannels?.map((user: UserResponse<TeamUserType>, i) => (
-          <SearchResult result={user} focusedId={focusedId} key={i} setChannel={setChannel} type='user' />
+          <SearchResult result={user} focusedId={focusedId} key={i} setChannel={setChannel} />
         ))
       )}
     </div>

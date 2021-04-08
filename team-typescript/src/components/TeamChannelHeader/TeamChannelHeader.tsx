@@ -36,13 +36,11 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
       <div className='team-channel-header__name-wrapper'>
         {members.map(({ user }, i) => {
           if (i > 2) return null;
-          // const addComma = members.length - 1 !== i && i < 2;
           return (
             <div key={i} className='team-channel-header__name-multi'>
               <Avatar image={user?.image} size={32} />
               <p className='team-channel-header__name user'>
                 {user?.name || user?.id || 'Johnny Blaze'}
-                {/* {addComma && ','} */}
               </p>
             </div>
           );
@@ -74,8 +72,8 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
         <p className='team-channel-header__right-text'>{getWatcherText(watcher_count)}</p>
         <div
           className='team-channel-header__right-pin-wrapper'
-          onClick={(e) => {
-            if (closeThread) closeThread(e);
+          onClick={(event) => {
+            if (closeThread) closeThread(event);
             setPinsOpen((prevState) => !prevState);
           }}
         >

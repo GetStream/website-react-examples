@@ -46,23 +46,29 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
     }
   };
 
-  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInput<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>({ ...props, overrideSubmitHandler });
 
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined = useCallback(
-    (e) => {
+  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
+    (event) => {
+      const deletePressed =
+        event.nativeEvent instanceof InputEvent &&
+        event.nativeEvent.inputType === 'deleteContentBackward'
+          ? true
+          : false;
+
       if (
         messageInput.text.length === 1 &&
-        e.nativeEvent.inputType === 'deleteContentBackward'
+        deletePressed
       ) {
         setGiphyState(false);
       }
 
       if (messageInput.text.startsWith('/giphy') && !giphyState) {
-        e.target.value = e.target.value.replace('/giphy', '');
+        event.target.value = event.target.value.replace('/giphy', '');
         setGiphyState(true);
       }
 
-      messageInput.handleChange(e);
+      messageInput.handleChange(event);
     },
     [giphyState, messageInput],
   );

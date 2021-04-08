@@ -112,50 +112,54 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
     resetIconState();
   };
 
-  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInput<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>({ ...props, overrideSubmitHandler });
 
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> | undefined = useCallback(
-    (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-      const { value } = e.target;
-      // @ts-expect-error
-      const deletePressed = e.nativeEvent?.inputType === 'deleteContentBackward';
+  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
+    (event) => {
+      const { value } = event.target;
+      
+      const deletePressed =
+        event.nativeEvent instanceof InputEvent &&
+        event.nativeEvent.inputType === 'deleteContentBackward'
+          ? true
+          : false;
 
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);
       }
 
       if (!giphyState && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
-        e.target.value = value.replace('/giphy', '');
+        event.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
 
       if (boldState) {
         if (deletePressed) {
-          e.target.value = `${value.slice(0, value.length - 2)}**`;
+          event.target.value = `${value.slice(0, value.length - 2)}**`;
         } else {
-          e.target.value = `**${value.replace(/\**/g, '')}**`;
+          event.target.value = `**${value.replace(/\**/g, '')}**`;
         }
       } else if (codeState) {
         if (deletePressed) {
-          e.target.value = `${value.slice(0, value.length - 1)}\``;
+          event.target.value = `${value.slice(0, value.length - 1)}\``;
         } else {
-          e.target.value = `\`${value.replace(/`/g, '')}\``;
+          event.target.value = `\`${value.replace(/`/g, '')}\``;
         }
       } else if (italicState) {
         if (deletePressed) {
-          e.target.value = `${value.slice(0, value.length - 1)}*`;
+          event.target.value = `${value.slice(0, value.length - 1)}*`;
         } else {
-          e.target.value = `*${value.replace(/\*/g, '')}*`;
+          event.target.value = `*${value.replace(/\*/g, '')}*`;
         }
       } else if (strikeThroughState) {
         if (deletePressed) {
-          e.target.value = `${value.slice(0, value.length - 2)}~~`;
+          event.target.value = `${value.slice(0, value.length - 2)}~~`;
         } else {
-          e.target.value = `~~${value.replace(/~~/g, '')}~~`;
+          event.target.value = `~~${value.replace(/~~/g, '')}~~`;
         }
       }
 
-      messageInput.handleChange(e);
+      messageInput.handleChange(event);
     },
     [boldState, codeState, giphyState, italicState, messageInput, strikeThroughState],
   );

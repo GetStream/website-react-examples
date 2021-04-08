@@ -1,8 +1,9 @@
-import { SetStateAction, useState } from 'react';
+import type { SetStateAction } from 'react';
 
 import { MessageList, Thread, ThreadHeaderProps, Window } from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
+import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
@@ -42,16 +43,13 @@ const ThreadHeader = (props: TeamThreadHeaderProps) => {
 export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
 
-  const [pinnedMessages, setPinnedMessages] = useState({});
-  const pinnedMessagesIds = Object.keys(pinnedMessages);
-
   return (
     <div style={{ display: 'flex', width: '100%' }}>
       <Window>
         <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
         <MessageList
           EmptyStateIndicator={ChannelEmptyState}
-          Message={(messageProps) => <TeamMessage {...messageProps} {...{ pinnedMessagesIds, setPinnedMessages, setPinsOpen }} />}
+          Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
           TypingIndicator={() => null}
         />
         <TeamMessageInput {...{ pinsOpen }} />
@@ -62,7 +60,7 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
         MessageInput={ThreadMessageInput}
         ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
       />
-      {/* {pinsOpen && <PinnedMessageList {...{ pinnedMessages, setPinsOpen }} />} */}
+      {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
     </div>
   );
 };

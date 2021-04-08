@@ -1,67 +1,45 @@
-import { MessageUIComponentProps, MessageTeam, StreamMessage } from 'stream-chat-react';
+
+import type { SetStateAction } from 'react';
+import { defaultPinPermissions, MessageUIComponentProps, MessageTeam, StreamMessage, usePinHandler } from 'stream-chat-react';
 
 import './TeamMessage.css';
 
-import { PinIconSmall } from '../../assets';
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 type TeamMessageProps = MessageUIComponentProps & {
   message: StreamMessage;
-  pinnedMessagesIds?: string[];
-  // setPinnedMessages?: React.Dispatch<SetStateAction<boolean>>;
-  // setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export const TeamMessage = (props: TeamMessageProps) => {
-  const { handleOpenThread, isMyMessage, message } = props;
+  const { handleOpenThread, handlePin, isMyMessage, message, setPinsOpen } = props;
 
-  // const { openThread } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
-  // const { client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const teamPermissions = { ...defaultPinPermissions.team, user: true };
+  const pinnedPermissions = {...defaultPinPermissions, team: teamPermissions};
 
-  // const isMessagePinned = pinnedMessagesIds?.find((id) => id === message.id) ? true : false;
-  // const [isPinned, setIsPinned] = useState(isMessagePinned);
-
-  // const handleFlag = async () => {
-  //   if (isPinned) {
-  //     setIsPinned(false);
-  //     if (setPinnedMessages) {
-  //     setPinnedMessages((prevState) => {
-  //       const pinCopy = { ...prevState };
-  //       delete pinCopy[message.id];
-  //       return pinCopy;
-  //     });
-  //     }
-  //   } else {
-  //     setIsPinned(true);
-  //     setPinnedMessages((prevState) => ({
-  //       ...prevState,
-  //       [message.id]: message,
-  //     }));
-  //   }
-
-  //   await client.updateMessage({ ...message, pinned: true } as MessageToSend | StreamMessage);
-  // };
+  // @ts-expect-error
+  const { canPin } = usePinHandler<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>(message, pinnedPermissions);
 
   const getMessageActions = () => {
     if (isMyMessage()) {
-      return ['edit', 'delete', 'react', 'reply', 'flag'];
+      return ['edit', 'delete', 'pin', 'react', 'reply', 'flag'];
+
     }
-    return ['react', 'reply', 'flag', 'mute'];
+    return ['pin', 'react', 'reply', 'flag', 'mute'];
   };
 
   const handleOpenThreadOverride = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
-    // if (setPinsOpen) setPinsOpen(false);
+    if (setPinsOpen) setPinsOpen(false);
     handleOpenThread(event);
   };
 
+  const pinMessageOverride = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+    if (canPin) handlePin(event);
+  }
+
   return (
     <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
-      {message.pinned && (
-        <div className='pin-icon__wrapper'>
-          <PinIconSmall />
-          <p className='pin-icon__text'>Pinned</p>
-        </div>
-      )}
-      <MessageTeam {...props} {...{ getMessageActions }} handleOpenThread={handleOpenThreadOverride} />
+      <MessageTeam {...props} {...{ getMessageActions }} handleOpenThread={handleOpenThreadOverride} handlePin={pinMessageOverride} />
       {/** potentially add replies component here */}
     </div>
   );

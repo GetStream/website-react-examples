@@ -1,14 +1,16 @@
 import { useCallback, useEffect, useState } from 'react';
+
+import type { Channel, ChannelFilters, UserResponse } from 'stream-chat';
 import { useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
 import './ChannelSearch.css';
 
+import { isChannel } from './utils';
 import { ResultsDropdown } from './ResultsDropdown';
 
 import { SearchIcon } from '../../assets';
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
-import type { Channel, UserResponse } from 'stream-chat';
 
 export const ChannelSearch = () => {
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
@@ -21,6 +23,25 @@ export const ChannelSearch = () => {
   const [focusedId, setFocusedId] = useState('');
   const [loading, setLoading] = useState(false);
   const [query, setQuery] = useState('');
+
+  const channelByUser = async (user: UserResponse<TeamUserType>)=> {
+    const filters: ChannelFilters = {
+      type: 'messaging',
+      member_count: 2,
+      members: { $eq: [user.id as string, client.userID || ''] },
+    };
+
+    const [existingChannel] = await client.queryChannels(filters);
+
+    if (existingChannel) {
+      return setActiveChannel(existingChannel);
+    }
+
+    const newChannel = client.channel('messaging', {
+      members: [user.id as string, client.userID || ''],
+    });
+    return setActiveChannel(newChannel);
+  }
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
@@ -36,14 +57,23 @@ export const ChannelSearch = () => {
         });
       } else if (event.key === '13') {
         event.preventDefault();
-        // @ts-expect-error
-        if (allChannels !== undefined && focused !== undefined) setActiveChannel(allChannels[focused]);
+
+        if (allChannels !== undefined && focused !== undefined){  
+          const channelToCheck = allChannels[focused];
+
+          if (isChannel(channelToCheck)) {
+            setActiveChannel(channelToCheck);
+          } else {
+            channelByUser(channelToCheck);
+          }
+
+        }
         setFocused(undefined);
         setFocusedId('');
         setQuery('');
       }
     },
-    [allChannels, focused, setActiveChannel],
+    [allChannels, focused, setActiveChannel], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {
@@ -96,9 +126,9 @@ export const ChannelSearch = () => {
       if (channels.length) setTeamChannels(channels);
       if (users.length) setDirectChannels(users);
       setAllChannels([...channels, ...users]);
-    } catch (e) {
+    } catch (event) {
       setQuery('');
-      console.log(e);
+      console.log(event);
     }
 
     setLoading(false);

@@ -10,9 +10,9 @@ export const CloseThreadIcon = (props: CloseThreadIconProps) => {
 
   return (
     <button
-      onClick={(e) => {
+      onClick={(event) => {
         if (closeThread) {
-          closeThread(e);
+          closeThread(event);
         }
         if (setPinsOpen) {
           setPinsOpen(false);

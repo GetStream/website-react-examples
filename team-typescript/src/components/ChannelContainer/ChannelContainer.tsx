@@ -10,15 +10,15 @@ import { ChannelInner } from './ChannelInner';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
 
- import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
- type ChannelContainerProps = {
-   createType: string;
-   isCreating: boolean;
-   isEditing?: boolean;
-   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
- }
+type ChannelContainerProps = {
+  createType: string;
+  isCreating: boolean;
+  isEditing?: boolean;
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+}
 
 export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
   const {

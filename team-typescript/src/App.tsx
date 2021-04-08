@@ -23,7 +23,6 @@ const i18nInstance = new Streami18n({
   language: 'en',
   translationsForLanguage: {
     ...enTranslations,
-    Flag: 'Pin to Channel',
   },
 });
 

@@ -103,7 +103,7 @@ export const UserList = (props: UserListProps) => {
         } else {
           setListEmpty(true);
         }
-      } catch (e) {
+      } catch (event) {
         setError(true);
       }
 
