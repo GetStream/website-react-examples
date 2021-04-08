@@ -1,5 +1,4 @@
-import React from 'react';
-
+// @ts-expect-error TODO: correct once library type is fixed
 export const CloseThreadIcon = ({ closeThread }) => (
   <svg
     width='40'
