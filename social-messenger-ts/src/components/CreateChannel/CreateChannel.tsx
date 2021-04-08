@@ -1,12 +1,20 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
+import type { UserResponse } from 'stream-chat';
 import _debounce from 'lodash/debounce';
 
 import { XButton, XButtonBackground } from '../../assets';
 
 import './CreateChannel.css';
-import type { AttachmentType, ChannelType, CommandType, EventType, MessageType, ReactionType, UserType } from '../../App';
-import type { UserResponse } from 'stream-chat';
+import type {
+  AttachmentType,
+  ChannelType,
+  CommandType,
+  EventType,
+  MessageType,
+  ReactionType,
+  UserType,
+} from '../../App';
 
 const UserResult = ({ user }: { user: UserResponse<UserType> }) => (
   <li className='messaging-create-channel__user-result'>
@@ -19,7 +27,13 @@ const UserResult = ({ user }: { user: UserResponse<UserType> }) => (
   </li>
 );
 
-const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleMobile: () => void }) => {
+const CreateChannel = ({
+  onClose,
+  toggleMobile,
+}: {
+  onClose: () => void;
+  toggleMobile: () => void;
+}) => {
   const { client, setActiveChannel } = useChatContext<
     AttachmentType,
     ChannelType,
@@ -64,7 +78,10 @@ const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleM
       const response = await client.queryUsers(
         {
           id: { $ne: client.userID as string },
-          $and: [{ name: { $autocomplete: inputText } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
+          $and: [
+            { name: { $autocomplete: inputText } },
+            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
+          ],
         },
         { id: 1 },
         { limit: 6 },
@@ -134,20 +151,20 @@ const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleM
 
   const handleKeyDown = useCallback(
     (event: KeyboardEvent) => {
-      // check for up(38) or down(40) key
-      if (event.which === 38) {
+      // check for up(ArrowUp) or down(ArrowDown) key
+      if (event.key === 'ArrowUp') {
         setFocusedUser((prevFocused) => {
           if (prevFocused === undefined) return 0;
           return prevFocused === 0 ? users.length - 1 : prevFocused - 1;
         });
       }
-      if (event.which === 40) {
+      if (event.key === 'ArrowDown') {
         setFocusedUser((prevFocused) => {
           if (prevFocused === undefined) return 0;
           return prevFocused === users.length - 1 ? 0 : prevFocused + 1;
         });
       }
-      if (event.which === 13) {
+      if (event.key === 'Enter') {
         event.preventDefault();
         if (focusedUser !== undefined) {
           addUser(users[focusedUser]);
@@ -172,15 +189,18 @@ const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleM
             {!!selectedUsers?.length && (
               <div className='messaging-create-channel__users'>
                 {selectedUsers.map((user) => (
-                  <div className='messaging-create-channel__user' onClick={() => removeUser(user)} key={user.id}>
+                  <div
+                    className='messaging-create-channel__user'
+                    onClick={() => removeUser(user)}
+                    key={user.id}
+                  >
                     <div className='messaging-create-channel__user-text'>{user.name}</div>
                     <XButton />
                   </div>
                 ))}
               </div>
             )}
-            {/* @ts-expect-error */}
-            <form onSubmit={() => addUser()}>
+            <form>
               <input
                 autoFocus
                 ref={inputRef}
@@ -207,7 +227,9 @@ const CreateChannel = ({ onClose, toggleMobile }: { onClose: () => void; toggleM
               <div>
                 {users.map((user, i) => (
                   <div
-                    className={`messaging-create-channel__user-result ${focusedUser === i && 'focused'}`}
+                    className={`messaging-create-channel__user-result ${
+                      focusedUser === i && 'focused'
+                    }`}
                     onClick={() => addUser(user)}
                     key={user.id}
                   >
