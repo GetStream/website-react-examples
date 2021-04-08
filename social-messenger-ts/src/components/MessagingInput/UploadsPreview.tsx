@@ -1,6 +1,15 @@
-import React, { useContext } from 'react';
 import { ImagePreviewer, FilePreviewer } from 'react-file-utils';
-import { ChannelContext } from 'stream-chat-react';
+import { MessageInputHookProps, MessageInputState, useChannelContext } from 'stream-chat-react';
+
+import type {
+  AttachmentType,
+  ChannelType,
+  CommandType,
+  EventType,
+  MessageType,
+  ReactionType,
+  UserType,
+} from '../../App';
 
 export const UploadsPreview = ({
   fileOrder,
@@ -13,14 +22,22 @@ export const UploadsPreview = ({
   uploadFile,
   uploadImage,
   uploadNewFiles,
-}) => {
-  const channelContext = useContext(ChannelContext);
+}: MessageInputHookProps & MessageInputState) => {
+  const channelContext = useChannelContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
 
   return (
     <>
       {imageOrder.length > 0 && (
         <ImagePreviewer
-          imageUploads={imageOrder.map((id) => imageUploads[id])}
+          imageUploads={imageOrder.map((id: string) => imageUploads[id])}
           handleRemove={removeImage}
           handleRetry={uploadImage}
           handleFiles={uploadNewFiles}
@@ -33,7 +50,7 @@ export const UploadsPreview = ({
       )}
       {fileOrder.length > 0 && (
         <FilePreviewer
-          uploads={fileOrder.map((id) => fileUploads[id])}
+          uploads={fileOrder.map((id: string) => fileUploads[id])}
           handleRemove={removeFile}
           handleRetry={uploadFile}
           handleFiles={uploadNewFiles}
