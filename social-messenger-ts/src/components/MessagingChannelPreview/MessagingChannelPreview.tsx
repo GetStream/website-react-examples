@@ -1,9 +1,23 @@
-import React, { useContext } from 'react';
-import { Avatar, ChannelPreviewUIComponentProps, ChatContext, ChatContextValue } from 'stream-chat-react';
+import {
+  Avatar,
+  ChannelPreviewUIComponentProps,
+  ChatContextValue,
+  useChatContext,
+} from 'stream-chat-react';
 
 import './MessagingChannelPreview.css';
 
 import type { Channel, ChannelMemberResponse } from 'stream-chat';
+
+import type {
+  AttachmentType,
+  ChannelType,
+  CommandType,
+  EventType,
+  MessageType,
+  ReactionType,
+  UserType,
+} from '../../App';
 
 import { getCleanImage } from '../../assets';
 
@@ -102,13 +116,27 @@ type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
 const MessagingChannelPreview: React.FC<MessagingChannelPreviewProps> = (props) => {
   const { channel, latestMessage, setActiveChannel, setIsCreating } = props;
 
-  const { channel: activeChannel, client } = useContext(ChatContext);
+  const { channel: activeChannel, client } = useChatContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
 
-  const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
+  const members = Object.values(channel.state.members).filter(
+    ({ user }) => user?.id !== client.userID,
+  );
 
   return (
     <div
-      className={channel?.id === activeChannel?.id ? 'channel-preview__container selected' : 'channel-preview__container'}
+      className={
+        channel?.id === activeChannel?.id
+          ? 'channel-preview__container selected'
+          : 'channel-preview__container'
+      }
       onClick={() => {
         setIsCreating(false);
         setActiveChannel?.(channel);
@@ -117,7 +145,9 @@ const MessagingChannelPreview: React.FC<MessagingChannelPreviewProps> = (props) 
       <AvatarGroup members={members} />
       <div className='channel-preview__content-wrapper'>
         <div className='channel-preview__content-top'>
-          <p className='channel-preview__content-name'>{channel.data?.name || getChannelName(members)}</p>
+          <p className='channel-preview__content-name'>
+            {channel.data?.name || getChannelName(members)}
+          </p>
           <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
         </div>
         <p className='channel-preview__content-message'>{latestMessage || 'Send a message'}</p>
