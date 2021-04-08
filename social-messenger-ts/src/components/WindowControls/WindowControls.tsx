@@ -1,8 +1,14 @@
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import './WindowControls.css';
 
-const WindowControls = ({ theme, setTheme }) => {
+const WindowControls = ({
+  theme,
+  setTheme,
+}: {
+  theme: string;
+  setTheme: (theme: string) => void;
+}) => {
   const darkClick = () => {
     if (theme === 'dark') return;
     setTheme('dark');
@@ -14,10 +20,10 @@ const WindowControls = ({ theme, setTheme }) => {
   };
 
   useEffect(() => {
-    const root = document.querySelector('#root');
-    if (theme === 'light') {
+    const root = document.querySelector<HTMLElement>('#root');
+    if (theme === 'light' && root) {
       root.style.background = '#333';
-    } else {
+    } else if (root) {
       root.style.background = '#fff';
     }
   }, [theme]);
@@ -25,10 +31,16 @@ const WindowControls = ({ theme, setTheme }) => {
   return (
     <div className='window-controls__container'>
       <div className={`window-controls__button-wrapper ${theme}`}>
-        <div className={`window-controls__button ${theme === 'dark' && 'selected'} ${theme}`} onClick={darkClick}>
+        <div
+          className={`window-controls__button ${theme === 'dark' && 'selected'} ${theme}`}
+          onClick={darkClick}
+        >
           DARK UI
         </div>
-        <div className={`window-controls__button ${theme === 'light' && 'selected'} ${theme}`} onClick={lightClick}>
+        <div
+          className={`window-controls__button ${theme === 'light' && 'selected'} ${theme}`}
+          onClick={lightClick}
+        >
           LIGHT UI
         </div>
       </div>
