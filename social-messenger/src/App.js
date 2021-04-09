@@ -34,7 +34,7 @@ const sort = {
 };
 
 const chatClient = StreamChat.getInstance(apiKey);
-chatClient.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
+chatClient.connectUser({ id: user }, userToken);
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);
