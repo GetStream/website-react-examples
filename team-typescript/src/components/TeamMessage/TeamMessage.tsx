@@ -1,23 +1,26 @@
 
 import type { SetStateAction } from 'react';
-import { defaultPinPermissions, MessageUIComponentProps, MessageTeam, StreamMessage, usePinHandler } from 'stream-chat-react';
+import { defaultPinPermissions, MessageUIComponentProps, MessageTeam, PinEnabledUserRoles, usePinHandler } from 'stream-chat-react';
 
 import './TeamMessage.css';
 
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
 type TeamMessageProps = MessageUIComponentProps & {
-  message: StreamMessage;
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
 }
 
 export const TeamMessage = (props: TeamMessageProps) => {
   const { handleOpenThread, handlePin, isMyMessage, message, setPinsOpen } = props;
 
-  const teamPermissions = { ...defaultPinPermissions.team, user: true };
-  const pinnedPermissions = {...defaultPinPermissions, team: teamPermissions};
+  // const { openThread } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  // const { client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
-  // @ts-expect-error
+  const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
+  const messagingPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.messaging, user: true };
+  const pinnedPermissions = {...defaultPinPermissions, team: teamPermissions, messaging: messagingPermissions};
+
+  //@ts-expect-error
   const { canPin } = usePinHandler<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>(message, pinnedPermissions);
 
   const getMessageActions = () => {
@@ -39,7 +42,7 @@ export const TeamMessage = (props: TeamMessageProps) => {
 
   return (
     <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
-      <MessageTeam {...props} {...{ getMessageActions }} handleOpenThread={handleOpenThreadOverride} handlePin={pinMessageOverride} />
+      <MessageTeam {...props} {...{ getMessageActions }} message={message} handleOpenThread={handleOpenThreadOverride} handlePin={pinMessageOverride} />
       {/** potentially add replies component here */}
     </div>
   );

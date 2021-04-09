@@ -9,7 +9,7 @@ import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
 
 import { SideBarFlag, SideBarLogo } from '../../assets';
 
-type ChannelListTeamsProps = Omit<ChannelListProps, 'filters'> & {
+type TeamChannelListProps = Omit<ChannelListProps, 'filters'> & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,7 +37,7 @@ const CompanyHeader = () => (
   </div>
 );
 
-export const ChannelListContainer: React.FC<ChannelListTeamsProps> = (props) => {
+export const ChannelListContainer: React.FC<TeamChannelListProps> = (props) => {
   const {
     filters,
     options,

@@ -55,10 +55,10 @@ export const ChannelSearch = () => {
           if (prevFocused === undefined || allChannels === undefined) return 0;
           return prevFocused === 0 ? allChannels.length - 1 : prevFocused - 1;
         });
-      } else if (event.key === '13') {
+      } else if (event.key === 'Enter') {
         event.preventDefault();
 
-        if (allChannels !== undefined && focused !== undefined){  
+        if (allChannels !== undefined && focused !== undefined) {  
           const channelToCheck = allChannels[focused];
 
           if (isChannel(channelToCheck)) {
@@ -66,8 +66,8 @@ export const ChannelSearch = () => {
           } else {
             channelByUser(channelToCheck);
           }
-
         }
+
         setFocused(undefined);
         setFocusedId('');
         setQuery('');
@@ -128,7 +128,6 @@ export const ChannelSearch = () => {
       setAllChannels([...channels, ...users]);
     } catch (event) {
       setQuery('');
-      console.log(event);
     }
 
     setLoading(false);
