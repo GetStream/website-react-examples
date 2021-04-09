@@ -1,7 +1,7 @@
 import { Avatar, useChatContext } from 'stream-chat-react';
-import type { Channel, ChannelFilters, UserResponse } from 'stream-chat';
+import type { Channel, UserResponse } from 'stream-chat';
 
-import { isChannel } from './utils';
+import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 
 import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
 
@@ -15,7 +15,7 @@ type ResultsDropdownProps = {
 }
 
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
-  result: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> | UserResponse<TeamUserType>;
+  result: ChannelOrUserType;
 }
 
 const SearchResult = (props: SearchResultProps) => {
@@ -41,23 +41,7 @@ const SearchResult = (props: SearchResultProps) => {
     return (
       <div
         onClick={async () => {
-          const filters: ChannelFilters = {
-            type: 'messaging',
-            member_count: 2,
-            members: { $eq: [user.id as string, client.userID || ''] },
-          };
-  
-          const [existingChannel] = await client.queryChannels(filters);
-  
-          if (existingChannel) {
-            return setActiveChannel(existingChannel);
-          }
-  
-          const newChannel = client.channel('messaging', {
-            members: [user.id as string, client.userID || ''],
-          });
-  
-          return setActiveChannel(newChannel);
+          channelByUser({ client, setActiveChannel, user });
         }}
         className={focusedId === user.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
       >
