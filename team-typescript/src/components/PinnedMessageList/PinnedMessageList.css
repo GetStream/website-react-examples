@@ -26,11 +26,20 @@
     padding-top: 20px;
   }
   
-  .pinned-messages__list .str-chat__message-team-actions {
+  .pinned-messages__list .str-chat__message-simple__actions {
     display: none;
   }
   
   .pinned-messages__list .str-chat__message-replies-count-button {
+    display: none;
+  }
+
+  .pinned-message {
+    margin-bottom: 10px;
+    padding: 5px;
+  }
+
+  .str-chat__reaction-list {
     display: none;
   }
   

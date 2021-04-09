@@ -1,6 +1,6 @@
 import type { SetStateAction } from 'react';
 
-import { useChannelContext, Message, MessageTeam } from 'stream-chat-react';
+import { useChannelContext, Message } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
@@ -28,7 +28,6 @@ export const PinnedMessageList = (props: PinnedMessageListProps) => {
             <Message
               key={message.id}
               message={message}
-              Message={MessageTeam}
             />
           ))}
       </div>

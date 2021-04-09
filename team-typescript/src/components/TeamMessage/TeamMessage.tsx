@@ -9,15 +9,7 @@ type TeamMessageProps = MessageUIComponentProps & {
 }
 
 export const TeamMessage = (props: TeamMessageProps) => {
-  const { handleOpenThread, isMyMessage, message, setPinsOpen } = props;
-
-  const getMessageActions = () => {
-    if (isMyMessage()) {
-      return ['edit', 'delete', 'pin', 'react', 'reply', 'flag'];
-
-    }
-    return ['pin', 'react', 'reply', 'flag', 'mute'];
-  };
+  const { handleOpenThread, message, setPinsOpen } = props;
 
   const handleOpenThreadOverride = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
     if (setPinsOpen) setPinsOpen(false);
@@ -26,7 +18,7 @@ export const TeamMessage = (props: TeamMessageProps) => {
 
   return (
     <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
-      <MessageTeam {...props} {...{ getMessageActions }} message={message} handleOpenThread={handleOpenThreadOverride} />
+      <MessageTeam {...props} message={message} handleOpenThread={handleOpenThreadOverride} />
       {/** potentially add replies component here */}
     </div>
   );
