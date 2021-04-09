@@ -1,6 +1,6 @@
 import type { SetStateAction } from 'react';
 
-import { useChannelContext, Message, MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
+import { useChannelContext, Message, MessageTeam } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
@@ -8,7 +8,7 @@ import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventTyp
 
 import { CloseThreadIcon } from '../../assets';
 
-type PinnedMessageListProps = Partial<MessageUIComponentProps> & {
+type PinnedMessageListProps = {
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
 }
 
@@ -24,12 +24,13 @@ export const PinnedMessageList = (props: PinnedMessageListProps) => {
         <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
       </div>
       <div className='pinned-messages__list'>
-        {channel.state.pinnedMessages.map((message) => (
-          <Message
-            message={message}
-            Message={MessageTeam}
-          />
-        ))}
+          {channel.state.pinnedMessages.map((message) => (
+            <Message
+              key={message.id}
+              message={message}
+              Message={MessageTeam}
+            />
+          ))}
       </div>
     </div>
   );
