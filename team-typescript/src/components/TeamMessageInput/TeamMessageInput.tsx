@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, logChatPromiseExecution, UserResponse } from 'stream-chat';
+import { Attachment, logChatPromiseExecution, MessageResponse, UserResponse } from 'stream-chat';
 import { ChatAutoComplete, EmojiPicker, MessageInputProps, useChannelContext, useChatContext, useMessageInput, StreamMessage } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
@@ -70,6 +70,7 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
         attachments: message.attachments,
         mentioned_users: message.mentioned_users,
         parent_id: message.parent?.id,
+        parent: message.parent as MessageResponse,
         text: message.text
       };
 

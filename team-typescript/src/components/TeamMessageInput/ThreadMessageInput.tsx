@@ -1,5 +1,5 @@
 import { useCallback, useState } from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
+import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
 import {
   useChannelContext,
   ChatAutoComplete,
@@ -31,6 +31,7 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
       attachments: message.attachments,
       mentioned_users: message.mentioned_users,
       parent_id: message.parent?.id,
+      parent: message.parent as MessageResponse,
       text: message.text
     };
 

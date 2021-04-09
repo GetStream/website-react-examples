@@ -1,6 +1,6 @@
 import type { SetStateAction } from 'react';
 
-import { useChannelContext, MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
+import { useChannelContext, Message, MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
@@ -17,14 +17,6 @@ export const PinnedMessageList = (props: PinnedMessageListProps) => {
 
   const { channel, closeThread } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
-  // const getMessageActions = () => {
-  //   if (isMyMessage && isMyMessage()) {
-  //     return ['edit', 'delete', 'pin', 'react', 'reply', 'flag'];
-
-  //   }
-  //   return ['pin', 'react', 'reply', 'flag', 'mute'];
-  // };
-
   return (
     <div className='pinned-messages__container'>
       <div className='pinned-messages__header'>
@@ -33,8 +25,10 @@ export const PinnedMessageList = (props: PinnedMessageListProps) => {
       </div>
       <div className='pinned-messages__list'>
         {channel.state.pinnedMessages.map((message) => (
-          //@ts-expect-error
-          <MessageTeam {...props} key={message.id} message={message} />
+          <Message
+            message={message}
+            Message={MessageTeam}
+          />
         ))}
       </div>
     </div>
