@@ -25,6 +25,14 @@
   .pinned-messages__list {
     padding-top: 20px;
   }
+
+  .pinned-message {
+    background: #fff !important;
+  }
+
+  .pinned-message:hover {
+    background: rgba(0, 0, 0, 0.03) !important;
+  }
   
   .pinned-messages__list .str-chat__message-simple__actions {
     display: none;
@@ -37,6 +45,10 @@
   .pinned-message {
     margin-bottom: 10px;
     padding: 5px;
+  }
+
+  .pinned-message:hover {
+    background: rgba(0, 0, 0, 0.03);
   }
 
   .str-chat__reaction-list {

@@ -1,7 +1,7 @@
 import { useCallback, useState } from 'react';
 
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, logChatPromiseExecution, MessageResponse, UserResponse } from 'stream-chat';
+import { Attachment, logChatPromiseExecution, MessageResponse,UserResponse } from 'stream-chat';
 import { ChatAutoComplete, EmojiPicker, MessageInputProps, useChannelContext, useChatContext, useMessageInput, StreamMessage } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
