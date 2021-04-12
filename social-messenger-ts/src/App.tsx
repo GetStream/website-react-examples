@@ -19,7 +19,7 @@ import {
 import { getRandomImage } from './assets';
 
 const urlParams = new URLSearchParams(window.location.search);
-const apiKey = process.env.REACT_APP_STREAM_KEY_YETI;
+const apiKey = process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
