@@ -169,7 +169,6 @@ const MessagingInput = (props: MessageInputProps) => {
         className='messaging-input__button'
         role='button'
         aria-roledescription='button'
-        // @ts-expect-error TODO: fix once library type is fixed
         onClick={messageInput.handleSubmit}
       >
         <SendIcon />

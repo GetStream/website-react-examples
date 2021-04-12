@@ -9,7 +9,15 @@ import { ChannelInfoIcon, ChannelSaveIcon, getCleanImage, HamburgerIcon } from '
 
 import type { ChannelMemberResponse } from 'stream-chat';
 
-import type { AttachmentType, ChannelType, CommandType, EventType, MessageType, ReactionType, UserType } from '../../App';
+import type {
+  AttachmentType,
+  ChannelType,
+  CommandType,
+  EventType,
+  MessageType,
+  ReactionType,
+  UserType,
+} from '../../App';
 
 const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   if (members.length === 1) {
@@ -66,7 +74,15 @@ const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
 };
 
 const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void }) => {
-  const { channel, client } = useChannelContext<AttachmentType, ChannelType, CommandType, EventType, MessageType, ReactionType, UserType>();
+  const { channel, client } = useChannelContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
 
   const [channelName, setChannelName] = useState(channel.data?.name || '');
   const [isEditing, setIsEditing] = useState(false);
@@ -74,11 +90,16 @@ const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const members = Object.values(channel.state.members || {}).filter((member) => member.user?.id !== client?.user?.id);
+  const members = Object.values(channel.state.members || {}).filter(
+    (member) => member.user?.id !== client?.user?.id,
+  );
 
   const updateChannel = async () => {
     if (channelName && channelName !== channel.data?.name) {
-      await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
+      await channel.update(
+        { name: channelName },
+        { text: `Channel name changed to ${channelName}` },
+      );
     }
 
     setIsEditing(false);
@@ -92,7 +113,9 @@ const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void
 
   useEffect(() => {
     if (!channelName) {
-      setTitle(members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '));
+      setTitle(
+        members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '),
+      );
     }
   }, [channelName, members]);
 
@@ -122,10 +145,15 @@ const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void
         <HamburgerIcon />
       </div>
       <AvatarGroup members={members} />
-      {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
+      {!isEditing ? (
+        <div className='channel-header__name'>{channelName || title}</div>
+      ) : (
+        <EditHeader />
+      )}
       <div className='messaging__channel-header__right'>
         <TypingIndicator />
-        {channelName !== 'Social Demo' && (!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />)}
+        {channelName !== 'Social Demo' &&
+          (!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />)}
       </div>
     </div>
   );

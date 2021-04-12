@@ -1,12 +1,15 @@
-// @ts-expect-error TODO: correct once library type is fixed
-export const CloseThreadIcon = ({ closeThread }) => (
+export const CloseThreadIcon = ({
+  closeThread,
+}: {
+  closeThread?: (event: React.BaseSyntheticEvent) => void;
+}) => (
   <svg
     width='40'
     height='40'
     viewBox='0 0 40 40'
     fill='none'
     xmlns='http://www.w3.org/2000/svg'
-    onClick={(e) => closeThread(e)}
+    onClick={closeThread}
     style={{ cursor: 'pointer', marginRight: '10px' }}
   >
     <path
