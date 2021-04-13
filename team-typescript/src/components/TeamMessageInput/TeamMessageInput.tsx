@@ -202,10 +202,9 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
                 ...additionalTextareaProps,
               }}
             />
-            {// @ts-expect-error - TODO: type of the onClick needs to be updated in stream-chat-react
             <div className='team-message-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
               <SendButton />
-            </div>}
+            </div>
           </div>
           <div className='team-message-input__bottom'>
             <div className='team-message-input__icons'>

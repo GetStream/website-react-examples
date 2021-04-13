@@ -109,7 +109,6 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
           className="thread-message-input__button"
           role="button"
           aria-roledescription="button"
-          // @ts-expect-error - TODO: type of the onClick needs to be updated in stream-chat-react
           onClick={messageInput.handleSubmit}
         >
           <SendButton />

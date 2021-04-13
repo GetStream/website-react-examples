@@ -11,7 +11,7 @@ type TeamMessageProps = MessageUIComponentProps & {
 export const TeamMessage = (props: TeamMessageProps) => {
   const { handleOpenThread, message, setPinsOpen } = props;
 
-  const handleOpenThreadOverride = (event: React.MouseEvent<HTMLElement, MouseEvent>) => {
+  const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
     if (setPinsOpen) setPinsOpen(false);
     handleOpenThread(event);
   };
