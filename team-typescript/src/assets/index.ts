@@ -17,7 +17,7 @@ export { SideBarLogo } from './SideBarLogo';
 export { SmileyFace } from './SmileyFace';
 export { StrikeThroughIcon } from './StrikeThroughIcon';
 
-const randomImages: string[] = [
+const randomImages = [
   require('./userImages/photo-1438761681033-6461ffad8d80.jpeg'),
   require('./userImages/photo-1463453091185-61582044d556.jpeg'),
   require('./userImages/photo-1503467913725-8484b65b0715.jpeg'),
@@ -45,7 +45,17 @@ const randomImages: string[] = [
   require('./userImages/photo-1531251445707-1f000e1e87d0.jpeg'),
 ];
 
-export const getRandomImage = (): string => {
+export const getRandomImage = () => {
   const index = Math.floor(Math.random() * 24);
-  return randomImages[index];
+  const randomImage = randomImages[index];
+
+  if (typeof randomImage === 'string') {
+    return randomImage;
+  }
+
+  if (randomImage.default) {
+    return randomImage.default as string;
+  }
+
+  return '';
 };
