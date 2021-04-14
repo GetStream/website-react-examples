@@ -33,6 +33,7 @@ const i18nInstance = new Streami18n({
 
 const chatClient = StreamChat.getInstance(apiKey);
 chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
+
 const App = () => {
   const [channel, setChannel] = useState(null);
   const [currentTheme, setCurrentTheme] = useState('light');
