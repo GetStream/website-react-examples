@@ -90,7 +90,9 @@ export const GamingMessage = (props) => {
         </p>
         <p className='message'>{message.text}</p>
       </div>
-      {message?.attachments && <Attachment attachments={message.attachments} actionHandler={handleAction} />}
+      {message?.attachments && (
+        <Attachment attachments={message.attachments} actionHandler={handleAction} />
+      )}
       <div className='custom-message__bottom-wrapper'>
         {hasVotes && <ReactionList />}
         {!!message.reply_count && (

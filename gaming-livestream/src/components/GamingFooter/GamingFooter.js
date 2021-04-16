@@ -84,13 +84,19 @@ export const GamingFooter = (props) => {
               <AlarmIcon />
             </div>
           </div>
-          <button className={`follow-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`} onClick={() => setFollowed(!followed)}>
+          <button
+            className={`follow-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}
+            onClick={() => setFollowed(!followed)}
+          >
             <div>
               {followed ? <HeartFullIcon /> : <HeartHollowIcon />}
               <p>Follow</p>
             </div>
           </button>
-          <button className={`sub-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`} onClick={() => setSubscribed(!subscribed)}>
+          <button
+            className={`sub-btn ${!isFullScreen && showMembers ? 'shrink' : ''}`}
+            onClick={() => setSubscribed(!subscribed)}
+          >
             <div>
               {subscribed ? <SubscribeFullIcon /> : <SubscribeHollowIcon />}
               <p>Subscribe</p>

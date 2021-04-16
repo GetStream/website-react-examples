@@ -71,7 +71,11 @@ export const UserList = ({ filters = {}, setSelectedUsers }) => {
       setLoading(true);
 
       try {
-        const response = await client.queryUsers({ id: { $ne: client.userID }, ...filters }, { id: 1 }, { limit: 6 });
+        const response = await client.queryUsers(
+          { id: { $ne: client.userID }, ...filters },
+          { id: 1 },
+          { limit: 6 },
+        );
 
         if (response.users.length) {
           setUsers(response.users);
@@ -109,7 +113,10 @@ export const UserList = ({ filters = {}, setSelectedUsers }) => {
       {loading ? (
         <div className='user-list__message'>Loading users...</div>
       ) : (
-        users.length && users.map((user, i) => <UserItem index={i} key={user.id} setSelectedUsers={setSelectedUsers} user={user} />)
+        users.length &&
+        users.map((user, i) => (
+          <UserItem index={i} key={user.id} setSelectedUsers={setSelectedUsers} user={user} />
+        ))
       )}
     </ListContainer>
   );

@@ -8,7 +8,8 @@ import { CreateChannelIcon } from '../../assets';
 
 const MessagingChannelList = ({ children, error = false, loading, onCreateChannel }) => {
   const { client, setActiveChannel } = useContext(ChatContext);
-  const { id, image = require('../../assets/stream.png'), name = 'Example User' } = client.user || {};
+  const { id, image = require('../../assets/stream.png'), name = 'Example User' } =
+    client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (client) => {
@@ -41,7 +42,9 @@ const MessagingChannelList = ({ children, error = false, loading, onCreateChanne
   if (error) {
     return (
       <ListHeaderWrapper>
-        <div className='messaging__channel-list__message'>Error loading conversations, please try again momentarily.</div>
+        <div className='messaging__channel-list__message'>
+          Error loading conversations, please try again momentarily.
+        </div>
       </ListHeaderWrapper>
     );
   }

@@ -12,7 +12,9 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
   const teamHeader = `# ${channel.data.name || channel.data.id || 'random'}`;
 
   const getMessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user.id !== client.userID,
+    );
     const additionalMembers = members.length - 3;
 
     if (!members.length) {
@@ -39,7 +41,9 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
             </div>
           );
         })}
-        {additionalMembers > 0 && <p className='team-channel-header__name user'>{`and ${additionalMembers} more`}</p>}
+        {additionalMembers > 0 && (
+          <p className='team-channel-header__name user'>{`and ${additionalMembers} more`}</p>
+        )}
       </div>
     );
   };

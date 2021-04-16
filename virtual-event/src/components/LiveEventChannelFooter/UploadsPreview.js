@@ -25,7 +25,10 @@ export const UploadsPreview = ({
           handleRetry={uploadImage}
           handleFiles={uploadNewFiles}
           multiple={channelContext.multipleUploads}
-          disabled={channelContext.maxNumberOfFiles !== undefined && numberOfUploads >= channelContext.maxNumberOfFiles}
+          disabled={
+            channelContext.maxNumberOfFiles !== undefined &&
+            numberOfUploads >= channelContext.maxNumberOfFiles
+          }
         />
       )}
       {fileOrder.length > 0 && (

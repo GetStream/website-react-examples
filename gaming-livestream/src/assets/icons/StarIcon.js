@@ -11,7 +11,14 @@ const StarIcon = () => (
       fill='url(#paint0_linear)'
     />
     <defs>
-      <linearGradient id='paint0_linear' x1='7' y1='6' x2='17' y2='18' gradientUnits='userSpaceOnUse'>
+      <linearGradient
+        id='paint0_linear'
+        x1='7'
+        y1='6'
+        x2='17'
+        y2='18'
+        gradientUnits='userSpaceOnUse'
+      >
         <stop stopColor='#FF00E5' />
         <stop offset='1' stopColor='#FF9900' />
       </linearGradient>

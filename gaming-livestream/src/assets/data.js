@@ -8,7 +8,12 @@ import UserIcon from './icons/UserIcon';
 import VIPIcon from './icons/VIPIcon';
 
 export const upgrades = [
-  { name: 'Unlimited Karma', description: 'Subscribe for $3 / month', active: true, img: 'infinite' },
+  {
+    name: 'Unlimited Karma',
+    description: 'Subscribe for $3 / month',
+    active: true,
+    img: 'infinite',
+  },
   { name: 'Karma +10', description: 'Activate mobile notifications', active: false, img: 'bell' },
   { name: 'Karma +10', description: 'Allow livestream in AdBlock', active: false, img: 'hand' },
   { name: 'Karma +10', description: 'Be a member for 100 days', active: false, img: 'member' },

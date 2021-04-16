@@ -70,13 +70,18 @@ const MessagingChannelHeader = (props) => {
 
   const inputRef = useRef();
 
-  const members = Object.values(channel.state?.members || {}).filter((member) => member.user?.id !== client?.user?.id);
+  const members = Object.values(channel.state?.members || {}).filter(
+    (member) => member.user?.id !== client?.user?.id,
+  );
 
   const updateChannel = async (e) => {
     if (e) e.preventDefault();
 
     if (channelName && channelName !== channel.data.name) {
-      await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
+      await channel.update(
+        { name: channelName },
+        { text: `Channel name changed to ${channelName}` },
+      );
     }
 
     setIsEditing(false);
@@ -90,7 +95,9 @@ const MessagingChannelHeader = (props) => {
 
   useEffect(() => {
     if (!channelName) {
-      setTitle(members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '));
+      setTitle(
+        members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '),
+      );
     }
   }, [channelName, members]);
 
@@ -120,10 +127,15 @@ const MessagingChannelHeader = (props) => {
         <HamburgerIcon />
       </div>
       {getAvatarGroup(members)}
-      {!isEditing ? <div className='channel-header__name'>{channelName || title}</div> : <EditHeader />}
+      {!isEditing ? (
+        <div className='channel-header__name'>{channelName || title}</div>
+      ) : (
+        <EditHeader />
+      )}
       <div className='messaging__channel-header__right'>
         <TypingIndicator />
-        {channelName !== 'Social Demo' && (!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />)}
+        {channelName !== 'Social Demo' &&
+          (!isEditing ? <ChannelInfoIcon {...{ isEditing, setIsEditing }} /> : <ChannelSaveIcon />)}
       </div>
     </div>
   );

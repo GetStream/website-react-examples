@@ -96,14 +96,18 @@ const App = () => {
       });
 
       await initialChannel.sendMessage({
-        text: 'My company is looking to upgrade our account to Enterprise. Can you provide me with some additional pricing information?',
+        text:
+          'My company is looking to upgrade our account to Enterprise. Can you provide me with some additional pricing information?',
       });
 
       await initialChannel.stopWatching();
       await initialClient.disconnect();
 
       const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
-      await client.connectUser({ id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') }, agentUserToken);
+      await client.connectUser(
+        { id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') },
+        agentUserToken,
+      );
 
       const [existingChannel] = await client.queryChannels({
         id: agentChannelId,

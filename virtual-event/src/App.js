@@ -76,7 +76,9 @@ const App = () => {
           <div className='main-container-inner'>
             <div
               className='main-container-inner__left'
-              style={currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }}
+              style={
+                currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }
+              }
             >
               <div style={{ height: '100%', width: '100%', position: 'relative', flex: '0 0 55%' }}>
                 <div className='live-video-icon'>

@@ -30,7 +30,11 @@ const ThreadHeader = ({ closeThread, thread }) => {
 export const GamingThread = () => {
   return (
     <>
-      <Thread Message={GamingMessage} MessageInput={GamingMessageInput} ThreadHeader={ThreadHeader} />
+      <Thread
+        Message={GamingMessage}
+        MessageInput={GamingMessageInput}
+        ThreadHeader={ThreadHeader}
+      />
     </>
   );
 };

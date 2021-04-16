@@ -9,13 +9,7 @@ import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
 
 export const ChannelContainer = (props) => {
-  const {
-    createType,
-    isCreating,
-    isEditing,
-    setIsCreating,
-    setIsEditing,
-  } = props;
+  const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
   const { channel } = useContext(ChatContext);
 
@@ -25,7 +19,7 @@ export const ChannelContainer = (props) => {
     const filters = {};
 
     return (
-      <div className="channel__container">
+      <div className='channel__container'>
         <CreateChannel {...{ createType, filters, setIsCreating }} />
       </div>
     );
@@ -42,14 +36,14 @@ export const ChannelContainer = (props) => {
     }
 
     return (
-      <div className="channel__container">
+      <div className='channel__container'>
         <EditChannel {...{ filters, setIsEditing }} />
       </div>
     );
   }
 
   return (
-    <div className="channel__container">
+    <div className='channel__container'>
       <Channel>
         <ChannelInner
           {...{

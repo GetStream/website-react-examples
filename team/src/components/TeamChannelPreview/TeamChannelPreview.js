@@ -10,10 +10,14 @@ export const TeamChannelPreview = (props) => {
 
   const { channel: activeChannel, client } = useContext(ChatContext);
 
-  const ChannelPreview = () => <p className='channel-preview__item'># {channel.data.name || channel.data.id || 'random'}</p>;
+  const ChannelPreview = () => (
+    <p className='channel-preview__item'># {channel.data.name || channel.data.id || 'random'}</p>
+  );
 
   const DirectPreview = () => {
-    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user.id !== client.userID,
+    );
     const defaultName = 'Johnny Blaze';
 
     if (!members.length || members.length === 1) {
@@ -33,7 +37,8 @@ export const TeamChannelPreview = (props) => {
         </span>
         <Avatar image={members[1]?.user.image || undefined} size={18} />
         <p>
-          {members[0]?.user.name || members[0]?.user.id || defaultName}, {members[1]?.user.name || members[1]?.user.id || defaultName}
+          {members[0]?.user.name || members[0]?.user.id || defaultName},{' '}
+          {members[1]?.user.name || members[1]?.user.id || defaultName}
         </p>
       </div>
     );
@@ -41,7 +46,11 @@ export const TeamChannelPreview = (props) => {
 
   return (
     <div
-      className={channel?.id === activeChannel?.id ? 'channel-preview__wrapper__selected' : 'channel-preview__wrapper'}
+      className={
+        channel?.id === activeChannel?.id
+          ? 'channel-preview__wrapper__selected'
+          : 'channel-preview__wrapper'
+      }
       onClick={() => {
         setIsCreating(false);
         setIsEditing(false);

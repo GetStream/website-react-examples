@@ -2,7 +2,13 @@ import React, { useEffect, useRef } from 'react';
 import './SloMoModal.css';
 import { SloMoToggle } from './SloMoToggle';
 
-export const SloMoModal = ({ sloMoDelay, setShowModal, setSloMoDelay, setToggleSwitchPosition, toggleSwitchPosition }) => {
+export const SloMoModal = ({
+  sloMoDelay,
+  setShowModal,
+  setSloMoDelay,
+  setToggleSwitchPosition,
+  toggleSwitchPosition,
+}) => {
   const wrapperRef = useRef(null);
 
   // eslint-disable-next-line consistent-return
@@ -58,7 +64,14 @@ export const SloMoModal = ({ sloMoDelay, setShowModal, setSloMoDelay, setToggleS
       <div className='slo-mo-modal__container__bottom '>
         <div>Seconds 1-100</div>
         <div>
-          <input onChange={handleChange} className='slo-mo-modal__text-input' min='0' max='100' type='number' value={sloMoDelay}></input>
+          <input
+            onChange={handleChange}
+            className='slo-mo-modal__text-input'
+            min='0'
+            max='100'
+            type='number'
+            value={sloMoDelay}
+          ></input>
         </div>
       </div>
     </div>

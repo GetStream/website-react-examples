@@ -26,7 +26,9 @@ const ThreadHeader = ({ closeThread, thread }) => {
 };
 
 const MessagingThread = () => {
-  return <Thread Message={CustomMessage} MessageInput={MessagingInput} ThreadHeader={ThreadHeader} />;
+  return (
+    <Thread Message={CustomMessage} MessageInput={MessagingInput} ThreadHeader={ThreadHeader} />
+  );
 };
 
 export default MessagingThread;

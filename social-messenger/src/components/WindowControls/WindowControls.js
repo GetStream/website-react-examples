@@ -25,10 +25,16 @@ const WindowControls = ({ theme, setTheme }) => {
   return (
     <div className='window-controls__container'>
       <div className={`window-controls__button-wrapper ${theme}`}>
-        <div className={`window-controls__button ${theme === 'dark' && 'selected'} ${theme}`} onClick={darkClick}>
+        <div
+          className={`window-controls__button ${theme === 'dark' && 'selected'} ${theme}`}
+          onClick={darkClick}
+        >
           DARK UI
         </div>
-        <div className={`window-controls__button ${theme === 'light' && 'selected'} ${theme}`} onClick={lightClick}>
+        <div
+          className={`window-controls__button ${theme === 'light' && 'selected'} ${theme}`}
+          onClick={lightClick}
+        >
           LIGHT UI
         </div>
       </div>

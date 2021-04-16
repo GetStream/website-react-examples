@@ -10,14 +10,14 @@ import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
 import { SideBarFlag, SideBarLogo } from '../../assets';
 
 const SideBar = () => (
-  <div className="channel-list__sidebar">
-    <div className="channel-list__sidebar__icon1">
-      <div className="icon1__inner">
+  <div className='channel-list__sidebar'>
+    <div className='channel-list__sidebar__icon1'>
+      <div className='icon1__inner'>
         <SideBarLogo />
       </div>
     </div>
-    <div className="channel-list__sidebar__icon2">
-      <div className="icon2__inner">
+    <div className='channel-list__sidebar__icon2'>
+      <div className='icon2__inner'>
         <SideBarFlag />
       </div>
     </div>
@@ -25,25 +25,18 @@ const SideBar = () => (
 );
 
 const CompanyHeader = () => (
-  <div className="channel-list__header">
-    <p className="channel-list__header__text">Worksly</p>
+  <div className='channel-list__header'>
+    <p className='channel-list__header__text'>Worksly</p>
   </div>
 );
 
 export const ChannelListContainer = (props) => {
-  const {
-    filters,
-    options,
-    setCreateType,
-    setIsCreating,
-    setIsEditing,
-    sort,
-  } = props;
+  const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
   return (
-    <div className="channel-list__container">
+    <div className='channel-list__container'>
       <SideBar />
-      <div className="channel-list__list__wrapper">
+      <div className='channel-list__list__wrapper'>
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
@@ -54,14 +47,14 @@ export const ChannelListContainer = (props) => {
             <TeamChannelList
               {...listProps}
               {...{ setCreateType, setIsCreating, setIsEditing }}
-              type="team"
+              type='team'
             />
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
               {...previewProps}
               {...{ setIsCreating, setIsEditing }}
-              type="team"
+              type='team'
             />
           )}
         />
@@ -73,14 +66,14 @@ export const ChannelListContainer = (props) => {
             <TeamChannelList
               {...listProps}
               {...{ setCreateType, setIsCreating, setIsEditing }}
-              type="messaging"
+              type='messaging'
             />
           )}
           Preview={(previewProps) => (
             <TeamChannelPreview
               {...previewProps}
               {...{ setIsCreating, setIsEditing }}
-              type="messaging"
+              type='messaging'
             />
           )}
         />

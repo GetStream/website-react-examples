@@ -2,7 +2,15 @@ import React from 'react';
 
 const SubscribeFullIcon = () => (
   <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
-    <mask id='mask0' mask-type='alpha' maskUnits='userSpaceOnUse' x='0' y='0' width='16' height='16'>
+    <mask
+      id='mask0'
+      mask-type='alpha'
+      maskUnits='userSpaceOnUse'
+      x='0'
+      y='0'
+      width='16'
+      height='16'
+    >
       <path
         fillRule='evenodd'
         clipRule='evenodd'

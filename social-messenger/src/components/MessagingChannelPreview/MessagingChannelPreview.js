@@ -93,11 +93,17 @@ const MessagingChannelPreview = (props) => {
 
   const { channel: activeChannel, client } = useContext(ChatContext);
 
-  const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+  const members = Object.values(channel.state.members).filter(
+    ({ user }) => user.id !== client.userID,
+  );
 
   return (
     <div
-      className={channel?.id === activeChannel?.id ? 'channel-preview__container selected' : 'channel-preview__container'}
+      className={
+        channel?.id === activeChannel?.id
+          ? 'channel-preview__container selected'
+          : 'channel-preview__container'
+      }
       onClick={() => {
         setIsCreating(false);
         setActiveChannel(channel);
@@ -106,7 +112,9 @@ const MessagingChannelPreview = (props) => {
       {getAvatarGroup(members)}
       <div className='channel-preview__content-wrapper'>
         <div className='channel-preview__content-top'>
-          <p className='channel-preview__content-name'>{channel.data.name || getChannelName(members)}</p>
+          <p className='channel-preview__content-name'>
+            {channel.data.name || getChannelName(members)}
+          </p>
           <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
         </div>
         <p className='channel-preview__content-message'>{latestMessage || 'Send a message'}</p>

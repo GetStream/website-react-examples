@@ -9813,10 +9813,22 @@ react-file-icon@^0.2.0:
     react-dom "^16.2.0"
     tinycolor2 "^1.4.1"
 
-react-file-utils@1.0.2, react-file-utils@^1.0.2:
+react-file-utils@1.0.2:
   version "1.0.2"
   resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.2.tgz#c2719584b79f551e12b2b56457ce8bdd3155aeb1"
   integrity sha512-nMLe+Lrebq+Nr9Fk8LmgQ8ofl5uwKFx2vwwoT0Gbe1B+EP95PBivC6kxt8IB5KyD7hYSWt4IHYm12RiXQ60uiw==
+  dependencies:
+    "@fortawesome/fontawesome-svg-core" "^1.2.13"
+    "@fortawesome/free-regular-svg-icons" "^5.7.0"
+    "@fortawesome/react-fontawesome" "^0.1.4"
+    blueimp-load-image "^5.13.0"
+    react-dropzone "11.2.0"
+    react-file-icon "^0.2.0"
+
+react-file-utils@^1.0.3:
+  version "1.0.3"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.3.tgz#1b0caa1a1b39573e7bbc4badd722bf1d14e1191a"
+  integrity sha512-+7QExg8C3dX3IE1Kg6dBCOyUvrfBa+//bnGl22nD/NFYus0oGBUOb3uMyRmkbSIs+wKuWbzb9g14e9jGht9m1Q==
   dependencies:
     "@fortawesome/fontawesome-svg-core" "^1.2.13"
     "@fortawesome/free-regular-svg-icons" "^5.7.0"

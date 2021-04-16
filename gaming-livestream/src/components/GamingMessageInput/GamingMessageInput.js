@@ -104,7 +104,12 @@ export const GamingMessageInput = React.memo((props) => {
           <SendIcon text={messageInput.text} />
         </button>
       </div>
-      {!thread && <EmojiPicker emojiPickerIsOpen={messageInput.emojiPickerIsOpen} onSelectEmoji={selectEmoji} />}
+      {!thread && (
+        <EmojiPicker
+          emojiPickerIsOpen={messageInput.emojiPickerIsOpen}
+          onSelectEmoji={selectEmoji}
+        />
+      )}
     </div>
   );
 });

@@ -20,7 +20,9 @@ export const LiveEventMessage = (props) => {
 
   const MyUserAvatar = (props) => {
     if (isMyMessage()) {
-      return <Avatar {...props} image={require('../../assets/AvatarRobertImg.png')} name={'Robert'} />;
+      return (
+        <Avatar {...props} image={require('../../assets/AvatarRobertImg.png')} name={'Robert'} />
+      );
     }
     return <Avatar {...props} />;
   };
@@ -50,7 +52,13 @@ export const LiveEventMessage = (props) => {
   };
 
   return (
-    <div className={isPinned ? 'live-event-message__container__pinned' : 'live-event-message__container__unpinned'}>
+    <div
+      className={
+        isPinned
+          ? 'live-event-message__container__pinned'
+          : 'live-event-message__container__unpinned'
+      }
+    >
       <div className='pin-icon' style={{ marginLeft: '15px' }} onClick={pinChecker}>
         {isPinned ? theme === 'livestream light' ? <PinIcon /> : <PinIconDark /> : null}
       </div>
@@ -61,7 +69,11 @@ export const LiveEventMessage = (props) => {
           </div>
         )}
         <div className='new-actions'>
-          <MessageActions {...props} handleMute={pinChecker} getMessageActions={getMessageActions} />
+          <MessageActions
+            {...props}
+            handleMute={pinChecker}
+            getMessageActions={getMessageActions}
+          />
         </div>
         <MessageLivestream {...props} Avatar={MyUserAvatar} ReactionsList={LiveEventReactions} />
       </div>

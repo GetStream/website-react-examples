@@ -7,13 +7,13 @@ export const SloMoToggle = ({ isOn, handleToggle, onColor }) => {
       <input
         checked={isOn}
         onChange={handleToggle}
-        className="slo-mo-toggle__container"
+        className='slo-mo-toggle__container'
         id={`react-switch-new`}
-        type="checkbox"
+        type='checkbox'
       />
       <label
         style={{ background: isOn && onColor }}
-        className="slo-mo-toggle__label "
+        className='slo-mo-toggle__label '
         htmlFor={`react-switch-new`}
       >
         <span className={`slo-mo-toggle__button`} />

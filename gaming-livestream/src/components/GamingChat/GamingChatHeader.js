@@ -1,7 +1,15 @@
 import React, { useState } from 'react';
 
 export const GamingChatHeader = (props) => {
-  const { isFullScreen, setIsFullScreen, setShowMembers, setShowUpgrade, setTimestamp, showMembers, timestamp } = props;
+  const {
+    isFullScreen,
+    setIsFullScreen,
+    setShowMembers,
+    setShowUpgrade,
+    setTimestamp,
+    showMembers,
+    timestamp,
+  } = props;
 
   const [optionsSelected, setOptionsSelected] = useState(false);
 

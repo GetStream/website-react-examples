@@ -35,7 +35,10 @@ export const LiveEventMessageInput = (props) => {
   return (
     <div className='live-event-message-input__input'>
       <EmojiPicker {...messageInput} onSelectEmoji={selectEmoji} />
-      <ImageDropzone disabled={messageInput.numberOfUploads >= 2} handleFiles={messageInput.uploadNewFiles}>
+      <ImageDropzone
+        disabled={messageInput.numberOfUploads >= 2}
+        handleFiles={messageInput.uploadNewFiles}
+      >
         <UploadsPreview {...messageInput} />
         <ChatAutoComplete
           commands={messageInput.getCommands()}

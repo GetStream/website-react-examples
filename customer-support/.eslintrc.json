@@ -1,14 +1,6 @@
 {
   "root": true,
-  "plugins": [
-    "babel",
-    "markdown",
-    "sonarjs",
-    "prettier",
-    "react-hooks",
-    "jest-dom",
-    "jest"
-  ],
+  "plugins": ["babel", "markdown", "sonarjs", "prettier", "react-hooks", "jest-dom", "jest"],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",

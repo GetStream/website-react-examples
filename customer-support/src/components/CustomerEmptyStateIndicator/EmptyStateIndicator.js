@@ -20,7 +20,11 @@ export const EmptyStateIndicator = ({ channel }) => {
       <div className='empty-state__responses'>
         {openingPrompts.map((prompt, i) => {
           return (
-            <div className='empty-state__response__wrapper' key={i} onClick={() => sendInitialMessage(prompt, i)}>
+            <div
+              className='empty-state__response__wrapper'
+              key={i}
+              onClick={() => sendInitialMessage(prompt, i)}
+            >
               <p className='empty-state__response__text'>{prompt}</p>
             </div>
           );

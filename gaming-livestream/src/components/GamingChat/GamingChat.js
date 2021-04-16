@@ -23,7 +23,15 @@ const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TAR
 const chatClient = StreamChat.getInstance(apiKey);
 
 export const GamingChat = (props) => {
-  const { isFullScreen, setPopUpText, setShowPopUp, setShowMembers, setShowUpgrade, showMembers, showUpgrade } = props;
+  const {
+    isFullScreen,
+    setPopUpText,
+    setShowPopUp,
+    setShowMembers,
+    setShowUpgrade,
+    showMembers,
+    showUpgrade,
+  } = props;
 
   const [channel, setChannel] = useState(null);
   const [timestamp, setTimestamp] = useState(false);
@@ -54,9 +62,9 @@ export const GamingChat = (props) => {
 
   return (
     <section
-      className={`chat-members-container ${showMembers ? 'show-members' : 'hide-members'} ${isFullScreen ? 'full-screen' : 'in-screen'} ${
-        showUpgrade ? 'show-upgrade' : ''
-      }`}
+      className={`chat-members-container ${showMembers ? 'show-members' : 'hide-members'} ${
+        isFullScreen ? 'full-screen' : 'in-screen'
+      } ${showUpgrade ? 'show-upgrade' : ''}`}
     >
       {channel && (
         <div className='chat-container'>

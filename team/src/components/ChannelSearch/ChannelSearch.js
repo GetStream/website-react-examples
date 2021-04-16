@@ -82,7 +82,10 @@ export const ChannelSearch = () => {
       const userResponse = client.queryUsers(
         {
           id: { $ne: client.userID },
-          $and: [{ name: { $autocomplete: text } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
+          $and: [
+            { name: { $autocomplete: text } },
+            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
+          ],
         },
         { id: 1 },
         { limit: 5 },
@@ -122,7 +125,13 @@ export const ChannelSearch = () => {
         <div className='channel-search__input__icon'>
           <SearchIcon />
         </div>
-        <input className='channel-search__input__text' onChange={onSearch} placeholder='Search' type='text' value={query} />
+        <input
+          className='channel-search__input__text'
+          onChange={onSearch}
+          placeholder='Search'
+          type='text'
+          value={query}
+        />
       </div>
       {query && (
         <ResultsDropdown

@@ -3,14 +3,12 @@ import './LiveEventWindowControls.css';
 
 export const LiveEventWindowControls = ({ currentTheme, setCurrentTheme }) => {
   return (
-    <div className="window-controls-container">
-      <div className="window-controls-slider">
+    <div className='window-controls-container'>
+      <div className='window-controls-slider'>
         <div
           onClick={() => setCurrentTheme('light')}
           className={
-            currentTheme === 'light'
-              ? 'window-controls-selected'
-              : 'window-controls-unselected'
+            currentTheme === 'light' ? 'window-controls-selected' : 'window-controls-unselected'
           }
         >
           LIGHT UI
@@ -18,9 +16,7 @@ export const LiveEventWindowControls = ({ currentTheme, setCurrentTheme }) => {
         <div
           onClick={() => setCurrentTheme('dark')}
           className={
-            currentTheme === 'dark'
-              ? 'window-controls-selected'
-              : 'window-controls-unselected'
+            currentTheme === 'dark' ? 'window-controls-selected' : 'window-controls-unselected'
           }
         >
           DARK UI

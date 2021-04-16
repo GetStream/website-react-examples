@@ -1,6 +1,12 @@
 import React, { useContext, useEffect } from 'react';
 import { FileUploadButton, ImageDropzone } from 'react-file-utils';
-import { ChannelContext, ChatAutoComplete, ChatContext, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import {
+  ChannelContext,
+  ChatAutoComplete,
+  ChatContext,
+  EmojiPicker,
+  useMessageInput,
+} from 'stream-chat-react';
 
 import './AgentMessageInput.css';
 
@@ -53,7 +59,9 @@ export const AgentMessageInput = (props) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles}
+        disabled={
+          maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles
+        }
       >
         <div className='agent-message-input__input'>
           <UploadsPreview {...messageInput} />

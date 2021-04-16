@@ -57,7 +57,9 @@ export const AgentChannelHeader = () => {
         </div>
         <div className='agent-channel-header__middle__wrapper'>
           <EmailIcon />
-          <p className='agent-channel-header__middle__text email'>{channel.data.created_by.email}</p>
+          <p className='agent-channel-header__middle__text email'>
+            {channel.data.created_by.email}
+          </p>
         </div>
       </div>
       <div className='agent-channel-header__bottom__border' />
@@ -70,7 +72,9 @@ export const AgentChannelHeader = () => {
         <DownIconSmall />
       </div>
       <div className='agent-channel-header__bottom__border' />
-      {popupVisible && previewText && <NotificationPopup {...{ eventChannel, previewText, setPopupVisible }} />}
+      {popupVisible && previewText && (
+        <NotificationPopup {...{ eventChannel, previewText, setPopupVisible }} />
+      )}
     </div>
   );
 };

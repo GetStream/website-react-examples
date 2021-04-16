@@ -28,7 +28,9 @@ const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TAR
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
-const filters = noChannelNameFilter ? { type: 'messaging', members: { $in: [user] } } : { type: 'messaging', name: 'Social Demo' };
+const filters = noChannelNameFilter
+  ? { type: 'messaging', members: { $in: [user] } }
+  : { type: 'messaging', name: 'Social Demo' };
 const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
@@ -87,16 +89,24 @@ const App = () => {
           filters={filters}
           sort={sort}
           options={options}
-          List={(props) => <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />}
+          List={(props) => (
+            <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />
+          )}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
       </div>
       <div>
         <Channel maxNumberOfFiles={10} multipleUploads={true}>
-          {isCreating && <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />}
+          {isCreating && (
+            <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+          )}
           <Window>
             <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-            <MessageList Message={CustomMessage} TypingIndicator={() => null} />
+            <MessageList
+              messageActions={['edit', 'delete', 'flag', 'mute', 'react', 'reply']}
+              Message={CustomMessage}
+              TypingIndicator={() => null}
+            />
             <MessageInput focus Input={MessagingInput} />
           </Window>
           <MessagingThread />

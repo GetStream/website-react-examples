@@ -37,7 +37,13 @@ export const LiveEventChannelContainer = ({ tab }) => {
             <MessageList
               noGroupByUser
               messages={pinnedMessagesArray}
-              Message={(props) => <LiveEventMessage {...props} setPinnedMessages={setPinnedMessages} pinnedMessages={pinnedMessages} />}
+              Message={(props) => (
+                <LiveEventMessage
+                  {...props}
+                  setPinnedMessages={setPinnedMessages}
+                  pinnedMessages={pinnedMessages}
+                />
+              )}
             />
           </div>
         );

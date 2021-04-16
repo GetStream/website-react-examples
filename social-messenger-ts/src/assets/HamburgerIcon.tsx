@@ -1,4 +1,4 @@
-export const HamburgerIcon = () => (
+export const HamburgerIcon: React.FC = () => (
   <svg
     width='16'
     height='14'

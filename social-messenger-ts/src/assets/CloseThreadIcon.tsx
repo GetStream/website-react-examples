@@ -1,8 +1,6 @@
-export const CloseThreadIcon = ({
-  closeThread,
-}: {
+export const CloseThreadIcon: React.FC<{
   closeThread?: (event: React.BaseSyntheticEvent) => void;
-}) => (
+}> = ({ closeThread }) => (
   <svg
     width='40'
     height='40'
