@@ -22,18 +22,18 @@ const UserResult = ({ user }: { user: UserResponse<UserType> }) => (
     {user.online && <div className='messaging-create-channel__user-result-online' />}
     <div className='messaging-create-channel__user-result__details'>
       <span>{user.name}</span>
-      {/* <span className='messaging-create-channel__user-result__details__last-seen'>{user.online}</span> */}
     </div>
   </li>
 );
 
-const CreateChannel = ({
-  onClose,
-  toggleMobile,
-}: {
+type Props = {
   onClose: () => void;
   toggleMobile: () => void;
-}) => {
+};
+
+const CreateChannel: React.FC<Props> = (props) => {
+  const { onClose, toggleMobile } = props;
+
   const { client, setActiveChannel } = useChatContext<
     AttachmentType,
     ChannelType,
@@ -129,11 +129,11 @@ const CreateChannel = ({
     onClose();
   };
 
-  const addUser = (u: UserResponse<UserType>) => {
-    const isAlreadyAdded = selectedUsers.find((user) => user.id === u.id);
+  const addUser = (addedUser: UserResponse<UserType>) => {
+    const isAlreadyAdded = selectedUsers.find((user) => user.id === addedUser.id);
     if (isAlreadyAdded) return;
 
-    setSelectedUsers([...selectedUsers, u]);
+    setSelectedUsers([...selectedUsers, addedUser]);
     setResultsOpen(false);
     setInputText('');
     if (inputRef.current) {

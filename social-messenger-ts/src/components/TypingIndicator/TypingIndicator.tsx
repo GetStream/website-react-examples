@@ -1,4 +1,4 @@
-import { useChannelContext } from 'stream-chat-react';
+import { useChannelContext, useChatContext } from 'stream-chat-react';
 
 import './TypingIndicator.css';
 
@@ -13,7 +13,17 @@ import type {
 } from '../../App';
 
 export const TypingIndicator = () => {
-  const { client, typing } = useChannelContext<
+  const { client } = useChatContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
+
+  const { typing } = useChannelContext<
     AttachmentType,
     ChannelType,
     CommandType,

@@ -1,4 +1,4 @@
-export const SkeletonLoader = () => {
+export const SkeletonLoader: React.FC = () => {
   return (
     <div style={{ position: 'relative' }}>
       <ul className='skeleton-loader__list'>

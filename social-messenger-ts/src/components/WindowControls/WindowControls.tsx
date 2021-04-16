@@ -2,13 +2,12 @@ import { useEffect } from 'react';
 
 import './WindowControls.css';
 
-const WindowControls = ({
-  theme,
-  setTheme,
-}: {
+type Props = {
   theme: string;
   setTheme: (theme: string) => void;
-}) => {
+};
+
+const WindowControls: React.FC<Props> = ({ theme, setTheme }) => {
   const darkClick = () => {
     if (theme === 'dark') return;
     setTheme('dark');

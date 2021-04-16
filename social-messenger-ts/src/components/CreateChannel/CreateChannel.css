@@ -194,7 +194,9 @@
   border-color: #ffffff;
 }
 
-.str-chat.dark .messaging-create-channel__user-result:hover .messaging-create-channel__user-result-online {
+.str-chat.dark
+  .messaging-create-channel__user-result:hover
+  .messaging-create-channel__user-result-online {
   border-color: #3e3e41;
 }
 
@@ -205,12 +207,6 @@
 
 .messaging-create-channel__user-result__details span:first-of-type {
   font-weight: 500;
-}
-
-.messaging-create-channel__user-result__details__last-seen {
-  font-weight: normal;
-  font-size: 13px;
-  line-height: 16px;
 }
 
 /* modifiers dark theme */
@@ -231,10 +227,6 @@
 .str-chat.dark .messaging-create-channel__user-result:hover,
 .str-chat.dark .messaging-create-channel__user-result.selected {
   background: #3e3e41;
-}
-
-.str-chat.dark .messaging-create-channel__user-result__details__last-seen {
-  color: #858688;
 }
 
 /* modifiers page structure */

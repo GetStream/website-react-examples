@@ -19,21 +19,37 @@ import {
 import { getRandomImage } from './assets';
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const apiKey = process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
+
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
+const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
 const filters = noChannelNameFilter
   ? { type: 'messaging', members: { $in: [user!] } }
   : { type: 'messaging', name: 'Social Demo' };
+
 const options = { state: true, watch: true, presence: true, limit: 8 };
+
 const sort: ChannelSort = {
   last_message_at: -1,
   updated_at: -1,
   cid: 1,
 };
+
+const userToConnect: { id: string; name?: string; image?: string } = {
+  id: user!,
+  name: user!,
+  image: getRandomImage(),
+};
+
+if (skipNameImageSet) {
+  delete userToConnect.name;
+  delete userToConnect.image;
+}
 
 export type AttachmentType = {};
 export type ChannelType = {};
@@ -52,7 +68,8 @@ const chatClient = StreamChat.getInstance<
   ReactionType,
   UserType
 >(apiKey!);
-chatClient.connectUser({ id: user!, name: user!, image: getRandomImage() }, userToken);
+
+chatClient.connectUser(userToConnect, userToken);
 
 const App = () => {
   const [isCreating, setIsCreating] = useState(false);

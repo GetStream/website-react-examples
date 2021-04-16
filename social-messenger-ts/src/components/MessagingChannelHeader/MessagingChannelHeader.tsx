@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, useChannelContext } from 'stream-chat-react';
+import { Avatar, useChannelContext, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelHeader.css';
 
@@ -73,8 +73,25 @@ const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   return null;
 };
 
-const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void }) => {
-  const { channel, client } = useChannelContext<
+type Props = {
+  theme: string;
+  toggleMobile: () => void;
+};
+
+const MessagingChannelHeader: React.FC<Props> = (props) => {
+  const { theme, toggleMobile } = props;
+
+  const { client } = useChatContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
+
+  const { channel } = useChannelContext<
     AttachmentType,
     ChannelType,
     CommandType,
@@ -141,7 +158,7 @@ const MessagingChannelHeader = (props: { theme: string; toggleMobile: () => void
 
   return (
     <div className='messaging__channel-header'>
-      <div id='mobile-nav-icon' className={`${props.theme}`} onClick={() => props.toggleMobile()}>
+      <div id='mobile-nav-icon' className={`${theme}`} onClick={() => toggleMobile()}>
         <HamburgerIcon />
       </div>
       <AvatarGroup members={members} />

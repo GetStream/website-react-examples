@@ -18,11 +18,11 @@ import type {
   UserType,
 } from '../../App';
 
-type MessagingChannelListProps = ChannelListTeamProps & {
+type Props = ChannelListTeamProps & {
   onCreateChannel: () => void;
 };
 
-const MessagingChannelList: React.FC<MessagingChannelListProps> = (props) => {
+const MessagingChannelList: React.FC<Props> = (props) => {
   const { children, error = false, loading, onCreateChannel } = props;
 
   const { client, setActiveChannel } = useChatContext<
@@ -60,7 +60,7 @@ const MessagingChannelList: React.FC<MessagingChannelListProps> = (props) => {
         await channel.addMembers([client.user.id]);
       }
 
-      setActiveChannel?.(channel);
+      setActiveChannel(channel);
     };
 
     //@ts-expect-error hack to ensure a channel is always loaded

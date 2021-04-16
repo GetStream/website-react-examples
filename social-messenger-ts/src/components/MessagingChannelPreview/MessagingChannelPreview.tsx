@@ -73,7 +73,7 @@ const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
 
 const getTimeStamp = (channel: Channel) => {
   let lastHours = channel.state.last_message_at?.getHours();
-  let lastMinutes = channel.state.last_message_at?.getMinutes();
+  let lastMinutes: string | number | undefined = channel.state.last_message_at?.getMinutes();
   let half = 'AM';
 
   if (lastHours === undefined || lastMinutes === undefined) {
@@ -89,7 +89,6 @@ const getTimeStamp = (channel: Channel) => {
   if (lastHours === 12) half = 'PM';
 
   if (lastMinutes.toString().length === 1) {
-    //@ts-expect-error
     lastMinutes = `0${lastMinutes}`;
   }
 
@@ -106,14 +105,14 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
   return `${members[0]?.user?.name || defaultName}, ${members[1]?.user?.name || defaultName}`;
 };
 
-type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
+type Props = ChannelPreviewUIComponentProps & {
   channel: Channel;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   latestMessage?: string;
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
-const MessagingChannelPreview: React.FC<MessagingChannelPreviewProps> = (props) => {
+const MessagingChannelPreview: React.FC<Props> = (props) => {
   const { channel, latestMessage, setActiveChannel, setIsCreating } = props;
 
   const { channel: activeChannel, client } = useChatContext<

@@ -6,13 +6,14 @@ import {
   EmojiPicker,
   MessageInputProps,
   StreamMessage,
+  UploadsPreview,
   useChannelContext,
   useMessageInput,
 } from 'stream-chat-react';
 
 import './MessagingInput.css';
 
-import { UploadsPreview } from './UploadsPreview';
+import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 import type {
   AttachmentType,
@@ -24,13 +25,6 @@ import type {
   UserType,
 } from '../../App';
 
-import {
-  // CommandIcon,
-  EmojiIcon,
-  LightningBoltSmall,
-  SendIcon,
-} from '../../assets';
-
 const GiphyIcon = () => (
   <div className='giphy-icon__wrapper'>
     <LightningBoltSmall />
@@ -38,7 +32,7 @@ const GiphyIcon = () => (
   </div>
 );
 
-const MessagingInput = (props: MessageInputProps) => {
+const MessagingInput: React.FC<MessageInputProps> = (props) => {
   const { acceptedFiles, maxNumberOfFiles, multipleUploads, sendMessage } = useChannelContext<
     AttachmentType,
     ChannelType,
@@ -52,18 +46,10 @@ const MessagingInput = (props: MessageInputProps) => {
   const [giphyState, setGiphyState] = useState(false);
 
   const overrideSubmitHandler = (message: {
-    attachments: Attachment<AttachmentType>[];
-    mentioned_users: UserResponse<UserType>[];
+    attachments: Attachment[];
+    mentioned_users: UserResponse[];
     text: string;
-    parent?: StreamMessage<
-      AttachmentType,
-      ChannelType,
-      CommandType,
-      EventType,
-      MessageType,
-      ReactionType,
-      UserType
-    >;
+    parent?: StreamMessage;
   }) => {
     let updatedMessage;
 
@@ -80,6 +66,7 @@ const MessagingInput = (props: MessageInputProps) => {
     if (sendMessage) {
       const newMessage = updatedMessage || message;
       const parentMessage = newMessage.parent;
+
       const messageToSend = {
         ...newMessage,
         parent: parentMessage
@@ -91,6 +78,7 @@ const MessagingInput = (props: MessageInputProps) => {
             }
           : undefined,
       };
+
       const sendMessagePromise = sendMessage(messageToSend);
       logChatPromiseExecution(sendMessagePromise, 'send message');
     }

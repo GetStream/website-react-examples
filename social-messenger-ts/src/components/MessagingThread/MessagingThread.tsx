@@ -6,7 +6,7 @@ import { CustomMessage, MessagingInput } from '../index';
 
 import { CloseThreadIcon } from '../../assets';
 
-const ThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
+const ThreadHeader: React.FC<ThreadHeaderProps> = ({ closeThread, thread }) => {
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
     if (thread.reply_count === 1) return '1 reply';
