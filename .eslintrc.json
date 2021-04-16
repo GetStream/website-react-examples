@@ -1,6 +1,15 @@
 {
   "root": true,
-  "plugins": ["babel", "sonarjs", "prettier", "react-hooks", "jest-dom", "jest", "jsx-a11y", "cypress"],
+  "plugins": [
+    "babel",
+    "sonarjs",
+    "prettier",
+    "react-hooks",
+    "jest-dom",
+    "jest",
+    "jsx-a11y",
+    "cypress"
+  ],
   "extends": [
     "eslint:recommended",
     "plugin:react/recommended",
@@ -26,7 +35,7 @@
     "camelcase": 0,
     "consistent-return": 0,
     "react-hooks/rules-of-hooks": 2,
-    "react-hooks/exhaustive-deps": 1,
+    "react-hooks/exhaustive-deps": 0,
     "jest/prefer-inline-snapshots": 0,
     "jest/lowercase-name": 0,
     "jest/prefer-expect-assertions": 0,

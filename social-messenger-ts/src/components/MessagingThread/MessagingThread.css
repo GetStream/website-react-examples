@@ -1,0 +1,133 @@
+.messaging.str-chat .str-chat__thread {
+  margin: 0;
+}
+
+.custom-thread-header {
+  border: none;
+  background: white;
+  min-height: 60px;
+  box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.03);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.str-chat.dark .custom-thread-header {
+  background: rgba(46, 48, 51, 0.98);
+  box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.03);
+}
+
+.custom-thread-header__left {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.custom-thread-header__left-title {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 24px;
+  color: rgba(0, 0, 0, 0.9);
+  margin-right: 10px;
+}
+
+.str-chat.dark .custom-thread-header__left-title {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.custom-thread-header__left-count {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+
+.str-chat.dark .custom-thread-header__left-count {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.messaging.str-chat .str-chat__thread {
+  border-left: 1px solid #f1f1f1;
+  border-radius: 0px 10px 0 0;
+  background: #ffffff;
+}
+
+.messaging.str-chat.dark .str-chat__thread {
+  border-left: 1px solid rgba(0, 0, 0, 0.09);
+  background: #282a2d;
+}
+
+.str-chat__thread .str-chat__messaging-input {
+  background: none !important;
+}
+
+.messaging.str-chat .str-chat__thread-list {
+  height: unset;
+  padding: 0;
+  padding-top: 20px;
+}
+
+.messaging.str-chat .str-chat__thread-list .str-chat__message {
+  padding-left: 20px;
+  padding-right: 20px;
+  margin-bottom: 0px;
+}
+
+.str-chat__thread-list .str-chat__list.str-chat__list--thread {
+  padding: 0 !important;
+}
+
+.str-chat__thread-list .str-chat__li.str-chat__li--top {
+  margin-top: 0;
+}
+
+.str-chat__thread-list .str-chat__message:first-of-type {
+  border-bottom: 1px solid #f1f1f1;
+  padding-bottom: 20px;
+}
+
+.str-chat.dark .str-chat__thread-list .str-chat__message:first-of-type {
+  border-bottom: 1px solid #212326;
+}
+
+.str-chat__thread-list li .str-chat__message:first-of-type {
+  border-bottom: none !important;
+  padding-bottom: 0px;
+}
+
+.str-chat__thread .str-chat__messaging-input {
+  margin-top: 0px !important;
+}
+
+.str-chat__message-replies-count-button:focus {
+  border: none;
+  outline: none;
+}
+
+.str-chat__thread-start {
+  display: none;
+}
+
+.messaging.str-chat .str-chat__thread-list .str-chat__reverse-infinite-scroll {
+  padding-top: 20px;
+}
+
+.str-chat__thread .str-chat__messaging-input {
+  margin-top: 10px;
+  box-shadow: 0px -2px 2px rgba(0, 0, 0, 0.04);
+}
+
+.str-chat__thread .str-chat__input--emojipicker {
+  top: 0%;
+}
+
+.str-chat__thread .emoji-mart {
+  width: 300px !important;
+}
+
+@media screen and (max-width: 640px) {
+  .str-chat__thread .str-chat__messaging-input .messaging-input__button.emoji-button {
+    display: none;
+  }
+}
