@@ -40,7 +40,7 @@ const ChannelNameInput = (props: ChannelNameInputProps) => {
 
 export const CreateChannel = (props: CreateChannelProps) => {
   const { createType, filters, setIsCreating } = props;
-  
+
   const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
 
   const [channelName, setChannelName] = useState('');

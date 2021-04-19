@@ -93,4 +93,4 @@ const ChannelList: React.FC<PropsWithChildren<TeamChannelListProps>> = (props) =
   );
 };
 
-export const TeamChannelList = React.memo(ChannelList);
+export const TeamChannelList = React.memo(ChannelList); 
