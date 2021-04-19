@@ -66,4 +66,3 @@ export const getCleanImage = (member: ChannelMemberResponse<UserType>) => {
 
   return member.user.image;
 };
-
