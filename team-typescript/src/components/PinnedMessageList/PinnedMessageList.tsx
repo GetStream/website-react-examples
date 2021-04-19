@@ -1,6 +1,6 @@
 import type { SetStateAction } from 'react';
 
-import { useChannelContext, Message } from 'stream-chat-react';
+import { useChannelContext, Message, MessageTeam } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
@@ -24,12 +24,14 @@ export const PinnedMessageList = (props: PinnedMessageListProps) => {
         <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
       </div>
       <div className='pinned-messages__list'>
-          {channel.state.pinnedMessages.map((message) => (
-            <Message
-              key={message.id}
-              message={message}
-            />
-          ))}
+        {channel.state.pinnedMessages.map((message) => (
+          <Message
+            groupStyles={['single']}
+            Message={MessageTeam}
+            key={message.id}
+            message={message}
+          />
+        ))}
       </div>
     </div>
   );

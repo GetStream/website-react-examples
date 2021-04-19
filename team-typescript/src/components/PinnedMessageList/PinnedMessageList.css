@@ -4,6 +4,7 @@
     box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
     z-index: 1;
     background: #ffffff;
+    overflow-x: hidden;
   }
   
   .pinned-messages__header {
@@ -26,15 +27,15 @@
     padding-top: 20px;
   }
 
-  .pinned-message {
+  .pinned-messages__list .pinned-message {
     background: #fff !important;
-  }
-
-  .pinned-message:hover {
-    background: rgba(0, 0, 0, 0.03) !important;
   }
   
   .pinned-messages__list .str-chat__message-simple__actions {
+    display: none;
+  }
+
+  .pinned-messages__list .str-chat__message-team-pin-indicator {
     display: none;
   }
   
@@ -42,16 +43,7 @@
     display: none;
   }
 
-  .pinned-message {
-    margin-bottom: 10px;
-    padding: 5px;
-  }
-
-  .pinned-message:hover {
-    background: rgba(0, 0, 0, 0.03);
-  }
-
-  .str-chat__reaction-list {
+  .pinned-messages__list .str-chat__message-team .str-chat__message-team-actions {
     display: none;
   }
   
