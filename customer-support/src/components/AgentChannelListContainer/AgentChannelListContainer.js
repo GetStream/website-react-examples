@@ -9,16 +9,16 @@ import { AgentChannelPreview } from '../AgentChannelList/AgentChannelPreview';
 import { SearchIcon } from '../../assets';
 
 const ChannelSearch = () => (
-  <div className="channel-search__container">
-    <div className="channel-search__input__wrapper">
-      <div className="channel-search__input__icon">
+  <div className='channel-search__container'>
+    <div className='channel-search__input__wrapper'>
+      <div className='channel-search__input__icon'>
         <SearchIcon />
       </div>
       <input
-        className="channel-search__input__text"
+        className='channel-search__input__text'
         onChange={(e) => console.log(e.target.value)}
-        placeholder="Search"
-        type="text"
+        placeholder='Search'
+        type='text'
       />
     </div>
   </div>
@@ -40,21 +40,16 @@ export const AgentChannelListContainer = (props) => {
   };
 
   return (
-    <div className="agent-channel-list__container">
+    <div className='agent-channel-list__container'>
       <ChannelSearch />
-      <p className="agent-channel-list__conversation-header">
-        Active Conversations
-      </p>
+      <p className='agent-channel-list__conversation-header'>Active Conversations</p>
       <ChannelList
         filters={filters}
         sort={sort}
         options={options}
         List={AgentChannelList}
         Preview={(previewProps) => (
-          <AgentChannelPreview
-            {...previewProps}
-            {...{ agentChannelId, customerChannelId }}
-          />
+          <AgentChannelPreview {...previewProps} {...{ agentChannelId, customerChannelId }} />
         )}
       />
     </div>

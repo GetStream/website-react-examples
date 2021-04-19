@@ -21,7 +21,9 @@ const GiphyIcon = () => (
 );
 
 const MessagingInput = (props) => {
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads, sendMessage } = useContext(ChannelContext);
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads, sendMessage } = useContext(
+    ChannelContext,
+  );
 
   const [giphyState, setGiphyState] = useState(false);
 
@@ -96,7 +98,10 @@ const MessagingInput = (props) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={(maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) || giphyState}
+        disabled={
+          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
+          giphyState
+        }
       >
         <div className='messaging-input__input-wrapper'>
           {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
@@ -119,7 +124,12 @@ const MessagingInput = (props) => {
           />
         </div>
       </ImageDropzone>
-      <div className='messaging-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
+      <div
+        className='messaging-input__button'
+        role='button'
+        aria-roledescription='button'
+        onClick={messageInput.handleSubmit}
+      >
         <SendIcon />
       </div>
       <EmojiPicker {...messageInput} />

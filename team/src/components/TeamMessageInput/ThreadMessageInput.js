@@ -1,11 +1,6 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { logChatPromiseExecution } from 'stream-chat';
-import {
-  ChannelContext,
-  ChatAutoComplete,
-  EmojiPicker,
-  useMessageInput,
-} from 'stream-chat-react';
+import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
 
 import './ThreadMessageInput.css';
 
@@ -37,10 +32,7 @@ export const ThreadMessageInput = (props) => {
 
   const onChange = useCallback(
     (e) => {
-      if (
-        messageInput.text.length === 1 &&
-        e.nativeEvent.inputType === 'deleteContentBackward'
-      ) {
+      if (messageInput.text.length === 1 && e.nativeEvent.inputType === 'deleteContentBackward') {
         setGiphyState(false);
       }
 
@@ -55,15 +47,15 @@ export const ThreadMessageInput = (props) => {
   );
 
   const GiphyIcon = () => (
-    <div className="giphy-icon__wrapper">
+    <div className='giphy-icon__wrapper'>
       <LightningBoltSmall />
-      <p className="giphy-icon__text">GIPHY</p>
+      <p className='giphy-icon__text'>GIPHY</p>
     </div>
   );
 
   return (
-    <div className="thread-message-input__wrapper">
-      <div className="thread-message-input__input">
+    <div className='thread-message-input__wrapper'>
+      <div className='thread-message-input__input'>
         {giphyState && <GiphyIcon />}
         <ChatAutoComplete
           innerRef={messageInput.textareaRef}
@@ -73,7 +65,7 @@ export const ThreadMessageInput = (props) => {
           value={messageInput.text}
           rows={1}
           maxRows={props.maxRows}
-          placeholder="Reply"
+          placeholder='Reply'
           onPaste={messageInput.onPaste}
           triggers={props.autocompleteTriggers}
           grow={props.grow}
@@ -82,14 +74,14 @@ export const ThreadMessageInput = (props) => {
             ...props.additionalTextareaProps,
           }}
         />
-        <div className="thread-message-input__icons">
+        <div className='thread-message-input__icons'>
           <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
           {/* <LightningBolt {...{ giphyState }} /> */}
         </div>
         <div
-          className="thread-message-input__button"
-          role="button"
-          aria-roledescription="button"
+          className='thread-message-input__button'
+          role='button'
+          aria-roledescription='button'
           onClick={messageInput.handleSubmit}
         >
           <SendButton />

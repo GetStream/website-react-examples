@@ -22,16 +22,12 @@ export const CustomerApp = ({ customerChannelId }) => {
 
   useEffect(() => {
     const getCustomerChannel = async () => {
-      const newChannel = await customerClient.channel(
-        'commerce',
-        customerChannelId,
-        {
-          name: 'Kevin Rosen',
-          image: require('./assets/kevin-avatar.png'), // eslint-disable-line
-          issue: 'Company Inquiry',
-          subtitle: '#853 Company Inquiry',
-        },
-      );
+      const newChannel = await customerClient.channel('commerce', customerChannelId, {
+        name: 'Kevin Rosen',
+        image: require('./assets/kevin-avatar.png'), // eslint-disable-line
+        issue: 'Company Inquiry',
+        subtitle: '#853 Company Inquiry',
+      });
 
       if (newChannel.state.messages.length) {
         newChannel.state.clearMessages();
@@ -62,18 +58,13 @@ export const CustomerApp = ({ customerChannelId }) => {
               </div>
             )}
             <MessageInput
-              Input={(props) => (
-                <CustomerMessageInput {...props} {...{ open, setOpen }} />
-              )}
+              Input={(props) => <CustomerMessageInput {...props} {...{ open, setOpen }} />}
               focus
             />
           </Window>
         </Channel>
       )}
-      <div
-        className={`toggle-button ${open && 'close-button'}`}
-        onClick={() => setOpen(!open)}
-      >
+      <div className={`toggle-button ${open && 'close-button'}`} onClick={() => setOpen(!open)}>
         {open ? <CloseCustomerIcon /> : <OpenCustomerIcon />}
       </div>
     </div>

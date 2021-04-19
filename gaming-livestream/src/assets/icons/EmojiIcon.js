@@ -2,7 +2,14 @@ import React from 'react';
 
 const EmojiIcon = ({ openEmojiPicker }) => (
   <div onClick={openEmojiPicker} style={{ cursor: 'pointer', display: 'flex' }}>
-    <svg width='20' height='20' viewBox='0 0 20 20' fill='none' fillOpacity='0.5' xmlns='http://www.w3.org/2000/svg'>
+    <svg
+      width='20'
+      height='20'
+      viewBox='0 0 20 20'
+      fill='none'
+      fillOpacity='0.5'
+      xmlns='http://www.w3.org/2000/svg'
+    >
       <path
         fillRule='evenodd'
         clipRule='evenodd'

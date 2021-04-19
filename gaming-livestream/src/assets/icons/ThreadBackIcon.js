@@ -1,7 +1,14 @@
 import React from 'react';
 
 const ThreadBackIcon = ({ onCloseThread }) => (
-  <svg onClick={onCloseThread} width='44' height='41' viewBox='0 0 44 41' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg
+    onClick={onCloseThread}
+    width='44'
+    height='41'
+    viewBox='0 0 44 41'
+    fill='none'
+    xmlns='http://www.w3.org/2000/svg'
+  >
     <path
       d='M0 11C0 5.47715 4.47715 1 10 1H30C35.5228 1 40 5.47715 40 11V31C40 36.5228 35.5228 41 30 41H10C4.47715 41 0 36.5228 0 31V11Z'
       fill='#062471'

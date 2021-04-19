@@ -1,7 +1,13 @@
 import React, { useCallback, useContext, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
 import { logChatPromiseExecution } from 'stream-chat';
-import { ChannelContext, ChatAutoComplete, ChatContext, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import {
+  ChannelContext,
+  ChatAutoComplete,
+  ChatContext,
+  EmojiPicker,
+  useMessageInput,
+} from 'stream-chat-react';
 
 import './TeamMessageInput.css';
 
@@ -22,7 +28,14 @@ import {
 export const TeamMessageInput = (props) => {
   const { pinsOpen } = props;
 
-  const { acceptedFiles, channel, maxNumberOfFiles, multipleUploads, sendMessage, thread } = useContext(ChannelContext);
+  const {
+    acceptedFiles,
+    channel,
+    maxNumberOfFiles,
+    multipleUploads,
+    sendMessage,
+    thread,
+  } = useContext(ChannelContext);
   const { client } = useContext(ChatContext);
 
   const [boldState, setBoldState] = useState(false);
@@ -43,7 +56,9 @@ export const TeamMessageInput = (props) => {
       return `#${channel.data.name || channel.data.id || 'random'}`;
     }
 
-    const members = Object.values(channel.state.members).filter(({ user }) => user.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user.id !== client.userID,
+    );
 
     if (!members.length || members.length === 1) {
       return members[0]?.user.name || members[0]?.user.id || 'Johnny Blaze';
@@ -173,7 +188,10 @@ export const TeamMessageInput = (props) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={(maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) || giphyState}
+        disabled={
+          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
+          giphyState
+        }
       >
         <div className='team-message-input__input'>
           <div className='team-message-input__top'>
@@ -197,7 +215,12 @@ export const TeamMessageInput = (props) => {
                 ...props.additionalTextareaProps,
               }}
             />
-            <div className='team-message-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
+            <div
+              className='team-message-input__button'
+              role='button'
+              aria-roledescription='button'
+              onClick={messageInput.handleSubmit}
+            >
               <SendButton />
             </div>
           </div>

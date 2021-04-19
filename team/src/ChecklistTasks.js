@@ -2,7 +2,7 @@ import { useEffect } from 'react';
 
 const notifyParent = (parent) => (message) => {
   window.parent.postMessage(message, parent);
-}
+};
 
 const YOUTUBE_LINK = 'https://youtu.be/Ujvy-DEA-UM';
 
@@ -20,7 +20,7 @@ export const useChecklist = (chatClient, targetOrigin) => {
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
     const handleNewEvent = ({ type, message }) => {
-      switch(type) {
+      switch (type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
@@ -28,15 +28,18 @@ export const useChecklist = (chatClient, targetOrigin) => {
           if (message.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
-          };
+          }
           if (message.attachments.length) {
-            if (message.attachments[0].type === 'video' && message.attachments[0].og_scrape_url === YOUTUBE_LINK) {
+            if (
+              message.attachments[0].type === 'video' &&
+              message.attachments[0].og_scrape_url === YOUTUBE_LINK
+            ) {
               notify(SEND_YOUTUBE);
               break;
             }
             if (message.attachments[0].type === 'image') {
               notify(DRAG_DROP);
-              break
+              break;
             }
           }
           if (message.parent_id) {
@@ -48,7 +51,7 @@ export const useChecklist = (chatClient, targetOrigin) => {
         default:
           break;
       }
-    }
+    };
     if (chatClient) {
       chatClient.on(handleNewEvent);
     }

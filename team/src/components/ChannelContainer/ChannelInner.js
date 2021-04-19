@@ -40,7 +40,12 @@ export const ChannelInner = (props) => {
         <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
         <MessageList
           EmptyStateIndicator={ChannelEmptyState}
-          Message={(messageProps) => <TeamMessage {...messageProps} {...{ pinnedMessagesIds, setPinnedMessages, setPinsOpen }} />}
+          Message={(messageProps) => (
+            <TeamMessage
+              {...messageProps}
+              {...{ pinnedMessagesIds, setPinnedMessages, setPinsOpen }}
+            />
+          )}
           TypingIndicator={() => null}
         />
         <TeamMessageInput focus {...{ pinsOpen }} />

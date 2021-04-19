@@ -32,27 +32,28 @@ const i18nInstance = new Streami18n({
 });
 
 const chatClient = StreamChat.getInstance(apiKey);
+chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
 
 const App = () => {
   const [channel, setChannel] = useState(null);
   const [currentTheme, setCurrentTheme] = useState('light');
 
   useEffect(() => {
-    const getChannel = async () => {
-      await chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
+    if (!channel) {
+      const getChannel = async () => {
+        const newChannel = await chatClient.channel('livestream', channelName, {
+          name: 'Virtual Event Demo',
+        });
 
-      const newChannel = await chatClient.channel('livestream', channelName, {
-        name: 'Virtual Event Demo',
-      });
+        if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
 
-      if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
+        await newChannel.watch();
+        setChannel(newChannel);
+      };
 
-      await newChannel.watch();
-      setChannel(newChannel);
-    };
-
-    getChannel();
-  }, []);
+      getChannel();
+    }
+  }, [channel]);
 
   useEffect(() => {
     const handleThemeChange = (e) => {
@@ -75,7 +76,9 @@ const App = () => {
           <div className='main-container-inner'>
             <div
               className='main-container-inner__left'
-              style={currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }}
+              style={
+                currentTheme === 'light' ? { background: '#FFFFFF' } : { background: '#000000' }
+              }
             >
               <div style={{ height: '100%', width: '100%', position: 'relative', flex: '0 0 55%' }}>
                 <div className='live-video-icon'>

@@ -1,10 +1,21 @@
 import React, { useState } from 'react';
 import { NimbleEmoji } from 'emoji-mart';
-import { defaultMinimalEmojis, emojiSetDef, emojiData } from 'stream-chat-react';
+import { useChannelContext } from 'stream-chat-react';
 
 import './LiveEventReactions.css';
 
-export const LiveEventReactions = ({ reactions, reaction_counts, reactionOptions = defaultMinimalEmojis, handleReaction }) => {
+export const LiveEventReactions = ({
+  reactions,
+  reaction_counts,
+  reactionOptions: propsReactionOptions,
+  handleReaction,
+}) => {
+  const { emojiConfig } = useChannelContext();
+
+  const { defaultMinimalEmojis, emojiSetDef, emojiData } = emojiConfig || {};
+
+  const reactionOptions = propsReactionOptions || defaultMinimalEmojis;
+
   const [tooltipReactionType, setTooltipReactionType] = useState(null);
 
   if (!reactions || reactions.length === 0) {
@@ -33,12 +44,20 @@ export const LiveEventReactions = ({ reactions, reaction_counts, reactionOptions
   const getOptionForType = (type) => reactionOptions.find((option) => option.id === type);
 
   return (
-    <ul data-testid='simple-reaction-list' className='live-event__simple-reactions-list' onMouseLeave={() => setTooltipReactionType(null)}>
+    <ul
+      data-testid='simple-reaction-list'
+      className='live-event__simple-reactions-list'
+      onMouseLeave={() => setTooltipReactionType(null)}
+    >
       {getReactionTypes().map((reactionType, i) => {
         const emojiDefinition = getOptionForType(reactionType);
         return emojiDefinition ? (
           <li
-            className={i > 0 ? 'live-event__simple-reactions-list-item__border' : 'live-event__simple-reactions-list-item'}
+            className={
+              i > 0
+                ? 'live-event__simple-reactions-list-item__border'
+                : 'live-event__simple-reactions-list-item'
+            }
             key={`${emojiDefinition?.id}-${i}`}
             onClick={() => handleReaction && handleReaction(reactionType)}
           >
@@ -56,7 +75,10 @@ export const LiveEventReactions = ({ reactions, reaction_counts, reactionOptions
             </span>
             {reactions?.length !== 0 && (
               <div className='live-event__simple-reactions-list-item--last-number'>
-                {(reaction_counts[reactionType] !== undefined || reaction_counts[reactionType]) === 0 ? 1 : reaction_counts[reactionType]}
+                {(reaction_counts[reactionType] !== undefined || reaction_counts[reactionType]) ===
+                0
+                  ? 1
+                  : reaction_counts[reactionType]}
               </div>
             )}
             {tooltipReactionType === getOptionForType(reactionType)?.id && (

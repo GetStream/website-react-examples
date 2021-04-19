@@ -7,15 +7,29 @@ export const LiveEventAttendees = () => {
   const { theme } = useContext(ChatContext);
 
   return (
-    <div className={theme === 'livestream light' ? 'live-event-attendees__container' : 'live-event-attendees__container-dark'}>
+    <div
+      className={
+        theme === 'livestream light'
+          ? 'live-event-attendees__container'
+          : 'live-event-attendees__container-dark'
+      }
+    >
       <div className='live-event-attendees__title'>Moderators</div>
       <div className='live-event-attendees__moderators'>
         <div className='live-event-attendees__moderator'>
-          <img alt='' style={{ height: '42px', width: '42px' }} src={require('../../assets/AttendeePics/Robert.png')}></img>
+          <img
+            alt=''
+            style={{ height: '42px', width: '42px' }}
+            src={require('../../assets/AttendeePics/Robert.png')}
+          ></img>
           <div className='live-event-attendees__moderator-name'>Robert Davidson</div>
         </div>
         <div className='live-event-attendees__moderator'>
-          <img alt='' style={{ height: '42px', width: '42px' }} src={require('../../assets/AttendeePics/Amanda.png')}></img>
+          <img
+            alt=''
+            style={{ height: '42px', width: '42px' }}
+            src={require('../../assets/AttendeePics/Amanda.png')}
+          ></img>
           <div className='live-event-attendees__moderator-name'>Amanda Stewart</div>
         </div>
       </div>

@@ -54,7 +54,10 @@ const CreateChannel = ({ onClose, toggleMobile }) => {
       const response = await client.queryUsers(
         {
           id: { $ne: client.userID },
-          $and: [{ name: { $autocomplete: inputText } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
+          $and: [
+            { name: { $autocomplete: inputText } },
+            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
+          ],
         },
         { id: 1 },
         { limit: 6 },
@@ -158,7 +161,11 @@ const CreateChannel = ({ onClose, toggleMobile }) => {
             {!!selectedUsers?.length && (
               <div className='messaging-create-channel__users'>
                 {selectedUsers.map((user) => (
-                  <div className='messaging-create-channel__user' onClick={() => removeUser(user)} key={user.id}>
+                  <div
+                    className='messaging-create-channel__user'
+                    onClick={() => removeUser(user)}
+                    key={user.id}
+                  >
                     <div className='messaging-create-channel__user-text'>{user.name}</div>
                     <XButton />
                   </div>
@@ -192,7 +199,9 @@ const CreateChannel = ({ onClose, toggleMobile }) => {
               <div>
                 {users.map((user, i) => (
                   <div
-                    className={`messaging-create-channel__user-result ${focusedUser === i && 'focused'}`}
+                    className={`messaging-create-channel__user-result ${
+                      focusedUser === i && 'focused'
+                    }`}
                     onClick={() => addUser(user)}
                     key={user.id}
                   >

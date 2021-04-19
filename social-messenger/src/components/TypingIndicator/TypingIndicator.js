@@ -23,12 +23,12 @@ export const TypingIndicator = () => {
   }
 
   return (
-    <div className="messaging__typing-indicator">
+    <div className='messaging__typing-indicator'>
       {text && (
-        <div className="dots">
-          <span className="dot" />
-          <span className="dot" />
-          <span className="dot" />
+        <div className='dots'>
+          <span className='dot' />
+          <span className='dot' />
+          <span className='dot' />
         </div>
       )}
       <div>{text}</div>

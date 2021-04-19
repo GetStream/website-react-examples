@@ -11,33 +11,24 @@ export const NotificationPopup = (props) => {
   const { setActiveChannel } = useContext(ChatContext);
 
   const getMessagePreview = () => {
-    return previewText.length > 40
-      ? `"${previewText.slice(0, 40)}..."`
-      : `"${previewText}"`;
+    return previewText.length > 40 ? `"${previewText.slice(0, 40)}..."` : `"${previewText}"`;
   };
 
   return (
     <div
-      className="notification-popup__container"
+      className='notification-popup__container'
       onClick={() => {
         if (eventChannel) setActiveChannel(eventChannel);
       }}
     >
-      <div className="notification-popup__top-wrapper">
-        <p className="notification-popup__top-text">AGENT DASHBOARD</p>
-        <div
-          className="notification-popup__dismiss"
-          onClick={() => setPopupVisible(false)}
-        >
+      <div className='notification-popup__top-wrapper'>
+        <p className='notification-popup__top-text'>AGENT DASHBOARD</p>
+        <div className='notification-popup__dismiss' onClick={() => setPopupVisible(false)}>
           <CloseIcon />
         </div>
       </div>
-      <p className="notification-popup__waiting-text">
-        You have 1 new customer waiting
-      </p>
-      <p className="notification-popup__message-preview">
-        {getMessagePreview()}
-      </p>
+      <p className='notification-popup__waiting-text'>You have 1 new customer waiting</p>
+      <p className='notification-popup__message-preview'>{getMessagePreview()}</p>
     </div>
   );
 };

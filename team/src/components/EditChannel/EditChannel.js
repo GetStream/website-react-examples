@@ -34,7 +34,10 @@ export const EditChannel = ({ filters, setIsEditing }) => {
     const nameChanged = channelName !== (channel.data.name || channel.data.id);
 
     if (nameChanged) {
-      await channel.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
+      await channel.update(
+        { name: channelName },
+        { text: `Channel name changed to ${channelName}` },
+      );
     }
 
     if (selectedUsers.length) {

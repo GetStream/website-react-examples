@@ -24,7 +24,11 @@ export const ChatUpgrades = ({ setPopUpText, setShowUpgrade, setShowPopUp }) => 
       </div>
       <ul>
         {upgrades.map((option, i) => (
-          <li className={upgradeSelected.includes(i) ? 'selected-button' : ''} onClick={() => upgradeSelector(i)} key={i}>
+          <li
+            className={upgradeSelected.includes(i) ? 'selected-button' : ''}
+            onClick={() => upgradeSelector(i)}
+            key={i}
+          >
             {getImage(option.img)}
             <div className='description-container'>
               <p>{option.name}</p>

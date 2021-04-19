@@ -10,7 +10,9 @@ export const LiveEventPanelists = () => {
   const { theme } = useContext(ChatContext);
 
   return (
-    <div className={theme === 'livestream light' ? 'panelists-container' : 'panelists-container-dark'}>
+    <div
+      className={theme === 'livestream light' ? 'panelists-container' : 'panelists-container-dark'}
+    >
       <div className='panelists-top'>
         <div className='panelists-top__left'>
           <div className='panelists-top__left-title'>The Storytelling of Science</div>
@@ -26,7 +28,8 @@ export const LiveEventPanelists = () => {
             </div>
           </div>
           <div className='panelists-top__left-description'>
-            Join us in watching experts at Arizona State University discuss the science and future of storytelling.
+            Join us in watching experts at Arizona State University discuss the science and future
+            of storytelling.
           </div>
         </div>
       </div>
@@ -35,7 +38,11 @@ export const LiveEventPanelists = () => {
         <div className='panelists-bottom__panelists'>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img alt='' style={{ height: '42px', width: '42px' }} src={require('../../assets/BrianGreene.png')}></img>
+              <img
+                alt=''
+                style={{ height: '42px', width: '42px' }}
+                src={require('../../assets/BrianGreene.png')}
+              ></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Brian</div>
                 <div className='panelists-name'>Green</div>
@@ -48,7 +55,11 @@ export const LiveEventPanelists = () => {
           </div>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img alt='' style={{ height: '42px', width: '42px' }} src={require('../../assets/NDT.png')}></img>
+              <img
+                alt=''
+                style={{ height: '42px', width: '42px' }}
+                src={require('../../assets/NDT.png')}
+              ></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Neil deGrasse</div>
                 <div className='panelists-name'>Tyson</div>
@@ -61,7 +72,11 @@ export const LiveEventPanelists = () => {
           </div>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img alt='' style={{ height: '42px', width: '42px' }} src={require('../../assets/BillNye.png')}></img>
+              <img
+                alt=''
+                style={{ height: '42px', width: '42px' }}
+                src={require('../../assets/BillNye.png')}
+              ></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Bill</div>
                 <div className='panelists-name'>Nye</div>

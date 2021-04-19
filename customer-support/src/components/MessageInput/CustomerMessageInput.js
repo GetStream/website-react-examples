@@ -43,7 +43,9 @@ export const CustomerMessageInput = (props) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles}
+        disabled={
+          maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles
+        }
       >
         <div className='support-message-input__input'>
           <UploadsPreview {...messageInput} />
