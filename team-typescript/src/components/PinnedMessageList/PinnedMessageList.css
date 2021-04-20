@@ -29,6 +29,7 @@
 
 .pinned-messages__list .pinned-message {
   background: #fff !important;
+  margin-left: 0.5px;
 }
 
 .pinned-messages__list .str-chat__message-simple__actions {

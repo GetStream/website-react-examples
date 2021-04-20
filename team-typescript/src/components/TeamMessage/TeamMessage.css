@@ -236,7 +236,7 @@ ul.str-chat__simple-reactions-list:hover {
 }
 
 .pinned-message {
-  background: var(--primary-color-alpha);
+  background: #e6efff;
 }
 
 .unpinned-message {

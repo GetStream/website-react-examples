@@ -1,7 +1,7 @@
 import type { SetStateAction } from 'react';
 
 type CloseThreadIconProps = {
-  closeThread?: (event: React.MouseEvent<HTMLButtonElement, MouseEvent>) => void;
+  closeThread?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
 }
 
@@ -9,7 +9,7 @@ export const CloseThreadIcon = (props: CloseThreadIconProps) => {
   const { closeThread, setPinsOpen } = props;
 
   return (
-    <button
+    <div
       onClick={(event) => {
         if (closeThread) {
           closeThread(event);
@@ -29,6 +29,6 @@ export const CloseThreadIcon = (props: CloseThreadIconProps) => {
         ></path>
         <rect width='39' height='39' x='0.5' y='0.5' stroke='#E9E9EA' rx='19.5'></rect>
       </svg>
-    </button>
+    </div>
   )
 };
