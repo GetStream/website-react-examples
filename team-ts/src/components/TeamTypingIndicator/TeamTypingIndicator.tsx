@@ -12,7 +12,7 @@ import type {
   TeamUserType,
 } from '../../App';
 
-export const TeamTypingIndicator = (props: { type: string }) => {
+export const TeamTypingIndicator: React.FC<{ type: string }> = (props) => {
   const { type } = props;
 
   const { client, typing } = useChannelContext<

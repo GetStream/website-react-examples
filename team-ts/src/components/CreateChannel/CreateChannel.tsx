@@ -1,11 +1,13 @@
 import { useState } from 'react';
-
-import type { ChannelFilters } from 'stream-chat';
 import { useChatContext } from 'stream-chat-react';
 
 import './CreateChannel.css';
 
 import { UserList } from './UserList';
+
+import { CloseCreateChannel } from '../../assets';
+
+import type { ChannelFilters } from 'stream-chat';
 
 import type {
   TeamAttachmentType,
@@ -17,20 +19,12 @@ import type {
   TeamUserType,
 } from '../../App';
 
-import { CloseCreateChannel } from '../../assets';
-
-type CreateChannelProps = {
-  createType: string;
-  filters: ChannelFilters[];
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type ChannelNameInputProps = {
+type InputProps = {
   channelName: string;
   setChannelName: (value: React.SetStateAction<string>) => void;
 };
 
-const ChannelNameInput = (props: ChannelNameInputProps) => {
+const ChannelNameInput: React.FC<InputProps> = (props) => {
   const { channelName = '', setChannelName } = props;
   const handleChange = (event: { preventDefault: () => void; target: { value: string } }) => {
     event.preventDefault();
@@ -46,7 +40,13 @@ const ChannelNameInput = (props: ChannelNameInputProps) => {
   );
 };
 
-export const CreateChannel = (props: CreateChannelProps) => {
+type Props = {
+  createType: string;
+  filters: ChannelFilters[];
+  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+export const CreateChannel: React.FC<Props> = (props) => {
   const { createType, filters, setIsCreating } = props;
 
   const { client, setActiveChannel } = useChatContext<

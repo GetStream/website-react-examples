@@ -14,21 +14,13 @@ import type {
   TeamUserType,
 } from '../../App';
 
-type TeamChannelPreviewProps = ChannelPreviewProps<
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType
-> & {
+type Props = ChannelPreviewProps & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   type: string;
 };
 
-export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
+export const TeamChannelPreview: React.FC<Props> = (props) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
   const { channel: activeChannel, client } = useChatContext<

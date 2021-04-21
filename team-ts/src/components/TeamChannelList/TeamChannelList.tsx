@@ -1,10 +1,10 @@
-import React, { PropsWithChildren } from 'react';
-
-import type { ChannelListTeamProps } from 'stream-chat-react';
+import React from 'react';
 
 import './TeamChannelList.css';
 
 import { AddChannel } from '../../assets';
+
+import type { ChannelListTeamProps } from 'stream-chat-react';
 
 export type TeamChannelListProps = ChannelListTeamProps & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
@@ -13,7 +13,7 @@ export type TeamChannelListProps = ChannelListTeamProps & {
   type: string;
 };
 
-const ChannelList: React.FC<PropsWithChildren<TeamChannelListProps>> = (props) => {
+const ChannelList: React.FC<TeamChannelListProps> = (props) => {
   const {
     children,
     error = false,

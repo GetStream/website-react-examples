@@ -1,4 +1,3 @@
-import type { ChannelFilters } from 'stream-chat';
 import { ChannelList, ChannelListProps } from 'stream-chat-react';
 
 import './ChannelListContainer.css';
@@ -9,7 +8,9 @@ import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
 
 import { SideBarFlag, SideBarLogo } from '../../assets';
 
-type TeamChannelListProps = Omit<ChannelListProps, 'filters'> & {
+import type { ChannelFilters } from 'stream-chat';
+
+type Props = Omit<ChannelListProps, 'filters'> & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -37,7 +38,7 @@ const CompanyHeader = () => (
   </div>
 );
 
-export const ChannelListContainer: React.FC<TeamChannelListProps> = (props) => {
+export const ChannelListContainer: React.FC<Props> = (props) => {
   const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
   return (

@@ -43,7 +43,7 @@ export const isChannel = (
     TeamUserType
   >).cid !== undefined;
 
-type ChannelByUserProps = {
+type Props = {
   client: StreamChat<
     TeamAttachmentType,
     TeamChannelType,
@@ -72,7 +72,7 @@ type ChannelByUserProps = {
   user: UserResponse<TeamUserType>;
 };
 
-export const channelByUser = async (props: ChannelByUserProps) => {
+export const channelByUser = async (props: Props) => {
   const { client, setActiveChannel, user } = props;
 
   const filters: ChannelFilters = {

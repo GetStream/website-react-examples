@@ -1,14 +1,13 @@
 import { useState } from 'react';
-
-import type { ChannelFilters } from 'stream-chat';
 import { Channel, useChatContext } from 'stream-chat-react';
 
 import './ChannelContainer.css';
 
 import { ChannelInner } from './ChannelInner';
-
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
+
+import type { ChannelFilters } from 'stream-chat';
 
 import type {
   TeamAttachmentType,
@@ -20,7 +19,7 @@ import type {
   TeamUserType,
 } from '../../App';
 
-type ChannelContainerProps = {
+type Props = {
   createType: string;
   isCreating: boolean;
   isEditing?: boolean;
@@ -28,7 +27,7 @@ type ChannelContainerProps = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
+export const ChannelContainer: React.FC<Props> = (props) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
   const { channel } = useChatContext<

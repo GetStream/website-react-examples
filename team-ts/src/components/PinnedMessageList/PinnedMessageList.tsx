@@ -1,5 +1,3 @@
-import type { SetStateAction } from 'react';
-
 import { useChannelContext, Message, MessageTeam } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
@@ -16,11 +14,11 @@ import type {
 
 import { CloseThreadIcon } from '../../assets';
 
-type PinnedMessageListProps = {
-  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+type Props = {
+  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const PinnedMessageList = (props: PinnedMessageListProps) => {
+export const PinnedMessageList: React.FC<Props> = (props) => {
   const { setPinsOpen } = props;
 
   const { channel, closeThread } = useChannelContext<

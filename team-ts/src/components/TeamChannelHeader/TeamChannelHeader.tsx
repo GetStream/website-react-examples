@@ -1,21 +1,46 @@
-import { useContext } from 'react';
-
-import { Avatar, ChannelContext, ChatContext } from 'stream-chat-react';
+import { Avatar, useChannelContext, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelHeader.css';
 
 import { ChannelInfo, PinIcon } from '../../assets';
 
-type TeamChannelHeaderProps = {
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
+
+type Props = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
+export const TeamChannelHeader: React.FC<Props> = (props) => {
   const { setIsEditing, setPinsOpen } = props;
 
-  const { client } = useContext(ChatContext);
-  const { channel, closeThread, watcher_count } = useContext(ChannelContext);
+  const { client } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
+
+  const { channel, closeThread, watcher_count } = useChannelContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
 
@@ -54,7 +79,7 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
     );
   };
 
-  const getWatcherText = (watchers: number | undefined) => {
+  const getWatcherText = (watchers?: number) => {
     if (!watchers) return 'No users online';
     if (watchers === 1) return '1 user online';
     return `${watchers} users online`;

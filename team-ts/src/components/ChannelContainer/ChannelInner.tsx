@@ -1,12 +1,10 @@
-import type { SetStateAction } from 'react';
-
 import {
+  defaultPinPermissions,
   MessageList,
+  PinEnabledUserRoles,
   Thread,
   ThreadHeaderProps,
   Window,
-  defaultPinPermissions,
-  PinEnabledUserRoles,
 } from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
@@ -18,18 +16,19 @@ import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 
 import { CloseThreadIcon } from '../../assets';
 
-type ChannelInnerProps = {
+type InnerProps = {
   pinsOpen: boolean;
-  setIsEditing: React.Dispatch<SetStateAction<boolean>>;
-  setPinsOpen: React.Dispatch<SetStateAction<boolean>>;
+  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+  setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type TeamThreadHeaderProps = ThreadHeaderProps & {
-  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+type HeaderProps = ThreadHeaderProps & {
+  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ThreadHeader = (props: TeamThreadHeaderProps) => {
+const ThreadHeader: React.FC<HeaderProps> = (props) => {
   const { closeThread, setPinsOpen, thread } = props;
+
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
     if (thread.reply_count === 1) return '1 reply';
@@ -47,7 +46,7 @@ const ThreadHeader = (props: TeamThreadHeaderProps) => {
   );
 };
 
-export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
+export const ChannelInner: React.FC<InnerProps> = (props) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
 
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };

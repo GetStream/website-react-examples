@@ -1,9 +1,11 @@
-import { PropsWithChildren, useEffect, useState } from 'react';
-
-import type { ChannelFilters, UserResponse } from 'stream-chat';
+import { useEffect, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './UserList.css';
+
+import { InviteIcon } from '../../assets';
+
+import type { ChannelFilters, UserResponse } from 'stream-chat';
 
 import type {
   TeamAttachmentType,
@@ -15,16 +17,7 @@ import type {
   TeamUserType,
 } from '../../App';
 
-import { InviteIcon } from '../../assets';
-
-type UserListProps = {
-  filters: ChannelFilters[];
-  setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
-};
-
-interface ListContainerProps {}
-
-const ListContainer = (props: PropsWithChildren<ListContainerProps>) => {
+const ListContainer: React.FC = (props) => {
   const { children } = props;
 
   return (
@@ -39,13 +32,13 @@ const ListContainer = (props: PropsWithChildren<ListContainerProps>) => {
   );
 };
 
-type UserItemProps = {
+type ItemProps = {
   index: number;
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   user: UserResponse<TeamUserType>;
 };
 
-const UserItem = (props: UserItemProps) => {
+const UserItem: React.FC<ItemProps> = (props) => {
   const { index, setSelectedUsers, user } = props;
 
   const [selected, setSelected] = useState(false);
@@ -88,7 +81,12 @@ const UserItem = (props: UserItemProps) => {
   );
 };
 
-export const UserList = (props: UserListProps) => {
+type Props = {
+  filters: ChannelFilters[];
+  setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
+};
+
+export const UserList: React.FC<Props> = (props) => {
   const { filters, setSelectedUsers } = props;
 
   const { client } = useChatContext<

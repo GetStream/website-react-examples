@@ -1,31 +1,20 @@
 import { useCallback, useState } from 'react';
-
 import { ImageDropzone } from 'react-file-utils';
 import { Attachment, logChatPromiseExecution, MessageResponse, UserResponse } from 'stream-chat';
 import {
   ChatAutoComplete,
   EmojiPicker,
   MessageInputProps,
+  StreamMessage,
+  UploadsPreview,
   useChannelContext,
   useChatContext,
   useMessageInput,
-  StreamMessage,
 } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
 
-import { UploadsPreview } from './UploadsPreview';
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
-
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
 
 import {
   BoldIcon,
@@ -37,9 +26,15 @@ import {
   StrikeThroughIcon,
 } from '../../assets';
 
-export type TeamMessageInputProps = MessageInputProps & {
-  pinsOpen: boolean;
-};
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 export type MessageToOverride = {
   attachments: Attachment[];
@@ -48,7 +43,11 @@ export type MessageToOverride = {
   parent?: StreamMessage;
 };
 
-export const TeamMessageInput = (props: TeamMessageInputProps) => {
+type Props = MessageInputProps & {
+  pinsOpen: boolean;
+};
+
+export const TeamMessageInput: React.FC<Props> = (props) => {
   const {
     additionalTextareaProps,
     autocompleteTriggers,
@@ -74,6 +73,7 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
     TeamReactionType,
     TeamUserType
   >();
+
   const { client } = useChatContext<
     TeamAttachmentType,
     TeamChannelType,

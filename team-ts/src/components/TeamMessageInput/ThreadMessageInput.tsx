@@ -1,12 +1,18 @@
 import { useCallback, useState } from 'react';
 import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
 import {
-  useChannelContext,
   ChatAutoComplete,
   EmojiPicker,
-  useMessageInput,
   MessageInputProps,
+  useChannelContext,
+  useMessageInput,
 } from 'stream-chat-react';
+
+import './ThreadMessageInput.css';
+
+import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
+
+import type { MessageToOverride } from './TeamMessageInput';
 
 import type {
   TeamAttachmentType,
@@ -18,13 +24,7 @@ import type {
   TeamUserType,
 } from '../../App';
 
-import type { MessageToOverride } from './TeamMessageInput';
-
-import './ThreadMessageInput.css';
-
-import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
-
-export const ThreadMessageInput = (props: MessageInputProps) => {
+export const ThreadMessageInput: React.FC<MessageInputProps> = (props) => {
   const { additionalTextareaProps, autocompleteTriggers, disabled, grow, maxRows } = props;
 
   const { sendMessage } = useChannelContext<
@@ -36,6 +36,7 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
     TeamReactionType,
     TeamUserType
   >();
+
   const [giphyState, setGiphyState] = useState(false);
 
   const overrideSubmitHandler = (message: MessageToOverride) => {

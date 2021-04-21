@@ -2,6 +2,8 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './ChannelEmptyState.css';
 
+import { HashIcon } from '../../assets';
+
 import type {
   TeamAttachmentType,
   TeamChannelType,
@@ -11,8 +13,6 @@ import type {
   TeamReactionType,
   TeamUserType,
 } from '../../App';
-
-import { HashIcon } from '../../assets';
 
 export const ChannelEmptyState = () => {
   const { channel, client } = useChatContext<
@@ -24,6 +24,7 @@ export const ChannelEmptyState = () => {
     TeamReactionType,
     TeamUserType
   >();
+
   const members = Object.values(channel?.state?.members || {}).filter(
     ({ user }) => user?.id !== client.userID,
   );

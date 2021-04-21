@@ -1,7 +1,8 @@
 import { Avatar, useChatContext } from 'stream-chat-react';
-import type { Channel, UserResponse } from 'stream-chat';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
+
+import type { Channel, UserResponse } from 'stream-chat';
 
 import type {
   TeamAttachmentType,
@@ -13,38 +14,11 @@ import type {
   TeamUserType,
 } from '../../App';
 
-type ResultsDropdownProps = {
-  teamChannels?: Channel<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >[];
-  directChannels?: UserResponse<TeamUserType>[];
-  focusedId: string;
-  loading: boolean;
-  setChannel: (
-    channel: Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >,
-  ) => void;
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-};
-
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
   result: ChannelOrUserType;
 };
 
-const SearchResult = (props: SearchResultProps) => {
+const SearchResult: React.FC<SearchResultProps> = (props) => {
   const { focusedId, result, setChannel } = props;
 
   const { client, setActiveChannel } = useChatContext<
@@ -104,7 +78,34 @@ const SearchResult = (props: SearchResultProps) => {
   }
 };
 
-export const ResultsDropdown = (props: ResultsDropdownProps) => {
+type ResultsDropdownProps = {
+  teamChannels?: Channel<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >[];
+  directChannels?: UserResponse<TeamUserType>[];
+  focusedId: string;
+  loading: boolean;
+  setChannel: (
+    channel: Channel<
+      TeamAttachmentType,
+      TeamChannelType,
+      TeamCommandType,
+      TeamEventType,
+      TeamMessageType,
+      TeamReactionType,
+      TeamUserType
+    >,
+  ) => void;
+  setQuery: React.Dispatch<React.SetStateAction<string>>;
+};
+
+export const ResultsDropdown: React.FC<ResultsDropdownProps> = (props) => {
   const { teamChannels, directChannels, focusedId, loading, setChannel, setQuery } = props;
   document.addEventListener('click', () => setQuery(''));
 

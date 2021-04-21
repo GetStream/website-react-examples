@@ -1,13 +1,12 @@
-import type { SetStateAction } from 'react';
 import { MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
 
 import './TeamMessage.css';
 
-type TeamMessageProps = MessageUIComponentProps & {
-  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+type Props = MessageUIComponentProps & {
+  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TeamMessage = (props: TeamMessageProps) => {
+export const TeamMessage: React.FC<Props> = (props) => {
   const { handleOpenThread, message, setPinsOpen } = props;
 
   const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
