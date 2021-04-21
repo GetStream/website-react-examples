@@ -1,0 +1,63 @@
+.pinned-messages__container {
+  height: 100%;
+  width: 300px;
+  box-shadow: inset 1px 0px 0px rgba(0, 0, 0, 0.1);
+  z-index: 1;
+  background: #ffffff;
+  overflow-x: hidden;
+}
+
+.pinned-messages__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 62px;
+  box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+}
+
+.pinned-messages__header-text {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 18px;
+  margin-left: 20px;
+  color: #2c2c30;
+}
+
+.pinned-messages__list {
+  padding-top: 20px;
+}
+
+.pinned-messages__list .pinned-message {
+  background: #fff !important;
+  margin-left: 0.5px;
+}
+
+.pinned-messages__list .str-chat__message-simple__actions {
+  display: none;
+}
+
+.pinned-messages__list .str-chat__message-team-pin-indicator {
+  display: none;
+}
+
+.pinned-messages__list .str-chat__message-replies-count-button {
+  display: none;
+}
+
+.pinned-messages__list .str-chat__message-team .str-chat__message-team-actions {
+  display: none;
+}
+
+div.pinned-messages__header > button {
+  background: #fff;
+  margin: 0;
+  padding: 0;
+  margin-right: 20px;
+  height: 35px;
+  width: 35px;
+  border-radius: 18px;
+}
+
+div.pinned-messages__header > button:active {
+  background: #fff;
+}

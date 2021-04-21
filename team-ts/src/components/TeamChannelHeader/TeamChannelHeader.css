@@ -1,0 +1,81 @@
+.team-channel-header__container {
+    position: relative;
+    height: 62px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    background: #ffffff;
+    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+    border-top-right-radius: 16px;
+    z-index: 1;
+  }
+
+  .team-channel-header__channel-wrapper {
+    display: flex;
+    align-items: center;
+  }
+
+  .team-channel-header__channel-wrapper svg {
+    cursor: pointer;
+  }
+
+  .team-channel-header__name {
+    font-family: Helvetica Neue, sans-serif;
+    font-weight: bold;
+    font-size: 18px;
+    color: #2c2c30;
+    margin-right: 8px;
+  }
+
+  .team-channel-header__name-wrapper {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    white-space: nowrap;
+  }
+
+  .team-channel-header__name-multi {
+    display: flex;
+    align-items: center;
+    margin-right: 8px;
+  }
+
+  .team-channel-header__name-multi:nth-child(3) {
+    margin-right: 0px;
+  }
+
+  .team-channel-header__name-wrapper .str-chat__avatar {
+    margin-right: 8px;
+  }
+
+  .team-channel-header__name.user {
+    font-weight: 500;
+    font-size: 14px;
+  }
+
+  .team-channel-header__right {
+    position: absolute;
+    display: flex;
+    align-items: center;
+    right: 0;
+    padding: 0 20px;
+    background: #ffffff;
+  }
+
+  .team-channel-header__right-pin-wrapper {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+  }
+
+  .team-channel-header__right svg {
+    margin-left: 16px;
+    margin-right: 4px;
+  }
+
+  .team-channel-header__right-text {
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 14px;
+    color: #858688;
+  }
