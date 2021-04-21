@@ -10,13 +10,40 @@ import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 import { ResultsDropdown } from './ResultsDropdown';
 
 import { SearchIcon } from '../../assets';
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { client, setActiveChannel } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
-  const [allChannels, setAllChannels] = useState<(ConcatArray<ChannelOrUserType>) | undefined>();
-  const [teamChannels, setTeamChannels] = useState<Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>[] | undefined>();
+  const [allChannels, setAllChannels] = useState<ConcatArray<ChannelOrUserType> | undefined>();
+  const [teamChannels, setTeamChannels] = useState<
+    | Channel<
+        TeamAttachmentType,
+        TeamChannelType,
+        TeamCommandType,
+        TeamEventType,
+        TeamMessageType,
+        TeamReactionType,
+        TeamUserType
+      >[]
+    | undefined
+  >();
   const [directChannels, setDirectChannels] = useState<UserResponse<TeamUserType>[] | undefined>();
 
   const [focused, setFocused] = useState<number>();
@@ -39,13 +66,13 @@ export const ChannelSearch = () => {
       } else if (event.key === 'Enter') {
         event.preventDefault();
 
-        if (allChannels !== undefined && focused !== undefined) {  
+        if (allChannels !== undefined && focused !== undefined) {
           const channelToCheck = allChannels[focused];
 
           if (isChannel(channelToCheck)) {
             setActiveChannel(channelToCheck);
           } else {
-            channelByUser({ client, setActiveChannel, user: channelToCheck});
+            channelByUser({ client, setActiveChannel, user: channelToCheck });
           }
         }
 
@@ -72,12 +99,22 @@ export const ChannelSearch = () => {
   }, [query]);
 
   useEffect(() => {
-    if ((focused && focused >= 0) && allChannels) {
+    if (focused && focused >= 0 && allChannels) {
       setFocusedId(allChannels[focused].id || '');
     }
   }, [allChannels, focused]);
 
-  const setChannel = (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>) => {
+  const setChannel = (
+    channel: Channel<
+      TeamAttachmentType,
+      TeamChannelType,
+      TeamCommandType,
+      TeamEventType,
+      TeamMessageType,
+      TeamReactionType,
+      TeamUserType
+    >,
+  ) => {
     setQuery('');
     setActiveChannel(channel);
   };
@@ -96,7 +133,10 @@ export const ChannelSearch = () => {
       const userResponse = client.queryUsers(
         {
           id: { $ne: client.userID || '' },
-          $and: [{ name: { $autocomplete: text } }, { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } }],
+          $and: [
+            { name: { $autocomplete: text } },
+            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
+          ],
         },
         { id: 1 },
         { limit: 5 },
@@ -135,7 +175,13 @@ export const ChannelSearch = () => {
         <div className='channel-search__input__icon'>
           <SearchIcon />
         </div>
-        <input className='channel-search__input__text' onChange={onSearch} placeholder='Search' type='text' value={query} />
+        <input
+          className='channel-search__input__text'
+          onChange={onSearch}
+          placeholder='Search'
+          type='text'
+          value={query}
+        />
       </div>
       {query && (
         <ResultsDropdown

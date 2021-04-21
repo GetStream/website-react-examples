@@ -7,7 +7,15 @@ import './CreateChannel.css';
 
 import { UserList } from './UserList';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 import { CloseCreateChannel } from '../../assets';
 
@@ -15,16 +23,16 @@ type CreateChannelProps = {
   createType: string;
   filters: ChannelFilters[];
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 type ChannelNameInputProps = {
   channelName: string;
   setChannelName: (value: React.SetStateAction<string>) => void;
-}
+};
 
 const ChannelNameInput = (props: ChannelNameInputProps) => {
   const { channelName = '', setChannelName } = props;
-  const handleChange = (event: { preventDefault: () => void; target: { value: string; }; }) => {
+  const handleChange = (event: { preventDefault: () => void; target: { value: string } }) => {
     event.preventDefault();
     setChannelName(event.target.value);
   };
@@ -41,12 +49,20 @@ const ChannelNameInput = (props: ChannelNameInputProps) => {
 export const CreateChannel = (props: CreateChannelProps) => {
   const { createType, filters, setIsCreating } = props;
 
-  const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { client, setActiveChannel } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   const [channelName, setChannelName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[] | undefined>([client.userID || '']);
 
-  const createChannel = async (event: { preventDefault: () => void; }) => {
+  const createChannel = async (event: { preventDefault: () => void }) => {
     event.preventDefault();
     if (!selectedUsers?.length) return;
 

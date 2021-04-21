@@ -8,22 +8,30 @@ import { UserList } from '../CreateChannel/UserList';
 
 import { CloseCreateChannel } from '../../assets';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 type EditChannelProps = {
   filters: ChannelFilters[];
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 type ChannelNameInputProps = {
   channelName: string;
   setChannelName: (value: React.SetStateAction<string>) => void;
-}
+};
 
 const ChannelNameInput = (props: ChannelNameInputProps) => {
   const { channelName = '', setChannelName } = props;
 
-  const handleChange = (event: { preventDefault: () => void; target: { value: string; }; }) => {
+  const handleChange = (event: { preventDefault: () => void; target: { value: string } }) => {
     event.preventDefault();
     setChannelName(event.target.value);
   };
@@ -40,9 +48,19 @@ const ChannelNameInput = (props: ChannelNameInputProps) => {
 export const EditChannel = (props: EditChannelProps) => {
   const { filters, setIsEditing } = props;
 
-  const { channel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { channel } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
-  const [channelName, setChannelName] = useState<string>(channel?.data?.name || channel?.data?.id as string);
+  const [channelName, setChannelName] = useState<string>(
+    channel?.data?.name || (channel?.data?.id as string),
+  );
   const [selectedUsers, setSelectedUsers] = useState<string[] | undefined>();
 
   const updateChannel = async (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => {
@@ -51,7 +69,10 @@ export const EditChannel = (props: EditChannelProps) => {
     const nameChanged = channelName !== (channel?.data?.name || channel?.data?.id);
 
     if (nameChanged) {
-      await channel?.update({ name: channelName }, { text: `Channel name changed to ${channelName}` });
+      await channel?.update(
+        { name: channelName },
+        { text: `Channel name changed to ${channelName}` },
+      );
     }
 
     if (selectedUsers?.length) {

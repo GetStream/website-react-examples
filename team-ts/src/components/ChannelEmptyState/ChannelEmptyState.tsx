@@ -2,13 +2,31 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './ChannelEmptyState.css';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 import { HashIcon } from '../../assets';
 
 export const ChannelEmptyState = () => {
-  const { channel, client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>()
-  const members = Object.values(channel?.state?.members || {}).filter(({ user }) => user?.id !== client.userID);
+  const { channel, client } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
+  const members = Object.values(channel?.state?.members || {}).filter(
+    ({ user }) => user?.id !== client.userID,
+  );
 
   const getAvatarGroup = () => {
     if (!members.length) return <Avatar size={72} />;
@@ -25,14 +43,18 @@ export const ChannelEmptyState = () => {
 
   const getUserText = () => {
     if (members.length === 1) {
-      return <span className='channel-empty__user-name'>{`@${members[0]?.user?.name || members[0]?.user?.id}`}</span>;
+      return (
+        <span className='channel-empty__user-name'>{`@${
+          members[0]?.user?.name || members[0]?.user?.id
+        }`}</span>
+      );
     }
 
     if (members.length === 2) {
       return (
-        <span className='channel-empty__user-name'>{`@${members[0]?.user?.name || members[0]?.user?.id} and @${
-          members[1]?.user?.name || members[1]?.user?.id
-        }`}</span>
+        <span className='channel-empty__user-name'>{`@${
+          members[0]?.user?.name || members[0]?.user?.id
+        } and @${members[1]?.user?.name || members[1]?.user?.id}`}</span>
       );
     }
 

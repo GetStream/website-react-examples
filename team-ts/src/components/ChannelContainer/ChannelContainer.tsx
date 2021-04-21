@@ -10,7 +10,15 @@ import { ChannelInner } from './ChannelInner';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 type ChannelContainerProps = {
   createType: string;
@@ -18,18 +26,20 @@ type ChannelContainerProps = {
   isEditing?: boolean;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
-  const {
-    createType,
-    isCreating,
-    isEditing,
-    setIsCreating,
-    setIsEditing,
-  } = props;
+  const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
-  const { channel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { channel } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   const [pinsOpen, setPinsOpen] = useState(false);
 
@@ -37,7 +47,7 @@ export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
     const filters: ChannelFilters[] = [];
 
     return (
-      <div className="channel__container">
+      <div className='channel__container'>
         <CreateChannel {...{ createType, filters, setIsCreating }} />
       </div>
     );
@@ -55,14 +65,14 @@ export const ChannelContainer: React.FC<ChannelContainerProps> = (props) => {
     }
 
     return (
-      <div className="channel__container">
+      <div className='channel__container'>
         <EditChannel {...{ filters, setIsEditing }} />
       </div>
     );
   }
 
   return (
-    <div className="channel__container">
+    <div className='channel__container'>
       <Channel>
         <ChannelInner
           {...{

@@ -5,7 +5,7 @@ import './TeamMessage.css';
 
 type TeamMessageProps = MessageUIComponentProps & {
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
-}
+};
 
 export const TeamMessage = (props: TeamMessageProps) => {
   const { handleOpenThread, message, setPinsOpen } = props;

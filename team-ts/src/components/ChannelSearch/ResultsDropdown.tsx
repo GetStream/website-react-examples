@@ -3,50 +3,100 @@ import type { Channel, UserResponse } from 'stream-chat';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 type ResultsDropdownProps = {
-  teamChannels?: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>[];
+  teamChannels?: Channel<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >[];
   directChannels?: UserResponse<TeamUserType>[];
   focusedId: string;
   loading: boolean;
-  setChannel: (channel: Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>) => void
+  setChannel: (
+    channel: Channel<
+      TeamAttachmentType,
+      TeamChannelType,
+      TeamCommandType,
+      TeamEventType,
+      TeamMessageType,
+      TeamReactionType,
+      TeamUserType
+    >,
+  ) => void;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
-}
+};
 
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
   result: ChannelOrUserType;
-}
+};
 
 const SearchResult = (props: SearchResultProps) => {
   const { focusedId, result, setChannel } = props;
 
-  const { client, setActiveChannel } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { client, setActiveChannel } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   if (isChannel(result)) {
-    const channel = result as Channel<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>
+    const channel = result as Channel<
+      TeamAttachmentType,
+      TeamChannelType,
+      TeamCommandType,
+      TeamEventType,
+      TeamMessageType,
+      TeamReactionType,
+      TeamUserType
+    >;
 
     return (
       <div
         onClick={() => setChannel(channel)}
-        className={focusedId === channel.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
+        className={
+          focusedId === channel.id
+            ? 'channel-search__result-container__focused'
+            : 'channel-search__result-container'
+        }
       >
         <div className='result-hashtag'>#</div>
         <p className='channel-search__result-text'>{channel?.data?.name}</p>
       </div>
     );
   } else {
-    const user = result as UserResponse<TeamUserType>
+    const user = result as UserResponse<TeamUserType>;
 
     return (
       <div
         onClick={async () => {
           channelByUser({ client, setActiveChannel, user });
         }}
-        className={focusedId === user.id ? 'channel-search__result-container__focused' : 'channel-search__result-container'}
+        className={
+          focusedId === user.id
+            ? 'channel-search__result-container__focused'
+            : 'channel-search__result-container'
+        }
       >
         <div className='channel-search__result-user'>
-          <Avatar image={user?.image} size={24} />     
+          <Avatar image={user?.image} size={24} />
           <p className='channel-search__result-text'>{user.name || user.id || 'Johnny Blaze'}</p>
         </div>
       </div>

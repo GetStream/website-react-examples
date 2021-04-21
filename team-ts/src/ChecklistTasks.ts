@@ -2,11 +2,19 @@ import { useEffect } from 'react';
 
 import type { Event, StreamChat } from 'stream-chat';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from './App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from './App';
 
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
-}
+};
 
 const YOUTUBE_LINK = 'https://youtu.be/Ujvy-DEA-UM';
 
@@ -21,9 +29,17 @@ const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_
 ];
 
 type ChecklistTaskProps = {
-  chatClient: StreamChat<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>;
+  chatClient: StreamChat<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >;
   targetOrigin: string;
-}
+};
 
 export const useChecklist = (props: ChecklistTaskProps): void => {
   const { chatClient, targetOrigin } = props;
@@ -31,10 +47,20 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (props: Event<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>) => {
+    const handleNewEvent = (
+      props: Event<
+        TeamAttachmentType,
+        TeamChannelType,
+        TeamCommandType,
+        TeamEventType,
+        TeamMessageType,
+        TeamReactionType,
+        TeamUserType
+      >,
+    ) => {
       const { message, type } = props;
 
-      switch(type) {
+      switch (type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
@@ -42,15 +68,18 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
           if (message?.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
-          };
+          }
           if (message?.attachments?.length) {
-            if (message.attachments[0].type === 'video' && message.attachments[0].og_scrape_url === YOUTUBE_LINK) {
+            if (
+              message.attachments[0].type === 'video' &&
+              message.attachments[0].og_scrape_url === YOUTUBE_LINK
+            ) {
               notify(SEND_YOUTUBE);
               break;
             }
             if (message.attachments[0].type === 'image') {
               notify(DRAG_DROP);
-              break
+              break;
             }
           }
           if (message?.parent_id) {
@@ -62,7 +91,7 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
         default:
           break;
       }
-    }
+    };
     if (chatClient) {
       chatClient.on(handleNewEvent);
     }

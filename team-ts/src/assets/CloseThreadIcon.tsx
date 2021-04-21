@@ -3,7 +3,7 @@ import type { SetStateAction } from 'react';
 type CloseThreadIconProps = {
   closeThread?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
-}
+};
 
 export const CloseThreadIcon = (props: CloseThreadIconProps) => {
   const { closeThread, setPinsOpen } = props;
@@ -20,7 +20,13 @@ export const CloseThreadIcon = (props: CloseThreadIconProps) => {
       }}
       className='close-thread-icon'
     >
-      <svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' fill='none' viewBox='0 0 40 40'>
+      <svg
+        xmlns='http://www.w3.org/2000/svg'
+        width='40'
+        height='40'
+        fill='none'
+        viewBox='0 0 40 40'
+      >
         <path
           fill='var(--primary-color)'
           fillRule='evenodd'
@@ -30,5 +36,5 @@ export const CloseThreadIcon = (props: CloseThreadIconProps) => {
         <rect width='39' height='39' x='0.5' y='0.5' stroke='#E9E9EA' rx='19.5'></rect>
       </svg>
     </div>
-  )
+  );
 };

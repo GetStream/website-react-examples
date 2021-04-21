@@ -1,20 +1,28 @@
-import {PropsWithChildren, useEffect, useState } from 'react';
+import { PropsWithChildren, useEffect, useState } from 'react';
 
 import type { ChannelFilters, UserResponse } from 'stream-chat';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './UserList.css';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 import { InviteIcon } from '../../assets';
 
 type UserListProps = {
-  filters: ChannelFilters[]
+  filters: ChannelFilters[];
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
-}
+};
 
-interface ListContainerProps { };
+interface ListContainerProps {}
 
 const ListContainer = (props: PropsWithChildren<ListContainerProps>) => {
   const { children } = props;
@@ -28,14 +36,14 @@ const ListContainer = (props: PropsWithChildren<ListContainerProps>) => {
       </div>
       {children}
     </div>
-  )
+  );
 };
 
 type UserItemProps = {
   index: number;
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   user: UserResponse<TeamUserType>;
-}
+};
 
 const UserItem = (props: UserItemProps) => {
   const { index, setSelectedUsers, user } = props;
@@ -63,7 +71,7 @@ const UserItem = (props: UserItemProps) => {
     if (selected) {
       setSelectedUsers((prevUsers) => prevUsers?.filter((prevUser) => prevUser !== user.id));
     } else {
-      setSelectedUsers((prevUsers) => prevUsers ? [...prevUsers, user.id] : [user.id]);
+      setSelectedUsers((prevUsers) => (prevUsers ? [...prevUsers, user.id] : [user.id]));
     }
     setSelected(!selected);
   };
@@ -83,7 +91,15 @@ const UserItem = (props: UserItemProps) => {
 export const UserList = (props: UserListProps) => {
   const { filters, setSelectedUsers } = props;
 
-  const { client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { client } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   const [error, setError] = useState(false);
   const [listEmpty, setListEmpty] = useState(false);
@@ -96,7 +112,11 @@ export const UserList = (props: UserListProps) => {
       setLoading(true);
 
       try {
-        const response = await client.queryUsers({ id: { $ne: client.userID || '' }, ...filters }, { id: 1 }, { limit: 6 });
+        const response = await client.queryUsers(
+          { id: { $ne: client.userID || '' }, ...filters },
+          { id: 1 },
+          { limit: 6 },
+        );
 
         if (response.users.length) {
           setUsers(response.users);
@@ -134,7 +154,10 @@ export const UserList = (props: UserListProps) => {
       {loading ? (
         <div className='user-list__message'>Loading users...</div>
       ) : (
-        users?.length && users.map((user, i) => <UserItem index={i} key={user.id} setSelectedUsers={setSelectedUsers} user={user} />)
+        users?.length &&
+        users.map((user, i) => (
+          <UserItem index={i} key={user.id} setSelectedUsers={setSelectedUsers} user={user} />
+        ))
       )}
     </ListContainer>
   );

@@ -1,6 +1,13 @@
 import type { SetStateAction } from 'react';
 
-import { MessageList, Thread, ThreadHeaderProps, Window, defaultPinPermissions, PinEnabledUserRoles } from 'stream-chat-react';
+import {
+  MessageList,
+  Thread,
+  ThreadHeaderProps,
+  Window,
+  defaultPinPermissions,
+  PinEnabledUserRoles,
+} from 'stream-chat-react';
 
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
@@ -15,11 +22,11 @@ type ChannelInnerProps = {
   pinsOpen: boolean;
   setIsEditing: React.Dispatch<SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<SetStateAction<boolean>>;
-}
+};
 
 type TeamThreadHeaderProps = ThreadHeaderProps & {
   setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
-}
+};
 
 const ThreadHeader = (props: TeamThreadHeaderProps) => {
   const { closeThread, setPinsOpen, thread } = props;
@@ -44,8 +51,15 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
 
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
-  const messagingPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.messaging, user: true };
-  const pinnedPermissions = {...defaultPinPermissions, team: teamPermissions, messaging: messagingPermissions};
+  const messagingPermissions: PinEnabledUserRoles = {
+    ...defaultPinPermissions.messaging,
+    user: true,
+  };
+  const pinnedPermissions = {
+    ...defaultPinPermissions,
+    team: teamPermissions,
+    messaging: messagingPermissions,
+  };
 
   return (
     <div style={{ display: 'flex', width: '100%' }}>

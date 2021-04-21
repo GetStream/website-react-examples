@@ -8,22 +8,34 @@ import {
   MessageInputProps,
 } from 'stream-chat-react';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 import type { MessageToOverride } from './TeamMessageInput';
 
 import './ThreadMessageInput.css';
 
-import {
-  LightningBoltSmall,
-  SendButton,
-  SmileyFace,
-} from '../../assets';
+import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
 
 export const ThreadMessageInput = (props: MessageInputProps) => {
   const { additionalTextareaProps, autocompleteTriggers, disabled, grow, maxRows } = props;
 
-  const { sendMessage } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const { sendMessage } = useChannelContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
   const [giphyState, setGiphyState] = useState(false);
 
   const overrideSubmitHandler = (message: MessageToOverride) => {
@@ -32,7 +44,7 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
       mentioned_users: message.mentioned_users,
       parent_id: message.parent?.id,
       parent: message.parent as MessageResponse,
-      text: message.text
+      text: message.text,
     };
 
     if (giphyState) {
@@ -47,7 +59,15 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
     }
   };
 
-  const messageInput = useMessageInput<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInput<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >({ ...props, overrideSubmitHandler });
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -57,10 +77,7 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
           ? true
           : false;
 
-      if (
-        messageInput.text.length === 1 &&
-        deletePressed
-      ) {
+      if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);
       }
 
@@ -75,15 +92,15 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
   );
 
   const GiphyIcon = () => (
-    <div className="giphy-icon__wrapper">
+    <div className='giphy-icon__wrapper'>
       <LightningBoltSmall />
-      <p className="giphy-icon__text">GIPHY</p>
+      <p className='giphy-icon__text'>GIPHY</p>
     </div>
   );
 
   return (
-    <div className="thread-message-input__wrapper">
-      <div className="thread-message-input__input">
+    <div className='thread-message-input__wrapper'>
+      <div className='thread-message-input__input'>
         {giphyState && <GiphyIcon />}
         <ChatAutoComplete
           innerRef={messageInput.textareaRef}
@@ -93,7 +110,7 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
           value={messageInput.text}
           rows={1}
           maxRows={maxRows}
-          placeholder="Reply"
+          placeholder='Reply'
           onPaste={messageInput.onPaste}
           triggers={autocompleteTriggers}
           grow={grow}
@@ -102,13 +119,13 @@ export const ThreadMessageInput = (props: MessageInputProps) => {
             ...additionalTextareaProps,
           }}
         />
-        <div className="thread-message-input__icons">
+        <div className='thread-message-input__icons'>
           <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
         </div>
         <div
-          className="thread-message-input__button"
-          role="button"
-          aria-roledescription="button"
+          className='thread-message-input__button'
+          role='button'
+          aria-roledescription='button'
           onClick={messageInput.handleSubmit}
         >
           <SendButton />

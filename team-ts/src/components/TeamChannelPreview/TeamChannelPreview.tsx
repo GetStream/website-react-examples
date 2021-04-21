@@ -4,23 +4,53 @@ import './TeamChannelPreview.css';
 
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
-type TeamChannelPreviewProps = ChannelPreviewProps<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType> & {
+type TeamChannelPreviewProps = ChannelPreviewProps<
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType
+> & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   type: string;
-}
+};
 
 export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
-  const { channel: activeChannel, client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>()
+  const { channel: activeChannel, client } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
-  const ChannelPreview = () => <p className='channel-preview__item'># {channel?.data?.name || channel?.data?.id || 'random'}</p>;
+  const ChannelPreview = () => (
+    <p className='channel-preview__item'>
+      # {channel?.data?.name || channel?.data?.id || 'random'}
+    </p>
+  );
 
   const DirectPreview = () => {
-    const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user?.id !== client.userID,
+    );
     const defaultName = 'Johnny Blaze';
 
     if (!members.length || members.length === 1) {
@@ -41,7 +71,8 @@ export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
         </span>
         <Avatar image={members[1]?.user?.image || undefined} size={18} />
         <p>
-          {members[0]?.user?.name || members[0]?.user?.id || defaultName}, {members[1]?.user?.name || members[1]?.user?.id || defaultName}
+          {members[0]?.user?.name || members[0]?.user?.id || defaultName},{' '}
+          {members[1]?.user?.name || members[1]?.user?.id || defaultName}
         </p>
       </div>
     );
@@ -49,12 +80,16 @@ export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
 
   return (
     <div
-      className={channel?.id === activeChannel?.id ? 'channel-preview__wrapper__selected' : 'channel-preview__wrapper'}
+      className={
+        channel?.id === activeChannel?.id
+          ? 'channel-preview__wrapper__selected'
+          : 'channel-preview__wrapper'
+      }
       onClick={() => {
         setIsCreating(false);
         setIsEditing(false);
         if (setActiveChannel) {
-          setActiveChannel(channel) 
+          setActiveChannel(channel);
         }
       }}
     >

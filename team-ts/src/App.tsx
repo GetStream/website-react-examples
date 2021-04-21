@@ -38,7 +38,15 @@ const filters: ChannelFilters[] = [{ type: 'team' }, { type: 'messaging' }];
 const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort: ChannelSort<TeamChannelType> = { last_message_at: -1, updated_at: -1 };
 
-const client = StreamChat.getInstance<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>(apiKey!);
+const client = StreamChat.getInstance<
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType
+>(apiKey!);
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
@@ -65,7 +73,8 @@ const App = () => {
     <>
       <div className='app__wrapper'>
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
-          <ChannelListContainer {...{
+          <ChannelListContainer
+            {...{
               isCreating,
               filters,
               options,

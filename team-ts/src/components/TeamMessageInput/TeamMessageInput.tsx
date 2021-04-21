@@ -1,15 +1,31 @@
 import { useCallback, useState } from 'react';
 
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, logChatPromiseExecution, MessageResponse,UserResponse } from 'stream-chat';
-import { ChatAutoComplete, EmojiPicker, MessageInputProps, useChannelContext, useChatContext, useMessageInput, StreamMessage } from 'stream-chat-react';
+import { Attachment, logChatPromiseExecution, MessageResponse, UserResponse } from 'stream-chat';
+import {
+  ChatAutoComplete,
+  EmojiPicker,
+  MessageInputProps,
+  useChannelContext,
+  useChatContext,
+  useMessageInput,
+  StreamMessage,
+} from 'stream-chat-react';
 
 import './TeamMessageInput.css';
 
 import { UploadsPreview } from './UploadsPreview';
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
-import type { TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType } from '../../App';
+import type {
+  TeamAttachmentType,
+  TeamChannelType,
+  TeamCommandType,
+  TeamEventType,
+  TeamMessageType,
+  TeamReactionType,
+  TeamUserType,
+} from '../../App';
 
 import {
   BoldIcon,
@@ -23,20 +39,50 @@ import {
 
 export type TeamMessageInputProps = MessageInputProps & {
   pinsOpen: boolean;
-}
+};
 
 export type MessageToOverride = {
   attachments: Attachment[];
   mentioned_users: UserResponse[];
   text: string;
   parent?: StreamMessage;
-}
+};
 
 export const TeamMessageInput = (props: TeamMessageInputProps) => {
-  const { additionalTextareaProps, autocompleteTriggers, disabled, grow, maxRows, pinsOpen } = props;
+  const {
+    additionalTextareaProps,
+    autocompleteTriggers,
+    disabled,
+    grow,
+    maxRows,
+    pinsOpen,
+  } = props;
 
-  const { acceptedFiles, channel, maxNumberOfFiles, multipleUploads, sendMessage, thread } = useChannelContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
-  const { client } = useChatContext<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>();
+  const {
+    acceptedFiles,
+    channel,
+    maxNumberOfFiles,
+    multipleUploads,
+    sendMessage,
+    thread,
+  } = useChannelContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
+  const { client } = useChatContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
 
   const [boldState, setBoldState] = useState(false);
   const [codeState, setCodeState] = useState(false);
@@ -56,7 +102,9 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
       return `#${channel?.data?.name || channel?.data?.id || 'random'}`;
     }
 
-    const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user?.id !== client.userID,
+    );
 
     if (!members.length || members.length === 1) {
       return members[0]?.user?.name || members[0]?.user?.id || 'Johnny Blaze';
@@ -67,12 +115,12 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
 
   const overrideSubmitHandler = (message: MessageToOverride) => {
     let updatedMessage = {
-        attachments: message.attachments,
-        mentioned_users: message.mentioned_users,
-        parent_id: message.parent?.id,
-        parent: message.parent as MessageResponse,
-        text: message.text
-      };
+      attachments: message.attachments,
+      mentioned_users: message.mentioned_users,
+      parent_id: message.parent?.id,
+      parent: message.parent as MessageResponse,
+      text: message.text,
+    };
 
     if (message?.attachments?.length && message?.text?.startsWith('/giphy')) {
       const updatedText = message.text.replace('/giphy', '');
@@ -113,7 +161,15 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
     resetIconState();
   };
 
-  const messageInput = useMessageInput<TeamAttachmentType, TeamChannelType, TeamCommandType, TeamEventType, TeamMessageType, TeamReactionType, TeamUserType>({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInput<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >({ ...props, overrideSubmitHandler });
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -178,7 +234,10 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
         accept={acceptedFiles}
         handleFiles={messageInput.uploadNewFiles}
         multiple={multipleUploads}
-        disabled={(maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) || giphyState}
+        disabled={
+          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
+          giphyState
+        }
       >
         <div className='team-message-input__input'>
           <div className='team-message-input__top'>
@@ -202,7 +261,12 @@ export const TeamMessageInput = (props: TeamMessageInputProps) => {
                 ...additionalTextareaProps,
               }}
             />
-            <div className='team-message-input__button' role='button' aria-roledescription='button' onClick={messageInput.handleSubmit}>
+            <div
+              className='team-message-input__button'
+              role='button'
+              aria-roledescription='button'
+              onClick={messageInput.handleSubmit}
+            >
               <SendButton />
             </div>
           </div>

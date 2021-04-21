@@ -9,7 +9,7 @@ import { ChannelInfo, PinIcon } from '../../assets';
 type TeamChannelHeaderProps = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-}
+};
 
 export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
   const { setIsEditing, setPinsOpen } = props;
@@ -20,7 +20,9 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
   const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
 
   const getMessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(({ user }) => user?.id !== client.userID);
+    const members = Object.values(channel.state.members).filter(
+      ({ user }) => user?.id !== client.userID,
+    );
     const additionalMembers = members.length - 3;
 
     if (!members.length) {
@@ -45,7 +47,9 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
             </div>
           );
         })}
-        {additionalMembers > 0 && <p className='team-channel-header__name user'>{`and ${additionalMembers} more`}</p>}
+        {additionalMembers > 0 && (
+          <p className='team-channel-header__name user'>{`and ${additionalMembers} more`}</p>
+        )}
       </div>
     );
   };
