@@ -1,7 +1,10 @@
 import type { TeamChannelListProps } from '../components/TeamChannelList/TeamChannelList';
 
-export const AddChannel = (props: TeamChannelListProps) => {
+export const AddChannel = (
+  props: Pick<TeamChannelListProps, 'setCreateType' | 'setIsCreating' | 'setIsEditing' | 'type'>,
+) => {
   const { setCreateType, setIsCreating, setIsEditing, type } = props;
+
   return (
     <svg
       width='14'

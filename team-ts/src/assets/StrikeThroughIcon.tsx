@@ -1,10 +1,10 @@
-type StrikeThroughIconProps = {
+type Props = {
   resetIconState: () => void;
   setStrikeThroughState: React.Dispatch<React.SetStateAction<boolean>>;
   strikeThroughState: Boolean;
 };
 
-export const StrikeThroughIcon = (props: StrikeThroughIconProps) => {
+export const StrikeThroughIcon = (props: Props) => {
   const { resetIconState, strikeThroughState, setStrikeThroughState } = props;
 
   return (

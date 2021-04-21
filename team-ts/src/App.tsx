@@ -13,6 +13,7 @@ import { ChannelListContainer } from './components/ChannelListContainer/ChannelL
 import { getRandomImage } from './assets';
 
 const urlParams = new URLSearchParams(window.location.search);
+
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const theme = urlParams.get('theme') || 'light';

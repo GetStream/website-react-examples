@@ -1,9 +1,9 @@
-type LightningBoltProps = {
+type Props = {
   giphyState: boolean;
   onCommandClick: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
 };
 
-export const LightningBolt = (props: LightningBoltProps) => {
+export const LightningBolt = (props: Props) => {
   const { giphyState, onCommandClick } = props;
 
   return (

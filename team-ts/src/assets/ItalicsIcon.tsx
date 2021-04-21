@@ -1,10 +1,10 @@
-type ItalicsIconProps = {
+type Props = {
   italicState: boolean;
   resetIconState: () => void;
   setItalicState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ItalicsIcon = (props: ItalicsIconProps) => {
+export const ItalicsIcon = (props: Props) => {
   const { italicState, resetIconState, setItalicState } = props;
 
   return (

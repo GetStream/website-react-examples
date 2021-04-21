@@ -1,10 +1,10 @@
-type CodeSnippetProps = {
+type Props = {
   codeState: boolean;
   resetIconState: () => void;
   setCodeState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CodeSnippet = (props: CodeSnippetProps) => {
+export const CodeSnippet = (props: Props) => {
   const { codeState, resetIconState, setCodeState } = props;
 
   return (

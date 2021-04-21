@@ -1,11 +1,9 @@
-import type { SetStateAction } from 'react';
-
-type CloseThreadIconProps = {
+type Props = {
   closeThread?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  setPinsOpen?: React.Dispatch<SetStateAction<boolean>>;
+  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CloseThreadIcon = (props: CloseThreadIconProps) => {
+export const CloseThreadIcon = (props: Props) => {
   const { closeThread, setPinsOpen } = props;
 
   return (

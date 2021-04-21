@@ -1,11 +1,12 @@
-type BoldIconProps = {
+type Props = {
   boldState: boolean;
   resetIconState: () => void;
   setBoldState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const BoldIcon = (props: BoldIconProps) => {
+export const BoldIcon = (props: Props) => {
   const { boldState, resetIconState, setBoldState } = props;
+
   return (
     <div
       onClick={() => {
