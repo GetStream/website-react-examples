@@ -125,7 +125,11 @@ const App = () => {
           )}
           <Window>
             <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-            <MessageList Message={CustomMessage} TypingIndicator={() => null} />
+            <MessageList
+              messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']}
+              Message={CustomMessage}
+              TypingIndicator={() => null}
+            />
             <MessageInput focus Input={MessagingInput} />
           </Window>
           <MessagingThread />
