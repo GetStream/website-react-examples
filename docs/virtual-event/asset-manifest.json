@@ -1,21 +1,23 @@
 {
   "files": {
     "main.css": "/website-react-examples/virtual-event/static/css/main.ca4dc920.chunk.css",
-    "main.js": "/website-react-examples/virtual-event/static/js/main.b104e463.chunk.js",
-    "main.js.map": "/website-react-examples/virtual-event/static/js/main.b104e463.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.214e3dd8.js",
-    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.214e3dd8.js.map",
+    "main.js": "/website-react-examples/virtual-event/static/js/main.d4cc310a.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event/static/js/main.d4cc310a.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.acf45cf5.js",
+    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.acf45cf5.js.map",
     "static/css/2.3636ec41.chunk.css": "/website-react-examples/virtual-event/static/css/2.3636ec41.chunk.css",
-    "static/js/2.6deaa6c7.chunk.js": "/website-react-examples/virtual-event/static/js/2.6deaa6c7.chunk.js",
-    "static/js/2.6deaa6c7.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.6deaa6c7.chunk.js.map",
-    "static/js/3.be1d7684.chunk.js": "/website-react-examples/virtual-event/static/js/3.be1d7684.chunk.js",
-    "static/js/3.be1d7684.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.be1d7684.chunk.js.map",
+    "static/js/2.f7d90c3d.chunk.js": "/website-react-examples/virtual-event/static/js/2.f7d90c3d.chunk.js",
+    "static/js/2.f7d90c3d.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.f7d90c3d.chunk.js.map",
+    "static/js/3.fde58d89.chunk.js": "/website-react-examples/virtual-event/static/js/3.fde58d89.chunk.js",
+    "static/js/3.fde58d89.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.fde58d89.chunk.js.map",
+    "static/js/4.e5865e7b.chunk.js": "/website-react-examples/virtual-event/static/js/4.e5865e7b.chunk.js",
+    "static/js/4.e5865e7b.chunk.js.map": "/website-react-examples/virtual-event/static/js/4.e5865e7b.chunk.js.map",
     "index.html": "/website-react-examples/virtual-event/index.html",
-    "precache-manifest.319fa4d99c647e8ea21fff00f31ea9aa.js": "/website-react-examples/virtual-event/precache-manifest.319fa4d99c647e8ea21fff00f31ea9aa.js",
+    "precache-manifest.df9be5214502deb0d986e519d68750af.js": "/website-react-examples/virtual-event/precache-manifest.df9be5214502deb0d986e519d68750af.js",
     "service-worker.js": "/website-react-examples/virtual-event/service-worker.js",
     "static/css/2.3636ec41.chunk.css.map": "/website-react-examples/virtual-event/static/css/2.3636ec41.chunk.css.map",
     "static/css/main.ca4dc920.chunk.css.map": "/website-react-examples/virtual-event/static/css/main.ca4dc920.chunk.css.map",
-    "static/js/2.6deaa6c7.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.6deaa6c7.chunk.js.LICENSE.txt",
+    "static/js/2.f7d90c3d.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.f7d90c3d.chunk.js.LICENSE.txt",
     "static/media/Amanda.png": "/website-react-examples/virtual-event/static/media/Amanda.587b9cd7.png",
     "static/media/AvatarRobertImg.png": "/website-react-examples/virtual-event/static/media/AvatarRobertImg.1f5824f5.png",
     "static/media/BillNye.png": "/website-react-examples/virtual-event/static/media/BillNye.e603796e.png",
@@ -50,10 +52,10 @@
     "static/media/photo-1573140247632-f8fd74997d5c.jpeg": "/website-react-examples/virtual-event/static/media/photo-1573140247632-f8fd74997d5c.77d2e7a6.jpeg"
   },
   "entrypoints": [
-    "static/js/runtime-main.214e3dd8.js",
+    "static/js/runtime-main.acf45cf5.js",
     "static/css/2.3636ec41.chunk.css",
-    "static/js/2.6deaa6c7.chunk.js",
+    "static/js/2.f7d90c3d.chunk.js",
     "static/css/main.ca4dc920.chunk.css",
-    "static/js/main.b104e463.chunk.js"
+    "static/js/main.d4cc310a.chunk.js"
   ]
 }
