@@ -9546,10 +9546,10 @@ react-view-pager@^0.6.0:
     resize-observer-polyfill "1.5.0"
     tabbable "1.1.2"
 
-react-virtuoso@1.5.9:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.5.9.tgz#1c64d093df7c67c07ca3813780e2c65cf07d5efa"
-  integrity sha512-r3nE98ElMWtI9rtLlPT5iVcN/cwkm1dyDXVdJ1LVdoVPGhiyTa4yTIgLR8AEiU8s65BvCcl50efEPVVqf+5MsA==
+react-virtuoso@1.8.6:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.8.6.tgz#dc7d79ee9e309c13700296ff65b04f6ebecdcbaa"
+  integrity sha512-WFSI4YzdyAFrr3CuZnQ8cmubGMJjgmgyuhx/OpWLls1uK9O43s+6DMr9oBXHAgvCDjS3Nd3vkIJAhsJBJzS1nQ==
   dependencies:
     "@virtuoso.dev/react-urx" "^0.2.5"
     "@virtuoso.dev/urx" "^0.2.5"
@@ -10551,10 +10551,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@5.1.7:
-  version "5.1.7"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-5.1.7.tgz#75625d2b2a1de50574489e8a5dbe4cb1b448ccdd"
-  integrity sha512-lU17FJS9aDNLUFQTvxUPZ4LcKCimjL8Hy9M4WBiaIjDeRyAynlUL1WAyunsnFBKKuPZ83qhk6khD47q1Xzn3JQ==
+stream-chat-react@5.3.0:
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-5.3.0.tgz#ea0622da281e3078477ef052c06e7d45676cb4a8"
+  integrity sha512-aS0S55iWMK6WppxxgEloq8Rnx8hfkwd2OdKuOUjNjO5DHw0EOtFYd/wnCdGdptxVpQPPR/7L0WzM5JSlz5rdVQ==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -10569,7 +10569,6 @@ stream-chat-react@5.1.7:
     lodash.throttle "^4.1.1"
     lodash.uniqby "^4.7.0"
     mdast-util-find-and-replace "1.1.1"
-    mml-react "^0.4.0"
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
@@ -10579,14 +10578,16 @@ stream-chat-react@5.1.7:
     react-markdown "^5.0.3"
     react-player "^2.7.0"
     react-textarea-autosize "^8.3.0"
-    react-virtuoso "1.5.9"
+    react-virtuoso "1.8.6"
     textarea-caret "^3.1.0"
     uuid "^8.3.1"
+  optionalDependencies:
+    mml-react "^0.4.0"
 
-stream-chat@3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.7.0.tgz#1e2e122feeb594509fdb4e36855cddb1dc5476c3"
-  integrity sha512-a4mg0kmdU6c1Foz8p1a370jAac8wkDNugE+GQrTeOqZqWh/yIrsE31WsJb901hhrl5nFwWPiTpFO0HuFXr8EmA==
+stream-chat@3.8.0:
+  version "3.8.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.8.0.tgz#4545784402b5126b93127f4d716f9b1ef84fb360"
+  integrity sha512-QzKitdlLWn8VMvudBeEfoJTcaFBhGftLH/0HQKfIpCho0MefW+inImQDIZWiM0EeaRjJr7omLZgIZZYLw9xNXw==
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@types/jsonwebtoken" "^8.5.0"
