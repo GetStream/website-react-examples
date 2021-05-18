@@ -82,17 +82,19 @@ const App = () => {
 
   useEffect(() => {
     /*
-     * Get the actual rendered window height to set the container size properly
-     * as in some browsers (like iOS) the browser nav bar might override
-     * the app.
+     * Get the actual rendered window height to set the container size properly.
+     * In some browsers (like Safari) the nav bar can override the app.
      */
-    const appHeight = () => {
+    const setAppHeight = () => {
       const doc = document.documentElement;
+      console.log('setting app height', window.innerHeight);
       doc.style.setProperty('--app-height', `${window.innerHeight}px`);
     };
-    window.addEventListener('resize', appHeight);
-    appHeight();
-    return () => window.removeEventListener('resize', appHeight);
+
+    setAppHeight();
+
+    window.addEventListener('resize', setAppHeight);
+    return () => window.removeEventListener('resize', setAppHeight);
   }, []);
 
   const toggleMobile = () => setMobileNav(!isMobileNavVisible);

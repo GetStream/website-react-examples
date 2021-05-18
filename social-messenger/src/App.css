@@ -1,6 +1,7 @@
 :root {
   --app-height: 100%;
 }
+
 html,
 body {
   margin: 0;
@@ -106,6 +107,7 @@ body::-webkit-scrollbar-thumb {
   .str-chat-channel {
     height: var(--app-height);
   }
+
   .str-chat-channel-list.messaging {
     float: unset;
   }

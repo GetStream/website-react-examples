@@ -1,3 +1,7 @@
+:root {
+  --app-height: 100%;
+}
+
 html,
 body {
   margin: 0;
@@ -95,6 +99,15 @@ body::-webkit-scrollbar-thumb {
 
 /* Mobile View */
 @media screen and (max-width: 640px) {
+  /*
+   * This is to prevent the browser navigation bars from hiding the app
+   * on some mobile browsers. The app-height variable is set dynamically
+   * using javascript.
+   */
+  .str-chat-channel {
+    height: var(--app-height);
+  }
+
   .str-chat-channel-list.messaging {
     float: unset;
   }
