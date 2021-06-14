@@ -1,11 +1,14 @@
 import { useState } from 'react';
-import { Channel, useChatContext } from 'stream-chat-react';
+import { Channel, useChatContext, ThreadHeaderProps } from 'stream-chat-react';
 
 import './ChannelContainer.css';
 
 import { ChannelInner } from './ChannelInner';
+import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
+
+import { CloseThreadIcon } from '../../assets';
 
 import type { ChannelFilters } from 'stream-chat';
 
@@ -25,6 +28,30 @@ type Props = {
   isEditing?: boolean;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+type HeaderProps = ThreadHeaderProps & {
+  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+};
+
+const ThreadHeader: React.FC<HeaderProps> = (props) => {
+  const { closeThread, setPinsOpen, thread } = props;
+
+  const getReplyCount = () => {
+    if (!thread?.reply_count) return '';
+    if (thread.reply_count === 1) return '1 reply';
+    return `${thread.reply_count} Replies`;
+  };
+
+  return (
+    <div className='custom-thread-header'>
+      <div className='custom-thread-header__left'>
+        <p className='custom-thread-header__left-title'>Thread</p>
+        <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
+      </div>
+      <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
+    </div>
+  );
 };
 
 export const ChannelContainer: React.FC<Props> = (props) => {
@@ -72,7 +99,11 @@ export const ChannelContainer: React.FC<Props> = (props) => {
 
   return (
     <div className='channel__container'>
-      <Channel>
+      <Channel
+        EmptyStateIndicator={ChannelEmptyState}
+        TypingIndicator={() => null}
+        ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />} 
+      >
         <ChannelInner
           {...{
             pinsOpen,

@@ -1,4 +1,4 @@
-import { MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
+import { MessageUIComponentProps, MessageTeam, useMessageContext } from 'stream-chat-react';
 
 import './TeamMessage.css';
 
@@ -7,15 +7,20 @@ type Props = MessageUIComponentProps & {
 };
 
 export const TeamMessage: React.FC<Props> = (props) => {
-  const { handleOpenThread, message, setPinsOpen } = props;
+  const { setPinsOpen } = props;
+
+  const {
+    handleOpenThread,
+    message,
+  } = useMessageContext();
 
   const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
     if (setPinsOpen) setPinsOpen(false);
-    handleOpenThread(event);
+    if (handleOpenThread)  handleOpenThread(event);
   };
 
   return (
-    <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
+    <div className={message?.pinned ? 'pinned-message' : 'unpinned-message'}>
       <MessageTeam {...props} message={message} handleOpenThread={handleOpenThreadOverride} />
       {/** potentially add replies component here */}
     </div>

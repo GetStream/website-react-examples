@@ -1,4 +1,4 @@
-import { Avatar, useChannelContext, useChatContext } from 'stream-chat-react';
+import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelHeader.css';
 
@@ -32,7 +32,17 @@ export const TeamChannelHeader: React.FC<Props> = (props) => {
     TeamUserType
   >();
 
-  const { channel, closeThread, watcher_count } = useChannelContext<
+  const { channel, watcher_count } = useChannelStateContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
+
+  const { closeThread } = useChannelActionContext<
     TeamAttachmentType,
     TeamChannelType,
     TeamCommandType,

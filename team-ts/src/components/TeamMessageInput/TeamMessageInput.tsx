@@ -1,20 +1,22 @@
-import { useCallback, useState } from 'react';
+import { useCallback, useContext, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, logChatPromiseExecution, MessageResponse, UserResponse } from 'stream-chat';
+import { Attachment, UserResponse } from 'stream-chat';
 import {
   ChatAutoComplete,
   EmojiPicker,
   MessageInputProps,
   StreamMessage,
   UploadsPreview,
-  useChannelContext,
+  useChannelStateContext,
   useChatContext,
-  useMessageInput,
+  useMessageInputContext,
 } from 'stream-chat-react';
 
 import './TeamMessageInput.css';
 
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
+
+import { GiphyContext } from '../ChannelContainer/ChannelInner';
 
 import {
   BoldIcon,
@@ -43,28 +45,28 @@ export type MessageToOverride = {
   parent?: StreamMessage;
 };
 
-type Props = MessageInputProps & {
-  pinsOpen: boolean;
+export type Props = MessageInputProps & {
+  pinsOpen?: boolean;
+  // giphyState: boolean;
+  // setGiphyState: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TeamMessageInput: React.FC<Props> = (props) => {
+export const TeamMessageInput: React.FC<Props> =  (props) => {
   const {
-    additionalTextareaProps,
-    autocompleteTriggers,
-    disabled,
-    grow,
-    maxRows,
+    // additionalTextareaProps,
+    // autocompleteTriggers,
+    // disabled,
+    // grow,
+    // maxRows,
     pinsOpen,
   } = props;
 
+  const { giphyState, setGiphyState } = useContext(GiphyContext);
+
   const {
-    acceptedFiles,
     channel,
-    maxNumberOfFiles,
-    multipleUploads,
-    sendMessage,
     thread,
-  } = useChannelContext<
+  } = useChannelStateContext<
     TeamAttachmentType,
     TeamChannelType,
     TeamCommandType,
@@ -86,7 +88,6 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
 
   const [boldState, setBoldState] = useState(false);
   const [codeState, setCodeState] = useState(false);
-  const [giphyState, setGiphyState] = useState(false);
   const [italicState, setItalicState] = useState(false);
   const [strikeThroughState, setStrikeThroughState] = useState(false);
 
@@ -113,55 +114,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
     return 'the group';
   };
 
-  const overrideSubmitHandler = (message: MessageToOverride) => {
-    let updatedMessage = {
-      attachments: message.attachments,
-      mentioned_users: message.mentioned_users,
-      parent_id: message.parent?.id,
-      parent: message.parent as MessageResponse,
-      text: message.text,
-    };
-
-    if (message?.attachments?.length && message?.text?.startsWith('/giphy')) {
-      const updatedText = message.text.replace('/giphy', '');
-      updatedMessage = { ...updatedMessage, text: updatedText };
-    }
-
-    if (giphyState) {
-      const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...updatedMessage, text: updatedText };
-    } else {
-      if (boldState && !message.text?.startsWith('**')) {
-        const updatedText = `**${message.text}**`;
-        updatedMessage = { ...updatedMessage, text: updatedText };
-      }
-
-      if (codeState && !message.text?.startsWith('`')) {
-        const updatedText = `\`${message.text}\``;
-        updatedMessage = { ...updatedMessage, text: updatedText };
-      }
-
-      if (italicState && !message?.text?.startsWith('*')) {
-        const updatedText = `*${message.text}*`;
-        updatedMessage = { ...updatedMessage, text: updatedText };
-      }
-
-      if (strikeThroughState && !message.text?.startsWith('~~')) {
-        const updatedText = `~~${message.text}~~`;
-        updatedMessage = { ...updatedMessage, text: updatedText };
-      }
-    }
-
-    if (sendMessage) {
-      const sendMessagePromise = sendMessage(updatedMessage);
-      logChatPromiseExecution(sendMessagePromise, 'send message');
-    }
-
-    setGiphyState(false);
-    resetIconState();
-  };
-
-  const messageInput = useMessageInput<
+  const messageInput = useMessageInputContext<
     TeamAttachmentType,
     TeamChannelType,
     TeamCommandType,
@@ -169,7 +122,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
     TeamMessageType,
     TeamReactionType,
     TeamUserType
-  >({ ...props, overrideSubmitHandler });
+  >();
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -218,7 +171,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
 
       messageInput.handleChange(event);
     },
-    [boldState, codeState, giphyState, italicState, messageInput, strikeThroughState],
+    [boldState, codeState, giphyState, italicState, messageInput, setGiphyState, strikeThroughState],
   );
 
   const GiphyIcon = () => (
@@ -230,36 +183,15 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
 
   return (
     <div className={`team-message-input__wrapper ${(!!thread || pinsOpen) && 'thread-open'}`}>
-      <ImageDropzone
-        accept={acceptedFiles}
-        handleFiles={messageInput.uploadNewFiles}
-        multiple={multipleUploads}
-        disabled={
-          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
-          giphyState
-        }
-      >
+      <ImageDropzone>
         <div className='team-message-input__input'>
           <div className='team-message-input__top'>
             {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
-            <UploadsPreview {...messageInput} />
+            <UploadsPreview />
             <ChatAutoComplete
-              commands={messageInput.getCommands()}
-              innerRef={messageInput.textareaRef}
-              handleSubmit={messageInput.handleSubmit}
-              onSelectItem={messageInput.onSelectItem}
               onChange={onChange}
               value={messageInput.text}
-              rows={1}
-              maxRows={maxRows}
               placeholder={`Message ${getPlaceholder()}`}
-              onPaste={messageInput.onPaste}
-              triggers={autocompleteTriggers}
-              grow={grow}
-              disabled={disabled}
-              additionalTextareaProps={{
-                ...additionalTextareaProps,
-              }}
             />
             <div
               className='team-message-input__button'
@@ -289,7 +221,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
         </div>
       </ImageDropzone>
       <TeamTypingIndicator type='input' />
-      <EmojiPicker {...messageInput} />
+      <EmojiPicker />
     </div>
   );
 };

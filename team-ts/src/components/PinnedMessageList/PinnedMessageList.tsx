@@ -1,4 +1,4 @@
-import { useChannelContext, Message, MessageTeam } from 'stream-chat-react';
+import { useChannelActionContext, useChannelStateContext, Message, MessageTeam } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
@@ -21,7 +21,17 @@ type Props = {
 export const PinnedMessageList: React.FC<Props> = (props) => {
   const { setPinsOpen } = props;
 
-  const { channel, closeThread } = useChannelContext<
+  const { closeThread } = useChannelActionContext<
+    TeamAttachmentType,
+    TeamChannelType,
+    TeamCommandType,
+    TeamEventType,
+    TeamMessageType,
+    TeamReactionType,
+    TeamUserType
+  >();
+
+  const { channel } = useChannelStateContext<
     TeamAttachmentType,
     TeamChannelType,
     TeamCommandType,
