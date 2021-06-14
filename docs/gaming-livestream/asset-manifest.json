@@ -1,27 +1,32 @@
 {
   "files": {
     "main.css": "/website-react-examples/gaming-livestream/static/css/main.e9c58a3f.chunk.css",
-    "main.js": "/website-react-examples/gaming-livestream/static/js/main.752a7d71.chunk.js",
-    "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.752a7d71.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/gaming-livestream/static/js/runtime-main.930cf9b1.js",
-    "runtime-main.js.map": "/website-react-examples/gaming-livestream/static/js/runtime-main.930cf9b1.js.map",
-    "static/css/2.29f2dcf7.chunk.css": "/website-react-examples/gaming-livestream/static/css/2.29f2dcf7.chunk.css",
-    "static/js/2.cbd783a9.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.cbd783a9.chunk.js",
-    "static/js/2.cbd783a9.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.cbd783a9.chunk.js.map",
-    "static/js/3.45e5d7af.chunk.js": "/website-react-examples/gaming-livestream/static/js/3.45e5d7af.chunk.js",
-    "static/js/3.45e5d7af.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/3.45e5d7af.chunk.js.map",
+    "main.js": "/website-react-examples/gaming-livestream/static/js/main.8b9d5628.chunk.js",
+    "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.8b9d5628.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/gaming-livestream/static/js/runtime-main.a0a39890.js",
+    "runtime-main.js.map": "/website-react-examples/gaming-livestream/static/js/runtime-main.a0a39890.js.map",
+    "static/css/2.233c9491.chunk.css": "/website-react-examples/gaming-livestream/static/css/2.233c9491.chunk.css",
+    "static/js/2.2c52a665.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.2c52a665.chunk.js",
+    "static/js/2.2c52a665.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.2c52a665.chunk.js.map",
+    "static/js/3.3d1b14e1.chunk.js": "/website-react-examples/gaming-livestream/static/js/3.3d1b14e1.chunk.js",
+    "static/js/3.3d1b14e1.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/3.3d1b14e1.chunk.js.map",
+    "static/js/4.b214dfad.chunk.js": "/website-react-examples/gaming-livestream/static/js/4.b214dfad.chunk.js",
+    "static/js/4.b214dfad.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/4.b214dfad.chunk.js.map",
     "index.html": "/website-react-examples/gaming-livestream/index.html",
-    "static/css/2.29f2dcf7.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/2.29f2dcf7.chunk.css.map",
+    "static/css/2.233c9491.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/2.233c9491.chunk.css.map",
     "static/css/main.e9c58a3f.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/main.e9c58a3f.chunk.css.map",
-    "static/js/2.cbd783a9.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.cbd783a9.chunk.js.LICENSE.txt",
+    "static/js/2.2c52a665.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.2c52a665.chunk.js.LICENSE.txt",
     "static/media/GamingFooter.scss": "/website-react-examples/gaming-livestream/static/media/Avatar.258a9df1.png",
-    "static/media/GamingChat.scss": "/website-react-examples/gaming-livestream/static/media/elip.47411f6f.svg"
+    "static/media/index.css": "/website-react-examples/gaming-livestream/static/media/NotoColorEmoji-flags.148141ac.woff2",
+    "static/media/GamingChat.scss": "/website-react-examples/gaming-livestream/static/media/elip.47411f6f.svg",
+    "static/media/str-chat__connection-error.svg": "/website-react-examples/gaming-livestream/static/media/str-chat__connection-error.90385cff.svg",
+    "static/media/str-chat__icon-chevron-down.svg": "/website-react-examples/gaming-livestream/static/media/str-chat__icon-chevron-down.e0ed94c6.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.930cf9b1.js",
-    "static/css/2.29f2dcf7.chunk.css",
-    "static/js/2.cbd783a9.chunk.js",
+    "static/js/runtime-main.a0a39890.js",
+    "static/css/2.233c9491.chunk.css",
+    "static/js/2.2c52a665.chunk.js",
     "static/css/main.e9c58a3f.chunk.css",
-    "static/js/main.752a7d71.chunk.js"
+    "static/js/main.8b9d5628.chunk.js"
   ]
 }
