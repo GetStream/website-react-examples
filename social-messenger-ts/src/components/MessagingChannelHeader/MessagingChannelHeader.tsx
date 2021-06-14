@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, useChannelContext, useChatContext } from 'stream-chat-react';
+import { Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelHeader.css';
 
@@ -91,7 +91,7 @@ const MessagingChannelHeader: React.FC<Props> = (props) => {
     UserType
   >();
 
-  const { channel } = useChannelContext<
+  const { channel } = useChannelStateContext<
     AttachmentType,
     ChannelType,
     CommandType,

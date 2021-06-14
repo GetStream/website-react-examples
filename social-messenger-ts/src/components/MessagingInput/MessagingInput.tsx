@@ -1,25 +1,25 @@
-import React, { useCallback, useState } from 'react';
+import React, { useCallback, useContext } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, logChatPromiseExecution, UserResponse } from 'stream-chat';
+
 import {
   ChatAutoComplete,
   EmojiPicker,
   MessageInputProps,
-  StreamMessage,
   UploadsPreview,
-  useChannelContext,
-  useMessageInput,
+  useChannelStateContext,
+  useMessageInputContext,
 } from 'stream-chat-react';
 
 import './MessagingInput.css';
 
 import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
-import type {
+import {
   AttachmentType,
   ChannelType,
   CommandType,
   EventType,
+  GiphyContext,
   MessageType,
   ReactionType,
   UserType,
@@ -32,8 +32,10 @@ const GiphyIcon = () => (
   </div>
 );
 
-const MessagingInput: React.FC<MessageInputProps> = (props) => {
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads, sendMessage } = useChannelContext<
+const MessagingInput: React.FC<MessageInputProps> = () => {
+  const { giphyState, setGiphyState } = useContext(GiphyContext);
+
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext<
     AttachmentType,
     ChannelType,
     CommandType,
@@ -43,50 +45,15 @@ const MessagingInput: React.FC<MessageInputProps> = (props) => {
     UserType
   >();
 
-  const [giphyState, setGiphyState] = useState(false);
-
-  const overrideSubmitHandler = (message: {
-    attachments: Attachment[];
-    mentioned_users: UserResponse[];
-    text: string;
-    parent?: StreamMessage;
-  }) => {
-    let updatedMessage;
-
-    if (message.attachments?.length && message.text?.startsWith('/giphy')) {
-      const updatedText = message.text.replace('/giphy', '');
-      updatedMessage = { ...message, text: updatedText };
-    }
-
-    if (giphyState) {
-      const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...message, text: updatedText };
-    }
-
-    if (sendMessage) {
-      const newMessage = updatedMessage || message;
-      const parentMessage = newMessage.parent;
-
-      const messageToSend = {
-        ...newMessage,
-        parent: parentMessage
-          ? {
-              ...parentMessage,
-              created_at: parentMessage.created_at?.toString(),
-              pinned_at: parentMessage.pinned_at?.toString(),
-              updated_at: parentMessage.updated_at?.toString(),
-            }
-          : undefined,
-      };
-
-      const sendMessagePromise = sendMessage(messageToSend);
-      logChatPromiseExecution(sendMessagePromise, 'send message');
-    }
-
-    setGiphyState(false);
-  };
-
-  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInputContext<
+    AttachmentType,
+    ChannelType,
+    CommandType,
+    EventType,
+    MessageType,
+    ReactionType,
+    UserType
+  >();
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -109,7 +76,7 @@ const MessagingInput: React.FC<MessageInputProps> = (props) => {
 
       messageInput.handleChange(event);
     },
-    [giphyState, messageInput],
+    [giphyState, messageInput], // eslint-disable-line
   );
 
   return (
@@ -134,23 +101,8 @@ const MessagingInput: React.FC<MessageInputProps> = (props) => {
       >
         <div className='messaging-input__input-wrapper'>
           {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
-          <UploadsPreview {...messageInput} />
-          <ChatAutoComplete
-            commands={messageInput.getCommands()}
-            innerRef={messageInput.textareaRef}
-            handleSubmit={messageInput.handleSubmit}
-            onSelectItem={messageInput.onSelectItem}
-            onChange={onChange}
-            value={messageInput.text}
-            rows={1}
-            maxRows={props.maxRows}
-            placeholder='Send a message'
-            onPaste={messageInput.onPaste}
-            triggers={props.autocompleteTriggers}
-            grow={props.grow}
-            disabled={props.disabled}
-            additionalTextareaProps={props.additionalTextareaProps}
-          />
+          <UploadsPreview />
+          <ChatAutoComplete onChange={onChange} rows={1} placeholder='Send a message' />
         </div>
       </ImageDropzone>
       <div
@@ -161,7 +113,7 @@ const MessagingInput: React.FC<MessageInputProps> = (props) => {
       >
         <SendIcon />
       </div>
-      <EmojiPicker {...messageInput} />
+      <EmojiPicker />
     </div>
   );
 };
