@@ -1,5 +1,5 @@
-import React, { useContext, useMemo, useState } from 'react';
-import { Attachment, ChannelContext } from 'stream-chat-react';
+import React, { useMemo, useState } from 'react';
+import { Attachment, useChannelActionContext, useMessageContext } from 'stream-chat-react';
 
 import './GamingMessage.scss';
 
@@ -42,9 +42,10 @@ const getReplyCount = (message) => {
 };
 
 export const GamingMessage = (props) => {
-  const { handleAction, message, timestamp } = props;
+  const { timestamp } = props;
 
-  const { openThread } = useContext(ChannelContext);
+  const { openThread } = useChannelActionContext();
+  const { handleAction, message } = useMessageContext();
 
   const onOpenThread = () => {
     const chatPanel = document.querySelector('.str-chat__main-panel');

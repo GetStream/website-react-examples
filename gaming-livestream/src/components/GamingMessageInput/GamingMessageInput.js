@@ -1,6 +1,13 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import { logChatPromiseExecution } from 'stream-chat';
-import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import {
+  ChatAutoComplete,
+  EmojiPicker,
+  useChannelActionContext,
+  useChannelStateContext,
+  useMessageInputContext,
+  useTypingContext,
+} from 'stream-chat-react';
 
 import EmojiIcon from '../../assets/icons/EmojiIcon';
 import SendIcon from '../../assets/icons/SendIcon';
@@ -11,7 +18,9 @@ import './GamingMessageInput.scss';
 export const GamingMessageInput = React.memo((props) => {
   const { setPopUpText, setShowPopUp, setShowUpgrade } = props;
 
-  const { sendMessage, thread, typing } = useContext(ChannelContext);
+  const { sendMessage } = useChannelActionContext();
+  const { thread } = useChannelStateContext();
+  const { typing } = useTypingContext();
 
   const overrideSubmitHandler = (message) => {
     const { text } = message;
@@ -37,9 +46,9 @@ export const GamingMessageInput = React.memo((props) => {
     logChatPromiseExecution(sendMessagePromise, 'send message');
   };
 
-  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInputContext({ ...props, overrideSubmitHandler });
 
-  const openPicker = async () => {
+  const openPicker = async (event) => {
     const picker = document.querySelector('.str-chat__input--emojipicker');
 
     if (picker?.style.display === 'block' && messageInput.emojiPickerIsOpen) {
@@ -50,7 +59,7 @@ export const GamingMessageInput = React.memo((props) => {
       picker.style.display = 'block';
     }
 
-    await messageInput.openEmojiPicker();
+    await messageInput.openEmojiPicker(event);
 
     const secondCheck = document.querySelector('.str-chat__input--emojipicker');
     if (secondCheck && !secondCheck.style.display) {
@@ -67,22 +76,7 @@ export const GamingMessageInput = React.memo((props) => {
   return (
     <div className='channel-footer'>
       <div className='channel-footer__top'>
-        <ChatAutoComplete
-          commands={messageInput.getCommands()}
-          innerRef={messageInput.textareaRef}
-          handleSubmit={messageInput.handleSubmit}
-          onSelectItem={messageInput.onSelectItem}
-          value={messageInput.text}
-          rows={1}
-          maxRows={props.maxRows}
-          placeholder='Say something'
-          onChange={messageInput.handleChange}
-          onPaste={messageInput.onPaste}
-          triggers={props.autocompleteTriggers}
-          grow={props.grow}
-          disabled={props.disabled}
-          additionalTextareaProps={props.additionalTextareaProps}
-        />
+        <ChatAutoComplete rows={1} placeholder='Say something' />
         {!thread && <EmojiIcon openEmojiPicker={openPicker} />}
       </div>
       <div className='channel-footer__bottom'>

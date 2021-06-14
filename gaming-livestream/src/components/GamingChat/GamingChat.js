@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, MessageList, Window } from 'stream-chat-react';
+import { Chat, Channel, MessageInput, MessageList, Window } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
 
 import './GamingChat.scss';
@@ -73,7 +73,15 @@ export const GamingChat = (props) => {
               <Window>
                 <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
                 <MessageList Message={(props) => <GamingMessage {...props} {...{ timestamp }} />} />
-                <GamingMessageInput focus {...{ setPopUpText, setShowPopUp, setShowUpgrade }} />
+                <MessageInput
+                  focus
+                  Input={(props) => (
+                    <GamingMessageInput
+                      {...props}
+                      {...{ setPopUpText, setShowPopUp, setShowUpgrade }}
+                    />
+                  )}
+                />
               </Window>
               <GamingThread />
             </Channel>
