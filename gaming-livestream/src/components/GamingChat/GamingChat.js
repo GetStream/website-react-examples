@@ -1,16 +1,13 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
-import { Chat, Channel, MessageInput, MessageList, Window } from 'stream-chat-react';
+import { Chat, Channel } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
 
 import './GamingChat.scss';
 
 import { useChecklist } from '../../ChecklistTasks';
-import { GamingChatHeader } from './GamingChatHeader';
-import { GamingMessage } from '../GamingMessage/GamingMessage';
-import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
+import { GamingChatInner } from './GamingChatInner';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
-import { GamingThread } from '../GamingThread/GamingThread';
 
 import { getColor, getRandomUserRole, participants } from '../../assets/data';
 
@@ -70,20 +67,9 @@ export const GamingChat = (props) => {
         <div className='chat-container'>
           <Chat client={chatClient}>
             <Channel channel={channel}>
-              <Window>
-                <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
-                <MessageList Message={(props) => <GamingMessage {...props} {...{ timestamp }} />} />
-                <MessageInput
-                  focus
-                  Input={(props) => (
-                    <GamingMessageInput
-                      {...props}
-                      {...{ setPopUpText, setShowPopUp, setShowUpgrade }}
-                    />
-                  )}
-                />
-              </Window>
-              <GamingThread />
+              <GamingChatInner
+                {...{ setPopUpText, setShowPopUp, setShowUpgrade, timestamp, setTimestamp }}
+              />
             </Channel>
           </Chat>
         </div>

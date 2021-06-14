@@ -1,9 +1,7 @@
 import React from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
 import {
   ChatAutoComplete,
   EmojiPicker,
-  useChannelActionContext,
   useChannelStateContext,
   useMessageInputContext,
   useTypingContext,
@@ -16,37 +14,12 @@ import StarIcon from '../../assets/icons/StarIcon';
 import './GamingMessageInput.scss';
 
 export const GamingMessageInput = React.memo((props) => {
-  const { setPopUpText, setShowPopUp, setShowUpgrade } = props;
+  const { setShowUpgrade } = props;
 
-  const { sendMessage } = useChannelActionContext();
   const { thread } = useChannelStateContext();
   const { typing } = useTypingContext();
 
-  const overrideSubmitHandler = (message) => {
-    const { text } = message;
-
-    if (text.startsWith('/ban')) {
-      setPopUpText('User banned');
-      return setShowPopUp(true);
-    } else if (text.startsWith('/flag')) {
-      setPopUpText('User flagged');
-      return setShowPopUp(true);
-    } else if (text.startsWith('/mute')) {
-      setPopUpText('User muted');
-      return setShowPopUp(true);
-    } else if (text.startsWith('/unban')) {
-      setPopUpText('User unbanned');
-      return setShowPopUp(true);
-    } else if (text.startsWith('/unmute')) {
-      setPopUpText('User unmuted');
-      return setShowPopUp(true);
-    }
-
-    const sendMessagePromise = sendMessage(message);
-    logChatPromiseExecution(sendMessagePromise, 'send message');
-  };
-
-  const messageInput = useMessageInputContext({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInputContext();
 
   const openPicker = async (event) => {
     const picker = document.querySelector('.str-chat__input--emojipicker');
