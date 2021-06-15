@@ -1,29 +1,25 @@
-.live-event__simple-reactions-list {
+.str-chat__simple-reactions-list {
   display: inline-flex;
-  flex-direction: row;
   border: 1px solid #bed5e4;
   border-radius: 20px;
   margin: 2px;
-  align-items: center;
-  padding: 0;
-  height: 21px;
-}
-
-.live-event__simple-reactions-list-item {
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
   align-items: center;
   padding: 0px 4px;
   height: 21px;
 }
 
-.live-event__simple-reactions-list li {
+.str-chat__simple-reactions-list-item {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 21px;
+}
+
+.str-chat__simple-reactions-list li {
   position: relative;
 }
-.live-event__simple-reactions-list-item__border {
+.str-chat__simple-reactions-list-item__border {
   display: flex;
-  flex-direction: row;
   justify-content: center;
   align-items: center;
   border-left: 1px solid #bed5e4;
@@ -31,10 +27,9 @@
   height: 21px;
 }
 
-.live-event__simple-reactions-list-item--last-number {
+.str-chat__simple-reactions-list-item--last-number {
   font-size: 11px;
-  /* align-items: baseline; */
-  /* justify-content: center; */
+  margin-right: 6px;
 }
 
 .emoji-mart-emoji.emoji-mart-emoji-custom {
@@ -42,11 +37,11 @@
   align-items: center;
 }
 
-.live-event__simple-reactions-list-item span {
+.str-chat__simple-reactions-list-item span {
   height: 16px;
   padding: 0px 2px;
 }
-.live-event__simple-reactions-list-item__border span {
+.str-chat__simple-reactions-list-item__border span {
   height: 16px;
   padding: 0px 2px;
 }
