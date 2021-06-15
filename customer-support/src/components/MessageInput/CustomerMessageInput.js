@@ -1,19 +1,23 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { ImageDropzone, FileUploadButton } from 'react-file-utils';
-import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import {
+  ChatAutoComplete,
+  EmojiPicker,
+  UploadsPreview,
+  useChannelStateContext,
+  useMessageInputContext,
+} from 'stream-chat-react';
 
 import './CustomerMessageInput.css';
-
-import { UploadsPreview } from './UploadsPreview';
 
 import { FileIcon, SmileyFace } from '../../assets';
 
 export const CustomerMessageInput = (props) => {
   const { open, setOpen } = props;
 
-  const messageInput = useMessageInput(props);
+  const messageInput = useMessageInputContext();
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useContext(ChannelContext);
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext();
 
   useEffect(() => {
     if (open) {
@@ -51,22 +55,9 @@ export const CustomerMessageInput = (props) => {
           <UploadsPreview {...messageInput} />
           <div className='support-message-input__input-wrapper'>
             <ChatAutoComplete
-              commands={messageInput.getCommands()}
-              innerRef={messageInput.textareaRef}
               handleSubmit={handleSubmit}
-              onSelectItem={messageInput.onSelectItem}
-              onChange={messageInput.handleChange}
-              value={messageInput.text}
               rows={1}
-              maxRows={props.maxRows}
               placeholder='Ask us a question'
-              onPaste={messageInput.onPaste}
-              triggers={props.autocompleteTriggers}
-              grow={props.grow}
-              disabled={props.disabled}
-              additionalTextareaProps={{
-                ...props.additionalTextareaProps,
-              }}
             />
             <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
             <FileUploadButton handleFiles={messageInput.uploadNewFiles}>

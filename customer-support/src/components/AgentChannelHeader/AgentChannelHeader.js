@@ -1,5 +1,5 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React, { useEffect, useState } from 'react';
+import { useChatContext } from 'stream-chat-react';
 
 import './AgentChannelHeader.css';
 
@@ -8,7 +8,7 @@ import { NotificationPopup } from './NotificationPopup';
 import { DownIconSmall, EmailIcon, PhoneIcon } from '../../assets';
 
 export const AgentChannelHeader = () => {
-  const { channel, client } = useContext(ChatContext);
+  const { channel, client } = useChatContext();
 
   const [eventChannel, setEventChannel] = useState(null);
   const [popupVisible, setPopupVisible] = useState(false);

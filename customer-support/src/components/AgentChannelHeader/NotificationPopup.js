@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { useChatContext } from 'stream-chat-react';
 
 import './NotificationPopup.css';
 
@@ -8,7 +8,7 @@ import { CloseIcon } from '../../assets';
 export const NotificationPopup = (props) => {
   const { eventChannel, previewText, setPopupVisible } = props;
 
-  const { setActiveChannel } = useContext(ChatContext);
+  const { setActiveChannel } = useChatContext();
 
   const getMessagePreview = () => {
     return previewText.length > 40 ? `"${previewText.slice(0, 40)}..."` : `"${previewText}"`;

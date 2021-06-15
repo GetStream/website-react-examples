@@ -1,10 +1,10 @@
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import {
   Channel,
-  ChatContext,
   MessageCommerce,
   MessageInput,
   MessageList,
+  useChatContext,
   Window,
 } from 'stream-chat-react';
 
@@ -15,7 +15,7 @@ import { CustomerMessageInput } from './components/MessageInput/CustomerMessageI
 import { CloseCustomerIcon, OpenCustomerIcon } from './assets';
 
 export const CustomerApp = ({ customerChannelId }) => {
-  const { client: customerClient } = useContext(ChatContext);
+  const { client: customerClient } = useChatContext();
 
   const [customerChannel, setCustomerChannel] = useState();
   const [open, setOpen] = useState(true);
@@ -44,23 +44,22 @@ export const CustomerApp = ({ customerChannelId }) => {
   return (
     <div className={`customer-wrapper ${open ? 'wrapper--open' : ''}`}>
       {customerChannel && open && (
-        <Channel channel={customerChannel}>
+        <Channel
+          channel={customerChannel}
+          EmptyStateIndicator={(props) => (
+            <EmptyStateIndicator {...props} channel={customerChannel} />
+          )}
+          Input={(props) => <CustomerMessageInput {...props} {...{ open, setOpen }} />}
+          Message={MessageCommerce}
+        >
           <Window>
             <CustomerChannelHeader />
             {open && (
               <div style={{ background: '#005fff' }}>
-                <MessageList
-                  EmptyStateIndicator={(props) => (
-                    <EmptyStateIndicator {...props} channel={customerChannel} />
-                  )}
-                  Message={MessageCommerce}
-                />
+                <MessageList />
               </div>
             )}
-            <MessageInput
-              Input={(props) => <CustomerMessageInput {...props} {...{ open, setOpen }} />}
-              focus
-            />
+            <MessageInput focus />
           </Window>
         </Channel>
       )}

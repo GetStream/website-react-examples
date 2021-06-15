@@ -1,12 +1,12 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React, { useEffect, useState } from 'react';
+import { useChatContext } from 'stream-chat-react';
 
 import './AgentChannelPreview.css';
 
 export const AgentChannelPreview = (props) => {
   const { agentChannelId, channel, customerChannelId, setActiveChannel } = props;
 
-  const { channel: activeChannel, client } = useContext(ChatContext);
+  const { channel: activeChannel, client } = useChatContext();
   const [unreadCount, setUnreadCount] = useState(channel.state.unreadCount);
 
   const selected = channel?.id === activeChannel?.id;
@@ -30,8 +30,9 @@ export const AgentChannelPreview = (props) => {
   if (
     !channel.state.messages.length ||
     (channel.id !== agentChannelId && channel.id !== customerChannelId)
-  )
+  ) {
     return null;
+  }
 
   return (
     <div

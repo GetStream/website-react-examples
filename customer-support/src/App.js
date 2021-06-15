@@ -8,10 +8,10 @@ import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
 
-import { useChecklist } from './ChecklistTasks';
 import { AgentApp } from './AgentApp';
 import { AgentHeader } from './components/AgentHeader/AgentHeader';
 import { AgentLoading } from './components/AgentLoading/AgentLoading';
+import { useChecklist } from './ChecklistTasks';
 import { CustomerApp } from './CustomerApp';
 
 const urlParams = new URLSearchParams(window.location.search);

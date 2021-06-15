@@ -1,16 +1,15 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import { FileUploadButton, ImageDropzone } from 'react-file-utils';
 import {
-  ChannelContext,
   ChatAutoComplete,
-  ChatContext,
   EmojiPicker,
-  useMessageInput,
+  UploadsPreview,
+  useChannelStateContext,
+  useChatContext,
+  useMessageInputContext,
 } from 'stream-chat-react';
 
 import './AgentMessageInput.css';
-
-import { UploadsPreview } from './UploadsPreview';
 
 import { FileIcon, SmileyFace } from '../../assets';
 
@@ -22,10 +21,10 @@ const automatedResponses = [
 ];
 
 export const AgentMessageInput = (props) => {
-  const messageInput = useMessageInput(props);
+  const messageInput = useMessageInputContext();
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useContext(ChannelContext);
-  const { client } = useContext(ChatContext);
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext();
+  const { client } = useChatContext();
 
   useEffect(() => {
     const handleEvent = async (event) => {
@@ -66,24 +65,7 @@ export const AgentMessageInput = (props) => {
         <div className='agent-message-input__input'>
           <UploadsPreview {...messageInput} />
           <div className='agent-message-input__input-wrapper'>
-            <ChatAutoComplete
-              commands={messageInput.getCommands()}
-              innerRef={messageInput.textareaRef}
-              handleSubmit={messageInput.handleSubmit}
-              onSelectItem={messageInput.onSelectItem}
-              onChange={messageInput.handleChange}
-              value={messageInput.text}
-              rows={1}
-              maxRows={props.maxRows}
-              placeholder='Send a message'
-              onPaste={messageInput.onPaste}
-              triggers={props.autocompleteTriggers}
-              grow={props.grow}
-              disabled={props.disabled}
-              additionalTextareaProps={{
-                ...props.additionalTextareaProps,
-              }}
-            />
+            <ChatAutoComplete rows={1} placeholder='Send a message' />
             <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
             <FileUploadButton handleFiles={messageInput.uploadNewFiles}>
               <FileIcon />
