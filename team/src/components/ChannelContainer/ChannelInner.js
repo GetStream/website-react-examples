@@ -68,6 +68,7 @@ export const ChannelInner = (props) => {
         <Window>
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
           <MessageList
+            disableQuotedMessages
             Message={(messageProps, i) => (
               <TeamMessage
                 key={i}

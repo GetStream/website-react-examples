@@ -1,10 +1,10 @@
 export const channelByUser = async (props) => {
-  const { client, setActiveChannel, user } = props;
+  const { client, setActiveChannel, channel } = props;
 
   const filters = {
     type: 'messaging',
     member_count: 2,
-    members: { $eq: [user.id, client.userID || ''] },
+    members: { $eq: [client.user.id, client.userID || ''] },
   };
 
   const [existingChannel] = await client.queryChannels(filters);
@@ -14,7 +14,7 @@ export const channelByUser = async (props) => {
   }
 
   const newChannel = client.channel('messaging', {
-    members: [user.id, client.userID || ''],
+    members: [channel.id, client.userID || ''],
   });
   return setActiveChannel(newChannel);
 };
