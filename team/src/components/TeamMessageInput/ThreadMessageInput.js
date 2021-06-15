@@ -1,49 +1,35 @@
-import React, { useCallback, useContext, useState } from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
-import { ChannelContext, ChatAutoComplete, EmojiPicker, useMessageInput } from 'stream-chat-react';
+import React, { useCallback, useContext } from 'react';
+import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-chat-react';
 
 import './ThreadMessageInput.css';
 
+import { GiphyContext } from '../ChannelContainer/ChannelInner';
+
 import {
-  // LightningBolt,
   LightningBoltSmall,
   SendButton,
   SmileyFace,
 } from '../../assets';
 
 export const ThreadMessageInput = (props) => {
-  const { sendMessage } = useContext(ChannelContext);
-  const [giphyState, setGiphyState] = useState(false);
+  const { giphyState, setGiphyState } = useContext(GiphyContext)
 
-  const overrideSubmitHandler = (message) => {
-    let updatedMessage;
-
-    if (giphyState) {
-      const updatedText = `/giphy ${message.text}`;
-      updatedMessage = { ...message, text: updatedText };
-    }
-
-    const sendMessagePromise = sendMessage(updatedMessage || message);
-    logChatPromiseExecution(sendMessagePromise, 'send message');
-    setGiphyState(false);
-  };
-
-  const messageInput = useMessageInput({ ...props, overrideSubmitHandler });
+  const messageInput = useMessageInputContext();
 
   const onChange = useCallback(
-    (e) => {
-      if (messageInput.text.length === 1 && e.nativeEvent.inputType === 'deleteContentBackward') {
+    (event) => {
+      if (messageInput.text.length === 1 && event.nativeEvent.inputType === 'deleteContentBackward') {
         setGiphyState(false);
       }
 
       if (messageInput.text.startsWith('/giphy') && !giphyState) {
-        e.target.value = e.target.value.replace('/giphy', '');
+        event.target.value = event.target.value.replace('/giphy', '');
         setGiphyState(true);
       }
 
-      messageInput.handleChange(e);
+      messageInput.handleChange(event);
     },
-    [giphyState, messageInput],
+    [giphyState, messageInput, setGiphyState],
   );
 
   const GiphyIcon = () => (
@@ -58,25 +44,13 @@ export const ThreadMessageInput = (props) => {
       <div className='thread-message-input__input'>
         {giphyState && <GiphyIcon />}
         <ChatAutoComplete
-          innerRef={messageInput.textareaRef}
-          handleSubmit={messageInput.handleSubmit}
-          onSelectItem={messageInput.onSelectItem}
           onChange={onChange}
           value={messageInput.text}
           rows={1}
-          maxRows={props.maxRows}
           placeholder='Reply'
-          onPaste={messageInput.onPaste}
-          triggers={props.autocompleteTriggers}
-          grow={props.grow}
-          disabled={props.disabled}
-          additionalTextareaProps={{
-            ...props.additionalTextareaProps,
-          }}
         />
         <div className='thread-message-input__icons'>
           <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
-          {/* <LightningBolt {...{ giphyState }} /> */}
         </div>
         <div
           className='thread-message-input__button'
@@ -87,7 +61,7 @@ export const ThreadMessageInput = (props) => {
           <SendButton />
         </div>
       </div>
-      <EmojiPicker {...messageInput} />
+      <EmojiPicker />
     </div>
   );
 };

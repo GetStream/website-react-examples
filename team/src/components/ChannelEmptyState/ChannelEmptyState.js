@@ -1,13 +1,13 @@
-import React, { useContext } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './ChannelEmptyState.css';
 
 import { HashIcon } from '../../assets';
 
 export const ChannelEmptyState = () => {
-  const { channel, client } = useContext(ChatContext);
-  const members = Object.values(channel.state.members).filter(
+  const { channel, client } = useChatContext();
+  const members = Object.values(channel?.state?.members).filter(
     ({ user }) => user.id !== client.userID,
   );
 

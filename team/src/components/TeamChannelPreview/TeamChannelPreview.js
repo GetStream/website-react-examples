@@ -1,5 +1,5 @@
-import React, { useContext } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelPreview.css';
 
@@ -8,10 +8,10 @@ import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator'
 export const TeamChannelPreview = (props) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
-  const { channel: activeChannel, client } = useContext(ChatContext);
+  const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => (
-    <p className='channel-preview__item'># {channel.data.name || channel.data.id || 'random'}</p>
+    <p className='channel-preview__item'># {channel?.data?.name || channel?.data?.id || 'random'}</p>
   );
 
   const DirectPreview = () => {

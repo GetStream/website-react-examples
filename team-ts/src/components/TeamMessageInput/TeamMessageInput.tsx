@@ -47,17 +47,11 @@ export type MessageToOverride = {
 
 export type Props = MessageInputProps & {
   pinsOpen?: boolean;
-  // giphyState: boolean;
-  // setGiphyState: React.Dispatch<React.SetStateAction<boolean>>;
+
 };
 
 export const TeamMessageInput: React.FC<Props> =  (props) => {
   const {
-    // additionalTextareaProps,
-    // autocompleteTriggers,
-    // disabled,
-    // grow,
-    // maxRows,
     pinsOpen,
   } = props;
 

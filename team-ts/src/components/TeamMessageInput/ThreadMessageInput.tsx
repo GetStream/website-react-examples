@@ -44,13 +44,9 @@ export const ThreadMessageInput: React.FC<Props> = (props) => {
           ? true
           : false;
       
-      console.log('asdfasdf');
-
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState (false);
       }
-
-      console.log('messageInput.text IS:', messageInput.text);
 
       if (messageInput.text.startsWith('/giphy') && !giphyState) {
         console.log('event.target.value IS:', event.target.value);

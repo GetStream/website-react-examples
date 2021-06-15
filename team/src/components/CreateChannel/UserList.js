@@ -1,22 +1,28 @@
-import React, { useContext, useEffect, useState } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React, { useEffect, useState } from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './UserList.css';
 
 import { InviteIcon } from '../../assets';
 
-const ListContainer = ({ children }) => (
-  <div className='user-list__container'>
-    <div className='user-list__header'>
-      <p>User</p>
-      <p>Last Active</p>
-      <p>Invite</p>
-    </div>
-    {children}
-  </div>
-);
+const ListContainer = (props) => {
+  const { children } = props;
 
-const UserItem = ({ index, setSelectedUsers, user }) => {
+  return (
+    <div className='user-list__container'>
+      <div className='user-list__header'>
+        <p>User</p>
+        <p>Last Active</p>
+        <p>Invite</p>
+      </div>
+      {children}
+    </div>
+  )
+};
+
+const UserItem = (props) => {
+  const { index, setSelectedUsers, user } = props;
+
   const [selected, setSelected] = useState(false);
 
   const getLastActive = (i) => {
@@ -57,8 +63,10 @@ const UserItem = ({ index, setSelectedUsers, user }) => {
   );
 };
 
-export const UserList = ({ filters = {}, setSelectedUsers }) => {
-  const { client } = useContext(ChatContext);
+export const UserList = (props) => {
+  const { filters, setSelectedUsers } = props;
+
+  const { client } = useChatContext();
 
   const [error, setError] = useState(false);
   const [listEmpty, setListEmpty] = useState(false);
@@ -113,7 +121,7 @@ export const UserList = ({ filters = {}, setSelectedUsers }) => {
       {loading ? (
         <div className='user-list__message'>Loading users...</div>
       ) : (
-        users.length &&
+        users?.length &&
         users.map((user, i) => (
           <UserItem index={i} key={user.id} setSelectedUsers={setSelectedUsers} user={user} />
         ))
