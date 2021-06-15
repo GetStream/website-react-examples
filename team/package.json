@@ -10,7 +10,7 @@
     "react-file-utils": "^1.1.0",
     "react-scripts": "3.4.3",
     "stream-chat": "3.11.0",
-    "stream-chat-react": "6.0.7",
+    "stream-chat-react": "6.1.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {
