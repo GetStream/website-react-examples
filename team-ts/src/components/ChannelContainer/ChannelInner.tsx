@@ -99,6 +99,7 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
         <Window>
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
           <MessageList
+            disableQuotedMessages={true}
             Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
             pinPermissions={pinnedPermissions}
           />
