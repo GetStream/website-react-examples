@@ -1,10 +1,11 @@
-import React, { useContext } from 'react';
-import { ChannelContext } from 'stream-chat-react';
+import React from 'react';
+import { useChannelStateContext, useTypingContext } from 'stream-chat-react';
 
 import './TypingIndicator.css';
 
 export const TypingIndicator = () => {
-  const { client, typing } = useContext(ChannelContext);
+  const { client } = useChannelStateContext();
+  const { typing } = useTypingContext();
 
   if (!client || !typing) return null;
 

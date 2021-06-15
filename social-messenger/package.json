@@ -10,8 +10,8 @@
     "react-dom": "^16.12.0",
     "react-file-utils": "1.0.3",
     "react-scripts": "3.3.0",
-    "stream-chat": "3.7.0",
-    "stream-chat-react": "5.1.7"
+    "stream-chat": "3.11.0",
+    "stream-chat-react": "6.0.7"
   },
   "scripts": {
     "start": "react-scripts start",

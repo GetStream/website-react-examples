@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useEffect, useRef, useState } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React, { useCallback, useEffect, useRef, useState } from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
 import { XButton, XButtonBackground } from '../../assets';
@@ -18,7 +18,7 @@ const UserResult = ({ user }) => (
 );
 
 const CreateChannel = ({ onClose, toggleMobile }) => {
-  const { client, setActiveChannel } = useContext(ChatContext);
+  const { client, setActiveChannel } = useChatContext();
 
   const [focusedUser, setFocusedUser] = useState(undefined);
   const [inputText, setInputText] = useState('');

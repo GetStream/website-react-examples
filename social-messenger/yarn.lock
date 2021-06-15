@@ -9273,18 +9273,6 @@ react-file-icon@^0.2.0:
     react-dom "^16.2.0"
     tinycolor2 "^1.4.1"
 
-react-file-utils@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.2.tgz#c2719584b79f551e12b2b56457ce8bdd3155aeb1"
-  integrity sha512-nMLe+Lrebq+Nr9Fk8LmgQ8ofl5uwKFx2vwwoT0Gbe1B+EP95PBivC6kxt8IB5KyD7hYSWt4IHYm12RiXQ60uiw==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.13"
-    "@fortawesome/free-regular-svg-icons" "^5.7.0"
-    "@fortawesome/react-fontawesome" "^0.1.4"
-    blueimp-load-image "^5.13.0"
-    react-dropzone "11.2.0"
-    react-file-icon "^0.2.0"
-
 react-file-utils@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.3.tgz#1b0caa1a1b39573e7bbc4badd722bf1d14e1191a"
@@ -9296,6 +9284,13 @@ react-file-utils@1.0.3:
     blueimp-load-image "^5.13.0"
     react-dropzone "11.2.0"
     react-file-icon "^0.2.0"
+
+react-file-utils@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.0.tgz#54913d558f98c6864d6c1f3b65e99b40f83b4a68"
+  integrity sha512-h9IWUk31gYqmmSUxM6Op3SoWEyiKVBX9alGN6uUOKNxe5gmc5fYPKrd9SwSwF5lX3M5Pr24SXqfZMgVdAxGQFg==
+  dependencies:
+    react-dropzone "11.2.0"
 
 react-focus-lock@^2.3.1:
   version "2.5.0"
@@ -9519,10 +9514,10 @@ react-view-pager@^0.6.0:
     resize-observer-polyfill "1.5.0"
     tabbable "1.1.2"
 
-react-virtuoso@1.5.9:
-  version "1.5.9"
-  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.5.9.tgz#1c64d093df7c67c07ca3813780e2c65cf07d5efa"
-  integrity sha512-r3nE98ElMWtI9rtLlPT5iVcN/cwkm1dyDXVdJ1LVdoVPGhiyTa4yTIgLR8AEiU8s65BvCcl50efEPVVqf+5MsA==
+react-virtuoso@1.8.6:
+  version "1.8.6"
+  resolved "https://registry.yarnpkg.com/react-virtuoso/-/react-virtuoso-1.8.6.tgz#dc7d79ee9e309c13700296ff65b04f6ebecdcbaa"
+  integrity sha512-WFSI4YzdyAFrr3CuZnQ8cmubGMJjgmgyuhx/OpWLls1uK9O43s+6DMr9oBXHAgvCDjS3Nd3vkIJAhsJBJzS1nQ==
   dependencies:
     "@virtuoso.dev/react-urx" "^0.2.5"
     "@virtuoso.dev/urx" "^0.2.5"
@@ -10507,10 +10502,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@5.1.7:
-  version "5.1.7"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-5.1.7.tgz#75625d2b2a1de50574489e8a5dbe4cb1b448ccdd"
-  integrity sha512-lU17FJS9aDNLUFQTvxUPZ4LcKCimjL8Hy9M4WBiaIjDeRyAynlUL1WAyunsnFBKKuPZ83qhk6khD47q1Xzn3JQ==
+stream-chat-react@6.0.6:
+  version "6.0.6"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.0.6.tgz#145ca2d9820826148e5becd699111ce2ccb72fa7"
+  integrity sha512-Y8CROOp3xC8p09dwUMdAt0mlAR44ddAZyTPpjWcARWZNeCwQqc/tcNCEhIz7I7CUEntVjr18qbNBiTNgPX00Qg==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -10525,24 +10520,25 @@ stream-chat-react@5.1.7:
     lodash.throttle "^4.1.1"
     lodash.uniqby "^4.7.0"
     mdast-util-find-and-replace "1.1.1"
-    mml-react "^0.4.0"
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
-    react-file-utils "1.0.2"
+    react-file-utils "1.1.0"
     react-images "^1.1.7"
     react-is "^17.0.1"
     react-markdown "^5.0.3"
     react-player "^2.7.0"
     react-textarea-autosize "^8.3.0"
-    react-virtuoso "1.5.9"
+    react-virtuoso "1.8.6"
     textarea-caret "^3.1.0"
     uuid "^8.3.1"
+  optionalDependencies:
+    mml-react "^0.4.0"
 
-stream-chat@3.7.0:
-  version "3.7.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.7.0.tgz#1e2e122feeb594509fdb4e36855cddb1dc5476c3"
-  integrity sha512-a4mg0kmdU6c1Foz8p1a370jAac8wkDNugE+GQrTeOqZqWh/yIrsE31WsJb901hhrl5nFwWPiTpFO0HuFXr8EmA==
+stream-chat@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.11.0.tgz#d26db68e9fac4dd2e79bbf3f2b058b2b7cdb6ad1"
+  integrity sha512-4LSLJ/ENM5jPBjKJkHjS+ilLcbjaf2R4bIwSNp9huSD1vj0jpwQXTlD+4QogliTnZMLWvIS5B6UHl8q8q1VYwA==
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@types/jsonwebtoken" "^8.5.0"
