@@ -10,8 +10,8 @@
     "react-file-utils": "1.0.3",
     "react-native-animated-emoji": "0.1.4",
     "react-scripts": "3.4.3",
-    "stream-chat": "3.8.0",
-    "stream-chat-react": "5.3.0",
+    "stream-chat": "3.11.0",
+    "stream-chat-react": "6.0.7",
     "web-vitals": "^0.2.4"
   },
   "scripts": {

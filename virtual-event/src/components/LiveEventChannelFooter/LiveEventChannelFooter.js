@@ -1,10 +1,13 @@
 import React, { useState } from 'react';
+import { MessageInput } from 'stream-chat-react';
+
+import './LiveEventChannelFooter.css';
+import { LiveEventMessageInput } from './LiveEventMessageInput';
+import { SloMoModal } from '../SloMoModal/SloMoModal';
+
 import { AdminBadge } from '../../assets/AdminBadge';
 import { AvatarRobert } from '../../assets/AvatarRobert';
 import { MeatballMenu } from '../../assets/MeatballMenu';
-import { SloMoModal } from '../SloMoModal/SloMoModal';
-import './LiveEventChannelFooter.css';
-import { LiveEventMessageInput } from './LiveEventMessageInput';
 
 export const LiveEventChannelFooter = () => {
   const [showModal, setShowModal] = useState(false);
@@ -18,7 +21,10 @@ export const LiveEventChannelFooter = () => {
           <AvatarRobert />
         </div>
         <div className='live-event-footer__input'>
-          <LiveEventMessageInput focus sloMoDelay={sloMoDelay} />
+          <MessageInput
+            focus
+            Input={(props) => <LiveEventMessageInput {...props} sloMoDelay={sloMoDelay} />}
+          />
         </div>
       </div>
       <div className='live-event-footer__bottom'>

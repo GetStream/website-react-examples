@@ -70,7 +70,6 @@ const App = () => {
 
   return (
     <>
-      {/* <LiveEventWindowControls currentTheme={currentTheme} setCurrentTheme={setCurrentTheme} /> */}
       <div className='main-container'>
         <Chat client={chatClient} i18nInstance={i18nInstance} theme={`livestream ${currentTheme}`}>
           <div className='main-container-inner'>

@@ -9292,18 +9292,6 @@ react-file-icon@^0.2.0:
     react-dom "^16.2.0"
     tinycolor2 "^1.4.1"
 
-react-file-utils@1.0.2:
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.2.tgz#c2719584b79f551e12b2b56457ce8bdd3155aeb1"
-  integrity sha512-nMLe+Lrebq+Nr9Fk8LmgQ8ofl5uwKFx2vwwoT0Gbe1B+EP95PBivC6kxt8IB5KyD7hYSWt4IHYm12RiXQ60uiw==
-  dependencies:
-    "@fortawesome/fontawesome-svg-core" "^1.2.13"
-    "@fortawesome/free-regular-svg-icons" "^5.7.0"
-    "@fortawesome/react-fontawesome" "^0.1.4"
-    blueimp-load-image "^5.13.0"
-    react-dropzone "11.2.0"
-    react-file-icon "^0.2.0"
-
 react-file-utils@1.0.3:
   version "1.0.3"
   resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.0.3.tgz#1b0caa1a1b39573e7bbc4badd722bf1d14e1191a"
@@ -9315,6 +9303,13 @@ react-file-utils@1.0.3:
     blueimp-load-image "^5.13.0"
     react-dropzone "11.2.0"
     react-file-icon "^0.2.0"
+
+react-file-utils@1.1.0:
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.0.tgz#54913d558f98c6864d6c1f3b65e99b40f83b4a68"
+  integrity sha512-h9IWUk31gYqmmSUxM6Op3SoWEyiKVBX9alGN6uUOKNxe5gmc5fYPKrd9SwSwF5lX3M5Pr24SXqfZMgVdAxGQFg==
+  dependencies:
+    react-dropzone "11.2.0"
 
 react-focus-lock@^2.3.1:
   version "2.5.0"
@@ -10551,10 +10546,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@5.3.0:
-  version "5.3.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-5.3.0.tgz#ea0622da281e3078477ef052c06e7d45676cb4a8"
-  integrity sha512-aS0S55iWMK6WppxxgEloq8Rnx8hfkwd2OdKuOUjNjO5DHw0EOtFYd/wnCdGdptxVpQPPR/7L0WzM5JSlz5rdVQ==
+stream-chat-react@6.0.7:
+  version "6.0.7"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.0.7.tgz#c05664419867acf863982b3676a51a7ca86dc31c"
+  integrity sha512-wf4Ue8Yth53kMhMOaDGJGbeeiEcm0qX4shd296ZtfbaCjpc0sPl06c5FFJbDDRhymBQhyZt0eh9yJEGCAoC8CA==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -10572,7 +10567,7 @@ stream-chat-react@5.3.0:
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
-    react-file-utils "1.0.2"
+    react-file-utils "1.1.0"
     react-images "^1.1.7"
     react-is "^17.0.1"
     react-markdown "^5.0.3"
@@ -10584,10 +10579,10 @@ stream-chat-react@5.3.0:
   optionalDependencies:
     mml-react "^0.4.0"
 
-stream-chat@3.8.0:
-  version "3.8.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.8.0.tgz#4545784402b5126b93127f4d716f9b1ef84fb360"
-  integrity sha512-QzKitdlLWn8VMvudBeEfoJTcaFBhGftLH/0HQKfIpCho0MefW+inImQDIZWiM0EeaRjJr7omLZgIZZYLw9xNXw==
+stream-chat@3.11.0:
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-3.11.0.tgz#d26db68e9fac4dd2e79bbf3f2b058b2b7cdb6ad1"
+  integrity sha512-4LSLJ/ENM5jPBjKJkHjS+ilLcbjaf2R4bIwSNp9huSD1vj0jpwQXTlD+4QogliTnZMLWvIS5B6UHl8q8q1VYwA==
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@types/jsonwebtoken" "^8.5.0"

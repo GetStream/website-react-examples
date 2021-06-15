@@ -1,5 +1,11 @@
 import React, { useContext, useState } from 'react';
-import { Avatar, ChatContext, MessageActions, MessageLivestream } from 'stream-chat-react';
+import {
+  Avatar,
+  ChatContext,
+  MessageActions,
+  MessageLivestream,
+  useMessageContext,
+} from 'stream-chat-react';
 
 import { LiveEventReactions } from '../LiveEventReactions/LiveEventReactions';
 
@@ -10,13 +16,16 @@ import { PinIconDark } from '../../assets/PinIconDark';
 import './LiveEventMessage.css';
 
 export const LiveEventMessage = (props) => {
-  const { isMyMessage, message, pinnedMessagesIds, setPinnedMessages } = props;
+  const { pinnedMessagesIds, setPinnedMessages } = props;
+
+  const { isMyMessage, message } = useMessageContext();
+
   const isMessagePinned = pinnedMessagesIds?.find((id) => id === message.id);
   const [isPinned, setIsPinned] = useState(isMessagePinned);
 
   const { theme } = useContext(ChatContext);
 
-  const onlineStatus = props.message.user.id === 'avatar-robert';
+  const onlineStatus = message.user?.id === 'avatar-robert';
 
   const MyUserAvatar = (props) => {
     if (isMyMessage()) {
@@ -45,7 +54,7 @@ export const LiveEventMessage = (props) => {
   };
 
   const getMessageActions = () => {
-    if (props.isMyMessage()) {
+    if (isMyMessage()) {
       return ['edit', 'delete', 'react', 'reply', 'mute'];
     }
     return ['react', 'reply', 'mute'];
@@ -75,7 +84,7 @@ export const LiveEventMessage = (props) => {
             getMessageActions={getMessageActions}
           />
         </div>
-        <MessageLivestream {...props} Avatar={MyUserAvatar} ReactionsList={LiveEventReactions} />
+        <MessageLivestream Avatar={MyUserAvatar} ReactionsList={LiveEventReactions} />
       </div>
     </div>
   );

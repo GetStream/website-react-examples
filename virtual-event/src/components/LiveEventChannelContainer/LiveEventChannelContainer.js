@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { MessageList } from 'stream-chat-react';
+
 import { LiveEventAttendees } from '../LiveEventAttendees/LiveEventAttendees';
 import { LiveEventChannelFooter } from '../LiveEventChannelFooter/LiveEventChannelFooter';
 import { LiveEventMessage } from '../LiveEventMessage/LiveEventMessage';
@@ -19,9 +20,8 @@ export const LiveEventChannelContainer = ({ tab }) => {
           <>
             <MessageList
               noGroupByUser
-              Message={(props) => (
+              Message={() => (
                 <LiveEventMessage
-                  {...props}
                   pinnedMessages={pinnedMessages}
                   pinnedMessagesIds={pinnedMessagesIds}
                   setPinnedMessages={setPinnedMessages}
@@ -35,11 +35,11 @@ export const LiveEventChannelContainer = ({ tab }) => {
         return (
           <div className={'pinned-messages__container'}>
             <MessageList
+              loadingMore={false}
               noGroupByUser
               messages={pinnedMessagesArray}
-              Message={(props) => (
+              Message={() => (
                 <LiveEventMessage
-                  {...props}
                   setPinnedMessages={setPinnedMessages}
                   pinnedMessages={pinnedMessages}
                 />

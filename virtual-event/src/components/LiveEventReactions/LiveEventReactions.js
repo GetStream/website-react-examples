@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { NimbleEmoji } from 'emoji-mart';
-import { useChannelContext } from 'stream-chat-react';
+import { useChannelStateContext } from 'stream-chat-react';
 
 import './LiveEventReactions.css';
 
@@ -10,7 +10,7 @@ export const LiveEventReactions = ({
   reactionOptions: propsReactionOptions,
   handleReaction,
 }) => {
-  const { emojiConfig } = useChannelContext();
+  const { emojiConfig } = useChannelStateContext();
 
   const { defaultMinimalEmojis, emojiSetDef, emojiData } = emojiConfig || {};
 
