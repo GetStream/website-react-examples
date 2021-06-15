@@ -2,14 +2,15 @@ import React, { useContext } from 'react';
 
 import { logChatPromiseExecution } from 'stream-chat';
 
-import { MessageList, MessageInput, Window, useChannelActionContext } from 'stream-chat-react';
-
 import {
-  CustomMessage,
-  MessagingChannelHeader,
-  MessagingInput,
-  MessagingThread,
-} from '../../components';
+  MessageList,
+  MessageInput,
+  Thread,
+  Window,
+  useChannelActionContext,
+} from 'stream-chat-react';
+
+import { MessagingChannelHeader } from '../../components';
 
 import { GiphyContext } from '../../App';
 
@@ -59,13 +60,10 @@ export const ChannelInner = (props) => {
     <>
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-        <MessageList
-          messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']}
-          Message={CustomMessage}
-        />
-        <MessageInput focus Input={MessagingInput} overrideSubmitHandler={overrideSubmitHandler} />
+        <MessageList messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']} />
+        <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
-      <MessagingThread />
+      <Thread />
     </>
   );
 };

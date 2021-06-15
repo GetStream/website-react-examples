@@ -8,14 +8,10 @@ import {
   Window,
   StreamMessage,
   useChannelActionContext,
+  Thread,
 } from 'stream-chat-react';
 
-import {
-  CustomMessage,
-  MessagingChannelHeader,
-  MessagingInput,
-  MessagingThread,
-} from '../../components';
+import { MessagingChannelHeader } from '../../components';
 
 import {
   AttachmentType,
@@ -92,13 +88,10 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
     <>
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-        <MessageList
-          messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']}
-          Message={CustomMessage}
-        />
-        <MessageInput focus Input={MessagingInput} overrideSubmitHandler={overrideSubmitHandler} />
+        <MessageList messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']} />
+        <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
-      <MessagingThread />
+      <Thread />
     </>
   );
 };

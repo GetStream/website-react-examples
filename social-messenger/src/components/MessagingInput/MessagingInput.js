@@ -75,12 +75,7 @@ const MessagingInput = () => {
         <div className='messaging-input__input-wrapper'>
           {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
           <UploadsPreview />
-          <ChatAutoComplete
-            onChange={onChange}
-            value={messageInput.text}
-            rows={1}
-            placeholder='Send a message'
-          />
+          <ChatAutoComplete onChange={onChange} rows={1} placeholder='Send a message' />
         </div>
       </ImageDropzone>
       <div

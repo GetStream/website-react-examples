@@ -6,7 +6,14 @@ import { useChecklist } from './ChecklistTasks';
 import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
-import { CreateChannel, MessagingChannelList, MessagingChannelPreview } from './components';
+import {
+  CreateChannel,
+  CustomMessage,
+  MessagingChannelList,
+  MessagingChannelPreview,
+  MessagingInput,
+  MessagingThreadHeader,
+} from './components';
 
 import { getRandomImage } from './assets';
 import { ChannelInner } from './components/ChannelInner/ChannelInner';
@@ -133,7 +140,14 @@ const App = () => {
         />
       </div>
       <div>
-        <Channel maxNumberOfFiles={10} multipleUploads={true} TypingIndicator={() => null}>
+        <Channel
+          maxNumberOfFiles={10}
+          Message={CustomMessage}
+          Input={MessagingInput}
+          multipleUploads={true}
+          ThreadHeader={MessagingThreadHeader}
+          TypingIndicator={() => null}
+        >
           {isCreating && (
             <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
           )}
