@@ -7,6 +7,8 @@ import { ChannelInner } from './ChannelInner';
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
 import { EditChannel } from '../EditChannel/EditChannel';
+import { TeamMessage } from '../TeamMessage/TeamMessage';
+import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 
 import { CloseThreadIcon } from '../../assets';
 
@@ -101,8 +103,10 @@ export const ChannelContainer: React.FC<Props> = (props) => {
     <div className='channel__container'>
       <Channel
         EmptyStateIndicator={ChannelEmptyState}
-        TypingIndicator={() => null}
+        Input={TeamMessageInput}
+        Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
         ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />} 
+        TypingIndicator={() => null}
       >
         <ChannelInner
           {...{

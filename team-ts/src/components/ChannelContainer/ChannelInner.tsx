@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import { MessageResponse, logChatPromiseExecution } from 'stream-chat';
 
 import {
   defaultPinPermissions,
@@ -12,11 +13,8 @@ import {
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
-import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
-import { MessageToOverride, TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
-
-import { MessageResponse, logChatPromiseExecution } from 'stream-chat';
+import { MessageToOverride } from '../TeamMessageInput/TeamMessageInput';
 
 import type {
   TeamAttachmentType,
@@ -100,17 +98,14 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
           <MessageList
             disableQuotedMessages={true}
-            Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
             pinPermissions={pinnedPermissions}
           />
           <MessageInput
-            Input={TeamMessageInput}
             overrideSubmitHandler={overrideSubmitHandler}
           />
         </Window>
         <Thread
           additionalMessageInputProps={{ Input: ThreadMessageInput }}
-          Message={(messageProps) => <TeamMessage {...messageProps} />}
         />
         {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
       </div>

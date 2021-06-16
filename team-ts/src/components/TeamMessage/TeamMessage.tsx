@@ -17,11 +17,11 @@ export const TeamMessage: React.FC<Props> = (props) => {
 
   const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
     if (setPinsOpen) setPinsOpen(false);
-    if (handleOpenThread) handleOpenThread(event);
+    handleOpenThread(event);
   };
 
   return (
-    <div className={message?.pinned ? 'pinned-message' : 'unpinned-message'}>
+    <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
       <MessageTeam {...props} message={message} handleOpenThread={handleOpenThreadOverride} />
       {/** potentially add replies component here */}
     </div>

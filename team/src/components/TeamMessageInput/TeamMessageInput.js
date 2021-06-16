@@ -127,7 +127,6 @@ export const TeamMessageInput = (props) => {
             <UploadsPreview />
             <ChatAutoComplete
               onChange={onChange}
-              value={messageInput.text}
               placeholder={`Message ${getPlaceholder()}`}
             />
             <div

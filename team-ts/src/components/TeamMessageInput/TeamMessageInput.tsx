@@ -50,7 +50,7 @@ export type Props = MessageInputProps & {
 
 };
 
-export const TeamMessageInput: React.FC<Props> =  (props) => {
+export const TeamMessageInput: React.FC<Props> = (props) => {
   const {
     pinsOpen,
   } = props;
@@ -184,7 +184,6 @@ export const TeamMessageInput: React.FC<Props> =  (props) => {
             <UploadsPreview />
             <ChatAutoComplete
               onChange={onChange}
-              value={messageInput.text}
               placeholder={`Message ${getPlaceholder()}`}
             />
             <div

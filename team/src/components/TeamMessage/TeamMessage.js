@@ -13,11 +13,11 @@ export const TeamMessage = (props) => {
 
   const handleOpenThreadOverride = (event) => {
     if (setPinsOpen) setPinsOpen(false);
-    if (handleOpenThread)  handleOpenThread(event);
+    handleOpenThread(event);
   };
 
   return (
-    <div className={message?.isPinned ? 'pinned-message' : 'unpinned-message'}>
+    <div className={message.isPinned ? 'pinned-message' : 'unpinned-message'}>
       <MessageTeam {...props} message={message} handleOpenThread={handleOpenThreadOverride} />
       {/** potentially add replies component here */}
     </div>

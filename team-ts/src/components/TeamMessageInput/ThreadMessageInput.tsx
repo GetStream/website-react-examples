@@ -45,11 +45,10 @@ export const ThreadMessageInput: React.FC<Props> = (props) => {
           : false;
       
       if (messageInput.text.length === 1 && deletePressed) {
-        setGiphyState (false);
+        setGiphyState(false);
       }
 
       if (messageInput.text.startsWith('/giphy') && !giphyState) {
-        console.log('event.target.value IS:', event.target.value);
         event.target.value = event.target.value.replace('/giphy', '');
         setGiphyState(true);
       }
@@ -72,7 +71,6 @@ export const ThreadMessageInput: React.FC<Props> = (props) => {
         {giphyState && <GiphyIcon />}
         <ChatAutoComplete
           onChange={onChange}
-          value={messageInput.text}
           placeholder='Reply'
         />
         <div className='thread-message-input__icons'>

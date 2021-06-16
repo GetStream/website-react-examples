@@ -45,7 +45,6 @@ export const ThreadMessageInput = (props) => {
         {giphyState && <GiphyIcon />}
         <ChatAutoComplete
           onChange={onChange}
-          value={messageInput.text}
           rows={1}
           placeholder='Reply'
         />

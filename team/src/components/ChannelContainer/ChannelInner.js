@@ -1,4 +1,6 @@
 import React, { useState } from 'react';
+import { logChatPromiseExecution } from 'stream-chat';
+
 import { 
   defaultPinPermissions,
   MessageList,
@@ -10,11 +12,7 @@ import {
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
-import { TeamMessage } from '../TeamMessage/TeamMessage';
-import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
-
-import { logChatPromiseExecution } from 'stream-chat';
 
 export const GiphyContext = React.createContext({});
 
@@ -69,23 +67,14 @@ export const ChannelInner = (props) => {
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
           <MessageList
             disableQuotedMessages
-            Message={(messageProps, i) => (
-              <TeamMessage
-                key={i}
-                {...messageProps}
-                {...{ setPinsOpen }}
-              />
-            )}
             pinPermissions={pinnedPermissions}
           />
           <MessageInput
-            Input={TeamMessageInput}
             overrideSubmitHandler={overrideSubmitHandler}
           />
         </Window>
         <Thread
           additionalMessageInputProps={{ Input: ThreadMessageInput }}
-          Message={(messageProps, i) => <TeamMessage key={i} {...messageProps} />}
         />
         {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
       </div>
