@@ -31,12 +31,12 @@ export const LiveEventMessageInput = (props) => {
 
   return (
     <div className='live-event-message-input__input'>
-      <EmojiPicker {...messageInput} onSelectEmoji={messageInput.onSelectEmoji} />
+      <EmojiPicker />
       <ImageDropzone
         disabled={messageInput.numberOfUploads >= 2}
         handleFiles={messageInput.uploadNewFiles}
       >
-        <UploadsPreview {...messageInput} />
+        <UploadsPreview />
         <ChatAutoComplete handleSubmit={handleSubmitDelayed} placeholder={'Send a message'} />
       </ImageDropzone>
       <div className='live-event-message-input__input-buttons'>
