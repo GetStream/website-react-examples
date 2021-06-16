@@ -1,6 +1,5 @@
 import React, { useCallback, useContext } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-
 import {
   ChatAutoComplete,
   EmojiPicker,
@@ -10,15 +9,9 @@ import {
 } from 'stream-chat-react';
 
 import { GiphyContext } from '../../App';
+import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 import './MessagingInput.css';
-
-import {
-  // CommandIcon,
-  EmojiIcon,
-  LightningBoltSmall,
-  SendIcon,
-} from '../../assets';
 
 const GiphyIcon = () => (
   <div className='giphy-icon__wrapper'>
@@ -34,20 +27,20 @@ const MessagingInput = () => {
   const messageInput = useMessageInputContext();
 
   const onChange = useCallback(
-    (e) => {
-      const { value } = e.target;
-      const deletePressed = e.nativeEvent?.inputType === 'deleteContentBackward';
+    (event) => {
+      const { value } = event.target;
+      const deletePressed = event.nativeEvent?.inputType === 'deleteContentBackward';
 
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);
       }
 
       if (!giphyState && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
-        e.target.value = value.replace('/giphy', '');
+        event.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
 
-      messageInput.handleChange(e);
+      messageInput.handleChange(event);
     },
     [giphyState, messageInput.numberOfUploads, messageInput.text], // eslint-disable-line
   );

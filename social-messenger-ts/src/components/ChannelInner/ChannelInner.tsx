@@ -9,7 +9,7 @@ import {
   Thread,
 } from 'stream-chat-react';
 
-import { MessagingChannelHeader } from '../../components';
+import { MessagingChannelHeader, MessagingInput } from '../../components';
 
 import {
   AttachmentType,
@@ -91,7 +91,7 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
         <MessageList messageActions={actions} />
         <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
-      <Thread />
+      <Thread Input={MessagingInput} />
     </>
   );
 };

@@ -1,6 +1,5 @@
 import React, { useCallback, useContext } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-
 import {
   ChatAutoComplete,
   EmojiPicker,
@@ -12,8 +11,6 @@ import {
 
 import './MessagingInput.css';
 
-import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
-
 import {
   AttachmentType,
   ChannelType,
@@ -24,6 +21,7 @@ import {
   ReactionType,
   UserType,
 } from '../../App';
+import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 const GiphyIcon = () => (
   <div className='giphy-icon__wrapper'>
@@ -118,4 +116,4 @@ const MessagingInput: React.FC<MessageInputProps> = () => {
   );
 };
 
-export default React.memo(MessagingInput);
+export default MessagingInput;
