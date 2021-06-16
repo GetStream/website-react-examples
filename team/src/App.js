@@ -1,15 +1,14 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/index.css';
 
+import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
+import { getRandomImage } from './assets';
 import { useChecklist } from './ChecklistTasks';
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
-
-import { getRandomImage } from './assets';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -38,7 +37,6 @@ const App = () => {
   const [isEditing, setIsEditing] = useState(false);
 
   useChecklist(client, targetOrigin);
-  // const primaryColor = useRef('78, 29, 157');
 
   useEffect(() => {
     const handleColorChange = (color) => {

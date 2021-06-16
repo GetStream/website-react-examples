@@ -34,7 +34,12 @@ const ChannelNameInput: React.FC<InputProps> = (props) => {
   return (
     <div className='channel-name-input__wrapper'>
       <p>Name</p>
-      <input onChange={handleChange} placeholder='channel-name' type='text' value={channelName} />
+      <input
+        onChange={handleChange}
+        placeholder='channel-name (no spaces)'
+        type='text'
+        value={channelName}
+      />
       <p>Add Members</p>
     </div>
   );
@@ -66,17 +71,21 @@ export const CreateChannel: React.FC<Props> = (props) => {
     event.preventDefault();
     if (!selectedUsers?.length) return;
 
-    const newChannel = await client.channel(createType, channelName, {
-      name: channelName,
-      members: selectedUsers,
-    });
+    try {
+      const newChannel = await client.channel(createType, channelName, {
+        name: channelName,
+        members: selectedUsers,
+      });
 
-    await newChannel.watch();
+      await newChannel.watch();
 
-    setChannelName('');
-    setIsCreating(false);
-    setSelectedUsers([client.userID || '']);
-    setActiveChannel(newChannel);
+      setChannelName('');
+      setIsCreating(false);
+      setSelectedUsers([client.userID || '']);
+      setActiveChannel(newChannel);
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   return (
