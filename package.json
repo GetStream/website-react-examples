@@ -5,16 +5,13 @@
   "repository": "git@github.com:GetStream/website-react-examples.git",
   "author": "Stream",
   "license": "MIT",
-	"scripts": {
-		"build:cs": "cd customer-support && yarn && yarn build && rm -rf ../docs/customer-support/* && mv build/* ../docs/customer-support",
-		"build:sm": "cd social-messenger && yarn && yarn build && rm -rf ../docs/social-messenger/* && mv build/* ../docs/social-messenger",
-		"build:sm-ts": "cd social-messenger-ts && yarn && yarn build && rm -rf ../docs/social-messenger-ts/* && mv build/* ../docs/social-messenger-ts",
-		"build:ve": "cd virtual-event && yarn && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
-		"build:t": "cd team && yarn && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
-		"build:t-ts": "cd team-ts && yarn && yarn build && rm -rf ../docs/team-ts/* && mv build/* ../docs/team-ts",
-		"build:gl": "cd gaming-livestream && yarn && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
+  "scripts": {
+    "build:cs": "cd customer-support && yarn && yarn build && rm -rf ../docs/customer-support/* && mv build/* ../docs/customer-support",
+    "build:sm": "cd social-messenger && yarn && yarn build && rm -rf ../docs/social-messenger/* && mv build/* ../docs/social-messenger",
+    "build:ve": "cd virtual-event && yarn && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
+    "build:t": "cd team && yarn && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
+    "build:gl": "cd gaming-livestream && yarn && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
     "build:js": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl",
-    "build:ts": "yarn build:sm-ts && yarn build:t-ts",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
@@ -36,8 +33,6 @@
     "eslint-plugin-promise": "^4.2.1",
     "eslint-plugin-react": "^7.20.6",
     "eslint-plugin-react-hooks": "^4.0.8",
-    "eslint-plugin-sonarjs": "^0.5.0",
     "prettier": "^2.0.5"
-
   }
 }
