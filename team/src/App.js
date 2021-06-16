@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
-// import { createGlobalStyle } from 'styled-components';
 import 'stream-chat-react/dist/css/index.css';
 
 import './App.css';
@@ -9,7 +8,6 @@ import './App.css';
 import { useChecklist } from './ChecklistTasks';
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
-// import { ColorSlider } from './components/ColorSlider/ColorSlider';
 
 import { getRandomImage } from './assets';
 
@@ -24,15 +22,8 @@ const i18nInstance = new Streami18n({
   language: 'en',
   translationsForLanguage: {
     ...enTranslations,
-    Flag: 'Pin to Channel',
   },
 });
-
-// const GlobalColor = createGlobalStyle`
-//   body {
-//     --primary-color: ${(props) => props.color.current};
-//   }
-// `;
 
 const filters = [{ type: 'team' }, { type: 'messaging' }];
 const options = { state: true, watch: true, presence: true, limit: 3 };

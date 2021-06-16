@@ -1,5 +1,5 @@
-import React, { useCallback, useContext, useEffect, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React, { useCallback, useEffect, useState } from 'react';
+import { useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
 import './ChannelSearch.css';
@@ -9,7 +9,7 @@ import { ResultsDropdown } from './ResultsDropdown';
 import { SearchIcon } from '../../assets';
 
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useContext(ChatContext);
+  const { client, setActiveChannel } = useChatContext();
 
   const [allChannels, setAllChannels] = useState([]);
   const [teamChannels, setTeamChannels] = useState([]);

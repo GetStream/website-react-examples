@@ -1,13 +1,14 @@
-import React, { useContext } from 'react';
-import { Avatar, ChannelContext, ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelHeader.css';
 
 import { ChannelInfo, PinIcon } from '../../assets';
 
 export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
-  const { client } = useContext(ChatContext);
-  const { channel, closeThread, watcher_count } = useContext(ChannelContext);
+  const { client } = useChatContext();
+  const { closeThread } = useChannelActionContext();
+  const { channel, watcher_count } = useChannelStateContext();
 
   const teamHeader = `# ${channel.data.name || channel.data.id || 'random'}`;
 
@@ -30,13 +31,11 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
       <div className='team-channel-header__name-wrapper'>
         {members.map(({ user }, i) => {
           if (i > 2) return null;
-          // const addComma = members.length - 1 !== i && i < 2;
           return (
             <div key={i} className='team-channel-header__name-multi'>
               <Avatar image={user.image} size={32} />
               <p className='team-channel-header__name user'>
                 {user.name || user.id || 'Johnny Blaze'}
-                {/* {addComma && ','} */}
               </p>
             </div>
           );

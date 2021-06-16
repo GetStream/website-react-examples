@@ -97,7 +97,10 @@
 
 .str-chat__message-attachment {
   margin-bottom: 0;
-  max-width: 300px;
+}
+
+.str-chat__message-attachment--image {
+  max-width: 375px;
 }
 
 .str-chat__message-attachment-card--title {
@@ -195,7 +198,8 @@ ul.str-chat__simple-reactions-list:hover {
 
 .str-chat__message-team--editing {
   background: #e9e9ea;
-  box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.06), inset 0 1px 0 0 var(--primary-color), inset 0 -1px 0 0 var(--primary-color);
+  box-shadow: 0 0 11px 0 rgba(0, 0, 0, 0.06), inset 0 1px 0 0 var(--primary-color),
+    inset 0 -1px 0 0 var(--primary-color);
   padding: 15px 20px;
 }
 
@@ -236,23 +240,28 @@ ul.str-chat__simple-reactions-list:hover {
 }
 
 .pinned-message {
-  background: var(--primary-color-alpha);
+  background: #e6efff;
 }
 
 .unpinned-message {
   background: #fff;
 }
 
-.pin-icon__wrapper {
+.str-chat__message-team-pin-indicator {
   display: flex;
   align-items: center;
-  margin-left: 80px;
-  height: 16px;
+  margin-left: 40px;
+  height: 18px;
 }
 
-.pin-icon__text {
+.str-chat__message-team-pin-indicator div svg {
+  fill: #858688;
+  font-size: 10px !important;
+}
+
+.str-chat__message-team-pin-indicator div div {
   font-family: Helvetica Neue, sans-serif;
-  font-size: 10px;
+  font-size: 10px !important;
   line-height: 120%;
   color: #858688;
   margin-left: 4px;

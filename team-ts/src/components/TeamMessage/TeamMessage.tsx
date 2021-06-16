@@ -1,4 +1,5 @@
-import { MessageUIComponentProps, MessageTeam } from 'stream-chat-react';
+import React from 'react';
+import { MessageUIComponentProps, MessageTeam, useMessageContext } from 'stream-chat-react';
 
 import './TeamMessage.css';
 
@@ -7,7 +8,12 @@ type Props = MessageUIComponentProps & {
 };
 
 export const TeamMessage: React.FC<Props> = (props) => {
-  const { handleOpenThread, message, setPinsOpen } = props;
+  const { setPinsOpen } = props;
+
+  const {
+    handleOpenThread,
+    message,
+  } = useMessageContext();
 
   const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
     if (setPinsOpen) setPinsOpen(false);

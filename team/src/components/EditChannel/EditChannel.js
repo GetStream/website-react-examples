@@ -1,5 +1,5 @@
-import React, { useContext, useState } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React, { useState } from 'react';
+import { useChatContext } from 'stream-chat-react';
 
 import './EditChannel.css';
 
@@ -7,7 +7,9 @@ import { UserList } from '../CreateChannel/UserList';
 
 import { CloseCreateChannel } from '../../assets';
 
-const ChannelNameInput = ({ channelName = '', setChannelName }) => {
+const ChannelNameInput = (props) => {
+  const { channelName = '', setChannelName } = props;
+
   const handleChange = (event) => {
     event.preventDefault();
     setChannelName(event.target.value);
@@ -22,8 +24,9 @@ const ChannelNameInput = ({ channelName = '', setChannelName }) => {
   );
 };
 
-export const EditChannel = ({ filters, setIsEditing }) => {
-  const { channel } = useContext(ChatContext);
+export const EditChannel = (props) => {
+  const { filters, setIsEditing } = props;
+  const { channel } = useChatContext();
 
   const [channelName, setChannelName] = useState(channel?.data.name || channel?.data.id);
   const [selectedUsers, setSelectedUsers] = useState([]);

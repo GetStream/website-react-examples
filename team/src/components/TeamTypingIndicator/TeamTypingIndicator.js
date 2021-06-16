@@ -1,10 +1,13 @@
-import React, { useContext } from 'react';
-import { ChannelContext } from 'stream-chat-react';
+import React from 'react';
+import { useChatContext, useTypingContext } from 'stream-chat-react';
 
 import './TeamTypingIndicator.css';
 
-export const TeamTypingIndicator = ({ type }) => {
-  const { client, typing } = useContext(ChannelContext);
+export const TeamTypingIndicator = (props) => {
+  const { type } = props;
+
+  const { client } = useChatContext();
+  const { typing } = useTypingContext();
 
   if (!client || !typing) return null;
 

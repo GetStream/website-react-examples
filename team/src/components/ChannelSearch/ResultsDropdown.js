@@ -1,8 +1,12 @@
-import React, { useContext } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
-const SearchResult = ({ channel, focusedId, setChannel, type }) => {
-  const { client, setActiveChannel } = useContext(ChatContext);
+import { channelByUser } from './utils';
+
+const SearchResult = (props) => {
+  const { channel, focusedId, type, setChannel } = props;
+
+  const { client, setActiveChannel } = useChatContext();
 
   if (type === 'channel') {
     return (
@@ -23,21 +27,7 @@ const SearchResult = ({ channel, focusedId, setChannel, type }) => {
   return (
     <div
       onClick={async () => {
-        const [existingChannel] = await client.queryChannels({
-          type: 'messaging',
-          member_count: 2,
-          members: { $eq: [channel.id, client.userID] },
-        });
-
-        if (existingChannel) {
-          return setActiveChannel(existingChannel);
-        }
-
-        const newChannel = await client.channel('messaging', {
-          members: [channel.id, client.userID],
-        });
-
-        return setActiveChannel(newChannel);
+        channelByUser({ client, setActiveChannel, channel });
       }}
       className={
         focusedId === channel.id
@@ -78,7 +68,7 @@ export const ResultsDropdown = ({
           <i>No channels found</i>
         </p>
       ) : (
-        teamChannels.map((channel, i) => (
+        teamChannels?.map((channel, i) => (
           <SearchResult
             channel={channel}
             focusedId={focusedId}
@@ -99,7 +89,7 @@ export const ResultsDropdown = ({
           <i>No direct messages found</i>
         </p>
       ) : (
-        directChannels.map((channel, i) => (
+        directChannels?.map((channel, i) => (
           <SearchResult
             channel={channel}
             focusedId={focusedId}
