@@ -9728,7 +9728,7 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^17.0.1:
+react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -9756,7 +9756,7 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-file-utils@1.1.0, react-file-utils@^1.1.0:
+react-file-utils@1.1.0:
   version "1.1.0"
   resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.0.tgz#54913d558f98c6864d6c1f3b65e99b40f83b4a68"
   integrity sha512-h9IWUk31gYqmmSUxM6Op3SoWEyiKVBX9alGN6uUOKNxe5gmc5fYPKrd9SwSwF5lX3M5Pr24SXqfZMgVdAxGQFg==
@@ -10016,7 +10016,7 @@ react-virtuoso@^1.5.8:
     react-app-polyfill "^1.0.6"
     resize-observer-polyfill "^1.5.1"
 
-react@^17.0.1:
+react@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==

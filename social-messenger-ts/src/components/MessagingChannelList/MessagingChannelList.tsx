@@ -5,6 +5,7 @@ import './MessagingChannelList.css';
 import { SkeletonLoader } from './SkeletonLoader';
 
 import { CreateChannelIcon } from '../../assets';
+import streamLogo from '../../assets/stream.png';
 
 import type { StreamChat } from 'stream-chat';
 
@@ -35,8 +36,7 @@ const MessagingChannelList: React.FC<Props> = (props) => {
     UserType
   >();
 
-  const { id, image = require('../../assets/stream.png') as string, name = 'Example User' } =
-    client.user || {};
+  const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (
