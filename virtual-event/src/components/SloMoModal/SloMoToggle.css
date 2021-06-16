@@ -14,25 +14,26 @@
   background: #dddddd;
   border-radius: 64px;
   position: relative;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s;
 }
 
 .react-switch-label .react-switch-button {
   content: '';
   position: absolute;
-  bottom: 3px;
+  bottom: 2px;
   left: 2px;
   width: 29px;
   height: 29px;
   border-radius: 30px;
-  transition: 0.2s;
+  transition: 0.3s;
   background: #fff;
   box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
 .react-switch-checkbox:checked + .react-switch-label .react-switch-button {
-  left: calc(100% - 2px);
+  left: 62px;
   transform: translateX(-100%);
+  transition: 0.2s;
 }
 
 .react-switch-label:active .react-switch-button {
@@ -53,7 +54,7 @@
   background: #dddddd;
   border-radius: 64px;
   position: relative;
-  transition: background-color 0.2s;
+  transition: background-color 0.3s;
 }
 
 .slo-mo-toggle__label .slo-mo-toggle__button {
@@ -64,17 +65,13 @@
   width: 29px;
   height: 29px;
   border-radius: 30px;
-  transition: 0.2s;
+  transition: 0.3s;
   background: #fff;
   box-shadow: 0 0 2px 0 rgba(10, 10, 10, 0.29);
 }
 
 .slo-mo-toggle__container:checked + .slo-mo-toggle__label .slo-mo-toggle__button {
-  left: calc(100% - 2px);
+  left: 62px;
   transform: translateX(-100%);
-}
-
-/* grow effect */
-.slo-mo-toggle__label:active .slo-mo-toggle__button {
-  width: 60px;
+  transition: 0.2s;
 }

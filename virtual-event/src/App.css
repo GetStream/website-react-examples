@@ -64,7 +64,10 @@ body {
 .livestream.str-chat.dark .str-chat__li:hover {
   background: #1a1c1e;
 }
-.livestream.dark.str-chat .str-chat__message-livestream:hover .str-chat.livestream.dark .str-chat__message-livestream--initial-message {
+.livestream.dark.str-chat
+  .str-chat__message-livestream:hover
+  .str-chat.livestream.dark
+  .str-chat__message-livestream--initial-message {
   background: #1a1c1e;
 }
 .livestream.str-chat.dark .str-chat__list .str-chat__reverse-infinite-scroll {
@@ -208,7 +211,7 @@ body {
 }
 
 .str-chat__message-livestream-left .str-chat__avatar {
-  margin-left: 15px;
+  margin-left: 12px;
   margin-right: 6px;
 }
 
@@ -324,6 +327,6 @@ body {
 
 .live-video-icon {
   position: absolute;
-  right: 10px;
-  bottom: 10px;
+  right: 12px;
+  bottom: 44px;
 }
