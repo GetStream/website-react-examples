@@ -8,6 +8,7 @@ import {
   Window,
 } from 'stream-chat-react';
 
+import KevinAvatar from './assets/kevin-avatar.png';
 import { EmptyStateIndicator } from './components/CustomerEmptyStateIndicator/EmptyStateIndicator';
 import { CustomerChannelHeader } from './components/CustomerChannelHeader/CustomerChannelHeader';
 import { CustomerMessageInput } from './components/MessageInput/CustomerMessageInput';
@@ -24,7 +25,7 @@ export const CustomerApp = ({ customerChannelId }) => {
     const getCustomerChannel = async () => {
       const newChannel = await customerClient.channel('commerce', customerChannelId, {
         name: 'Kevin Rosen',
-        image: require('./assets/kevin-avatar.png'), // eslint-disable-line
+        image: KevinAvatar,
         issue: 'Company Inquiry',
         subtitle: '#853 Company Inquiry',
       });

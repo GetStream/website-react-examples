@@ -20,7 +20,7 @@ const automatedResponses = [
   "Great. Can you describe what you're looking for?",
 ];
 
-export const AgentMessageInput = (props) => {
+export const AgentMessageInput = () => {
   const messageInput = useMessageInputContext();
 
   const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext();
@@ -63,7 +63,7 @@ export const AgentMessageInput = (props) => {
         }
       >
         <div className='agent-message-input__input'>
-          <UploadsPreview {...messageInput} />
+          <UploadsPreview />
           <div className='agent-message-input__input-wrapper'>
             <ChatAutoComplete rows={1} placeholder='Send a message' />
             <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
@@ -73,7 +73,7 @@ export const AgentMessageInput = (props) => {
           </div>
         </div>
       </ImageDropzone>
-      <EmojiPicker {...messageInput} />
+      <EmojiPicker />
     </div>
   );
 };

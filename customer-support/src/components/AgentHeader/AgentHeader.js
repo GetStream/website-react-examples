@@ -1,9 +1,9 @@
-/* eslint-disable global-require */
 import React from 'react';
 
 import './AgentHeader.css';
 
 import { BellIcon, DownIcon, HeadsetIcon, TalkingIcon } from '../../assets';
+import user1 from '../../assets/user1.png';
 
 export const AgentHeader = () => {
   return (
@@ -20,7 +20,7 @@ export const AgentHeader = () => {
         </div>
         <p className='agent-header__left__text'>Active</p>
         <BellIcon />
-        <img src={require('../../assets/user1.png')} alt='user-1' height='35' width='35' />
+        <img src={user1} alt='user-1' height='35' width='35' />
         <DownIcon />
       </div>
     </div>

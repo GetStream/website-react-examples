@@ -15,9 +15,8 @@ import { FileIcon, SmileyFace } from '../../assets';
 export const CustomerMessageInput = (props) => {
   const { open, setOpen } = props;
 
-  const messageInput = useMessageInputContext();
-
   const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext();
+  const messageInput = useMessageInputContext();
 
   useEffect(() => {
     if (open) {
@@ -35,10 +34,10 @@ export const CustomerMessageInput = (props) => {
 
   const handleSubmit = (event) => {
     if (messageInput.text.startsWith('/')) {
-      event.target.value = '';
+      event.target.value = ''; // eslint-disable-line
       return messageInput.handleChange(event);
     }
-    messageInput.handleSubmit(event);
+    return messageInput.handleSubmit(event);
   };
 
   return (
@@ -52,7 +51,7 @@ export const CustomerMessageInput = (props) => {
         }
       >
         <div className='support-message-input__input'>
-          <UploadsPreview {...messageInput} />
+          <UploadsPreview />
           <div className='support-message-input__input-wrapper'>
             <ChatAutoComplete
               handleSubmit={handleSubmit}
@@ -66,7 +65,7 @@ export const CustomerMessageInput = (props) => {
           </div>
         </div>
       </ImageDropzone>
-      <EmojiPicker {...messageInput} />
+      <EmojiPicker />
     </div>
   );
 };

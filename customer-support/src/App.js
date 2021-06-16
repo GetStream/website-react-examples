@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import { Chat } from 'stream-chat-react';
 import { StreamChat } from 'stream-chat';
@@ -9,6 +8,9 @@ import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
 import { AgentApp } from './AgentApp';
+import JenAvatar from './assets/jen-avatar.png';
+import KevinAvatar from './assets/kevin-avatar.png';
+import User1 from './assets/user1.png';
 import { AgentHeader } from './components/AgentHeader/AgentHeader';
 import { AgentLoading } from './components/AgentLoading/AgentLoading';
 import { useChecklist } from './ChecklistTasks';
@@ -35,7 +37,7 @@ customerClient.connectUser(
   {
     id: customerUserId,
     name: 'Kevin Rosen',
-    image: require('./assets/kevin-avatar.png'),
+    image: KevinAvatar,
     phone: '+1 (303) 555-1212',
     email: 'kevin@example.com',
   },
@@ -57,7 +59,7 @@ const App = () => {
         {
           id: previousUserId,
           name: 'Jen Alexander',
-          image: require('./assets/jen-avatar.png'),
+          image: JenAvatar,
           phone: '+1 (720) 555-1525',
           email: 'jen@example.com',
           role: 'moderator',
@@ -67,7 +69,7 @@ const App = () => {
       setInitialClient(client);
 
       const newChannel = await client.channel('commerce', agentChannelId, {
-        image: require('./assets/jen-avatar.png'),
+        image: JenAvatar,
         name: 'Jen Alexander',
         issue: 'Enterprise Inquiry',
         subtitle: '#572 Enterprise Inquiry',
@@ -105,7 +107,7 @@ const App = () => {
 
       const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
       await client.connectUser(
-        { id: agentUserId, name: 'Daniel Smith', image: require('./assets/user1.png') },
+        { id: agentUserId, name: 'Daniel Smith', image: User1 },
         agentUserToken,
       );
 

@@ -5,12 +5,12 @@
   "homepage": "/website-react-examples/customer-support",
   "dependencies": {
     "eslint-plugin-import": "^2.22.1",
-    "react": "^16.12.0",
-    "react-dom": "^16.12.0",
+    "react": "17.0.2",
+    "react-dom": "17.0.2",
     "react-file-utils": "1.1.0",
-    "react-scripts": "3.4.3",
+    "react-scripts": "4.0.3",
     "stream-chat": "3.11.0",
-    "stream-chat-react": "6.0.7",
+    "stream-chat-react": "6.1.1",
     "uuid": "^8.3.1"
   },
   "scripts": {
@@ -27,5 +27,8 @@
     "not dead",
     "not ie <= 11",
     "not op_mini all"
-  ]
+  ],
+  "devDependencies": {
+    "eslint-plugin-markdown": "^2.2.0"
+  }
 }
