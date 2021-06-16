@@ -10,7 +10,15 @@ import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
 import { GamingThread } from '../GamingThread/GamingThread';
 
 export const GamingChatInner = (props) => {
-  const { setPopUpText, setShowPopUp, setShowUpgrade, setTimestamp, timestamp } = props;
+  const {
+    setIsFullScreen,
+    setPopUpText,
+    setShowMembers,
+    setShowPopUp,
+    setShowUpgrade,
+    setTimestamp,
+    timestamp,
+  } = props;
 
   const { sendMessage } = useChannelActionContext();
 
@@ -41,7 +49,10 @@ export const GamingChatInner = (props) => {
   return (
     <>
       <Window>
-        <GamingChatHeader {...props} {...{ timestamp, setTimestamp }} />
+        <GamingChatHeader
+          {...props}
+          {...{ setIsFullScreen, setShowMembers, timestamp, setTimestamp }}
+        />
         <MessageList Message={(props) => <GamingMessage {...props} {...{ timestamp }} />} />
         <MessageInput
           focus

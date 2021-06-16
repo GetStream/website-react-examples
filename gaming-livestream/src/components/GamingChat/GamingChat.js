@@ -8,6 +8,7 @@ import './GamingChat.scss';
 import { useChecklist } from '../../ChecklistTasks';
 import { GamingChatInner } from './GamingChatInner';
 import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
+import { GamingThreadHeader } from '../GamingThread/GamingThreadHeader';
 
 import { getColor, getRandomUserRole, participants } from '../../assets/data';
 
@@ -22,6 +23,7 @@ const chatClient = StreamChat.getInstance(apiKey);
 export const GamingChat = (props) => {
   const {
     isFullScreen,
+    setIsFullScreen,
     setPopUpText,
     setShowPopUp,
     setShowMembers,
@@ -66,9 +68,17 @@ export const GamingChat = (props) => {
       {channel && (
         <div className='chat-container'>
           <Chat client={chatClient}>
-            <Channel channel={channel}>
+            <Channel channel={channel} ThreadHeader={GamingThreadHeader}>
               <GamingChatInner
-                {...{ setPopUpText, setShowPopUp, setShowUpgrade, timestamp, setTimestamp }}
+                {...{
+                  setIsFullScreen,
+                  setPopUpText,
+                  setShowMembers,
+                  setShowPopUp,
+                  setShowUpgrade,
+                  timestamp,
+                  setTimestamp,
+                }}
               />
             </Channel>
           </Chat>
