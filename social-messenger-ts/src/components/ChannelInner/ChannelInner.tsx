@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-
 import { Attachment, logChatPromiseExecution, UserResponse } from 'stream-chat';
-
 import {
   MessageList,
   MessageInput,
@@ -84,11 +82,13 @@ export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
     setGiphyState(false);
   };
 
+  const actions = ['delete', 'edit', 'flag', 'mute', 'react', 'reply'];
+
   return (
     <>
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-        <MessageList messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']} />
+        <MessageList messageActions={actions} />
         <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
       <Thread />

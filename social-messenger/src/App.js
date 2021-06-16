@@ -1,4 +1,4 @@
-import React, { createContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelList } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
@@ -48,7 +48,7 @@ if (skipNameImageSet) {
 const chatClient = StreamChat.getInstance(apiKey);
 chatClient.connectUser(userToConnect, userToken);
 
-export const GiphyContext = createContext({});
+export const GiphyContext = React.createContext({});
 
 const App = () => {
   const [giphyState, setGiphyState] = useState(false);
@@ -101,6 +101,8 @@ const App = () => {
 
   const toggleMobile = () => setMobileNav(!isMobileNavVisible);
 
+  const giphyContextValue = { giphyState, setGiphyState };
+
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
       <div id='mobile-channel-list' onClick={toggleMobile}>
@@ -116,9 +118,9 @@ const App = () => {
       </div>
       <div>
         <Channel
+          Input={MessagingInput}
           maxNumberOfFiles={10}
           Message={CustomMessage}
-          Input={MessagingInput}
           multipleUploads={true}
           ThreadHeader={MessagingThreadHeader}
           TypingIndicator={() => null}
@@ -126,7 +128,7 @@ const App = () => {
           {isCreating && (
             <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
           )}
-          <GiphyContext.Provider value={{ giphyState, setGiphyState }}>
+          <GiphyContext.Provider value={giphyContextValue}>
             <ChannelInner theme={theme} toggleMobile={toggleMobile} />
           </GiphyContext.Provider>
         </Channel>

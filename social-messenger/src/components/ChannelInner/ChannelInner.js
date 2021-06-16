@@ -1,7 +1,5 @@
 import React, { useContext } from 'react';
-
 import { logChatPromiseExecution } from 'stream-chat';
-
 import {
   MessageList,
   MessageInput,
@@ -56,11 +54,13 @@ export const ChannelInner = (props) => {
     setGiphyState(false);
   };
 
+  const actions = ['delete', 'edit', 'flag', 'mute', 'react', 'reply'];
+
   return (
     <>
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-        <MessageList messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']} />
+        <MessageList messageActions={actions} />
         <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
       <Thread />

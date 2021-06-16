@@ -11,7 +11,7 @@
     "react-file-utils": "1.1.0",
     "react-scripts": "3.3.0",
     "stream-chat": "3.11.0",
-    "stream-chat-react": "6.0.7"
+    "stream-chat-react": "6.1.1"
   },
   "scripts": {
     "start": "react-scripts start",

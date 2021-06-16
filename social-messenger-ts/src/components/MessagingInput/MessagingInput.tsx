@@ -76,7 +76,7 @@ const MessagingInput: React.FC<MessageInputProps> = () => {
 
       messageInput.handleChange(event);
     },
-    [giphyState, messageInput], // eslint-disable-line
+    [giphyState, messageInput.numberOfUploads, messageInput.text], // eslint-disable-line
   );
 
   return (

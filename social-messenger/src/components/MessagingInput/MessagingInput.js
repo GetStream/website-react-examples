@@ -49,7 +49,7 @@ const MessagingInput = () => {
 
       messageInput.handleChange(e);
     },
-    [giphyState, messageInput], // eslint-disable-line
+    [giphyState, messageInput.numberOfUploads, messageInput.text], // eslint-disable-line
   );
 
   return (
