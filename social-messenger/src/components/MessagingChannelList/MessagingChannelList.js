@@ -1,15 +1,15 @@
-import React, { useContext, useEffect } from 'react';
-import { Avatar, ChatContext } from 'stream-chat-react';
+import React, { useEffect } from 'react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
 import { SkeletonLoader } from './SkeletonLoader';
 
 import { CreateChannelIcon } from '../../assets';
+import streamLogo from '../../assets/stream.png';
 
 const MessagingChannelList = ({ children, error = false, loading, onCreateChannel }) => {
-  const { client, setActiveChannel } = useContext(ChatContext);
-  const { id, image = require('../../assets/stream.png'), name = 'Example User' } =
-    client.user || {};
+  const { client, setActiveChannel } = useChatContext();
+  const { id, image = streamLogo, name = 'Example User' } = client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (client) => {

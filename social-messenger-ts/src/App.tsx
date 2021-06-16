@@ -1,6 +1,6 @@
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { ChannelSort, LiteralStringForUnion, StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelList, MessageList, MessageInput, Window } from 'stream-chat-react';
+import { Chat, Channel, ChannelList } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -9,14 +9,14 @@ import './App.css';
 import {
   CreateChannel,
   CustomMessage,
-  MessagingChannelHeader,
   MessagingChannelList,
   MessagingChannelPreview,
   MessagingInput,
-  MessagingThread,
+  MessagingThreadHeader,
 } from './components';
 
 import { getRandomImage } from './assets';
+import { ChannelInner } from './components/ChannelInner/ChannelInner';
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -71,7 +71,12 @@ const chatClient = StreamChat.getInstance<
 
 chatClient.connectUser(userToConnect, userToken);
 
+export const GiphyContext = React.createContext(
+  {} as { giphyState: boolean; setGiphyState: React.Dispatch<React.SetStateAction<boolean>> },
+);
+
 const App = () => {
+  const [giphyState, setGiphyState] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
@@ -121,6 +126,8 @@ const App = () => {
 
   const toggleMobile = () => setMobileNav(!isMobileNavVisible);
 
+  const giphyContextValue = { giphyState, setGiphyState };
+
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
       <div id='mobile-channel-list' onClick={toggleMobile}>
@@ -135,20 +142,20 @@ const App = () => {
         />
       </div>
       <div>
-        <Channel maxNumberOfFiles={10} multipleUploads={true}>
+        <Channel
+          Input={MessagingInput}
+          maxNumberOfFiles={10}
+          Message={CustomMessage}
+          multipleUploads={true}
+          ThreadHeader={MessagingThreadHeader}
+          TypingIndicator={() => null}
+        >
           {isCreating && (
             <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
           )}
-          <Window>
-            <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-            <MessageList
-              messageActions={['delete', 'edit', 'flag', 'mute', 'react', 'reply']}
-              Message={CustomMessage}
-              TypingIndicator={() => null}
-            />
-            <MessageInput focus Input={MessagingInput} />
-          </Window>
-          <MessagingThread />
+          <GiphyContext.Provider value={giphyContextValue}>
+            <ChannelInner theme={theme} toggleMobile={toggleMobile} />
+          </GiphyContext.Provider>
         </Channel>
       </div>
     </Chat>
