@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/website-react-examples/gaming-livestream/static/css/main.e9c58a3f.chunk.css",
-    "main.js": "/website-react-examples/gaming-livestream/static/js/main.829b0927.chunk.js",
-    "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.829b0927.chunk.js.map",
+    "main.js": "/website-react-examples/gaming-livestream/static/js/main.71e167aa.chunk.js",
+    "main.js.map": "/website-react-examples/gaming-livestream/static/js/main.71e167aa.chunk.js.map",
     "runtime-main.js": "/website-react-examples/gaming-livestream/static/js/runtime-main.118b904e.js",
     "runtime-main.js.map": "/website-react-examples/gaming-livestream/static/js/runtime-main.118b904e.js.map",
     "static/css/2.233c9491.chunk.css": "/website-react-examples/gaming-livestream/static/css/2.233c9491.chunk.css",
-    "static/js/2.c071b588.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.c071b588.chunk.js",
-    "static/js/2.c071b588.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.c071b588.chunk.js.map",
+    "static/js/2.3b911050.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.3b911050.chunk.js",
+    "static/js/2.3b911050.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.3b911050.chunk.js.map",
     "static/js/3.de5c87d2.chunk.js": "/website-react-examples/gaming-livestream/static/js/3.de5c87d2.chunk.js",
     "static/js/3.de5c87d2.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/3.de5c87d2.chunk.js.map",
     "static/js/4.b214dfad.chunk.js": "/website-react-examples/gaming-livestream/static/js/4.b214dfad.chunk.js",
@@ -15,7 +15,7 @@
     "index.html": "/website-react-examples/gaming-livestream/index.html",
     "static/css/2.233c9491.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/2.233c9491.chunk.css.map",
     "static/css/main.e9c58a3f.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/main.e9c58a3f.chunk.css.map",
-    "static/js/2.c071b588.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.c071b588.chunk.js.LICENSE.txt",
+    "static/js/2.3b911050.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.3b911050.chunk.js.LICENSE.txt",
     "static/media/GamingFooter.scss": "/website-react-examples/gaming-livestream/static/media/Avatar.258a9df1.png",
     "static/media/index.css": "/website-react-examples/gaming-livestream/static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/App.scss": "/website-react-examples/gaming-livestream/static/media/arrow.28fc5ae8.svg",
@@ -27,8 +27,8 @@
   "entrypoints": [
     "static/js/runtime-main.118b904e.js",
     "static/css/2.233c9491.chunk.css",
-    "static/js/2.c071b588.chunk.js",
+    "static/js/2.3b911050.chunk.js",
     "static/css/main.e9c58a3f.chunk.css",
-    "static/js/main.829b0927.chunk.js"
+    "static/js/main.71e167aa.chunk.js"
   ]
 }
