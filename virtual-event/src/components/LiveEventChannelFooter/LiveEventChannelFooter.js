@@ -14,6 +14,8 @@ export const LiveEventChannelFooter = () => {
   const [sloMoDelay, setSloMoDelay] = useState('0');
   const [toggleSwitchPosition, setToggleSwitchPosition] = useState(false);
 
+  const toggleModal = () => setShowModal((value) => !value);
+
   return (
     <div className='live-event-footer__container'>
       <div className='live-event-footer__top'>
@@ -43,7 +45,7 @@ export const LiveEventChannelFooter = () => {
             toggleSwitchPosition={toggleSwitchPosition}
           />
         )}
-        <div style={{ cursor: 'pointer' }} onClick={() => setShowModal(!showModal)}>
+        <div style={{ cursor: 'pointer' }} onClick={toggleModal}>
           <MeatballMenu />
         </div>
       </div>
