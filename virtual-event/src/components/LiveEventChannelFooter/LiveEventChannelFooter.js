@@ -14,7 +14,10 @@ export const LiveEventChannelFooter = () => {
   const [sloMoDelay, setSloMoDelay] = useState('0');
   const [toggleSwitchPosition, setToggleSwitchPosition] = useState(false);
 
-  const toggleModal = () => setShowModal((value) => !value);
+  const toggleModal = (event) => {
+    event.stopPropagation();
+    setShowModal((value) => !value);
+  };
 
   return (
     <div className='live-event-footer__container'>

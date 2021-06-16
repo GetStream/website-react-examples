@@ -1,13 +1,16 @@
-import React, { useContext } from 'react';
-import { ChatContext } from 'stream-chat-react';
+import React from 'react';
+import { useChatContext } from 'stream-chat-react';
 
 import { LinkedInLogo } from '../../assets/LinkedInLogo';
 import { TwitterLogo } from '../../assets/TwitterLogo';
+import BrianGreen from '../../assets/BrianGreene.png';
+import NeilDT from '../../assets/NDT.png';
+import BillNye from '../../assets/BillNye.png';
 
 import './LiveEventPanelists.css';
 
 export const LiveEventPanelists = () => {
-  const { theme } = useContext(ChatContext);
+  const { theme } = useChatContext();
 
   return (
     <div
@@ -38,11 +41,7 @@ export const LiveEventPanelists = () => {
         <div className='panelists-bottom__panelists'>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img
-                alt=''
-                style={{ height: '42px', width: '42px' }}
-                src={require('../../assets/BrianGreene.png')}
-              ></img>
+              <img alt='' style={{ height: '42px', width: '42px' }} src={BrianGreen}></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Brian</div>
                 <div className='panelists-name'>Green</div>
@@ -55,11 +54,7 @@ export const LiveEventPanelists = () => {
           </div>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img
-                alt=''
-                style={{ height: '42px', width: '42px' }}
-                src={require('../../assets/NDT.png')}
-              ></img>
+              <img alt='' style={{ height: '42px', width: '42px' }} src={NeilDT}></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Neil deGrasse</div>
                 <div className='panelists-name'>Tyson</div>
@@ -72,11 +67,7 @@ export const LiveEventPanelists = () => {
           </div>
           <div className='panelists-bottom__panelist'>
             <div className='panelists-bottom__panelist-left'>
-              <img
-                alt=''
-                style={{ height: '42px', width: '42px' }}
-                src={require('../../assets/BillNye.png')}
-              ></img>
+              <img alt='' style={{ height: '42px', width: '42px' }} src={BillNye}></img>
               <div className='panelists-names'>
                 <div className='panelists-name'>Bill</div>
                 <div className='panelists-name'>Nye</div>

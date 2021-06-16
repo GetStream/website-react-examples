@@ -1,4 +1,3 @@
-/* eslint-disable global-require */
 import React, { useEffect, useState } from 'react';
 import { StreamChat } from 'stream-chat';
 import { Chat, Channel, Window, Thread, Streami18n, enTranslations } from 'stream-chat-react';

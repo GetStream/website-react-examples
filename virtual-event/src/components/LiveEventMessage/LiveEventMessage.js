@@ -12,6 +12,7 @@ import { LiveEventReactions } from '../LiveEventReactions/LiveEventReactions';
 import { OnlineIndicator } from '../../assets/OnlineIndicator';
 import { PinIcon } from '../../assets/PinIcon';
 import { PinIconDark } from '../../assets/PinIconDark';
+import AvatarRobertImg from '../../assets/AvatarRobertImg.png';
 
 import './LiveEventMessage.css';
 
@@ -29,9 +30,7 @@ export const LiveEventMessage = (props) => {
 
   const MyUserAvatar = (props) => {
     if (isMyMessage()) {
-      return (
-        <Avatar {...props} image={require('../../assets/AvatarRobertImg.png')} name={'Robert'} />
-      );
+      return <Avatar {...props} image={AvatarRobertImg} name={'Robert'} />;
     }
     return <Avatar {...props} />;
   };

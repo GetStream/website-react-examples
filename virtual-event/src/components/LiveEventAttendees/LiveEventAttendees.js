@@ -3,6 +3,20 @@ import { ChatContext } from 'stream-chat-react';
 
 import './LiveEventAttendees.css';
 
+import Robert from '../../assets/AttendeePics/Robert.png';
+import Amanda from '../../assets/AttendeePics/Amanda.png';
+import Casey from '../../assets/AttendeePics/Casey.png';
+import Jane from '../../assets/AttendeePics/Jane.png';
+import Ted from '../../assets/AttendeePics/Ted.png';
+import Kelly from '../../assets/AttendeePics/Kelly.png';
+import Samantha from '../../assets/AttendeePics/Samantha.png';
+import Luke from '../../assets/AttendeePics/Luke.png';
+import Tracy from '../../assets/AttendeePics/Tracy.png';
+import Alex from '../../assets/AttendeePics/Alex.png';
+import Mike from '../../assets/AttendeePics/Mike.png';
+import Fredrick from '../../assets/AttendeePics/Fredrick.png';
+import Erica from '../../assets/AttendeePics/Erica.png';
+
 export const LiveEventAttendees = () => {
   const { theme } = useContext(ChatContext);
 
@@ -17,19 +31,11 @@ export const LiveEventAttendees = () => {
       <div className='live-event-attendees__title'>Moderators</div>
       <div className='live-event-attendees__moderators'>
         <div className='live-event-attendees__moderator'>
-          <img
-            alt=''
-            style={{ height: '42px', width: '42px' }}
-            src={require('../../assets/AttendeePics/Robert.png')}
-          ></img>
+          <img alt='' style={{ height: '42px', width: '42px' }} src={Robert}></img>
           <div className='live-event-attendees__moderator-name'>Robert Davidson</div>
         </div>
         <div className='live-event-attendees__moderator'>
-          <img
-            alt=''
-            style={{ height: '42px', width: '42px' }}
-            src={require('../../assets/AttendeePics/Amanda.png')}
-          ></img>
+          <img alt='' style={{ height: '42px', width: '42px' }} src={Amanda}></img>
           <div className='live-event-attendees__moderator-name'>Amanda Stewart</div>
         </div>
       </div>
@@ -39,7 +45,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Casey.png')}
+            src={Casey}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Casey</div>
         </div>
@@ -50,7 +56,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Jane.png')}
+            src={Jane}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Jane</div>
         </div>
@@ -61,7 +67,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Ted.png')}
+            src={Ted}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Ted</div>
         </div>
@@ -72,7 +78,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Kelly.png')}
+            src={Kelly}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Kelly</div>
         </div>
@@ -83,7 +89,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Samantha.png')}
+            src={Samantha}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Samantha</div>
         </div>
@@ -94,7 +100,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Luke.png')}
+            src={Luke}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Luke</div>
         </div>
@@ -105,7 +111,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Tracy.png')}
+            src={Tracy}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Tracy</div>
         </div>
@@ -116,7 +122,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Alex.png')}
+            src={Alex}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Alex</div>
         </div>
@@ -127,7 +133,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Mike.png')}
+            src={Mike}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Mike</div>
         </div>
@@ -138,9 +144,9 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Fredrick.png')}
+            src={Fredrick}
           ></img>
-          <div className='live-event-attendees__audience-member__left-name'>Mike</div>
+          <div className='live-event-attendees__audience-member__left-name'>Fredrick</div>
         </div>
         <div className='live-event-attendees__audience-member__right'>Active 7h ago</div>
       </div>
@@ -149,7 +155,7 @@ export const LiveEventAttendees = () => {
           <img
             alt=''
             style={{ height: '30px', width: '30px', marginRight: '10px' }}
-            src={require('../../assets/AttendeePics/Erica.png')}
+            src={Erica}
           ></img>
           <div className='live-event-attendees__audience-member__left-name'>Erica</div>
         </div>

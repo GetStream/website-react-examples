@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { NimbleEmoji } from 'emoji-mart';
-import { useChannelStateContext } from 'stream-chat-react';
+import { useChannelStateContext, useComponentContext } from 'stream-chat-react';
 
 import './LiveEventReactions.css';
 
@@ -11,6 +10,7 @@ export const LiveEventReactions = ({
   handleReaction,
 }) => {
   const { emojiConfig } = useChannelStateContext();
+  const { Emoji } = useComponentContext();
 
   const { defaultMinimalEmojis, emojiSetDef, emojiData } = emojiConfig || {};
 
@@ -62,15 +62,7 @@ export const LiveEventReactions = ({
             onClick={() => handleReaction && handleReaction(reactionType)}
           >
             <span onMouseEnter={() => setTooltipReactionType(reactionType)}>
-              <NimbleEmoji
-                // emoji-mart type defs don't support spriteSheet use case
-                // (but implementation does)
-                // @ts-ignore
-                emoji={emojiDefinition}
-                {...emojiSetDef}
-                size={16}
-                data={emojiData}
-              />
+              <Emoji emoji={emojiDefinition} {...emojiSetDef} size={16} data={emojiData} />
               &nbsp;
             </span>
             {reactions?.length !== 0 && (

@@ -1,4 +1,5 @@
 import React, { useEffect, useRef } from 'react';
+
 import './SloMoModal.css';
 import { SloMoToggle } from './SloMoToggle';
 
@@ -11,7 +12,6 @@ export const SloMoModal = ({
 }) => {
   const wrapperRef = useRef(null);
 
-  // eslint-disable-next-line consistent-return
   const handleChange = (event) => {
     if (!toggleSwitchPosition) {
       return null;
@@ -24,26 +24,22 @@ export const SloMoModal = ({
       setSloMoDelay(event.target.value);
     }
   };
+
   const useOutsideAlerter = (ref) => {
     useEffect(() => {
-      /**
-       * Alert if clicked on outside of element
-       */
       function handleClickOutside(event) {
         if (ref.current && !ref.current.contains(event.target)) {
           setShowModal(false);
         }
       }
 
-      // Bind the event listener
       document.addEventListener('click', handleClickOutside);
-      return () => {
-        // Unbind the event listener on clean up
-        document.removeEventListener('click', handleClickOutside);
-      };
+      return () => document.removeEventListener('click', handleClickOutside);
     }, [ref]);
   };
+
   useOutsideAlerter(wrapperRef);
+
   return (
     <div ref={wrapperRef} className='slo-mo-modal__container'>
       <div className='slo-mo-modal__container__top '>
