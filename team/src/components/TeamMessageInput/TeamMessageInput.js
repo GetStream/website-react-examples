@@ -31,7 +31,10 @@ export const TeamMessageInput = (props) => {
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
   const {
+    acceptedFiles,
     channel,
+    maxNumberOfFiles,
+    multipleUploads,
     thread,
   } = useChannelStateContext();
   const { client } = useChatContext();
@@ -120,7 +123,14 @@ export const TeamMessageInput = (props) => {
 
   return (
     <div className={`team-message-input__wrapper ${(!!thread || pinsOpen) && 'thread-open'}`}>
-      <ImageDropzone>
+      <ImageDropzone
+        accept={acceptedFiles}
+        handleFiles={messageInput.uploadNewFiles}
+        multiple={multipleUploads}
+        disabled={
+          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
+          giphyState
+      }>
         <div className='team-message-input__input'>
           <div className='team-message-input__top'>
             {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
