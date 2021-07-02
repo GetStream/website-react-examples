@@ -1,11 +1,9 @@
 import { useCallback, useContext, useState } from 'react';
 import { ImageDropzone } from 'react-file-utils';
-import { Attachment, UserResponse } from 'stream-chat';
 import {
   ChatAutoComplete,
   EmojiPicker,
   MessageInputProps,
-  StreamMessage,
   UploadsPreview,
   useChannelStateContext,
   useChatContext,
@@ -38,22 +36,12 @@ import type {
   TeamUserType,
 } from '../../App';
 
-export type MessageToOverride = {
-  attachments: Attachment[];
-  mentioned_users: UserResponse[];
-  text: string;
-  parent?: StreamMessage;
-};
-
 export type Props = MessageInputProps & {
   pinsOpen?: boolean;
-
 };
 
 export const TeamMessageInput: React.FC<Props> = (props) => {
-  const {
-    pinsOpen,
-  } = props;
+  const { pinsOpen } = props;
 
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
@@ -168,7 +156,15 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
 
       messageInput.handleChange(event);
     },
-    [boldState, codeState, giphyState, italicState, messageInput, setGiphyState, strikeThroughState],
+    [
+      boldState,
+      codeState,
+      giphyState,
+      italicState,
+      messageInput,
+      setGiphyState,
+      strikeThroughState,
+    ],
   );
 
   const GiphyIcon = () => (
@@ -187,15 +183,13 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
         disabled={
           (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
           giphyState
-        }>
+        }
+      >
         <div className='team-message-input__input'>
           <div className='team-message-input__top'>
             {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
             <UploadsPreview />
-            <ChatAutoComplete
-              onChange={onChange}
-              placeholder={`Message ${getPlaceholder()}`}
-            />
+            <ChatAutoComplete onChange={onChange} placeholder={`Message ${getPlaceholder()}`} />
             <div
               className='team-message-input__button'
               role='button'

@@ -56,3 +56,11 @@
   cursor: pointer;
   margin-right: 10px;
 }
+
+.str-chat__list--thread
+  .str-chat__message-simple__actions__action--options
+  .str-chat__message-actions-box {
+  left: initial;
+  right: 100%;
+  border-radius: var(--border-radius-md);
+}

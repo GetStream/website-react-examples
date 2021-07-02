@@ -9,12 +9,12 @@ import {
   Thread,
   useChannelActionContext,
   Window,
+  MessageToSend,
 } from 'stream-chat-react';
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
-import { MessageToOverride } from '../TeamMessageInput/TeamMessageInput';
 
 import type {
   TeamAttachmentType,
@@ -46,7 +46,7 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
 
   const giphyStateObj = {
     giphyState: giphyState,
-    setGiphyState
+    setGiphyState,
   };
 
   const { sendMessage } = useChannelActionContext<
@@ -70,7 +70,7 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
     messaging: messagingPermissions,
   };
 
-  const overrideSubmitHandler = (message: MessageToOverride) => {
+  const overrideSubmitHandler = (message: MessageToSend) => {
     let updatedMessage = {
       attachments: message.attachments,
       mentioned_users: message.mentioned_users,
@@ -96,17 +96,10 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
       <div style={{ display: 'flex', width: '100%' }}>
         <Window>
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
-          <MessageList
-            disableQuotedMessages={true}
-            pinPermissions={pinnedPermissions}
-          />
-          <MessageInput
-            overrideSubmitHandler={overrideSubmitHandler}
-          />
+          <MessageList disableQuotedMessages={true} pinPermissions={pinnedPermissions} />
+          <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread
-          additionalMessageInputProps={{ Input: ThreadMessageInput }}
-        />
+        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
         {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
       </div>
     </GiphyContext.Provider>

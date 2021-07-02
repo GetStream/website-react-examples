@@ -4,9 +4,9 @@ import './TeamChannelList.css';
 
 import { AddChannel } from '../../assets';
 
-import type { ChannelListTeamProps } from 'stream-chat-react';
+import type { ChannelListMessengerProps } from 'stream-chat-react';
 
-export type TeamChannelListProps = ChannelListTeamProps & {
+export type TeamChannelListProps = ChannelListMessengerProps & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
