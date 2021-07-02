@@ -1,33 +1,32 @@
 {
   "files": {
     "main.css": "/website-react-examples/customer-support/static/css/main.38ca280d.chunk.css",
-    "main.js": "/website-react-examples/customer-support/static/js/main.ff080097.chunk.js",
-    "main.js.map": "/website-react-examples/customer-support/static/js/main.ff080097.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/customer-support/static/js/runtime-main.bb7b274f.js",
-    "runtime-main.js.map": "/website-react-examples/customer-support/static/js/runtime-main.bb7b274f.js.map",
-    "static/css/2.610e4154.chunk.css": "/website-react-examples/customer-support/static/css/2.610e4154.chunk.css",
-    "static/js/2.e1155f9d.chunk.js": "/website-react-examples/customer-support/static/js/2.e1155f9d.chunk.js",
-    "static/js/2.e1155f9d.chunk.js.map": "/website-react-examples/customer-support/static/js/2.e1155f9d.chunk.js.map",
-    "static/js/3.5f132486.chunk.js": "/website-react-examples/customer-support/static/js/3.5f132486.chunk.js",
-    "static/js/3.5f132486.chunk.js.map": "/website-react-examples/customer-support/static/js/3.5f132486.chunk.js.map",
+    "main.js": "/website-react-examples/customer-support/static/js/main.fe094a69.chunk.js",
+    "main.js.map": "/website-react-examples/customer-support/static/js/main.fe094a69.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/customer-support/static/js/runtime-main.42616663.js",
+    "runtime-main.js.map": "/website-react-examples/customer-support/static/js/runtime-main.42616663.js.map",
+    "static/css/2.0c5731fc.chunk.css": "/website-react-examples/customer-support/static/css/2.0c5731fc.chunk.css",
+    "static/js/2.a5f9ec86.chunk.js": "/website-react-examples/customer-support/static/js/2.a5f9ec86.chunk.js",
+    "static/js/2.a5f9ec86.chunk.js.map": "/website-react-examples/customer-support/static/js/2.a5f9ec86.chunk.js.map",
+    "static/js/3.c21d7b19.chunk.js": "/website-react-examples/customer-support/static/js/3.c21d7b19.chunk.js",
+    "static/js/3.c21d7b19.chunk.js.map": "/website-react-examples/customer-support/static/js/3.c21d7b19.chunk.js.map",
     "index.html": "/website-react-examples/customer-support/index.html",
-    "static/css/2.610e4154.chunk.css.map": "/website-react-examples/customer-support/static/css/2.610e4154.chunk.css.map",
+    "static/css/2.0c5731fc.chunk.css.map": "/website-react-examples/customer-support/static/css/2.0c5731fc.chunk.css.map",
     "static/css/main.38ca280d.chunk.css.map": "/website-react-examples/customer-support/static/css/main.38ca280d.chunk.css.map",
-    "static/js/2.e1155f9d.chunk.js.LICENSE.txt": "/website-react-examples/customer-support/static/js/2.e1155f9d.chunk.js.LICENSE.txt",
+    "static/js/2.a5f9ec86.chunk.js.LICENSE.txt": "/website-react-examples/customer-support/static/js/2.a5f9ec86.chunk.js.LICENSE.txt",
     "static/media/index.css": "/website-react-examples/customer-support/static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/jen-avatar.dcb956a8.png": "/website-react-examples/customer-support/static/media/jen-avatar.dcb956a8.png",
     "static/media/kevin-avatar.aa678195.png": "/website-react-examples/customer-support/static/media/kevin-avatar.aa678195.png",
     "static/media/str-chat__connection-error.90385cff.svg": "/website-react-examples/customer-support/static/media/str-chat__connection-error.90385cff.svg",
-    "static/media/str-chat__icon-chevron-down.svg": "/website-react-examples/customer-support/static/media/str-chat__icon-chevron-down.e0ed94c6.svg",
     "static/media/user1.27b501e6.png": "/website-react-examples/customer-support/static/media/user1.27b501e6.png",
     "static/media/user2.b6146e99.png": "/website-react-examples/customer-support/static/media/user2.b6146e99.png",
     "static/media/user3.9b46a243.png": "/website-react-examples/customer-support/static/media/user3.9b46a243.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.bb7b274f.js",
-    "static/css/2.610e4154.chunk.css",
-    "static/js/2.e1155f9d.chunk.js",
+    "static/js/runtime-main.42616663.js",
+    "static/css/2.0c5731fc.chunk.css",
+    "static/js/2.a5f9ec86.chunk.js",
     "static/css/main.38ca280d.chunk.css",
-    "static/js/main.ff080097.chunk.js"
+    "static/js/main.fe094a69.chunk.js"
   ]
 }
