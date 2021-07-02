@@ -28,6 +28,7 @@ export const LiveEventChannelFooter = () => {
         <div className='live-event-footer__input'>
           <MessageInput
             focus
+            grow
             Input={(props) => <LiveEventMessageInput {...props} sloMoDelay={sloMoDelay} />}
           />
         </div>

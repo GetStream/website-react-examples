@@ -15,7 +15,6 @@
   line-height: 150%;
   position: relative;
   border: none;
-  width: 238px;
   display: flex;
   align-items: center;
   background: #ffffff;
@@ -77,14 +76,19 @@
   border: none;
   border-radius: 8px;
 }
+
 .str-chat__textarea textarea {
   border: none;
   outline: none;
   box-shadow: none;
   background: #ffffff;
-  max-width: 180px;
   border-radius: 8px;
 }
+
+.str-chat__thread .str-chat__textarea textarea {
+  min-width: 260px;
+}
+
 .str-chat__textarea textarea:focus {
   border: none;
   outline: none;
@@ -105,6 +109,7 @@
 .str-chat__textarea textarea::placeholder {
   color: #19a0ff;
 }
+
 .live-event-message-input__wrapper .str-chat__input--emojipicker {
   z-index: 9;
 }
@@ -116,9 +121,11 @@
 .str-chat.dark .live-event-message-input__wrapper {
   background-color: #1a1c1e;
 }
+
 .str-chat.dark .str-chat__textarea textarea {
   background-color: #1a1c1e;
 }
+
 .str-chat.dark .str-chat__textarea {
   background-color: #1a1c1e;
 }

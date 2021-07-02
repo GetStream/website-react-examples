@@ -6,9 +6,9 @@ import 'stream-chat-react/dist/css/index.css';
 import './App.css';
 
 import { useChecklist } from './ChecklistTasks';
-import { LiveEventChannelFooter } from './components/LiveEventChannelFooter/LiveEventChannelFooter';
 import { LiveEventChannelSwitch } from './components/LiveEventChannelSwitch/LiveEventChannelSwitch';
 import { LiveEventMessage } from './components/LiveEventMessage/LiveEventMessage';
+import { LiveEventMessageInput } from './components/LiveEventChannelFooter/LiveEventMessageInput';
 import { LiveEventPanelists } from './components/LiveEventPanelists/LiveEventPanelists';
 
 import { LiveVideoIcon } from './assets/LiveVideoIcon';
@@ -104,8 +104,9 @@ const App = () => {
                   </Window>
                   <Thread
                     additionalMessageListProps={{ TypingIndicator: () => null }}
+                    additionalMessageInputProps={{ grow: true }}
                     Message={LiveEventMessage}
-                    MessageInput={LiveEventChannelFooter}
+                    Input={LiveEventMessageInput}
                   />
                 </Channel>
               )}
