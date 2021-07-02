@@ -1,16 +1,35 @@
 /* ACTIONS */
 
-.str-chat__message .str-chat__message-simple__actions__action--options .str-chat__message-actions-box--mine {
+.str-chat__message-actions-box {
+  border-radius: 16px;
+}
+
+.str-chat__list--thread
+  .str-chat__message-simple__actions__action--options
+  .str-chat__message-actions-box {
+  border-radius: 16px;
+}
+
+.str-chat__message
+  .str-chat__message-simple__actions__action--options
+  .str-chat__message-actions-box--mine {
   background: #f1f1f1;
   box-shadow: 0px 10px 12px rgba(0, 0, 0, 0.15), 0px 2px 4px rgba(0, 0, 0, 0.15);
   border-radius: 16px;
 }
 
-.str-chat.dark .str-chat__message .str-chat__message-simple__actions__action--options .str-chat__message-actions-box--mine {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%), rgba(0, 0, 0, 0.7);
+.str-chat.dark
+  .str-chat__message
+  .str-chat__message-simple__actions__action--options
+  .str-chat__message-actions-box--mine {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%),
+    rgba(0, 0, 0, 0.7);
+  border-radius: 16px;
 }
 
-.str-chat.dark .str-chat__message-simple__actions__action.str-chat__message-simple__actions__action--reactions g {
+.str-chat.dark
+  .str-chat__message-simple__actions__action.str-chat__message-simple__actions__action--reactions
+  g {
   fill: #ffffff;
 }
 
@@ -130,7 +149,8 @@
 }
 
 .str-chat.dark .str-chat__reaction-selector {
-  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%), rgba(0, 0, 0, 0.7);
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.0001) 0%, rgba(0, 0, 0, 0.5) 100%),
+    rgba(0, 0, 0, 0.7);
 }
 
 .str-chat__reaction-selector li {
@@ -151,7 +171,8 @@ span.react-images__footer__count.react-images__footer__count--isModal {
   display: none;
 }
 
-.str-chat__message.str-chat__message--me.str-chat__message-simple.str-chat__message-simple--me.str-chat__message--reply .str-chat__avatar {
+.str-chat__message.str-chat__message--me.str-chat__message-simple.str-chat__message-simple--me.str-chat__message--reply
+  .str-chat__avatar {
   display: none;
 }
 
@@ -162,20 +183,17 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 @media screen and (max-width: 640px) {
   /* REACTIONS */
 
-  .str-chat__message-simple__actions__action--thread, .str-chat__message-simple__actions__action--reactions {
-    display: flex;
-  }
-
-  .str-chat__message-simple__actions__action--options {
-    display: flex;
-  }
-
-  .str-chat__message--me .str-chat__message-inner > .str-chat__message-simple__actions, .str-chat__message-simple--me .str-chat__message-inner > .str-chat__message-simple__actions {
-    position: unset;
+  .str-chat__message--me .str-chat__message-inner > .str-chat__message-simple__actions,
+  .str-chat__message-simple--me .str-chat__message-inner > .str-chat__message-simple__actions {
     margin-bottom: 6px;
   }
 
-  .str-chat__message-inner > .str-chat__message-simple__actions, .str-chat__message-simple-inner > .str-chat__message-simple__actions {
+  .str-chat__message-inner > .str-chat__message-simple__actions,
+  .str-chat__message-simple-inner > .str-chat__message-simple__actions {
+    margin-bottom: 6px;
+  }
+
+  .str-chat__message--has-attachment .str-chat__message-simple__actions {
     position: unset;
     margin-bottom: 6px;
   }
