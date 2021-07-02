@@ -10447,6 +10447,13 @@ react-file-utils@1.1.0:
   dependencies:
     react-dropzone "11.2.0"
 
+react-file-utils@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.1.tgz#620f06154f1ca61c4c89702acb61da88445739b3"
+  integrity sha512-ioJcEZQOUBbpFC61aUPp+7zByJsrFZ8JwFu4E4zIssn+NeSUjnSkUxzoZMI438Pzp6nG10r5ZBgtnjnmu+WQVA==
+  dependencies:
+    react-dropzone "11.2.0"
+
 react-focus-lock@^2.3.1:
   version "2.5.0"
   resolved "https://registry.yarnpkg.com/react-focus-lock/-/react-focus-lock-2.5.0.tgz#12e3a3940e897c26e2c2a0408cd25ea3c99b3709"
@@ -11679,10 +11686,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.1.1.tgz#7f5466ce9103ea3ffed9babd04abd8bfedfc75f7"
-  integrity sha512-gdMuuzcUEUZ4wLI7L9emx4IV/ZmrwvIXxXM2P9iahqecIZJqAs0ZdxT5PID13ZRb4+yrzHz8MbBGiMZqoQbuog==
+stream-chat-react@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.3.0.tgz#1721636577e54636ce3dbad39955664715280b73"
+  integrity sha512-FEU0Y50e1wUOJtZwjlwdrvLyOArZ5AQP0bjr2v2ZjDjb6gOa/eVy6o6/UEXcEAoK2CGwuo/QO02wXy7iZ6z1aQ==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -11700,7 +11707,7 @@ stream-chat-react@6.1.1:
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
-    react-file-utils "1.1.0"
+    react-file-utils "1.1.1"
     react-images "^1.1.7"
     react-is "^17.0.1"
     react-markdown "^5.0.3"
@@ -12647,15 +12654,15 @@ utils-merge@1.0.1:
   resolved "https://registry.yarnpkg.com/utils-merge/-/utils-merge-1.0.1.tgz#9f95710f50a267947b2ccc124741c1028427e713"
   integrity sha1-n5VxD1CiZ5R7LMwSR0HBAoQn5xM=
 
+uuid@8.3.2, uuid@^8.3.0, uuid@^8.3.1:
+  version "8.3.2"
+  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
+  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
+
 uuid@^3.3.2, uuid@^3.4.0:
   version "3.4.0"
   resolved "https://registry.yarnpkg.com/uuid/-/uuid-3.4.0.tgz#b23e4358afa8a202fe7a100af1f5f883f02007ee"
   integrity sha512-HjSDRw6gZE5JMggctHBcjVak08+KEVhSIiDzFnT9S9aegmp85S/bReBVTb4QTFaRNptJ9kuYaNhnbNEOkbKb/A==
-
-uuid@^8.3.0, uuid@^8.3.1:
-  version "8.3.2"
-  resolved "https://registry.yarnpkg.com/uuid/-/uuid-8.3.2.tgz#80d5b5ced271bb9af6c445f21a1a04c606cefbe2"
-  integrity sha512-+NYs2QeMWy+GWFOEm9xnn6HCDp0l7QBD7ml8zLUmJ+93Q5NF0NocErnwkTkXVFNiX3/fpC6afS8Dhb/gz7R7eg==
 
 v8-compile-cache@^2.0.3:
   version "2.2.0"
