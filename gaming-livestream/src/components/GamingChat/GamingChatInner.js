@@ -56,6 +56,7 @@ export const GamingChatInner = (props) => {
         <MessageList Message={(props) => <GamingMessage {...props} {...{ timestamp }} />} />
         <MessageInput
           focus
+          grow
           Input={(props) => (
             <GamingMessageInput {...props} {...{ setPopUpText, setShowPopUp, setShowUpgrade }} />
           )}

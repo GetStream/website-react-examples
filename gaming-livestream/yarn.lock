@@ -10822,10 +10822,10 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-file-utils@1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.0.tgz#54913d558f98c6864d6c1f3b65e99b40f83b4a68"
-  integrity sha512-h9IWUk31gYqmmSUxM6Op3SoWEyiKVBX9alGN6uUOKNxe5gmc5fYPKrd9SwSwF5lX3M5Pr24SXqfZMgVdAxGQFg==
+react-file-utils@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.1.tgz#620f06154f1ca61c4c89702acb61da88445739b3"
+  integrity sha512-ioJcEZQOUBbpFC61aUPp+7zByJsrFZ8JwFu4E4zIssn+NeSUjnSkUxzoZMI438Pzp6nG10r5ZBgtnjnmu+WQVA==
   dependencies:
     react-dropzone "11.2.0"
 
@@ -12164,10 +12164,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.1.1.tgz#7f5466ce9103ea3ffed9babd04abd8bfedfc75f7"
-  integrity sha512-gdMuuzcUEUZ4wLI7L9emx4IV/ZmrwvIXxXM2P9iahqecIZJqAs0ZdxT5PID13ZRb4+yrzHz8MbBGiMZqoQbuog==
+stream-chat-react@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.3.0.tgz#1721636577e54636ce3dbad39955664715280b73"
+  integrity sha512-FEU0Y50e1wUOJtZwjlwdrvLyOArZ5AQP0bjr2v2ZjDjb6gOa/eVy6o6/UEXcEAoK2CGwuo/QO02wXy7iZ6z1aQ==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -12185,7 +12185,7 @@ stream-chat-react@6.1.1:
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
-    react-file-utils "1.1.0"
+    react-file-utils "1.1.1"
     react-images "^1.1.7"
     react-is "^17.0.1"
     react-markdown "^5.0.3"
