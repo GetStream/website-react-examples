@@ -13,7 +13,6 @@
 .str-chat__thread-header-details {
   display: flex;
   height: 62px !important;
-
   align-items: center;
 }
 
@@ -114,7 +113,6 @@
   display: flex;
   align-items: center;
   width: 100%;
-  height: 44px;
 }
 
 .thread-message-input__input:focus-within {
@@ -145,9 +143,8 @@
   border: none;
   outline: none;
   font-family: Helvetica Neue, sans-serif;
-  font-style: normal;
-  font-weight: normal;
   font-size: 15px;
+  line-height: 10px;
 }
 
 .thread-message-input__wrapper .str-chat__textarea textarea:focus {

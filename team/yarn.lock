@@ -8149,7 +8149,7 @@ lodash.clonedeep@^4.5.0:
   resolved "https://registry.yarnpkg.com/lodash.clonedeep/-/lodash.clonedeep-4.5.0.tgz#e23f3f9c4f8fbdde872529c1071857a086e5ccef"
   integrity sha1-4j8/nE+Pvd6HJSnBBxhXoIblzO8=
 
-lodash.debounce@^4.0.8:
+lodash.debounce@4.0.8, lodash.debounce@^4.0.8:
   version "4.0.8"
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha1-gteb/zCmfEAF/9XiUVMArZyk168=
@@ -10429,7 +10429,7 @@ react-clientside-effect@^1.2.2:
   dependencies:
     "@babel/runtime" "^7.0.0"
 
-react-color@^2.19.3:
+react-color@2.19.3:
   version "2.19.3"
   resolved "https://registry.yarnpkg.com/react-color/-/react-color-2.19.3.tgz#ec6c6b4568312a3c6a18420ab0472e146aa5683d"
   integrity sha512-LEeGE/ZzNLIsFWa1TMe8y5VYqr7bibneWmvJwm1pCn/eNmrabWDh659JSPn9BuaMpEfU83WTOJfnCcjDZwNQTA==
@@ -10472,7 +10472,7 @@ react-dev-utils@^11.0.3:
     strip-ansi "6.0.0"
     text-table "0.2.0"
 
-react-dom@^17.0.2:
+react-dom@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-17.0.2.tgz#ecffb6845e3ad8dbfcdc498f0d0a939736502c23"
   integrity sha512-s4h96KtLDUQlsENhMn1ar8t2bEa+q/YAtj8pPPdIjPDGBDIVNsrD9aXNWqspUe6AzKCIG0C1HZZLqLV7qpOBGA==
@@ -10500,10 +10500,10 @@ react-fast-compare@^3.0.1, react-fast-compare@^3.2.0:
   resolved "https://registry.yarnpkg.com/react-fast-compare/-/react-fast-compare-3.2.0.tgz#641a9da81b6a6320f270e89724fb45a0b39e43bb"
   integrity sha512-rtGImPZ0YyLrscKI9xTpV8psd6I8VAtjKCzQDlzyDvqJA8XOW78TXYQwNRNd8g8JZnDu8q9Fu/1v4HPAVwVdHA==
 
-react-file-utils@1.1.0, react-file-utils@^1.1.0:
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.0.tgz#54913d558f98c6864d6c1f3b65e99b40f83b4a68"
-  integrity sha512-h9IWUk31gYqmmSUxM6Op3SoWEyiKVBX9alGN6uUOKNxe5gmc5fYPKrd9SwSwF5lX3M5Pr24SXqfZMgVdAxGQFg==
+react-file-utils@1.1.1:
+  version "1.1.1"
+  resolved "https://registry.yarnpkg.com/react-file-utils/-/react-file-utils-1.1.1.tgz#620f06154f1ca61c4c89702acb61da88445739b3"
+  integrity sha512-ioJcEZQOUBbpFC61aUPp+7zByJsrFZ8JwFu4E4zIssn+NeSUjnSkUxzoZMI438Pzp6nG10r5ZBgtnjnmu+WQVA==
   dependencies:
     react-dropzone "11.2.0"
 
@@ -10760,7 +10760,7 @@ react-virtuoso@^1.5.8:
     react-app-polyfill "^1.0.6"
     resize-observer-polyfill "^1.5.1"
 
-react@^17.0.2:
+react@17.0.2:
   version "17.0.2"
   resolved "https://registry.yarnpkg.com/react/-/react-17.0.2.tgz#d0b5cc516d29eb3eee383f75b62864cfb6800037"
   integrity sha512-gnhPt75i/dq/z3/6q/0asP78D0u592D5L1pd7M8P+dck6Fu/jJeL6iVVK23fptSUZj8Vjf++7wXA8UNclGQcbA==
@@ -11751,10 +11751,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@6.1.1:
-  version "6.1.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.1.1.tgz#7f5466ce9103ea3ffed9babd04abd8bfedfc75f7"
-  integrity sha512-gdMuuzcUEUZ4wLI7L9emx4IV/ZmrwvIXxXM2P9iahqecIZJqAs0ZdxT5PID13ZRb4+yrzHz8MbBGiMZqoQbuog==
+stream-chat-react@6.3.0:
+  version "6.3.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.3.0.tgz#1721636577e54636ce3dbad39955664715280b73"
+  integrity sha512-FEU0Y50e1wUOJtZwjlwdrvLyOArZ5AQP0bjr2v2ZjDjb6gOa/eVy6o6/UEXcEAoK2CGwuo/QO02wXy7iZ6z1aQ==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
@@ -11772,7 +11772,7 @@ stream-chat-react@6.1.1:
     pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-fast-compare "^3.2.0"
-    react-file-utils "1.1.0"
+    react-file-utils "1.1.1"
     react-images "^1.1.7"
     react-is "^17.0.1"
     react-markdown "^5.0.3"
@@ -12006,7 +12006,7 @@ style-to-object@0.3.0:
   dependencies:
     inline-style-parser "0.1.1"
 
-styled-components@^5.2.1:
+styled-components@5.2.1:
   version "5.2.1"
   resolved "https://registry.yarnpkg.com/styled-components/-/styled-components-5.2.1.tgz#6ed7fad2dc233825f64c719ffbdedd84ad79101a"
   integrity sha512-sBdgLWrCFTKtmZm/9x7jkIabjFNVzCUeKfoQsM6R3saImkUnjx0QYdLwJHBjY9ifEcmjDamJDVfknWm1yxZPxQ==

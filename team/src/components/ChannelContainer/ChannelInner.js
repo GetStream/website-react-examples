@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { logChatPromiseExecution } from 'stream-chat';
 
-import { 
+import {
   defaultPinPermissions,
   MessageList,
   MessageInput,
   Thread,
   Window,
-  useChannelActionContext 
+  useChannelActionContext,
 } from 'stream-chat-react';
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
@@ -23,7 +23,7 @@ export const ChannelInner = (props) => {
 
   const giphyStateObj = {
     giphyState: giphyState,
-    setGiphyState
+    setGiphyState,
   };
 
   const { sendMessage } = useChannelActionContext();
@@ -65,17 +65,10 @@ export const ChannelInner = (props) => {
       <div style={{ display: 'flex', width: '100%' }}>
         <Window>
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
-          <MessageList
-            disableQuotedMessages
-            pinPermissions={pinnedPermissions}
-          />
-          <MessageInput
-            overrideSubmitHandler={overrideSubmitHandler}
-          />
+          <MessageList disableQuotedMessages pinPermissions={pinnedPermissions} />
+          <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread
-          additionalMessageInputProps={{ Input: ThreadMessageInput }}
-        />
+        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
         {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
       </div>
     </GiphyContext.Provider>
