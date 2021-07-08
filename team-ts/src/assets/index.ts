@@ -5,7 +5,7 @@ import Avatar4 from '../assets/userImages/photo-1519345182560-3f2917c472ef.jpeg'
 import Avatar5 from '../assets/userImages/photo-1506089676908-3592f7389d4d.jpeg';
 import Avatar6 from '../assets/userImages/photo-1507003211169-0a1dd7228f2d.jpeg';
 import Avatar7 from '../assets/userImages/photo-1517202383675-eb0a6e27775f.jpeg';
-import Avatar8 from '../assets/userImages/photo-1519345182560-3f2917c472ef.jpeg';
+import Avatar8 from '../assets/userImages/photo-1531251445707-1f000e1e87d0.jpeg';
 import Avatar9 from '../assets/userImages/photo-1541271696563-3be2f555fc4e.jpeg';
 import Avatar10 from '../assets/userImages/photo-1542345812-d98b5cd6cf98.jpeg';
 import Avatar11 from '../assets/userImages/photo-1546539782-6fc531453083.jpeg';
@@ -22,7 +22,6 @@ import Avatar21 from '../assets/userImages/photo-1502378735452-bc7d86632805.jpeg
 import Avatar22 from '../assets/userImages/photo-1546967191-fdfb13ed6b1e.jpeg';
 import Avatar23 from '../assets/userImages/photo-1502937406922-305bb2789e95.jpeg';
 import Avatar24 from '../assets/userImages/photo-1552058544-f2b08422138a.jpeg';
-import Avatar25 from '../assets/userImages/photo-1531251445707-1f000e1e87d0.jpeg';
 
 export { AddChannel } from './AddChannel';
 export { BoldIcon } from './BoldIcon';
@@ -43,7 +42,7 @@ export { SideBarLogo } from './SideBarLogo';
 export { SmileyFace } from './SmileyFace';
 export { StrikeThroughIcon } from './StrikeThroughIcon';
 
-const randomImages = [ 
+const randomImages = [
   Avatar1,
   Avatar2,
   Avatar3,
@@ -68,7 +67,6 @@ const randomImages = [
   Avatar22,
   Avatar23,
   Avatar24,
-  Avatar25,
 ];
 
 export const getRandomImage = () => {
