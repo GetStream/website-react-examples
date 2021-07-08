@@ -30,6 +30,14 @@ const CompanyHeader = () => (
   </div>
 );
 
+const customChannelTeamFilter = (channels) => {
+  return channels.filter((channel) => channel.type === 'team');
+};
+
+const customChannelMessagingFilter = (channels) => {
+  return channels.filter((channel) => channel.type === 'messaging');
+};
+
 export const ChannelListContainer = (props) => {
   const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
@@ -40,6 +48,7 @@ export const ChannelListContainer = (props) => {
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
+          channelRenderFilterFn={customChannelTeamFilter}
           filters={filters[0]}
           options={options}
           sort={sort}
@@ -59,8 +68,10 @@ export const ChannelListContainer = (props) => {
           )}
         />
         <ChannelList
+          channelRenderFilterFn={customChannelMessagingFilter}
           filters={filters[1]}
           options={options}
+          setActiveChannelOnMount={false}
           sort={sort}
           List={(listProps) => (
             <TeamChannelList
