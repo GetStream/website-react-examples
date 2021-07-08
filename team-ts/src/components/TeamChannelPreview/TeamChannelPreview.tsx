@@ -1,4 +1,4 @@
-import { Avatar, ChannelPreviewProps, useChatContext } from 'stream-chat-react';
+import { Avatar, ChannelPreviewUIComponentProps, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelPreview.css';
 
@@ -14,7 +14,7 @@ import type {
   TeamUserType,
 } from '../../App';
 
-type Props = ChannelPreviewProps & {
+type Props = ChannelPreviewUIComponentProps & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   type: string;

@@ -24,39 +24,6 @@ const ChannelList: React.FC<TeamChannelListProps> = (props) => {
     type,
   } = props;
 
-  /**
-   * This work around removes children of the other channel type since we have
-   * two ChannelList components and each receives the `message.new` event,
-   * which by default adds the channel in question to children on each list.
-   */
-  let newChildren = children;
-  let childArray: React.ReactNode;
-
-  if (type === 'team') {
-    // TODO: set up event listener on new.message, check channel type to add to appropriate channel type
-    // @ts-expect-error
-    childArray = newChildren?.props?.children?.filter(
-      // @ts-expect-error
-      (child) => child.props.channel.type === 'team',
-    );
-  }
-
-  if (type === 'messaging') {
-    // @ts-expect-error
-    childArray = newChildren?.props?.children?.filter(
-      // @ts-expect-error
-      (child) => child.props.channel.type === 'messaging',
-    );
-  }
-
-  newChildren = {
-    // @ts-expect-error
-    ...newChildren,
-    props: {
-      children: childArray,
-    },
-  };
-
   if (error) {
     return type === 'team' ? (
       <div className='team-channel-list'>
@@ -88,7 +55,7 @@ const ChannelList: React.FC<TeamChannelListProps> = (props) => {
           type={type === 'team' ? 'team' : 'messaging'}
         />
       </div>
-      {newChildren}
+      {children}
     </div>
   );
 };

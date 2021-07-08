@@ -8,7 +8,7 @@ import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';
 
 import { SideBarFlag, SideBarLogo } from '../../assets';
 
-import type { ChannelFilters } from 'stream-chat';
+import type { Channel, ChannelFilters } from 'stream-chat';
 
 type Props = Omit<ChannelListProps, 'filters'> & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
@@ -38,6 +38,14 @@ const CompanyHeader = () => (
   </div>
 );
 
+const customChannelTeamFilter = (channels: Channel[]) => {
+  return channels.filter((channel) => channel.type === 'team');
+};
+
+const customChannelMessagingFilter = (channels: Channel[]) => {
+  return channels.filter((channel) => channel.type === 'messaging');
+};
+
 export const ChannelListContainer: React.FC<Props> = (props) => {
   const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
@@ -48,6 +56,7 @@ export const ChannelListContainer: React.FC<Props> = (props) => {
         <CompanyHeader />
         <ChannelSearch />
         <ChannelList
+          channelRenderFilterFn={customChannelTeamFilter}
           filters={filters[0]}
           options={options}
           sort={sort}
@@ -67,8 +76,10 @@ export const ChannelListContainer: React.FC<Props> = (props) => {
           )}
         />
         <ChannelList
+          channelRenderFilterFn={customChannelMessagingFilter}
           filters={filters[1]}
           options={options}
+          setActiveChannelOnMount={false}
           sort={sort}
           List={(listProps) => (
             <TeamChannelList
