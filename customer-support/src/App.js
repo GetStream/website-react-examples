@@ -85,6 +85,11 @@ const App = () => {
     };
 
     getInitialChannel();
+
+    return () => {
+      customerClient.disconnectUser();
+      agentClient.disconnectUser();
+    };
   }, []); // eslint-disable-line react-hooks/exhaustive-deps
 
   /**
@@ -103,7 +108,7 @@ const App = () => {
       });
 
       await initialChannel.stopWatching();
-      await initialClient.disconnect();
+      await initialClient.disconnectUser();
 
       const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
       await client.connectUser(
