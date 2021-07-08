@@ -13,7 +13,7 @@
       "react-file-utils": "1.1.1",
       "react-scripts": "4.0.3",
       "stream-chat": "3.11.0",
-      "stream-chat-react": "6.3.0",
+      "stream-chat-react": "6.4.0",
       "styled-components": "5.2.1",
       "typescript": "4.3.5"
     },
