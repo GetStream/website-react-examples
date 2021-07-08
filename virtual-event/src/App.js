@@ -44,7 +44,9 @@ const App = () => {
           name: 'Virtual Event Demo',
         });
 
-        if (!newChannel.state.members[userId]) await newChannel.addMembers([userId]);
+        if (!newChannel.state.members[userId]) {
+          await newChannel.addMembers([userId]);
+        }
 
         await newChannel.watch();
         setChannel(newChannel);
@@ -52,17 +54,22 @@ const App = () => {
 
       getChannel();
     }
-  }, [channel]);
+
+    return () => {
+      setChannel(null);
+      chatClient.disconnectUser();
+    };
+  }, []); // eslint-disable-line
 
   useEffect(() => {
-    const handleThemeChange = (e) => {
-      if (e === 'light' || e === 'dark') {
-        setCurrentTheme(e);
+    const handleThemeChange = (data) => {
+      if (data === 'light' || data === 'dark') {
+        setCurrentTheme(data);
       }
     };
 
-    window.addEventListener('message', (e) => handleThemeChange(e.data));
-    return () => window.removeEventListener('message', (e) => handleThemeChange(e.data));
+    window.addEventListener('message', ({ data }) => handleThemeChange(data));
+    return () => window.removeEventListener('message', ({ data }) => handleThemeChange(data));
   }, []);
 
   useChecklist(chatClient, targetOrigin);
