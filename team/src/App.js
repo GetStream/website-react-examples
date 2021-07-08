@@ -48,7 +48,10 @@ const App = () => {
     };
 
     window.addEventListener('message', (event) => handleColorChange(event.data));
-    return () => window.removeEventListener('message', (event) => handleColorChange(event.data));
+    return () => {
+      client.disconnectUser();
+      window.removeEventListener('message', (event) => handleColorChange(event.data));
+    };
   }, []);
 
   return (

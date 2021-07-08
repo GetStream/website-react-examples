@@ -11751,10 +11751,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@6.3.0:
-  version "6.3.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.3.0.tgz#1721636577e54636ce3dbad39955664715280b73"
-  integrity sha512-FEU0Y50e1wUOJtZwjlwdrvLyOArZ5AQP0bjr2v2ZjDjb6gOa/eVy6o6/UEXcEAoK2CGwuo/QO02wXy7iZ6z1aQ==
+stream-chat-react@6.4.0:
+  version "6.4.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-6.4.0.tgz#49aafde53fc7360efecb0f57d88080ddc0470263"
+  integrity sha512-c51F/C/VD0H0ckwEJJMW5YlFkUdI/ogI4p+h/Hv+SwXoZOK8a6g8AcSVxUx8kQzhZDKbTpoIGwDShk8BFJlq0Q==
   dependencies:
     "@braintree/sanitize-url" "5.0.0"
     custom-event "^1.0.1"
