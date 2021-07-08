@@ -27,7 +27,7 @@ const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_
   'send-message',
 ];
 
-export const useChecklist = (chatClient: StreamChat, targetOrigin: string) => {
+export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string) => {
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
 

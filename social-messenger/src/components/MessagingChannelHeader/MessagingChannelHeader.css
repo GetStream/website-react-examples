@@ -68,7 +68,7 @@
 
 .messaging__channel-header__avatars.four span:nth-child(2) {
   position: relative;
-  right: 14px;
+  right: 10px;
 }
 
 .channel-header__edit-input {

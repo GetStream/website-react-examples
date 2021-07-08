@@ -1,5 +1,5 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, useChannelStateContext } from 'stream-chat-react';
+import { Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelHeader.css';
 
@@ -62,7 +62,8 @@ const getAvatarGroup = (members) => {
 };
 
 const MessagingChannelHeader = (props) => {
-  const { channel, client } = useChannelStateContext();
+  const { client } = useChatContext();
+  const { channel } = useChannelStateContext();
 
   const [channelName, setChannelName] = useState(channel?.data.name || '');
   const [isEditing, setIsEditing] = useState(false);
@@ -71,7 +72,7 @@ const MessagingChannelHeader = (props) => {
   const inputRef = useRef();
 
   const members = Object.values(channel.state?.members || {}).filter(
-    (member) => member.user?.id !== client?.user?.id,
+    (member) => member.user?.id !== client.user?.id,
   );
 
   const updateChannel = async (e) => {

@@ -45,18 +45,28 @@ if (skipNameImageSet) {
   delete userToConnect.image;
 }
 
-const chatClient = StreamChat.getInstance(apiKey);
-chatClient.connectUser(userToConnect, userToken);
-
 export const GiphyContext = React.createContext({});
 
 const App = () => {
+  const [chatClient, setChatClient] = useState(null);
   const [giphyState, setGiphyState] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   useChecklist(chatClient, targetOrigin);
+
+  useEffect(() => {
+    const initChat = async () => {
+      const client = StreamChat.getInstance(apiKey);
+      await client.connectUser(userToConnect, userToken);
+      setChatClient(client);
+    };
+
+    initChat();
+
+    return () => chatClient.disconnectUser();
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     const handleThemeChange = ({ data, origin }) => {
@@ -102,6 +112,8 @@ const App = () => {
   const toggleMobile = () => setMobileNav(!isMobileNavVisible);
 
   const giphyContextValue = { giphyState, setGiphyState };
+
+  if (!chatClient) return null;
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>

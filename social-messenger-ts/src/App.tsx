@@ -59,29 +59,40 @@ export type MessageType = {};
 export type ReactionType = {};
 export type UserType = { image?: string };
 
-const chatClient = StreamChat.getInstance<
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType
->(apiKey!);
-
-chatClient.connectUser(userToConnect, userToken);
-
 export const GiphyContext = React.createContext(
   {} as { giphyState: boolean; setGiphyState: React.Dispatch<React.SetStateAction<boolean>> },
 );
 
 const App = () => {
+  const [chatClient, setChatClient] = useState<StreamChat | null>(null);
   const [giphyState, setGiphyState] = useState(false);
   const [isCreating, setIsCreating] = useState(false);
   const [isMobileNavVisible, setMobileNav] = useState(false);
   const [theme, setTheme] = useState('dark');
 
   useChecklist(chatClient, targetOrigin!);
+
+  useEffect(() => {
+    const initChat = async () => {
+      const client = StreamChat.getInstance<
+        AttachmentType,
+        ChannelType,
+        CommandType,
+        EventType,
+        MessageType,
+        ReactionType,
+        UserType
+      >(apiKey!);
+      await client.connectUser(userToConnect, userToken);
+      setChatClient(client);
+    };
+
+    initChat();
+
+    return () => {
+      chatClient?.disconnectUser();
+    };
+  }, []); // eslint-disable-line
 
   useEffect(() => {
     const handleThemeChange = ({ data, origin }: { data: string; origin: string }) => {
@@ -127,6 +138,8 @@ const App = () => {
   const toggleMobile = () => setMobileNav(!isMobileNavVisible);
 
   const giphyContextValue = { giphyState, setGiphyState };
+
+  if (!chatClient) return null;
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>

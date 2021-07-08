@@ -5,7 +5,7 @@ import avatar4 from './userImages/photo-1519345182560-3f2917c472ef.jpeg';
 import avatar5 from './userImages/photo-1506089676908-3592f7389d4d.jpeg';
 import avatar6 from './userImages/photo-1507003211169-0a1dd7228f2d.jpeg';
 import avatar7 from './userImages/photo-1517202383675-eb0a6e27775f.jpeg';
-import avatar8 from './userImages/photo-1519345182560-3f2917c472ef.jpeg';
+import avatar8 from './userImages/photo-1531251445707-1f000e1e87d0.jpeg';
 import avatar9 from './userImages/photo-1541271696563-3be2f555fc4e.jpeg';
 import avatar10 from './userImages/photo-1542345812-d98b5cd6cf98.jpeg';
 import avatar11 from './userImages/photo-1546539782-6fc531453083.jpeg';
@@ -22,7 +22,6 @@ import avatar21 from './userImages/photo-1502378735452-bc7d86632805.jpeg';
 import avatar22 from './userImages/photo-1546967191-fdfb13ed6b1e.jpeg';
 import avatar23 from './userImages/photo-1502937406922-305bb2789e95.jpeg';
 import avatar24 from './userImages/photo-1552058544-f2b08422138a.jpeg';
-import avatar25 from './userImages/photo-1531251445707-1f000e1e87d0.jpeg';
 
 export { ChannelInfoIcon } from './ChannelInfoIcon';
 export { ChannelSaveIcon } from './ChannelSaveIcon';
@@ -61,7 +60,6 @@ const randomImages = [
   avatar22,
   avatar23,
   avatar24,
-  avatar25,
 ];
 
 export const getRandomImage = () => {
@@ -70,11 +68,21 @@ export const getRandomImage = () => {
 };
 
 export const getCleanImage = (member) => {
-  if (!member?.user.image) return getRandomImage();
+  let cleanImage = member.user?.image || '';
 
-  if (member?.user.image.includes('jen-avatar')) {
-    return randomImages[11];
+  const cleanIndex = randomImages.indexOf(cleanImage);
+
+  if (cleanIndex === -1) {
+    cleanImage = getRandomImage();
   }
 
-  return member.user.image;
+  if (member.user?.name === 'Jen Alexander') {
+    cleanImage = randomImages[11];
+  }
+
+  if (member.user?.name === 'Kevin Rosen') {
+    cleanImage = randomImages[23];
+  }
+
+  return cleanImage;
 };

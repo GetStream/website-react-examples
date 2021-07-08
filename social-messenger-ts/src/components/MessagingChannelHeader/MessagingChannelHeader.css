@@ -53,7 +53,7 @@
 
 .messaging__channel-header__avatars.two div:nth-child(2) {
   position: relative;
-  right: 14px;
+  right: 10px;
 }
 
 .messaging__channel-header__avatars.two span {
