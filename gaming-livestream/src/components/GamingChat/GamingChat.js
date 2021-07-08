@@ -55,6 +55,8 @@ export const GamingChat = (props) => {
     };
 
     loadChat();
+
+    return () => chatClient.disconnectUser();
   }, []);
 
   useChecklist(chatClient, targetOrigin);

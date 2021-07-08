@@ -53,6 +53,7 @@ div.rta__autocomplete.str-chat__emojisearch {
     textarea {
       background: $background;
       border-color: $border-color;
+      max-height: 52px;
       color: $foreground;
     }
   }
