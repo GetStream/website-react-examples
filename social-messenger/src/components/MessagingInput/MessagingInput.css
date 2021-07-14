@@ -190,4 +190,8 @@ div.rta__autocomplete.str-chat__emojisearch {
   div.rta__autocomplete.str-chat__emojisearch {
     width: unset;
   }
+
+  .str-chat__textarea textarea {
+    font-size: 16px;
+  }
 }
