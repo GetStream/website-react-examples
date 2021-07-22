@@ -16,7 +16,7 @@ import { FileIcon, SmileyFace } from '../../assets';
 const automatedResponses = [
   'Great! We have many resources on our website detailing various pricing plans, including which features are available. And, if you’re interested, follow the links at the bottom of each section to speak with our sales team: https://getstream.io/pricing/chat/',
   'Got it. Our Enterprise program is one of the most popular among customers. You can find everything you need by following this link to our website: https://getstream.io/enterprise/',
-  'Good choice. We are always looking to add talented people to our team. You can find all of our current job listings on our website: https://getstream.io/enterprise/',
+  'Good choice. We are always looking to add talented people to our team. You can find all of our current job listings on our website: https://getstream.io/team/',
   "Great. Can you describe what you're looking for?",
 ];
 
