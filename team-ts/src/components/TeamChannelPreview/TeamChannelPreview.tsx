@@ -49,7 +49,11 @@ export const TeamChannelPreview: React.FC<Props> = (props) => {
       const member = members[0];
       return (
         <div className='channel-preview__item single'>
-          <Avatar image={member?.user?.image || undefined} size={24} />
+          <Avatar
+            image={member.user?.image}
+            name={member.user?.name || member.user?.id}
+            size={24}
+          />
           <p>{member?.user?.name || member?.user?.id || defaultName}</p>
           <TeamTypingIndicator type='list' />
         </div>
@@ -59,12 +63,20 @@ export const TeamChannelPreview: React.FC<Props> = (props) => {
     return (
       <div className='channel-preview__item multi'>
         <span>
-          <Avatar image={members[0]?.user?.image || undefined} size={18} />
+          <Avatar
+            image={members[0].user?.image}
+            name={members[0].user?.name || members[0].user?.id}
+            size={18}
+          />
         </span>
-        <Avatar image={members[1]?.user?.image || undefined} size={18} />
+        <Avatar
+          image={members[1].user?.image}
+          name={members[1].user?.name || members[1].user?.id}
+          size={18}
+        />
         <p>
-          {members[0]?.user?.name || members[0]?.user?.id || defaultName},{' '}
-          {members[1]?.user?.name || members[1]?.user?.id || defaultName}
+          {members[0].user?.name || members[0].user?.id || defaultName},{' '}
+          {members[1].user?.name || members[1].user?.id || defaultName}
         </p>
       </div>
     );

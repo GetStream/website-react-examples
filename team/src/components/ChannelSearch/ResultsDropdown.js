@@ -36,7 +36,7 @@ const SearchResult = (props) => {
       }
     >
       <div className='channel-search__result-user'>
-        <Avatar image={channel.image || undefined} size={24} />
+        <Avatar image={channel.image || undefined} name={channel.name || channel.id} size={24} />
         <p className='channel-search__result-text'>
           {channel.name || channel.id || 'Johnny Blaze'}
         </p>

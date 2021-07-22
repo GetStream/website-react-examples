@@ -70,7 +70,7 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
         }
       >
         <div className='channel-search__result-user'>
-          <Avatar image={user?.image} size={24} />
+          <Avatar image={user.image} name={user.name || user.id} size={24} />
           <p className='channel-search__result-text'>{user.name || user.id || 'Johnny Blaze'}</p>
         </div>
       </div>

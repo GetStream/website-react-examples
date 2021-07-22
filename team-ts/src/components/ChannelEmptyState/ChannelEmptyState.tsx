@@ -36,7 +36,14 @@ export const ChannelEmptyState = () => {
       <div className='channel-empty__avatars'>
         {members.map((member, i) => {
           if (i > 2) return null;
-          return <Avatar key={i} image={member?.user?.image} size={72} />;
+          return (
+            <Avatar
+              key={i}
+              image={member.user?.image}
+              name={member.user?.name || member.user?.id}
+              size={72}
+            />
+          );
         })}
       </div>
     );
@@ -46,7 +53,7 @@ export const ChannelEmptyState = () => {
     if (members.length === 1) {
       return (
         <span className='channel-empty__user-name'>{`@${
-          members[0]?.user?.name || members[0]?.user?.id
+          members[0].user?.name || members[0].user?.id
         }`}</span>
       );
     }
@@ -54,8 +61,8 @@ export const ChannelEmptyState = () => {
     if (members.length === 2) {
       return (
         <span className='channel-empty__user-name'>{`@${
-          members[0]?.user?.name || members[0]?.user?.id
-        } and @${members[1]?.user?.name || members[1]?.user?.id}`}</span>
+          members[0].user?.name || members[0].user?.id
+        } and @${members[1].user?.name || members[1].user?.id}`}</span>
       );
     }
 

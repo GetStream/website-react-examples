@@ -11,7 +11,9 @@ export const TeamChannelPreview = (props) => {
   const { channel: activeChannel, client } = useChatContext();
 
   const ChannelPreview = () => (
-    <p className='channel-preview__item'># {channel?.data?.name || channel?.data?.id || 'random'}</p>
+    <p className='channel-preview__item'>
+      # {channel?.data?.name || channel?.data?.id || 'random'}
+    </p>
   );
 
   const DirectPreview = () => {
@@ -23,7 +25,11 @@ export const TeamChannelPreview = (props) => {
     if (!members.length || members.length === 1) {
       return (
         <div className='channel-preview__item single'>
-          <Avatar image={members[0]?.user.image || undefined} size={24} />
+          <Avatar
+            image={members[0]?.user.image || undefined}
+            name={members[0]?.user.name || members[0]?.user.id}
+            size={24}
+          />
           <p>{members[0]?.user.name || members[0]?.user.id || defaultName}</p>
           <TeamTypingIndicator type='list' />
         </div>
@@ -33,9 +39,17 @@ export const TeamChannelPreview = (props) => {
     return (
       <div className='channel-preview__item multi'>
         <span>
-          <Avatar image={members[0]?.user.image || undefined} size={18} />
+          <Avatar
+            image={members[0]?.user.image || undefined}
+            name={members[0]?.user.name || members[0]?.user.id}
+            size={18}
+          />
         </span>
-        <Avatar image={members[1]?.user.image || undefined} size={18} />
+        <Avatar
+          image={members[1]?.user.image || undefined}
+          name={members[1]?.user.name || members[1]?.user.id}
+          size={18}
+        />
         <p>
           {members[0]?.user.name || members[0]?.user.id || defaultName},{' '}
           {members[1]?.user.name || members[1]?.user.id || defaultName}

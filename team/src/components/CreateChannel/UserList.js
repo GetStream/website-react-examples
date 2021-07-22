@@ -17,7 +17,7 @@ const ListContainer = (props) => {
       </div>
       {children}
     </div>
-  )
+  );
 };
 
 const UserItem = (props) => {
@@ -54,7 +54,7 @@ const UserItem = (props) => {
   return (
     <div className='user-item__wrapper' onClick={handleClick}>
       <div className='user-item__name-wrapper'>
-        <Avatar image={user.image} size={32} />
+        <Avatar image={user.image} name={user.name || user.id} size={32} />
         <p className='user-item__name'>{user.name || user.id}</p>
       </div>
       <p className='user-item__last-active'>{getLastActive(index)}</p>
@@ -82,7 +82,7 @@ export const UserList = (props) => {
         const response = await client.queryUsers(
           { id: { $ne: client.userID }, ...filters },
           { id: 1 },
-          { limit: 6 },
+          { limit: 8 },
         );
 
         if (response.users.length) {
@@ -90,7 +90,7 @@ export const UserList = (props) => {
         } else {
           setListEmpty(true);
         }
-      } catch (e) {
+      } catch (err) {
         setError(true);
       }
 

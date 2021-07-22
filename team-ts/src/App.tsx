@@ -33,7 +33,10 @@ export type TeamMessageType = Record<string, unknown>;
 export type TeamReactionType = Record<string, unknown>;
 export type TeamUserType = { image?: string };
 
-const filters: ChannelFilters[] = [{ type: 'team' }, { type: 'messaging' }];
+const filters: ChannelFilters[] = [
+  { type: 'team', demo: 'team' },
+  { type: 'messaging', demo: 'team' },
+];
 const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort: ChannelSort<TeamChannelType> = { last_message_at: -1, updated_at: -1 };
 

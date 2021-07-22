@@ -18,7 +18,14 @@ export const ChannelEmptyState = () => {
       <div className='channel-empty__avatars'>
         {members.map((member, i) => {
           if (i > 2) return null;
-          return <Avatar key={i} image={member.user.image} size={72} />;
+          return (
+            <Avatar
+              key={i}
+              image={member.user.image}
+              name={member.user.name || member.user.id}
+              size={72}
+            />
+          );
         })}
       </div>
     );

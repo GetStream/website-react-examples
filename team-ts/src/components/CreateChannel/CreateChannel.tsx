@@ -75,6 +75,7 @@ export const CreateChannel: React.FC<Props> = (props) => {
       const newChannel = await client.channel(createType, channelName, {
         name: channelName,
         members: selectedUsers,
+        demo: 'team',
       });
 
       await newChannel.watch();

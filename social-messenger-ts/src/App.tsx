@@ -30,7 +30,7 @@ const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
 const filters = noChannelNameFilter
   ? { type: 'messaging', members: { $in: [user!] } }
-  : { type: 'messaging', name: 'Social Demo' };
+  : { type: 'messaging', name: 'Social Demo', demo: 'social' };
 
 const options = { state: true, watch: true, presence: true, limit: 8 };
 
@@ -52,7 +52,7 @@ if (skipNameImageSet) {
 }
 
 export type AttachmentType = {};
-export type ChannelType = {};
+export type ChannelType = { demo?: string };
 export type CommandType = LiteralStringForUnion;
 export type EventType = {};
 export type MessageType = {};

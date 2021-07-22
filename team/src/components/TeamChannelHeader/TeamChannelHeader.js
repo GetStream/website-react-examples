@@ -1,5 +1,10 @@
 import React from 'react';
-import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
+import {
+  Avatar,
+  useChannelActionContext,
+  useChannelStateContext,
+  useChatContext,
+} from 'stream-chat-react';
 
 import './TeamChannelHeader.css';
 
@@ -33,7 +38,7 @@ export const TeamChannelHeader = ({ setIsEditing, setPinsOpen }) => {
           if (i > 2) return null;
           return (
             <div key={i} className='team-channel-header__name-multi'>
-              <Avatar image={user.image} size={32} />
+              <Avatar image={user.image} name={user.name || user.id} size={32} />
               <p className='team-channel-header__name user'>
                 {user.name || user.id || 'Johnny Blaze'}
               </p>

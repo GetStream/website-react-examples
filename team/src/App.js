@@ -24,7 +24,10 @@ const i18nInstance = new Streami18n({
   },
 });
 
-const filters = [{ type: 'team' }, { type: 'messaging' }];
+const filters = [
+  { type: 'team', demo: 'team' },
+  { type: 'messaging', demo: 'team' },
+];
 const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort = { last_message_at: -1, updated_at: -1 };
 

@@ -52,6 +52,7 @@ const MessagingChannelList: React.FC<Props> = (props) => {
     ) => {
       const channel = client.channel('messaging', 'first', {
         name: 'Social Demo',
+        demo: 'social',
       });
 
       await channel.watch();
