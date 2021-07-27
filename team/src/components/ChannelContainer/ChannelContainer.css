@@ -19,6 +19,10 @@
   padding-top: 0px;
 }
 
+.str-chat__thread-list .channel-empty__container {
+  display: none;
+}
+
 .str-chat__date-separator {
   padding: 20px 40px;
 }
