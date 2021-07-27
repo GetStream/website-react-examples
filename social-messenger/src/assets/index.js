@@ -70,10 +70,12 @@ export const getRandomImage = () => {
 export const getCleanImage = (member) => {
   let cleanImage = member.user?.image || '';
 
-  const cleanIndex = randomImages.indexOf(cleanImage);
+  const cleanIndex = randomImages.findIndex((image) => image.includes(cleanImage.slice(1, -14)));
 
   if (cleanIndex === -1) {
     cleanImage = getRandomImage();
+  } else {
+    cleanImage = randomImages[cleanIndex];
   }
 
   if (member.user?.name === 'Jen Alexander') {
