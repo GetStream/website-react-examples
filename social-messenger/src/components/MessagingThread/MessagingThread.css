@@ -5,7 +5,7 @@
 .custom-thread-header {
   border: none;
   background: white;
-  min-height: 80px;
+  min-height: 60px;
   box-shadow: 0px 7px 9px rgba(0, 0, 0, 0.03), 0px 1px 0px rgba(0, 0, 0, 0.03);
   display: flex;
   align-items: center;
