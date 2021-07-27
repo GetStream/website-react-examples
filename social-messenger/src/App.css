@@ -49,12 +49,12 @@ body::-webkit-scrollbar-thumb {
 }
 
 .str-chat-channel .str-chat__container {
-  padding: 20px 0px;
+  padding-top: 20px;
 }
 
 .str-chat-channel.messaging .str-chat__main-panel {
   padding: 0 !important;
-  min-width: 250px
+  min-width: 250px;
 }
 
 .messaging.str-chat .str-chat__list .str-chat__reverse-infinite-scroll {
