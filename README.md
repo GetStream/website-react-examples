@@ -8,14 +8,6 @@
 - [team](https://getstream.github.io/website-react-examples/team/)
 - [virtual-event](https://getstream.github.io/website-react-examples/virtual-event/)
 
-## Todo
-
-- [x] setup linting
-- [x] setup prettier
-- [x] create react app for all apps
-- [x] setup github pages for every app
-- [ ] move examples to this repo
-
 ## Important
 
 - Use environment vars for apiKeys etc
