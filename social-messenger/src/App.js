@@ -67,7 +67,7 @@ const App = () => {
 
     initChat();
 
-    return () => chatClient.disconnectUser();
+    return () => chatClient?.disconnectUser();
   }, []); // eslint-disable-line
 
   useEffect(() => {
