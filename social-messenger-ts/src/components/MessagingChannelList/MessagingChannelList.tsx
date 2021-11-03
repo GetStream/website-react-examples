@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Avatar, ChannelListTeamProps, useChatContext } from 'stream-chat-react';
+import { Avatar, ChannelListMessengerProps, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
 import { SkeletonLoader } from './SkeletonLoader';
@@ -19,7 +19,7 @@ import type {
   UserType,
 } from '../../App';
 
-type Props = ChannelListTeamProps & {
+type Props = ChannelListMessengerProps & {
   onCreateChannel: () => void;
 };
 
