@@ -32,7 +32,7 @@ const agentUserToken = urlParams.get('user2_token') || process.env.REACT_APP_AGE
 const customerUserId = urlParams.get('user3') || process.env.REACT_APP_CUSTOMER_ID;
 const customerUserToken = urlParams.get('user3_token') || process.env.REACT_APP_CUSTOMER_TOKEN;
 
-const customerClient = StreamChat.getInstance(apiKey);
+const customerClient = StreamChat.getInstance(apiKey, { enableInsights: true });
 customerClient.connectUser(
   {
     id: customerUserId,
@@ -54,7 +54,7 @@ const App = () => {
    */
   useEffect(() => {
     const getInitialChannel = async () => {
-      const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
+      const client = new StreamChat(apiKey, { enableInsights: true }); // since app is dual client need to construct an additional instance
       await client.connectUser(
         {
           id: previousUserId,
@@ -110,7 +110,7 @@ const App = () => {
       await initialChannel.stopWatching();
       await initialClient.disconnectUser();
 
-      const client = new StreamChat(apiKey); // since app is dual client need to construct an additional instance
+      const client = new StreamChat(apiKey, { enableInsights: true }); // since app is dual client need to construct an additional instance
       await client.connectUser(
         { id: agentUserId, name: 'Daniel Smith', image: User1 },
         agentUserToken,
