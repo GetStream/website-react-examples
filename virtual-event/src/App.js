@@ -30,7 +30,7 @@ const i18nInstance = new Streami18n({
   },
 });
 
-const chatClient = StreamChat.getInstance(apiKey);
+const chatClient = StreamChat.getInstance(apiKey, { enableInsights: true });
 chatClient.connectUser({ id: userId, image: getRandomImage() }, userToken);
 
 const App = () => {
