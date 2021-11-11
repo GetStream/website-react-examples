@@ -82,7 +82,7 @@ const App = () => {
         MessageType,
         ReactionType,
         UserType
-      >(apiKey!);
+      >(apiKey!,{ enableInsights:true });
       await client.connectUser(userToConnect, userToken);
       setChatClient(client);
     };
