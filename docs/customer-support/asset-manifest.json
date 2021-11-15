@@ -6,8 +6,8 @@
     "runtime-main.js": "/website-react-examples/customer-support/static/js/runtime-main.d876bd3a.js",
     "runtime-main.js.map": "/website-react-examples/customer-support/static/js/runtime-main.d876bd3a.js.map",
     "static/css/2.55e639ad.chunk.css": "/website-react-examples/customer-support/static/css/2.55e639ad.chunk.css",
-    "static/js/2.3094c560.chunk.js": "/website-react-examples/customer-support/static/js/2.3094c560.chunk.js",
-    "static/js/2.3094c560.chunk.js.map": "/website-react-examples/customer-support/static/js/2.3094c560.chunk.js.map",
+    "static/js/2.dec1b471.chunk.js": "/website-react-examples/customer-support/static/js/2.dec1b471.chunk.js",
+    "static/js/2.dec1b471.chunk.js.map": "/website-react-examples/customer-support/static/js/2.dec1b471.chunk.js.map",
     "static/js/3.1fa71501.chunk.js": "/website-react-examples/customer-support/static/js/3.1fa71501.chunk.js",
     "static/js/3.1fa71501.chunk.js.map": "/website-react-examples/customer-support/static/js/3.1fa71501.chunk.js.map",
     "static/js/4.a7190a91.chunk.js": "/website-react-examples/customer-support/static/js/4.a7190a91.chunk.js",
@@ -17,7 +17,7 @@
     "index.html": "/website-react-examples/customer-support/index.html",
     "static/css/2.55e639ad.chunk.css.map": "/website-react-examples/customer-support/static/css/2.55e639ad.chunk.css.map",
     "static/css/main.38ca280d.chunk.css.map": "/website-react-examples/customer-support/static/css/main.38ca280d.chunk.css.map",
-    "static/js/2.3094c560.chunk.js.LICENSE.txt": "/website-react-examples/customer-support/static/js/2.3094c560.chunk.js.LICENSE.txt",
+    "static/js/2.dec1b471.chunk.js.LICENSE.txt": "/website-react-examples/customer-support/static/js/2.dec1b471.chunk.js.LICENSE.txt",
     "static/media/index.css": "/website-react-examples/customer-support/static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/jen-avatar.dcb956a8.png": "/website-react-examples/customer-support/static/media/jen-avatar.dcb956a8.png",
     "static/media/kevin-avatar.aa678195.png": "/website-react-examples/customer-support/static/media/kevin-avatar.aa678195.png",
@@ -29,7 +29,7 @@
   "entrypoints": [
     "static/js/runtime-main.d876bd3a.js",
     "static/css/2.55e639ad.chunk.css",
-    "static/js/2.3094c560.chunk.js",
+    "static/js/2.dec1b471.chunk.js",
     "static/css/main.38ca280d.chunk.css",
     "static/js/main.24455b14.chunk.js"
   ]
