@@ -11057,10 +11057,10 @@ stream-chat-react@6.4.0:
   optionalDependencies:
     mml-react "^0.4.0"
 
-stream-chat@4.4.2:
-  version "4.4.2"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-4.4.2.tgz#e840ec735aa96d92a84c54e5f4f689d163d69a41"
-  integrity sha512-36i/s1YwTU5b9Dk7kt0vdZJUGl90/WwaMeYneQB3f0/wUi8dgSjWzSp2Oxu9pEzB3Jg5QZf7+xdNz/jddMSbPA==
+stream-chat@4.4.3-dev.1:
+  version "4.4.3-dev.1"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-4.4.3-dev.1.tgz#8d20852f53122cd4cba0d491b031916bb22921dc"
+  integrity sha512-HeD/jZe5e4gE6DIRewFf5VczLONCbLmXTLwcBLKZ1cnB8PTXkWEc5niJYRNwOCFqKVWfg+MdScWJKWyOj3M0Xg==
   dependencies:
     "@babel/runtime" "^7.13.10"
     "@types/jsonwebtoken" "^8.5.0"
