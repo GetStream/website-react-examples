@@ -6,8 +6,8 @@
     "runtime-main.js": "/website-react-examples/gaming-livestream/static/js/runtime-main.1fa7e9c0.js",
     "runtime-main.js.map": "/website-react-examples/gaming-livestream/static/js/runtime-main.1fa7e9c0.js.map",
     "static/css/2.05f7de72.chunk.css": "/website-react-examples/gaming-livestream/static/css/2.05f7de72.chunk.css",
-    "static/js/2.ba196f79.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.ba196f79.chunk.js",
-    "static/js/2.ba196f79.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.ba196f79.chunk.js.map",
+    "static/js/2.680096e8.chunk.js": "/website-react-examples/gaming-livestream/static/js/2.680096e8.chunk.js",
+    "static/js/2.680096e8.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/2.680096e8.chunk.js.map",
     "static/js/3.34502c36.chunk.js": "/website-react-examples/gaming-livestream/static/js/3.34502c36.chunk.js",
     "static/js/3.34502c36.chunk.js.map": "/website-react-examples/gaming-livestream/static/js/3.34502c36.chunk.js.map",
     "static/js/4.7ea91151.chunk.js": "/website-react-examples/gaming-livestream/static/js/4.7ea91151.chunk.js",
@@ -19,7 +19,7 @@
     "index.html": "/website-react-examples/gaming-livestream/index.html",
     "static/css/2.05f7de72.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/2.05f7de72.chunk.css.map",
     "static/css/main.a36d9bf7.chunk.css.map": "/website-react-examples/gaming-livestream/static/css/main.a36d9bf7.chunk.css.map",
-    "static/js/2.ba196f79.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.ba196f79.chunk.js.LICENSE.txt",
+    "static/js/2.680096e8.chunk.js.LICENSE.txt": "/website-react-examples/gaming-livestream/static/js/2.680096e8.chunk.js.LICENSE.txt",
     "static/media/GamingFooter.scss": "/website-react-examples/gaming-livestream/static/media/Avatar.258a9df1.png",
     "static/media/index.css": "/website-react-examples/gaming-livestream/static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/App.scss": "/website-react-examples/gaming-livestream/static/media/arrow.28fc5ae8.svg",
@@ -30,7 +30,7 @@
   "entrypoints": [
     "static/js/runtime-main.1fa7e9c0.js",
     "static/css/2.05f7de72.chunk.css",
-    "static/js/2.ba196f79.chunk.js",
+    "static/js/2.680096e8.chunk.js",
     "static/css/main.a36d9bf7.chunk.css",
     "static/js/main.a05fac60.chunk.js"
   ]

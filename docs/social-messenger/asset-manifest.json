@@ -6,14 +6,14 @@
     "runtime-main.js": "./static/js/runtime-main.ed2cb0e1.js",
     "runtime-main.js.map": "./static/js/runtime-main.ed2cb0e1.js.map",
     "static/css/2.b2a3775f.chunk.css": "./static/css/2.b2a3775f.chunk.css",
-    "static/js/2.f111e489.chunk.js": "./static/js/2.f111e489.chunk.js",
-    "static/js/2.f111e489.chunk.js.map": "./static/js/2.f111e489.chunk.js.map",
+    "static/js/2.af95cecf.chunk.js": "./static/js/2.af95cecf.chunk.js",
+    "static/js/2.af95cecf.chunk.js.map": "./static/js/2.af95cecf.chunk.js.map",
     "static/js/3.edea89a7.chunk.js": "./static/js/3.edea89a7.chunk.js",
     "static/js/3.edea89a7.chunk.js.map": "./static/js/3.edea89a7.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.b2a3775f.chunk.css.map": "./static/css/2.b2a3775f.chunk.css.map",
     "static/css/main.a18579f9.chunk.css.map": "./static/css/main.a18579f9.chunk.css.map",
-    "static/js/2.f111e489.chunk.js.LICENSE.txt": "./static/js/2.f111e489.chunk.js.LICENSE.txt",
+    "static/js/2.af95cecf.chunk.js.LICENSE.txt": "./static/js/2.af95cecf.chunk.js.LICENSE.txt",
     "static/media/index.css": "./static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/photo-1438761681033-6461ffad8d80.613ac608.jpeg": "./static/media/photo-1438761681033-6461ffad8d80.613ac608.jpeg",
     "static/media/photo-1463453091185-61582044d556.3619e52a.jpeg": "./static/media/photo-1463453091185-61582044d556.3619e52a.jpeg",
@@ -46,7 +46,7 @@
   "entrypoints": [
     "static/js/runtime-main.ed2cb0e1.js",
     "static/css/2.b2a3775f.chunk.css",
-    "static/js/2.f111e489.chunk.js",
+    "static/js/2.af95cecf.chunk.js",
     "static/css/main.a18579f9.chunk.css",
     "static/js/main.ebdfc48d.chunk.js"
   ]
