@@ -9,7 +9,7 @@
     "react-file-utils": "1.1.0",
     "react-native-animated-emoji": "0.1.4",
     "react-scripts": "4.0.3",
-    "stream-chat": "4.4.3-dev.2",
+   "stream-chat": "4.4.3-dev.3",
     "stream-chat-react": "6.1.1",
     "web-vitals": "^0.2.4"
   },
