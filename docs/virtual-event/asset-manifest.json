@@ -6,8 +6,8 @@
     "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.0e46d2a9.js",
     "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.0e46d2a9.js.map",
     "static/css/2.873cd8a7.chunk.css": "/website-react-examples/virtual-event/static/css/2.873cd8a7.chunk.css",
-    "static/js/2.e58dda51.chunk.js": "/website-react-examples/virtual-event/static/js/2.e58dda51.chunk.js",
-    "static/js/2.e58dda51.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.e58dda51.chunk.js.map",
+    "static/js/2.ca768d69.chunk.js": "/website-react-examples/virtual-event/static/js/2.ca768d69.chunk.js",
+    "static/js/2.ca768d69.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.ca768d69.chunk.js.map",
     "static/js/3.6061f17c.chunk.js": "/website-react-examples/virtual-event/static/js/3.6061f17c.chunk.js",
     "static/js/3.6061f17c.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.6061f17c.chunk.js.map",
     "static/js/4.dbd19aca.chunk.js": "/website-react-examples/virtual-event/static/js/4.dbd19aca.chunk.js",
@@ -15,7 +15,7 @@
     "index.html": "/website-react-examples/virtual-event/index.html",
     "static/css/2.873cd8a7.chunk.css.map": "/website-react-examples/virtual-event/static/css/2.873cd8a7.chunk.css.map",
     "static/css/main.9356be78.chunk.css.map": "/website-react-examples/virtual-event/static/css/main.9356be78.chunk.css.map",
-    "static/js/2.e58dda51.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.e58dda51.chunk.js.LICENSE.txt",
+    "static/js/2.ca768d69.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event/static/js/2.ca768d69.chunk.js.LICENSE.txt",
     "static/media/Amanda.718a7082.png": "/website-react-examples/virtual-event/static/media/Amanda.718a7082.png",
     "static/media/AvatarRobertImg.d0a3ae77.png": "/website-react-examples/virtual-event/static/media/AvatarRobertImg.d0a3ae77.png",
     "static/media/BillNye.97c0f73f.png": "/website-react-examples/virtual-event/static/media/BillNye.97c0f73f.png",
@@ -54,7 +54,7 @@
   "entrypoints": [
     "static/js/runtime-main.0e46d2a9.js",
     "static/css/2.873cd8a7.chunk.css",
-    "static/js/2.e58dda51.chunk.js",
+    "static/js/2.ca768d69.chunk.js",
     "static/css/main.9356be78.chunk.css",
     "static/js/main.4c0752d1.chunk.js"
   ]
