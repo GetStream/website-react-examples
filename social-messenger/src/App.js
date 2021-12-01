@@ -60,7 +60,10 @@ const App = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance(apiKey, { enableInsights: true });
+      const client = StreamChat.getInstance(apiKey, {
+        enableInsights: true,
+        enableWSFallback: true,
+      });
       await client.connectUser(userToConnect, userToken);
       setChatClient(client);
     };

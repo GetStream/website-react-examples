@@ -32,7 +32,10 @@ const agentUserToken = urlParams.get('user2_token') || process.env.REACT_APP_AGE
 const customerUserId = urlParams.get('user3') || process.env.REACT_APP_CUSTOMER_ID;
 const customerUserToken = urlParams.get('user3_token') || process.env.REACT_APP_CUSTOMER_TOKEN;
 
-const customerClient = StreamChat.getInstance(apiKey, { enableInsights: true });
+const customerClient = StreamChat.getInstance(apiKey, {
+  enableInsights: true,
+  enableWSFallback: true,
+});
 customerClient.connectUser(
   {
     id: customerUserId,

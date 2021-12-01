@@ -18,7 +18,7 @@ const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const chatClient = StreamChat.getInstance(apiKey, { enableInsights: true });
+const chatClient = StreamChat.getInstance(apiKey, { enableInsights: true, enableWSFallback: true });
 
 export const GamingChat = (props) => {
   const {
