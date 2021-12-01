@@ -48,7 +48,7 @@ const client = StreamChat.getInstance<
   TeamMessageType,
   TeamReactionType,
   TeamUserType
->(apiKey!,{ enableInsights:true });
+>(apiKey!, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {

@@ -31,7 +31,7 @@ const filters = [
 const options = { state: true, watch: true, presence: true, limit: 3 };
 const sort = { last_message_at: -1, updated_at: -1 };
 
-const client = StreamChat.getInstance(apiKey, { enableInsights: true });
+const client = StreamChat.getInstance(apiKey, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
