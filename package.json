@@ -8,10 +8,11 @@
   "scripts": {
     "build:cs": "cd customer-support && yarn && yarn build && rm -rf ../docs/customer-support/* && mv build/* ../docs/customer-support",
     "build:sm": "cd social-messenger-ts && yarn && yarn build && rm -rf ../docs/social-messenger/* && mv build/* ../docs/social-messenger",
-    "build:ve": "cd virtual-event && yarn && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
+    "build:ve": "cd virtual-event-old && yarn && yarn build && rm -rf ../docs/virtual-event/* && mv build/* ../docs/virtual-event",
+    "build:ve2": "cd virtual-event && yarn && yarn build && rm -rf ../docs/virtual-event-v2/* && mv build/* ../docs/virtual-event-v2",
     "build:t": "cd team-ts && yarn && yarn build && rm -rf ../docs/team/* && mv build/* ../docs/team",
     "build:gl": "cd gaming-livestream && yarn && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
-    "build:js": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl",
+    "build:js": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl && yarn build:ve2",
     "lint": "eslint",
     "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
   },
