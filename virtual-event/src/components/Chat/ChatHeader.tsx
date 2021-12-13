@@ -17,7 +17,7 @@ export const ChatHeader: React.FC<Props> = (props) => {
   const { chatType, eventName, selected, setChatType, setShowChannelList } = useEventContext();
 
   const handleGlobalClick = () => {
-    setChatType('global');
+    setChatType('global-ve2');
     setShowChannelList(false);
   };
 
@@ -51,7 +51,7 @@ export const ChatHeader: React.FC<Props> = (props) => {
       <div className='chat-components-header-tabs'>
         <div className='chat-components-header-tabs-item' onClick={handleGlobalClick}>
           <AnimatePresence>
-            {chatType === 'global' && (
+            {chatType === 'global-ve2' && (
               <motion.div
                 className='selected'
                 variants={variants}
@@ -62,7 +62,7 @@ export const ChatHeader: React.FC<Props> = (props) => {
             )}
           </AnimatePresence>
           <div>Global</div>
-          <div className={`${globalUnread && chatType !== 'global' ? 'unread' : ''}`} />
+          <div className={`${globalUnread && chatType !== 'global-ve2' ? 'unread' : ''}`} />
         </div>
         {selected !== 'overview' && eventName && (
           <div className='chat-components-header-tabs-item' onClick={handleEventClick}>

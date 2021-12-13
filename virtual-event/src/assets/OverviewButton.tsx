@@ -18,7 +18,7 @@ export const OverviewButton: React.FC = () => {
     setVideoOpen(false);
     setSelected('overview');
     setEventName(undefined);
-    setChatType('global');
+    setChatType('global-ve2');
     if (showChannelList) setShowChannelList(false);
   };
 

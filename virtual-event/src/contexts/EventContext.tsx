@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react';
 
 import { ModeOptions, ThemeOptions, useTheme } from '../hooks/useTheme';
 
-export type ChatType = 'global' | 'main-event' | 'room' | 'direct' | 'qa';
+export type ChatType = 'global-ve2' | 'main-event' | 'room' | 'direct' | 'qa';
 export type TabOptions = 'overview' | 'main-event' | 'rooms';
 export type UserActions = 'flag' | 'mute' | 'unmute';
 
@@ -35,15 +35,15 @@ const EventContext = React.createContext({} as EventContextValue);
 
 export const EventProvider: React.FC = ({ children }) => {
   const [actionsModalOpen, setActionsModalOpen] = useState(false);
-  const [chatType, setChatType] = useState<ChatType>('global');
+  const [chatType, setChatType] = useState<ChatType>('global-ve2');
   const [eventName, setEventName] = useState<string | undefined>();
   const [isFullScreen, setIsFullScreen] = useState(false);
   const [searching, setSearching] = useState(false);
-  const [selected, setSelected] = useState<TabOptions>('overview');
+  const [selected, setSelected] = useState<TabOptions>('main-event');
   const [showChannelList, setShowChannelList] = useState(false);
   const [themeModalOpen, setThemeModalOpen] = useState(false);
   const [userActionType, setUserActionType] = useState<UserActions>();
-  const [videoOpen, setVideoOpen] = useState(false);
+  const [videoOpen, setVideoOpen] = useState(true);
 
   const { setMode, setTheme } = useTheme();
 

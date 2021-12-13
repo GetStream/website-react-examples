@@ -17,7 +17,7 @@ export const MainEventButton: React.FC = () => {
   const handleClick = () => {
     setSelected('main-event');
     setEventName(undefined);
-    setChatType('global');
+    setChatType('global-ve2');
     setVideoOpen(false);
     if (showChannelList) setShowChannelList(false);
   };

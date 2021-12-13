@@ -17,7 +17,7 @@ export const RoomsButton: React.FC = () => {
   const handleClick = () => {
     setSelected('rooms');
     setEventName(undefined);
-    setChatType('global');
+    setChatType('global-ve2');
     setVideoOpen(false);
     if (showChannelList) setShowChannelList(false);
   };

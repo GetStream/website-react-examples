@@ -29,7 +29,7 @@ export const useInitChat = () => {
   const { chatType, eventName } = useEventContext();
 
   useEffect(() => {
-    if (globalUnread && chatType === 'global') setGlobalUnread(false);
+    if (globalUnread && chatType === 'global-ve2') setGlobalUnread(false);
   }, [chatType, globalUnread]);
 
   useEffect(() => {
@@ -46,7 +46,7 @@ export const useInitChat = () => {
 
   const setUnreadStatus = (id: string, boolean: boolean) => {
     switch (id) {
-      case 'global':
+      case 'global-ve2':
         setGlobalUnread(boolean);
         break;
 
@@ -112,17 +112,23 @@ export const useInitChat = () => {
         client.setBaseURL(process.env.REACT_APP_CHAT_SERVER_ENDPOINT);
       }
 
+      const userName = userId
+        .split('-')
+        .slice(0, 2)
+        .map((str) => str[0].toUpperCase() + str.substring(1))
+        .join(' ');
+
       await client.connectUser(
         {
           id: userId,
-          name: userId,
-          image: process.env.REACT_APP_USER_IMAGE || getRandomImage(),
-          title: userId === 'daddy-dan' ? 'Admin' : getRandomTitle(),
+          name: userName,
+          image: `https://getstream.io/random_svg/?name=${userName}`,
+          title: userId === 'daddy' ? 'Admin' : getRandomTitle(),
         },
         userToken,
       );
 
-      const globalChannel = client.channel('livestream', 'global', { name: 'global' });
+      const globalChannel = client.channel('livestream', 'global-ve2', { name: 'global' });
       await globalChannel.watch({ watchers: { limit: 100 } });
 
       client.on('message.new', handleDmMessages);

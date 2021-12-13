@@ -1,8 +1,8 @@
 {
   "files": {
     "main.css": "/website-react-examples/virtual-event-v2/static/css/main.dfb4c76f.chunk.css",
-    "main.js": "/website-react-examples/virtual-event-v2/static/js/main.76958bcd.chunk.js",
-    "main.js.map": "/website-react-examples/virtual-event-v2/static/js/main.76958bcd.chunk.js.map",
+    "main.js": "/website-react-examples/virtual-event-v2/static/js/main.8b02b053.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event-v2/static/js/main.8b02b053.chunk.js.map",
     "runtime-main.js": "/website-react-examples/virtual-event-v2/static/js/runtime-main.ea5b35b8.js",
     "runtime-main.js.map": "/website-react-examples/virtual-event-v2/static/js/runtime-main.ea5b35b8.js.map",
     "static/css/2.79086e1f.chunk.css": "/website-react-examples/virtual-event-v2/static/css/2.79086e1f.chunk.css",
@@ -72,6 +72,6 @@
     "static/css/2.79086e1f.chunk.css",
     "static/js/2.1314348b.chunk.js",
     "static/css/main.dfb4c76f.chunk.css",
-    "static/js/main.76958bcd.chunk.js"
+    "static/js/main.8b02b053.chunk.js"
   ]
 }

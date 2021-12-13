@@ -16,7 +16,7 @@ export const SidebarHomeButton: React.FC<Props> = ({ globalUnread }) => {
   } = useEventContext();
 
   const handleClick = () => {
-    setChatType('global');
+    setChatType('global-ve2');
     setEventName(undefined);
     setIsFullScreen(false);
     setSelected('overview');

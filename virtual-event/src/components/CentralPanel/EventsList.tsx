@@ -34,7 +34,7 @@ export const EventsList = () => {
   }, [dropdownOpen]);
 
   const handleBackArrow = (event: BaseSyntheticEvent) => {
-    setChatType('global');
+    setChatType('global-ve2');
     setEventName(undefined);
     setVideoOpen(false);
   };
