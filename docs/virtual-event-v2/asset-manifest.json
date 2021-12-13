@@ -1,13 +1,13 @@
 {
   "files": {
     "main.css": "/website-react-examples/virtual-event-v2/static/css/main.dfb4c76f.chunk.css",
-    "main.js": "/website-react-examples/virtual-event-v2/static/js/main.7bc1eed1.chunk.js",
-    "main.js.map": "/website-react-examples/virtual-event-v2/static/js/main.7bc1eed1.chunk.js.map",
+    "main.js": "/website-react-examples/virtual-event-v2/static/js/main.76958bcd.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event-v2/static/js/main.76958bcd.chunk.js.map",
     "runtime-main.js": "/website-react-examples/virtual-event-v2/static/js/runtime-main.ea5b35b8.js",
     "runtime-main.js.map": "/website-react-examples/virtual-event-v2/static/js/runtime-main.ea5b35b8.js.map",
     "static/css/2.79086e1f.chunk.css": "/website-react-examples/virtual-event-v2/static/css/2.79086e1f.chunk.css",
-    "static/js/2.1904adab.chunk.js": "/website-react-examples/virtual-event-v2/static/js/2.1904adab.chunk.js",
-    "static/js/2.1904adab.chunk.js.map": "/website-react-examples/virtual-event-v2/static/js/2.1904adab.chunk.js.map",
+    "static/js/2.1314348b.chunk.js": "/website-react-examples/virtual-event-v2/static/js/2.1314348b.chunk.js",
+    "static/js/2.1314348b.chunk.js.map": "/website-react-examples/virtual-event-v2/static/js/2.1314348b.chunk.js.map",
     "static/js/3.59b3192d.chunk.js": "/website-react-examples/virtual-event-v2/static/js/3.59b3192d.chunk.js",
     "static/js/3.59b3192d.chunk.js.map": "/website-react-examples/virtual-event-v2/static/js/3.59b3192d.chunk.js.map",
     "static/js/4.8240b63a.chunk.js": "/website-react-examples/virtual-event-v2/static/js/4.8240b63a.chunk.js",
@@ -19,7 +19,7 @@
     "index.html": "/website-react-examples/virtual-event-v2/index.html",
     "static/css/2.79086e1f.chunk.css.map": "/website-react-examples/virtual-event-v2/static/css/2.79086e1f.chunk.css.map",
     "static/css/main.dfb4c76f.chunk.css.map": "/website-react-examples/virtual-event-v2/static/css/main.dfb4c76f.chunk.css.map",
-    "static/js/2.1904adab.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event-v2/static/js/2.1904adab.chunk.js.LICENSE.txt",
+    "static/js/2.1314348b.chunk.js.LICENSE.txt": "/website-react-examples/virtual-event-v2/static/js/2.1314348b.chunk.js.LICENSE.txt",
     "static/media/Card1.48eef34a.jpg": "/website-react-examples/virtual-event-v2/static/media/Card1.48eef34a.jpg",
     "static/media/Card2.076c5571.jpg": "/website-react-examples/virtual-event-v2/static/media/Card2.076c5571.jpg",
     "static/media/Card3.1a7584fa.jpg": "/website-react-examples/virtual-event-v2/static/media/Card3.1a7584fa.jpg",
@@ -70,8 +70,8 @@
   "entrypoints": [
     "static/js/runtime-main.ea5b35b8.js",
     "static/css/2.79086e1f.chunk.css",
-    "static/js/2.1904adab.chunk.js",
+    "static/js/2.1314348b.chunk.js",
     "static/css/main.dfb4c76f.chunk.css",
-    "static/js/main.7bc1eed1.chunk.js"
+    "static/js/main.76958bcd.chunk.js"
   ]
 }
