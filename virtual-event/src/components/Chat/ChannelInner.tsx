@@ -15,7 +15,7 @@ export const ChannelInner = () => {
           hideDeletedMessages
           separateGiphyPreview
         />
-        <MessageInput focus maxRows={2} grow overrideSubmitHandler={overrideSubmitHandler} />
+        <MessageInput maxRows={2} grow overrideSubmitHandler={overrideSubmitHandler} />
       </Window>
       <ThreadInner />
     </>
