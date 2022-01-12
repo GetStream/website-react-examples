@@ -78,9 +78,7 @@ const CreateChannel: React.FC<Props> = (props) => {
       const response = await client.queryUsers(
         {
           id: { $ne: client.userID as string },
-          $and: [
-            { name: { $autocomplete: inputText } },
-          ],
+          $and: [{ name: { $autocomplete: inputText } }],
         },
         { id: 1 },
         { limit: 6 },
