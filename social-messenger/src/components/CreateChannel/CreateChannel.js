@@ -56,7 +56,6 @@ const CreateChannel = ({ onClose, toggleMobile }) => {
           id: { $ne: client.userID },
           $and: [
             { name: { $autocomplete: inputText } },
-            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
           ],
         },
         { id: 1 },

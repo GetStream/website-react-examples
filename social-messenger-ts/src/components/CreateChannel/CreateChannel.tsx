@@ -80,7 +80,6 @@ const CreateChannel: React.FC<Props> = (props) => {
           id: { $ne: client.userID as string },
           $and: [
             { name: { $autocomplete: inputText } },
-            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
           ],
         },
         { id: 1 },
