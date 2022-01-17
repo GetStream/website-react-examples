@@ -5,23 +5,23 @@ import { StreamChat, Event } from 'stream-chat';
 enum Task {
   Reaction = 'react-to-message',
   Giphy = 'run-giphy',
-  SendMessage = 'send-message'
-} 
+  SendMessage = 'send-message',
+}
 
 type UseCheckList = {
-  chatClient?: StreamChat,
-  targetOrigin?: string,
+  chatClient?: StreamChat;
+  targetOrigin?: string;
 };
 
-export const useCheckList = ({chatClient, targetOrigin}: UseCheckList) => {
+export const useCheckList = ({ chatClient, targetOrigin }: UseCheckList) => {
   useEffect(() => {
     const notifyParent = (message: Task) => {
       if (targetOrigin) {
         window?.parent?.postMessage(message, targetOrigin);
       }
-    }
+    };
     const handleNewEvent = ({ type, message }: Event) => {
-      switch(type) {
+      switch (type) {
         case 'reaction.new':
           notifyParent(Task.Reaction);
           break;
@@ -35,10 +35,10 @@ export const useCheckList = ({chatClient, targetOrigin}: UseCheckList) => {
         default:
           break;
       }
-    } 
-    if(chatClient) {
+    };
+    if (chatClient) {
       chatClient.on(handleNewEvent);
     }
     return () => chatClient?.off(handleNewEvent);
-  }, [chatClient, targetOrigin])
-}
+  }, [chatClient, targetOrigin]);
+};
