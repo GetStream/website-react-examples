@@ -135,7 +135,6 @@ export const ChannelSearch = () => {
           id: { $ne: client.userID || '' },
           $and: [
             { name: { $autocomplete: text } },
-            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
           ],
         },
         { id: 1 },
