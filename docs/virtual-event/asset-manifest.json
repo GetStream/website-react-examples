@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/website-react-examples/virtual-event/static/css/main.9356be78.chunk.css",
-    "main.js": "/website-react-examples/virtual-event/static/js/main.fe195638.chunk.js",
-    "main.js.map": "/website-react-examples/virtual-event/static/js/main.fe195638.chunk.js.map",
-    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.b83325e4.js",
-    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.b83325e4.js.map",
+    "main.js": "/website-react-examples/virtual-event/static/js/main.2a5c179d.chunk.js",
+    "main.js.map": "/website-react-examples/virtual-event/static/js/main.2a5c179d.chunk.js.map",
+    "runtime-main.js": "/website-react-examples/virtual-event/static/js/runtime-main.c9a5db84.js",
+    "runtime-main.js.map": "/website-react-examples/virtual-event/static/js/runtime-main.c9a5db84.js.map",
     "static/css/2.873cd8a7.chunk.css": "/website-react-examples/virtual-event/static/css/2.873cd8a7.chunk.css",
     "static/js/2.f537a1b2.chunk.js": "/website-react-examples/virtual-event/static/js/2.f537a1b2.chunk.js",
     "static/js/2.f537a1b2.chunk.js.map": "/website-react-examples/virtual-event/static/js/2.f537a1b2.chunk.js.map",
-    "static/js/3.25eb36ce.chunk.js": "/website-react-examples/virtual-event/static/js/3.25eb36ce.chunk.js",
-    "static/js/3.25eb36ce.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.25eb36ce.chunk.js.map",
+    "static/js/3.abcd73ef.chunk.js": "/website-react-examples/virtual-event/static/js/3.abcd73ef.chunk.js",
+    "static/js/3.abcd73ef.chunk.js.map": "/website-react-examples/virtual-event/static/js/3.abcd73ef.chunk.js.map",
     "static/js/4.6ca182c1.chunk.js": "/website-react-examples/virtual-event/static/js/4.6ca182c1.chunk.js",
     "static/js/4.6ca182c1.chunk.js.map": "/website-react-examples/virtual-event/static/js/4.6ca182c1.chunk.js.map",
     "index.html": "/website-react-examples/virtual-event/index.html",
@@ -52,10 +52,10 @@
     "static/media/str-chat__icon-chevron-down.svg": "/website-react-examples/virtual-event/static/media/str-chat__icon-chevron-down.e0ed94c6.svg"
   },
   "entrypoints": [
-    "static/js/runtime-main.b83325e4.js",
+    "static/js/runtime-main.c9a5db84.js",
     "static/css/2.873cd8a7.chunk.css",
     "static/js/2.f537a1b2.chunk.js",
     "static/css/main.9356be78.chunk.css",
-    "static/js/main.fe195638.chunk.js"
+    "static/js/main.2a5c179d.chunk.js"
   ]
 }
