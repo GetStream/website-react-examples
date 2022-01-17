@@ -54,10 +54,7 @@ const CreateChannel = ({ onClose, toggleMobile }) => {
       const response = await client.queryUsers(
         {
           id: { $ne: client.userID },
-          $and: [
-            { name: { $autocomplete: inputText } },
-            { name: { $nin: ['Daniel Smith', 'Kevin Rosen', 'Jen Alexander'] } },
-          ],
+          $and: [{ name: { $autocomplete: inputText } }],
         },
         { id: 1 },
         { limit: 6 },
