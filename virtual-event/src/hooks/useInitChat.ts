@@ -1,14 +1,15 @@
 import { useEffect, useState } from 'react';
 import { Channel as StreamChannel, Event, LiteralStringForUnion, StreamChat } from 'stream-chat';
 
-import { getRandomImage, getRandomTitle } from '../components/Chat/utils';
+import { getRandomTitle } from '../components/Chat/utils';
 import { ChatType, useEventContext } from '../contexts/EventContext';
-
+import { useCheckList } from './useCheckList';
 const urlParams = new URLSearchParams(window.location.search);
 
 const apiKey = urlParams.get('apikey') || (process.env.REACT_APP_STREAM_KEY as string);
 const userId = urlParams.get('user') || (process.env.REACT_APP_USER_ID as string);
 const userToken = urlParams.get('user_token') || (process.env.REACT_APP_USER_TOKEN as string);
+const targetOrigin = urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
 
 export type AttachmentType = {};
 export type ChannelType = {};
@@ -28,6 +29,7 @@ export const useInitChat = () => {
 
   const { chatType, eventName } = useEventContext();
 
+  useCheckList({chatClient, targetOrigin});
   useEffect(() => {
     if (globalUnread && chatType === 'global-ve2') setGlobalUnread(false);
   }, [chatType, globalUnread]);
