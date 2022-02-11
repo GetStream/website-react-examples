@@ -141,3 +141,7 @@ body::-webkit-scrollbar-thumb {
     transition: unset;
   }
 }
+
+.str-chat-channel-list {
+  overflow: scroll;
+}
