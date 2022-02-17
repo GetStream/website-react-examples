@@ -39,7 +39,7 @@
   color: #000;
 }
 
-.str-chat.dark .messaging__channel-list__header__name {
+.dark.messaging__channel-list__header__name {
   color: white;
 }
 
@@ -62,12 +62,12 @@
   fill: #005fff;
 }
 
-.str-chat.dark .messaging__channel-list__header__button {
+.dark.messaging__channel-list__header__button {
   background: #3e3e41;
   box-shadow: none;
 }
 
-.str-chat.dark .messaging__channel-list__header__button svg path {
+.dark.messaging__channel-list__header__button svg path {
   fill: #e9e9ea;
 }
 

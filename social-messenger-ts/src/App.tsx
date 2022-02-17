@@ -145,7 +145,7 @@ const App = () => {
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
       <div className='messaging__sidebar' id='mobile-channel-list' onClick={toggleMobile}>
-        <MessagingChannelListHeader onCreateChannel={() => setIsCreating(!isCreating)} />
+        <MessagingChannelListHeader onCreateChannel={() => setIsCreating(!isCreating)} theme={theme} />
         <ChannelList
           filters={filters}
           sort={sort}
