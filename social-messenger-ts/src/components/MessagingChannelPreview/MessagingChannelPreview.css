@@ -9,6 +9,7 @@
   justify-content: space-between;
   align-items: center;
   padding-left: 8px;
+  width: 330px;
 }
 
 .channel-preview__container:hover {

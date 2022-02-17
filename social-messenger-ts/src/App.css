@@ -144,4 +144,5 @@ body::-webkit-scrollbar-thumb {
 
 .str-chat-channel-list {
   overflow: scroll;
+  height: 100%;
 }

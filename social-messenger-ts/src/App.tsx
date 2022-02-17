@@ -10,6 +10,7 @@ import {
   CreateChannel,
   CustomMessage,
   MessagingChannelList,
+  MessagingChannelListHeader,
   MessagingChannelPreview,
   MessagingInput,
   MessagingThreadHeader,
@@ -28,12 +29,11 @@ const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TAR
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
-// const filters = noChannelNameFilter
-//   ? { type: 'messaging', members: { $in: [user!] } }
-//   : { type: 'messaging', name: 'Social Demo', demo: 'social' };
-const filters = { type: 'messaging', members: { $in: [user!] } };
+const filters = noChannelNameFilter
+  ? { type: 'messaging', members: { $in: [user!] } }
+  : { type: 'messaging', name: 'Social Demo', demo: 'social' };
 
-const options = { state: true, watch: true, presence: true, limit: 16 };
+const options = { state: true, watch: true, presence: true, limit: 8 };
 
 const sort: ChannelSort = {
   last_message_at: -1,
@@ -140,26 +140,17 @@ const App = () => {
 
   const giphyContextValue = { giphyState, setGiphyState };
 
-  const CustomList = (props: any) => {
-    const { children } = props;
-
-    // return <div>{children}</div>;
-    return <div className='messaging__channel-list'>{children}</div>;
-  };
-
   if (!chatClient) return null;
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div id='mobile-channel-list' onClick={toggleMobile}>
+      <div className='messaging__sidebar' id='mobile-channel-list' onClick={toggleMobile}>
+        <MessagingChannelListHeader onCreateChannel={() => setIsCreating(!isCreating)} />
         <ChannelList
           filters={filters}
           sort={sort}
           options={options}
-          // List={CustomList}
-          List={(props) => (
-            <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />
-          )}
+          List={(props) => <MessagingChannelList {...props} />}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
       </div>

@@ -1,11 +1,8 @@
 import React, { useEffect } from 'react';
-import { Avatar, ChannelListMessengerProps, useChatContext } from 'stream-chat-react';
+import { ChannelListMessengerProps, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
 import { SkeletonLoader } from './SkeletonLoader';
-
-import { CreateChannelIcon } from '../../assets';
-import streamLogo from '../../assets/stream.png';
 
 import type { StreamChat } from 'stream-chat';
 
@@ -19,12 +16,8 @@ import type {
   UserType,
 } from '../../App';
 
-type Props = ChannelListMessengerProps & {
-  onCreateChannel: () => void;
-};
-
-const MessagingChannelList: React.FC<Props> = (props) => {
-  const { children, error = false, loading, onCreateChannel } = props;
+const MessagingChannelList: React.FC<ChannelListMessengerProps> = (props) => {
+  const { children, error = false, loading } = props;
 
   const { client, setActiveChannel } = useChatContext<
     AttachmentType,
@@ -35,8 +28,6 @@ const MessagingChannelList: React.FC<Props> = (props) => {
     ReactionType,
     UserType
   >();
-
-  const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (
@@ -70,42 +61,23 @@ const MessagingChannelList: React.FC<Props> = (props) => {
     }
   }, [loading]); // eslint-disable-line
 
-  const ListHeaderWrapper: React.FC = ({ children }) => {
-    return (
-      <div className='messaging__channel-list'>
-        <div className='messaging__channel-list__header'>
-          <Avatar image={image} name={name} size={40} />
-          <div className='messaging__channel-list__header__name'>{name || id}</div>
-          <button className='messaging__channel-list__header__button' onClick={onCreateChannel}>
-            <CreateChannelIcon />
-          </button>
-        </div>
-        {children}
-      </div>
-    );
-  };
-
   if (error) {
     return (
-      <ListHeaderWrapper>
-        <div className='messaging__channel-list__message'>
-          Error loading conversations, please try again momentarily.
-        </div>
-      </ListHeaderWrapper>
+      <div className='messaging__channel-list__message'>
+        Error loading conversations, please try again momentarily.
+      </div>
     );
   }
 
   if (loading) {
     return (
-      <ListHeaderWrapper>
-        <div className='messaging__channel-list__message'>
-          <SkeletonLoader />
-        </div>
-      </ListHeaderWrapper>
+      <div className='messaging__channel-list__message'>
+        <SkeletonLoader />
+      </div>
     );
   }
 
-  return <ListHeaderWrapper>{children}</ListHeaderWrapper>;
+  return <>{children}</>;
 };
 
 export default React.memo(MessagingChannelList);
