@@ -1,11 +1,13 @@
 .messaging__sidebar {
-  height: calc(100% - 110px);
+  height: 100%;
+  display: grid;
   float: left;
 }
 
 .messaging__channel-list {
   padding: 20px 10px 10px 10px;
   overflow-y: auto;
+  width: 330px;
 }
 
 @media screen and (max-width: 640px) {

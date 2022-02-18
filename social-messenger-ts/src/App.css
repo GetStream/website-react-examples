@@ -30,6 +30,19 @@ body::-webkit-scrollbar-thumb {
   height: 100%;
 }
 
+.str-chat-channel-list {
+  overflow: scroll;
+  height: 100%;
+}
+
+.dark.messaging__channel-list {
+  background: #212326;
+}
+
+.light.messaging__channel-list {
+  background: #fafafa;
+}
+
 .str-chat.str-chat-channel.messaging {
   background: #fafafa;
   box-shadow: 0px 0px 8px rgba(0, 0, 0, 0.06), 0px 2px 30px rgba(0, 0, 0, 0.1);
@@ -140,9 +153,4 @@ body::-webkit-scrollbar-thumb {
     box-shadow: unset;
     transition: unset;
   }
-}
-
-.str-chat-channel-list {
-  overflow: scroll;
-  height: 100%;
 }

@@ -150,7 +150,7 @@ const App = () => {
           filters={filters}
           sort={sort}
           options={options}
-          List={(props) => <MessagingChannelList {...props} />}
+          List={MessagingChannelList}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
       </div>

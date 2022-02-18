@@ -35,7 +35,7 @@ const MessagingChannelListHeader: React.FC<Props> = React.memo((props) => {
   const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
 
   return (
-    <div className='messaging__channel-list'>
+    <div className={`${theme} messaging__channel-list`}>
       <div className='messaging__channel-list__header'>
         <Avatar image={image} name={name} size={40} />
         <div className={`${theme} messaging__channel-list__header__name`}>{name || id}</div>
