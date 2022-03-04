@@ -1,8 +1,14 @@
+.messaging__sidebar {
+  height: 100%;
+  display: grid;
+  grid-template-rows: min-content;
+  float: left;
+}
+
 .messaging__channel-list {
   padding: 20px 10px 10px 10px;
-  width: 330px;
-  height: 100%;
   overflow-y: auto;
+  width: 330px;
 }
 
 @media screen and (max-width: 640px) {
@@ -36,7 +42,7 @@
   color: #000;
 }
 
-.str-chat.dark .messaging__channel-list__header__name {
+.dark.messaging__channel-list__header__name {
   color: white;
 }
 
@@ -59,12 +65,12 @@
   fill: #005fff;
 }
 
-.str-chat.dark .messaging__channel-list__header__button {
+.dark.messaging__channel-list__header__button {
   background: #3e3e41;
   box-shadow: none;
 }
 
-.str-chat.dark .messaging__channel-list__header__button svg path {
+.dark.messaging__channel-list__header__button svg path {
   fill: #e9e9ea;
 }
 

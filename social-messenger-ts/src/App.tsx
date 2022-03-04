@@ -10,6 +10,7 @@ import {
   CreateChannel,
   CustomMessage,
   MessagingChannelList,
+  MessagingChannelListHeader,
   MessagingChannelPreview,
   MessagingInput,
   MessagingThreadHeader,
@@ -143,14 +144,13 @@ const App = () => {
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div id='mobile-channel-list' onClick={toggleMobile}>
+      <div className='messaging__sidebar' id='mobile-channel-list' onClick={toggleMobile}>
+        <MessagingChannelListHeader onCreateChannel={() => setIsCreating(!isCreating)} theme={theme} />
         <ChannelList
           filters={filters}
           sort={sort}
           options={options}
-          List={(props) => (
-            <MessagingChannelList {...props} onCreateChannel={() => setIsCreating(!isCreating)} />
-          )}
+          List={MessagingChannelList}
           Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
         />
       </div>
