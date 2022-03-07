@@ -1,19 +1,19 @@
 {
   "files": {
     "main.css": "./static/css/main.da930d7f.chunk.css",
-    "main.js": "./static/js/main.b996dd19.chunk.js",
-    "main.js.map": "./static/js/main.b996dd19.chunk.js.map",
-    "runtime-main.js": "./static/js/runtime-main.80255699.js",
-    "runtime-main.js.map": "./static/js/runtime-main.80255699.js.map",
+    "main.js": "./static/js/main.9afc9a3d.chunk.js",
+    "main.js.map": "./static/js/main.9afc9a3d.chunk.js.map",
+    "runtime-main.js": "./static/js/runtime-main.c67e1f2f.js",
+    "runtime-main.js.map": "./static/js/runtime-main.c67e1f2f.js.map",
     "static/css/2.b2a3775f.chunk.css": "./static/css/2.b2a3775f.chunk.css",
-    "static/js/2.48cc5bed.chunk.js": "./static/js/2.48cc5bed.chunk.js",
-    "static/js/2.48cc5bed.chunk.js.map": "./static/js/2.48cc5bed.chunk.js.map",
-    "static/js/3.3c2cc78d.chunk.js": "./static/js/3.3c2cc78d.chunk.js",
-    "static/js/3.3c2cc78d.chunk.js.map": "./static/js/3.3c2cc78d.chunk.js.map",
+    "static/js/2.f50ebfc5.chunk.js": "./static/js/2.f50ebfc5.chunk.js",
+    "static/js/2.f50ebfc5.chunk.js.map": "./static/js/2.f50ebfc5.chunk.js.map",
+    "static/js/3.b2bf0373.chunk.js": "./static/js/3.b2bf0373.chunk.js",
+    "static/js/3.b2bf0373.chunk.js.map": "./static/js/3.b2bf0373.chunk.js.map",
     "index.html": "./index.html",
     "static/css/2.b2a3775f.chunk.css.map": "./static/css/2.b2a3775f.chunk.css.map",
     "static/css/main.da930d7f.chunk.css.map": "./static/css/main.da930d7f.chunk.css.map",
-    "static/js/2.48cc5bed.chunk.js.LICENSE.txt": "./static/js/2.48cc5bed.chunk.js.LICENSE.txt",
+    "static/js/2.f50ebfc5.chunk.js.LICENSE.txt": "./static/js/2.f50ebfc5.chunk.js.LICENSE.txt",
     "static/media/index.css": "./static/media/NotoColorEmoji-flags.148141ac.woff2",
     "static/media/photo-1438761681033-6461ffad8d80.613ac608.jpeg": "./static/media/photo-1438761681033-6461ffad8d80.613ac608.jpeg",
     "static/media/photo-1463453091185-61582044d556.3619e52a.jpeg": "./static/media/photo-1463453091185-61582044d556.3619e52a.jpeg",
@@ -44,10 +44,10 @@
     "static/media/stream.408c159b.png": "./static/media/stream.408c159b.png"
   },
   "entrypoints": [
-    "static/js/runtime-main.80255699.js",
+    "static/js/runtime-main.c67e1f2f.js",
     "static/css/2.b2a3775f.chunk.css",
-    "static/js/2.48cc5bed.chunk.js",
+    "static/js/2.f50ebfc5.chunk.js",
     "static/css/main.da930d7f.chunk.css",
-    "static/js/main.b996dd19.chunk.js"
+    "static/js/main.9afc9a3d.chunk.js"
   ]
 }
