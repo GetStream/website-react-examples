@@ -31,7 +31,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .str-chat-channel-list {
-  overflow: scroll;
+  overflow: auto;
   height: 100%;
 }
 
