@@ -6,17 +6,10 @@ import _debounce from 'lodash/debounce';
 import { XButton, XButtonBackground } from '../../assets';
 
 import './CreateChannel.css';
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
 
-const UserResult = ({ user }: { user: UserResponse<UserType> }) => (
+import type { StreamChatGenerics } from '../../types';
+
+const UserResult = ({ user }: { user: UserResponse<StreamChatGenerics> }) => (
   <li className='messaging-create-channel__user-result'>
     <Avatar image={user.image} size={40} />
     {user.online && <div className='messaging-create-channel__user-result-online' />}
@@ -34,23 +27,15 @@ type Props = {
 const CreateChannel: React.FC<Props> = (props) => {
   const { onClose, toggleMobile } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();
 
   const [focusedUser, setFocusedUser] = useState<number>();
   const [inputText, setInputText] = useState('');
   const [resultsOpen, setResultsOpen] = useState(false);
   const [searchEmpty, setSearchEmpty] = useState(false);
   const [searching, setSearching] = useState(false);
-  const [selectedUsers, setSelectedUsers] = useState<UserResponse<UserType>[]>([]);
-  const [users, setUsers] = useState<UserResponse<UserType>[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<UserResponse<StreamChatGenerics>[]>([]);
+  const [users, setUsers] = useState<UserResponse<StreamChatGenerics>[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
@@ -126,7 +111,7 @@ const CreateChannel: React.FC<Props> = (props) => {
     onClose();
   };
 
-  const addUser = (addedUser: UserResponse<UserType>) => {
+  const addUser = (addedUser: UserResponse<StreamChatGenerics>) => {
     const isAlreadyAdded = selectedUsers.find((user) => user.id === addedUser.id);
     if (isAlreadyAdded) return;
 
@@ -138,7 +123,7 @@ const CreateChannel: React.FC<Props> = (props) => {
     }
   };
 
-  const removeUser = (user: UserResponse<UserType>) => {
+  const removeUser = (user: UserResponse<StreamChatGenerics>) => {
     const newUsers = selectedUsers.filter((item) => item.id !== user.id);
     setSelectedUsers(newUsers);
     if (inputRef.current) {
