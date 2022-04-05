@@ -1,7 +1,5 @@
 import type { ChannelMemberResponse } from 'stream-chat';
 
-import type { UserType } from '../App';
-
 import avatar1 from './userImages/photo-1438761681033-6461ffad8d80.jpeg';
 import avatar2 from './userImages/photo-1463453091185-61582044d556.jpeg';
 import avatar3 from './userImages/photo-1503467913725-8484b65b0715.jpeg';
@@ -26,6 +24,8 @@ import avatar21 from './userImages/photo-1502378735452-bc7d86632805.jpeg';
 import avatar22 from './userImages/photo-1546967191-fdfb13ed6b1e.jpeg';
 import avatar23 from './userImages/photo-1502937406922-305bb2789e95.jpeg';
 import avatar24 from './userImages/photo-1552058544-f2b08422138a.jpeg';
+
+import type { StreamChatGenerics } from '../types';
 
 export { ChannelInfoIcon } from './ChannelInfoIcon';
 export { ChannelSaveIcon } from './ChannelSaveIcon';
@@ -71,7 +71,7 @@ export const getRandomImage = () => {
   return randomImages[index];
 };
 
-export const getCleanImage = (member: ChannelMemberResponse<UserType>) => {
+export const getCleanImage = (member: ChannelMemberResponse<StreamChatGenerics>) => {
   let cleanImage = member.user?.image || '';
 
   const cleanIndex = randomImages.indexOf(cleanImage);
