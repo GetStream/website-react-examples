@@ -11,17 +11,9 @@ import {
 
 import './MessagingInput.css';
 
-import {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  GiphyContext,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
+import {GiphyContext} from '../../App';
 import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
+import type { StreamChatGenerics } from '../../types';
 
 const GiphyIcon = () => (
   <div className='giphy-icon__wrapper'>
@@ -33,25 +25,9 @@ const GiphyIcon = () => (
 const MessagingInput: React.FC<MessageInputProps> = () => {
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>();
 
-  const messageInput = useMessageInputContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const messageInput = useMessageInputContext<StreamChatGenerics>();
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -60,8 +36,6 @@ const MessagingInput: React.FC<MessageInputProps> = () => {
       const deletePressed =
         event.nativeEvent instanceof InputEvent &&
         event.nativeEvent.inputType === 'deleteContentBackward'
-          ? true
-          : false;
 
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);

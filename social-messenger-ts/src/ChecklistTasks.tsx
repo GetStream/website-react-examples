@@ -1,15 +1,7 @@
 import { useEffect } from 'react';
 import type { Event, StreamChat } from 'stream-chat';
 
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from './App';
+import type { StreamChatGenerics } from './types';
 
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
@@ -32,15 +24,7 @@ export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string
     const notify = notifyParent(targetOrigin);
 
     const handleNewEvent = (
-      props: Event<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
-      >,
+      props: Event<StreamChatGenerics>,
     ) => {
       const { message, type } = props;
 

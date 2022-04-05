@@ -1,9 +1,9 @@
 import React, { useEffect, useState } from 'react';
-import { ChannelSort, LiteralStringForUnion, StreamChat } from 'stream-chat';
-import { Chat, Channel, ChannelList } from 'stream-chat-react';
+import { ChannelSort, StreamChat } from 'stream-chat';
+import { Channel, ChannelList, Chat } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
-import 'stream-chat-react/dist/css/index.css';
+import '@stream-io/stream-chat-css/dist/css/index.css';
 import './App.css';
 
 import {
@@ -17,6 +17,7 @@ import {
 
 import { getRandomImage } from './assets';
 import { ChannelInner } from './components/ChannelInner/ChannelInner';
+import type { StreamChatGenerics } from './types';
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -37,7 +38,6 @@ const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort: ChannelSort = {
   last_message_at: -1,
   updated_at: -1,
-  cid: 1,
 };
 
 const userToConnect: { id: string; name?: string; image?: string } = {
@@ -50,14 +50,6 @@ if (skipNameImageSet) {
   delete userToConnect.name;
   delete userToConnect.image;
 }
-
-export type AttachmentType = {};
-export type ChannelType = { demo?: string };
-export type CommandType = LiteralStringForUnion;
-export type EventType = {};
-export type MessageType = {};
-export type ReactionType = {};
-export type UserType = { image?: string };
 
 export const GiphyContext = React.createContext(
   {} as { giphyState: boolean; setGiphyState: React.Dispatch<React.SetStateAction<boolean>> },
@@ -74,15 +66,7 @@ const App = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
-      >(apiKey!);
+      const client = StreamChat.getInstance<StreamChatGenerics>(apiKey!);
       await client.connectUser(userToConnect, userToken);
       setChatClient(client);
     };

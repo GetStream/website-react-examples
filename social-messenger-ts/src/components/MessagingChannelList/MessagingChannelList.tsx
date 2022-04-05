@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Avatar, ChannelListTeamProps, useChatContext } from 'stream-chat-react';
+import { Avatar, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
 import { SkeletonLoader } from './SkeletonLoader';
@@ -8,47 +8,24 @@ import { CreateChannelIcon } from '../../assets';
 import streamLogo from '../../assets/stream.png';
 
 import type { StreamChat } from 'stream-chat';
+import type { ChannelListMessengerProps } from 'stream-chat-react/dist/components/ChannelList/ChannelListMessenger';
 
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
+import type { StreamChatGenerics } from '../../types';
 
-type Props = ChannelListTeamProps & {
+type Props = ChannelListMessengerProps & {
   onCreateChannel: () => void;
 };
 
 const MessagingChannelList: React.FC<Props> = (props) => {
   const { children, error = false, loading, onCreateChannel } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();
 
   const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
 
   useEffect(() => {
     const getDemoChannel = async (
-      client: StreamChat<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
-      >,
+      client: StreamChat<StreamChatGenerics>,
     ) => {
       const channel = client.channel('messaging', 'first', {
         name: 'Social Demo',

@@ -9,17 +9,8 @@ import './MessagingChannelPreview.css';
 
 import type { Channel, ChannelMemberResponse } from 'stream-chat';
 
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
-
 import { getCleanImage } from '../../assets';
+import type { StreamChatGenerics } from '../../types';
 
 const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   if (members.length === 1) {
@@ -105,25 +96,16 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
   return `${members[0]?.user?.name || defaultName}, ${members[1]?.user?.name || defaultName}`;
 };
 
-type Props = ChannelPreviewUIComponentProps & {
+type Props = ChannelPreviewUIComponentProps<StreamChatGenerics> & {
   channel: Channel;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  latestMessage?: string;
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
 const MessagingChannelPreview: React.FC<Props> = (props) => {
   const { channel, latestMessage, setActiveChannel, setIsCreating } = props;
 
-  const { channel: activeChannel, client } = useChatContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
 
   const members = Object.values(channel.state.members).filter(
     ({ user }) => user?.id !== client.userID,
