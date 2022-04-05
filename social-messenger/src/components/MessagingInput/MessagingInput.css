@@ -12,6 +12,11 @@
   border-top: 1px solid rgba(0, 0, 0, 0.16);
 }
 
+.messaging-input__container {
+  display: flex;
+  align-items: center;
+}
+
 .messaging-input__input-wrapper {
   display: flex;
   align-items: center;
@@ -23,6 +28,7 @@
   background: #ffffff;
   border: 2px solid rgba(0, 0, 0, 0.16);
   transition: border 0.2s ease-in-out;
+  position: relative;
 }
 
 .str-chat.dark .messaging-input__input-wrapper {
