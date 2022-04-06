@@ -59,6 +59,7 @@
   border: none !important;
   outline: none !important;
   border-radius: 20px;
+  padding: 11px;
 }
 
 .str-chat.dark .str-chat__messaging-input .str-chat__textarea textarea {
