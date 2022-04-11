@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@stream-io/stream-chat-css": "^2.8.0",
+    "@stream-io/stream-chat-css": "^2.8.1",
     "lodash.debounce": "^4.0.8",
     "react": "17.0.2",
     "react-color": "^2.19.3",
@@ -11,7 +11,7 @@
     "react-file-utils": "1.1.0",
     "react-scripts": "4.0.3",
     "stream-chat": "^6.4.0",
-    "stream-chat-react": "^8.0.0",
+    "stream-chat-react": "^8.1.0",
     "styled-components": "^5.2.1"
   },
   "scripts": {
