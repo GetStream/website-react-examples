@@ -6,40 +6,16 @@ import { SkeletonLoader } from './SkeletonLoader';
 
 import type { StreamChat } from 'stream-chat';
 
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
+import type { StreamChatGenerics } from '../../types';
 
 const MessagingChannelList: React.FC<ChannelListMessengerProps> = (props) => {
   const { children, error = false, loading } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();
 
   useEffect(() => {
     const getDemoChannel = async (
-      client: StreamChat<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
-      >,
+      client: StreamChat<StreamChatGenerics>,
     ) => {
       const channel = client.channel('messaging', 'first', {
         name: 'Social Demo',

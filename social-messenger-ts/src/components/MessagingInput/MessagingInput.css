@@ -1,6 +1,6 @@
 .str-chat__messaging-input {
   background: #ffffff;
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.08);
   display: flex;
   align-items: center;
   padding: 8px;
@@ -10,6 +10,11 @@
 .str-chat.dark .str-chat__messaging-input {
   background: #2e3033;
   border-top: 1px solid rgba(0, 0, 0, 0.16);
+}
+
+.messaging-input__container {
+  display: flex;
+  align-items: center;
 }
 
 .messaging-input__input-wrapper {
@@ -23,6 +28,7 @@
   background: #ffffff;
   border: 2px solid rgba(0, 0, 0, 0.16);
   transition: border 0.2s ease-in-out;
+  position: relative;
 }
 
 .str-chat.dark .messaging-input__input-wrapper {
@@ -47,7 +53,7 @@
   background: #ffffff;
   font-size: 14px;
   line-height: 16px;
-  min-height: 0px;
+  min-height: 0;
   transition: box-shadow 0.2s ease-in-out;
   color: rgba(0, 0, 0, 0.9);
   border: none !important;
@@ -151,6 +157,11 @@ div.rta__autocomplete.str-chat__emojisearch {
   background: #fafafa;
   margin: 4px 10px;
   border-radius: 16px !important;
+}
+
+.str-chat__thread div.rta__autocomplete.str-chat__emojisearch {
+  width: 100%;
+  left: -10px;
 }
 
 .str-chat__user-item {

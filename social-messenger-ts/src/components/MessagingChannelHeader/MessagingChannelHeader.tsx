@@ -9,15 +9,7 @@ import { ChannelInfoIcon, ChannelSaveIcon, getCleanImage, HamburgerIcon } from '
 
 import type { ChannelMemberResponse } from 'stream-chat';
 
-import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
-} from '../../App';
+import type { StreamChatGenerics } from '../../types';
 
 const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   if (members.length === 1) {
@@ -81,25 +73,9 @@ type Props = {
 const MessagingChannelHeader: React.FC<Props> = (props) => {
   const { theme, toggleMobile } = props;
 
-  const { client } = useChatContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { client } = useChatContext<StreamChatGenerics>();
 
-  const { channel } = useChannelStateContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  >();
+  const { channel } = useChannelStateContext<StreamChatGenerics>();
 
   const [channelName, setChannelName] = useState(channel.data?.name || '');
   const [isEditing, setIsEditing] = useState(false);

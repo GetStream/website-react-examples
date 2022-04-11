@@ -1,6 +1,6 @@
 import type { ChannelMemberResponse } from 'stream-chat';
 
-import type { UserType } from '../App';
+import type { StreamChatGenerics } from '../types';
 
 import avatar1 from './userImages/photo-1438761681033-6461ffad8d80.jpeg';
 import avatar2 from './userImages/photo-1463453091185-61582044d556.jpeg';
@@ -71,7 +71,7 @@ export const getRandomImage = () => {
   return randomImages[index];
 };
 
-export const getCleanImage = (member: ChannelMemberResponse<UserType>) => {
+export const getCleanImage = (member: ChannelMemberResponse<StreamChatGenerics>) => {
   let cleanImage = member.user?.image || '';
 
   const cleanIndex = randomImages.indexOf(cleanImage);

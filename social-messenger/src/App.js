@@ -3,7 +3,7 @@ import { StreamChat } from 'stream-chat';
 import { Chat, Channel, ChannelList } from 'stream-chat-react';
 import { useChecklist } from './ChecklistTasks';
 
-import 'stream-chat-react/dist/css/index.css';
+import '@stream-io/stream-chat-css/dist/css/index.css';
 import './App.css';
 
 import {
@@ -37,7 +37,6 @@ const options = { state: true, watch: true, presence: true, limit: 8 };
 const sort = {
   last_message_at: -1,
   updated_at: -1,
-  cid: 1,
 };
 
 const userToConnect = { id: user, name: user, image: getRandomImage() };
