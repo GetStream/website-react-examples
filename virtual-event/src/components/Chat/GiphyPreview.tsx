@@ -9,8 +9,9 @@ import {
 } from 'stream-chat-react';
 
 import { GiphyCommandIcon, VideoViewersIcon } from '../../assets';
+import {StreamChatType} from '../../hooks/useInitChat';
 
-const CustomAttachmentActions: React.FC<AttachmentActionsProps> = (props) => {
+const CustomAttachmentActions: React.FC<AttachmentActionsProps<StreamChatType>> = (props) => {
   const { actionHandler, actions } = props;
 
   const handleClick = async (
@@ -64,7 +65,7 @@ const CustomCard: React.FC<CardProps> = (props) => {
   return <Card {...props} />;
 };
 
-export const GiphyPreview: React.FC<GiphyPreviewMessageProps> = (props) => {
+export const GiphyPreview: React.FC<GiphyPreviewMessageProps<StreamChatType>> = (props) => {
   const { message } = props;
 
   const handleAction = useActionHandler(message);
@@ -74,7 +75,7 @@ export const GiphyPreview: React.FC<GiphyPreviewMessageProps> = (props) => {
   return (
     <div className='giphy'>
       <div className='giphy-preview'>
-        <Attachment
+        <Attachment<StreamChatType>
           actionHandler={handleAction}
           attachments={message.attachments}
           AttachmentActions={CustomAttachmentActions}

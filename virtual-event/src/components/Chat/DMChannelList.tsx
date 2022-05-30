@@ -22,6 +22,7 @@ import type {
   ChannelSort,
   UserResponse,
 } from 'stream-chat';
+import {StreamChatType} from '../../hooks/useInitChat';
 
 export const SkeletonLoader: React.FC = () => (
   <ul className='dm-loading'>
@@ -66,7 +67,7 @@ const ListUI: React.FC<ChannelListMessengerProps> = (props) => {
 };
 
 const PreviewUI: React.FC<
-  ChannelPreviewUIComponentProps & {
+  ChannelPreviewUIComponentProps<StreamChatType> & {
     setDmChannel: React.Dispatch<React.SetStateAction<StreamChannel | undefined>>;
   }
 > = (props) => {

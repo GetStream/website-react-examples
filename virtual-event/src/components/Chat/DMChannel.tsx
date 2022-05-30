@@ -12,6 +12,7 @@ import { ThreadHeader } from './ThreadHeader';
 import { UserActionsDropdown } from './UserActionsDropdown';
 
 import { CloseX, Ellipse } from '../../assets';
+import {StreamChatType} from '../../hooks/useInitChat';
 
 type Props = {
   dmChannel: StreamChannel;
@@ -51,7 +52,7 @@ export const DMChannel: React.FC<Props> = (props) => {
           setDropdownOpen={setDropdownOpen}
         />
       )}
-      <Channel
+      <Channel<StreamChatType>
         AutocompleteSuggestionHeader={SuggestionHeader}
         AutocompleteSuggestionItem={SuggestionListItem}
         channel={dmChannel}

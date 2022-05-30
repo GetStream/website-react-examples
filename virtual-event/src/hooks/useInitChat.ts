@@ -11,13 +11,23 @@ const userId = urlParams.get('user') || (process.env.REACT_APP_USER_ID as string
 const userToken = urlParams.get('user_token') || (process.env.REACT_APP_USER_TOKEN as string);
 const targetOrigin = urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
 
-export type AttachmentType = {};
-export type ChannelType = {};
-export type CommandType = LiteralStringForUnion;
-export type EventType = {};
-export type MessageType = { up_votes?: string[] };
-export type ReactionType = {};
+type AttachmentType = {};
+type ChannelType = {};
+type CommandType = LiteralStringForUnion;
+type EventType = {};
+type MessageType = { up_votes?: string[] };
+type ReactionType = {};
 export type UserType = { image?: string; title?: string };
+
+export type StreamChatType = {
+  attachmentType: AttachmentType;
+  channelType: ChannelType;
+  commandType: CommandType;
+  eventType: EventType;
+  messageType: MessageType;
+  reactionType: ReactionType;
+  userType: UserType;
+}
 
 export const useInitChat = () => {
   const [chatClient, setChatClient] = useState<StreamChat>();
@@ -101,13 +111,7 @@ export const useInitChat = () => {
   useEffect(() => {
     const initChat = async () => {
       const client = StreamChat.getInstance<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
+        StreamChatType
       >(apiKey);
 
       if (process.env.REACT_APP_CHAT_SERVER_ENDPOINT) {

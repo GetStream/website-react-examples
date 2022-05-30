@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Chat, Channel, CustomStyles } from 'stream-chat-react';
-import 'stream-chat-css/dist/css/index.css';
+import 'stream-chat-react/dist/css/index.css';
 
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
@@ -19,7 +19,7 @@ import { UserActionsModal } from './UserActionsModal';
 
 import { useEventContext } from '../../contexts/EventContext';
 import { GiphyContextProvider } from '../../contexts/GiphyContext';
-import { useInitChat } from '../../hooks/useInitChat';
+import { StreamChatType, useInitChat } from '../../hooks/useInitChat';
 
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
 
@@ -110,7 +110,7 @@ export const ChatContainer: React.FC = () => {
               />
             ) : (
               currentChannel && (
-                <Channel
+                <Channel<StreamChatType>
                   AutocompleteSuggestionHeader={SuggestionHeader}
                   AutocompleteSuggestionItem={SuggestionListItem}
                   channel={currentChannel}

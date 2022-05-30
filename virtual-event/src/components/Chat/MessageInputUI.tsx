@@ -10,8 +10,9 @@ import {
 import { CommandBolt, EmojiPickerIcon, GiphyIcon, GiphySearch, SendArrow } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 import { useGiphyContext } from '../../contexts/GiphyContext';
+import {StreamChatType} from '../../hooks/useInitChat';
 
-type Props = MessageInputProps & {
+type Props = MessageInputProps<StreamChatType> & {
   checked?: boolean;
   setChecked?: React.Dispatch<React.SetStateAction<boolean>>;
   threadInput?: boolean;

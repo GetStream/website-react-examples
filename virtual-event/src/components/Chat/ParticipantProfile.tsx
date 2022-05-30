@@ -6,17 +6,17 @@ import { UserActionsDropdown } from './UserActionsDropdown';
 import { CloseX, Ellipse, LinkedInLogo, TwitterLogo } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 
-import type { Channel, UserResponse } from 'stream-chat';
+import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
 
-import type { UserType } from '../../hooks/useInitChat';
+import type { StreamChatType } from '../../hooks/useInitChat';
 
-type Props<UserType> = {
-  participantProfile: UserResponse<UserType>;
+type Props<StreamChatType extends ExtendableGenerics> = {
+  participantProfile: UserResponse<StreamChatType>;
   setDmChannel: React.Dispatch<React.SetStateAction<Channel | undefined>>;
   setParticipantProfile: React.Dispatch<React.SetStateAction<UserResponse | undefined>>;
 };
 
-export const ParticipantProfile = (props: Props<UserType>) => {
+export const ParticipantProfile = (props: Props<StreamChatType>) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
 
   const { client } = useChatContext();

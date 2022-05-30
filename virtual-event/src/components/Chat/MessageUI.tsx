@@ -21,13 +21,7 @@ import { MessageActionsEllipse, QAThumb, ReactionSmiley } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 
 import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
+  StreamChatType
 } from '../../hooks/useInitChat';
 
 type OptionsProps = {
@@ -99,16 +93,7 @@ const ReactionSelector: React.FC<{ isTopMessage: boolean }> = ({ isTopMessage })
   );
 };
 
-export const MessageUI: React.FC<
-  MessageUIComponentProps<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
-  > & { setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>> }
+export const MessageUI: React.FC<MessageUIComponentProps<StreamChatType> & { setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>> }
 > = (props) => {
   const { setMessageActionUser } = props;
 
@@ -118,13 +103,7 @@ export const MessageUI: React.FC<
 
   const { chatType, themeModalOpen } = useEventContext();
   const { handleOpenThread, message } = useMessageContext<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
+    StreamChatType
   >();
 
   const replyCount = useRef(message.reply_count);
@@ -251,7 +230,7 @@ export const MessageUI: React.FC<
           <div className='message-ui-content-top-time'>{getTimeSinceMessage()}</div>
         </div>
         <div className='message-ui-content-bottom'>{message.text}</div>
-        {message.attachments?.length ? <Attachment attachments={message.attachments} /> : null}
+        {message.attachments?.length ? <Attachment<StreamChatType> attachments={message.attachments} /> : null}
         <MessageRepliesCountButton onClick={customOpenThread} reply_count={repliesToShow} />
         <SimpleReactionsList reactionOptions={customReactions} />
       </div>

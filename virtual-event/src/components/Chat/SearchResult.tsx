@@ -2,24 +2,12 @@ import React, { useEffect, useState } from 'react';
 import { Avatar, isChannel, SearchResultItemProps } from 'stream-chat-react';
 
 import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
+  StreamChatType
 } from '../../hooks/useInitChat';
 
 export const SearchResult: React.FC<
   SearchResultItemProps<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
+  StreamChatType
   >
 > = (props) => {
   const { focusedUser, index, result, selectResult } = props;

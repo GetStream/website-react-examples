@@ -14,13 +14,7 @@ import { SearchResult } from './SearchResult';
 import { ClearSearchButton, CloseX, SearchIcon } from '../../assets';
 
 import type {
-  AttachmentType,
-  ChannelType,
-  CommandType,
-  EventType,
-  MessageType,
-  ReactionType,
-  UserType,
+  StreamChatType
 } from '../../hooks/useInitChat';
 
 type Props = {
@@ -31,13 +25,7 @@ type Props = {
 
 const SearchInput: React.FC<
   SearchInputProps<
-    AttachmentType,
-    ChannelType,
-    CommandType,
-    EventType,
-    MessageType,
-    ReactionType,
-    UserType
+  StreamChatType
   >
 > = (props) => {
   const { channelSearchParams, inputRef, onSearch, query } = props;
@@ -108,13 +96,7 @@ export const ParticipantSearch: React.FC<Props> = (props) => {
         <div className='search-header-title'>Participants</div>
       </div>
       <ChannelSearch<
-        AttachmentType,
-        ChannelType,
-        CommandType,
-        EventType,
-        MessageType,
-        ReactionType,
-        UserType
+    StreamChatType
       >
         onSelectResult={handleSelectResult}
         searchQueryParams={extraParams}
