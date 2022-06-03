@@ -11,7 +11,7 @@ import {
 
 import './MessagingInput.css';
 
-import {GiphyContext} from '../../App';
+import { GiphyContext } from '../../App';
 import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 import type { StreamChatGenerics } from '../../types';
@@ -26,7 +26,11 @@ const GiphyIcon = () => (
 const MessagingInput: React.FC<MessageInputProps> = () => {
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>();
+  const {
+    acceptedFiles,
+    maxNumberOfFiles,
+    multipleUploads,
+  } = useChannelStateContext<StreamChatGenerics>();
 
   const messageInput = useMessageInputContext<StreamChatGenerics>();
 

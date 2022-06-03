@@ -8,7 +8,7 @@ import {
   Thread,
 } from 'stream-chat-react';
 
-import { GiphyContext, } from '../../App';
+import { GiphyContext } from '../../App';
 import { MessagingChannelHeader, MessagingInput } from '../../components';
 
 import type { MessageToSend } from 'stream-chat-react';

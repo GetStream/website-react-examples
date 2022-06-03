@@ -23,7 +23,10 @@ const MessagingChannelListHeader: React.FC<Props> = React.memo((props) => {
       <div className='messaging__channel-list__header'>
         <Avatar image={image} name={name} size={40} />
         <div className={`${theme} messaging__channel-list__header__name`}>{name || id}</div>
-        <button className={`${theme} messaging__channel-list__header__button`} onClick={onCreateChannel}>
+        <button
+          className={`${theme} messaging__channel-list__header__button`}
+          onClick={onCreateChannel}
+        >
           <CreateChannelIcon />
         </button>
       </div>
