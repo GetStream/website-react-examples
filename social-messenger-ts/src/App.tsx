@@ -68,7 +68,10 @@ const App = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance<StreamChatGenerics>(apiKey!, { enableInsights: true, enableWSFallback: true });
+      const client = StreamChat.getInstance<StreamChatGenerics>(apiKey!, {
+        enableInsights: true,
+        enableWSFallback: true,
+      });
       await client.connectUser(userToConnect, userToken);
       setChatClient(client);
     };
@@ -130,13 +133,16 @@ const App = () => {
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
       <div className='messaging__sidebar' id='mobile-channel-list' onClick={toggleMobile}>
-        <MessagingChannelListHeader onCreateChannel={() => setIsCreating(!isCreating)} theme={theme} />
+        <MessagingChannelListHeader
+          onCreateChannel={() => setIsCreating(!isCreating)}
+          theme={theme}
+        />
         <ChannelList
           filters={filters}
           sort={sort}
           options={options}
           List={MessagingChannelList}
-          Preview={(props) => <MessagingChannelPreview {...props} {...{ setIsCreating }} />}
+          Preview={(props) => <MessagingChannelPreview {...props} setIsCreating={setIsCreating} />}
         />
       </div>
       <div>

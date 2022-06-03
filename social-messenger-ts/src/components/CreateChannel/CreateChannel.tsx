@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 import type { UserResponse } from 'stream-chat';
-import _debounce from 'lodash/debounce';
+import _debounce from 'lodash.debounce';
 
 import { XButton, XButtonBackground } from '../../assets';
 
