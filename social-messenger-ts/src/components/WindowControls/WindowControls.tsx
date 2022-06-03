@@ -7,7 +7,7 @@ type Props = {
   setTheme: (theme: string) => void;
 };
 
-const WindowControls: React.FC<Props> = ({ theme, setTheme }) => {
+const WindowControls = ({ theme, setTheme }: Props) => {
   const darkClick = () => {
     if (theme === 'dark') return;
     setTheme('dark');

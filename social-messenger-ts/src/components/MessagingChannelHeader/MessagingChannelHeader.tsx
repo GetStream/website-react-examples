@@ -70,7 +70,7 @@ type Props = {
   toggleMobile: () => void;
 };
 
-const MessagingChannelHeader: React.FC<Props> = (props) => {
+const MessagingChannelHeader = (props: Props) => {
   const { theme, toggleMobile } = props;
 
   const { client } = useChatContext<StreamChatGenerics>();

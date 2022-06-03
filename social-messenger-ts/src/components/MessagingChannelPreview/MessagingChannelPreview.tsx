@@ -7,7 +7,7 @@ import {
 } from 'stream-chat-react';
 import { getCleanImage } from '../../assets';
 
-import type { Dispatch, FC, SetStateAction } from 'react';
+import type { Dispatch, SetStateAction } from 'react';
 import type { Channel, ChannelMemberResponse } from 'stream-chat';
 import type { StreamChatGenerics } from '../../types';
 
@@ -101,7 +101,7 @@ type Props = ChannelPreviewUIComponentProps & {
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
-const MessagingChannelPreview: FC<Props> = (props) => {
+const MessagingChannelPreview = (props: Props) => {
   const { channel, lastMessage, setActiveChannel, setIsCreating } = props;
   const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
 

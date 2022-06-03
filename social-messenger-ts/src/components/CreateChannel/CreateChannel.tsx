@@ -24,7 +24,7 @@ type Props = {
   toggleMobile: () => void;
 };
 
-const CreateChannel: React.FC<Props> = (props) => {
+const CreateChannel = (props: Props) => {
   const { onClose, toggleMobile } = props;
 
   const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();

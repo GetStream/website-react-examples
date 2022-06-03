@@ -11,7 +11,7 @@ type Props = {
   theme: string;
 };
 
-const MessagingChannelListHeader: React.FC<Props> = React.memo((props) => {
+const MessagingChannelListHeader = React.memo((props: Props) => {
   const { onCreateChannel, theme } = props;
 
   const { client } = useChatContext<StreamChatGenerics>();

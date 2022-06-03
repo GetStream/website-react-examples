@@ -3,7 +3,6 @@ import { ImageDropzone } from 'react-file-utils';
 import {
   ChatAutoComplete,
   EmojiPicker,
-  MessageInputProps,
   UploadsPreview,
   useChannelStateContext,
   useMessageInputContext,
@@ -23,7 +22,7 @@ const GiphyIcon = () => (
   </div>
 );
 
-const MessagingInput: React.FC<MessageInputProps> = () => {
+const MessagingInput = () => {
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
   const {

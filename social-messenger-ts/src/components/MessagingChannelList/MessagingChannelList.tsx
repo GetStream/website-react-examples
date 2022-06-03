@@ -1,4 +1,4 @@
-import React, { FC, PropsWithChildren, useEffect } from 'react';
+import React, { PropsWithChildren, useEffect } from 'react';
 import { ChannelListMessengerProps, useChatContext } from 'stream-chat-react';
 
 import './MessagingChannelList.css';
@@ -7,7 +7,7 @@ import { SkeletonLoader } from './SkeletonLoader';
 import type { StreamChat } from 'stream-chat';
 import type { StreamChatGenerics } from '../../types';
 
-const MessagingChannelList: FC<PropsWithChildren<ChannelListMessengerProps>> = (props) => {
+const MessagingChannelList = (props: PropsWithChildren<ChannelListMessengerProps>) => {
   const { children, error = false, loading } = props;
   const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();
 

@@ -20,7 +20,7 @@ export type ChannelInnerProps = {
   theme: string;
 };
 
-export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
+export const ChannelInner = (props: ChannelInnerProps) => {
   const { theme, toggleMobile } = props;
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
