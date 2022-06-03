@@ -1,17 +1,15 @@
+import './MessagingChannelPreview.css';
 import {
   Avatar,
   ChannelPreviewUIComponentProps,
   ChatContextValue,
   useChatContext,
 } from 'stream-chat-react';
-
-import './MessagingChannelPreview.css';
-
-import type { Channel, ChannelMemberResponse } from 'stream-chat';
-
-import type { StreamChatGenerics } from '../../types';
-
 import { getCleanImage } from '../../assets';
+
+import type { Dispatch, FC, SetStateAction } from 'react';
+import type { Channel, ChannelMemberResponse } from 'stream-chat';
+import type { StreamChatGenerics } from '../../types';
 
 const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   if (members.length === 1) {
@@ -99,13 +97,12 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
 
 type Props = ChannelPreviewUIComponentProps & {
   channel: Channel;
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
+  setIsCreating: Dispatch<SetStateAction<boolean>>;
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
-const MessagingChannelPreview: React.FC<Props> = (props) => {
-  const { channel, latestMessage, setActiveChannel, setIsCreating } = props;
-
+const MessagingChannelPreview: FC<Props> = (props) => {
+  const { channel, lastMessage, setActiveChannel, setIsCreating } = props;
   const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
 
   const members = Object.values(channel.state.members).filter(
@@ -132,7 +129,7 @@ const MessagingChannelPreview: React.FC<Props> = (props) => {
           </p>
           <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
         </div>
-        <p className='channel-preview__content-message'>{latestMessage || 'Send a message'}</p>
+        <p className='channel-preview__content-message'>{lastMessage?.text ?? 'Send a message'}</p>
       </div>
     </div>
   );
