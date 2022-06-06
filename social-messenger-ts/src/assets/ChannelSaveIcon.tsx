@@ -1,4 +1,4 @@
-export const ChannelSaveIcon: React.FC = () => (
+export const ChannelSaveIcon = () => (
   <svg
     width='24'
     height='24'

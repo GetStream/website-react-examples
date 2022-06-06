@@ -23,9 +23,7 @@ export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (
-      props: Event<StreamChatGenerics>,
-    ) => {
+    const handleNewEvent = (props: Event<StreamChatGenerics>) => {
       const { message, type } = props;
 
       switch (type) {

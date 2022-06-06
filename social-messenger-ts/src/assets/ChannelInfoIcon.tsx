@@ -3,7 +3,7 @@ type Props = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const ChannelInfoIcon: React.FC<Props> = ({ isEditing, setIsEditing }) => (
+export const ChannelInfoIcon = ({ isEditing, setIsEditing }: Props) => (
   <svg
     width='24'
     height='24'

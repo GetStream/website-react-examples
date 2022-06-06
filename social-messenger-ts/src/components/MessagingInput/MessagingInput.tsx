@@ -3,7 +3,6 @@ import { ImageDropzone } from 'react-file-utils';
 import {
   ChatAutoComplete,
   EmojiPicker,
-  MessageInputProps,
   UploadsPreview,
   useChannelStateContext,
   useMessageInputContext,
@@ -11,7 +10,7 @@ import {
 
 import './MessagingInput.css';
 
-import {GiphyContext} from '../../App';
+import { GiphyContext } from '../../App';
 import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 import type { StreamChatGenerics } from '../../types';
@@ -23,10 +22,14 @@ const GiphyIcon = () => (
   </div>
 );
 
-const MessagingInput: React.FC<MessageInputProps> = () => {
+const MessagingInput = () => {
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 
-  const { acceptedFiles, maxNumberOfFiles, multipleUploads } = useChannelStateContext<StreamChatGenerics>();
+  const {
+    acceptedFiles,
+    maxNumberOfFiles,
+    multipleUploads,
+  } = useChannelStateContext<StreamChatGenerics>();
 
   const messageInput = useMessageInputContext<StreamChatGenerics>();
 

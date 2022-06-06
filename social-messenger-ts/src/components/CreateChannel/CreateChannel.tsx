@@ -1,7 +1,7 @@
 import React, { useCallback, useEffect, useRef, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 import type { UserResponse } from 'stream-chat';
-import _debounce from 'lodash/debounce';
+import _debounce from 'lodash.debounce';
 
 import { XButton, XButtonBackground } from '../../assets';
 
@@ -24,7 +24,7 @@ type Props = {
   toggleMobile: () => void;
 };
 
-const CreateChannel: React.FC<Props> = (props) => {
+const CreateChannel = (props: Props) => {
   const { onClose, toggleMobile } = props;
 
   const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();

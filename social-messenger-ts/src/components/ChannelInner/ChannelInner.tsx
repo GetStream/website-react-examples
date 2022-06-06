@@ -8,7 +8,7 @@ import {
   Thread,
 } from 'stream-chat-react';
 
-import { GiphyContext, } from '../../App';
+import { GiphyContext } from '../../App';
 import { MessagingChannelHeader, MessagingInput } from '../../components';
 
 import type { MessageToSend } from 'stream-chat-react';
@@ -20,7 +20,7 @@ export type ChannelInnerProps = {
   theme: string;
 };
 
-export const ChannelInner: React.FC<ChannelInnerProps> = (props) => {
+export const ChannelInner = (props: ChannelInnerProps) => {
   const { theme, toggleMobile } = props;
   const { giphyState, setGiphyState } = useContext(GiphyContext);
 

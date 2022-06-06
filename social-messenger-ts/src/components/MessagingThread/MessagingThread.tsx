@@ -4,7 +4,7 @@ import './MessagingThread.css';
 
 import { CloseThreadIcon } from '../../assets';
 
-const MessagingThreadHeader: React.FC<ThreadHeaderProps> = ({ closeThread, thread }) => {
+const MessagingThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
   const getReplyCount = () => {
     if (!thread?.reply_count) return '';
     if (thread.reply_count === 1) return '1 reply';
