@@ -1,7 +1,7 @@
 # Getting Started
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
-The main purpose of this demo is to showcase how Stream React SDK can be used for building Social Messenger
+The main purpose of this demo is to showcase how Stream's React SDK can be used for building Social Messenger kind of applications.
 
 
 # Development process
