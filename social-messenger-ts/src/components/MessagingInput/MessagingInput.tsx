@@ -1,4 +1,4 @@
-import React, { useCallback, useContext } from 'react';
+import React, { useCallback } from 'react';
 import { ImageDropzone } from 'react-file-utils';
 import {
   ChatAutoComplete,
@@ -10,10 +10,10 @@ import {
 
 import './MessagingInput.css';
 
-import { GiphyContext } from '../../App';
 import { EmojiIcon, LightningBoltSmall, SendIcon } from '../../assets';
 
 import type { StreamChatGenerics } from '../../types';
+import { useGiphyContext } from '../../Giphy';
 
 const GiphyIcon = () => (
   <div className='giphy-icon__wrapper'>
@@ -23,7 +23,7 @@ const GiphyIcon = () => (
 );
 
 const MessagingInput = () => {
-  const { giphyState, setGiphyState } = useContext(GiphyContext);
+  const { giphyState, setGiphyState } = useGiphyContext();
 
   const {
     acceptedFiles,

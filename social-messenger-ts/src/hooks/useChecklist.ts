@@ -1,7 +1,6 @@
 import { useEffect } from 'react';
 import type { Event, StreamChat } from 'stream-chat';
-
-import type { StreamChatGenerics } from './types';
+import type { StreamChatGenerics } from '../types';
 
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
