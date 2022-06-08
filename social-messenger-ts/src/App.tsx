@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import type { ChannelFilters, ChannelOptions, ChannelSort, StreamChat } from 'stream-chat';
+import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
 import { Chat, Channel, ChannelList } from 'stream-chat-react';
 
 import '@stream-io/stream-chat-css/dist/css/index.css';
@@ -24,7 +24,7 @@ import { useMobileView } from './hooks/useMobileView';
 import { GiphyContextProvider } from './Giphy';
 
 type AppProps = {
-  chatClient: StreamChat;
+  apiKey: string;
   userToConnect: { id: string; name?: string; image?: string };
   userToken: string | undefined;
   targetOrigin: string;
@@ -36,17 +36,17 @@ type AppProps = {
 };
 
 const App = (props: AppProps) => {
-  const { chatClient, userToConnect, userToken, targetOrigin, channelListOptions } = props;
+  const { apiKey, userToConnect, userToken, targetOrigin, channelListOptions } = props;
   const [isCreating, setIsCreating] = useState(false);
 
-  const isUserConnected = useConnectUser(chatClient, userToConnect, userToken);
+  const chatClient = useConnectUser(apiKey, userToConnect, userToken);
   const toggleMobile = useMobileView();
   const theme = useTheme(targetOrigin);
 
   useChecklist(chatClient, targetOrigin);
   useUpdateAppHeightOnResize();
 
-  if (!isUserConnected) {
+  if (!chatClient) {
     return null; // render nothing until connection to the backend is established
   }
 
