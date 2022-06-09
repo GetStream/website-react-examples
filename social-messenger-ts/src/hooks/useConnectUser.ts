@@ -1,5 +1,12 @@
-import { useEffect, useState } from 'react';
-import { StreamChat } from 'stream-chat';
+import { useEffect, useRef, useState } from 'react';
+import {
+  DefaultGenerics,
+  ExtendableGenerics,
+  OwnUserResponse,
+  StreamChat,
+  TokenOrProvider,
+  UserResponse,
+} from 'stream-chat';
 
 /**
  * A hook which handles the process of connecting/disconnecting a user
@@ -7,34 +14,41 @@ import { StreamChat } from 'stream-chat';
  *
  * @param apiKey the Stream app API key to use.
  * @param userToConnect the user information.
- * @param userToken the user's token.
+ * @param userTokenOrProvider the user's token.
  */
-export const useConnectUser = (
+export const useConnectUser = <StreamChatGenerics extends ExtendableGenerics = DefaultGenerics>(
   apiKey: string,
-  userToConnect: { id: string; name?: string; image?: string },
-  userToken?: string,
+  userToConnect: OwnUserResponse<StreamChatGenerics> | UserResponse<StreamChatGenerics>,
+  userTokenOrProvider: TokenOrProvider,
 ) => {
-  const [chatClient, setChatClient] = useState<StreamChat | null>(null);
+  const [chatClient, setChatClient] = useState<StreamChat<StreamChatGenerics> | null>(null);
+  const disconnectUserPromiseRef = useRef<Promise<unknown> | null>(null);
   useEffect(() => {
-    const connectUser = async () => {
-      const client = new StreamChat(apiKey, {
-        enableInsights: true,
-        enableWSFallback: true,
-      });
-      await client.connectUser(userToConnect, userToken);
-      setChatClient(client);
-    };
-
-    connectUser().catch((e) => {
-      console.error(`Failed to connect user`, e);
+    const client = new StreamChat<StreamChatGenerics>(apiKey, {
+      enableInsights: true,
+      enableWSFallback: true,
     });
 
+    const wait = disconnectUserPromiseRef.current || Promise.resolve();
+    const connectUserPromise = wait.then(() =>
+      client
+        .connectUser(userToConnect, userTokenOrProvider)
+        .catch((e) => {
+          console.error(`Failed to connect user`, e);
+        })
+        .then(() => {
+          setChatClient(client);
+        }),
+    );
     return () => {
-      chatClient?.disconnectUser().catch((e) => {
-        console.error(`Failed to disconnect user`, e);
+      connectUserPromise.then(() => {
+        setChatClient(null);
+        disconnectUserPromiseRef.current = client.disconnectUser().catch((e) => {
+          console.error(`Failed to disconnect user`, e);
+        });
       });
     };
-  }, [apiKey, userToken, userToConnect]); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [apiKey, userTokenOrProvider, userToConnect]);
 
   return chatClient;
 };

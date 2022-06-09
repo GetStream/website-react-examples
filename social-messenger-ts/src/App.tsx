@@ -22,6 +22,7 @@ import { useChecklist } from './hooks/useChecklist';
 import { useUpdateAppHeightOnResize } from './hooks/useUpdateAppHeightOnResize';
 import { useMobileView } from './hooks/useMobileView';
 import { GiphyContextProvider } from './Giphy';
+import type { StreamChatGenerics } from './types';
 
 type AppProps = {
   apiKey: string;
@@ -39,7 +40,7 @@ const App = (props: AppProps) => {
   const { apiKey, userToConnect, userToken, targetOrigin, channelListOptions } = props;
   const [isCreating, setIsCreating] = useState(false);
 
-  const chatClient = useConnectUser(apiKey, userToConnect, userToken);
+  const chatClient = useConnectUser<StreamChatGenerics>(apiKey, userToConnect, userToken);
   const toggleMobile = useMobileView();
   const theme = useTheme(targetOrigin);
 
