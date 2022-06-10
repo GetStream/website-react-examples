@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
   DefaultGenerics,
   ExtendableGenerics,
@@ -16,34 +16,41 @@ import {
  * @param userToConnect the user information.
  * @param userTokenOrProvider the user's token.
  */
-export const useConnectUser = <StreamChatGenerics extends ExtendableGenerics = DefaultGenerics>(
+export const useConnectUser = <SCG extends ExtendableGenerics = DefaultGenerics>(
   apiKey: string,
-  userToConnect: OwnUserResponse<StreamChatGenerics> | UserResponse<StreamChatGenerics>,
+  userToConnect: OwnUserResponse<SCG> | UserResponse<SCG>,
   userTokenOrProvider: TokenOrProvider,
 ) => {
-  const [chatClient, setChatClient] = useState<StreamChat<StreamChatGenerics> | null>(null);
-  const disconnectUserPromiseRef = useRef<Promise<unknown> | null>(null);
+  const [chatClient, setChatClient] = useState<StreamChat<SCG> | null>(null);
   useEffect(() => {
-    const client = new StreamChat<StreamChatGenerics>(apiKey, {
+    const client = new StreamChat<SCG>(apiKey, {
       enableInsights: true,
       enableWSFallback: true,
     });
 
-    const wait = disconnectUserPromiseRef.current || Promise.resolve();
-    const connectUserPromise = wait.then(() =>
-      client
-        .connectUser(userToConnect, userTokenOrProvider)
-        .catch((e) => {
-          console.error(`Failed to connect user`, e);
-        })
-        .then(() => {
+    // Under some circumstances, a "connectUser" operation might be interrupted
+    // (fast user switching, react strict-mode in dev). With this flag, we control
+    // whether a "disconnectUser" operation has been requested before we
+    // provide a new StreamChat instance to the consumers of this hook.
+    let didUserConnectInterrupt = false;
+    const connectUser = client
+      .connectUser(userToConnect, userTokenOrProvider)
+      .catch((e) => {
+        console.error(`Failed to connect user`, e);
+      })
+      .then(() => {
+        if (!didUserConnectInterrupt) {
           setChatClient(client);
-        }),
-    );
+        }
+      });
+
     return () => {
-      connectUserPromise.then(() => {
+      didUserConnectInterrupt = true;
+      // there might be a pending "connectUser" operation, wait for it to finish
+      // before executing the "disconnectUser" in order to prevent race-conditions.
+      connectUser.then(() => {
         setChatClient(null);
-        disconnectUserPromiseRef.current = client.disconnectUser().catch((e) => {
+        client.disconnectUser().catch((e) => {
           console.error(`Failed to disconnect user`, e);
         });
       });
