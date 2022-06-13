@@ -39,7 +39,7 @@ export { SendIcon } from './SendIcon';
 export { XButton } from './XButton';
 export { XButtonBackground } from './XButtonBackground';
 
-const randomImages = [
+const staticImages = [
   avatar1,
   avatar2,
   avatar3,
@@ -66,27 +66,38 @@ const randomImages = [
   avatar24,
 ];
 
-export const getRandomImage = () => {
-  const index = Math.floor(Math.random() * 24);
-  return randomImages[index];
+export const getImage = (userId: string) => {
+  const hash = hashCode(userId);
+  const index = Math.abs(hash) % staticImages.length;
+  return staticImages[index];
 };
 
 export const getCleanImage = (member: ChannelMemberResponse<StreamChatGenerics>) => {
   let cleanImage = member.user?.image || '';
-
-  const cleanIndex = randomImages.indexOf(cleanImage);
-
+  const cleanIndex = staticImages.indexOf(cleanImage);
   if (cleanIndex === -1) {
-    cleanImage = getRandomImage();
+    cleanImage = getImage(member.user_id || 'stream-user');
   }
 
   if (member.user?.name === 'Jen Alexander') {
-    cleanImage = randomImages[11];
+    cleanImage = staticImages[11];
   }
 
   if (member.user?.name === 'Kevin Rosen') {
-    cleanImage = randomImages[23];
+    cleanImage = staticImages[23];
   }
 
   return cleanImage;
+};
+
+// https://stackoverflow.com/a/7616484/1270325
+const hashCode = (value: string) => {
+  let hash = 0;
+  if (value.length === 0) return hash;
+  for (let i = 0; i < value.length; i++) {
+    const chr = value.charCodeAt(i);
+    hash = (hash << 5) - hash + chr;
+    hash |= 0; // Convert to 32bit integer
+  }
+  return hash;
 };

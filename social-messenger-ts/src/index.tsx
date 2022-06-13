@@ -3,7 +3,7 @@ import ReactDOM from 'react-dom/client';
 import './index.css';
 
 import App from './App';
-import { getRandomImage } from './assets';
+import { getImage } from './assets';
 import { getChannelListOptions } from './channelListOptions';
 
 const apiKey = process.env.REACT_APP_STREAM_KEY;
@@ -19,7 +19,7 @@ const channelListOptions = getChannelListOptions(!!noChannelNameFilter, user);
 const userToConnect: { id: string; name?: string; image?: string } = {
   id: user!,
   name: skipNameImageSet ? undefined : user!,
-  image: skipNameImageSet ? undefined : getRandomImage(),
+  image: skipNameImageSet ? undefined : getImage(user!),
 };
 
 const container = document.getElementById('root');
