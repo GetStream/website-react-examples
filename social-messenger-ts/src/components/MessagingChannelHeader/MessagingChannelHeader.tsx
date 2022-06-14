@@ -1,69 +1,12 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { Avatar, useChannelStateContext, useChatContext } from 'stream-chat-react';
-
+import { useChannelStateContext, useChatContext } from 'stream-chat-react';
 import './MessagingChannelHeader.css';
 
 import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
-
-import { ChannelInfoIcon, ChannelSaveIcon, getCleanImage, HamburgerIcon } from '../../assets';
-
-import type { ChannelMemberResponse } from 'stream-chat';
+import { ChannelInfoIcon, ChannelSaveIcon, HamburgerIcon } from '../../assets';
+import { AvatarGroup } from '../';
 
 import type { StreamChatGenerics } from '../../types';
-
-const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
-  if (members.length === 1) {
-    return (
-      <div className='messaging__channel-header__avatars'>
-        <Avatar image={getCleanImage(members[0])} size={40} />;
-      </div>
-    );
-  }
-
-  if (members.length === 2) {
-    return (
-      <div className='messaging__channel-header__avatars two'>
-        <span>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={40} />
-        </span>
-      </div>
-    );
-  }
-
-  if (members.length === 3) {
-    return (
-      <div className='messaging__channel-header__avatars three'>
-        <span>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[2])} shape='square' size={20} />
-        </span>
-      </div>
-    );
-  }
-
-  if (members.length >= 4) {
-    return (
-      <div className='messaging__channel-header__avatars four'>
-        <span>
-          <Avatar image={getCleanImage(members[members.length - 1])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 2])} shape='square' size={20} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[members.length - 3])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 4])} shape='square' size={20} />
-        </span>
-      </div>
-    );
-  }
-
-  return null;
-};
 
 type Props = {
   theme: string;
@@ -72,15 +15,11 @@ type Props = {
 
 const MessagingChannelHeader = (props: Props) => {
   const { theme, toggleMobile } = props;
-
   const { client } = useChatContext<StreamChatGenerics>();
-
   const { channel } = useChannelStateContext<StreamChatGenerics>();
-
   const [channelName, setChannelName] = useState(channel.data?.name || '');
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState('');
-
   const inputRef = useRef<HTMLInputElement>(null);
 
   const members = Object.values(channel.state.members || {}).filter(

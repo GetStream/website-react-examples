@@ -34,41 +34,14 @@
   margin-right: 16px;
 }
 
-.messaging__channel-header__avatars {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  min-width: 40px;
-  max-width: 40px;
-  border-radius: 20px;
-  overflow: hidden;
+.messaging__channel-header .avatar-group__avatars {
   margin-right: 20px;
   margin-left: 20px;
 }
 
-.messaging__channel-header__avatars.two div:first-child {
+.messaging__channel-header .avatar-group__avatars.four span:nth-child(2) {
   position: relative;
-  right: 10px;
-}
-
-.messaging__channel-header__avatars.two div:nth-child(2) {
-  position: relative;
-  right: 10px;
-}
-
-.messaging__channel-header__avatars.two span {
-  width: 20px;
-  overflow: hidden;
-}
-
-.messaging__channel-header__avatars.three span {
-  width: 20px;
-  overflow: hidden;
-}
-
-.messaging__channel-header__avatars.four span:nth-child(2) {
-  position: relative;
-  right: 14px;
+  right: 9px;
 }
 
 .channel-header__edit-input {
