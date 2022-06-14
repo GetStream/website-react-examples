@@ -17,7 +17,7 @@ const MessagingThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
         <p className='custom-thread-header__left-title'>Thread</p>
         <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
       </div>
-      <CloseThreadIcon {...{ closeThread }} />
+      <CloseThreadIcon closeThread={closeThread} />
     </div>
   );
 };

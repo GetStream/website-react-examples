@@ -4,7 +4,7 @@ import { useCallback, useEffect, useState } from 'react';
  * Internal, handles the mobile/responsive view adjustments.
  */
 export const useMobileView = () => {
-  const [isMobileNavVisible, setMobileNav] = useState(false);
+  const [isMobileNavVisible, setIsMobileNavVisible] = useState(false);
   useEffect(() => {
     const mobileChannelList = document.querySelector('#mobile-channel-list');
     if (isMobileNavVisible && mobileChannelList) {
@@ -17,6 +17,6 @@ export const useMobileView = () => {
   }, [isMobileNavVisible]);
 
   return useCallback(() => {
-    setMobileNav((isMobile) => !isMobile);
+    setIsMobileNavVisible((isMobile) => !isMobile);
   }, []);
 };
