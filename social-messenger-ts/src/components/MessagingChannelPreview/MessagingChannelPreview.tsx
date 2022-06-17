@@ -1,65 +1,14 @@
 import './MessagingChannelPreview.css';
 import {
-  Avatar,
   ChannelPreviewUIComponentProps,
   ChatContextValue,
   useChatContext,
 } from 'stream-chat-react';
-import { getCleanImage } from '../../assets';
+import { AvatarGroup } from '../';
 
 import type { Dispatch, SetStateAction } from 'react';
 import type { Channel, ChannelMemberResponse } from 'stream-chat';
 import type { StreamChatGenerics } from '../../types';
-
-const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
-  if (members.length === 1) {
-    return <Avatar image={getCleanImage(members[0])} size={40} />;
-  }
-
-  if (members.length === 2) {
-    return (
-      <div className='channel-preview__avatars two'>
-        <span>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={40} />
-        </span>
-      </div>
-    );
-  }
-
-  if (members.length === 3) {
-    return (
-      <div className='channel-preview__avatars three'>
-        <span>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[2])} shape='square' size={20} />
-        </span>
-      </div>
-    );
-  }
-
-  if (members.length >= 4) {
-    return (
-      <div className='channel-preview__avatars'>
-        <span>
-          <Avatar image={getCleanImage(members[members.length - 1])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 2])} shape='square' size={20} />
-        </span>
-        <span>
-          <Avatar image={getCleanImage(members[members.length - 3])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 4])} shape='square' size={20} />
-        </span>
-      </div>
-    );
-  }
-
-  return null;
-};
 
 const getTimeStamp = (channel: Channel) => {
   let lastHours = channel.state.last_message_at?.getHours();

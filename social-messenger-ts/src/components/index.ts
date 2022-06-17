@@ -1,3 +1,4 @@
+export { default as AvatarGroup } from './AvatarGroup/AvatarGroup';
 export { default as CreateChannel } from './CreateChannel/CreateChannel';
 export { default as CustomMessage } from './CustomMessage/CustomMessage';
 export { default as MessagingChannelHeader } from './MessagingChannelHeader/MessagingChannelHeader';

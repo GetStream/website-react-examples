@@ -88,33 +88,3 @@
 .channel-preview__container .str-chat__avatar {
   margin-right: 0;
 }
-
-.channel-preview__avatars {
-  display: flex;
-  align-items: center;
-  height: 40px;
-  min-width: 40px;
-  max-width: 40px;
-  border-radius: 20px;
-  overflow: hidden;
-}
-
-.channel-preview__avatars.two div:first-child {
-  position: relative;
-  right: 10px;
-}
-
-.channel-preview__avatars.two div:nth-child(2) {
-  position: relative;
-  right: 30px;
-}
-
-.channel-preview__avatars.two span {
-  width: 20px;
-  overflow: hidden;
-}
-
-.channel-preview__avatars.three span {
-  width: 20px;
-  overflow: hidden;
-}
