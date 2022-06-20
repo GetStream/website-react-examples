@@ -18,6 +18,10 @@
   font-weight: 500;
 }
 
+.str-chat__message-simple__actions__action--options button {
+  display: flex;
+}
+
 /* EDIT MESSAGE */
 
 .str-chat__modal.str-chat__modal--open {
@@ -151,28 +155,7 @@ span.react-images__footer__count.react-images__footer__count--isModal {
 }
 
 @media screen and (max-width: 640px) {
-  /* REACTIONS */
-
-  .str-chat__message-simple__actions__action--thread, .str-chat__message-simple__actions__action--reactions {
-    display: flex;
-  }
-
-  .str-chat__message-simple__actions__action--options {
-    display: flex;
-  }
-
-  .str-chat__message--me .str-chat__message-inner > .str-chat__message-simple__actions, .str-chat__message-simple--me .str-chat__message-inner > .str-chat__message-simple__actions {
-    position: unset;
-    margin-bottom: 6px;
-  }
-
-  .str-chat__message-inner > .str-chat__message-simple__actions, .str-chat__message-simple-inner > .str-chat__message-simple__actions {
-    position: unset;
-    margin-bottom: 6px;
-  }
-
   /* EDIT MESSAGE */
-
   .str-chat__modal.str-chat__modal--open {
     padding-top: 200px;
   }
@@ -189,4 +172,15 @@ span.react-images__footer__count.react-images__footer__count--isModal {
   .str-chat__modal__close-button {
     left: 75vw;
   }
+}
+
+.str-chat__message-simple:hover .str-chat__message-simple__actions__action--thread,
+.str-chat__message-simple:hover .str-chat__message-simple__actions__action--reactions,
+.str-chat__message-simple:hover .str-chat__message-simple__actions__action--options {
+  /*
+   * There is a rule which hides all actions on hover for screens < 960px wide.
+   * Here we override that behavior by explicitly enabling hover for all screen sizes.
+   * See: https://github.com/GetStream/stream-chat-react/issues/1641
+   */
+  display: flex;
 }
