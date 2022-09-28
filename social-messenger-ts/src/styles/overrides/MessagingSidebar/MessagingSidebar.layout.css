@@ -25,30 +25,10 @@
     align-items: center;
     justify-content: center;
     margin-left: auto;
-}
-
-.str-chat__theme-dark .messaging__channel-list__header__button {
-    background: #3e3e41;
-    box-shadow: none;
-}
-
-.messaging__channel-list__header__button svg path {
-    fill: var(--str-chat__primary-color);
-}
-
-.str-chat__theme-dark .messaging__channel-list__header__button svg path {
-    fill: #e9e9ea;
+    margin-right: 20px;
 }
 
 .str-chat__load-more-button {
     display: none;
 }
 
-.messaging__channel-list__header__button:focus {
-    border: none;
-    outline: none;
-}
-
-.messaging__channel-list__message {
-    color: #000;
-}

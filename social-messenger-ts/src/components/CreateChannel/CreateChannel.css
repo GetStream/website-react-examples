@@ -9,13 +9,9 @@
   border-radius: 10px 10px 0 0;
 }
 
-.str-chat.str-chat__theme-dark .messaging-create-channel {
-  background: var(--str-chat__background-color);
-}
-
 .messaging-create-channel header {
   background: var(--str-chat__secondary-background-color);
-  box-shadow: 0 7px 9px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: var(--messaging__header-shadow);
   transform: matrix(1, 0, 0, 1, 0, 0);
   border-radius: 10px 10px 0 0;
   display: flex;
@@ -26,7 +22,6 @@
 
 .str-chat.str-chat__theme-dark .messaging-create-channel header {
   background: #3e3e41;
-  box-shadow: 0 7px 9px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.03);
   color: rgba(255, 255, 255, 0.9);
   border-radius: 10px 10px 0 0;
   height: auto;

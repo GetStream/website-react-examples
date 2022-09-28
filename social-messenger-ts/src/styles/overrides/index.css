@@ -1,4 +1,5 @@
 @import "Channel/Channel.theme.css";
+@import "ChannelList/ChannelList.layout.css";
 @import "ChannelList/ChannelList.theme.css";
 @import "Message/Message.layout.css";
 @import "Message/Message.theme.css";
@@ -6,7 +7,6 @@
 @import "MessageActionsBox/MessageActionsBox.theme.css";
 @import "MessageInput/MessageInput.layout.css";
 @import "MessageInput/MessageInput.theme.css";
-@import "MessageList/MessageList.theme.css";
 @import "MessageReactions/MessageReactions.theme.css";
 @import "MessagingSidebar/MessagingSidebar.theme.css";
 @import "MessagingSidebar/MessagingSidebar.layout.css";

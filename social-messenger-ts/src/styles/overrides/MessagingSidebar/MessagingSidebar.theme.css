@@ -2,18 +2,6 @@
     background: var(--str-chat__channel-list-background-color);
 }
 
-.str-chat-channel-list {
-}
-
-.messaging__channel-list__header__button {
-    border: 0;
-    cursor: pointer;
-    background: #fafafa;
-    border-radius: 20px;
-    margin-right: 20px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.06), 0 2px 30px rgba(0, 0, 0, 0.1);
-}
-
 .str-chat.str-chat__theme-dark .messaging__channel-list__message {
     color: #fff;
 }
@@ -25,16 +13,31 @@
 
 
 .messaging__channel-list__header__button {
-    width: 40px;
-    height: 40px;
     border: 0;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-left: auto;
     cursor: pointer;
     background: #fafafa;
     border-radius: 20px;
-    margin-right: 20px;
-    box-shadow: 0 0 8px rgba(0, 0, 0, 0.06), 0 2px 30px rgba(0, 0, 0, 0.1);
+    box-shadow: var(--str-chat__channel-box-shadow);
+}
+
+.str-chat__theme-dark .messaging__channel-list__header__button {
+    background: #3e3e41;
+    box-shadow: none;
+}
+
+.messaging__channel-list__header__button svg path {
+    fill: var(--str-chat__primary-color);
+}
+
+.str-chat__theme-dark .messaging__channel-list__header__button svg path {
+    fill: #e9e9ea;
+}
+
+.messaging__channel-list__header__button:focus {
+    border: none;
+    outline: none;
+}
+
+.messaging__channel-list__message {
+    color: #000;
 }

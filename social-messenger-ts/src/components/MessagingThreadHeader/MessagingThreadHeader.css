@@ -10,7 +10,7 @@
   border: none;
   background: white;
   min-height: 60px;
-  box-shadow: 0 7px 9px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.03);
+  box-shadow: var(--messaging__header-shadow);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -19,7 +19,6 @@
 
 .str-chat.str-chat__theme-dark .custom-thread-header {
   background: rgba(46, 48, 51, 0.98);
-  box-shadow: var(--str-chat__message-list-header-box-shadow);
 }
 
 .custom-thread-header__left {
