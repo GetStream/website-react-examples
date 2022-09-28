@@ -1,6 +1,6 @@
 import type { ThreadHeaderProps } from 'stream-chat-react';
 
-import './MessagingThread.css';
+import './MessagingThreadHeader.css';
 
 import { CloseThreadIcon } from '../../assets';
 
