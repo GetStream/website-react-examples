@@ -1,3 +1,7 @@
+.str-chat {
+    --str-chat__channel-list-border-inline-end: none;
+}
+
 .str-chat__theme-light {
     --str-chat__channel-list-background-color: #fafafa;
 }

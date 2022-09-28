@@ -44,13 +44,13 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
   return `${members[0]?.user?.name || defaultName}, ${members[1]?.user?.name || defaultName}`;
 };
 
-type Props = ChannelPreviewUIComponentProps & {
+type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
   channel: Channel;
   onClick: MouseEventHandler;
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
-const MessagingChannelPreview = (props: Props) => {
+const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
   const { channel, lastMessage, setActiveChannel, onClick } = props;
   const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
 

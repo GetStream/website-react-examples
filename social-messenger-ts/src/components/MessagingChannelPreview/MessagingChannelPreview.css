@@ -1,14 +1,10 @@
 .channel-preview__container {
   height: 56px;
-  margin-bottom: 8px;
-  margin-left: 20px;
-  margin-right: 20px;
   border-radius: 8px;
   cursor: pointer;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 8px;
 }
 
 .channel-preview__container:hover {

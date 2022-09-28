@@ -1,9 +1,8 @@
 import type { MouseEventHandler } from 'react';
 import { ChannelList, ChannelListProps } from 'stream-chat-react';
-import { MessagingChannelList, MessagingChannelListHeader, MessagingChannelPreview } from '../index';
+import { MessagingChannelListHeader, MessagingChannelPreview } from '../index';
 
 import type { Theme } from '../../hooks';
-
 
 type MessagingSidebarProps = {
   channelListOptions: {
@@ -26,7 +25,6 @@ const MessagingSidebar = ({channelListOptions, onClick, onCreateChannel, onPrevi
       />
       <ChannelList
         {...channelListOptions}
-        List={MessagingChannelList}
         Preview={(props) => <MessagingChannelPreview {...props} onClick={onPreviewSelect} />}
       />
     </div>

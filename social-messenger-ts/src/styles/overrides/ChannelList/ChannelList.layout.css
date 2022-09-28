@@ -1,0 +1,9 @@
+.str-chat__channel-list {
+    padding: 10px 20px 20px;
+}
+
+.str-chat__channel-list-messenger__main {
+    display: grid;
+    grid-row-gap: 10px;
+    grid-auto-rows: max-content;
+}
