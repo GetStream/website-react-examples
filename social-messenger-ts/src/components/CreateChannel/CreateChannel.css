@@ -22,7 +22,7 @@
 
 .str-chat.str-chat__theme-dark .messaging-create-channel header {
   background: #3e3e41;
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--str-chat__message-textarea-color);
   border-radius: 10px 10px 0 0;
   height: auto;
 }
@@ -105,7 +105,7 @@
 }
 
 .str-chat.str-chat__theme-dark .messaging-create-channel__input {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--str-chat__message-textarea-color);
 }
 
 .messaging-create-channel__input::placeholder {

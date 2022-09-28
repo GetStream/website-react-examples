@@ -32,12 +32,12 @@
   font-weight: bold;
   font-size: 15px;
   line-height: 24px;
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--str-chat__message-textarea-color);
   margin-right: 10px;
 }
 
 .str-chat.str-chat__theme-dark .custom-thread-header__left-title {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--str-chat__message-textarea-color);
 }
 
 .custom-thread-header__left-count {
@@ -48,7 +48,7 @@
 }
 
 .str-chat.str-chat__theme-dark .custom-thread-header__left-count {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--str-chat__message-textarea-color);
 }
 
 .messaging.str-chat .str-chat__thread {

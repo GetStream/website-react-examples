@@ -18,7 +18,7 @@
   flex: 1;
   font-weight: bold;
   font-size: 15px;
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--str-chat__message-textarea-color);
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -30,7 +30,7 @@
 }
 
 .str-chat.str-chat__theme-dark .messaging__channel-header .channel-header__name {
-  color: rgba(255, 255, 255, 0.9);
+  color: var(--str-chat__message-textarea-color);
 }
 
 .messaging__channel-header__right {
