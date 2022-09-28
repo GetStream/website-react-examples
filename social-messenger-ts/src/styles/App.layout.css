@@ -1,0 +1,80 @@
+:root {
+    --app-height: 100%;
+    --min-workspace-width: 330px;
+}
+
+html,
+body {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+}
+
+#root {
+    height: 100%;
+    display: flex;
+}
+
+.messaging__sidebar {
+    width: var(--min-workspace-width);
+}
+
+.str-chat__channel {
+    flex: 1;
+}
+
+.str-chat__main-panel {
+    flex: 1;
+}
+
+.str-chat__thread {
+    flex: 0 1 var(--min-workspace-width);
+}
+
+/* Mobile View */
+@media screen and (max-width: 640px) {
+    /*
+     * This is to prevent the browser navigation bars from hiding the app
+     * on some mobile browsers. The app-height variable is set dynamically
+     * using javascript.
+     */
+    .str-chat-channel {
+        height: var(--app-height);
+    }
+
+    #mobile-channel-list {
+        width: 100vw;
+        height: 100vh;
+        position: fixed;
+        top: 0;
+        left: 0;
+        transform: translate3d(-100vw, 0, 0);
+        transition: transform 0.3s cubic-bezier(0, 0.52, 0, 1);
+    }
+
+    #mobile-channel-list.show {
+        transform: translate3d(0vw, 0, 0);
+        z-index: 1000;
+    }
+
+
+}
+
+/* To fix inherited styles (as per Team and Customer Support apps */
+@media screen and (max-width: 960px) {
+    .str-chat-channel-list {
+        position: unset;
+        left: unset;
+        top: unset;
+        z-index: unset;
+        min-height: unset;
+        overflow-y: unset;
+        transition: unset;
+    }
+
+    .str-chat__thread {
+        position: absolute;
+        height: 100%;
+        width: 100%;
+    }
+}
