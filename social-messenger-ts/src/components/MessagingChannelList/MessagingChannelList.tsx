@@ -1,8 +1,5 @@
 import React, { PropsWithChildren, useEffect } from 'react';
-import { ChannelListMessengerProps, useChatContext } from 'stream-chat-react';
-
-import './MessagingChannelList.css';
-import { SkeletonLoader } from './SkeletonLoader';
+import { ChannelListMessengerProps, LoadingChannels, useChatContext } from 'stream-chat-react';
 
 import type { StreamChat } from 'stream-chat';
 import type { StreamChatGenerics } from '../../types';
@@ -44,7 +41,7 @@ const MessagingChannelList = (props: PropsWithChildren<ChannelListMessengerProps
   if (loading) {
     return (
       <div className='messaging__channel-list__message'>
-        <SkeletonLoader />
+        <LoadingChannels />
       </div>
     );
   }
