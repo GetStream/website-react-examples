@@ -1,18 +1,14 @@
 import React, { useState } from 'react';
 import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
-import { Chat, Channel, ChannelList } from 'stream-chat-react';
+import { Chat, Channel } from 'stream-chat-react';
 
-import '@stream-io/stream-chat-css/dist/css/index.css';
-import './App.css';
+import 'stream-chat-react/dist/css/v2/index.css';
+import './styles/index.css';
 
 import {
   CreateChannel,
-  CustomMessage,
-  MessagingChannelList,
-  MessagingChannelListHeader,
-  MessagingChannelPreview,
-  MessagingInput,
   MessagingThreadHeader,
+  SendButton,
 } from './components';
 
 import { ChannelInner } from './components/ChannelInner/ChannelInner';
@@ -23,6 +19,7 @@ import { useUpdateAppHeightOnResize } from './hooks/useUpdateAppHeightOnResize';
 import { useMobileView } from './hooks/useMobileView';
 import { GiphyContextProvider } from './Giphy';
 import type { StreamChatGenerics } from './types';
+import { MessagingSidebar } from './components/Sidebar/MessagingSidebar';
 
 type AppProps = {
   apiKey: string;
@@ -53,25 +50,17 @@ const App = (props: AppProps) => {
 
   return (
     <Chat client={chatClient} theme={`messaging ${theme}`}>
-      <div className='messaging__sidebar' id='mobile-channel-list' onClick={toggleMobile}>
-        <MessagingChannelListHeader
+        <MessagingSidebar
+          channelListOptions={channelListOptions}
+          onClick={toggleMobile}
           onCreateChannel={() => setIsCreating(!isCreating)}
+          onPreviewSelect={() => setIsCreating(false)}
           theme={theme}
         />
-        <ChannelList
-          filters={channelListOptions.filters}
-          sort={channelListOptions.sort}
-          options={channelListOptions.options}
-          List={MessagingChannelList}
-          Preview={(props) => <MessagingChannelPreview {...props} setIsCreating={setIsCreating} />}
-        />
-      </div>
-      <div>
         <Channel
-          Input={MessagingInput}
           maxNumberOfFiles={10}
-          Message={CustomMessage}
           multipleUploads={true}
+          SendButton={SendButton}
           ThreadHeader={MessagingThreadHeader}
           TypingIndicator={() => null}
         >
@@ -82,7 +71,6 @@ const App = (props: AppProps) => {
             <ChannelInner theme={theme} toggleMobile={toggleMobile} />
           </GiphyContextProvider>
         </Channel>
-      </div>
     </Chat>
   );
 };
