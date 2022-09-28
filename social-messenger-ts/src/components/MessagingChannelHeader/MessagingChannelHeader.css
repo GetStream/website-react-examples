@@ -39,12 +39,12 @@
   margin-right: 16px;
 }
 
-.messaging__channel-header .avatar-group__avatars {
+.messaging__channel-header .avatar-group {
   margin-right: 20px;
   margin-left: 20px;
 }
 
-.messaging__channel-header .avatar-group__avatars.four span:nth-child(2) {
+.messaging__channel-header .avatar-group.four span:nth-child(2) {
   position: relative;
   right: 9px;
 }
