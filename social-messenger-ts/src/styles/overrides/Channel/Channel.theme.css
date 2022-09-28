@@ -1,0 +1,7 @@
+.str-chat {
+    --str-chat__channel-box-shadow: 0 0 8px rgba(0, 0, 0, 0.06), 0 2px 30px rgba(0, 0, 0, 0.1);
+}
+
+.str-chat__theme-dark {
+    --str-chat__channel-box-shadow: 0 2px 30px rgba(0, 0, 0, 0.1);
+}

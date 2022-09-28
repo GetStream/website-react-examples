@@ -1,0 +1,15 @@
+.str-chat__theme-light {
+    --str-chat__message-actions-box-background-color: var(--str-chat__background-color);
+}
+
+.str-chat__theme-dark {
+    --str-chat__message-actions-box-background-color: var(--str-chat__secondary-surface-color);
+}
+
+.str-chat__theme-dark .str-chat__message-actions-box {
+    background-image: linear-gradient(-180deg,var(--str-chat__secondary-surface-color),#00000033);
+}
+
+.str-chat__message-actions-box .str-chat__message-actions-list-item-button {
+  font: var(--str-chat__caption-text);
+}
