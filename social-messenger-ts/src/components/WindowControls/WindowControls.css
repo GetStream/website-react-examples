@@ -12,7 +12,7 @@
   height: 30px;
   width: 180px;
   background: rgba(255, 255, 255, 0.799579);
-  box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 0 4px rgba(0, 0, 0, 0.06);
   border-radius: 15px;
   padding: 0 2px;
 }
@@ -43,7 +43,7 @@
 
 .window-controls__button.selected {
   background: #ffffff;
-  box-shadow: 0px 2px 7px rgba(0, 0, 0, 0.2);
+  box-shadow: 0 2px 7px rgba(0, 0, 0, 0.2);
   color: #0a0a0a;
   opacity: 1;
 }

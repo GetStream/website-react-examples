@@ -13,21 +13,21 @@
 
 .channel-preview__container:hover {
   background: #ffffff;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
   transition: background 0.1s ease-in-out;
 }
 
-.str-chat.dark .channel-preview__container:hover {
+.str-chat.str-chat__theme-dark .channel-preview__container:hover {
   background: #2c2c30;
 }
 
 .channel-preview__container.selected {
   background: #ffffff;
-  box-shadow: 0px 1px 5px rgba(0, 0, 0, 0.07);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.07);
   transition: background 0.1s ease-in-out;
 }
 
-.str-chat.dark .channel-preview__container.selected {
+.str-chat.str-chat__theme-dark .channel-preview__container.selected {
   background: #2c2c30;
 }
 
@@ -61,7 +61,7 @@
   white-space: nowrap;
 }
 
-.str-chat.dark .channel-preview__content-name {
+.str-chat.str-chat__theme-dark .channel-preview__content-name {
   color: #ffffff;
 }
 

@@ -8,19 +8,19 @@ type Props = {
 };
 
 const WindowControls = ({ theme, setTheme }: Props) => {
-  const darkClick = () => {
-    if (theme === 'dark') return;
-    setTheme('dark');
+  const setDarkTheme = () => {
+    if (theme === 'str-chat__theme-dark') return;
+    setTheme('str-chat__theme-dark');
   };
 
   const lightClick = () => {
-    if (theme === 'light') return;
-    setTheme('light');
+    if (theme === 'str-chat__theme-light') return;
+    setTheme('str-chat__theme-light');
   };
 
   useEffect(() => {
     const root = document.querySelector<HTMLElement>('#root');
-    if (theme === 'light' && root) {
+    if (theme === 'str-chat__theme-light' && root) {
       root.style.background = '#333';
     } else if (root) {
       root.style.background = '#fff';
@@ -31,13 +31,13 @@ const WindowControls = ({ theme, setTheme }: Props) => {
     <div className='window-controls__container'>
       <div className={`window-controls__button-wrapper ${theme}`}>
         <div
-          className={`window-controls__button ${theme === 'dark' && 'selected'} ${theme}`}
-          onClick={darkClick}
+          className={`window-controls__button ${theme === 'str-chat__theme-dark' && 'selected'} ${theme}`}
+          onClick={setDarkTheme}
         >
           DARK UI
         </div>
         <div
-          className={`window-controls__button ${theme === 'light' && 'selected'} ${theme}`}
+          className={`window-controls__button ${theme === 'str-chat__theme-light' && 'selected'} ${theme}`}
           onClick={lightClick}
         >
           LIGHT UI
