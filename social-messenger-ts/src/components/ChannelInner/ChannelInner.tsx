@@ -3,15 +3,14 @@ import { logChatPromiseExecution } from 'stream-chat';
 import {
   MessageList,
   MessageInput,
+  MessageToSend,
   Window,
   useChannelActionContext,
   Thread,
 } from 'stream-chat-react';
 
 import { MessagingChannelHeader } from '../../components';
-import { useGiphyContext } from '../../Giphy';
-
-import type { MessageToSend } from 'stream-chat-react';
+import { useGiphyContext } from '../../context';
 import type { StreamChatGenerics } from '../../types';
 
 export type ChannelInnerProps = {
@@ -19,7 +18,7 @@ export type ChannelInnerProps = {
   theme: string;
 };
 
-export const ChannelInner = (props: ChannelInnerProps) => {
+const ChannelInner = (props: ChannelInnerProps) => {
   const { theme, toggleMobile } = props;
   const { giphyState, setGiphyState } = useGiphyContext();
 
@@ -74,3 +73,5 @@ export const ChannelInner = (props: ChannelInnerProps) => {
     </>
   );
 };
+
+export default ChannelInner;

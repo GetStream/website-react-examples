@@ -1,25 +1,29 @@
 import React, { useState } from 'react';
 import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
-import { Chat, Channel } from 'stream-chat-react';
+import { Channel, Chat } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/v2/index.css';
 import './styles/index.css';
 
 import {
+  ChannelInner,
   CreateChannel,
+  MessagingSidebar,
   MessagingThreadHeader,
-  SendButton,
+  SendButton
 } from './components';
 
-import { ChannelInner } from './components/ChannelInner/ChannelInner';
-import { useConnectUser } from './hooks/useConnectUser';
-import { useTheme } from './hooks/useTheme';
-import { useChecklist } from './hooks/useChecklist';
-import { useUpdateAppHeightOnResize } from './hooks/useUpdateAppHeightOnResize';
-import { useMobileView } from './hooks/useMobileView';
-import { GiphyContextProvider } from './Giphy';
+import { GiphyContextProvider } from './context';
+
+import {
+  useConnectUser,
+  useChecklist,
+  useMobileView,
+  useTheme,
+  useUpdateAppHeightOnResize
+} from './hooks';
+
 import type { StreamChatGenerics } from './types';
-import { MessagingSidebar } from './components/Sidebar/MessagingSidebar';
 
 type AppProps = {
   apiKey: string;

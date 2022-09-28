@@ -1,8 +1,8 @@
+import type { MouseEventHandler } from 'react';
 import { ChannelList, ChannelListProps } from 'stream-chat-react';
 import { MessagingChannelList, MessagingChannelListHeader, MessagingChannelPreview } from '../index';
-import type { Theme } from '../../hooks/useTheme';
 
-import type { MouseEventHandler } from 'react';
+import type { Theme } from '../../hooks';
 
 
 type MessagingSidebarProps = {
@@ -17,7 +17,7 @@ type MessagingSidebarProps = {
   theme: Theme;
 }
 
-export const MessagingSidebar = ({channelListOptions, onClick, onCreateChannel, onPreviewSelect, theme}: MessagingSidebarProps) => {
+const MessagingSidebar = ({channelListOptions, onClick, onCreateChannel, onPreviewSelect, theme}: MessagingSidebarProps) => {
 
   return (
     <div className={`str-chat messaging__sidebar ${theme}`} id='mobile-channel-list' onClick={onClick}>
@@ -32,3 +32,5 @@ export const MessagingSidebar = ({channelListOptions, onClick, onCreateChannel, 
     </div>
   )
 }
+
+export default MessagingSidebar;
