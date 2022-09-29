@@ -16,7 +16,8 @@
     &-preview {
       position: relative;
       display: flex;
-      height: 74px;
+      gap: 10px;
+      align-items: center;
       border-bottom: 1px solid $stroke;
       padding: 8px;
 
