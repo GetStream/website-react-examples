@@ -2,20 +2,19 @@ import React, { useEffect, useState } from 'react';
 import { Channel, UserResponse } from 'stream-chat';
 import {
   ChannelSearch,
+  ChannelSearchProps,
+  ChannelOrUserResponse,
   isChannel,
   SearchInputProps,
-  SearchQueryParams,
   useChatContext,
 } from 'stream-chat-react';
+import { ChannelSearchFunctionParams } from 'stream-chat-react/dist/components/ChannelSearch/hooks/useChannelSearch';
 
 import { SkeletonLoader } from './DMChannelList';
 import { SearchResult } from './SearchResult';
 
 import { ClearSearchButton, CloseX, SearchIcon } from '../../assets';
-
-import type {
-  StreamChatType
-} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type Props = {
   setDmChannel: React.Dispatch<React.SetStateAction<Channel | undefined>>;
@@ -23,20 +22,14 @@ type Props = {
   setSearching: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchInput: React.FC<
-  SearchInputProps<
-  StreamChatType
-  >
-> = (props) => {
-  const { channelSearchParams, inputRef, onSearch, query } = props;
-
-  const { setQuery } = channelSearchParams;
+const SearchInput: React.FC<SearchInputProps> = (props) => {
+  const { clearState, inputRef, onSearch, query } = props;
 
   return (
     <div className='search-input'>
       <SearchIcon />
       <input onChange={onSearch} placeholder='Search' ref={inputRef} type='text' value={query} />
-      <ClearSearchButton setQuery={setQuery} />
+      <ClearSearchButton onClick={clearState} />
     </div>
   );
 };
@@ -81,7 +74,13 @@ export const ParticipantSearch: React.FC<Props> = (props) => {
     setSearching(false);
   };
 
-  const extraParams: SearchQueryParams = {
+
+  const onSelectResult = (
+    params: ChannelSearchFunctionParams<StreamChatType>,
+    result: ChannelOrUserResponse<StreamChatType>
+  ) => handleSelectResult(result)
+
+  const extraParams: ChannelSearchProps['searchQueryParams'] = {
     userFilters: {
       options: { limit: 20 },
     },
@@ -98,7 +97,9 @@ export const ParticipantSearch: React.FC<Props> = (props) => {
       <ChannelSearch<
     StreamChatType
       >
-        onSelectResult={handleSelectResult}
+        // @ts-ignore todo: setChannels value should be ChannelOrUser
+        setChannels={setParticipants}
+        onSelectResult={onSelectResult}
         searchQueryParams={extraParams}
         SearchEmpty={SearchEmpty}
         SearchInput={SearchInput}

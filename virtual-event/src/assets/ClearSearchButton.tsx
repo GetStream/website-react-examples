@@ -1,10 +1,10 @@
 import React from 'react';
 
 export const ClearSearchButton: React.FC<{
-  setQuery: React.Dispatch<React.SetStateAction<string>>;
-}> = ({ setQuery }) => (
+  onClick: React.MouseEventHandler;
+}> = ({ onClick }) => (
   <svg
-    onClick={() => setQuery('')}
+    onClick={onClick}
     xmlns='http://www.w3.org/2000/svg'
     width='24'
     height='24'
