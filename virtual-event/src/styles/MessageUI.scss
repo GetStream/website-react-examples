@@ -1,8 +1,9 @@
+@use './_utils';
 @import './_variables';
 
 .str-chat__virtual-list .str-chat__virtual-list-message-wrapper {
   background: unset;
-  padding: 0px;
+  padding: 0;
 }
 
 .str-chat__message-replies-count-button svg {
@@ -27,9 +28,11 @@
   }
 
   &-options {
+    background: var(--card-background);
+    padding: 7px;
     position: absolute;
-    top: 5px;
-    right: 8px;
+    top: 0;
+    right: 0;
 
     span:first-child {
       margin-right: 8px;
@@ -96,18 +99,18 @@
   }
 
   &-content {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
     margin-left: 4px;
+    width: 90%;
 
     &-top {
       display: flex;
       align-items: center;
 
       &-name {
+        @include utils.ellipsis-text;
         font-weight: 600;
         margin-right: 4px;
+        flex: 1 0;
       }
 
       &-title {
