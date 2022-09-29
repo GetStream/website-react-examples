@@ -2,7 +2,8 @@ import React, { useState } from 'react';
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
 import { Chat, Channel } from 'stream-chat-react';
 
-import 'stream-chat-react/dist/css/index.css';
+import 'stream-chat-react/dist/css/v2/index.css';
+
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
@@ -25,7 +26,7 @@ import { useInitChat } from '../../hooks/useInitChat';
 
 import { StreamChatType } from '../../types';
 
-export const ChatContainer: React.FC = () => {
+export const ChatContainer = () => {
   const {
     actionsModalOpen,
     isFullScreen,
@@ -53,7 +54,7 @@ export const ChatContainer: React.FC = () => {
 
   return (
     <div
-      className={`chat ${isFullScreen ? 'full-screen' : ''} ${
+      className={`chat str-chat ${isFullScreen ? 'full-screen' : ''} ${
         actionsModalOpen ? 'actions-modal' : ''
       }`}
     >
