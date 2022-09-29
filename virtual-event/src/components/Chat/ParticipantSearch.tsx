@@ -5,7 +5,6 @@ import {
   ChannelSearchProps,
   ChannelOrUserResponse,
   isChannel,
-  SearchInputProps,
   useChatContext,
 } from 'stream-chat-react';
 import { ChannelSearchFunctionParams } from 'stream-chat-react/dist/components/ChannelSearch/hooks/useChannelSearch';
@@ -16,34 +15,23 @@ import { SearchResult } from './SearchResult';
 import { ClearSearchButton, CloseX, SearchIcon } from '../../assets';
 import { StreamChatType } from '../../types';
 
-type Props = {
+type ParticipantSearchProps = {
   setDmChannel: React.Dispatch<React.SetStateAction<Channel | undefined>>;
   setParticipantProfile: React.Dispatch<React.SetStateAction<UserResponse | undefined>>;
   setSearching: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const SearchInput: React.FC<SearchInputProps> = (props) => {
-  const { clearState, inputRef, onSearch, query } = props;
-
-  return (
-    <div className='search-input'>
-      <SearchIcon />
-      <input onChange={onSearch} placeholder='Search' ref={inputRef} type='text' value={query} />
-      <ClearSearchButton onClick={clearState} />
-    </div>
-  );
-};
-
 const SearchLoading: React.FC = () => <div className='search-loading'>Loading participants...</div>;
 const SearchEmpty: React.FC = () => <div className='search-empty'>No participants found</div>;
 
-export const ParticipantSearch: React.FC<Props> = (props) => {
+export const ParticipantSearch = (props: ParticipantSearchProps) => {
   const { setParticipantProfile, setSearching } = props;
 
   const { client } = useChatContext();
 
   const [participants, setParticipants] = useState<UserResponse[]>();
   const [querying, setQuerying] = useState(false);
+  const [showingSearchResults, setShowingSearchResults] = useState(false)
 
   useEffect(() => {
     const getParticipants = async () => {
@@ -94,25 +82,27 @@ export const ParticipantSearch: React.FC<Props> = (props) => {
         </div>
         <div className='search-header-title'>Participants</div>
       </div>
-      <ChannelSearch<
-    StreamChatType
-      >
+      <ChannelSearch
         // @ts-ignore todo: setChannels value should be ChannelOrUser
         setChannels={setParticipants}
         onSelectResult={onSelectResult}
         searchQueryParams={extraParams}
         SearchEmpty={SearchEmpty}
-        SearchInput={SearchInput}
         SearchLoading={SearchLoading}
         SearchResultItem={SearchResult}
+        ClearInputIcon={ClearSearchButton}
+        SearchInputIcon={SearchIcon}
+        onSearch={() => setShowingSearchResults(true)}
+        onSearchExit={() => setShowingSearchResults(false)}
       />
       {querying ? (
         <SkeletonLoader />
-      ) : (
+      ) : showingSearchResults ? null : (
         participants?.length &&
-        participants.map((participant, i) => (
+          <div className='.str-chat__channel-search-result-list'>
+            {participants.map((participant, i) => (
           <SearchResult index={i} key={i} result={participant} selectResult={handleSelectResult} />
-        ))
+        ))}</div>
       )}
     </div>
   );
