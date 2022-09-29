@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
-import { Chat, Channel, CustomStyles } from 'stream-chat-react';
+import { Chat, Channel } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/index.css';
 import { ChannelInner } from './ChannelInner';
@@ -51,10 +51,6 @@ export const ChatContainer: React.FC = () => {
 
   if (!chatClient) return null;
 
-  const customStyles: CustomStyles = {
-    '--primary-color': 'var(--primary-accent)',
-  };
-
   return (
     <div
       className={`chat ${isFullScreen ? 'full-screen' : ''} ${
@@ -70,7 +66,7 @@ export const ChatContainer: React.FC = () => {
         />
       )}
       <div className={`chat-components ${isFullScreen ? 'full-screen' : ''}`}>
-        <Chat client={chatClient} customStyles={customStyles}>
+        <Chat client={chatClient}>
           <GiphyContextProvider>
             {searching && (
               <ParticipantSearch
