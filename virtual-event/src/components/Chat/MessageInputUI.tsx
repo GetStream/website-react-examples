@@ -10,7 +10,7 @@ import {
 import { CommandBolt, EmojiPickerIcon, GiphyIcon, GiphySearch, SendArrow } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 import { useGiphyContext } from '../../contexts/GiphyContext';
-import {StreamChatType} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type Props = MessageInputProps<StreamChatType> & {
   checked?: boolean;

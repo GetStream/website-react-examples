@@ -12,7 +12,7 @@ import { ThreadHeader } from './ThreadHeader';
 import { UserActionsDropdown } from './UserActionsDropdown';
 
 import { CloseX, Ellipse } from '../../assets';
-import {StreamChatType} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type Props = {
   dmChannel: StreamChannel;

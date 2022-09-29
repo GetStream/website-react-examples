@@ -1,7 +1,8 @@
 import React, { useState } from 'react';
+import { Channel as StreamChannel, UserResponse } from 'stream-chat';
 import { Chat, Channel, CustomStyles } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/index.css';
 
+import 'stream-chat-react/dist/css/index.css';
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
@@ -19,9 +20,10 @@ import { UserActionsModal } from './UserActionsModal';
 
 import { useEventContext } from '../../contexts/EventContext';
 import { GiphyContextProvider } from '../../contexts/GiphyContext';
-import { StreamChatType, useInitChat } from '../../hooks/useInitChat';
 
-import { Channel as StreamChannel, UserResponse } from 'stream-chat';
+import { useInitChat } from '../../hooks/useInitChat';
+
+import { StreamChatType } from '../../types';
 
 export const ChatContainer: React.FC = () => {
   const {

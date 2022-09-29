@@ -8,7 +8,7 @@ import { useEventContext } from '../../contexts/EventContext';
 
 import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
 
-import type { StreamChatType } from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type Props<StreamChatType extends ExtendableGenerics> = {
   participantProfile: UserResponse<StreamChatType>;

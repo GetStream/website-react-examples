@@ -1,16 +1,16 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 import { EmptyStateIndicatorProps, useChannelStateContext } from 'stream-chat-react';
 
 import { EmptyChatIcon, EmptyDMIcon, EmptyQAIcon } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
+import { PropsWithChildrenOnly } from '../../types';
 
-const EmptyStateWrapper: React.FC = ({ children }) => (
+const EmptyStateWrapper = ({ children }: PropsWithChildrenOnly) => (
   <div className='chat-components-empty'>{children}</div>
 );
 
-export const EmptyStateIndicators: React.FC<
-  EmptyStateIndicatorProps & { isDmChannel?: boolean }
-> = ({ isDmChannel }) => {
+export const EmptyStateIndicators = ({ isDmChannel }: PropsWithChildren<EmptyStateIndicatorProps & { isDmChannel?: boolean }>
+) => {
   const { thread } = useChannelStateContext();
   const { chatType } = useEventContext();
 

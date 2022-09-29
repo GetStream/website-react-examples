@@ -1,33 +1,18 @@
 import { useEffect, useState } from 'react';
-import { Channel as StreamChannel, Event, LiteralStringForUnion, StreamChat } from 'stream-chat';
+import { Channel as StreamChannel, Event, StreamChat } from 'stream-chat';
 
 import { getRandomTitle } from '../components/Chat/utils';
 import { ChatType, useEventContext } from '../contexts/EventContext';
 import { useCheckList } from './useCheckList';
+
+import { StreamChatType } from '../types';
+
 const urlParams = new URLSearchParams(window.location.search);
 
 const apiKey = urlParams.get('apikey') || (process.env.REACT_APP_STREAM_KEY as string);
 const userId = urlParams.get('user') || (process.env.REACT_APP_USER_ID as string);
 const userToken = urlParams.get('user_token') || (process.env.REACT_APP_USER_TOKEN as string);
 const targetOrigin = urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
-
-type AttachmentType = {};
-type ChannelType = {};
-type CommandType = LiteralStringForUnion;
-type EventType = {};
-type MessageType = { up_votes?: string[] };
-type ReactionType = {};
-export type UserType = { image?: string; title?: string };
-
-export type StreamChatType = {
-  attachmentType: AttachmentType;
-  channelType: ChannelType;
-  commandType: CommandType;
-  eventType: EventType;
-  messageType: MessageType;
-  reactionType: ReactionType;
-  userType: UserType;
-}
 
 export const useInitChat = () => {
   const [chatClient, setChatClient] = useState<StreamChat>();

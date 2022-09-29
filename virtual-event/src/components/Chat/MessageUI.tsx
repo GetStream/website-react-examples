@@ -20,9 +20,7 @@ import { customReactions, getFormattedTime } from './utils';
 import { MessageActionsEllipse, QAThumb, ReactionSmiley } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 
-import type {
-  StreamChatType
-} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type OptionsProps = {
   dropdownOpen: boolean;

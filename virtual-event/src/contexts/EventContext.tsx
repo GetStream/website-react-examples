@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 
 import { ModeOptions, ThemeOptions, useTheme } from '../hooks/useTheme';
+import { PropsWithChildrenOnly } from '../types';
 
 export type ChatType = 'global-ve2' | 'main-event' | 'room' | 'direct' | 'qa';
 export type TabOptions = 'overview' | 'main-event' | 'rooms';
@@ -33,7 +34,7 @@ type EventContextValue = {
 
 const EventContext = React.createContext({} as EventContextValue);
 
-export const EventProvider: React.FC = ({ children }) => {
+export const EventProvider = ({ children }: PropsWithChildrenOnly) => {
   const [actionsModalOpen, setActionsModalOpen] = useState(false);
   const [chatType, setChatType] = useState<ChatType>('global-ve2');
   const [eventName, setEventName] = useState<string | undefined>();

@@ -1,9 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Avatar, isChannel, SearchResultItemProps } from 'stream-chat-react';
 
-import type {
-  StreamChatType
-} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 export const SearchResult: React.FC<
   SearchResultItemProps<
