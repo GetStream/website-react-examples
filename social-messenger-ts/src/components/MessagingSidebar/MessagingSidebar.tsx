@@ -2,7 +2,7 @@ import type { MouseEventHandler } from 'react';
 import { ChannelList, ChannelListProps } from 'stream-chat-react';
 import { MessagingChannelListHeader, MessagingChannelPreview } from '../index';
 
-import type { Theme } from '../../hooks';
+import type { ThemeClassName } from '../../hooks';
 
 type MessagingSidebarProps = {
   channelListOptions: {
@@ -13,7 +13,7 @@ type MessagingSidebarProps = {
   onClick: MouseEventHandler;
   onCreateChannel: () => void;
   onPreviewSelect: MouseEventHandler;
-  theme: Theme;
+  theme: ThemeClassName;
 }
 
 const MessagingSidebar = ({channelListOptions, onClick, onCreateChannel, onPreviewSelect, theme}: MessagingSidebarProps) => {
