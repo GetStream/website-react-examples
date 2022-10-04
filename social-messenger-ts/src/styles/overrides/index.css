@@ -11,4 +11,5 @@
 @import "MessagingSidebar/MessagingSidebar.theme.css";
 @import "MessagingSidebar/MessagingSidebar.layout.css";
 @import "Modal/Modal.layout.css";
+@import "Modal/Modal.theme.css";
 @import "Notification/NotificationList.theme.css";
