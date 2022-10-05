@@ -7,9 +7,8 @@ import type { StreamChatGenerics } from '../../types';
 export const TypingIndicator = () => {
   const { client } = useChatContext<StreamChatGenerics>();
 
-  const { typing } = useTypingContext<StreamChatGenerics>();
-
-  if (!client || !typing) return null;
+  const {typing} = useTypingContext<StreamChatGenerics>();
+  if (!client || !typing || !Object.values(typing).length ) return null;
 
   const users = Object.values(typing)
     .filter(({ user }) => user?.id !== client.user?.id)

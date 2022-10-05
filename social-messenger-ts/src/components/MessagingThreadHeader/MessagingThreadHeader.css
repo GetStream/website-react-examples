@@ -1,0 +1,108 @@
+
+.str-chat {
+  --str-chat__thread-head-start-border-block-end-color: var(--str-chat__secondary-background-color)
+}
+.messaging.str-chat .str-chat__thread {
+  margin: 0;
+}
+
+.custom-thread-header {
+  border: none;
+  background: white;
+  min-height: 60px;
+  box-shadow: var(--messaging__header-shadow);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 1;
+}
+
+.str-chat.str-chat__theme-dark .custom-thread-header {
+  background: rgba(46, 48, 51, 0.98);
+}
+
+.custom-thread-header__left {
+  display: flex;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.custom-thread-header__left-title {
+  font-family: Helvetica Neue, sans-serif;
+  font-weight: bold;
+  font-size: 15px;
+  line-height: 24px;
+  color: var(--str-chat__message-textarea-color);
+  margin-right: 10px;
+}
+
+.str-chat.str-chat__theme-dark .custom-thread-header__left-title {
+  color: var(--str-chat__message-textarea-color);
+}
+
+.custom-thread-header__left-count {
+  font-family: Helvetica, sans-serif;
+  font-size: 14px;
+  mix-blend-mode: normal;
+  opacity: 0.5;
+}
+
+.str-chat.str-chat__theme-dark .custom-thread-header__left-count {
+  color: var(--str-chat__message-textarea-color);
+}
+
+.messaging.str-chat .str-chat__thread {
+  border-left: 1px solid #f1f1f1;
+  border-radius: 0 10px 0 0;
+}
+
+.messaging.str-chat.str-chat__theme-dark .str-chat__thread {
+  border-left: 1px solid rgba(0, 0, 0, 0.09);
+}
+
+.str-chat__thread .str-chat__messaging-input {
+  background: none !important;
+}
+
+.messaging.str-chat .str-chat__thread-list {
+  height: unset;
+  padding: 0;
+}
+
+.str-chat__thread-list .str-chat__list.str-chat__list--thread {
+  padding: 0 !important;
+}
+
+.str-chat__thread-list .str-chat__li.str-chat__li--top {
+  margin-top: 0;
+}
+
+.str-chat__thread-list li .str-chat__message:first-of-type {
+  border-bottom: none !important;
+  padding-bottom: 0;
+}
+
+.str-chat__thread .str-chat__messaging-input {
+  margin-top: 0 !important;
+}
+
+.str-chat__message-replies-count-button:focus {
+  border: none;
+  outline: none;
+}
+
+.str-chat__thread-start {
+  display: none;
+}
+
+.messaging.str-chat .str-chat__thread-list .str-chat__reverse-infinite-scroll {
+  padding-top: 20px;
+}
+
+
+
+@media screen and (max-width: 640px) {
+  .str-chat__thread .str-chat__messaging-input .messaging-input__button.emoji-button {
+    display: none;
+  }
+}

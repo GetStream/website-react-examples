@@ -1,0 +1,78 @@
+.str-chat {
+    --str-chat__message-textarea-border-active: 2px solid var(--str-chat__primary-color);
+    --str-chat__message-textarea-border: 2px solid #00000029;
+    --str-chat__message-textarea-border-block-start: var(--str-chat__message-textarea-border);
+    --str-chat__message-textarea-border-block-end: var(--str-chat__message-textarea-border);
+    --str-chat__message-textarea-border-inline-start: var(--str-chat__message-textarea-border);
+    --str-chat__message-textarea-border-inline-end: var(--str-chat__message-textarea-border);
+
+}
+
+.str-chat__theme-light {
+    --str-chat__message-input-background-color: var(--str-chat__background-color);
+    --str-chat__message-textarea-color: rgba(0, 0, 0, 0.9);
+}
+
+.str-chat__theme-dark {
+    --str-chat__message-input-background-color: #2e3033;
+    --str-chat__message-input-border-block-start: 1px solid rgba(0, 0, 0, 0.16);
+    --str-chat__message-textarea-background-color: #323437;
+    --str-chat__message-textarea-color: rgba(255, 255, 255, 0.9);
+}
+
+.str-chat__message-input .str-chat__message-textarea-container:focus-within {
+    border-block-start: var(--str-chat__message-textarea-border-active);
+    border-block-end: var(--str-chat__message-textarea-border-active);
+    border-inline-start: var(--str-chat__message-textarea-border-active);
+    border-inline-end: var(--str-chat__message-textarea-border-active);
+}
+
+.str-chat__message-textarea-container {
+    transition: border 0.2s ease-in-out;
+}
+
+.str-chat__message-input .str-chat__message-textarea-container .str-chat__message-textarea {
+    font: var(--str-chat__body-text);
+    transition: box-shadow 0.2s ease-in-out;
+}
+
+.str-chat__thread-container .str-chat__message-input {
+    background: var(--str-chat__background-color);
+    box-shadow: 0 -2px 2px rgba(0, 0, 0, .04);
+}
+
+.str-chat__message-input .str-chat__send-button svg path {
+    /*background-image: url("../../../assets/send-icon.svg");*/
+    transition: fill 0.2s ease-in-out;
+}
+
+.str-chat__message-input .str-chat__send-button:active svg path {
+    /*background-image: url("../../../assets/send-icon.svg");*/
+    fill: var(--str-chat__active-primary-color);
+}
+
+.str-chat__theme-dark .emoji-mart {
+    background: var(--str-chat__secondary-background-color);
+    border: var(--str-chat__secondary-surface-color);
+    box-shadow: var(--str-chat__box-shadow-color);
+}
+
+.str-chat__theme-dark .str-chat__message-input .emoji-mart-bar,
+.str-chat__theme-dark .str-chat__message-input .emoji-mart-search input {
+    border-color: rgba(0, 0, 0, 0.36);
+}
+
+.str-chat__theme-dark .emoji-mart-category-label span,
+.str-chat__theme-dark .emoji-mart-search input {
+    background: var(--str-chat__secondary-background-color);
+    color: var(--str-chat__text-color);
+}
+
+.str-chat__suggestion-list-container {
+    overflow: auto;
+}
+
+.str-chat__slash-command:hover {
+    background: #005fff;
+    cursor: pointer;
+}

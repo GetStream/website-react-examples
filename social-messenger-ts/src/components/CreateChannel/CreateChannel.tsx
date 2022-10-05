@@ -53,7 +53,7 @@ const CreateChannel = (props: Props) => {
     document.addEventListener('click', clickListener);
 
     return () => document.removeEventListener('click', clickListener);
-  }, []); // eslint-disable-line react-hooks/exhaustive-deps
+  }, [resultsOpen]);
 
   const findUsers = async () => {
     if (searching) return;
@@ -99,7 +99,7 @@ const CreateChannel = (props: Props) => {
 
     if (!selectedUsersIds.length || !client.userID) return;
 
-    const conversation = await client.channel('messaging', {
+    const conversation = client.channel('messaging', {
       members: [...selectedUsersIds, client.userID],
     });
 

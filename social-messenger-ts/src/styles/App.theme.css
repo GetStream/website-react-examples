@@ -1,0 +1,47 @@
+.str-chat {
+    --str-chat__primary-color: #005fff;
+    --str-chat__background-color: #fff;
+    --str-chat__secondary-background-color: rgba(255, 255, 255, 0.9);
+    --str-chat__thread-background-color: var(--str-chat__background-color);
+    --str-chat__notification-list-background-color: var(--str-chat__background-color);
+    --str-chat__message-list-background-color: var(--str-chat__background-color);
+
+    --messaging__header-shadow: 0 7px 9px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.03);
+}
+
+.str-chat.str-chat__theme-dark {
+    --str-chat__background-color: #282a2d;
+    --str-chat__secondary-background-color: #212326;
+    --str-chat__primary-surface-color: #18191b;
+    --str-chat__secondary-surface-color: #343434;
+}
+
+:root {
+    --app-height: 100%;
+}
+
+html,
+body {
+    background: var(--str-chat__background-color);
+}
+
+*::-webkit-scrollbar {
+    width: 0.3rem;
+}
+
+*::-webkit-scrollbar-thumb {
+    background-color: darkgrey;
+    border-radius: 2px;
+}
+
+body::-webkit-scrollbar {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+body::-webkit-scrollbar-thumb {
+    background-color: transparent;
+}

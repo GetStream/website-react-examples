@@ -1,0 +1,7 @@
+.str-chat__message-actions-box:not(.str-chat__message-actions-box-angular):not(.str-chat__message-actions-box--mine) {
+    inset-inline-end: 0;
+}
+
+.str-chat__message-actions-box:not(.str-chat__message-actions-box-angular).str-chat__message-actions-box--mine {
+    inset-inline-start: -5px;
+}

@@ -1,0 +1,7 @@
+.str-chat.str-chat__theme-light {
+    --str-chat__modal-background-color: var(--str-chat__background-color);
+}
+
+.str-chat.str-chat__theme-dark {
+    --str-chat__modal-background-color: #2e3033;
+}

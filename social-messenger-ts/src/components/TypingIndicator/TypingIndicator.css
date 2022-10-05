@@ -5,7 +5,7 @@
   font-weight: normal;
   font-size: 12px;
   line-height: 16px;
-  color: rgba(0, 0, 0, 0.9);
+  color: var(--str-chat__message-textarea-color);
   opacity: 0.5;
 }
 
@@ -25,11 +25,11 @@
   animation: wave2 1.1s linear infinite;
 }
 
-.str-chat.dark .messaging__typing-indicator {
-  color: rgba(255, 255, 255, 0.9);
+.str-chat.str-chat__theme-dark .messaging__typing-indicator {
+  color: var(--str-chat__message-textarea-color);
 }
 
-.str-chat.dark .messaging__typing-indicator .dots .dot {
+.str-chat.str-chat__theme-dark .messaging__typing-indicator .dots .dot {
   background: white;
 }
 

@@ -1,0 +1,34 @@
+.messaging__sidebar {
+    height: 100%;
+    display: grid;
+    grid-template-rows: min-content;
+}
+
+
+.messaging__channel-list__header {
+    display: flex;
+    align-items: center;
+    padding: 30px 10px 10px 30px;
+}
+
+.messaging__channel-list__header__name {
+    display: flex;
+    line-height: 20px;
+    font-size: 16px;
+    margin: 0 10px;
+}
+
+.messaging__channel-list__header__button {
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+.str-chat__load-more-button {
+    display: none;
+}
+

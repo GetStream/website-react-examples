@@ -1,0 +1,18 @@
+.emoji-mart {
+    max-width: 100vw;
+}
+
+.str-chat__thread-container .str-chat__message-input {
+    padding-top: var(--str-chat__spacing-1_5) ;
+}
+
+.str-chat__message-input .str-chat__message-input-inner {
+    align-items: center;
+}
+
+.str-chat__message-input .str-chat__send-button {
+    margin-left: calc(var(--str-chat__spacing-px)*5);
+    width: calc(var(--str-chat__spacing-px)*20);
+    height: calc(var(--str-chat__spacing-px)*20);
+    min-width: calc(var(--str-chat__spacing-px)*20);
+}

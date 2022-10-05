@@ -1,29 +1,13 @@
-.avatar-group__avatars {
+.avatar-group {
   display: flex;
   align-items: center;
   height: 40px;
   min-width: 40px;
   max-width: 40px;
+  overflow: hidden;
   border-radius: 20px;
-  overflow: hidden;
 }
 
-.avatar-group__avatars.two div:first-child {
-  position: relative;
-  right: 10px;
-}
-
-.avatar-group__avatars.two div:nth-child(2) {
-  position: relative;
-  right: 30px;
-}
-
-.avatar-group__avatars.two span {
-  width: 20px;
-  overflow: hidden;
-}
-
-.avatar-group__avatars.three span {
-  width: 20px;
-  overflow: hidden;
+.avatar-group .str-chat__avatar .str-chat__avatar-image {
+  border-radius: 0;
 }

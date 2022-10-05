@@ -1,0 +1,14 @@
+.str-chat {
+    --str-chat__channel-list-border-inline-end: none;
+}
+
+.str-chat__theme-light {
+    --str-chat__channel-list-background-color: #fafafa;
+}
+
+/* To fix inherited styles (as per Team and Customer Support apps */
+@media screen and (max-width: 960px) {
+    .str-chat-channel-list {
+        box-shadow: unset;
+    }
+}

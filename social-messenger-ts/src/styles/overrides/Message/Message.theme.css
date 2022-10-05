@@ -1,0 +1,31 @@
+.str-chat__theme-light {
+    --str-chat__own-message-bubble-background-color: #ecebeb;
+    --str-chat__message-bubble-background-color: #fcfcfc;
+    --str-chat__message-bubble-border: 1px solid #00000014;
+    --str-chat__message-bubble-border-block-start: var(--str-chat__message-bubble-border);
+    --str-chat__message-bubble-border-block-end: var(--str-chat__message-bubble-border);
+    --str-chat__message-bubble-border-inline-start: var(--str-chat__message-bubble-border);
+    --str-chat__message-bubble-border-inline-end: var(--str-chat__message-bubble-border);
+}
+
+.str-chat__theme-dark {
+    --str-chat__own-message-bubble-background-color: #00000066;
+    --str-chat__message-bubble-background-color: var(--str-chat__secondary-surface-color);
+}
+
+
+.str-chat__message--me .str-chat__message-bubble {
+    border: none;
+}
+
+.str-chat.str-chat__theme-dark .str-chat__message--system__date {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.str-chat.str-chat__theme-dark .str-chat__message--system__text p {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.str-chat.str-chat__theme-dark .str-chat__message--system__line {
+    background: rgba(255, 255, 255, 0.1);
+}
