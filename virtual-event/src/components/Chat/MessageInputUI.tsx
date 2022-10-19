@@ -40,7 +40,7 @@ export const MessageInputUI = (props: Props) => {
 
   const [commandsOpen, setCommandsOpen] = useState(false);
 
-  const onCheckChange = () => setChecked?.(!checked);
+  const onCheckChange = () => setChecked?.((checked) => !checked);
 
   useEffect(() => {
     const handleClick = () => {
@@ -58,9 +58,7 @@ export const MessageInputUI = (props: Props) => {
 
       const deletePressed =
         event.nativeEvent instanceof InputEvent &&
-        event.nativeEvent.inputType === 'deleteContentBackward'
-          ? true
-          : false;
+        event.nativeEvent.inputType === 'deleteContentBackward';
 
       if (text.length === 1 && deletePressed) {
         setGiphyState(false);
@@ -92,14 +90,15 @@ export const MessageInputUI = (props: Props) => {
           {chatType !== 'qa' && (
             <>
               <div
-                className={`input-ui-input-commands ${cooldownRemaining ? 'cooldown' : ''}`}
+                className={`input-ui-input-commands-button ${cooldownRemaining ? 'cooldown' : ''}`}
                 onClick={cooldownRemaining ? () => null : handleCommandsClick}
+                role='button'
               >
                 <CommandBolt />
               </div>
               {!giphyState && (
                 <div
-                  className={`input-ui-input-emoji-picker ${cooldownRemaining ? 'cooldown' : ''}`}
+                  className={`input-ui-input-emoji-picker-button ${cooldownRemaining ? 'cooldown' : ''}`}
                   ref={emojiPickerRef}
                   onClick={cooldownRemaining ? () => null : openEmojiPicker}
                 >
@@ -109,8 +108,9 @@ export const MessageInputUI = (props: Props) => {
             </>
           )}
         </div>
-        <div
-          className={`input-ui-send ${text ? 'text' : ''} ${cooldownRemaining ? 'cooldown' : ''}`}
+        <button
+          className={`input-ui-send-button ${text ? 'text' : ''} ${cooldownRemaining ? 'cooldown' : ''}`}
+          disabled={!text}
           onClick={handleSubmit}
         >
           {giphyState ? (
@@ -128,7 +128,7 @@ export const MessageInputUI = (props: Props) => {
               <div>{269 - text.length}</div>
             </>
           )}
-        </div>
+        </button>
       </div>
       {threadInput && (
         <div className='thread-footer'>
