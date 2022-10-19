@@ -27,7 +27,7 @@ export const ThreadInner = () => {
           separateGiphyPreview: true,
         }}
         Input={(props) => (
-          <MessageInputUI {...props} checked={checked} setChecked={setChecked} threadInput />
+          <MessageInputUI {...props} checked={checked} setChecked={setChecked} threadInput focus />
         )}
         virtualized
       />
