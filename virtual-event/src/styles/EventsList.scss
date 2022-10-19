@@ -108,7 +108,7 @@
     display: flex;
     align-items: center;
     justify-content: center;
-    height: calc(100% - 57px);
+    height: calc(100% - 56px);
 
     &-hidden {
       display: none;
@@ -181,7 +181,7 @@
     width: 280px;
     background: $stroke;
     position: absolute;
-    right: 0px;
+    right: 0;
     top: 56px;
     border-radius: 2px;
     padding-top: 16px;
