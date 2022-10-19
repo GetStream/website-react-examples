@@ -22,7 +22,7 @@ import { getFormattedTime } from './utils';
 import { ClickDMIcon } from '../../assets';
 
 import { useEventContext } from '../../contexts/EventContext';
-import { PropsWithChildrenOnly, StreamChatType } from '../../types';
+import { PropsWithChildrenOnly } from '../../types';
 
 export const SkeletonLoader: React.FC = () => (
   <ul className='dm-loading'>
@@ -64,7 +64,7 @@ const ListUI  = ({ children, error, loading }: PropsWithChildren<ChannelListMess
   return <ListWrapper>{children}</ListWrapper>;
 };
 
-type PreviewUIProps = ChannelPreviewUIComponentProps<StreamChatType> & {
+type PreviewUIProps = ChannelPreviewUIComponentProps & {
   setDmChannel: React.Dispatch<React.SetStateAction<StreamChannel | undefined>>;
 };
 
