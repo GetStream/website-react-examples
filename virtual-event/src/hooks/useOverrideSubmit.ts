@@ -1,4 +1,5 @@
 import { MessageToSend, useChannelActionContext } from 'stream-chat-react';
+import { useCallback } from 'react';
 
 import { useGiphyContext } from '../contexts/GiphyContext';
 
@@ -6,9 +7,8 @@ export const useOverrideSubmit = (showInChannel?: boolean) => {
   const { sendMessage } = useChannelActionContext();
   const { giphyState, setGiphyState } = useGiphyContext();
 
-  const overrideSubmitHandler = async (message: MessageToSend) => {
+  return useCallback(async (message: MessageToSend) => {
     let updatedMessage;
-
     if (message.attachments?.length && message.text?.startsWith('/giphy')) {
       const updatedText = message.text.replace('/giphy', '');
       updatedMessage = { ...message, text: updatedText };
@@ -28,7 +28,5 @@ export const useOverrideSubmit = (showInChannel?: boolean) => {
     }
 
     setGiphyState(false);
-  };
-
-  return overrideSubmitHandler;
+  }, [ showInChannel, giphyState, sendMessage, setGiphyState ]);
 };
