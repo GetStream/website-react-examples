@@ -92,7 +92,7 @@
     width: 100%;
     align-content: center;
     justify-content: center;
-    overflow: scroll;
+    overflow: auto;
 
     > div:first-child {
       border: 4px solid $accent-green;
