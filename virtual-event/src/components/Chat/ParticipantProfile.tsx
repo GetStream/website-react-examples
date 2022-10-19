@@ -1,6 +1,6 @@
-import React  from 'react';
+import React, { useCallback, useState } from 'react';
 import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
-import { Avatar, useChatContext } from 'stream-chat-react';
+import { Avatar, ReactEventHandler, useChatContext } from 'stream-chat-react';
 
 import { UserActionsDropdown } from './UserActionsDropdown';
 import { CloseX, Ellipse, LinkedInLogo, TwitterLogo } from '../../assets';
@@ -19,12 +19,17 @@ type Props<StreamChatType extends ExtendableGenerics> = {
 
 export const ParticipantProfile = (props: Props<StreamChatType>) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
+  const { id, image, name, online, title } = participantProfile;
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
-  const {state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState();
 
-  const { id, image, name, online, title } = participantProfile;
+  const {state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState();
+  const [imgSrc, setImgSrc] = useState<string | null>(image || null);
+
+  const handleImageLoadError: ReactEventHandler = useCallback((e) => {
+    setImgSrc(null);
+  }, []);
 
   const handleStartChat = async () => {
     if (!client.userID) return;
@@ -67,8 +72,8 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         />
       )}
       <div className='profile-details'>
-        {image ? (
-          <img src={image} alt={image} />
+        {imgSrc ? (
+          <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError}/>
         ) : (
           <Avatar name={name || id} shape='rounded' size={200} />
         )}
