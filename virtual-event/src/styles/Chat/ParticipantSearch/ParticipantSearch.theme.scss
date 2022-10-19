@@ -1,0 +1,82 @@
+.str-chat {
+  --str-chat__channel-search-results-header-color: $text-high-emphasis;
+  --str-chat__channel-search-result-list-background-color: $app-canvas;
+}
+
+.str-chat__channel-search-bar {
+  .str-chat__channel-search-input--wrapper {
+    border: 2px solid $stroke;
+
+    input {
+      color: $text-high-emphasis;
+      font-size: 14px;
+      transition: background 1s;
+    }
+
+    .str-chat__channel-search-input--clear-button svg path#icon-background {
+      fill: var(--card-background);
+    }
+
+    .str-chat__channel-search-input--clear-button svg path#icon-pattern {
+      fill: var(--text-mid-emphasis);
+    }
+  }
+
+  .str-chat__channel-search-input--wrapper:focus-within {
+    border-color: $primary-accent;
+    caret-color: $primary-accent;
+
+    .str-chat__channel-search-input--icon svg path {
+      fill: var(--primary-color);
+    }
+
+    .str-chat__channel-search-input--clear-button svg path#icon-background {
+      fill: var(--primary-color);
+    }
+
+    .str-chat__channel-search-input--clear-button {
+      cursor: pointer;
+
+      svg path#icon-pattern {
+        fill: var(--text-self);
+      }
+    }
+  }
+}
+
+.search, .search * {
+  transition: background 1s, border 1s;
+}
+
+.search {
+  background: $app-canvas;
+
+  .search-header {
+    background: $app-canvas;
+    border-bottom: 1px solid $stroke;
+
+    .search-header-close {
+      border-radius: 8px;
+      background: $card-background;
+      cursor: pointer;
+
+      svg {
+        fill: $primary-accent;
+      }
+    }
+
+    .search-header-title {
+      color: $text-high-emphasis;
+      font-weight: 600;
+      font-size: 14px;
+    }
+  }
+}
+
+.search-loading,
+.search-empty {
+  color: var(--text-high-emphasis);
+  font-weight: 600;
+  padding: 8px;
+  background: $app-canvas;
+}
