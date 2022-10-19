@@ -2,8 +2,6 @@ import React, { useState } from 'react';
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
 import { Chat, Channel } from 'stream-chat-react';
 
-import 'stream-chat-react/dist/css/v2/index.css';
-
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
@@ -26,6 +24,7 @@ import { useInitChat } from '../../hooks/useInitChat';
 
 import { StreamChatType } from '../../types';
 
+// todo: remove AutocompleteSuggestionHeader prop
 export const ChatContainer = () => {
   const {
     actionsModalOpen,

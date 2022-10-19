@@ -1,0 +1,45 @@
+.giphy {
+  .giphy-preview {
+    z-index: 1;
+    margin: 8px 8px 2px 8px;
+
+    .str-chat__message-attachment {
+      margin: 0;
+    }
+
+    .giphy-preview-card {
+      .giphy-preview-card-header {
+        display: flex;
+        align-items: center;
+        padding: 8px;
+
+        span {
+          margin-left: 8px;
+        }
+      }
+    }
+
+    .giphy-preview-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-evenly;
+      height: 50px;
+
+      .giphy-preview-actions-button {
+        width: 33%;
+        height: 100%;
+      }
+    }
+  }
+
+  .giphy-footer {
+    display: flex;
+    margin-bottom: 8px;
+    justify-content: flex-end;
+    padding-right: 8px;
+
+    span {
+      margin-left: 4px;
+    }
+  }
+}

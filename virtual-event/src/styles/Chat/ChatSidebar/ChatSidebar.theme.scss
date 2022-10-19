@@ -1,0 +1,11 @@
+.chat-sidebar {
+
+  .chat-sidebar-button {
+    cursor: pointer;
+
+    .unread {
+      border-radius: 3px;
+      background: $accent-red;
+    }
+  }
+}

@@ -1,0 +1,14 @@
+.str-chat__channel {
+  position: initial;
+}
+
+.dm-channel {
+  width: 100%;
+  position: absolute;
+  top: 0;
+  z-index: 1;
+
+  .str-chat-channel {
+    height: calc(100vh - 56px); // height of dm header
+  }
+}

@@ -6,8 +6,9 @@ export const CloseChatButton: React.FC = () => {
   const { isFullScreen, setIsFullScreen } = useEventContext();
 
   return (
+    <div className='chat-close-button chat-sidebar-button'>
     <svg
-      className='chat-close'
+      className=''
       onClick={() => setIsFullScreen((prev) => !prev)}
       xmlns='http://www.w3.org/2000/svg'
       width='40'
@@ -35,5 +36,6 @@ export const CloseChatButton: React.FC = () => {
         ></path>
       )}
     </svg>
+    </div>
   );
 };
