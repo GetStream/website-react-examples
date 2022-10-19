@@ -1,12 +1,13 @@
-import React, { useState } from 'react';
+import React  from 'react';
+import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { UserActionsDropdown } from './UserActionsDropdown';
-
 import { CloseX, Ellipse, LinkedInLogo, TwitterLogo } from '../../assets';
+
 import { useEventContext } from '../../contexts/EventContext';
 
-import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
+import { useBoolState } from '../../hooks/useBoolState';
 
 import { StreamChatType } from '../../types';
 
@@ -21,8 +22,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
-
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const {state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState();
 
   const { id, image, name, online, title } = participantProfile;
 
@@ -54,7 +54,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         </div>
         <div
           className={`profile-header-actions ${dropdownOpen ? 'open' : ''}`}
-          onClick={() => setDropdownOpen((prev) => !prev)}
+          onClick={toggleOpenDropdown}
         >
           <Ellipse />
         </div>
@@ -63,7 +63,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         <UserActionsDropdown
           dropdownOpen={dropdownOpen}
           participantProfile={participantProfile}
-          setDropdownOpen={setDropdownOpen}
+          closeDropdown={closeDropdown}
         />
       )}
       <div className='profile-details'>
