@@ -1,0 +1,25 @@
+.message-ui-options {
+  position: absolute;
+  top: 0;
+  right: 0;
+  padding: 7px;
+
+  & > span:first-child {
+    margin-right: 8px;
+  }
+
+  .message-ui-options-dropdown {
+    position: absolute;
+    margin-top: 4px;
+    right: -8px;
+  }
+
+  .message-ui-options-dropdown.recent {
+    margin-top: 0;
+    bottom: 145px;
+  }
+
+  .message-ui-options-dropdown.recent.mine {
+    bottom: 64px;
+  }
+}

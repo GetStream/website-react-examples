@@ -1,0 +1,51 @@
+.str-chat {
+  --str-chat__message-reactions-border-radius: var(--str-chat__border-radius-circle);
+}
+
+.channel-header-container {
+  border-bottom: 1px solid $stroke;
+  background: $app-canvas;
+  transition: background 1s;
+
+  .channel-header-close-button {
+    border-radius: 8px;
+    background: $card-background;
+    transition: background 1s;
+    cursor: pointer;
+
+    svg {
+      fill: $primary-accent;
+    }
+  }
+
+  .channel-header-title {
+    color: $text-high-emphasis;
+    font-weight: 600;
+    font-size: 14px;
+
+    .channel-header-sub-title {
+      color: $text-mid-emphasis;
+      font-size: 12px;
+      font-weight: normal;
+    }
+  }
+
+  .channel-header-actions-button {
+    border-radius: 8px;
+    background: $card-background;
+    transition: background 0.5s;
+    cursor: pointer;
+
+    svg {
+      fill: $primary-accent;
+    }
+
+    &.open {
+      background: $primary-accent;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+}

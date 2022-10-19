@@ -1,0 +1,19 @@
+.str-chat {
+  --reaction-list-border: 1px solid var(--stroke);
+  --str-chat__message-reactions-border-block-start: var(--reaction-list-border);
+  --str-chat__message-reactions-border-block-end: var(--reaction-list-border);
+  --str-chat__message-reactions-border-inline-start: var(--reaction-list-border);
+  --str-chat__message-reactions-border-inline-end: var(--reaction-list-border);
+}
+
+.message-ui-reaction-selector {
+  background: $app-canvas;
+  border-radius: 20px;
+  filter: drop-shadow(0px 0px 8px rgba(0, 0, 0, 0.15));
+
+  span:hover {
+    cursor: pointer;
+    background: $stroke;
+    border-radius: 20px;
+  }
+}

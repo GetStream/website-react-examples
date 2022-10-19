@@ -1,0 +1,66 @@
+@use '../../_utils';
+
+.str-chat__parent-message-li {
+  padding: 0;
+
+  .message-ui-options {
+    display: none;
+  }
+}
+
+.str-chat__li {
+  padding: 0;
+}
+
+.message-ui {
+  width: 100%;
+  position: relative;
+  display: flex;
+  gap: 6px;
+  padding: var(--message-padding);
+
+  .message-ui-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    min-width: 0;
+
+    .message-ui-content-top {
+      display: flex;
+      flex: 1;
+      align-items: center;
+      gap: 5px;
+
+      .message-ui-content-top-name {
+        @include utils.ellipsis-text;
+        flex: 1 0;
+      }
+
+      .message-ui-content-top-title {
+        margin-right: 4px;
+      }
+    }
+
+    .message-ui-content-bottom {
+      word-break: break-word;
+    }
+  }
+
+
+  .message-ui-upvote-button {
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    gap: 6px;
+  }
+}
+
+.str-chat__message-replies-count-button {
+  display: block;
+  padding: 0;
+  margin-top: 8px;
+  line-height: 15px;
+}

@@ -8,7 +8,7 @@ import type { Channel, UserResponse } from 'stream-chat';
 
 type Props = {
   dropdownOpen: boolean;
-  setDropdownOpen: React.Dispatch<React.SetStateAction<boolean>>;
+  closeDropdown: () => void;
   dmChannel?: Channel;
   openThread?: ReactEventHandler;
   participantProfile?: UserResponse;
@@ -23,7 +23,7 @@ export const UserActionsDropdown: React.FC<Props> = (props) => {
     dmChannel,
     openThread,
     participantProfile,
-    setDropdownOpen,
+    closeDropdown,
     setMessageActionUser,
     thread,
     user,
@@ -53,7 +53,7 @@ export const UserActionsDropdown: React.FC<Props> = (props) => {
         const actionsModal = elements.item(0);
 
         if (!actionsModal?.contains(event.target)) {
-          setDropdownOpen(false);
+          closeDropdown();
         }
       }
     };
@@ -65,7 +65,7 @@ export const UserActionsDropdown: React.FC<Props> = (props) => {
   const handleClick = (action: UserActions) => {
     if (user) setMessageActionUser?.(user.id);
     setActionsModalOpen(true);
-    setDropdownOpen(false);
+    closeDropdown();
     setUserActionType(action);
   };
 

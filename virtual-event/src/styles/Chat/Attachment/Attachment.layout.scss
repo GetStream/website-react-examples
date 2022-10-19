@@ -1,0 +1,22 @@
+.str-chat__message-attachment--giphy {
+  max-width: 175px;
+
+  .str-chat__message-attachment-card--header {
+    height: 175px;
+  }
+
+  .str-chat__message-attachment-card--content {
+    display: none;
+  }
+}
+
+.giphy-preview {
+  .str-chat__message-attachment--giphy {
+    max-width: 100%;
+    height: initial;
+
+    .str-chat__message-attachment-card--header {
+      height: unset;
+    }
+  }
+}

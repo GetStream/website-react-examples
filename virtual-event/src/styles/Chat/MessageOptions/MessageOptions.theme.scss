@@ -1,0 +1,14 @@
+.message-ui-options {
+  background: var(--card-background);
+
+  svg {
+    &:hover {
+      cursor: pointer;
+
+      path {
+        transition: fill 0.2s;
+        fill: $primary-accent;
+      }
+    }
+  }
+}

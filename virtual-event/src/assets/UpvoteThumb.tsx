@@ -1,6 +1,6 @@
 import React from 'react';
 
-export const QAThumb: React.FC = () => (
+export const UpvoteThumb: React.FC = () => (
   <svg width='11' height='14' fill='none' viewBox='0 0 11 14'>
     <path
       fillRule='evenodd'
