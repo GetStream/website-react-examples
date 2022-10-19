@@ -1,7 +1,6 @@
 import React from 'react';
 import { useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
-
-import { CloseX, Ellipse } from '../../assets';
+import { ChannelHeader } from './ChannelHeader';
 
 export const ThreadHeader: React.FC = () => {
   const { thread } = useChannelStateContext();
@@ -9,20 +8,8 @@ export const ThreadHeader: React.FC = () => {
 
   if (!thread) return null;
 
+  const text = thread.user?.name || thread.user?.id || '';
   return (
-    <div className='dm-header-container'>
-      <div className='dm-header-close' onClick={closeThread}>
-        <CloseX />
-      </div>
-      <div className='dm-header-title'>
-        <div>Thread Reply</div>
-        <div className='dm-header-title-sub-title'>
-          with {thread.user?.name || thread.user?.id || ''}
-        </div>
-      </div>
-      <div className='dm-header-actions'>
-        <Ellipse />
-      </div>
-    </div>
+    <ChannelHeader onClose={closeThread} subtitle={`with ${text}`} title='Thread Reply'/>
   );
 };
