@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
 
 import './TeamChannelList.css';
 
@@ -13,7 +13,7 @@ export type TeamChannelListProps = ChannelListMessengerProps & {
   type: string;
 };
 
-const ChannelList: React.FC<TeamChannelListProps> = (props) => {
+const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
   const {
     children,
     error = false,

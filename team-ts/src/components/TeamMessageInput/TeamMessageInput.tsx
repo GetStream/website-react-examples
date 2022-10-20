@@ -28,11 +28,11 @@ import {
 
 import type { StreamChatType } from '../../types';
 
-export type Props = MessageInputProps & {
+export type ThreadMessageInputProps = MessageInputProps & {
   pinsOpen?: boolean;
 };
 
-export const TeamMessageInput: React.FC<Props> = (props) => {
+export const TeamMessageInput = (props: ThreadMessageInputProps) => {
   const { pinsOpen } = props;
 
   const { giphyState, setGiphyState } = useContext(GiphyContext);

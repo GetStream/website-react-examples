@@ -11,12 +11,12 @@ import type { ChannelFilters } from 'stream-chat';
 
 import type { StreamChatType } from '../../types';
 
-type InputProps = {
+type ChannelNameInputProps = {
   channelName: string;
   setChannelName: (value: React.SetStateAction<string>) => void;
 };
 
-const ChannelNameInput: React.FC<InputProps> = (props) => {
+const ChannelNameInput = (props: ChannelNameInputProps) => {
   const { channelName = '', setChannelName } = props;
 
   const handleChange = (event: { preventDefault: () => void; target: { value: string } }) => {
@@ -33,12 +33,12 @@ const ChannelNameInput: React.FC<InputProps> = (props) => {
   );
 };
 
-type Props = {
+type EditChannelProps = {
   filters: ChannelFilters[];
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const EditChannel: React.FC<Props> = (props) => {
+export const EditChannel = (props: EditChannelProps) => {
   const { filters, setIsEditing } = props;
 
   const { channel } = useChatContext<StreamChatType>();

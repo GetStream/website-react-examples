@@ -6,12 +6,12 @@ import { ChannelInfo, PinIcon } from '../../assets';
 
 import type { StreamChatType } from '../../types';
 
-type Props = {
+type TeamChannelHeaderProps = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TeamChannelHeader: React.FC<Props> = (props) => {
+export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
   const { setIsEditing, setPinsOpen } = props;
 
   const { client } = useChatContext<StreamChatType>();

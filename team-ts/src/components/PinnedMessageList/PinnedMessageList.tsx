@@ -5,11 +5,11 @@ import './PinnedMessageList.css';
 import { CloseThreadIcon } from '../../assets';
 import type { StreamChatType } from '../../types';
 
-type Props = {
+type PinnedMessageListProps = {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const PinnedMessageList: React.FC<Props> = (props) => {
+export const PinnedMessageList = (props: PinnedMessageListProps) => {
   const { setPinsOpen } = props;
 
   const { closeThread } = useChannelActionContext<StreamChatType>();

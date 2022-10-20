@@ -4,7 +4,7 @@ import './TeamTypingIndicator.css';
 
 import type { StreamChatType } from '../../types';
 
-export const TeamTypingIndicator: React.FC<{ type: string }> = (props) => {
+export const TeamTypingIndicator = (props: { type: string }) => {
   const { type } = props;
 
   const { client } = useChatContext<StreamChatType>();

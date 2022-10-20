@@ -3,11 +3,11 @@ import { MessageUIComponentProps, MessageTeam, useMessageContext } from 'stream-
 
 import './TeamMessage.css';
 
-type Props = MessageUIComponentProps & {
+type TeamMessageProps = MessageUIComponentProps & {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const TeamMessage: React.FC<Props> = (props) => {
+export const TeamMessage = (props: TeamMessageProps) => {
   const { setPinsOpen } = props;
 
   const {

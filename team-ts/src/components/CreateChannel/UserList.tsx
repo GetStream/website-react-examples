@@ -24,13 +24,13 @@ const ListContainer = (props: {children: React.ReactNode}) => {
   );
 };
 
-type ItemProps = {
+type UserItemProps = {
   index: number;
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
   user: UserResponse<StreamChatType>;
 };
 
-const UserItem: React.FC<ItemProps> = (props) => {
+const UserItem = (props: UserItemProps) => {
   const { index, setSelectedUsers, user } = props;
 
   const [selected, setSelected] = useState(false);
@@ -73,12 +73,12 @@ const UserItem: React.FC<ItemProps> = (props) => {
   );
 };
 
-type Props = {
+type UserListProps = {
   filters: ChannelFilters[];
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
 };
 
-export const UserList: React.FC<Props> = (props) => {
+export const UserList = (props: UserListProps) => {
   const { filters, setSelectedUsers } = props;
 
   const { client } = useChatContext<StreamChatType>();

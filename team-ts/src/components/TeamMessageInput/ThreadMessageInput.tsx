@@ -5,13 +5,11 @@ import { GiphyContext } from '../ChannelContainer/ChannelInner';
 
 import './ThreadMessageInput.css';
 
-import { Props } from './TeamMessageInput';
-
 import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
 
 import type { StreamChatType } from '../../types';
 
-export const ThreadMessageInput: React.FC<Props> = (props) => {
+export const ThreadMessageInput = () => {
   const { giphyState, setGiphyState } = useContext(GiphyContext)
 
   const messageInput = useMessageInputContext<StreamChatType>();

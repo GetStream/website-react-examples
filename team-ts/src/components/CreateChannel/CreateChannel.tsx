@@ -16,7 +16,7 @@ type InputProps = {
   setChannelName: (value: React.SetStateAction<string>) => void;
 };
 
-const ChannelNameInput: React.FC<InputProps> = (props) => {
+const ChannelNameInput = (props: InputProps) => {
   const { channelName = '', setChannelName } = props;
   const handleChange = (event: { preventDefault: () => void; target: { value: string } }) => {
     event.preventDefault();
@@ -37,13 +37,13 @@ const ChannelNameInput: React.FC<InputProps> = (props) => {
   );
 };
 
-type Props = {
+type CreateChannelProps = {
   createType: string;
   filters: ChannelFilters[];
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-export const CreateChannel: React.FC<Props> = (props) => {
+export const CreateChannel = (props: CreateChannelProps) => {
   const { createType, filters, setIsCreating } = props;
 
   const { client, setActiveChannel } = useChatContext<StreamChatType>();

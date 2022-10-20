@@ -18,7 +18,7 @@ import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 
 import type { StreamChatType } from '../../types';
 
-type InnerProps = {
+type ChannelInnerProps = {
   pinsOpen: boolean;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
@@ -31,7 +31,7 @@ type GiphyStateObj = {
 
 export const GiphyContext = React.createContext<GiphyStateObj>({} as GiphyStateObj);
 
-export const ChannelInner: React.FC<InnerProps> = (props) => {
+export const ChannelInner = (props: ChannelInnerProps) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
 
   const [giphyState, setGiphyState] = useState(false);

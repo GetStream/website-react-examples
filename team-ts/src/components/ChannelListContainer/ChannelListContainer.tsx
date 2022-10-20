@@ -10,7 +10,9 @@ import { SideBarFlag, SideBarLogo } from '../../assets';
 
 import type { Channel, ChannelFilters } from 'stream-chat';
 
-type Props = Omit<ChannelListProps, 'filters'> & {
+import { StreamChatType } from '../../types';
+
+type ChannelListContainerProps = Omit<ChannelListProps<StreamChatType>, 'filters'> & {
   setCreateType: React.Dispatch<React.SetStateAction<string>>;
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -46,7 +48,7 @@ const customChannelMessagingFilter = (channels: Channel[]) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
-export const ChannelListContainer: React.FC<Props> = (props) => {
+export const ChannelListContainer = (props: ChannelListContainerProps) => {
   const { filters, options, setCreateType, setIsCreating, setIsEditing, sort } = props;
 
   return (

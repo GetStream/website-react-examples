@@ -10,7 +10,7 @@ type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> 
   result: ChannelOrUserType;
 };
 
-const SearchResult: React.FC<SearchResultProps> = (props) => {
+const SearchResult = (props: SearchResultProps) => {
   const { focusedId, result, setChannel } = props;
 
   const { client, setActiveChannel } = useChatContext<StreamChatType>();
@@ -65,7 +65,7 @@ type ResultsDropdownProps = {
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const ResultsDropdown: React.FC<ResultsDropdownProps> = (props) => {
+export const ResultsDropdown = (props: ResultsDropdownProps) => {
   const { teamChannels, directChannels, focusedId, loading, setChannel, setQuery } = props;
   document.addEventListener('click', () => setQuery(''));
 

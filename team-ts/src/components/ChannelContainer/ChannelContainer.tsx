@@ -16,7 +16,7 @@ import type { ChannelFilters } from 'stream-chat';
 
 import type { StreamChatType } from '../../types';
 
-type Props = {
+type ChannelContainerProps = {
   createType: string;
   isCreating: boolean;
   isEditing?: boolean;
@@ -28,7 +28,7 @@ type HeaderProps = ThreadHeaderProps & {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-const ThreadHeader: React.FC<HeaderProps> = (props) => {
+const ThreadHeader = (props: HeaderProps) => {
   const { closeThread, setPinsOpen, thread } = props;
 
   const getReplyCount = () => {
@@ -48,7 +48,7 @@ const ThreadHeader: React.FC<HeaderProps> = (props) => {
   );
 };
 
-export const ChannelContainer: React.FC<Props> = (props) => {
+export const ChannelContainer = (props: ChannelContainerProps) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
   const { channel } = useChatContext<StreamChatType>();

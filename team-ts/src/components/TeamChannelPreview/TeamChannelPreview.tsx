@@ -6,13 +6,13 @@ import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator'
 
 import type { StreamChatType } from '../../types';
 
-type Props = ChannelPreviewUIComponentProps & {
+type TeamChannelPreviewProps = ChannelPreviewUIComponentProps<StreamChatType> & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   type: string;
 };
 
-export const TeamChannelPreview: React.FC<Props> = (props) => {
+export const TeamChannelPreview = (props: TeamChannelPreviewProps) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
   const { channel: activeChannel, client } = useChatContext<StreamChatType>();
