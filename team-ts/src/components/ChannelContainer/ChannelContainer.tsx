@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Channel, useChatContext, ThreadHeaderProps } from 'stream-chat-react';
+import { Channel, ThreadHeaderProps, useChatContext } from 'stream-chat-react';
 
 import './ChannelContainer.css';
 
@@ -14,15 +14,7 @@ import { CloseThreadIcon } from '../../assets';
 
 import type { ChannelFilters } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type Props = {
   createType: string;
@@ -59,15 +51,7 @@ const ThreadHeader: React.FC<HeaderProps> = (props) => {
 export const ChannelContainer: React.FC<Props> = (props) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
 
-  const { channel } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { channel } = useChatContext<StreamChatType>();
 
   const [pinsOpen, setPinsOpen] = useState(false);
 

@@ -9,15 +9,7 @@ import { CloseCreateChannel } from '../../assets';
 
 import type { ChannelFilters } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type InputProps = {
   channelName: string;
@@ -54,15 +46,7 @@ type Props = {
 export const CreateChannel: React.FC<Props> = (props) => {
   const { createType, filters, setIsCreating } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatType>();
 
   const [channelName, setChannelName] = useState('');
   const [selectedUsers, setSelectedUsers] = useState<string[] | undefined>([client.userID || '']);

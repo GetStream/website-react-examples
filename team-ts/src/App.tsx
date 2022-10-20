@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { LiteralStringForUnion, StreamChat, ChannelFilters, ChannelSort } from 'stream-chat';
+import { ChannelFilters, ChannelSort, StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 
 import 'stream-chat-react/dist/css/index.css';
@@ -9,6 +9,8 @@ import { getRandomImage } from './assets';
 import { useChecklist } from './ChecklistTasks';
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
 import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
+
+import type { StreamChatType } from './types';
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -25,30 +27,14 @@ const i18nInstance = new Streami18n({
   },
 });
 
-export type TeamAttachmentType = Record<string, unknown>;
-export type TeamChannelType = Record<string, unknown>;
-export type TeamCommandType = LiteralStringForUnion;
-export type TeamEventType = Record<string, unknown>;
-export type TeamMessageType = Record<string, unknown>;
-export type TeamReactionType = Record<string, unknown>;
-export type TeamUserType = { image?: string };
-
 const filters: ChannelFilters[] = [
   { type: 'team', demo: 'team' },
   { type: 'messaging', demo: 'team' },
 ];
 const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort: ChannelSort<TeamChannelType> = { last_message_at: -1, updated_at: -1 };
+const sort: ChannelSort<StreamChatType> = { last_message_at: -1, updated_at: -1 };
 
-const client = StreamChat.getInstance<
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType
->(apiKey!, { enableInsights: true, enableWSFallback: true });
+const client = StreamChat.getInstance<StreamChatType>(apiKey!, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {

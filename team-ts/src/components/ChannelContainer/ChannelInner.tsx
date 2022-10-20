@@ -1,30 +1,22 @@
 import React, { useState } from 'react';
-import { MessageResponse, logChatPromiseExecution } from 'stream-chat';
+import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
 
 import {
   defaultPinPermissions,
-  MessageList,
   MessageInput,
+  MessageList,
+  MessageToSend,
   PinEnabledUserRoles,
   Thread,
   useChannelActionContext,
   Window,
-  MessageToSend,
 } from 'stream-chat-react';
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type InnerProps = {
   pinsOpen: boolean;
@@ -49,15 +41,7 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
     setGiphyState,
   };
 
-  const { sendMessage } = useChannelActionContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { sendMessage } = useChannelActionContext<StreamChatType>();
 
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
   const messagingPermissions: PinEnabledUserRoles = {

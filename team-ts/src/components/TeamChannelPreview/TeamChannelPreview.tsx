@@ -4,15 +4,7 @@ import './TeamChannelPreview.css';
 
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type Props = ChannelPreviewUIComponentProps & {
   setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
@@ -23,19 +15,11 @@ type Props = ChannelPreviewUIComponentProps & {
 export const TeamChannelPreview: React.FC<Props> = (props) => {
   const { channel, setActiveChannel, setIsCreating, setIsEditing, type } = props;
 
-  const { channel: activeChannel, client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { channel: activeChannel, client } = useChatContext<StreamChatType>();
 
   const ChannelPreview = () => (
     <p className='channel-preview__item'>
-      # {channel?.data?.name || channel?.data?.id || 'random'}
+      {`# ${channel?.data?.name || channel?.data?.id || 'random'}`}
     </p>
   );
 

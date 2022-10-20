@@ -7,17 +7,9 @@ import { InviteIcon } from '../../assets';
 
 import type { ChannelFilters, UserResponse } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
-const ListContainer: React.FC = (props) => {
+const ListContainer = (props: {children: React.ReactNode}) => {
   const { children } = props;
 
   return (
@@ -35,7 +27,7 @@ const ListContainer: React.FC = (props) => {
 type ItemProps = {
   index: number;
   setSelectedUsers: React.Dispatch<React.SetStateAction<string[] | undefined>>;
-  user: UserResponse<TeamUserType>;
+  user: UserResponse<StreamChatType>;
 };
 
 const UserItem: React.FC<ItemProps> = (props) => {
@@ -89,20 +81,12 @@ type Props = {
 export const UserList: React.FC<Props> = (props) => {
   const { filters, setSelectedUsers } = props;
 
-  const { client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client } = useChatContext<StreamChatType>();
 
   const [error, setError] = useState(false);
   const [listEmpty, setListEmpty] = useState(false);
   const [loading, setLoading] = useState(false);
-  const [users, setUsers] = useState<UserResponse<TeamUserType>[] | undefined>();
+  const [users, setUsers] = useState<UserResponse<StreamChatType>[] | undefined>();
 
   useEffect(() => {
     const getUsers = async () => {

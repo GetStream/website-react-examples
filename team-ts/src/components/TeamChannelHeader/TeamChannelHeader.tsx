@@ -1,23 +1,10 @@
-import {
-  Avatar,
-  useChannelActionContext,
-  useChannelStateContext,
-  useChatContext,
-} from 'stream-chat-react';
+import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
 import './TeamChannelHeader.css';
 
 import { ChannelInfo, PinIcon } from '../../assets';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type Props = {
   setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
@@ -27,35 +14,11 @@ type Props = {
 export const TeamChannelHeader: React.FC<Props> = (props) => {
   const { setIsEditing, setPinsOpen } = props;
 
-  const { client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client } = useChatContext<StreamChatType>();
 
-  const { channel, watcher_count } = useChannelStateContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { channel, watcher_count } = useChannelStateContext<StreamChatType>();
 
-  const { closeThread } = useChannelActionContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { closeThread } = useChannelActionContext<StreamChatType>();
 
   const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
 

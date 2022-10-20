@@ -26,15 +26,7 @@ import {
   StrikeThroughIcon,
 } from '../../assets';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 export type Props = MessageInputProps & {
   pinsOpen?: boolean;
@@ -51,25 +43,9 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
     maxNumberOfFiles,
     multipleUploads,
     thread,
-  } = useChannelStateContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  } = useChannelStateContext<StreamChatType>();
 
-  const { client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client } = useChatContext<StreamChatType>();
 
   const [boldState, setBoldState] = useState(false);
   const [codeState, setCodeState] = useState(false);
@@ -99,15 +75,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
     return 'the group';
   };
 
-  const messageInput = useMessageInputContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const messageInput = useMessageInputContext<StreamChatType>();
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -115,9 +83,7 @@ export const TeamMessageInput: React.FC<Props> = (props) => {
 
       const deletePressed =
         event.nativeEvent instanceof InputEvent &&
-        event.nativeEvent.inputType === 'deleteContentBackward'
-          ? true
-          : false;
+        event.nativeEvent.inputType === 'deleteContentBackward';
 
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);

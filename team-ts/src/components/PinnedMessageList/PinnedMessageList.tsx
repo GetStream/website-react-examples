@@ -1,18 +1,9 @@
-import { useChannelActionContext, useChannelStateContext, Message, MessageTeam } from 'stream-chat-react';
+import { Message, MessageTeam, useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
-
 import { CloseThreadIcon } from '../../assets';
+import type { StreamChatType } from '../../types';
 
 type Props = {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
@@ -21,25 +12,9 @@ type Props = {
 export const PinnedMessageList: React.FC<Props> = (props) => {
   const { setPinsOpen } = props;
 
-  const { closeThread } = useChannelActionContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { closeThread } = useChannelActionContext<StreamChatType>();
 
-  const { channel } = useChannelStateContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { channel } = useChannelStateContext<StreamChatType>();
 
   return (
     <div className='pinned-messages__container'>

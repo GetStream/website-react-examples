@@ -4,15 +4,7 @@ import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 
 import type { Channel, UserResponse } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
   result: ChannelOrUserType;
@@ -21,26 +13,10 @@ type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> 
 const SearchResult: React.FC<SearchResultProps> = (props) => {
   const { focusedId, result, setChannel } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatType>();
 
   if (isChannel(result)) {
-    const channel = result as Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >;
+    const channel = result as Channel<StreamChatType>;
 
     return (
       <div
@@ -56,7 +32,7 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
       </div>
     );
   } else {
-    const user = result as UserResponse<TeamUserType>;
+    const user = result as UserResponse<StreamChatType>;
 
     return (
       <div
@@ -79,28 +55,12 @@ const SearchResult: React.FC<SearchResultProps> = (props) => {
 };
 
 type ResultsDropdownProps = {
-  teamChannels?: Channel<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >[];
-  directChannels?: UserResponse<TeamUserType>[];
+  teamChannels?: Channel<StreamChatType>[];
+  directChannels?: UserResponse<StreamChatType>[];
   focusedId: string;
   loading: boolean;
   setChannel: (
-    channel: Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >,
+    channel: Channel<StreamChatType>,
   ) => void;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
@@ -137,7 +97,7 @@ export const ResultsDropdown: React.FC<ResultsDropdownProps> = (props) => {
           <i>No direct messages found</i>
         </p>
       ) : (
-        directChannels?.map((user: UserResponse<TeamUserType>, i) => (
+        directChannels?.map((user: UserResponse<StreamChatType>, i) => (
           <SearchResult result={user} focusedId={focusedId} key={i} setChannel={setChannel} />
         ))
       )}

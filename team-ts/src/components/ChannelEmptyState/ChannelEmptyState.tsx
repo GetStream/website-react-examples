@@ -4,26 +4,10 @@ import './ChannelEmptyState.css';
 
 import { HashIcon } from '../../assets';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 export const ChannelEmptyState = () => {
-  const { channel, client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { channel, client } = useChatContext<StreamChatType>();
 
   const members = Object.values(channel?.state?.members || {}).filter(
     ({ user }) => user?.id !== client.userID,

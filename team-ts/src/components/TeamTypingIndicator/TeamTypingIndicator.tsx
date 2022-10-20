@@ -2,38 +2,14 @@ import { useChatContext, useTypingContext } from 'stream-chat-react';
 
 import './TeamTypingIndicator.css';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 export const TeamTypingIndicator: React.FC<{ type: string }> = (props) => {
   const { type } = props;
 
-  const { client } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client } = useChatContext<StreamChatType>();
 
-  const { typing } = useTypingContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { typing } = useTypingContext<StreamChatType>();
 
   if (!client || !typing) return null;
 

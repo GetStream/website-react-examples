@@ -1,48 +1,26 @@
 import { useCallback, useContext } from 'react';
-import {
-  ChatAutoComplete,
-  EmojiPicker,
-  useMessageInputContext,
-} from 'stream-chat-react';
+import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-chat-react';
 
 import { GiphyContext } from '../ChannelContainer/ChannelInner';
 
 import './ThreadMessageInput.css';
 
-import { Props } from '../TeamMessageInput/TeamMessageInput';
+import { Props } from './TeamMessageInput';
 
 import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 export const ThreadMessageInput: React.FC<Props> = (props) => {
   const { giphyState, setGiphyState } = useContext(GiphyContext)
 
-  const messageInput = useMessageInputContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const messageInput = useMessageInputContext<StreamChatType>();
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
       const deletePressed =
         event.nativeEvent instanceof InputEvent &&
-        event.nativeEvent.inputType === 'deleteContentBackward'
-          ? true
-          : false;
+        event.nativeEvent.inputType === 'deleteContentBackward';
       
       if (messageInput.text.length === 1 && deletePressed) {
         setGiphyState(false);
