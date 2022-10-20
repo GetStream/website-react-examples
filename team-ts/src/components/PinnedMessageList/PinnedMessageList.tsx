@@ -1,9 +1,10 @@
-import { Message, MessageTeam, useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
+import { Message, useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
 
 import './PinnedMessageList.css';
 
 import { CloseThreadIcon } from '../../assets';
 import type { StreamChatType } from '../../types';
+import { MessageTeam } from '../MessageTeam';
 
 type PinnedMessageListProps = {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;

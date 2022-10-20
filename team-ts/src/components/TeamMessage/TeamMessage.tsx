@@ -1,7 +1,8 @@
 import React from 'react';
-import { MessageUIComponentProps, MessageTeam, useMessageContext } from 'stream-chat-react';
+import { MessageUIComponentProps, useMessageContext } from 'stream-chat-react';
 
 import './TeamMessage.css';
+import { MessageTeam } from '../MessageTeam';
 
 type TeamMessageProps = MessageUIComponentProps & {
   setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
