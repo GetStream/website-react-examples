@@ -12,7 +12,8 @@ const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || (process.env.REACT_APP_STREAM_KEY as string);
 const userId = urlParams.get('user') || (process.env.REACT_APP_USER_ID as string);
 const userToken = urlParams.get('user_token') || (process.env.REACT_APP_USER_TOKEN as string);
-const targetOrigin = urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
+const targetOrigin =
+  urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
 
 export const useInitChat = () => {
   const [chatClient, setChatClient] = useState<StreamChat>();
@@ -24,7 +25,7 @@ export const useInitChat = () => {
 
   const { chatType, eventName } = useEventContext();
 
-  useCheckList({chatClient, targetOrigin});
+  useCheckList({ chatClient, targetOrigin });
   useEffect(() => {
     if (globalUnread && chatType === 'global-ve2') setGlobalUnread(false);
   }, [chatType, globalUnread]);
@@ -95,9 +96,7 @@ export const useInitChat = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance<
-        StreamChatType
-      >(apiKey);
+      const client = StreamChat.getInstance<StreamChatType>(apiKey);
 
       if (process.env.REACT_APP_CHAT_SERVER_ENDPOINT) {
         client.setBaseURL(process.env.REACT_APP_CHAT_SERVER_ENDPOINT);

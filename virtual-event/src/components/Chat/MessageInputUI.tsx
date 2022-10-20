@@ -98,7 +98,9 @@ export const MessageInputUI = (props: Props) => {
               </div>
               {!giphyState && (
                 <div
-                  className={`input-ui-input-emoji-picker-button ${cooldownRemaining ? 'cooldown' : ''}`}
+                  className={`input-ui-input-emoji-picker-button ${
+                    cooldownRemaining ? 'cooldown' : ''
+                  }`}
                   ref={emojiPickerRef}
                   onClick={cooldownRemaining ? () => null : openEmojiPicker}
                 >
@@ -109,7 +111,9 @@ export const MessageInputUI = (props: Props) => {
           )}
         </div>
         <button
-          className={`input-ui-send-button ${text ? 'text' : ''} ${cooldownRemaining ? 'cooldown' : ''}`}
+          className={`input-ui-send-button ${text ? 'text' : ''} ${
+            cooldownRemaining ? 'cooldown' : ''
+          }`}
           disabled={!text}
           onClick={handleSubmit}
         >

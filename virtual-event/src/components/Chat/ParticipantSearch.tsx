@@ -31,7 +31,7 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
 
   const [participants, setParticipants] = useState<UserResponse[]>();
   const [querying, setQuerying] = useState(false);
-  const [showingSearchResults, setShowingSearchResults] = useState(false)
+  const [showingSearchResults, setShowingSearchResults] = useState(false);
 
   useEffect(() => {
     const getParticipants = async () => {
@@ -62,11 +62,10 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
     setSearching(false);
   };
 
-
   const onSelectResult = (
     params: ChannelSearchFunctionParams<StreamChatType>,
-    result: ChannelOrUserResponse<StreamChatType>
-  ) => handleSelectResult(result)
+    result: ChannelOrUserResponse<StreamChatType>,
+  ) => handleSelectResult(result);
 
   const extraParams: ChannelSearchProps['searchQueryParams'] = {
     userFilters: {
@@ -98,11 +97,18 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
       {querying ? (
         <SkeletonLoader />
       ) : showingSearchResults ? null : (
-        participants?.length &&
+        participants?.length && (
           <div className='.str-chat__channel-search-result-list'>
             {participants.map((participant, i) => (
-          <SearchResult index={i} key={i} result={participant} selectResult={handleSelectResult} />
-        ))}</div>
+              <SearchResult
+                index={i}
+                key={i}
+                result={participant}
+                selectResult={handleSelectResult}
+              />
+            ))}
+          </div>
+        )
       )}
     </div>
   );

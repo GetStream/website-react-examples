@@ -24,10 +24,10 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
 
-  const {state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState();
+  const { state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown } = useBoolState();
   const [imgSrc, setImgSrc] = useState<string | null>(image || null);
 
-  const handleImageLoadError: ReactEventHandler = useCallback((e) => {
+  const handleImageLoadError: ReactEventHandler = useCallback(() => {
     setImgSrc(null);
   }, []);
 
@@ -73,7 +73,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
       )}
       <div className='profile-details'>
         {imgSrc ? (
-          <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError}/>
+          <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError} />
         ) : (
           <Avatar name={name || id} shape='rounded' size={200} />
         )}

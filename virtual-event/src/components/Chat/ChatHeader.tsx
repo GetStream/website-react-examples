@@ -9,9 +9,9 @@ type HeaderTabItemProps = {
   content: React.ReactNode;
   onClick: () => void;
   className?: string;
-}
+};
 
-const HeaderTabItem = ({animate, className, onClick, content}:HeaderTabItemProps) => {
+const HeaderTabItem = ({ animate, className, onClick, content }: HeaderTabItemProps) => {
   const variants: Variants = {
     open: { opacity: 1, y: 0, zIndex: 1 },
     closed: { opacity: 0, y: -4, zIndex: -1 },
@@ -33,8 +33,8 @@ const HeaderTabItem = ({animate, className, onClick, content}:HeaderTabItemProps
       <div>{content}</div>
       <div className={className} />
     </div>
-  )
-}
+  );
+};
 
 type ChatHeaderProps = {
   dmUnread: boolean;

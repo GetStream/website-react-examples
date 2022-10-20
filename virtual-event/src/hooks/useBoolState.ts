@@ -2,10 +2,12 @@ import React, { useCallback, useState } from 'react';
 
 type UseBoolStateParams = {
   initValue?: boolean;
-  setState?: React.Dispatch<React.SetStateAction<boolean>>
-}
+  setState?: React.Dispatch<React.SetStateAction<boolean>>;
+};
 
-export const useBoolState = ({initValue, setState}: UseBoolStateParams = {initValue: false}) => {
+export const useBoolState = (
+  { initValue, setState }: UseBoolStateParams = { initValue: false },
+) => {
   const [state, _setState] = useState(initValue);
   const setStateFinal = setState || _setState;
 
@@ -26,5 +28,5 @@ export const useBoolState = ({initValue, setState}: UseBoolStateParams = {initVa
     on,
     toggle,
     state,
-  }
-}
+  };
+};

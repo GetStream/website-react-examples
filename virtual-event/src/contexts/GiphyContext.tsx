@@ -5,7 +5,7 @@ const GiphyContext = React.createContext(
   {} as { giphyState: boolean; setGiphyState: React.Dispatch<React.SetStateAction<boolean>> },
 );
 
-export const GiphyContextProvider= ({ children }: PropsWithChildrenOnly) => {
+export const GiphyContextProvider = ({ children }: PropsWithChildrenOnly) => {
   const [giphyState, setGiphyState] = useState(false);
 
   const value = { giphyState, setGiphyState };

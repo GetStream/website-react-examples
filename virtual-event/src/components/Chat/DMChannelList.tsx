@@ -42,7 +42,7 @@ const ListWrapper = ({ children }: PropsWithChildrenOnly) => {
   return <div className='dm-list'>{children}</div>;
 };
 
-const ListUI  = ({ children, error, loading }: PropsWithChildren<ChannelListMessengerProps>) => {
+const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListMessengerProps>) => {
   if (loading) {
     return (
       <ListWrapper>

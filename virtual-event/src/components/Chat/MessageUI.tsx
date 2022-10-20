@@ -51,12 +51,19 @@ const MessageOptions: React.FC<OptionsProps> = (props) => {
 
   const hideActions = (thread && isMyMessage()) || (!thread && message.show_in_channel);
 
-  const {toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState({setState: setDropdownOpen});
-  const {toggle: toggleOpenReactionSelector, off: closeReactionSelector} = useBoolState({setState: setShowReactionSelector});
+  const { toggle: toggleOpenDropdown, off: closeDropdown } = useBoolState({
+    setState: setDropdownOpen,
+  });
+  const { toggle: toggleOpenReactionSelector, off: closeReactionSelector } = useBoolState({
+    setState: setShowReactionSelector,
+  });
 
   const [selectorRoot, setSelectorRoot] = useState<HTMLDivElement | null>(null);
   const [reactButton, setReactButton] = useState<HTMLSpanElement | null>(null);
-  useOnClickOutside({ targets: [selectorRoot, reactButton], onClickOutside: closeReactionSelector });
+  useOnClickOutside({
+    targets: [selectorRoot, reactButton],
+    onClickOutside: closeReactionSelector,
+  });
 
   return (
     <div className='message-ui-options'>
@@ -68,11 +75,13 @@ const MessageOptions: React.FC<OptionsProps> = (props) => {
           <MessageActionsEllipse />
         </span>
       )}
-      {showReactionSelector &&
+      {showReactionSelector && (
         <ReactionSelector
           isTopMessage={isTopMessage}
           closeReactionSelector={closeReactionSelector}
-          ref={setSelectorRoot}/>}
+          ref={setSelectorRoot}
+        />
+      )}
       {dropdownOpen && (
         <div
           className={`message-ui-options-dropdown ${isRecentMessage ? 'recent' : ''} ${
@@ -94,28 +103,28 @@ const MessageOptions: React.FC<OptionsProps> = (props) => {
 };
 
 type ReactionSelectorProps = {
-  isTopMessage: boolean
+  isTopMessage: boolean;
   closeReactionSelector: () => void;
-}
+};
 
 const ReactionSelector = React.forwardRef<HTMLDivElement, ReactionSelectorProps>(
   ({ isTopMessage, closeReactionSelector }, ref) => {
-  const { Emoji, emojiConfig } = useEmojiContext();
-  const { handleReaction } = useMessageContext();
+    const { Emoji, emojiConfig } = useEmojiContext();
+    const { handleReaction } = useMessageContext();
 
-  return (
-    <div className={`message-ui-reaction-selector ${isTopMessage ? 'top' : ''}`} ref={ref}>
-      {customReactions.map((reaction, i) => (
-        <Suspense fallback={null} key={i}>
-          <div onClick={(event) => handleReaction(reaction.id, event)}>
-            <Emoji data={emojiConfig.emojiData} emoji={reaction} size={24} />
-          </div>
-        </Suspense>
-      ))}
-    </div>
-  );
-});
-
+    return (
+      <div className={`message-ui-reaction-selector ${isTopMessage ? 'top' : ''}`} ref={ref}>
+        {customReactions.map((reaction, i) => (
+          <Suspense fallback={null} key={i}>
+            <div onClick={(event) => handleReaction(reaction.id, event)}>
+              <Emoji data={emojiConfig.emojiData} emoji={reaction} size={24} />
+            </div>
+          </Suspense>
+        ))}
+      </div>
+    );
+  },
+);
 
 const UpvoteButton = () => {
   const { client } = useChatContext<StreamChatType>();
@@ -123,41 +132,46 @@ const UpvoteButton = () => {
 
   const userUpVoted = client.userID && message.up_votes?.includes(client.userID);
 
-  const handleClick = useCallback(async (event: React.MouseEvent) => {
-    event.stopPropagation();
+  const handleClick = useCallback(
+    async (event: React.MouseEvent) => {
+      event.stopPropagation();
 
-    const mentionIDs = message.mentioned_users?.map(({ id }) => id);
-    let updatedUpVotes;
+      const mentionIDs = message.mentioned_users?.map(({ id }) => id);
+      let updatedUpVotes;
 
-    if (!message.up_votes) {
-      return await client.updateMessage({
+      if (!message.up_votes) {
+        return await client.updateMessage({
+          ...message,
+          mentioned_users: mentionIDs,
+          up_votes: [client.userID],
+        });
+      } else if (client.userID && message.up_votes.includes(client.userID)) {
+        updatedUpVotes = message.up_votes.filter((userID: string) => userID !== client.userID);
+      } else {
+        updatedUpVotes = [...message.up_votes, client.userID];
+      }
+
+      const updatedMessage = {
         ...message,
         mentioned_users: mentionIDs,
-        up_votes: [client.userID],
-      });
-    } else if (client.userID && message.up_votes.includes(client.userID)) {
-      updatedUpVotes = message.up_votes.filter((userID: string) => userID !== client.userID);
-    } else {
-      updatedUpVotes = [...message.up_votes, client.userID];
-    }
+        up_votes: updatedUpVotes,
+      };
 
-    const updatedMessage = {
-      ...message,
-      mentioned_users: mentionIDs,
-      up_votes: updatedUpVotes,
-    };
-
-    return await client.updateMessage(updatedMessage);
-  }, [client, message]);
-
+      return await client.updateMessage(updatedMessage);
+    },
+    [client, message],
+  );
 
   return (
-    <div className={`message-ui-upvote-button ${userUpVoted ? 'up-voted' : ''}`} onClick={handleClick}>
+    <div
+      className={`message-ui-upvote-button ${userUpVoted ? 'up-voted' : ''}`}
+      onClick={handleClick}
+    >
       <UpvoteThumb />
       <div className='message-ui-upvote-button-text'>{message.up_votes?.length || 0}</div>
     </div>
-  )
-}
+  );
+};
 
 const OpenInThreadButton = (props: React.ComponentProps<'button'>) => (
   <div className='str-chat__message-simple-reply-button str-chat__message-replies-count-button-wrapper'>
@@ -169,7 +183,7 @@ const OpenInThreadButton = (props: React.ComponentProps<'button'>) => (
       Show in thread
     </button>
   </div>
-)
+);
 
 const searchRequestLock = Promise.resolve();
 
@@ -179,12 +193,12 @@ const OpenThreadButton = () => {
   const { handleOpenThread, message } = useMessageContext<StreamChatType>();
   const [threadParent, setThreadParent] = useState<StreamMessage>();
 
-  const customOpenThread = useCallback((event: BaseSyntheticEvent) => {
-    return threadParent
-      ? openThread(threadParent, event)
-      : handleOpenThread(event);
-  }, [threadParent, openThread, handleOpenThread]);
-
+  const customOpenThread = useCallback(
+    (event: BaseSyntheticEvent) => {
+      return threadParent ? openThread(threadParent, event) : handleOpenThread(event);
+    },
+    [threadParent, openThread, handleOpenThread],
+  );
 
   useEffect(() => {
     const getMessage = async () => {
@@ -203,22 +217,30 @@ const OpenThreadButton = () => {
     };
     let execute = true;
     if (message.show_in_channel) {
-      searchRequestLock.then(() => { if (execute) getMessage() })
+      searchRequestLock.then(() => {
+        if (execute) getMessage();
+      });
     }
 
     return () => {
-      execute = false
-    }
+      execute = false;
+    };
   }, []); // eslint-disable-line
 
   if (!(message.reply_count || message.show_in_channel)) return null;
 
-  return message.show_in_channel
-    ? <OpenInThreadButton onClick={customOpenThread}/>
-    : <MessageRepliesCountButton onClick={customOpenThread} reply_count={message.reply_count} />
-}
+  return message.show_in_channel ? (
+    <OpenInThreadButton onClick={customOpenThread} />
+  ) : (
+    <MessageRepliesCountButton onClick={customOpenThread} reply_count={message.reply_count} />
+  );
+};
 
-export const MessageUI: React.FC<MessageUIComponentProps<StreamChatType> & { setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>> }> = (props) => {
+export const MessageUI: React.FC<
+  MessageUIComponentProps<StreamChatType> & {
+    setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>>;
+  }
+> = (props) => {
   const { setMessageActionUser } = props;
 
   const { messages } = useChannelStateContext();
@@ -286,11 +308,13 @@ export const MessageUI: React.FC<MessageUIComponentProps<StreamChatType> & { set
           <div className='message-ui-content-top-time'>{getTimeSinceMessage()}</div>
         </div>
         <div className='message-ui-content-bottom'>{message.text}</div>
-        {!!message.attachments?.length && <Attachment<StreamChatType> attachments={message.attachments} />}
+        {!!message.attachments?.length && (
+          <Attachment<StreamChatType> attachments={message.attachments} />
+        )}
         <OpenThreadButton />
         <SimpleReactionsList reactionOptions={customReactions} />
       </div>
-      {isQA && <UpvoteButton/>}
+      {isQA && <UpvoteButton />}
     </div>
   );
 };

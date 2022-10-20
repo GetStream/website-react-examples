@@ -9,8 +9,9 @@ const EmptyStateWrapper = ({ children }: PropsWithChildrenOnly) => (
   <div className='chat-components-empty'>{children}</div>
 );
 
-export const EmptyStateIndicators = ({ isDmChannel }: PropsWithChildren<EmptyStateIndicatorProps & { isDmChannel?: boolean }>
-) => {
+export const EmptyStateIndicators = ({
+  isDmChannel,
+}: PropsWithChildren<EmptyStateIndicatorProps & { isDmChannel?: boolean }>) => {
   const { thread } = useChannelStateContext();
   const { chatType } = useEventContext();
 

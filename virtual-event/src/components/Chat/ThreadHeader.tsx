@@ -9,7 +9,5 @@ export const ThreadHeader: React.FC = () => {
   if (!thread) return null;
 
   const text = thread.user?.name || thread.user?.id || '';
-  return (
-    <ChannelHeader onClose={closeThread} subtitle={`with ${text}`} title='Thread Reply'/>
-  );
+  return <ChannelHeader onClose={closeThread} subtitle={`with ${text}`} title='Thread Reply' />;
 };

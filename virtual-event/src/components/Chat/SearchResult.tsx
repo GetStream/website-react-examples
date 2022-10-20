@@ -3,11 +3,7 @@ import { Avatar, isChannel, SearchResultItemProps } from 'stream-chat-react';
 
 import { StreamChatType } from '../../types';
 
-export const SearchResult: React.FC<
-  SearchResultItemProps<
-  StreamChatType
-  >
-> = (props) => {
+export const SearchResult: React.FC<SearchResultItemProps<StreamChatType>> = (props) => {
   const { focusedUser, index, result, selectResult } = props;
 
   const focused = focusedUser === index;

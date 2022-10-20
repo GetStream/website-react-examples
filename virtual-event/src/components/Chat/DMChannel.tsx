@@ -24,13 +24,13 @@ type Props = {
 export const DMChannel: React.FC<Props> = (props) => {
   const { dmChannel, setDmChannel } = props;
 
-  const {state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown} = useBoolState();
+  const { state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown } = useBoolState();
 
   const user = dmChannel.state.membership.user?.id;
 
   const otherUsersIDs = Object.keys(dmChannel.state.members).filter((key) => key !== user);
   const otherUserID = otherUsersIDs[0];
-  const channelTitle = dmChannel.state.members[otherUserID].user?.name ||  otherUserID;
+  const channelTitle = dmChannel.state.members[otherUserID].user?.name || otherUserID;
 
   return (
     <div className='dm-channel'>
