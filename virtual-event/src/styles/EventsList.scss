@@ -4,7 +4,7 @@
   &-container {
     display: flex;
     flex-direction: column;
-    height: calc(100% - 57px);
+    height: calc(100% - 56px);
     background: $stroke;
     transition: background 1s;
     overflow: scroll;
@@ -58,6 +58,7 @@
   }
 
   &-header {
+    height: 61px;
     display: flex;
     background: $app-canvas;
     transition: background 1s;
