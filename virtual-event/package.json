@@ -2,7 +2,7 @@
   "name": "stream-chat-virtual-event-demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/website-react-examples/virtual-event-v2",
+  "homepage": "./",
   "dependencies": {
     "framer-motion": "^7.5.0",
     "lottie-web": "^5.9.6",
