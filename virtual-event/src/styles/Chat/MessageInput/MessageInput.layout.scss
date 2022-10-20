@@ -66,19 +66,20 @@
   .suggestion-item {
     display: flex;
     align-items: center;
+    gap: 8px;
     height: 40px;
     padding: 0 8px;
     text-overflow: ellipsis;
     overflow: hidden;
     white-space: nowrap;
 
-    &-icon {
+    .suggestion-item-icon {
       height: 24px;
       width: 24px;
       margin-right: 8px;
     }
 
-    &-description {
+    .suggestion-item-description {
       margin-left: 8px;
     }
   }
