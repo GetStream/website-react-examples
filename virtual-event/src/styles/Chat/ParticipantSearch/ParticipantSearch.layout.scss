@@ -1,12 +1,21 @@
-.str-chat__channel-search-bar {
+.str-chat__channel-search {
+  height: 100%;
 
-  .str-chat__channel-search-bar-button--exit-search {
-    display: none;
+  .str-chat__channel-search-bar {
+
+    .str-chat__channel-search-bar-button--exit-search {
+      display: none;
+    }
+
+    .str-chat__channel-search-input--wrapper {
+      height: 40px;
+      padding: 0 0 0 5px;
+    }
   }
 
-  .str-chat__channel-search-input--wrapper {
-    height: 40px;
-    padding: 0 0 0 5px;
+  .str-chat__channel-search-result-list {
+    overflow-y: auto;
+    max-height: calc(100% - 120px);
   }
 }
 
