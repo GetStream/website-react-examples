@@ -1,0 +1,20 @@
+{
+  "short_name": "Virtual Event App",
+  "name": "Virtual Event demo app",
+  "icons": [
+    {
+      "src": "favicon.ico",
+      "sizes": "32x32",
+      "type": "image/x-icon"
+    },
+    {
+      "src": "apple-icon-114x114.png",
+      "type": "image/png",
+      "sizes": "114x114"
+    }
+  ],
+  "start_url": ".",
+  "display": "standalone",
+  "theme_color": "#000000",
+  "background_color": "#ffffff"
+}
