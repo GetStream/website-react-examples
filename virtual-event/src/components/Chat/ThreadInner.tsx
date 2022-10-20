@@ -1,36 +1,36 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect } from 'react';
 import { Thread, useChannelStateContext } from 'stream-chat-react';
 
-import { MessageInputUI } from './MessageInputUI';
+import { ThreadMessageInputUI } from './ThreadMessageInputUI';
 
+import { ThreadInputContext } from '../../contexts/ThreadInputContext';
+import { useBoolState } from '../../hooks/useBoolState';
 import { useOverrideSubmit } from '../../hooks/useOverrideSubmit';
 
 export const ThreadInner = () => {
-  const [checked, setChecked] = useState(false);
-
   const { thread } = useChannelStateContext();
+
+  const {state: checked, off: uncheck, toggle: toggleCheckedFooter} = useBoolState();
+  const threadOverrideSubmitHandler = useOverrideSubmit(checked);
 
   useEffect(() => {
     if (!thread) {
-      setChecked(false);
+      uncheck();
     }
-  }, [thread]);
+  }, [thread, uncheck]);
 
-  const threadOverrideSubmitHandler = useOverrideSubmit(checked);
 
   return (
-    <>
+    <ThreadInputContext.Provider value={{footerChecked: checked, toggleCheckedFooter}}>
       <Thread
         additionalMessageInputProps={{ overrideSubmitHandler: threadOverrideSubmitHandler }}
         additionalVirtualizedMessageListProps={{
           additionalVirtuosoProps: { alignToBottom: true },
           separateGiphyPreview: true,
         }}
-        Input={(props) => (
-          <MessageInputUI {...props} checked={checked} setChecked={setChecked} threadInput focus />
-        )}
+        Input={ThreadMessageInputUI}
         virtualized
       />
-    </>
+    </ThreadInputContext.Provider>
   );
 };

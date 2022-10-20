@@ -5,10 +5,17 @@ type UseBoolStateParams = {
   setState?: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
+type BoolStateController = {
+  off: () => void;
+  on: () => void;
+  toggle: () => void;
+  state: boolean;
+}
+
 export const useBoolState = (
   { initValue, setState }: UseBoolStateParams = { initValue: false },
-) => {
-  const [state, _setState] = useState(initValue);
+): BoolStateController => {
+  const [state, _setState] = useState<boolean>(initValue as boolean);
   const setStateFinal = setState || _setState;
 
   const off = useCallback(() => {
