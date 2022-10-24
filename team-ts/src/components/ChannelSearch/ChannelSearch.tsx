@@ -4,8 +4,6 @@ import type { Channel, UserResponse } from 'stream-chat';
 import { useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
-import './ChannelSearch.css';
-
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 import { ResultsDropdown } from './ResultsDropdown';
 

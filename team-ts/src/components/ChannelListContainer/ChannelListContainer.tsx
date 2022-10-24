@@ -1,7 +1,5 @@
 import { ChannelList, ChannelListProps } from 'stream-chat-react';
 
-import './ChannelListContainer.css';
-
 import { ChannelSearch } from '../ChannelSearch/ChannelSearch';
 import { TeamChannelList } from '../TeamChannelList/TeamChannelList';
 import { TeamChannelPreview } from '../TeamChannelPreview/TeamChannelPreview';

@@ -1,19 +1,20 @@
-.edit-channel__container {
+.create-channel__container {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
 
-  .edit-channel__header {
+  .create-channel__header {
     display: flex;
     align-items: center;
     justify-content: space-between;
     height: 62px;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
     padding-right: 20px;
+    padding-bottom: 4px;
   }
 
-  .edit-channel__header p {
+  .create-channel__header p {
     font-family: Helvetica Neue, sans-serif;
     font-weight: bold;
     font-size: 18px;
@@ -22,7 +23,7 @@
     margin-left: 20px;
   }
 
-  .edit-channel__header svg {
+  .create-channel__header svg {
     cursor: pointer;
   }
 
@@ -31,7 +32,7 @@
     flex-direction: column;
     height: 169px;
     padding-left: 20px;
-    box-shadow: 0px 1px 0px rgba(0, 0, 0, 0.1);
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.1);
   }
 
   .channel-name-input__wrapper p {
@@ -45,7 +46,7 @@
   .channel-name-input__wrapper input {
     font-family: Helvetica Neue, sans-serif;
     font-size: 18px;
-    color: rgba(0, 0, 0);
+    color: rgba(0, 0, 0, 0.5);
     height: 50px;
     width: 540px;
     background: #f7f6f8;
@@ -65,7 +66,7 @@
     color: rgba(0, 0, 0, 0.5);
   }
 
-  .edit-channel__button-wrapper {
+  .create-channel__button-wrapper {
     height: 82px;
     background: #f7f6f8;
     display: flex;
@@ -74,7 +75,7 @@
     border-bottom-right-radius: 16px;
   }
 
-  .edit-channel__button-wrapper p {
+  .create-channel__button-wrapper p {
     background: var(--primary-color);
     font-family: Helvetica Neue, sans-serif;
     font-weight: bold;

@@ -1,7 +1,5 @@
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-import './ChannelEmptyState.css';
-
 import { HashIcon } from '../../assets';
 
 import type { StreamChatType } from '../../types';

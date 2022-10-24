@@ -8,7 +8,7 @@
   }
 
   .team-message-input__wrapper.thread-open {
-    border-bottom-right-radius: 0px;
+    border-bottom-right-radius: 0;
   }
 
   .team-message-input__input {
@@ -80,8 +80,8 @@
     font-style: normal;
     font-weight: normal;
     font-size: 15px;
-    border-bottom-left-radius: 0px;
-    border-bottom-right-radius: 0px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
   }
 
   .team-message-input__wrapper .str-chat__textarea textarea:focus {

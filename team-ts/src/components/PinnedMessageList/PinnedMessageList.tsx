@@ -1,7 +1,5 @@
 import { Message, useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
 
-import './PinnedMessageList.css';
-
 import { CloseThreadIcon } from '../../assets';
 import type { StreamChatType } from '../../types';
 import { MessageTeam } from '../MessageTeam';

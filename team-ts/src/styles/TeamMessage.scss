@@ -154,7 +154,7 @@ ul.str-chat__simple-reactions-list:hover {
 }
 
 .str-chat__message-attachment-actions-form {
-  margin: 0px;
+  margin: 0;
   padding: 10px 0;
   border-top: none;
   border-radius: 16px;
@@ -271,7 +271,7 @@ ul.str-chat__simple-reactions-list:hover {
   background: #ffffff;
   border: 1px solid #e9e9ea;
   box-sizing: border-box;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.06);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
   border-radius: 99999px;
 }
 

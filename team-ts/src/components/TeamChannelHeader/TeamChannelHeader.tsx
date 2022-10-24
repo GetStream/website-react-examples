@@ -1,7 +1,5 @@
 import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
-import './TeamChannelHeader.css';
-
 import { ChannelInfo, PinIcon } from '../../assets';
 
 import type { StreamChatType } from '../../types';

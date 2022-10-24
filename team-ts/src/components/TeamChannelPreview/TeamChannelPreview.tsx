@@ -1,7 +1,5 @@
 import { Avatar, ChannelPreviewUIComponentProps, useChatContext } from 'stream-chat-react';
 
-import './TeamChannelPreview.css';
-
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
 import type { StreamChatType } from '../../types';

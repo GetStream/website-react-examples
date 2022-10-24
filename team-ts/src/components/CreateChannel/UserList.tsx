@@ -1,8 +1,6 @@
 import { useEffect, useState } from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-import './UserList.css';
-
 import { InviteIcon } from '../../assets';
 
 import type { ChannelFilters, UserResponse } from 'stream-chat';

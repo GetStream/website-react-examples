@@ -3,8 +3,6 @@ import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-ch
 
 import { GiphyContext } from '../ChannelContainer/ChannelInner';
 
-import './ThreadMessageInput.css';
-
 import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
 
 import type { StreamChatType } from '../../types';

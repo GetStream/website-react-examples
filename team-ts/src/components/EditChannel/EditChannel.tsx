@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useChatContext } from 'stream-chat-react';
 
-import './EditChannel.css';
-
 import { UserList } from '../CreateChannel/UserList';
 
 import { CloseCreateChannel } from '../../assets';

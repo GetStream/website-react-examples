@@ -1,7 +1,5 @@
 import React, { PropsWithChildren } from 'react';
 
-import './TeamChannelList.css';
-
 import { AddChannel } from '../../assets';
 
 import type { ChannelListMessengerProps } from 'stream-chat-react';

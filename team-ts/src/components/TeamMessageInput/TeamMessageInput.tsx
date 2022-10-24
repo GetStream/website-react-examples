@@ -10,8 +10,6 @@ import {
   useMessageInputContext,
 } from 'stream-chat-react';
 
-import './TeamMessageInput.css';
-
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
 import { GiphyContext } from '../ChannelContainer/ChannelInner';

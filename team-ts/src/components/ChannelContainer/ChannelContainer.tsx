@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { Channel, ThreadHeaderProps, useChatContext } from 'stream-chat-react';
 
-import './ChannelContainer.css';
-
 import { ChannelInner } from './ChannelInner';
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
 import { CreateChannel } from '../CreateChannel/CreateChannel';
