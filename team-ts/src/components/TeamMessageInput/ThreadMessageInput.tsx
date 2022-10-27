@@ -1,16 +1,23 @@
-import { useCallback, useContext } from 'react';
+import { useCallback, useState } from 'react';
 import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-chat-react';
+import { usePopper } from 'react-popper';
 
-import { GiphyContext } from '../ChannelContainer/ChannelInner';
+import { GiphyIcon } from './GiphyIcon';
 
-import { LightningBoltSmall, SendButton, SmileyFace } from '../../assets';
-
+import { SendButton, SmileyFace } from '../../assets';
 import type { StreamChatType } from '../../types';
+import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
 
 export const ThreadMessageInput = () => {
-  const { giphyState, setGiphyState } = useContext(GiphyContext)
+  const { isComposingGiphyReply, clearGiphyFlagThread, setComposeGiphyReplyFlag } = useGiphyInMessageContext();
 
   const messageInput = useMessageInputContext<StreamChatType>();
+
+  const [referenceElement, setReferenceElement] = useState<HTMLDivElement | null>(null);
+  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
+  const {styles, attributes} = usePopper(referenceElement, popperElement, {
+    placement: 'top-end',
+  });
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -19,35 +26,29 @@ export const ThreadMessageInput = () => {
         event.nativeEvent.inputType === 'deleteContentBackward';
       
       if (messageInput.text.length === 1 && deletePressed) {
-        setGiphyState(false);
+        clearGiphyFlagThread();
       }
 
-      if (messageInput.text.startsWith('/giphy') && !giphyState) {
+      if (messageInput.text.startsWith('/giphy') && !isComposingGiphyReply()) {
+        console.log('replacing')
         event.target.value = event.target.value.replace('/giphy', '');
-        setGiphyState(true);
+        setComposeGiphyReplyFlag();
       }
 
       messageInput.handleChange(event);
     },
-    [giphyState, messageInput, setGiphyState],
-  );
-
-  const GiphyIcon = () => (
-    <div className='giphy-icon__wrapper'>
-      <LightningBoltSmall />
-      <p className='giphy-icon__text'>GIPHY</p>
-    </div>
+    [clearGiphyFlagThread, messageInput, setComposeGiphyReplyFlag, isComposingGiphyReply],
   );
 
   return (
     <div className='thread-message-input__wrapper'>
       <div className='thread-message-input__input'>
-        {giphyState && <GiphyIcon />}
+        {isComposingGiphyReply() && <GiphyIcon />}
         <ChatAutoComplete
           onChange={onChange}
           placeholder='Reply'
         />
-        <div className='thread-message-input__icons'>
+        <div className='thread-message-input__icons' ref={setReferenceElement}>
           <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
         </div>
         <div
@@ -59,7 +60,16 @@ export const ThreadMessageInput = () => {
           <SendButton />
         </div>
       </div>
-      <EmojiPicker />
+      { messageInput.emojiPickerIsOpen && (
+        <div
+          className='str-chat__message-textarea-emoji-picker-container'
+          style={styles.popper}
+          {...attributes.popper}
+          ref={setPopperElement}
+        >
+          <EmojiPicker />
+        </div>
+      )}
     </div>
   );
 };

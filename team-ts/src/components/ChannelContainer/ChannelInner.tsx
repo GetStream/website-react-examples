@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useCallback } from 'react';
 import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
 
 import {
@@ -16,6 +16,8 @@ import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 
+import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
+
 import type { StreamChatType } from '../../types';
 
 type ChannelInnerProps = {
@@ -24,23 +26,9 @@ type ChannelInnerProps = {
   setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
-type GiphyStateObj = {
-  giphyState: boolean;
-  setGiphyState: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const GiphyContext = React.createContext<GiphyStateObj>({} as GiphyStateObj);
-
 export const ChannelInner = (props: ChannelInnerProps) => {
   const { pinsOpen, setIsEditing, setPinsOpen } = props;
-
-  const [giphyState, setGiphyState] = useState(false);
-
-  const giphyStateObj = {
-    giphyState: giphyState,
-    setGiphyState,
-  };
-
+  const {inputHasGiphyMessage, clearGiphyFlag} = useGiphyInMessageContext();
   const { sendMessage } = useChannelActionContext<StreamChatType>();
 
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
@@ -48,13 +36,14 @@ export const ChannelInner = (props: ChannelInnerProps) => {
     ...defaultPinPermissions.messaging,
     user: true,
   };
+
   const pinnedPermissions = {
     ...defaultPinPermissions,
     team: teamPermissions,
     messaging: messagingPermissions,
   };
 
-  const overrideSubmitHandler = (message: MessageToSend) => {
+  const overrideSubmitHandler = useCallback((message: MessageToSend) => {
     let updatedMessage = {
       attachments: message.attachments,
       mentioned_users: message.mentioned_users,
@@ -63,7 +52,9 @@ export const ChannelInner = (props: ChannelInnerProps) => {
       text: message.text,
     };
 
-    if (giphyState) {
+    const isReply = !!updatedMessage.parent_id;
+
+    if (inputHasGiphyMessage(isReply)) {
       const updatedText = `/giphy ${message.text}`;
       updatedMessage = { ...updatedMessage, text: updatedText };
     }
@@ -71,21 +62,19 @@ export const ChannelInner = (props: ChannelInnerProps) => {
     if (sendMessage) {
       const sendMessagePromise = sendMessage(updatedMessage);
       logChatPromiseExecution(sendMessagePromise, 'send message');
-      setGiphyState(false);
+      clearGiphyFlag(isReply);
     }
-  };
+  }, [inputHasGiphyMessage, sendMessage, clearGiphyFlag]);
 
   return (
-    <GiphyContext.Provider value={giphyStateObj}>
-      <div style={{ display: 'flex', width: '100%' }}>
+      <>
         <Window>
           <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
           <MessageList disableQuotedMessages={true} pinPermissions={pinnedPermissions} />
           <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
+        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput, overrideSubmitHandler }} />
         {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
-      </div>
-    </GiphyContext.Provider>
+    </>
   );
 };

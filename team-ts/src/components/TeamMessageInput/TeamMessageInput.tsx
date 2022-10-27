@@ -1,30 +1,24 @@
-import { useCallback, useContext, useState } from 'react';
-import { ImageDropzone } from 'react-file-utils';
+import { useCallback, useMemo, useState } from 'react';
 import {
+  AttachmentPreviewList,
   ChatAutoComplete,
   EmojiPicker,
   MessageInputProps,
-  UploadsPreview,
+  SendButton,
   useChannelStateContext,
   useChatContext,
   useMessageInputContext,
 } from 'stream-chat-react';
+import { useDropzone } from 'react-dropzone';
+import clsx from 'clsx';
+
+import { GiphyIcon } from './GiphyIcon';
 
 import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
 
-import { GiphyContext } from '../ChannelContainer/ChannelInner';
-
-import {
-  BoldIcon,
-  CodeSnippet,
-  ItalicsIcon,
-  LightningBoltSmall,
-  SendButton,
-  SmileyFace,
-  StrikeThroughIcon,
-} from '../../assets';
-
+import { BoldIcon, CodeSnippet, ItalicsIcon, SmileyFace, StrikeThroughIcon } from '../../assets';
 import type { StreamChatType } from '../../types';
+import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
 
 export type ThreadMessageInputProps = MessageInputProps & {
   pinsOpen?: boolean;
@@ -33,12 +27,11 @@ export type ThreadMessageInputProps = MessageInputProps & {
 export const TeamMessageInput = (props: ThreadMessageInputProps) => {
   const { pinsOpen } = props;
 
-  const { giphyState, setGiphyState } = useContext(GiphyContext);
+  const { isComposingGiphyMessage, clearGiphyFlagMainInput, setComposeGiphyMessageFlag } = useGiphyInMessageContext();
 
   const {
-    acceptedFiles,
+    acceptedFiles = [],
     channel,
-    maxNumberOfFiles,
     multipleUploads,
     thread,
   } = useChannelStateContext<StreamChatType>();
@@ -74,6 +67,16 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
   };
 
   const messageInput = useMessageInputContext<StreamChatType>();
+  const { numberOfUploads, text, uploadNewFiles, maxFilesLeft, isUploadEnabled } = messageInput;
+
+  const accept = useMemo(
+    () =>
+      acceptedFiles.reduce<Record<string, Array<string>>>((mediaTypeMap, mediaType) => {
+        mediaTypeMap[mediaType] ??= [];
+        return mediaTypeMap;
+      }, {}),
+    [acceptedFiles],
+  );
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -84,12 +87,12 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
         event.nativeEvent.inputType === 'deleteContentBackward';
 
       if (messageInput.text.length === 1 && deletePressed) {
-        setGiphyState(false);
+        clearGiphyFlagMainInput();
       }
 
-      if (!giphyState && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
+      if (!isComposingGiphyMessage() && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
         event.target.value = value.replace('/giphy', '');
-        setGiphyState(true);
+        setComposeGiphyMessageFlag();
       }
 
       if (boldState) {
@@ -123,64 +126,66 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
     [
       boldState,
       codeState,
-      giphyState,
       italicState,
       messageInput,
-      setGiphyState,
       strikeThroughState,
+      clearGiphyFlagMainInput,
+      isComposingGiphyMessage,
+      setComposeGiphyMessageFlag,
     ],
   );
 
-  const GiphyIcon = () => (
-    <div className='giphy-icon__wrapper'>
-      <LightningBoltSmall />
-      <p className='giphy-icon__text'>GIPHY</p>
-    </div>
-  );
+  const { getRootProps, isDragActive, isDragReject } = useDropzone({
+    accept,
+    disabled: !isUploadEnabled || maxFilesLeft === 0,
+    multiple: multipleUploads,
+    noClick: true,
+    onDrop: uploadNewFiles,
+  });
+
 
   return (
-    <div className={`team-message-input__wrapper ${(!!thread || pinsOpen) && 'thread-open'}`}>
-      <ImageDropzone
-        accept={acceptedFiles}
-        handleFiles={messageInput.uploadNewFiles}
-        multiple={multipleUploads}
-        disabled={
-          (maxNumberOfFiles !== undefined && messageInput.numberOfUploads >= maxNumberOfFiles) ||
-          giphyState
-        }
-      >
-        <div className='team-message-input__input'>
-          <div className='team-message-input__top'>
-            {giphyState && !messageInput.numberOfUploads && <GiphyIcon />}
-            <UploadsPreview />
+    <div {...getRootProps({ className: clsx(`team-message-input__wrapper`, { 'thread-open': !!thread || pinsOpen }) })}>
+      {isDragActive && (
+        <div
+          className={clsx('str-chat__dropzone-container', {
+            'str-chat__dropzone-container--not-accepted': isDragReject,
+          })}
+        >
+          {!isDragReject && <p>Drag your files here</p>}
+          {isDragReject && <p>Some of the files will not be accepted</p>}
+        </div>
+      )}
+      <div className='team-message-input__input'>
+        <div className='team-message-input__top'>
+          {!!numberOfUploads && <AttachmentPreviewList />}
+          <div className='team-message-input__form'>
+            {isComposingGiphyMessage() && !numberOfUploads && <GiphyIcon />}
             <ChatAutoComplete onChange={onChange} placeholder={`Message ${getPlaceholder()}`} />
-            <div
-              className='team-message-input__button'
-              role='button'
-              aria-roledescription='button'
-              onClick={messageInput.handleSubmit}
-            >
-              <SendButton />
-            </div>
-          </div>
-          <div className='team-message-input__bottom'>
-            <div className='team-message-input__icons'>
-              <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
-              <div className='icon-divider'></div>
-              <BoldIcon {...{ boldState, resetIconState, setBoldState }} />
-              <ItalicsIcon {...{ italicState, resetIconState, setItalicState }} />
-              <StrikeThroughIcon
-                {...{
-                  resetIconState,
-                  strikeThroughState,
-                  setStrikeThroughState,
-                }}
-              />
-              <CodeSnippet {...{ codeState, resetIconState, setCodeState }} />
-            </div>
+
+            <SendButton
+              disabled={!numberOfUploads && !text.length}
+              sendMessage={messageInput.handleSubmit}
+            />
           </div>
         </div>
-      </ImageDropzone>
+        <div className='team-message-input__bottom'>
+          <div className='team-message-input__icons'>
+            <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
+            <div className='icon-divider'></div>
+            <BoldIcon {...{ boldState, resetIconState, setBoldState }} />
+            <ItalicsIcon {...{ italicState, resetIconState, setItalicState }} />
+            <StrikeThroughIcon
+              {...{
+                resetIconState,
+                strikeThroughState,
+                setStrikeThroughState,
+              }}
+            />
+            <CodeSnippet {...{ codeState, resetIconState, setCodeState }} />
+          </div>
+        </div>
+      </div>
       <TeamTypingIndicator type='input' />
       <EmojiPicker />
     </div>

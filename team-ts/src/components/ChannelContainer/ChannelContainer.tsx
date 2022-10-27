@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Channel, ThreadHeaderProps, useChatContext } from 'stream-chat-react';
+import { Channel, SimpleReactionsList, ThreadHeaderProps, useChatContext } from 'stream-chat-react';
 
 import { ChannelInner } from './ChannelInner';
 import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
@@ -8,10 +8,11 @@ import { EditChannel } from '../EditChannel/EditChannel';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 
+import { GiphyInMessageFlagProvider } from '../../context/GiphyInMessageFlagContext';
+
 import { CloseThreadIcon } from '../../assets';
 
 import type { ChannelFilters } from 'stream-chat';
-
 import type { StreamChatType } from '../../types';
 
 type ChannelContainerProps = {
@@ -45,6 +46,8 @@ const ThreadHeader = (props: HeaderProps) => {
     </div>
   );
 };
+
+const LoadingIndicator = () => null;
 
 export const ChannelContainer = (props: ChannelContainerProps) => {
   const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
@@ -85,18 +88,22 @@ export const ChannelContainer = (props: ChannelContainerProps) => {
     <div className='channel__container'>
       <Channel
         EmptyStateIndicator={ChannelEmptyState}
+        LoadingIndicator={LoadingIndicator}
         Input={TeamMessageInput}
         Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
-        ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />} 
+        ReactionsList={SimpleReactionsList}
+        ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
         TypingIndicator={() => null}
       >
-        <ChannelInner
-          {...{
-            pinsOpen,
-            setIsEditing,
-            setPinsOpen,
-          }}
-        />
+        <GiphyInMessageFlagProvider>
+          <ChannelInner
+            {...{
+              pinsOpen,
+              setIsEditing,
+              setPinsOpen,
+            }}
+          />
+        </GiphyInMessageFlagProvider>
       </Channel>
     </div>
   );
