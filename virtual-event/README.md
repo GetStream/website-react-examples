@@ -19,7 +19,7 @@ Current release process is quite manual. Until we automate it, please follow the
    1. You can `git stash` your current work-in-progress
 2. Copy the `.env-example` file into `.env.production` and fill in just the following parameter:
    1. `REACT_APP_STREAM_KEY=dz5f4d5kzrue`
-3. `cd .. && yarn build:sm`
+3. `cd .. && yarn build:ve2`
    1. This command will create a production optimized bundle and will copy it to the `/docs/virtual-event-v2` directory
    2. Please make sure to smoke-test the demo locally before proceeding with the next step
 4. Commit the changes (minified bundle) to your branch and open a PR towards `master`
