@@ -3,7 +3,7 @@ import { Channel as StreamChannel } from 'stream-chat';
 import { Channel } from 'stream-chat-react';
 
 import { ChannelInner } from './ChannelInner';
-import { EmptyStateIndicators } from './EmptyStateIndicators';
+import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
 import { GiphyPreview } from './GiphyPreview';
 import { MessageUI } from './MessageUI';
 import { MessageInputUI } from './MessageInputUI';
@@ -52,7 +52,7 @@ export const DMChannel: React.FC<Props> = (props) => {
         AutocompleteSuggestionHeader={SuggestionHeader}
         AutocompleteSuggestionItem={SuggestionListItem}
         channel={dmChannel}
-        EmptyStateIndicator={(props) => <EmptyStateIndicators {...props} isDmChannel />}
+        EmptyStateIndicator={(props) => <EmptyStateIndicatorChannel {...props} isDmChannel />}
         GiphyPreviewMessage={GiphyPreview}
         Input={MessageInputUI}
         ThreadHeader={ThreadHeader}

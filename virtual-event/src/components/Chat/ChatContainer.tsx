@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
-import { Chat, Channel } from 'stream-chat-react';
+import { Channel, Chat } from 'stream-chat-react';
 
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
 import { DMChannelList } from './DMChannelList';
-import { EmptyStateIndicators } from './EmptyStateIndicators';
+import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
 import { GiphyPreview } from './GiphyPreview';
 import { MessageUI } from './MessageUI';
 import { MessageInputUI } from './MessageInputUI';
@@ -112,7 +112,7 @@ export const ChatContainer = () => {
                   AutocompleteSuggestionHeader={SuggestionHeader}
                   AutocompleteSuggestionItem={SuggestionListItem}
                   channel={currentChannel}
-                  EmptyStateIndicator={EmptyStateIndicators}
+                  EmptyStateIndicator={EmptyStateIndicatorChannel}
                   GiphyPreviewMessage={GiphyPreview}
                   Input={MessageInputUI}
                   ThreadHeader={ThreadHeader}
