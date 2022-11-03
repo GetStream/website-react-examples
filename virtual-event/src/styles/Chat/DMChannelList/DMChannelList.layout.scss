@@ -1,0 +1,97 @@
+@use '../../_utils';
+
+.dm {
+  display: flex;
+  flex-direction: column;
+
+  .start-chat {
+    position: absolute;
+    bottom: 0;
+    max-height: 56px;
+    padding: 8px;
+    box-sizing: border-box;
+    width: 320px;
+
+    .start-chat-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      height: 40px;
+      line-height: 18px;
+    }
+  }
+}
+
+.dm-list {
+  height: calc(100% - 56px); // height of chat start button
+  width: 320px;
+
+  .dm-list-preview {
+    position: relative;
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    padding: 8px;
+    width: 100%;
+
+    svg {
+      position: absolute;
+      top: 10px;
+      right: 10px;
+    }
+
+    .dm-list-preview-top {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      width: 100%;
+      margin-bottom: 8px;
+    }
+
+    .dm-list-preview-bottom {
+      p {
+        @include utils.ellipsis-text;
+        margin: 0;
+        max-height: 32px;
+      }
+    }
+  }
+}
+
+.dm-error {
+  padding: 8px;
+}
+
+.dm-loading {
+  margin: 0;
+  padding: 8px;
+
+  li {
+    display: flex;
+    align-items: center;
+    margin-bottom: 16px;
+    height: 40px;
+  }
+
+  .dm-loading-avatar,
+  .dm-loading-text {
+    display: inline-block;
+  }
+
+  .dm-loading-avatar {
+    float: left;
+    width: 32px;
+    height: 32px;
+    margin-right: 10px;
+  }
+
+  &-text div {
+    width: 220px;
+    height: 10px;
+  }
+
+  &-text div:nth-child(2) {
+    height: 16px;
+    margin-top: 8px;
+  }
+}

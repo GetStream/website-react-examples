@@ -1,18 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Channel as StreamChannel } from 'stream-chat';
 import { Channel } from 'stream-chat-react';
 
 import { ChannelInner } from './ChannelInner';
-import { EmptyStateIndicators } from './EmptyStateIndicators';
+import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
 import { GiphyPreview } from './GiphyPreview';
 import { MessageUI } from './MessageUI';
 import { MessageInputUI } from './MessageInputUI';
 import { SuggestionHeader, SuggestionListItem } from './SuggestionList';
 import { ThreadHeader } from './ThreadHeader';
 import { UserActionsDropdown } from './UserActionsDropdown';
+import { StreamChatType } from '../../types';
+import { useBoolState } from '../../hooks/useBoolState';
+import { ChannelHeader } from './ChannelHeader';
 
-import { CloseX, Ellipse } from '../../assets';
-import {StreamChatType} from '../../hooks/useInitChat';
+// todo: remove AutocompleteSuggestionHeader prop
 
 type Props = {
   dmChannel: StreamChannel;
@@ -22,41 +24,35 @@ type Props = {
 export const DMChannel: React.FC<Props> = (props) => {
   const { dmChannel, setDmChannel } = props;
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown } = useBoolState();
 
   const user = dmChannel.state.membership.user?.id;
 
-  const channelTitle = Object.keys(dmChannel.state.members).filter((key) => key !== user);
+  const otherUsersIDs = Object.keys(dmChannel.state.members).filter((key) => key !== user);
+  const otherUserID = otherUsersIDs[0];
+  const channelTitle = dmChannel.state.members[otherUserID].user?.name || otherUserID;
 
   return (
     <div className='dm-channel'>
-      <div className='dm-header-container'>
-        <div className='dm-header-close' onClick={() => setDmChannel(undefined)}>
-          <CloseX />
-        </div>
-        <div className='dm-header-title'>
-          <div>{channelTitle}</div>
-          <div className='dm-header-title-sub-title'>Direct Message</div>
-        </div>
-        <div
-          className={`dm-header-actions ${dropdownOpen ? 'open' : ''}`}
-          onClick={() => setDropdownOpen((prev) => !prev)}
-        >
-          <Ellipse />
-        </div>
-      </div>
+      <ChannelHeader
+        onClose={() => setDmChannel(undefined)}
+        menuOpen={dropdownOpen}
+        title={channelTitle}
+        subtitle='Direct Message'
+        onMenuClick={toggleOpenDropdown}
+      />
       {dropdownOpen && (
         <UserActionsDropdown
           dropdownOpen={dropdownOpen}
           dmChannel={dmChannel}
-          setDropdownOpen={setDropdownOpen}
+          closeDropdown={closeDropdown}
         />
       )}
       <Channel<StreamChatType>
         AutocompleteSuggestionHeader={SuggestionHeader}
         AutocompleteSuggestionItem={SuggestionListItem}
         channel={dmChannel}
-        EmptyStateIndicator={(props) => <EmptyStateIndicators {...props} isDmChannel />}
+        EmptyStateIndicator={(props) => <EmptyStateIndicatorChannel {...props} isDmChannel />}
         GiphyPreviewMessage={GiphyPreview}
         Input={MessageInputUI}
         ThreadHeader={ThreadHeader}

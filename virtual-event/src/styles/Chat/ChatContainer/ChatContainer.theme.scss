@@ -1,0 +1,128 @@
+.chat {
+  background: $app-canvas;
+  transition: all 0.5s, background 1s;
+  border: 1px solid $stroke;
+
+  .chat.actions-modal {
+    border-color: $overlay;
+    border-radius: 0;
+  }
+
+  .chat-components {
+    .chat-components-header {
+      background: $app-canvas;
+      transition: background 1s;
+
+      .chat-components-header-top {
+        svg:hover {
+          cursor: pointer;
+        }
+      }
+
+      .chat-components-header-tabs {
+        color: $text-high-emphasis;
+        border-top: 1px solid $stroke;
+        border-bottom: 1px solid $stroke;
+
+        .chat-components-header-tabs-item {
+          cursor: pointer;
+
+          .selected {
+            background: $primary-accent;
+            border-radius: 0 0 4px 4px;
+          }
+
+          .selected + div {
+            font-weight: 600;
+          }
+
+          .unread {
+            border-radius: 2px;
+            background: $accent-red;
+          }
+        }
+      }
+    }
+
+    .chat-components-empty {
+      :nth-child(2) {
+        font-size: 18px;
+        color: $text-high-emphasis;
+      }
+
+      :last-child {
+        font-size: 14px;
+        color: $text-mid-emphasis;
+      }
+    }
+
+    .dropdown {
+      border-radius: 8px;
+      box-shadow: $shadow;
+      background: $app-canvas;
+      transition: background 1s;
+
+      .dropdown-option {
+        color: $text-high-emphasis;
+        cursor: pointer;
+      }
+
+      .dropdown-option.thread {
+        &:hover {
+          svg path {
+            fill: $text-self;
+          }
+        }
+      }
+
+      .dropdown-option:hover {
+        background: $primary-accent;
+        color: $text-self;
+
+      }
+    }
+
+    .snackbar {
+      @keyframes fade {
+        0%,
+        100% {
+          opacity: 0;
+        }
+        20%,
+        80% {
+          opacity: 1;
+        }
+      }
+
+      background: $app-canvas;
+      border-radius: 16px;
+      filter: drop-shadow($shadow);
+      animation: fade 3s linear;
+
+      div {
+        color: $text-high-emphasis;
+        font-size: 14px;
+        font-weight: 600;
+      }
+
+      :last-child {
+        &:hover {
+          cursor: pointer;
+        }
+      }
+    }
+  }
+}
+
+.chat.full-screen {
+  width: 56px;
+  min-width: 56px;
+
+  .chat-components {
+    visibility: hidden;
+
+    .str-chat {
+      height: 0;
+    }
+  }
+}

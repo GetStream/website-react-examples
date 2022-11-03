@@ -1,33 +1,19 @@
 import { useEffect, useState } from 'react';
-import { Channel as StreamChannel, Event, LiteralStringForUnion, StreamChat } from 'stream-chat';
+import { Channel as StreamChannel, Event, StreamChat } from 'stream-chat';
 
 import { getRandomTitle } from '../components/Chat/utils';
 import { ChatType, useEventContext } from '../contexts/EventContext';
 import { useCheckList } from './useCheckList';
+
+import { StreamChatType } from '../types';
+
 const urlParams = new URLSearchParams(window.location.search);
 
 const apiKey = urlParams.get('apikey') || (process.env.REACT_APP_STREAM_KEY as string);
 const userId = urlParams.get('user') || (process.env.REACT_APP_USER_ID as string);
 const userToken = urlParams.get('user_token') || (process.env.REACT_APP_USER_TOKEN as string);
-const targetOrigin = urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
-
-type AttachmentType = {};
-type ChannelType = {};
-type CommandType = LiteralStringForUnion;
-type EventType = {};
-type MessageType = { up_votes?: string[] };
-type ReactionType = {};
-export type UserType = { image?: string; title?: string };
-
-export type StreamChatType = {
-  attachmentType: AttachmentType;
-  channelType: ChannelType;
-  commandType: CommandType;
-  eventType: EventType;
-  messageType: MessageType;
-  reactionType: ReactionType;
-  userType: UserType;
-}
+const targetOrigin =
+  urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
 
 export const useInitChat = () => {
   const [chatClient, setChatClient] = useState<StreamChat>();
@@ -39,7 +25,7 @@ export const useInitChat = () => {
 
   const { chatType, eventName } = useEventContext();
 
-  useCheckList({chatClient, targetOrigin});
+  useCheckList({ chatClient, targetOrigin });
   useEffect(() => {
     if (globalUnread && chatType === 'global-ve2') setGlobalUnread(false);
   }, [chatType, globalUnread]);
@@ -110,9 +96,7 @@ export const useInitChat = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance<
-        StreamChatType
-      >(apiKey);
+      const client = StreamChat.getInstance<StreamChatType>(apiKey);
 
       if (process.env.REACT_APP_CHAT_SERVER_ENDPOINT) {
         client.setBaseURL(process.env.REACT_APP_CHAT_SERVER_ENDPOINT);

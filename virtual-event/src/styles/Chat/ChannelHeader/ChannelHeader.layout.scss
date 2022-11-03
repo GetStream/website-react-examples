@@ -1,0 +1,46 @@
+@use '../../_utils';
+
+.channel-header-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 8px;
+  max-height: 61px;
+  box-sizing: border-box;
+
+  .channel-header-close-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 40px;
+    width: 40px;
+  }
+
+  .channel-header-title {
+    flex: 1;
+    width: 60%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 0 8px;
+
+    div:first-child {
+      @include utils.ellipsis-text;
+      width: 100%;
+      text-align: center;
+    }
+    .channel-header-sub-title {
+      text-align: center;
+    }
+  }
+
+  .channel-header-actions-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    height: 40px;
+    width: 40px;
+  }
+}

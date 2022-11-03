@@ -1,0 +1,89 @@
+
+.str-chat__virtual-list {
+
+  .str-chat__parent-message-li:hover {
+    background: var(--card-background);
+
+  }
+
+  .message-ui {
+    font-size: 14px;
+    color: $text-high-emphasis;
+    background: $app-canvas;
+    transition: background 0s;
+
+    &:hover {
+      background: $card-background;
+    }
+
+    .message-ui-content-top {
+      .message-ui-content-top-name {
+        font-weight: 600;
+      }
+
+      .message-ui-content-top-title {
+        color: $primary-accent;
+        font-size: 12px;
+      }
+
+      .message-ui-content-top-time {
+        color: $text-mid-emphasis;
+        font-size: 12px;
+      }
+    }
+  }
+
+  .message-ui.theme-open {
+    transition: background 1s;
+  }
+
+  .str-chat__message-replies-count-button {
+    border: none;
+    background: none;
+    font-size: 12px;
+    font-weight: 700;
+    color: #006cff;
+    cursor: pointer;
+  }
+
+  .message-ui-upvote-button {
+    border-radius: 8px;
+    background: $card-background;
+    transition: background 1s;
+    cursor: pointer;
+
+    svg {
+      fill: $text-low-emphasis;
+    }
+
+    &:hover {
+      cursor: pointer;
+      color: $primary-accent;
+      background: $app-canvas;
+      transition: none;
+
+      svg {
+        fill: $primary-accent;
+      }
+    }
+
+    &:active {
+      background: $primary-accent;
+      transition: none;
+      color: $white;
+
+      svg {
+        fill: $white;
+      }
+    }
+  }
+
+  .message-ui-upvote-button.up-voted {
+    background: $primary-accent;
+    color: $white;
+
+    svg {
+      fill: $white;
+    }
+  }
+}

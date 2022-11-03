@@ -1,0 +1,86 @@
+.str-chat__input--emojipicker {
+  position: absolute;
+  bottom: 100%;
+  right: 0;
+}
+
+.input-ui-container {
+  position: relative;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px;
+  width: 320px;
+
+  .input-ui-input {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px;
+    height: 40px;
+    flex: 1;
+    max-width: 100%;
+  }
+
+  .input-ui-send-button {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-evenly;
+    align-items: center;
+    height: 40px;
+    padding: 0 8px;
+    font-size: 11px;
+  }
+
+  .input-ui-send-button.cooldown {
+    font-size: 20px;
+  }
+}
+
+.str-chat__textarea {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  height: 100%;
+
+  textarea {
+    width: 100%;
+    padding: 0;
+    font-size: 14px;
+    min-height: unset;
+    resize: none;
+  }
+}
+
+.str-chat__input--emojipicker {
+
+  .emoji-mart {
+    width: 320px !important;
+  }
+}
+
+.str-chat__suggestion-list-container {
+  bottom: 100%;
+  left: 0;
+
+  .suggestion-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    height: 40px;
+    padding: 0 8px;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+
+    .suggestion-item-icon {
+      height: 24px;
+      width: 24px;
+      margin-right: 8px;
+    }
+
+    .suggestion-item-description {
+      margin-left: 8px;
+    }
+  }
+}

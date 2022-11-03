@@ -1,4 +1,5 @@
 import React, { useContext, useState } from 'react';
+import { PropsWithChildrenOnly } from '../types';
 
 type VideoContextValue = {
   setEventNumber: React.Dispatch<React.SetStateAction<number | undefined>>;
@@ -15,7 +16,7 @@ type VideoContextValue = {
 
 const VideoContext = React.createContext({} as VideoContextValue);
 
-export const VideoProvider: React.FC = ({ children }) => {
+export const VideoProvider = ({ children }: PropsWithChildrenOnly) => {
   const [eventNumber, setEventNumber] = useState<number>();
   const [label, setLabel] = useState<string>();
   const [presenters, setPresenters] = useState<number>();

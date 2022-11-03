@@ -1,14 +1,15 @@
-import React, { useState } from 'react';
-import { Avatar, useChatContext } from 'stream-chat-react';
+import React, { useCallback, useState } from 'react';
+import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
+import { Avatar, ReactEventHandler, useChatContext } from 'stream-chat-react';
 
 import { UserActionsDropdown } from './UserActionsDropdown';
-
 import { CloseX, Ellipse, LinkedInLogo, TwitterLogo } from '../../assets';
+
 import { useEventContext } from '../../contexts/EventContext';
 
-import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
+import { useBoolState } from '../../hooks/useBoolState';
 
-import type { StreamChatType } from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 type Props<StreamChatType extends ExtendableGenerics> = {
   participantProfile: UserResponse<StreamChatType>;
@@ -18,13 +19,17 @@ type Props<StreamChatType extends ExtendableGenerics> = {
 
 export const ParticipantProfile = (props: Props<StreamChatType>) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
+  const { id, image, name, online, title } = participantProfile;
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
 
-  const [dropdownOpen, setDropdownOpen] = useState(false);
+  const { state: dropdownOpen, toggle: toggleOpenDropdown, off: closeDropdown } = useBoolState();
+  const [imgSrc, setImgSrc] = useState<string | null>(image || null);
 
-  const { id, image, name, online, title } = participantProfile;
+  const handleImageLoadError: ReactEventHandler = useCallback(() => {
+    setImgSrc(null);
+  }, []);
 
   const handleStartChat = async () => {
     if (!client.userID) return;
@@ -54,7 +59,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         </div>
         <div
           className={`profile-header-actions ${dropdownOpen ? 'open' : ''}`}
-          onClick={() => setDropdownOpen((prev) => !prev)}
+          onClick={toggleOpenDropdown}
         >
           <Ellipse />
         </div>
@@ -63,12 +68,12 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         <UserActionsDropdown
           dropdownOpen={dropdownOpen}
           participantProfile={participantProfile}
-          setDropdownOpen={setDropdownOpen}
+          closeDropdown={closeDropdown}
         />
       )}
       <div className='profile-details'>
-        {image ? (
-          <img src={image} alt={image} />
+        {imgSrc ? (
+          <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError} />
         ) : (
           <Avatar name={name || id} shape='rounded' size={200} />
         )}

@@ -1,0 +1,9 @@
+.str-chat {
+  --str-chat__primary-color: var(--primary-color);
+  --str-chat__background-color: var(--app-canvas);
+  --str-chat__secondary-background-color: var(--app-canvas);
+  --str-chat__text-color: var(--text-high-emphasis);
+  --str-chat__text-low-emphasis-color: var(--text-mid-emphasis);
+  --str-chat__disabled-color: var(--text-low-emphasis);
+  --str-chat__box-shadow-color: rgba(0, 0, 0, 0.15);
+}

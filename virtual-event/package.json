@@ -2,23 +2,24 @@
   "name": "stream-chat-virtual-event-demo",
   "version": "0.1.0",
   "private": true,
-  "homepage": "/website-react-examples/virtual-event-v2",
+  "homepage": "./",
   "dependencies": {
-    "framer-motion": "^4.1.17",
-    "lottie-web": "^5.7.13",
-    "react": "^17.0.2",
-    "react-dom": "^17.0.2",
-    "react-scripts": "4.0.3",
-    "sass": "^1.41.0",
-    "stream-chat": "^6.5.1",
-    "stream-chat-react": "^9.0.0",
-    "typescript": "4.3.5"
+    "framer-motion": "^7.5.0",
+    "lottie-web": "^5.9.6",
+    "postcss-normalize": "^10.0.1",
+    "react": "^18.2.0",
+    "react-dom": "^18.2.0",
+    "sass": "^1.55.0",
+    "stream-chat": "^7.1.0",
+    "stream-chat-react": "^10.3.0"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.8",
-    "@types/node": "^12.0.0",
-    "@types/react": "17.0.13",
-    "@types/react-dom": "17.0.8"
+    "@types/node": "^16",
+    "@types/react": "^18.0.21",
+    "@types/react-dom": "^18.0.6",
+    "react-scripts": "^5.0.1",
+    "typescript": "^4.8.4"
   },
   "scripts": {
     "start": "react-scripts start",

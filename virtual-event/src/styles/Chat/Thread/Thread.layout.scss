@@ -1,0 +1,20 @@
+.str-chat__thread {
+  position: absolute;
+  height: 100%;
+  top: 0;
+  z-index: 1;
+
+  .str-chat__thread-start {
+    display: none;
+  }
+
+  .str-chat__message-replies-count-button {
+    display: none;
+  }
+}
+
+.thread-footer {
+  display: flex;
+  padding: 8px;
+  align-items: center;
+}

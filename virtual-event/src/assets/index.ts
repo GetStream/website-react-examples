@@ -53,7 +53,7 @@ export { default as Speaker2 } from './Speaker2.mp4';
 // @ts-expect-error
 export { default as Speaker3 } from './Speaker3.mp4';
 export { ParticipantsIcon } from './ParticipantsIcon';
-export { QAThumb } from './QAThumb';
+export { UpvoteThumb } from './UpvoteThumb';
 export { ReactionSmiley } from './ReactionSmiley';
 export { RoomsButton } from './RoomsButton';
 export { SearchIcon } from './SearchIcon';
@@ -66,6 +66,5 @@ export { SidebarRoomButton } from './SidebarRoomButton';
 export { default as SpeakingAnimation } from './speaking-animation.json';
 export { StartThread } from './StartThread';
 export { TwitterLogo } from './TwitterLogo';
-export { UserEllipse } from './UserEllipse';
 export { VideoViewersIcon } from './VideoViewersIcon';
 export { VideoWatermark } from './VideoWatermark';

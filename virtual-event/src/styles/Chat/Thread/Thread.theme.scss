@@ -1,0 +1,22 @@
+.str-chat {
+  --str-chat__thread-head-start-border-block-end-color: var(--stroke);
+  --str-chat__thread-border-inline-start: 1px solid var(--stroke);
+}
+
+.str-chat__thread {
+  .channel-header-actions-button {
+    opacity: 0;
+    pointer-events: none;
+  }
+}
+
+.thread-footer {
+  background: $app-canvas;
+  transition: background 1s;
+
+  .thread-footer-text {
+    font-size: 12px;
+    margin-left: 8px;
+    color: $text-high-emphasis;
+  }
+}

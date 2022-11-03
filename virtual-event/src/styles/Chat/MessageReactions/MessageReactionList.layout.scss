@@ -1,0 +1,19 @@
+.str-chat__simple-reactions-list {
+  height: 30px;
+  display: flex;
+  align-items: center;
+  padding: 1px 12px 0;
+
+  .emoji-mart-emoji {
+    span {
+      height: 16px !important;
+      width: 16px !important;
+    }
+  }
+
+  .str-chat__simple-reactions-list-item--last-number {
+    display: block;
+    color: $text-high-emphasis;
+    font-size: 12px;
+  }
+}

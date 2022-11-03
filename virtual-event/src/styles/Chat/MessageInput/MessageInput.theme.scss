@@ -1,0 +1,165 @@
+.input-ui-container {
+  border-top: 1px solid $stroke;
+  background: $app-canvas;
+  transition: background 1s;
+
+  .input-ui-input {
+    border-radius: 8px;
+    border: 1px solid $stroke;
+    background: $card-alt-background;
+    transition: background 1s, border-color 0.2s;
+
+    &:focus-within {
+      border: 2px solid $primary-accent;
+      caret-color: $primary-accent;
+    }
+
+    .input-ui-input-commands-button {
+      &:hover {
+        cursor: pointer;
+      }
+
+      svg:hover path {
+        fill: $primary-accent;
+      }
+    }
+
+    .input-ui-input-commands-button.cooldown {
+      &:hover {
+        cursor: default;
+      }
+
+      svg:hover path {
+        fill: $text-mid-emphasis;
+      }
+    }
+
+    .input-ui-input-emoji-picker-button {
+      &:hover {
+        cursor: pointer;
+      }
+
+      svg:hover path {
+        fill: $primary-accent;
+      }
+    }
+
+    .input-ui-input-emoji-picker-button.cooldown {
+      &:hover {
+        cursor: default;
+      }
+
+      svg:hover path {
+        fill: $text-mid-emphasis;
+      }
+    }
+  }
+
+  .input-ui-input.giphy {
+    border: 2px solid $primary-accent;
+    caret-color: $primary-accent;
+  }
+
+  .input-ui-send-button {
+    transition: background .2s;
+    outline: none;
+    border: none;
+    border-radius: 8px;
+
+    color: $primary-accent;
+    background: $card-background;
+
+    svg path {
+      fill: $primary-accent;
+    }
+
+    &:hover {
+      cursor: pointer;
+    }
+  }
+
+  .input-ui-send-button:disabled {
+    color: $text-low-emphasis;
+
+    svg path {
+      fill: $text-low-emphasis;
+    }
+
+    &:hover {
+      cursor: default;
+    }
+  }
+
+  .input-ui-send-button:active:not(:disabled) {
+    background: $primary-accent;
+    color: $white;
+
+    svg path {
+      fill: $white;
+    }
+  }
+
+  .input-ui-send-button.cooldown {
+    font-weight: 600;
+    color: $primary-accent;
+
+    &:hover {
+      cursor: default;
+    }
+  }
+}
+
+.str-chat__textarea {
+  textarea {
+    background: $card-alt-background;
+    transition: background 1s;
+    color: $text-high-emphasis;
+    border: none;
+  }
+
+  textarea:focus {
+    border: none;
+    outline: none;
+    box-shadow: none;
+  }
+}
+
+.str-chat__input--emojipicker {
+  .emoji-mart {
+    background: $app-canvas;
+    transition: background 1s;
+    box-shadow: $shadow;
+    border-color: $stroke;
+
+    .emoji-mart-category-label {
+      background: $app-canvas;
+      transition: background 1s;
+      color: $text-high-emphasis;
+
+      span {
+        background: $app-canvas;
+        transition: background 1s;
+      }
+    }
+  }
+}
+
+.str-chat__suggestion-list-container {
+  .suggestion-item {
+    font-weight: 600;
+    font-size: 18px;
+    color: $text-high-emphasis;
+
+
+    .suggestion-item-description {
+      color: $text-mid-emphasis;
+      font-weight: normal;
+      font-size: 14px;
+    }
+  }
+
+  .suggestion-item.selected {
+    background: $stroke-low-emphasis;
+    cursor: pointer;
+  }
+}

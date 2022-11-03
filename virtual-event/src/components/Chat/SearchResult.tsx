@@ -1,36 +1,12 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import { Avatar, isChannel, SearchResultItemProps } from 'stream-chat-react';
 
-import type {
-  StreamChatType
-} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
-export const SearchResult: React.FC<
-  SearchResultItemProps<
-  StreamChatType
-  >
-> = (props) => {
+export const SearchResult: React.FC<SearchResultItemProps<StreamChatType>> = (props) => {
   const { focusedUser, index, result, selectResult } = props;
 
-  const [actionsOpen, setActionsOpen] = useState(false);
-
   const focused = focusedUser === index;
-
-  useEffect(() => {
-    const handleClickOutside = (event: Event) => {
-      if (event.target instanceof HTMLElement) {
-        const elements = document.getElementsByClassName('search-result-actions');
-        const actionsModal = elements.item(0);
-
-        if (!actionsModal?.contains(event.target)) {
-          setActionsOpen(false);
-        }
-      }
-    };
-
-    if (actionsOpen) document.addEventListener('click', handleClickOutside);
-    return () => document.removeEventListener('click', handleClickOutside);
-  }, [actionsOpen]); // eslint-disable-line
 
   if (isChannel(result)) return null;
 

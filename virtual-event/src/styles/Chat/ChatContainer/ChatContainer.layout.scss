@@ -1,0 +1,126 @@
+.str-chat {
+  height: calc(100vh - 114px); // height of ChatHeader component
+}
+
+.chat {
+  position: relative;
+  height: 100%;
+  width: var(--chat-panel-width);
+  min-width: var(--chat-panel-width);
+
+  .chat-components {
+    .chat-components-header {
+      .chat-components-header-top {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        padding: 8px;
+      }
+
+      .chat-components-header-tabs {
+        display: flex;
+        align-items: center;
+        justify-content: space-around;
+        height: 56px;
+        font-weight: 400;
+        font-size: 14px;
+        line-height: 18px;
+
+        .chat-components-header-tabs-item {
+          position: relative;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          height: 100%;
+
+          .selected {
+            position: absolute;
+            top: 0;
+            width: 72px;
+            height: 4px;
+          }
+
+          .unread {
+            position: absolute;
+            top: 20px;
+            left: -6px;
+            height: 4px;
+            width: 4px;
+          }
+        }
+      }
+    }
+
+    .chat-components-empty {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100%;
+
+      :nth-child(2) {
+        margin: 10px 0;
+      }
+
+      :last-child {
+        text-align: center;
+        max-width: 260px;
+      }
+    }
+
+    .dropdown {
+      display: flex;
+      flex-direction: column;
+      z-index: 3;
+      right: 10px;
+      position: absolute;
+      overflow: hidden;
+
+      .dropdown-option {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        height: 40px;
+        width: 130px;
+        padding: 0 16px;
+        font-size: 12px;
+        box-sizing: border-box;
+      }
+    }
+
+    .snackbar {
+      z-index: 10;
+      position: absolute;
+      top: 8px;
+      left: 8px;
+      display: flex;
+      align-items: center;
+      height: 56px;
+      width: 304px;
+      padding: 0 20px;
+      box-sizing: border-box;
+
+      div {
+        margin-left: 8px;
+      }
+
+      :last-child {
+        position: absolute;
+        right: 20px;
+      }
+    }
+  }
+}
+
+.chat.full-screen {
+  width: 56px;
+  min-width: 56px;
+
+  .chat-components {
+    visibility: hidden;
+
+    .str-chat {
+      height: 0;
+    }
+  }
+}

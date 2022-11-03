@@ -1,0 +1,7 @@
+.str-chat {
+  --str-chat__image-attachment-background-color: var(--stroke);
+}
+
+.str-chat__message-attachment-card img {
+  transition: background 1s;
+}

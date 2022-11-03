@@ -1,12 +1,12 @@
 import React, { useState } from 'react';
-import { Chat, Channel, CustomStyles } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/index.css';
+import { Channel as StreamChannel, UserResponse } from 'stream-chat';
+import { Channel, Chat } from 'stream-chat-react';
 
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
 import { DMChannelList } from './DMChannelList';
-import { EmptyStateIndicators } from './EmptyStateIndicators';
+import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
 import { GiphyPreview } from './GiphyPreview';
 import { MessageUI } from './MessageUI';
 import { MessageInputUI } from './MessageInputUI';
@@ -19,11 +19,13 @@ import { UserActionsModal } from './UserActionsModal';
 
 import { useEventContext } from '../../contexts/EventContext';
 import { GiphyContextProvider } from '../../contexts/GiphyContext';
-import { StreamChatType, useInitChat } from '../../hooks/useInitChat';
 
-import { Channel as StreamChannel, UserResponse } from 'stream-chat';
+import { useInitChat } from '../../hooks/useInitChat';
 
-export const ChatContainer: React.FC = () => {
+import { StreamChatType } from '../../types';
+
+// todo: remove AutocompleteSuggestionHeader prop
+export const ChatContainer = () => {
   const {
     actionsModalOpen,
     isFullScreen,
@@ -49,13 +51,9 @@ export const ChatContainer: React.FC = () => {
 
   if (!chatClient) return null;
 
-  const customStyles: CustomStyles = {
-    '--primary-color': 'var(--primary-accent)',
-  };
-
   return (
     <div
-      className={`chat ${isFullScreen ? 'full-screen' : ''} ${
+      className={`chat str-chat ${isFullScreen ? 'full-screen' : ''} ${
         actionsModalOpen ? 'actions-modal' : ''
       }`}
     >
@@ -68,7 +66,7 @@ export const ChatContainer: React.FC = () => {
         />
       )}
       <div className={`chat-components ${isFullScreen ? 'full-screen' : ''}`}>
-        <Chat client={chatClient} customStyles={customStyles}>
+        <Chat client={chatClient}>
           <GiphyContextProvider>
             {searching && (
               <ParticipantSearch
@@ -114,7 +112,7 @@ export const ChatContainer: React.FC = () => {
                   AutocompleteSuggestionHeader={SuggestionHeader}
                   AutocompleteSuggestionItem={SuggestionListItem}
                   channel={currentChannel}
-                  EmptyStateIndicator={EmptyStateIndicators}
+                  EmptyStateIndicator={EmptyStateIndicatorChannel}
                   GiphyPreviewMessage={GiphyPreview}
                   Input={MessageInputUI}
                   ThreadHeader={ThreadHeader}

@@ -1,0 +1,24 @@
+@use '../../_utils';
+
+@import '../../_variables.scss';
+
+.search-result {
+  position: relative;
+  height: 48px;
+  display: flex;
+  width: 100%;
+  align-items: center;
+  gap: 10px;
+  padding-left: 8px;
+
+  .search-result-info {
+    max-width: 80%;
+
+    .search-result-info-name {
+      @include utils.ellipsis-text();
+    }
+  }
+}
+
+
+

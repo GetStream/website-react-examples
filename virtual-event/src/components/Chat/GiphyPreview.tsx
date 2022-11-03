@@ -9,7 +9,7 @@ import {
 } from 'stream-chat-react';
 
 import { GiphyCommandIcon, VideoViewersIcon } from '../../assets';
-import {StreamChatType} from '../../hooks/useInitChat';
+import { StreamChatType } from '../../types';
 
 const CustomAttachmentActions: React.FC<AttachmentActionsProps<StreamChatType>> = (props) => {
   const { actionHandler, actions } = props;

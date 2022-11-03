@@ -1,0 +1,22 @@
+.message-ui-reaction-selector {
+  position: absolute;
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  height: 40px;
+  width: 216px;
+  right: 8px;
+  top: -40px;
+
+  &.top {
+    top: 0;
+  }
+
+  span {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 36px;
+    width: 36px;
+  }
+}

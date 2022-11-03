@@ -1,0 +1,24 @@
+@import '../../_variables.scss';
+
+.search-result {
+  background: $app-canvas;
+  transition: background 1s;
+  cursor: pointer;
+
+  &:hover {
+    background: $card-background;
+    transition: background 0.2s;
+  }
+
+  .search-result-info {
+    color: $text-high-emphasis;
+    font-size: 14px;
+
+    .search-result-info-name {
+      font-weight: 600;
+    }
+  }
+}
+
+
+

@@ -1,4 +1,11 @@
-import React from 'react';
+import React, { PropsWithChildren } from 'react';
+import type {
+  Channel as StreamChannel,
+  ChannelFilters,
+  ChannelOptions,
+  ChannelSort,
+  UserResponse,
+} from 'stream-chat';
 import {
   Avatar,
   ChannelList,
@@ -10,19 +17,12 @@ import {
 import { DMChannel } from './DMChannel';
 import { EmptyStateIndicators } from './EmptyStateIndicators';
 import { ParticipantSearch } from './ParticipantSearch';
+
 import { getFormattedTime } from './utils';
-
 import { ClickDMIcon } from '../../assets';
-import { useEventContext } from '../../contexts/EventContext';
 
-import type {
-  Channel as StreamChannel,
-  ChannelFilters,
-  ChannelOptions,
-  ChannelSort,
-  UserResponse,
-} from 'stream-chat';
-import {StreamChatType} from '../../hooks/useInitChat';
+import { useEventContext } from '../../contexts/EventContext';
+import { PropsWithChildrenOnly } from '../../types';
 
 export const SkeletonLoader: React.FC = () => (
   <ul className='dm-loading'>
@@ -38,13 +38,11 @@ export const SkeletonLoader: React.FC = () => (
   </ul>
 );
 
-const ListWrapper: React.FC = ({ children }) => {
+const ListWrapper = ({ children }: PropsWithChildrenOnly) => {
   return <div className='dm-list'>{children}</div>;
 };
 
-const ListUI: React.FC<ChannelListMessengerProps> = (props) => {
-  const { children, error, loading } = props;
-
+const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListMessengerProps>) => {
   if (loading) {
     return (
       <ListWrapper>
@@ -66,11 +64,11 @@ const ListUI: React.FC<ChannelListMessengerProps> = (props) => {
   return <ListWrapper>{children}</ListWrapper>;
 };
 
-const PreviewUI: React.FC<
-  ChannelPreviewUIComponentProps<StreamChatType> & {
-    setDmChannel: React.Dispatch<React.SetStateAction<StreamChannel | undefined>>;
-  }
-> = (props) => {
+type PreviewUIProps = ChannelPreviewUIComponentProps & {
+  setDmChannel: React.Dispatch<React.SetStateAction<StreamChannel | undefined>>;
+};
+
+const PreviewUI = (props: PreviewUIProps) => {
   const { channel, displayImage, displayTitle, latestMessage, setDmChannel, unread } = props;
 
   const { client } = useChatContext();

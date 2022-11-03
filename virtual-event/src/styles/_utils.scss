@@ -1,0 +1,8 @@
+@mixin ellipsis-text {
+  white-space: nowrap;
+  overflow-y: visible;
+  // Not every browser support clip overflow, so hidden is defined as a fallback
+  overflow-x: hidden;
+  overflow-x: clip;
+  text-overflow: ellipsis;
+}
