@@ -2,26 +2,12 @@ import { useChatContext, useTypingContext } from 'stream-chat-react';
 
 import type { StreamChatType } from '../../types';
 
-export const TeamTypingIndicator = (props: { type: string }) => {
-  const { type } = props;
-
+export const TeamTypingIndicator = () => {
   const { client } = useChatContext<StreamChatType>();
 
   const { typing } = useTypingContext<StreamChatType>();
 
   if (!client || !typing) return null;
-
-  if (type === 'list') {
-    return (
-      <div className='typing-indicator__list'>
-        <div className='dots'>
-          <div className='dot' />
-          <div className='dot' />
-          <div className='dot' />
-        </div>
-      </div>
-    );
-  }
 
   const users = Object.values(typing)
     .filter(({ user }) => user?.id !== client.user?.id)

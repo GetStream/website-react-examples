@@ -1,108 +1,38 @@
-import { useState } from 'react';
-import { Channel, SimpleReactionsList, ThreadHeaderProps, useChatContext } from 'stream-chat-react';
+import { Channel, SimpleReactionsList } from 'stream-chat-react';
 
+import { AdminPanel } from '../AdminPanel/AdminPanel';
 import { ChannelInner } from './ChannelInner';
-import { ChannelEmptyState } from '../ChannelEmptyState/ChannelEmptyState';
-import { CreateChannel } from '../CreateChannel/CreateChannel';
-import { EditChannel } from '../EditChannel/EditChannel';
-import { TeamMessage } from '../TeamMessage/TeamMessage';
+import { EmptyChannel } from '../EmptyChannel/EmptyChannel';
 import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
+import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
+import { ThreadHeader } from '../TeamChannelHeader/ThreadHeader';
+import { TeamMessage } from '../TeamMessage/TeamMessage';
 
 import { GiphyInMessageFlagProvider } from '../../context/GiphyInMessageFlagContext';
-
-import { CloseThreadIcon } from '../../assets';
-
-import type { ChannelFilters } from 'stream-chat';
-import type { StreamChatType } from '../../types';
-
-type ChannelContainerProps = {
-  createType: string;
-  isCreating: boolean;
-  isEditing?: boolean;
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-type HeaderProps = ThreadHeaderProps & {
-  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-const ThreadHeader = (props: HeaderProps) => {
-  const { closeThread, setPinsOpen, thread } = props;
-
-  const getReplyCount = () => {
-    if (!thread?.reply_count) return '';
-    if (thread.reply_count === 1) return '1 reply';
-    return `${thread.reply_count} Replies`;
-  };
-
-  return (
-    <div className='custom-thread-header'>
-      <div className='custom-thread-header__left'>
-        <p className='custom-thread-header__left-title'>Thread</p>
-        <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
-      </div>
-      <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
-    </div>
-  );
-};
+import { useWorkspaceController } from '../../context/WorkspaceController';
 
 const LoadingIndicator = () => null;
 
-export const ChannelContainer = (props: ChannelContainerProps) => {
-  const { createType, isCreating, isEditing, setIsCreating, setIsEditing } = props;
+export const ChannelContainer = () => {
+  const { activeWorkspace } = useWorkspaceController();
 
-  const { channel } = useChatContext<StreamChatType>();
-
-  const [pinsOpen, setPinsOpen] = useState(false);
-
-  if (isCreating) {
-    const filters: ChannelFilters[] = [];
-
-    return (
-      <div className='channel__container'>
-        <CreateChannel {...{ createType, filters, setIsCreating }} />
-      </div>
-    );
-  }
-
-  if (isEditing) {
-    const filters: ChannelFilters[] = [];
-
-    if (channel?.state?.members) {
-      const channelMembers = Object.keys(channel.state.members);
-      if (channelMembers.length) {
-        // @ts-expect-error
-        filters.id = { $nin: channelMembers };
-      }
-    }
-
-    return (
-      <div className='channel__container'>
-        <EditChannel {...{ filters, setIsEditing }} />
-      </div>
-    );
+  if (activeWorkspace.match('Admin')) {
+    return <AdminPanel/>;
   }
 
   return (
     <div className='channel__container'>
       <Channel
-        EmptyStateIndicator={ChannelEmptyState}
+        EmptyStateIndicator={EmptyChannel}
         LoadingIndicator={LoadingIndicator}
         Input={TeamMessageInput}
-        Message={(messageProps) => <TeamMessage {...messageProps} {...{ setPinsOpen }} />}
+        Message={TeamMessage}
         ReactionsList={SimpleReactionsList}
-        ThreadHeader={(threadProps) => <ThreadHeader {...threadProps} {...{ setPinsOpen }} />}
-        TypingIndicator={() => null}
+        ThreadHeader={ThreadHeader}
+        TypingIndicator={TeamTypingIndicator}
       >
         <GiphyInMessageFlagProvider>
-          <ChannelInner
-            {...{
-              pinsOpen,
-              setIsEditing,
-              setPinsOpen,
-            }}
-          />
+          <ChannelInner />
         </GiphyInMessageFlagProvider>
       </Channel>
     </div>

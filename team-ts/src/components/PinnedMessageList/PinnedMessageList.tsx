@@ -1,31 +1,28 @@
-import { Message, useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
+import { Message, useChannelStateContext } from 'stream-chat-react';
 
-import { CloseThreadIcon } from '../../assets';
+import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
 import type { StreamChatType } from '../../types';
-import { MessageTeam } from '../MessageTeam';
+import { TeamMessage } from '../TeamMessage/TeamMessage';
 
-type PinnedMessageListProps = {
-  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import { useWorkspaceController } from '../../context/WorkspaceController';
 
-export const PinnedMessageList = (props: PinnedMessageListProps) => {
-  const { setPinsOpen } = props;
-
-  const { closeThread } = useChannelActionContext<StreamChatType>();
-
+export const PinnedMessageList = () => {
+  const { pinnedMessageListOpen, togglePinnedMessageListOpen } = useWorkspaceController();
   const { channel } = useChannelStateContext<StreamChatType>();
+
+  if (!pinnedMessageListOpen) return null;
 
   return (
     <div className='pinned-messages__container'>
       <div className='pinned-messages__header'>
-        <p className='pinned-messages__header-text'>Pins</p>
-        <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
+        <div className='workspace-header__title'>Pins</div>
+        <CloseThreadButton onClick={togglePinnedMessageListOpen} />
       </div>
       <div className='pinned-messages__list'>
         {channel.state.pinnedMessages.map((message) => (
           <Message
             groupStyles={['single']}
-            Message={MessageTeam}
+            Message={TeamMessage}
             key={message.id}
             message={message}
           />

@@ -1,6 +1,5 @@
 import React, { useCallback } from 'react';
 import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
-
 import {
   defaultPinPermissions,
   MessageInput,
@@ -20,17 +19,11 @@ import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContex
 
 import type { StreamChatType } from '../../types';
 
-type ChannelInnerProps = {
-  pinsOpen: boolean;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const ChannelInner = (props: ChannelInnerProps) => {
-  const { pinsOpen, setIsEditing, setPinsOpen } = props;
+export const ChannelInner = () => {
   const {inputHasGiphyMessage, clearGiphyFlag} = useGiphyInMessageContext();
   const { sendMessage } = useChannelActionContext<StreamChatType>();
 
+  // todo: migrate to channel capabilities once migration guide is available
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
   const messagingPermissions: PinEnabledUserRoles = {
     ...defaultPinPermissions.messaging,
@@ -69,12 +62,12 @@ export const ChannelInner = (props: ChannelInnerProps) => {
   return (
       <>
         <Window>
-          <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
+          <TeamChannelHeader />
           <MessageList disableQuotedMessages={true} pinPermissions={pinnedPermissions} />
           <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
         <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput, overrideSubmitHandler }} />
-        {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
+        <PinnedMessageList />
     </>
   );
 };

@@ -1,10 +1,10 @@
 import { Avatar, useChatContext } from 'stream-chat-react';
 
-import { HashIcon } from '../../assets';
+import { HashIcon } from './HashIcon';
 
 import type { StreamChatType } from '../../types';
 
-export const ChannelEmptyState = () => {
+export const EmptyChannel = () => {
   const { channel, client } = useChatContext<StreamChatType>();
 
   const members = Object.values(channel?.state?.members || {}).filter(
@@ -64,12 +64,12 @@ export const ChannelEmptyState = () => {
   return (
     <div className='channel-empty__container'>
       {channel?.type === 'team' ? <HashIcon /> : getAvatarGroup()}
-      <p className='channel-empty__first'>
+      <p className='channel-empty__main-description'>
         This is the beginning of your chat history
         {channel?.type === 'team' ? ' in ' : ' with '}
         {channel?.type === 'team' ? `#${channel?.data?.name || channel?.data?.id}` : getUserText()}.
       </p>
-      <p className='channel-empty__second'>Send messages, attachments, links, emojis, and more.</p>
+      <p className='channel-empty__secondary-description'>Send messages, attachments, links, emojis, and more.</p>
     </div>
   );
 };
