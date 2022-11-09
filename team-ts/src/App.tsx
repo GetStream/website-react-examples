@@ -1,11 +1,13 @@
-import { useEffect, useState } from 'react';
-import { ChannelFilters, ChannelSort, StreamChat } from 'stream-chat';
+import { useEffect } from 'react';
+import { StreamChat } from 'stream-chat';
 import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
 
 import { getRandomImage } from './assets';
 import { useChecklist } from './ChecklistTasks';
 import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
-import { ChannelListContainer } from './components/ChannelListContainer/ChannelListContainer';
+import { Sidebar } from './components/Sidebar/Sidebar';
+
+import { WorkspaceController } from './context/WorkspaceController';
 
 import type { StreamChatType } from './types';
 
@@ -24,21 +26,10 @@ const i18nInstance = new Streami18n({
   },
 });
 
-const filters: ChannelFilters[] = [
-  { type: 'team', demo: 'team' },
-  { type: 'messaging', demo: 'team' },
-];
-const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort: ChannelSort<StreamChatType> = { last_message_at: -1, updated_at: -1 };
-
 const client = StreamChat.getInstance<StreamChatType>(apiKey!, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
-  const [createType, setCreateType] = useState('');
-  const [isCreating, setIsCreating] = useState(false);
-  const [isEditing, setIsEditing] = useState(false);
-
   useChecklist({ chatClient: client, targetOrigin: targetOrigin! });
 
   useEffect(() => {
@@ -59,28 +50,12 @@ const App = () => {
 
   return (
     <>
-      <div className='app__wrapper'>
+      <div className='app__wrapper str-chat'>
         <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
-          <ChannelListContainer
-            {...{
-              isCreating,
-              filters,
-              options,
-              setCreateType,
-              setIsCreating,
-              setIsEditing,
-              sort,
-            }}
-          />
-          <ChannelContainer
-            {...{
-              createType,
-              isCreating,
-              isEditing,
-              setIsCreating,
-              setIsEditing,
-            }}
-          />
+          <WorkspaceController>
+            <Sidebar />
+            <ChannelContainer />
+          </WorkspaceController>
         </Chat>
       </div>
     </>
