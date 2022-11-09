@@ -142,7 +142,6 @@ export const ChannelSearch = () => {
           <SearchIcon />
         </div>
         <input
-          className='channel-search__input__text'
           onChange={onSearch}
           placeholder='Search'
           type='text'

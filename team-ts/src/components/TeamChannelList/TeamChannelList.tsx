@@ -1,13 +1,12 @@
-import React, { PropsWithChildren } from 'react';
+import React, { PropsWithChildren, useCallback } from 'react';
 
-import { AddChannel } from '../../assets';
+import { AddChannelButton } from './AddChannelButton';
+
+import { useWorkspaceController, Workspace } from '../../context/WorkspaceController';
 
 import type { ChannelListMessengerProps } from 'stream-chat-react';
 
 export type TeamChannelListProps = ChannelListMessengerProps & {
-  setCreateType: React.Dispatch<React.SetStateAction<string>>;
-  setIsCreating: React.Dispatch<React.SetStateAction<boolean>>;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
   type: string;
 };
 
@@ -16,11 +15,14 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
     children,
     error = false,
     loading,
-    setCreateType,
-    setIsCreating,
-    setIsEditing,
     type,
   } = props;
+
+  const { displayWorkspace } = useWorkspaceController();
+
+  const handleAddChannelClick = useCallback(() => {
+    displayWorkspace(`Admin-Admin-Channel-Create__${type}` as Workspace);
+  }, [type, displayWorkspace]);
 
   if (error) {
     return type === 'team' ? (
@@ -48,9 +50,7 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
         <p className='team-channel-list__header__title'>
           {type === 'team' ? 'Channels' : 'Direct Messages'}
         </p>
-        <AddChannel
-          {...{ setCreateType, setIsCreating, setIsEditing }}
-          type={type === 'team' ? 'team' : 'messaging'}
+        <AddChannelButton onClick={handleAddChannelClick}
         />
       </div>
       {children}

@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
@@ -21,11 +22,10 @@ const SearchResult = (props: SearchResultProps) => {
     return (
       <div
         onClick={() => setChannel(channel)}
-        className={
-          focusedId === channel.id
-            ? 'channel-search__result-container__focused'
-            : 'channel-search__result-container'
-        }
+        className={clsx(
+          'channel-search__result-container',
+          {highlighted: focusedId === channel.id}
+        )}
       >
         <div className='result-hashtag'>#</div>
         <p className='channel-search__result-text'>{channel?.data?.name}</p>
@@ -36,19 +36,16 @@ const SearchResult = (props: SearchResultProps) => {
 
     return (
       <div
-        onClick={async () => {
+        onClick={() => {
           channelByUser({ client, setActiveChannel, user });
         }}
-        className={
-          focusedId === user.id
-            ? 'channel-search__result-container__focused'
-            : 'channel-search__result-container'
-        }
+        className={clsx(
+          'channel-search__result-container',
+          {highlighted: focusedId === user.id}
+        )}
       >
-        <div className='channel-search__result-user'>
           <Avatar image={user.image} name={user.name || user.id} size={24} />
           <p className='channel-search__result-text'>{user.name || user.id || 'Johnny Blaze'}</p>
-        </div>
       </div>
     );
   }
