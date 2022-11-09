@@ -1,73 +1,52 @@
-import { useCallback, useMemo, useState } from 'react';
+import clsx from 'clsx';
+import { useMemo } from 'react';
 import {
   AttachmentPreviewList,
   ChatAutoComplete,
   EmojiPicker,
-  MessageInputProps,
   SendButton,
-  useChannelStateContext,
-  useChatContext,
+  useChannelStateContext, useComponentContext,
   useMessageInputContext,
 } from 'stream-chat-react';
 import { useDropzone } from 'react-dropzone';
-import clsx from 'clsx';
 
-import { GiphyIcon } from './GiphyIcon';
+import { GiphyBadge } from './GiphyBadge';
+import { MessageInputControlButton } from './MessageInputControls';
 
-import { TeamTypingIndicator } from '../TeamTypingIndicator/TeamTypingIndicator';
-
-import { BoldIcon, CodeSnippet, ItalicsIcon, SmileyFace, StrikeThroughIcon } from '../../assets';
-import type { StreamChatType } from '../../types';
 import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
+import { useMessageInputCompositionControls } from './hooks/useMessageInputCompositionControls';
 
-export type ThreadMessageInputProps = MessageInputProps & {
-  pinsOpen?: boolean;
-};
+import type { StreamChatType } from '../../types';
 
-export const TeamMessageInput = (props: ThreadMessageInputProps) => {
-  const { pinsOpen } = props;
-
-  const { isComposingGiphyMessage, clearGiphyFlagMainInput, setComposeGiphyMessageFlag } = useGiphyInMessageContext();
+export const TeamMessageInput = () => {
+  const {TypingIndicator} = useComponentContext();
 
   const {
     acceptedFiles = [],
-    channel,
     multipleUploads,
-    thread,
   } = useChannelStateContext<StreamChatType>();
+  const {
+    handleSubmit,
+    numberOfUploads,
+    text,
+    uploadNewFiles,
+    maxFilesLeft,
+    isUploadEnabled,
+    openEmojiPicker,
+    closeEmojiPicker,
+    emojiPickerIsOpen,
+  } = useMessageInputContext<StreamChatType>();
+  const { isComposingGiphyMessage } = useGiphyInMessageContext();
+  const {
+    formatting,
+    handleBoldButtonClick,
+    handleCodeButtonClick,
+    handleItalicsButtonClick,
+    handleStrikeThroughButtonClick,
+    onChange,
+    placeholder,
+  } = useMessageInputCompositionControls();
 
-  const { client } = useChatContext<StreamChatType>();
-
-  const [boldState, setBoldState] = useState(false);
-  const [codeState, setCodeState] = useState(false);
-  const [italicState, setItalicState] = useState(false);
-  const [strikeThroughState, setStrikeThroughState] = useState(false);
-
-  const resetIconState = () => {
-    setBoldState(false);
-    setCodeState(false);
-    setItalicState(false);
-    setStrikeThroughState(false);
-  };
-
-  const getPlaceholder = () => {
-    if (channel.type === 'team') {
-      return `#${channel?.data?.name || channel?.data?.id || 'random'}`;
-    }
-
-    const members = Object.values(channel.state.members).filter(
-      ({ user }) => user?.id !== client.userID,
-    );
-
-    if (!members.length || members.length === 1) {
-      return members[0]?.user?.name || members[0]?.user?.id || 'Johnny Blaze';
-    }
-
-    return 'the group';
-  };
-
-  const messageInput = useMessageInputContext<StreamChatType>();
-  const { numberOfUploads, text, uploadNewFiles, maxFilesLeft, isUploadEnabled } = messageInput;
 
   const accept = useMemo(
     () =>
@@ -76,63 +55,6 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
         return mediaTypeMap;
       }, {}),
     [acceptedFiles],
-  );
-
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
-    (event) => {
-      const { value } = event.target;
-
-      const deletePressed =
-        event.nativeEvent instanceof InputEvent &&
-        event.nativeEvent.inputType === 'deleteContentBackward';
-
-      if (messageInput.text.length === 1 && deletePressed) {
-        clearGiphyFlagMainInput();
-      }
-
-      if (!isComposingGiphyMessage() && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
-        event.target.value = value.replace('/giphy', '');
-        setComposeGiphyMessageFlag();
-      }
-
-      if (boldState) {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 2)}**`;
-        } else {
-          event.target.value = `**${value.replace(/\**/g, '')}**`;
-        }
-      } else if (codeState) {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 1)}\``;
-        } else {
-          event.target.value = `\`${value.replace(/`/g, '')}\``;
-        }
-      } else if (italicState) {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 1)}*`;
-        } else {
-          event.target.value = `*${value.replace(/\*/g, '')}*`;
-        }
-      } else if (strikeThroughState) {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 2)}~~`;
-        } else {
-          event.target.value = `~~${value.replace(/~~/g, '')}~~`;
-        }
-      }
-
-      messageInput.handleChange(event);
-    },
-    [
-      boldState,
-      codeState,
-      italicState,
-      messageInput,
-      strikeThroughState,
-      clearGiphyFlagMainInput,
-      isComposingGiphyMessage,
-      setComposeGiphyMessageFlag,
-    ],
   );
 
   const { getRootProps, isDragActive, isDragReject } = useDropzone({
@@ -145,7 +67,7 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
 
 
   return (
-    <div {...getRootProps({ className: clsx(`team-message-input__wrapper`, { 'thread-open': !!thread || pinsOpen }) })}>
+    <div {...getRootProps({ className: clsx(`team-message-input__wrapper`) })}>
       {isDragActive && (
         <div
           className={clsx('str-chat__dropzone-container', {
@@ -160,33 +82,24 @@ export const TeamMessageInput = (props: ThreadMessageInputProps) => {
         <div className='team-message-input__top'>
           {!!numberOfUploads && <AttachmentPreviewList />}
           <div className='team-message-input__form'>
-            {isComposingGiphyMessage() && !numberOfUploads && <GiphyIcon />}
-            <ChatAutoComplete onChange={onChange} placeholder={`Message ${getPlaceholder()}`} />
+            {isComposingGiphyMessage() && !numberOfUploads && <GiphyBadge />}
+            <ChatAutoComplete onChange={onChange} placeholder={placeholder} />
 
             <SendButton
               disabled={!numberOfUploads && !text.length}
-              sendMessage={messageInput.handleSubmit}
+              sendMessage={handleSubmit}
             />
           </div>
         </div>
         <div className='team-message-input__bottom'>
-          <div className='team-message-input__icons'>
-            <SmileyFace openEmojiPicker={messageInput.openEmojiPicker} />
-            <div className='icon-divider'></div>
-            <BoldIcon {...{ boldState, resetIconState, setBoldState }} />
-            <ItalicsIcon {...{ italicState, resetIconState, setItalicState }} />
-            <StrikeThroughIcon
-              {...{
-                resetIconState,
-                strikeThroughState,
-                setStrikeThroughState,
-              }}
-            />
-            <CodeSnippet {...{ codeState, resetIconState, setCodeState }} />
-          </div>
+            <MessageInputControlButton type='emoji' onClick={emojiPickerIsOpen ? closeEmojiPicker : openEmojiPicker} />
+            <MessageInputControlButton type='bold' active={formatting === 'bold'} onClick={handleBoldButtonClick} />
+            <MessageInputControlButton type='italics' active={formatting === 'italics'} onClick={handleItalicsButtonClick} />
+            <MessageInputControlButton type='strike-through' active={formatting === 'strike-through'} onClick={handleStrikeThroughButtonClick} />
+            <MessageInputControlButton type='code' active={formatting === 'code'} onClick={handleCodeButtonClick} />
         </div>
       </div>
-      <TeamTypingIndicator type='input' />
+      {TypingIndicator && <TypingIndicator />}
       <EmojiPicker />
     </div>
   );
