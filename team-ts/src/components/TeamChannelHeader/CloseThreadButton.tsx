@@ -1,21 +1,15 @@
+import { MouseEventHandler } from 'react';
+
 type Props = {
-  closeThread?: (event: React.MouseEvent<HTMLDivElement, MouseEvent>) => void;
-  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
+  onClick?: MouseEventHandler;
 };
 
-export const CloseThreadIcon = (props: Props) => {
-  const { closeThread, setPinsOpen } = props;
+export const CloseThreadButton = (props: Props) => {
+  const { onClick } = props;
 
   return (
-    <div
-      onClick={(event) => {
-        if (closeThread) {
-          closeThread(event);
-        }
-        if (setPinsOpen) {
-          setPinsOpen(false);
-        }
-      }}
+    <button
+      onClick={onClick}
       className='close-thread-icon'
     >
       <svg
@@ -33,6 +27,6 @@ export const CloseThreadIcon = (props: Props) => {
         ></path>
         <rect width='39' height='39' x='0.5' y='0.5' stroke='#E9E9EA' rx='19.5'></rect>
       </svg>
-    </div>
+    </button>
   );
 };

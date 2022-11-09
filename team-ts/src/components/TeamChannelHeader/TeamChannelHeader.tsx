@@ -1,24 +1,30 @@
+import { MouseEventHandler, useCallback } from 'react';
 import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
 
-import { ChannelInfo, PinIcon } from '../../assets';
+import { PinIcon } from '../../assets';
+
+import { ChannelInfoIcon } from './ChannelInfoIcon';
+import { useWorkspaceController } from '../../context/WorkspaceController';
 
 import type { StreamChatType } from '../../types';
 
-type TeamChannelHeaderProps = {
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
-  const { setIsEditing, setPinsOpen } = props;
-
+export const TeamChannelHeader = () => {
+  const { displayWorkspace } = useWorkspaceController();
   const { client } = useChatContext<StreamChatType>();
-
   const { channel, watcher_count } = useChannelStateContext<StreamChatType>();
-
   const { closeThread } = useChannelActionContext<StreamChatType>();
+  const { togglePinnedMessageListOpen } = useWorkspaceController();
 
   const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
+
+  const openChannelEditPanel = useCallback(() => {
+    displayWorkspace('Admin-Channel-Edit');
+  }, [displayWorkspace]);
+
+  const onPinIconClick: MouseEventHandler = useCallback((event) => {
+    closeThread?.(event);
+    togglePinnedMessageListOpen();
+  }, [closeThread, togglePinnedMessageListOpen])
 
   const getMessagingHeader = () => {
     const members = Object.values(channel.state.members).filter(
@@ -28,7 +34,7 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
 
     if (!members.length) {
       return (
-        <div className='team-channel-header__name-wrapper'>
+        <div className='workspace-header__block'>
           <Avatar image={null} size={32} />
           <p className='team-channel-header__name user'>Johnny Blaze</p>
         </div>
@@ -36,11 +42,11 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
     }
 
     return (
-      <div className='team-channel-header__name-wrapper'>
+      <div className='workspace-header__block'>
         {members.map(({ user }, i) => {
           if (i > 2) return null;
           return (
-            <div key={i} className='team-channel-header__name-multi'>
+            <div key={i} className='workspace-header__block-item'>
               <Avatar image={user?.image} name={user?.name || user?.id} size={32} />
               <p className='team-channel-header__name user'>
                 {user?.name || user?.id || 'Johnny Blaze'}
@@ -66,25 +72,22 @@ export const TeamChannelHeader = (props: TeamChannelHeaderProps) => {
       {channel.type === 'messaging' ? (
         getMessagingHeader()
       ) : (
-        <div className='team-channel-header__channel-wrapper'>
-          <p className='team-channel-header__name'>{teamHeader}</p>
-          <span style={{ display: 'flex' }} onClick={() => setIsEditing(true)}>
-            <ChannelInfo />
-          </span>
+        <div className='workspace-header__block'>
+          <div className='team-channel-header__name workspace-header__title'>{teamHeader}</div>
+          <button onClick={openChannelEditPanel}>
+            <ChannelInfoIcon />
+          </button>
         </div>
       )}
-      <div className='team-channel-header__right'>
-        <p className='team-channel-header__right-text'>{getWatcherText(watcher_count)}</p>
-        <div
-          className='team-channel-header__right-pin-wrapper'
-          onClick={(event) => {
-            if (closeThread) closeThread(event);
-            setPinsOpen((prevState) => !prevState);
-          }}
+      <div className='workspace-header__block'>
+        <div className='workspace-header__subtitle'>{getWatcherText(watcher_count)}</div>
+        <button
+          className='workspace-header__subtitle'
+          onClick={onPinIconClick}
         >
           <PinIcon />
-          <p className='team-channel-header__right-text'>Pins</p>
-        </div>
+          Pins
+        </button>
       </div>
     </div>
   );
