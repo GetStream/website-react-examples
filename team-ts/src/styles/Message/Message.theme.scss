@@ -25,7 +25,7 @@
 }
 
 .unpinned-message {
-  background: #fff;
+  background: var(--static-background-color);
 }
 
 .str-chat__message-team-pin-indicator {

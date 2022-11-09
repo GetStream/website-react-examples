@@ -5,7 +5,7 @@
 }
 
 textarea {
-  background: #fff;
+  background: var(--static-background-color);
   font-size: 15px;
   border: none;
   outline: none;
@@ -59,7 +59,7 @@ textarea {
 
   path {
     fill-opacity: 0.2;
-    fill: black;
+    fill: #000;
   }
 
   &.active path {

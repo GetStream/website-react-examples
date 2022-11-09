@@ -1,6 +1,6 @@
 @mixin workspace-header-theme {
   border-bottom: var(--border-stroke);
-  background: #ffffff;
+  background: var(--static-background-color);
 
   .workspace-header__title {
     font: var(--header-title-text);

@@ -1,7 +1,7 @@
 input[type="checkbox"] {
   -webkit-appearance: none;
   appearance: none;
-  background-color: #fff;
+  background-color: var(--static-background-color);
   margin: 0;
   font: inherit;
   color: var(--text-low-emphasis-color);

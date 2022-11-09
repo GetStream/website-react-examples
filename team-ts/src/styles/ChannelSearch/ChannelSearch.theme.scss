@@ -8,14 +8,14 @@
   border: 1px solid transparent;
 
   &:focus-within {
-    border: 1px solid #fff;
+    border: 1px solid var(--static-background-color);
   }
 
   input {
     background: none;
     border: none;
     outline: none;
-    color: #fff;
+    color: var(--static-background-color);
     font-size: 16px;
   }
 

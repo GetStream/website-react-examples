@@ -20,7 +20,7 @@
 }
 
 .typing-indicator__list .dots .dot {
-  background: #fff;
+  background: var(--static-background-color);
 }
 
 .typing-indicator__input .dots .dot {
