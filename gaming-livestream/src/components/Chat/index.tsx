@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react';
 import { Channel, Chat } from 'stream-chat-react';
-import 'stream-chat-react/dist/css/index.css';
 
 import { GamingChatInner } from './GamingChatInner';
 import { GamingParticipants } from './GamingParticipants';
