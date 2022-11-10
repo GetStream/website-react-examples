@@ -1,13 +1,12 @@
 import React from 'react';
 
-import './GamingHeader.scss';
-
 import ControllerIcon from '../../../assets/icons/ControllerIcon';
 import HeartFullIcon from '../../../assets/icons/HeartFullIcon';
 import LiveIcon from '../../../assets/icons/LiveIcon';
 import PeopleIcon from '../../../assets/icons/PeopleIcon';
 import SubscribeFullIcon from '../../../assets/icons/SubscribeFullIcon';
 import WatcherIcon from '../../../assets/icons/WatcherIcon';
+
 import { useLayoutController } from '../../../context/LayoutController';
 
 export const GamingHeader = () => {

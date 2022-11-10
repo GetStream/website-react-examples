@@ -1,8 +1,9 @@
 import type { MouseEventHandler } from 'react';
 
+import ThreadBackIcon from '../../../assets/icons/ThreadBackIcon';
+
 import type { ThreadHeaderProps } from 'stream-chat-react';
-import ThreadBackIcon from '../../assets/icons/ThreadBackIcon';
-import type { StreamChatType } from '../../types';
+import type { StreamChatType } from '../../../types';
 
 type GamingThreadHeaderProps = Pick<ThreadHeaderProps<StreamChatType>, 'closeThread' | 'thread'>
 

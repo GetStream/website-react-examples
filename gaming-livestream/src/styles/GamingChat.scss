@@ -1,7 +1,5 @@
-@import '../../styles/variables';
-
 section.chat-members-container {
-  border: 1px solid $border-color;
+  border: 1px solid var(--border-color);
   border-top: 0;
   border-bottom: 0;
   background-color: transparent;
@@ -15,8 +13,8 @@ section.chat-members-container {
 
   > .members-container {
     align-items: center;
-    background-color: $background;
-    border-left: 1px solid $border-color;
+    background-color: var(--background);
+    border-left: 1px solid var(--border-color);
     display: flex;
     flex-direction: column;
     opacity: 0;
@@ -35,10 +33,10 @@ section.chat-members-container {
 
       > .list-separator {
         > .list-header {
-          background-color: $component-background;
+          background-color: var(--component-background);
           border-top-right-radius: 0.5rem;
           border-bottom-right-radius: 0.5rem;
-          color: $foreground;
+          color: var(--foreground);
           height: 1rem;
           margin-top: 1rem;
           margin-bottom: 0.5rem;
@@ -82,12 +80,12 @@ section.chat-members-container {
     background-color: transparent;
     border-top-right-radius: 1rem;
     border-bottom-right-radius: 1rem;
-    transition: width 0.5s alternate;
+    transition: width 0.5s ease-in-out;
     width: 320px;
 
     > .str-chat {
       background-color: transparent;
-      background-color: rgba($color: $background, $alpha: 0.7);
+      background-color: rgba($color: var(--background), $alpha: 0.7);
     }
 
     .str-chat__main-panel {
@@ -160,8 +158,8 @@ section.chat-members-container {
   .channel-header,
   .members-header {
     align-items: center;
-    background-color: $component-background;
-    border-bottom: 1px solid $border-color;
+    background-color: var(--component-background);
+    border-bottom: 1px solid var(--border-color);
     display: flex;
     height: 3.75rem;
     justify-content: space-between;
@@ -179,15 +177,15 @@ section.chat-members-container {
       width: 2.5rem;
 
       &.hide-btn {
-        background-image: url(/assets/icons/arrow.svg);
+        background-image: url(../assets/icons/arrow.svg);
       }
 
       &.options-btn {
-        background-image: url(/assets/icons/elip.svg);
+        background-image: url(../assets/icons/elip.svg);
       }
 
       &.close-participants-btn {
-        background-image: url(/assets/icons/close.svg);
+        background-image: url(../assets/icons/close.svg);
       }
     }
 
@@ -199,8 +197,8 @@ section.chat-members-container {
     }
 
     > .options-container {
-      background-color: $component-background;
-      border: 1px solid $border-color;
+      background-color: var(--component-background);
+      border: 1px solid var(--border-color);
       border-radius: 0.5rem;
       list-style: none;
       margin: 0;
@@ -215,25 +213,25 @@ section.chat-members-container {
       > li {
         font-family: Helvetica Neue, sans-serif;
         font-size: 13px;
-        color: $foreground;
+        color: var(--foreground);
         cursor: pointer;
-        padding: 0.5rem 1rem 0.5rem 0rem;
+        padding: 0.5rem 1rem 0.5rem 0;
         display: flex;
         align-items: center;
         justify-content: flex-end;
         height: 36px;
 
         &:hover {
-          background-color: $button-background-hover;
+          background-color: var(--button-background-hover);
         }
       }
     }
   }
 
   .custom-input {
-    background-color: $component-background;
-    border-top: 1px solid $border-color;
-    border-left: 1px solid $border-color;
+    background-color: var(--component-background);
+    border-top: 1px solid var(--border-color);
+    border-left: 1px solid var(--border-color);
     height: 7.5rem;
     width: 100%;
   }

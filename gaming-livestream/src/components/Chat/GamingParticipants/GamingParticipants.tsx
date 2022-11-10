@@ -1,8 +1,9 @@
 import React, { ChangeEventHandler, useState } from 'react';
 
-import { useLayoutController } from '../../context/LayoutController';
-import { UserIcon } from '../Chat/UserIcon';
-import type { ParticipantGroup, ParticipantsDataSet } from '../../assets/data';
+import { UserIcon } from '../UserIcon';
+import { useLayoutController } from '../../../context/LayoutController';
+
+import type { ParticipantGroup, ParticipantsDataSet } from '../../../assets/data';
 
 type GamingParticipantsProps = {
   participants: ParticipantsDataSet

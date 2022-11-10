@@ -1,8 +1,6 @@
-@import '../../../styles/variables';
-
 footer {
-  background-color: $component-background;
-  border-top: 1px solid $border-color;
+  background-color: var(--component-background);
+  border-top: 1px solid var(--border-color);
   display: flex;
   height: 3.75rem;
   justify-content: space-between;
@@ -29,7 +27,7 @@ footer {
     align-items: center;
 
     > .avatar {
-      background-image: url(../../../assets/images/Avatar.png);
+      background-image: url(../assets/images/Avatar.png);
       background-position: center;
       background-repeat: no-repeat;
       background-size: cover;
@@ -66,9 +64,9 @@ footer {
         padding: 0;
 
         > li {
-          background-color: $button-background;
+          background-color: var(--button-background);
           border-radius: 1rem;
-          color: $foreground;
+          color: var(--foreground);
           margin-right: 0.5rem;
           padding: 0 0.5rem;
           font-family: Helvetica Neue, sans-serif;
@@ -198,10 +196,10 @@ footer {
     }
 
     .btn-group > button:first-child {
-      background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), $button-background;
+      background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--button-background);
 
       &:hover {
-        background: $button-background-hover;
+        background: var(--button-background-hover);
       }
     }
   }

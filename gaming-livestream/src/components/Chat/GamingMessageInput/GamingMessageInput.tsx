@@ -7,13 +7,12 @@ import {
   useTypingContext,
 } from 'stream-chat-react';
 
-import EmojiIcon from '../../assets/icons/EmojiIcon';
-import SendIcon from '../../assets/icons/SendIcon';
-import StarIcon from '../../assets/icons/StarIcon';
+import EmojiIcon from '../../../assets/icons/EmojiIcon';
+import SendIcon from '../../../assets/icons/SendIcon';
+import StarIcon from '../../../assets/icons/StarIcon';
 
-import './GamingMessageInput.scss';
-import { useLayoutController } from '../../context/LayoutController';
-import type { StreamChatType } from '../../types';
+import { useLayoutController } from '../../../context/LayoutController';
+import type { StreamChatType } from '../../../types';
 
 export const GamingMessageInput = React.memo(() => {
   const { showUpgradePopup } = useLayoutController();

@@ -1,9 +1,7 @@
-@import '../../../styles/variables';
-
 header {
   align-items: center;
-  background-color: $component-background;
-  border-bottom: 1px solid $border-color;
+  background-color: var(--component-background);
+  border-bottom: 1px solid var(--border-color);
   display: flex;
   justify-content: space-between;
   padding: 0.5rem;

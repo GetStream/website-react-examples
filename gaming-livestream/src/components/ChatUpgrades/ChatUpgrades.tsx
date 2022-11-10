@@ -1,7 +1,5 @@
 import React, { ComponentType, useCallback, useState } from 'react';
 
-import './ChatUpgrades.scss';
-
 import { upgrades } from '../../assets/data';
 import { useLayoutController } from '../../context/LayoutController';
 import InfiniteIcon from '../../assets/icons/InfiniteIcon';

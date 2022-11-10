@@ -1,11 +1,10 @@
 import React from 'react';
 
-import './App.scss';
-
 import { ChatUpgrades } from './components/ChatUpgrades/ChatUpgrades';
-import { GamingChat } from './components/GamingChat/GamingChat';
-import { LayoutControlProvider } from './context/LayoutController';
+import { GamingChat } from './components/Chat/GamingChat';
 import { VideoStream } from './components/VideoStream';
+
+import { LayoutControlProvider } from './context/LayoutController';
 
 const App = () => (
   <main>

@@ -1,5 +1,3 @@
-@import '../../styles/variables';
-
 section.chat-members-container {
   .custom-message__wrapper {
     display: flex;
@@ -7,7 +5,7 @@ section.chat-members-container {
     padding: 6px 10px 4px;
 
     &:hover {
-      background: $component-background;
+      background: var(--component-background);
     }
 
     &:hover .custom-message__actions-wrapper {
@@ -47,7 +45,7 @@ section.chat-members-container {
         display: inline;
         font-family: Helvetica Neue, sans-serif;
         font-size: 13px;
-        color: $foreground;
+        color: var(--foreground);
         mix-blend-mode: normal;
         position: relative;
         bottom: 2px;
@@ -71,8 +69,8 @@ section.chat-members-container {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    border: 1px solid $border-color;
-    background: $background;
+    border: 1px solid var(--border-color);
+    background: var(--background);
 
     border-radius: 20px;
     border-top-left-radius: 0;
@@ -90,23 +88,23 @@ section.chat-members-container {
       display: inline;
       font-family: Helvetica Neue, sans-serif;
       font-size: 12px;
-      color: $foreground;
+      color: var(--foreground);
     }
   }
 
   .custom-message__reply-count {
     font-family: Helvetica Neue, sans-serif;
     font-size: 12px;
-    color: $foreground;
+    color: var(--foreground);
     height: 20px;
     display: flex;
     align-items: center;
     cursor: pointer;
-    border: 1px solid $border-color;
+    border: 1px solid var(--border-color);
     box-sizing: border-box;
-    border-radius: 0px 10px 10px 10px;
+    border-radius: 0 10px 10px 10px;
     padding: 0 8px;
-    background: $background;
+    background: var(--background);
   }
 
   .custom-message__actions-wrapper {
@@ -119,8 +117,8 @@ section.chat-members-container {
     align-items: center;
     height: 25px;
     width: 86px;
-    background: $background;
-    border: 1px solid $border-color;
+    background: var(--background);
+    border: 1px solid var(--border-color);
     border-radius: 99999px;
 
     > svg {
@@ -134,18 +132,18 @@ section.chat-members-container {
 
   .str-chat__message-attachment-card.str-chat__message-attachment-card--giphy,
   .str-chat__message-attachment-card.str-chat__message-attachment-card--image {
-    border-color: $border-color;
+    border-color: var(--border-color);
     border-radius: 16px;
     width: 75%;
 
     .str-chat__message-attachment-card--header {
-      background: $background;
+      background: var(--background);
     }
 
     .str-chat__message-attachment-card--content {
       margin: 0;
       padding: 2px 16px 4px;
-      background: $background;
+      background: var(--background);
 
       .str-chat__message-attachment-card--flex {
         display: flex;
@@ -154,7 +152,7 @@ section.chat-members-container {
         width: 100%;
 
         .str-chat__message-attachment-card--title {
-          color: $foreground;
+          color: var(--foreground);
           margin-right: 2px;
         }
       }
@@ -169,40 +167,40 @@ section.chat-members-container {
     }
 
     .str-chat__message-attachment-card--url {
-      color: $foreground;
+      color: var(--foreground);
     }
   }
 
   .str-chat__message-attachment--card.str-chat__message-attachment--undefined.str-chat__message-attachment--card--no-image {
     .str-chat__message-attachment-card--undefined {
-      background: $background;
-      border: 1px solid $border-color;
+      background: var(--background);
+      border: 1px solid var(--border-color);
       border-radius: 16px;
       margin: 0;
     }
 
     .str-chat__message-attachment-card--content {
-      background: $background;
+      background: var(--background);
     }
 
     .str-chat__message-attachment-card--title {
-      color: $foreground;
+      color: var(--foreground);
     }
 
     .str-chat__message-attachment-card--url {
-      color: $foreground;
+      color: var(--foreground);
     }
   }
 
   .str-chat__message-attachment .str-chat__message-attachment-actions {
     .str-chat__message-attachment-actions-form button {
       cursor: pointer;
-      background: $button-background;
+      background: var(--button-background);
       border: none;
       box-shadow: none;
 
       &:hover {
-        background: $button-background-hover;
+        background: var(--button-background-hover);
       }
 
       &:focus {

@@ -1,7 +1,5 @@
 import React, { useState, useEffect } from 'react';
 
-import './GamingFooter.scss';
-
 import AlarmIcon from '../../../assets/icons/AlarmIcon';
 import CheckIcon from '../../../assets/icons/CheckIcon';
 import ClockIcon from '../../../assets/icons/ClockIcon';

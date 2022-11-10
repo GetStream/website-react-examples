@@ -1,5 +1,6 @@
 import React, { MouseEventHandler, useCallback, useEffect, useState } from 'react';
-import { useLayoutController } from '../../context/LayoutController';
+
+import { useLayoutController } from '../../../context/LayoutController';
 
 type GamingChatHeaderProps = {
   toggleTimestamp: MouseEventHandler<HTMLElement>;
