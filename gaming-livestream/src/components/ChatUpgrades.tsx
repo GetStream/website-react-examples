@@ -1,11 +1,11 @@
 import React, { ComponentType, useCallback, useState } from 'react';
 
-import { upgrades } from '../../assets/data';
-import { useLayoutController } from '../../context/LayoutController';
-import InfiniteIcon from '../../assets/icons/InfiniteIcon';
-import BellIcon from '../../assets/icons/BellIcon';
-import HandIcon from '../../assets/icons/HandIcon';
-import MemberIcon from '../../assets/icons/MemberIcon';
+import { upgrades } from '../assets/data';
+import { useLayoutController } from '../context/LayoutController';
+import InfiniteIcon from '../assets/icons/InfiniteIcon';
+import BellIcon from '../assets/icons/BellIcon';
+import HandIcon from '../assets/icons/HandIcon';
+import MemberIcon from '../assets/icons/MemberIcon';
 
 type UpgradeImageType = 'infinite' | 'bell' | 'hand' | 'member' | string;
 

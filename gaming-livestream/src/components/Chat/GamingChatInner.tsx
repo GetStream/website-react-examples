@@ -3,12 +3,12 @@ import { logChatPromiseExecution } from 'stream-chat';
 import { MessageInput, MessageList, MessageToSend, useChannelActionContext, Window } from 'stream-chat-react';
 
 import { GamingChatHeader } from './GamingChatHeader';
-import { GamingMessage } from '../GamingMessage/GamingMessage';
-import { GamingMessageInput } from '../GamingMessageInput/GamingMessageInput';
-import { GamingThread } from '../GamingThread/GamingThread';
+import { GamingMessage } from './GamingMessage';
+import { GamingMessageInput } from './GamingMessageInput';
+import { GamingThread } from './GamingThread';
 
-import { useLayoutController } from '../../../context/LayoutController';
-import type { StreamChatType } from '../../../types';
+import { useLayoutController } from '../../context/LayoutController';
+import type { StreamChatType } from '../../types';
 
 const NOTIFICATION_TEXT_FOR_COMMAND: Record<string, string> = {
   '/ban': 'User banned',

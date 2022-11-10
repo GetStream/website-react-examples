@@ -1,14 +1,14 @@
 import React, { useState, useEffect } from 'react';
 
-import AlarmIcon from '../../../assets/icons/AlarmIcon';
-import CheckIcon from '../../../assets/icons/CheckIcon';
-import ClockIcon from '../../../assets/icons/ClockIcon';
-import DownVoteIcon from '../../../assets/icons/DownVoteIcon';
-import HeartFullIcon from '../../../assets/icons/HeartFullIcon';
-import HeartHollowIcon from '../../../assets/icons/HeartHollowIcon';
-import SubscribeFullIcon from '../../../assets/icons/SubscribeFullIcon';
-import SubscribeHollowIcon from '../../../assets/icons/SubscribeHollowIcon';
-import UpVoteIcon from '../../../assets/icons/UpVoteIcon';
+import AlarmIcon from '../../assets/icons/AlarmIcon';
+import CheckIcon from '../../assets/icons/CheckIcon';
+import ClockIcon from '../../assets/icons/ClockIcon';
+import DownVoteIcon from '../../assets/icons/DownVoteIcon';
+import HeartFullIcon from '../../assets/icons/HeartFullIcon';
+import HeartHollowIcon from '../../assets/icons/HeartHollowIcon';
+import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
+import SubscribeHollowIcon from '../../assets/icons/SubscribeHollowIcon';
+import UpVoteIcon from '../../assets/icons/UpVoteIcon';
 
 type GamingFooterProps = {
   isFullScreen: boolean

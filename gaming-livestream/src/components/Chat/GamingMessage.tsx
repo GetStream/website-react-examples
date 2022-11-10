@@ -1,18 +1,18 @@
 import React, { MouseEventHandler, useCallback, useMemo, useState } from 'react';
 import { Attachment, useChannelActionContext, useMessageContext } from 'stream-chat-react';
 
-import { UserIcon } from '../UserIcon';
+import { UserIcon } from './UserIcon';
 
-import ActionDownVote from '../../../assets/icons/ActionDownVote';
-import ActionThread from '../../../assets/icons/ActionThread';
-import ActionUpVote from '../../../assets/icons/ActionUpVote';
-import ReactionDownVote from '../../../assets/icons/ReactionDownVote';
-import ReactionUpVote from '../../../assets/icons/ReactionUpVote';
+import ActionDownVote from '../../assets/icons/ActionDownVote';
+import ActionThread from '../../assets/icons/ActionThread';
+import ActionUpVote from '../../assets/icons/ActionUpVote';
+import ReactionDownVote from '../../assets/icons/ReactionDownVote';
+import ReactionUpVote from '../../assets/icons/ReactionUpVote';
 
-import { getColor } from '../../../assets/data';
+import { getColor } from '../../assets/data';
 
 import type { StreamMessage } from 'stream-chat-react/dist/context/ChannelStateContext';
-import type { StreamChatType } from '../../../types';
+import type { StreamChatType } from '../../types';
 
 const getTimeStamp = (messageCreatedAt?: StreamMessage<StreamChatType>['created_at']) => {
   if (!messageCreatedAt) return '';

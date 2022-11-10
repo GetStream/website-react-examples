@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ChatUpgrades } from './components/ChatUpgrades/ChatUpgrades';
-import { GamingChat } from './components/Chat/GamingChat';
+import { ChatUpgrades } from './components/ChatUpgrades';
+import { GamingChat } from './components/Chat';
 import { VideoStream } from './components/VideoStream';
 
 import { LayoutControlProvider } from './context/LayoutController';

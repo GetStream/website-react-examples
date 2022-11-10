@@ -3,17 +3,17 @@ import { Channel, Chat } from 'stream-chat-react';
 import 'stream-chat-react/dist/css/index.css';
 
 import { GamingChatInner } from './GamingChatInner';
-import { GamingParticipants } from '../GamingParticipants/GamingParticipants';
-import { GamingThreadHeader } from '../GamingThread/GamingThreadHeader';
+import { GamingParticipants } from './GamingParticipants';
+import { GamingThreadHeader } from './GamingThreadHeader';
 
-import { getColor, getRandomUserRole, participants } from '../../../assets/data';
+import { getColor, getRandomUserRole, participants } from '../../assets/data';
 
-import { useChecklist } from '../../../hooks/useChecklistTasks';
-import { useConnectUser } from '../../../hooks/useConnectUser';
-import { useLayoutController } from '../../../context/LayoutController';
+import { useChecklist } from '../../hooks/useChecklistTasks';
+import { useConnectUser } from '../../hooks/useConnectUser';
+import { useLayoutController } from '../../context/LayoutController';
 
 import type { Channel as ChannelT } from 'stream-chat';
-import type { StreamChatType } from '../../../types';
+import type { StreamChatType } from '../../types';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
