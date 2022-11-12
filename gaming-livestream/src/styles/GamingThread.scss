@@ -1,3 +1,7 @@
+.str-chat {
+  --str-chat__message-list-background-color: var(--background);
+}
+
 .messaging.str-chat .str-chat__thread {
   position: absolute;
   margin: 0;
@@ -5,8 +9,12 @@
   width: 320px;
   max-width: 320px;
   transition: all 1s;
-  animation: slideRight 1s forwards;
+  animation: slide-down 1s forwards;
   background: var(--background);
+
+  .str-chat__main-panel-inner {
+    flex: unset;
+  }
 
   .str-chat__thread-list {
     padding: 0;
@@ -31,9 +39,14 @@
     background-color: var(--component-background);
     border-bottom: 1px solid var(--border-color);
     display: flex;
-    justify-content: center;
+    justify-content: space-between;
     align-items: center;
     padding: 0 10px;
+
+    button {
+      padding: 0;
+      cursor: pointer;
+    }
 
     > svg {
       cursor: pointer;

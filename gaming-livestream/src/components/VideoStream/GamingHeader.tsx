@@ -8,16 +8,15 @@ import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
 import WatcherIcon from '../../assets/icons/WatcherIcon';
 
 import { useLayoutController } from '../../context/LayoutController';
+import { ChatIcon } from '../../assets/icons/ChatIcon';
 
 export const GamingHeader = () => {
-  const {memberListVisible, isFullScreen, toggleFullScreen} = useLayoutController();
+  const {memberListVisible, chatVisible, toggleFullScreen} = useLayoutController();
 
   return (
     <div className='header-container'>
       <header
-        className={`${memberListVisible ? 'show-members' : ''} ${
-          isFullScreen ? 'full-screen' : ''
-        }`}
+        className={`${memberListVisible ? 'show-members' : ''} ${chatVisible}`}
       >
         <div className='stream-details'>
           <LiveIcon />
@@ -39,7 +38,7 @@ export const GamingHeader = () => {
           <div className='stream-involvement'>
             <div
               className={`watchers-container ${
-                !isFullScreen && memberListVisible ? 'shrink' : 'grow'
+                !chatVisible && memberListVisible ? 'shrink' : 'grow'
               }`}
             >
               <WatcherIcon />
@@ -47,7 +46,7 @@ export const GamingHeader = () => {
             </div>
             <div
               className={`follows-container ${
-                !isFullScreen && memberListVisible ? 'shrink' : 'grow'
+                !chatVisible && memberListVisible ? 'shrink' : 'grow'
               }`}
             >
               <HeartFullIcon />
@@ -55,7 +54,7 @@ export const GamingHeader = () => {
             </div>
             <div
               className={`subs-container ${
-                !isFullScreen && memberListVisible ? 'shrink' : 'grow'
+                !chatVisible && memberListVisible ? 'shrink' : 'grow'
               }`}
             >
               <SubscribeFullIcon />
@@ -64,11 +63,8 @@ export const GamingHeader = () => {
           </div>
         }
       </header>
-      <div className={`sub-header ${isFullScreen ? 'show' : 'hide'}`}>
-        <button onClick={toggleFullScreen}></button>
-        <p>Live Chat</p>
-        <div />
-        {/* keep for flex */}
+      <div className={`sub-header ${['chat-visible', ''].includes(chatVisible) ? 'hide' : 'show' }`}>
+        <button onClick={toggleFullScreen} title='Open Chat'><ChatIcon/></button>
       </div>
     </div>
   );

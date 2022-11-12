@@ -1,17 +1,18 @@
 import React from 'react';
+import type { LayoutControllerContext } from '../../context/LayoutController';
 
 type GamingVideoProps = {
-  isFullScreen: boolean;
+  chatVisible: LayoutControllerContext['chatVisible'];
 }
 
-export const GamingVideo = ({ isFullScreen }: GamingVideoProps) => {
+export const GamingVideo = ({ chatVisible }: GamingVideoProps) => {
   return (
     <video
       autoPlay
       muted
       loop
       controls
-      className={`video-container ${isFullScreen ? 'full-screen' : 'clipped'}`}
+      className={`video-container ${chatVisible}`}
     >
       <source src='https://getstream.io/downloads/react_example-gaming_livestream.mp4' />
     </video>

@@ -13,6 +13,7 @@ import { useLayoutController } from '../../context/LayoutController';
 
 import type { Channel as ChannelT } from 'stream-chat';
 import type { StreamChatType } from '../../types';
+import { ChatUpgrades } from '../ChatUpgrades';
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -28,7 +29,7 @@ const userToConnect = {
 
 export const GamingChat = () => {
   const [channel, setChannel] = useState<ChannelT<StreamChatType> | null>(null);
-  const {memberListVisible, showUpgrade, isFullScreen} = useLayoutController();
+  const {memberListVisible, showUpgrade, chatVisible} = useLayoutController();
   const chatClient = useConnectUser<StreamChatType>(apiKey!, userToConnect, userToken);
   useChecklist({chatClient, targetOrigin});
 
@@ -49,9 +50,7 @@ export const GamingChat = () => {
 
   return (
     <section
-      className={`chat-members-container ${memberListVisible ? 'show-members' : 'hide-members'} ${
-        isFullScreen ? 'full-screen' : 'in-screen'
-      } ${showUpgrade ? 'show-upgrade' : ''}`}
+      className={`chat-members-container ${memberListVisible} ${chatVisible} ${showUpgrade ? 'show-upgrade' : ''}`}
     >
       {channel && (
         <div className='chat-container'>
@@ -63,6 +62,7 @@ export const GamingChat = () => {
         </div>
       )}
       <GamingParticipants participants={participants} />
+      <ChatUpgrades />
     </section>
   );
 };

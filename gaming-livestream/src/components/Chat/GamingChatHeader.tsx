@@ -12,20 +12,21 @@ export const GamingChatHeader = ({ toggleTimestamp, timestampEnabled }: GamingCh
   const [showOptions, setShowOptions] = useState(false);
   const [optionsContainer, setOptionsContainerRef] = useState<HTMLUListElement | null>(null);
 
-  const toggleShowOptions = useCallback(() => {
+  const toggleShowOptions: MouseEventHandler<HTMLButtonElement> = useCallback((e) => {
+    e.stopPropagation();
     setShowOptions((prev) => !prev);
   }, []);
 
   useEffect(() => {
-    if (!optionsContainer) return;
+    if (!(optionsContainer)) return;
     const handleClick = () => {
-        setShowOptions(false);
+      setShowOptions(false);
     }
     document.addEventListener('click', handleClick);
     return () => {
       document.removeEventListener('click', handleClick);
     }
-  }, [optionsContainer]);
+  }, [showOptions, optionsContainer]);
 
   return (
     <div className='channel-header'>
@@ -33,7 +34,7 @@ export const GamingChatHeader = ({ toggleTimestamp, timestampEnabled }: GamingCh
         className='hide-btn'
         onClick={hideChat}
       ></button>
-      <p>Live Chat</p>
+      <h2>Live Chat</h2>
       <button className='options-btn' onClick={toggleShowOptions}></button>
       {showOptions && (
         <ul className='options-container' ref={setOptionsContainerRef}>

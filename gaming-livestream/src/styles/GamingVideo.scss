@@ -6,13 +6,13 @@
   max-height: 30rem !important;
   transition: all 1s;
 
-  &.full-screen {
+  &.chat-visible {
     max-height: 40rem !important;
     margin: 0;
     width: 100%;
   }
 
-  &.clipped {
-    width: calc(100vw - 320px);
+  &.chat-hidden {
+    width: 100%;
   }
 }

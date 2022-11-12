@@ -28,11 +28,7 @@ header {
     }
   }
 
-  &.show-members {
-    padding-right: 26%;
-  }
-
-  &.full-screen {
+  &.chat-visible {
     padding: 0.5rem;
   }
 
@@ -86,7 +82,7 @@ header {
       width: 3.5rem;
 
       &.shrink {
-        display: none;
+        //display: none;
         // width: 1rem;
 
         // > p {

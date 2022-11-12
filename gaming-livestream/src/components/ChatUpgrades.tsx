@@ -26,7 +26,7 @@ const UpgradeIcon = ({type}: UpgradeIconProps) => {
 
 export const ChatUpgrades = () => {
   const [upgradeSelected, setUpgradeSelected] = useState<number[]>([]);
-  const {showUpgrade, hideUpgradePopup, publishAppNotification} = useLayoutController();
+  const {hideUpgradePopup, publishAppNotification} = useLayoutController();
 
   const upgradeSelector = (index: number) => {
     if (upgradeSelected.includes(index)) {
@@ -42,8 +42,6 @@ export const ChatUpgrades = () => {
     }
     hideUpgradePopup();
   }, [upgradeSelected, hideUpgradePopup, publishAppNotification])
-
-  if (!showUpgrade) return null;
 
   return (
     <div className='upgrade-container'>

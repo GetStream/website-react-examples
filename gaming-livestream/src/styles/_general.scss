@@ -1,0 +1,47 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+
+  p {
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  button {
+    background-color: var(--button-background);
+    border: none;
+    border-radius: .5rem;
+    color: var(--foreground);
+    padding: .75rem;
+    transition: all .2s;
+
+    &:hover {
+      background-color: var(--button-background-hover);
+    }
+
+    &:focus {
+      outline: none; // check if we care about a11y
+    }
+
+    &:active {
+      background-color: var(--button-background);
+    }
+  }
+
+  input {
+    background-color: var(--background);
+    border: 1px solid var(--border-color-secondary);
+    border-radius: .5rem;
+    color: var(--foreground);
+    height: 2.5rem;
+    padding-left: .5rem;
+    width: 100%;
+  }
+}

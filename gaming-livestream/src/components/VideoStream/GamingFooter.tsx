@@ -9,13 +9,11 @@ import HeartHollowIcon from '../../assets/icons/HeartHollowIcon';
 import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
 import SubscribeHollowIcon from '../../assets/icons/SubscribeHollowIcon';
 import UpVoteIcon from '../../assets/icons/UpVoteIcon';
+import type { LayoutControllerContext } from '../../context/LayoutController';
 
-type GamingFooterProps = {
-  isFullScreen: boolean
-  memberListVisible: boolean
-}
+type GamingFooterProps = Pick<LayoutControllerContext, 'chatVisible' | 'memberListVisible'>
 
-export const GamingFooter = ({ memberListVisible, isFullScreen }: GamingFooterProps) => {
+export const GamingFooter = ({ memberListVisible, chatVisible }: GamingFooterProps) => {
   const [countDown, setCountDown] = useState('00:00:00');
   const [countUp, setCountUp] = useState('00:00:00');
   const [followed, setFollowed] = useState(false);
@@ -58,7 +56,7 @@ export const GamingFooter = ({ memberListVisible, isFullScreen }: GamingFooterPr
   };
 
   return (
-    <footer className={`${memberListVisible ? 'show-members' : ''} ${isFullScreen ? 'full-screen' : ''}`}>
+    <footer className={memberListVisible ? 'show-members' : ''}>
       <div className='streamer-details-container'>
         <div className='avatar'></div>
         <div className='streamer-container'>
@@ -86,7 +84,7 @@ export const GamingFooter = ({ memberListVisible, isFullScreen }: GamingFooterPr
             </div>
           </div>
           <button
-            className={`follow-btn ${!isFullScreen && memberListVisible ? 'shrink' : ''}`}
+            className={`follow-btn ${!chatVisible && memberListVisible ? 'shrink' : ''}`}
             onClick={() => setFollowed(!followed)}
           >
             <div>
@@ -95,7 +93,7 @@ export const GamingFooter = ({ memberListVisible, isFullScreen }: GamingFooterPr
             </div>
           </button>
           <button
-            className={`sub-btn ${!isFullScreen && memberListVisible ? 'shrink' : ''}`}
+            className={`sub-btn ${!chatVisible && memberListVisible ? 'shrink' : ''}`}
             onClick={() => setSubscribed(!subscribed)}
           >
             <div>
@@ -105,13 +103,13 @@ export const GamingFooter = ({ memberListVisible, isFullScreen }: GamingFooterPr
           </button>
           {window.innerWidth > 1100 && (
             <div className='btn-group'>
-              <button className={`${!isFullScreen && memberListVisible ? 'shrink' : ''}`}>
+              <button className={`${!chatVisible && memberListVisible ? 'shrink' : ''}`}>
                 <div>
                   <UpVoteIcon />
                   <p>325K</p>
                 </div>
               </button>
-              <button className={`${!isFullScreen && memberListVisible ? 'shrink' : ''}`}>
+              <button className={`${!chatVisible && memberListVisible ? 'shrink' : ''}`}>
                 <div>
                   <DownVoteIcon />
                   <p>9.5K</p>

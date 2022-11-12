@@ -2,13 +2,13 @@ import { createContext, ReactNode, useCallback, useContext, useState } from 'rea
 
 const noop = () => null;
 
-type LayoutControllerContext = {
-  isFullScreen: boolean;
+export type LayoutControllerContext = {
+  chatVisible: 'chat-visible' | 'chat-hidden' | string;
   toggleFullScreen: () => void;
   hideChat: () => void;
   popUpText: string;
   publishAppNotification: (text?: string | null) => void;
-  memberListVisible: boolean;
+  memberListVisible: 'show-members' | 'hide-members' | string;
   hideMemberList: () => void;
   showMemberList: () => void;
   showUpgrade: boolean;
@@ -17,12 +17,12 @@ type LayoutControllerContext = {
 }
 
 const LayoutController = createContext<LayoutControllerContext>({
-  isFullScreen: false,
+  chatVisible: '',
   toggleFullScreen: noop,
   hideChat: noop,
   popUpText: '',
   publishAppNotification: noop,
-  memberListVisible: false,
+  memberListVisible: '',
   hideMemberList: noop,
   showMemberList: noop,
   showUpgrade: false,
@@ -31,22 +31,22 @@ const LayoutController = createContext<LayoutControllerContext>({
 });
 
 export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
-  const [isFullScreen, setIsFullScreen] = useState(false);
+  const [chatVisible, setChatVisibility] = useState<LayoutControllerContext['chatVisible']>('');
   const [popUpText, setPopUpText] = useState('');
-  const [memberListVisible, setShowMembers] = useState(false);
+  const [memberListVisible, setShowMembers] = useState<LayoutControllerContext['memberListVisible']>('');
   const [showUpgrade, setShowUpgrade] = useState(false);
-
+  console.log('chatVisible', chatVisible)
   const toggleFullScreen = useCallback(() => {
-    setIsFullScreen((prev) => !prev);
+    setChatVisibility((prev) => ['chat-hidden', ''].includes(prev) ? 'chat-visible' : 'chat-hidden');
   }, []);
 
   const hideChat = useCallback(() => {
-    setIsFullScreen(true);
-    setShowMembers(false);
+    setChatVisibility('chat-hidden');
+    setShowMembers('hide-members');
   }, []);
 
   const showUpgradePopup = useCallback(()=> {
-    setShowMembers(false);
+    setShowMembers('hide-members');
     setShowUpgrade(true);
   }, []);
 
@@ -55,11 +55,11 @@ export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
   }, []);
 
   const hideMemberList = useCallback(() => {
-    setShowMembers(false);
+    setShowMembers('hide-members');
   }, []);
 
   const showMemberList = useCallback(() => {
-    setShowMembers(true);
+    setShowMembers('show-members');
   }, []);
 
 
@@ -74,7 +74,7 @@ export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
   }, []);
 
   return <LayoutController.Provider value={{
-    isFullScreen,
+    chatVisible,
     hideChat,
     toggleFullScreen,
     popUpText,

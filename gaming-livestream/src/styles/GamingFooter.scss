@@ -2,24 +2,18 @@ footer {
   background-color: var(--component-background);
   border-top: 1px solid var(--border-color);
   display: flex;
-  height: 3.75rem;
+  height: var(--header-height);
   justify-content: space-between;
   padding: 0.5rem;
-  padding-right: 330px;
   transition: all 1s;
 
   &.show-members {
-    padding-right: 51%;
 
     > .user-interaction-container {
       @media (max-width: 1250px) {
         display: none;
       }
     }
-  }
-
-  &.full-screen {
-    padding-right: 0.5rem;
   }
 
   > .streamer-details-container {
@@ -41,7 +35,7 @@ footer {
       display: flex;
       flex-direction: column;
       justify-content: space-evenly;
-      height: 60px;
+      gap: 5px;
 
       > .streamer-name {
         align-items: center;
@@ -115,21 +109,19 @@ footer {
       width: 7.5rem;
       cursor: pointer;
 
-      &.shrink {
-        width: 3rem;
-
-        > div {
-          > p {
-            height: 0;
-            width: 0;
-            visibility: hidden;
-          }
-
-          > svg {
-            margin: 0;
-          }
-        }
-      }
+      //&.shrink {
+      //  > div {
+      //    > p {
+      //      height: 0;
+      //      width: 0;
+      //      visibility: hidden;
+      //    }
+      //
+      //    > svg {
+      //      margin: 0;
+      //    }
+      //  }
+      //}
     }
 
     > .follow-btn {
@@ -161,6 +153,7 @@ footer {
     }
 
     > .btn-group {
+      display: flex;
       > button {
         overflow: hidden;
         width: 5rem;

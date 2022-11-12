@@ -10,7 +10,7 @@ type GamingParticipantsProps = {
 }
 
 export const GamingParticipants = ({ participants }: GamingParticipantsProps) => {
-  const {memberListVisible, hideMemberList } = useLayoutController();
+  const {hideMemberList } = useLayoutController();
   const [searchInput, setSearchInput] = useState('');
 
   const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
@@ -31,10 +31,10 @@ export const GamingParticipants = ({ participants }: GamingParticipantsProps) =>
   });
 
   return (
-    <div className={`members-container ${memberListVisible ? 'show' : 'hide'}`}>
+    <div className={`members-container`}>
       <div className='members-header'>
         <button className='close-participants-btn' onClick={hideMemberList}></button>
-        <p>Participants (458K)</p>
+        <h2>Participants (458K)</h2>
         <div></div>
       </div>
       <div className='list-container'>

@@ -1,3 +1,7 @@
+.str-chat__li {
+  position: relative;
+}
+
 section.chat-members-container {
   .custom-message__wrapper {
     display: flex;
@@ -101,7 +105,6 @@ section.chat-members-container {
     align-items: center;
     cursor: pointer;
     border: 1px solid var(--border-color);
-    box-sizing: border-box;
     border-radius: 0 10px 10px 10px;
     padding: 0 8px;
     background: var(--background);

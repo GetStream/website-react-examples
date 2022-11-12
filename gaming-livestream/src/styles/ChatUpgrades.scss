@@ -1,15 +1,20 @@
+.show-upgrade {
+  .upgrade-container {
+    right: 0;
+  }
+}
+
 .upgrade-container {
-  animation: slideRight 1s forwards;
+  transition: right 0.5s ease-out;
   border: 1px solid var(--border-color);
   border-top: 0;
   border-bottom: 0;
-  background-color: transparent;
+  background-color: var(--background);;
   height: 100%;
   justify-content: space-between;
   position: absolute;
-  right: 0;
-  transition: all 1s;
-  width: 320px;
+  right: -100%;
+  width: 100%;
 
   > .upgrade-header {
     align-items: center;
