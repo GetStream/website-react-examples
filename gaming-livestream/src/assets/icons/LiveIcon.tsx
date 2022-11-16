@@ -1,7 +1,7 @@
 import React from 'react';
 
 const LiveIcon = () => (
-  <svg viewBox='0 0 41 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg className='live-icon' viewBox='0 0 41 40' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <path
       d='M0 10C0 4.47715 4.47715 0 10 0H39C40.1046 0 41 0.895431 41 2V38C41 39.1046 40.1046 40 39 40H2C0.895431 40 0 39.1046 0 38V10Z'
       fill='#081E58'

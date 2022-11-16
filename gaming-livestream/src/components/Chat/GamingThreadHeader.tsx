@@ -1,7 +1,5 @@
 import type { MouseEventHandler } from 'react';
 
-import ThreadBackIcon from '../../assets/icons/ThreadBackIcon';
-
 import type { ThreadHeaderProps } from 'stream-chat-react';
 import type { StreamChatType } from '../../types';
 
@@ -20,9 +18,9 @@ export const GamingThreadHeader = ({ closeThread, thread }: GamingThreadHeaderPr
   };
 
   return (
-    <div className='thread-header__wrapper'>
-      <button onClick={onCloseThread}><ThreadBackIcon /></button>
-      <p>{`Thread (${getReplyCount()})`}</p>
+    <div className='thread-header'>
+      <button className='close-drawer-btn' onClick={onCloseThread}/>
+      <h2>{`Thread (${getReplyCount()})`}</h2>
     </div>
   );
 };

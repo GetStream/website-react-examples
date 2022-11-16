@@ -7,65 +7,50 @@ import PeopleIcon from '../../assets/icons/PeopleIcon';
 import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
 import WatcherIcon from '../../assets/icons/WatcherIcon';
 
-import { useLayoutController } from '../../context/LayoutController';
-import { ChatIcon } from '../../assets/icons/ChatIcon';
+import {useLayoutController} from '../../context/LayoutController';
+import {ChatIcon} from '../../assets/icons/ChatIcon';
 
 export const GamingHeader = () => {
-  const {memberListVisible, chatVisible, toggleFullScreen} = useLayoutController();
+	const {chatVisible, toggleFullScreen} = useLayoutController();
 
-  return (
-    <div className='header-container'>
-      <header
-        className={`${memberListVisible ? 'show-members' : ''} ${chatVisible}`}
-      >
-        <div className='stream-details'>
-          <LiveIcon />
-          <div className='info'>
-            <p>2200+ Wins, #1 Warzone Battle Royale All Platforms Wins</p>
-            <div className='info-separator'>
-              <div>
-                <ControllerIcon />
-                <p>Overwatch</p>
-              </div>
-              <div>
-                <PeopleIcon />
-                <p>Corsairs</p>
-              </div>
-            </div>
-          </div>
-        </div>
-        {
-          <div className='stream-involvement'>
-            <div
-              className={`watchers-container ${
-                !chatVisible && memberListVisible ? 'shrink' : 'grow'
-              }`}
-            >
-              <WatcherIcon />
-              <p className='title-text'>458K</p>
-            </div>
-            <div
-              className={`follows-container ${
-                !chatVisible && memberListVisible ? 'shrink' : 'grow'
-              }`}
-            >
-              <HeartFullIcon />
-              <p className='title-text'>1.2K</p>
-            </div>
-            <div
-              className={`subs-container ${
-                !chatVisible && memberListVisible ? 'shrink' : 'grow'
-              }`}
-            >
-              <SubscribeFullIcon />
-              <p className='title-text'>250</p>
-            </div>
-          </div>
-        }
-      </header>
-      <div className={`sub-header ${['chat-visible', ''].includes(chatVisible) ? 'hide' : 'show' }`}>
-        <button onClick={toggleFullScreen} title='Open Chat'><ChatIcon/></button>
-      </div>
-    </div>
-  );
+	const title = '2200+ Wins, #1 Warzone Battle Royale All Platforms Wins';
+
+	return (
+			<header>
+				<div className='stream-details'>
+					<LiveIcon/>
+					<div className='info'>
+						<h2 title={title}>{title}</h2>
+						<div className='game-details'>
+							<div>
+								<ControllerIcon/>
+								<p>Overwatch</p>
+							</div>
+							<div>
+								<PeopleIcon/>
+								<p>Corsairs</p>
+							</div>
+						</div>
+					</div>
+				</div>
+				<div className='stream-involvement'>
+					<div className='stream-involvement__stat'>
+						<WatcherIcon/>
+						<p>458K</p>
+					</div>
+					<div className='stream-involvement__stat'>
+						<HeartFullIcon/>
+						<p>1.2K</p>
+					</div>
+					<div className='stream-involvement__stat'>
+						<SubscribeFullIcon/>
+						<p>250</p>
+					</div>
+				</div>
+				<div className={`chat-opener ${['chat-visible', ''].includes(chatVisible) ? 'hide' : ''}`}>
+					<button onClick={toggleFullScreen} title='Open Chat'><ChatIcon/></button>
+				</div>
+			</header>
+
+	);
 };

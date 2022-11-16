@@ -1,0 +1,51 @@
+@use "../mixins";
+
+.channel-header,
+.thread-header,
+.members-header,
+.upgrade-header,
+{
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: var(--header-height);
+  min-height: var(--header-height);
+  padding-inline: 10px;
+  position: relative;
+  width: 100%;
+
+  button {
+    height: 2.5rem;
+    width: 2.5rem;
+  }
+
+  h2 {
+    flex: 1;
+    text-align: center;
+  }
+
+  ul.options-container {
+    position: absolute;
+    top: var(--header-height);
+    right: 10px;
+    width: 140px;
+    overflow: hidden;
+    z-index: 1;
+
+    li {
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      height: 36px;
+      padding: 0.5rem 1rem 0.5rem 0;
+    }
+  }
+}
+
+// compensate for missing options button
+.thread-header,
+.upgrade-header,
+.members-header {
+  padding-inline: 10px calc(2.5rem + 10px);
+}
+

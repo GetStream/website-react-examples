@@ -1,14 +1,16 @@
-import React, { MouseEventHandler, useCallback, useState } from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
-import { MessageInput, MessageList, MessageToSend, useChannelActionContext, Window } from 'stream-chat-react';
+import React, {useCallback} from 'react';
+import {logChatPromiseExecution} from 'stream-chat';
+import {MessageInput, MessageList, MessageToSend, useChannelActionContext, Window} from 'stream-chat-react';
 
-import { GamingChatHeader } from './GamingChatHeader';
-import { GamingMessage } from './GamingMessage';
-import { GamingMessageInput } from './GamingMessageInput';
-import { GamingThread } from './GamingThread';
+import {GamingChatHeader} from './GamingChatHeader';
+import {GamingMessage} from './GamingMessage';
+import {GamingMessageInput} from './GamingMessageInput';
+import {GamingThread} from './GamingThread';
 
-import { useLayoutController } from '../../context/LayoutController';
-import type { StreamChatType } from '../../types';
+import {useLayoutController} from '../../context/LayoutController';
+import {useMessageTimestamp} from "../../context/MessageTimestampController";
+
+import type {StreamChatType} from '../../types';
 
 const NOTIFICATION_TEXT_FOR_COMMAND: Record<string, string> = {
   '/ban': 'User banned',
@@ -29,27 +31,14 @@ const getNotificationText = (messageText?: string): string | null => {
 export const GamingChatInner = () => {
   const { sendMessage } = useChannelActionContext();
   const { publishAppNotification } = useLayoutController();
-  const [timestampEnabled, setShowTimestamp] = useState(false);
+  const {timestampEnabled, toggleTimestamp} = useMessageTimestamp();
 
-  const overrideSubmitHandler = (message: MessageToSend<StreamChatType>) => {
+  const overrideSubmitHandler = useCallback((message: MessageToSend<StreamChatType>) => {
     const { text } = message;
-
     publishAppNotification(getNotificationText(text))
     const sendMessagePromise = sendMessage(message);
     logChatPromiseExecution(sendMessagePromise, 'send message');
-  };
-
-  const toggleTimestamp: MouseEventHandler<HTMLUListElement> = useCallback(() => {
-    const elements = document.querySelectorAll<HTMLElement>('.timestamp');
-    elements.forEach((element) => {
-      if (timestampEnabled) {
-        element.style.display = 'none';
-      } else {
-        element.style.display = 'inline';
-      }
-    });
-    setShowTimestamp((prev) => !prev);
-  }, [setShowTimestamp, timestampEnabled]);
+  }, [publishAppNotification, sendMessage]);
 
   return (
     <>

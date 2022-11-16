@@ -11,44 +11,49 @@ import EmojiIcon from '../../assets/icons/EmojiIcon';
 import SendIcon from '../../assets/icons/SendIcon';
 import StarIcon from '../../assets/icons/StarIcon';
 
-import { useLayoutController } from '../../context/LayoutController';
+import {useLayoutController} from '../../context/LayoutController';
 
-import type { StreamChatType } from '../../types';
+import type {StreamChatType} from '../../types';
+
+const TypingIndicator = () => (
+    <div className='typing-indicator'>
+      <div className='dots'>
+        <div className='dot'></div>
+        <div className='dot'></div>
+        <div className='dot'></div>
+      </div>
+      <p>a member is typing</p>
+    </div>
+)
 
 export const GamingMessageInput = React.memo(() => {
-  const { showUpgradePopup } = useLayoutController();
+  const { showUpgradePanel } = useLayoutController();
   const { thread } = useChannelStateContext<StreamChatType>();
   const { typing } = useTypingContext<StreamChatType>();
   const messageInput = useMessageInputContext<StreamChatType>();
 
   return (
     <div className='channel-footer'>
+      {!thread && (
+          <EmojiPicker/>
+      )}
       <div className='channel-footer__top'>
         <ChatAutoComplete rows={1} placeholder='Say something' />
-        {!thread && <div onClick={messageInput.openEmojiPicker} style={{ cursor: 'pointer', display: 'flex' }}><EmojiIcon /></div>}
+        {!thread && <button className='emoji-button' onClick={messageInput.openEmojiPicker}><EmojiIcon /></button>}
       </div>
       <div className='channel-footer__bottom'>
-        <div onClick={showUpgradePopup} className='watcher-count'>
+        <button onClick={showUpgradePanel} className='watcher-count-button'>
           <StarIcon />
           <p>68</p>
-        </div>
+        </button>
         {typing && !!Object.keys(typing).length && (
-          <div className='typing-indicators'>
-            <div className='indicators'>
-              <div className='dot' style={{ animationDelay: '0.2s' }}></div>
-              <div className='dot' style={{ animationDelay: '0.4s' }}></div>
-              <div className='dot' style={{ animationDelay: '0.6s' }}></div>
-            </div>
-            <p>a member is typing</p>
-          </div>
+          <TypingIndicator/>
         )}
-        <button className={messageInput.text ? 'text' : ''} disabled={!messageInput.text} onClick={messageInput.handleSubmit}>
+        <button className='send-message-button' disabled={!messageInput.text} onClick={messageInput.handleSubmit}>
           <SendIcon />
         </button>
       </div>
-      {!thread && (
-        <EmojiPicker/>
-      )}
+
     </div>
   );
 });

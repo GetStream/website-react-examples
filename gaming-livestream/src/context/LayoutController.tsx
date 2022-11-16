@@ -11,9 +11,9 @@ export type LayoutControllerContext = {
   memberListVisible: 'show-members' | 'hide-members' | string;
   hideMemberList: () => void;
   showMemberList: () => void;
-  showUpgrade: boolean;
-  showUpgradePopup: () => void;
-  hideUpgradePopup: () => void;
+  upgradePanelVisible: boolean;
+  showUpgradePanel: () => void;
+  hideUpgradePanel: () => void;
 }
 
 const LayoutController = createContext<LayoutControllerContext>({
@@ -25,19 +25,20 @@ const LayoutController = createContext<LayoutControllerContext>({
   memberListVisible: '',
   hideMemberList: noop,
   showMemberList: noop,
-  showUpgrade: false,
-  showUpgradePopup: noop,
-  hideUpgradePopup: noop,
+  upgradePanelVisible: false,
+  showUpgradePanel: noop,
+  hideUpgradePanel: noop,
 });
 
 export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
   const [chatVisible, setChatVisibility] = useState<LayoutControllerContext['chatVisible']>('');
   const [popUpText, setPopUpText] = useState('');
   const [memberListVisible, setShowMembers] = useState<LayoutControllerContext['memberListVisible']>('');
-  const [showUpgrade, setShowUpgrade] = useState(false);
-  console.log('chatVisible', chatVisible)
+  const [upgradePanelVisible, setUpgradePanelVisible] = useState(false);
+
   const toggleFullScreen = useCallback(() => {
     setChatVisibility((prev) => ['chat-hidden', ''].includes(prev) ? 'chat-visible' : 'chat-hidden');
+    setShowMembers('');
   }, []);
 
   const hideChat = useCallback(() => {
@@ -45,13 +46,13 @@ export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
     setShowMembers('hide-members');
   }, []);
 
-  const showUpgradePopup = useCallback(()=> {
+  const showUpgradePanel = useCallback(()=> {
     setShowMembers('hide-members');
-    setShowUpgrade(true);
+    setUpgradePanelVisible(true);
   }, []);
 
-  const hideUpgradePopup = useCallback(()=> {
-    setShowUpgrade(false);
+  const hideUpgradePanel = useCallback(()=> {
+    setUpgradePanelVisible(false);
   }, []);
 
   const hideMemberList = useCallback(() => {
@@ -82,9 +83,9 @@ export const LayoutControlProvider = ({children}: {children: ReactNode}) => {
     memberListVisible,
     hideMemberList,
     showMemberList,
-    showUpgrade,
-    showUpgradePopup,
-    hideUpgradePopup,
+    upgradePanelVisible,
+    showUpgradePanel,
+    hideUpgradePanel,
   }}>{children}</LayoutController.Provider>;
 }
 

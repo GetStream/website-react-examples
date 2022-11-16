@@ -6,11 +6,15 @@
 @import "layout";
 @import "variables";
 
+@import "Attachment";
 @import "ChatUpgrades";
 @import "GamingChat";
+@import "GamingChatHeader";
+@import "GamingChatNotification";
 @import "GamingFooter";
 @import "GamingHeader";
 @import "GamingMessage";
 @import "GamingMessageInput";
+@import "GamingParticipants";
 @import "GamingThread";
 @import "GamingVideo";

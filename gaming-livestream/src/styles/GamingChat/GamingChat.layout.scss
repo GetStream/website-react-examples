@@ -1,0 +1,41 @@
+section.sidebar {
+  display: flex;
+  justify-content: space-between;
+  width: var(--sidebar-width);
+  height: 100%;
+  overflow: hidden;
+
+  .chat-container {
+    width: 100%;
+
+    .str-chat__main-panel {
+      padding: 0;
+
+      .str-chat__main-panel-inner {
+        flex: 1;
+      }
+
+      .str-chat__list {
+        .str-chat__message-list-scroll {
+          .str-chat__li {
+            position: relative;
+            margin: 0;
+            padding:0;
+          }
+
+          .str-chat__date-separator {
+            display: none;
+          }
+        }
+      }
+    }
+  }
+}
+
+.str-chat__list {
+  padding: 0;
+
+  .str-chat__message-list-scroll {
+    padding: 0;
+  }
+}

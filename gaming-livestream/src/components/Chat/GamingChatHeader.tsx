@@ -8,7 +8,7 @@ type GamingChatHeaderProps = {
 }
 
 export const GamingChatHeader = ({ toggleTimestamp, timestampEnabled }: GamingChatHeaderProps) => {
-  const {hideChat, showUpgradePopup, showMemberList} = useLayoutController();
+  const {hideChat, showUpgradePanel, showMemberList} = useLayoutController();
   const [showOptions, setShowOptions] = useState(false);
   const [optionsContainer, setOptionsContainerRef] = useState<HTMLUListElement | null>(null);
 
@@ -30,17 +30,14 @@ export const GamingChatHeader = ({ toggleTimestamp, timestampEnabled }: GamingCh
 
   return (
     <div className='channel-header'>
-      <button
-        className='hide-btn'
-        onClick={hideChat}
-      ></button>
+      <button className='hide-btn' onClick={hideChat}/>
       <h2>Live Chat</h2>
       <button className='options-btn' onClick={toggleShowOptions}></button>
       {showOptions && (
         <ul className='options-container' ref={setOptionsContainerRef}>
           <li onClick={toggleTimestamp}>{timestampEnabled ? 'Disable timestamp' : 'Enable timestamp'}</li>
           <li onClick={showMemberList}>Participants</li>
-          <li onClick={showUpgradePopup}>Upgrade</li>
+          <li onClick={showUpgradePanel}>Upgrade</li>
         </ul>
       )}
     </div>

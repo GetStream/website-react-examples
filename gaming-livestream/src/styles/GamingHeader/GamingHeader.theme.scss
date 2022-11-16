@@ -1,0 +1,38 @@
+header {
+  background-color: var(--component-background);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 1s;
+
+  .stream-details .info {
+    h2 {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    .game-details {
+      font-size: 13px;
+    }
+  }
+
+  .stream-involvement {
+    .stream-involvement__stat {
+      font-size: 13px;
+      color: var(--foreground);
+    }
+  }
+
+  .chat-opener {
+    background-color: var(--component-background);
+    border-left: 1px solid var(--border-color);
+    transition: width 1s ease-out 1s;
+
+    button {
+      border-radius: 0.5rem;
+
+      svg {
+        fill: white;
+      }
+    }
+  }
+}
+

@@ -1,0 +1,22 @@
+.str-chat__thread {
+  position: absolute;
+  margin: 0;
+  width: var(--sidebar-width);
+  max-width: var(--sidebar-width);
+
+  .str-chat__thread-list {
+    padding: 0;
+
+    .str-chat__parent-message-li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .custom-message__reaction-list,
+    .custom-message__actions-wrapper,
+    .custom-message__voting-stats,
+    .str-chat__thread-start {
+      display: none;
+    }
+  }
+}

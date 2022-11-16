@@ -23,127 +23,12 @@ main {
   flex-direction: column;
   flex: 1;
   height: 100%;
+  min-width: 0;
   justify-content: space-between;
   position: relative;
   transition: all 1s;
 
   &.show-members {
     width: 34rem;
-  }
-
-  > .header-container {
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    height: var(--header-height);
-
-    > header {
-      flex: 1;
-      width: 100%;
-    }
-
-    .sub-header {
-      align-items: center;
-      background-color: var(--component-background);
-      border-bottom: 1px solid var(--border-color);
-      border-left: 1px solid var(--border-color);
-      border-top-right-radius: 1rem;
-      display: flex;
-      justify-content: space-between;
-      width: 0;
-      transition: width 1s ease-out 1s;
-
-      button {
-        cursor: pointer;
-        visibility: hidden;
-      }
-
-      p {
-        font-size: 0;
-        visibility: hidden;
-      }
-
-      div {
-        height: 2.5rem;
-        width: 2.5rem;
-      }
-
-      &.hide {
-        border: none;
-        padding: 0;
-        width: 0;
-      }
-
-      &.show {
-        width: fit-content;
-        padding: 0.5rem;
-
-        button {
-          display: flex;
-          align-items: center;
-          justify-content: center;
-          border-radius: 0.5rem;
-          visibility: visible;
-          transition: visibility 1s ease-out;
-
-          svg {
-            height: 26px;
-            width: 26px;
-            path {
-              fill: white;
-            }
-          }
-        }
-
-        p {
-          font-family: Helvetica Neue, sans-serif;
-          font-weight: bold;
-          font-size: 15px;
-          color: var(--foreground);
-          visibility: visible;
-        }
-      }
-    }
-  }
-
-  .gaming-popup {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    width: 320px;
-    height: 100px;
-    z-index: 11;
-    bottom: 132px;
-    right: 0;
-    background: var(--button-background);
-    border-radius: 16px;
-    font-family: Helvetica Neue, sans-serif;
-    font-weight: bold;
-    font-size: 15px;
-    color: var(--foreground);
-    animation: fade 3s linear;
-  }
-}
-
-
-@keyframes fade {
-  0%,
-  100% {
-    opacity: 0;
-  }
-  20%,
-  60% {
-    opacity: 0.8;
-  }
-}
-
-@keyframes slide-down {
-  from {
-    transform: translateY(-2rem);
-  }
-
-  to {
-    transform: translateX(0);
   }
 }

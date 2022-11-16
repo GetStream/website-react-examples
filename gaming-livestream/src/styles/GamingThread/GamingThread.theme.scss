@@ -1,0 +1,22 @@
+.str-chat {
+  --str-chat__message-list-background-color: var(--background);
+  --str-chat__thread-head-start-border-block-end-color: var(--border-color);
+  --str-chat__thread-border-inline-start: 1px solid var(--border-color);
+}
+
+@keyframes slide-down {
+  from {
+    transform: translateY(-2rem);
+  }
+
+  to {
+    transform: translateX(0);
+  }
+}
+
+.str-chat__thread {
+  background: var(--background);
+  border-radius: 0;
+  transition: all 1s;
+  animation: slide-down 1s forwards;
+}

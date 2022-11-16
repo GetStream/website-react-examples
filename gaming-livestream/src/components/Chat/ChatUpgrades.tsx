@@ -1,11 +1,11 @@
 import React, { ComponentType, useCallback, useState } from 'react';
 
-import { upgrades } from '../assets/data';
-import { useLayoutController } from '../context/LayoutController';
-import InfiniteIcon from '../assets/icons/InfiniteIcon';
-import BellIcon from '../assets/icons/BellIcon';
-import HandIcon from '../assets/icons/HandIcon';
-import MemberIcon from '../assets/icons/MemberIcon';
+import { upgrades } from '../../assets/data';
+import { useLayoutController } from '../../context/LayoutController';
+import InfiniteIcon from '../../assets/icons/InfiniteIcon';
+import BellIcon from '../../assets/icons/BellIcon';
+import HandIcon from '../../assets/icons/HandIcon';
+import MemberIcon from '../../assets/icons/MemberIcon';
 
 type UpgradeImageType = 'infinite' | 'bell' | 'hand' | 'member' | string;
 
@@ -26,7 +26,7 @@ const UpgradeIcon = ({type}: UpgradeIconProps) => {
 
 export const ChatUpgrades = () => {
   const [upgradeSelected, setUpgradeSelected] = useState<number[]>([]);
-  const {hideUpgradePopup, publishAppNotification} = useLayoutController();
+  const {hideUpgradePanel, publishAppNotification} = useLayoutController();
 
   const upgradeSelector = (index: number) => {
     if (upgradeSelected.includes(index)) {
@@ -36,19 +36,23 @@ export const ChatUpgrades = () => {
     }
   };
 
+  const handleClose = useCallback(() => {
+    hideUpgradePanel();
+    setUpgradeSelected([]);
+  }, [hideUpgradePanel, setUpgradeSelected])
+
   const handleSubmit = useCallback(() => {
     if (upgradeSelected.length) {
       publishAppNotification('Thanks for upgrading!');
     }
-    hideUpgradePopup();
-  }, [upgradeSelected, hideUpgradePopup, publishAppNotification])
+    handleClose();
+  }, [upgradeSelected, handleClose, publishAppNotification]);
 
   return (
     <div className='upgrade-container'>
       <div className='upgrade-header'>
-        <button onClick={hideUpgradePopup}></button>
-        <p>Upgrade</p>
-        <div></div>
+        <button className='close-drawer-btn' onClick={handleClose}></button>
+        <h2>Upgrade</h2>
       </div>
       <ul>
         {upgrades.map((option, i) => (

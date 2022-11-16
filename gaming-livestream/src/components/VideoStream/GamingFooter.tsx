@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, {useEffect, useState} from 'react';
 
 import AlarmIcon from '../../assets/icons/AlarmIcon';
 import CheckIcon from '../../assets/icons/CheckIcon';
@@ -9,116 +9,118 @@ import HeartHollowIcon from '../../assets/icons/HeartHollowIcon';
 import SubscribeFullIcon from '../../assets/icons/SubscribeFullIcon';
 import SubscribeHollowIcon from '../../assets/icons/SubscribeHollowIcon';
 import UpVoteIcon from '../../assets/icons/UpVoteIcon';
-import type { LayoutControllerContext } from '../../context/LayoutController';
 
-type GamingFooterProps = Pick<LayoutControllerContext, 'chatVisible' | 'memberListVisible'>
+const CountDownTimer = () => {
+	const [countDown, setCountDown] = useState('00:00:00');
+	const [countUp, setCountUp] = useState('00:00:00');
 
-export const GamingFooter = ({ memberListVisible, chatVisible }: GamingFooterProps) => {
-  const [countDown, setCountDown] = useState('00:00:00');
-  const [countUp, setCountUp] = useState('00:00:00');
-  const [followed, setFollowed] = useState(false);
-  const [subscribed, setSubscribed] = useState(false);
+	let totalSeconds = 0;
+	const deadline = new Date();
+	deadline.setHours(deadline.getHours() + 3);
 
-  let totalSeconds = 0;
-  const deadline = new Date();
-  deadline.setHours(deadline.getHours() + 3);
+	const countTimerUp = () => {
+		++totalSeconds;
+		let hour: number | string = Math.floor(totalSeconds / 3600);
+		let minute: number | string = Math.floor((totalSeconds - hour * 3600) / 60);
+		let seconds: number | string = totalSeconds - (hour * 3600 + minute * 60);
 
-  const countTimerUp = () => {
-    ++totalSeconds;
-    let hour: number | string = Math.floor(totalSeconds / 3600);
-    let minute: number | string = Math.floor((totalSeconds - hour * 3600) / 60);
-    let seconds: number | string = totalSeconds - (hour * 3600 + minute * 60);
+		if (hour < 10) hour = '0' + hour;
+		if (minute < 10) minute = '0' + minute;
+		if (seconds < 10) seconds = '0' + seconds;
 
-    if (hour < 10) hour = '0' + hour;
-    if (minute < 10) minute = '0' + minute;
-    if (seconds < 10) seconds = '0' + seconds;
+		setCountUp(`${hour}:${minute}:${seconds}`);
+	};
 
-    setCountUp(`${hour}:${minute}:${seconds}`);
-  };
+	const countTimerDown = (endTime: Date) => {
+		const total = endTime.getTime() - new Date().getTime();
+		const seconds = Math.floor(total % 60);
+		const minutes = Math.floor((total / 60) % 60);
+		const hours = Math.floor((total / (60 * 60)) % 24);
 
-  const countTimerDown = (endtime: Date) => {
-    const total = endtime.getTime() - new Date().getTime();
-    const seconds = Math.floor(total % 60);
-    const minutes = Math.floor((total / 60) % 60);
-    const hours = Math.floor((total / (60 * 60)) % 24);
+		setCountDown(`${hours}:${minutes}:${seconds}`);
+	};
 
-    setCountDown(`${hours}:${minutes}:${seconds}`);
-  };
+	useEffect(() => {
+		setInterval(countTimerUp, 1000);
+		setInterval(() => countTimerDown(deadline), 1000);
+	}, []); // eslint-disable-line
 
-  useEffect(() => {
-    setInterval(countTimerUp, 1000);
-    setInterval(() => countTimerDown(deadline), 1000);
-  }, []); // eslint-disable-line
+	return (
+		<div className='timer-container'>
+			<div>
+				<p>{countDown}</p>
+				<ClockIcon/>
+			</div>
+			<div>
+				<p>-{countUp}</p>
+				<AlarmIcon/>
+			</div>
+		</div>
+	)
+}
 
-  const showLastLi = () => {
-    if (memberListVisible) return null;
-    return <li>Shooter</li>;
-  };
+const FollowerButtons = () => {
+	const [followed, setFollowed] = useState(false);
+	const [subscribed, setSubscribed] = useState(false);
+	return (
+		<>
+			<button
+				className='follower-button'
+				onClick={() => setFollowed(!followed)}
+			>
+				{followed ? <HeartFullIcon/> : <HeartHollowIcon/>}
+				<p>Follow</p>
+			</button>
+			<button
+				className='follower-button'
+				onClick={() => setSubscribed(!subscribed)}
+			>
+				{subscribed ? <SubscribeFullIcon/> : <SubscribeHollowIcon/>}
+				<p>Subscribe</p>
+			</button>
+		</>
+	)
+}
 
-  return (
-    <footer className={memberListVisible ? 'show-members' : ''}>
-      <div className='streamer-details-container'>
-        <div className='avatar'></div>
-        <div className='streamer-container'>
-          <div className='streamer-name'>
-            <p>PolarBear</p>
-            <CheckIcon />
-          </div>
-          <ul className='streamer-details'>
-            <li>English</li>
-            <li>FPS</li>
-            {showLastLi()}
-          </ul>
-        </div>
-      </div>
-      {window.innerWidth > 920 && (
-        <div className='user-interaction-container'>
-          <div className='timer-container'>
-            <div>
-              <p>{countDown}</p>
-              <ClockIcon />
-            </div>
-            <div>
-              <p>-{countUp}</p>
-              <AlarmIcon />
-            </div>
-          </div>
-          <button
-            className={`follow-btn ${!chatVisible && memberListVisible ? 'shrink' : ''}`}
-            onClick={() => setFollowed(!followed)}
-          >
-            <div>
-              {followed ? <HeartFullIcon /> : <HeartHollowIcon />}
-              <p>Follow</p>
-            </div>
-          </button>
-          <button
-            className={`sub-btn ${!chatVisible && memberListVisible ? 'shrink' : ''}`}
-            onClick={() => setSubscribed(!subscribed)}
-          >
-            <div>
-              {subscribed ? <SubscribeFullIcon /> : <SubscribeHollowIcon />}
-              <p>Subscribe</p>
-            </div>
-          </button>
-          {window.innerWidth > 1100 && (
-            <div className='btn-group'>
-              <button className={`${!chatVisible && memberListVisible ? 'shrink' : ''}`}>
-                <div>
-                  <UpVoteIcon />
-                  <p>325K</p>
-                </div>
-              </button>
-              <button className={`${!chatVisible && memberListVisible ? 'shrink' : ''}`}>
-                <div>
-                  <DownVoteIcon />
-                  <p>9.5K</p>
-                </div>
-              </button>
-            </div>
-          )}
-        </div>
-      )}
-    </footer>
-  );
-};
+const VotingButtons = () => (
+	<div className='voting-button-group'>
+		<button>
+			<UpVoteIcon/>
+			<p>325K</p>
+		</button>
+		<button>
+			<DownVoteIcon/>
+			<p>9.5K</p>
+		</button>
+	</div>
+);
+
+
+const StreamerDetails = () => (
+	<div className='streamer-details-container'>
+		<div className='avatar'/>
+		<div className='streamer-container'>
+			<div className='streamer-name'>
+				<p>PolarBear</p>
+				<CheckIcon/>
+			</div>
+			<ul className='streamer-details'>
+				<li>English</li>
+				<li>FPS</li>
+				<li>Shooter</li>
+			</ul>
+		</div>
+	</div>
+);
+
+
+export const GamingFooter = () => (
+	<footer>
+		<StreamerDetails/>
+		<div className='user-interaction-container'>
+			<CountDownTimer/>
+			<FollowerButtons/>
+			<VotingButtons/>
+		</div>
+	</footer>
+);

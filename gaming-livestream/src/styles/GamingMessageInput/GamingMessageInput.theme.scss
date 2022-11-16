@@ -1,0 +1,179 @@
+@use "../mixins";
+
+.str-chat {
+  --str-chat__mention-list-user-item-color: var(--foreground);
+  --str-chat__mention-list-user-item-at-sign-color: var(--foreground);
+  --str-chat__slash-command-color: var(--foreground);
+  --str-chat__mention-list-emoji-item-color: var(--foreground);
+}
+
+.rta__autocomplete.str-chat__suggestion-list-container {
+  border: 3px solid var(--border-color);
+  border-radius: 16px;
+  color: var(--foreground);
+
+  .str-chat__slash-command-header,
+  .str-chat__emoji-item--name,
+  .str-chat__user-item--name {
+    font-size: 14px;
+  }
+
+  .str-chat__suggestion-item--selected {
+    background: var(--button-background-hover);
+  }
+
+  .str-chat__slash-command {
+    &:hover {
+      background: var(--button-background-hover);
+    }
+
+    .str-chat__slash-command-description {
+      font-size: 12px;
+    }
+  }
+}
+
+.channel-footer {
+  background: var(--component-background);
+  border-top: 1px solid var(--border-color);
+
+  .channel-footer__top {
+    border: 1px solid var(--border-color);
+    background: black;
+    border-radius: 0.5rem;
+
+    &:focus-within {
+      box-shadow: var(--input-focused-box-shadow);
+    }
+
+    .str-chat__textarea {
+      background: none;
+
+      textarea {
+        font-size: 16px;
+        background: transparent;
+        border: none;
+        resize: none;
+        color: var(--foreground);
+        outline: none;
+      }
+    }
+
+    .emoji-button {
+      background: transparent;
+      border-radius: var(--str-chat__border-radius-circle);
+
+      &:hover {
+        background: var(--button-background);
+
+        svg {
+          fill-opacity: 1;
+        }
+      }
+    }
+  }
+
+  .channel-footer__bottom {
+    .watcher-count-button {
+      @include mixins.default-button;
+      transition: all 0.2s;
+      font-size: 0.75rem;
+    }
+
+    .send-message-button {
+      @include mixins.default-button;
+      background: var(--button-background-hover);
+      opacity: 1;
+      transition: opacity 0.2s;
+
+      path {
+        fill: var(--foreground);
+      }
+
+      &:disabled {
+        opacity: 0.5;
+      }
+    }
+  }
+}
+
+.typing-indicator {
+  .dots {
+    .dot {
+      background: var(--foreground);
+      border-radius: 50%;
+      animation: typing-indicator-animation 1s infinite;
+      transition: all 1s;
+    }
+
+    .dot:nth-of-type(1) {
+      animation-delay: 0.2s;
+    }
+    .dot:nth-of-type(2) {
+      animation-delay: 0.4s;
+    }
+    .dot:nth-of-type(3) {
+      animation-delay: 0.6s;
+    }
+
+    @keyframes typing-indicator-animation {
+      0% {
+        transform: translateY(0) scale(1);
+      }
+
+      50% {
+        transform: translateY(-6px) scale(0.75);
+      }
+
+      100% {
+        transform: translateY(0) scale(1);
+      }
+    }
+  }
+
+  p {
+    color: rgba($color: var(--foreground), $alpha: 0.5);
+    font-size: 0.75rem;
+  }
+}
+
+.str-chat__input--emojipicker {
+  button, button:hover {
+    background: none;
+    // todo: vendor stylesheet sets cursor: default inside a button. does not make sense. remove that rule
+    span {
+      cursor: unset;
+    }
+  }
+
+  > section {
+    background: var(--background);
+    border: 3px solid var(--border-color);
+    border-radius: 16px;
+
+    .emoji-mart-category-label {
+      background: var(--background);
+
+      span {
+        background: none;
+        color: var(--foreground);
+      }
+    }
+
+    .emoji-mart-search input {
+      border-color: var(--border-color);
+    }
+
+    .emoji-mart-bar {
+      border: none;
+
+      .emoji-mart-anchor {
+        color: #858585;
+      }
+
+      .emoji-mart-anchor-selected, .emoji-mart-anchor:focus, .emoji-mart-anchor:hover {
+        color: #464646;
+      }
+    }
+  }
+}

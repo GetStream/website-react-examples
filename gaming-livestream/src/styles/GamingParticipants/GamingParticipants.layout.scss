@@ -1,0 +1,44 @@
+.members-container {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  position: absolute;
+  height: 100%;
+  width: 100%;
+  right: -100%;
+
+  .participant-list__container {
+    width: 100%;
+    padding: 1rem 1rem 0 1rem;
+    overflow: auto;
+
+    .participant-group {
+      line-height: 16px;
+
+      .participant-group__header {
+        height: 1rem;
+        margin-top: 1rem;
+        margin-bottom: 0.5rem;
+        padding-left: 1.5rem;
+      }
+
+      ul li {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0.3rem 0;
+      }
+    }
+  }
+}
+
+section.sidebar.show-members {
+  .members-container {
+    right: 0;
+  }
+}
+
+section.sidebar.hide-members {
+  .members-container {
+    right: -100%;
+  }
+}

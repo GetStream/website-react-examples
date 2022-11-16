@@ -1,4 +1,4 @@
-import React, { ChangeEventHandler, useState } from 'react';
+import React, {ChangeEventHandler, useCallback, useState} from 'react';
 
 import { UserIcon } from './UserIcon';
 import { useLayoutController } from '../../context/LayoutController';
@@ -13,31 +13,30 @@ export const GamingParticipants = ({ participants }: GamingParticipantsProps) =>
   const {hideMemberList } = useLayoutController();
   const [searchInput, setSearchInput] = useState('');
 
-  const onChangeHandler: ChangeEventHandler<HTMLInputElement> = (e) => {
+  const onChangeHandler: ChangeEventHandler<HTMLInputElement> = useCallback((e) => {
     setSearchInput(e.target.value);
-  };
+  }, []);
 
-  const participantFilter: ParticipantsDataSet = { ...participants };
+  const handleClose = useCallback(() => {
+    setSearchInput('');
+    hideMemberList();
+  }, [hideMemberList]);
 
+
+  const participantFilter = {...participants};
   Object.keys(participants).forEach((category: ParticipantGroup) => {
     participantFilter[category] = participantFilter[category].filter((part) => {
-      let lowerCaseName = part.name.toLowerCase();
-      if (lowerCaseName.includes(searchInput.toLowerCase())) {
-        return part;
-      } else {
-        return null;
-      }
+      return part.name.match(new RegExp(searchInput, 'i')) ? part : null
     });
   });
 
   return (
     <div className={`members-container`}>
       <div className='members-header'>
-        <button className='close-participants-btn' onClick={hideMemberList}></button>
+        <button className='close-drawer-btn' onClick={handleClose}></button>
         <h2>Participants (458K)</h2>
-        <div></div>
       </div>
-      <div className='list-container'>
+      <div className='participant-list__container'>
         <input
           className='members-container-input'
           placeholder='Search'
@@ -47,9 +46,9 @@ export const GamingParticipants = ({ participants }: GamingParticipantsProps) =>
         />
         {Object.keys(participantFilter).map((category, i) => {
           return (
-            <div key={i} className='list-separator'>
-              <div className='list-header'>
-                <p>{category}</p>
+            <div key={i} className='participant-group'>
+              <div className='participant-group__header'>
+                {category}
               </div>
               <ul>
                 {participantFilter[category].map((participant) => {

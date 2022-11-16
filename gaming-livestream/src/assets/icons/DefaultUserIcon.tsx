@@ -1,7 +1,7 @@
 import React from 'react';
 
 const DefaultUserIcon = () => (
-  <svg width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
+  <svg className='user-icon' width='16' height='16' viewBox='0 0 16 16' fill='none' xmlns='http://www.w3.org/2000/svg'>
     <rect width='16' height='16' rx='2' fill='#0D47D9' />
     <circle cx='8' cy='4' r='3' fill='white' />
     <path

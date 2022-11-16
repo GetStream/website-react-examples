@@ -1,0 +1,31 @@
+@mixin default-button {
+  background-color: var(--button-background);
+  border: none;
+  border-radius: .5rem;
+  color: var(--foreground);
+  padding: .75rem;
+  transition: all .2s;
+  cursor: pointer;
+
+  &:hover {
+    background-color: var(--button-background-hover);
+  }
+
+  &:focus {
+    outline: none; // check if we care about a11y
+  }
+
+  &:active, &:focus {
+    background-color: var(--button-background);
+  }
+
+  &:disabled {
+    cursor: default;
+  }
+}
+
+@mixin with-background-image($src) {
+  background-image: url($src);
+  background-position: center;
+  background-repeat: no-repeat;
+}
