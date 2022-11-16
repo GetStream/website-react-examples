@@ -14,30 +14,29 @@ const CountDownTimer = () => {
 	const [countDown, setCountDown] = useState('00:00:00');
 	const [countUp, setCountUp] = useState('00:00:00');
 
-	let totalSeconds = 0;
+	const start = new Date();
 	const deadline = new Date();
-	deadline.setHours(deadline.getHours() + 3);
+	deadline.setHours(start.getHours() + 3);
+
+	const convertMsToTimeString = (ms: number) => {
+		let seconds: number | string = Math.floor((ms / 1000) % 60);
+		let minutes: number | string = Math.floor((ms / 1000 / 60) % 60);
+		let hours: number | string = Math.floor((ms / (1000 * 60 * 60)) % 24);
+
+		if (hours < 10) hours = '0' + hours;
+		if (minutes < 10) minutes = '0' + minutes;
+		if (seconds < 10) seconds = '0' + seconds;
+		return `${hours}:${minutes}:${seconds}`;
+	}
 
 	const countTimerUp = () => {
-		++totalSeconds;
-		let hour: number | string = Math.floor(totalSeconds / 3600);
-		let minute: number | string = Math.floor((totalSeconds - hour * 3600) / 60);
-		let seconds: number | string = totalSeconds - (hour * 3600 + minute * 60);
-
-		if (hour < 10) hour = '0' + hour;
-		if (minute < 10) minute = '0' + minute;
-		if (seconds < 10) seconds = '0' + seconds;
-
-		setCountUp(`${hour}:${minute}:${seconds}`);
+		// @ts-ignore
+		setCountUp(convertMsToTimeString(Date.parse(new Date()) - Date.parse(start)));
 	};
 
 	const countTimerDown = (endTime: Date) => {
-		const total = endTime.getTime() - new Date().getTime();
-		const seconds = Math.floor(total % 60);
-		const minutes = Math.floor((total / 60) % 60);
-		const hours = Math.floor((total / (60 * 60)) % 24);
-
-		setCountDown(`${hours}:${minutes}:${seconds}`);
+		// @ts-ignore
+		setCountDown(convertMsToTimeString(Date.parse(endTime) - Date.parse(new Date())));
 	};
 
 	useEffect(() => {
@@ -48,11 +47,11 @@ const CountDownTimer = () => {
 	return (
 		<div className='timer-container'>
 			<div>
-				<p>{countDown}</p>
+				<p>{countUp}</p>
 				<ClockIcon/>
 			</div>
 			<div>
-				<p>-{countUp}</p>
+				<p>-{countDown}</p>
 				<AlarmIcon/>
 			</div>
 		</div>
