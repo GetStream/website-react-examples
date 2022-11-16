@@ -1,6 +1,30 @@
-# Getting Started with Create React App
+# Getting Started
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).\
+The main purpose of this demo is to showcase how Stream's React SDK can be used for building livestream gaming kind of applications.
+
+# Development process
+
+1. Clone this repository
+2. `cd gaming-livestream && yarn install`
+3. Copy the `.env-example` file into `.env.development` file and fill in the details
+4. `yarn start`
+
+# Release process
+
+Current release process is quite manual. Until we automate it, please follow the following procedure for creating a build and a deployment to the production environment.\
+**Note**: This demo is currently hosted on GitHub Pages.
+
+1. Clean the working directory of your current branch
+    1. You can `git stash` your current work-in-progress
+2. Copy the `.env-example` file into `.env.production` and fill in just the following parameter:
+    1. `REACT_APP_STREAM_KEY=dz5f4d5kzrue`
+3. `cd .. && yarn build:gl`
+    1. This command will create a production optimized bundle and will copy it to the `/docs/gaming-livestream` directory
+    2. Please make sure to smoke-test the demo locally before proceeding with the next step
+4. Commit the changes (minified bundle) to your branch and open a PR towards `master`
+5. Once your PR is merged, GitHub will automatically initiate the deployment process to GitHub Pages.
+6. Once the deployment process is finished, you can see your changes live on the [main website](https://getstream.io/chat/demos/gaming/).
 
 ## Available Scripts
 
