@@ -1,0 +1,19 @@
+.chat-notification {
+  @keyframes fade {
+    0%,
+    100% {
+      opacity: 0;
+    }
+    20%,
+    60% {
+      opacity: 0.8;
+    }
+  }
+
+  background: var(--button-background);
+  border-radius: 16px;
+  font-weight: bold;
+  font-size: 15px;
+  color: var(--foreground);
+  animation: fade 3s linear;
+}

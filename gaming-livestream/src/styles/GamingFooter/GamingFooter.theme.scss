@@ -1,0 +1,67 @@
+@use "../mixins";
+
+footer {
+  background-color: var(--component-background);
+  border-top: 1px solid var(--border-color);
+  transition: all 1s;
+
+  .streamer-details-container {
+    .avatar {
+      @include mixins.with-background-image('/assets/images/Avatar.png');
+      background-size: cover;
+      border-radius: 50%;
+    }
+
+    .streamer-container {
+      .streamer-name {
+        font-weight: bold;
+        font-size: 17px;
+        line-height: 21px;
+      }
+
+      .streamer-details {
+        li {
+          background-color: var(--button-background);
+          border-radius: 1rem;
+          color: var(--foreground);
+          font-size: 11px;
+        }
+      }
+    }
+  }
+
+  .user-interaction-container {
+    .timer-container {
+      p {
+        font-size: 15px;
+        line-height: 18px;
+        color: var(--foreground);
+      }
+
+      div:nth-child(2) p {
+        font-size: 11px;
+        opacity: 0.5;
+      }
+    }
+
+    button {
+      transition: all 1s;
+    }
+
+    .voting-button-group {
+      border-radius: var(--btn-border-radius);
+
+      button {
+        border-radius: 0;
+      }
+
+      button:nth-of-type(1) {
+        background: linear-gradient(0deg, rgba(0, 0, 0, 0.25), rgba(0, 0, 0, 0.25)), var(--button-background);
+
+        &:hover {
+          background: var(--button-background-hover);
+        }
+      }
+    }
+  }
+}

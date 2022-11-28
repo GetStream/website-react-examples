@@ -1,0 +1,64 @@
+.custom-message__wrapper {
+  &:hover {
+    background: var(--component-background);
+  }
+
+  &:hover .custom-message__actions-wrapper {
+    opacity: 1;
+  }
+
+  .custom-message__content {
+    font-size: 13px;
+    line-height: 13px;
+
+    .timestamp {
+      font-size: 11px;
+      color: #858688;
+    }
+
+    > .message-owner {
+      font-weight: bold;
+    }
+
+    > .message {
+      color: var(--foreground);
+    }
+  }
+
+  .custom-message__reaction-list {
+    font-size: 12px;
+
+    @mixin reaction-badge-theme {
+      background: var(--background);
+      border: 1px solid var(--border-color);
+      border-radius: 0 20px 20px 20px;
+    }
+
+    .custom-message__voting-stats {
+      @include reaction-badge-theme;
+    }
+
+    .custom-message__reply-count {
+      @include reaction-badge-theme;
+      cursor: pointer;
+    }
+  }
+
+  .custom-message__actions-wrapper {
+    background: var(--background);
+    border: 1px solid var(--border-color);
+    border-radius: 99999px;
+
+    button,
+    button:hover, button:active, button:focus {
+      background: transparent;
+      border-radius: unset;
+
+      svg:hover path {
+        fill-opacity: 1;
+
+      }
+    }
+  }
+}
+

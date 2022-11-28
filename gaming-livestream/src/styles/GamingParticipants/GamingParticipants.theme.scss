@@ -1,0 +1,23 @@
+.members-container {
+  transition: right 0.5s ease-out;
+  background-color: var(--background);
+  border-left: 1px solid var(--border-color);
+
+  .participant-list__container {
+    .members-container-input:focus {
+      box-shadow: var(--input-focused-box-shadow);
+    }
+
+    .participant-group {
+      font-size: 13px;
+      font-weight: bold;
+
+      .participant-group__header {
+        background-color: var(--component-background);
+        border-top-right-radius: 0.5rem;
+        border-bottom-right-radius: 0.5rem;
+        color: var(--foreground);
+      }
+    }
+  }
+}

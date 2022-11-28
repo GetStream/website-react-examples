@@ -1,0 +1,30 @@
+.str-chat__attachment-list {
+  margin-top: 0.75rem;
+
+  .str-chat__message-attachment {
+    justify-content: flex-start;
+  }
+
+  .str-chat__message-attachment-card {
+    width: 75%;
+
+    .str-chat__message-attachment-card--content > img {
+      display: none;
+    }
+  }
+}
+
+.str-chat__message-attachment .str-chat__message-attachment-actions {
+  margin-top: 6px;
+
+  .str-chat__message-attachment-actions-form {
+    button {
+      width: 85px;
+      padding: 0.25rem 0.5rem;
+
+      &:nth-of-type(2) {
+        margin-inline: 0.25rem;
+      }
+    }
+  }
+}

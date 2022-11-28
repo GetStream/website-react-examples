@@ -1,0 +1,47 @@
+.upgrade-container {
+  transition: right 0.5s ease-out;
+  border: 1px solid var(--border-color);
+  border-top: 0;
+  border-bottom: 0;
+  background-color: var(--background);;
+
+  ul {
+    @mixin highlighted-button {
+      border: 5px solid var(--attendees);
+
+      svg path {
+        fill: var(--attendees);
+      }
+    }
+
+    > li {
+      background-color: var(--component-background);
+      border: 5px solid var(--border-color);
+      border-radius: 1rem;
+      color: var(--foreground);
+      font-size: 13px;
+      cursor: pointer;
+      transition: 0.2s border-color ease-in-out;
+
+      &:hover {
+        @include highlighted-button;
+      }
+
+      &.selected-button {
+        @include highlighted-button;
+      }
+
+      svg {
+        transition: 0.2s fill ease-in-out;
+      }
+
+      .description-container p:first-of-type {
+        font-weight: bold;
+      }
+    }
+  }
+
+  > button {
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,52 @@
+@use "../mixins";
+
+.channel-header,
+.thread-header,
+.members-header,
+.upgrade-header
+{
+  background-color: var(--component-background);
+  border-bottom: 1px solid var(--border-color);
+  transition: all 0.5s;
+
+  button {
+    background-size: 50%;
+    border-radius: 0.5rem;
+
+    &.hide-btn {
+      @include mixins.with-background-image('/assets/icons/arrow.svg');
+      transform: rotate(90deg);
+    }
+
+    &.options-btn {
+      @include mixins.with-background-image('/assets/icons/elip.svg');
+    }
+
+    &.close-drawer-btn {
+      @include mixins.with-background-image('/assets/icons/close.svg');
+    }
+  }
+
+  h2 {
+    font-weight: bold;
+    font-size: 15px;
+    color: var(--foreground);
+    transition: opacity 0.2s ease-out;
+  }
+
+  ul.options-container {
+    border: 1px solid var(--border-color);
+    border-radius: 0.5rem;
+    background-color: var(--component-background);
+
+    li {
+      font-size: 13px;
+      color: var(--foreground);
+      cursor: pointer;
+
+      &:hover {
+        background-color: var(--button-background-hover);
+      }
+    }
+  }
+}

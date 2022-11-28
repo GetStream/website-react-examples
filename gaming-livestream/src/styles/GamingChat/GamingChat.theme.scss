@@ -1,0 +1,47 @@
+@keyframes reveal-chat {
+  from {
+    transform: translateX(100%);
+  }
+  to {
+    transform: translateX(0);
+    position: relative;
+    right: 0;
+  }
+}
+
+@keyframes hide-chat {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(100%);
+    position: absolute;
+    right: -100%;
+  }
+}
+
+section.sidebar {
+  border-inline: 1px solid var(--border-color);
+  background-color: transparent;
+  transition: width 1s ease-out;
+
+  .chat-container {
+    background-color: transparent;
+
+    .str-chat {
+      background-color: rgba($color: var(--background), $alpha: 0.7);
+    }
+
+    .str-chat__list {
+      background-color: transparent;
+    }
+  }
+
+  &.chat-visible {
+    animation: reveal-chat 1s forwards;
+  }
+
+  &.chat-hidden {
+    animation: hide-chat 1s forwards;
+  }
+}

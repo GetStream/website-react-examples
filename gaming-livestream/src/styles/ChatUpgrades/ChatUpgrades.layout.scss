@@ -1,0 +1,42 @@
+.show-upgrade {
+  .upgrade-container {
+    right: 0;
+  }
+}
+
+.upgrade-container {
+  position: absolute;
+  right: -100%;
+  height: 100%;
+  width: 100%;
+
+  ul {
+    padding-inline: 16px;
+
+    > li {
+      display: flex;
+      align-items: center;
+      width: 100%;
+      margin-top: 1rem;
+      padding: 0.5rem;
+      gap: 0.5rem;
+
+      .description-container {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        height: 2.5rem;
+      }
+    }
+  }
+
+  > button {
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0.5rem;
+    margin-inline: auto;
+    width: 94%;
+    cursor: pointer;
+  }
+}

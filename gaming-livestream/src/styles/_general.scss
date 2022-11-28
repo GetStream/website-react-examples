@@ -1,0 +1,77 @@
+* {
+  box-sizing: border-box;
+}
+
+html {
+  overflow: hidden;
+  scroll-behavior: smooth;
+  font-family: Helvetica Neue, sans-serif;
+}
+
+body {
+  margin: 0;
+
+  ul {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  p, h2 {
+    color: var(--foreground);
+    margin: 0;
+  }
+
+  button {
+    background-color: var(--button-background);
+    border: none;
+    border-radius: var(--btn-border-radius);
+    color: var(--foreground);
+    padding: .75rem;
+    transition: all .2s;
+    cursor: pointer;
+
+
+    &:hover {
+      background-color: var(--button-background-hover);
+    }
+
+    &:focus {
+      outline: none; // check if we care about a11y
+    }
+
+    &:active, &:focus {
+      background-color: var(--button-background);
+    }
+
+    &:disabled {
+      cursor: default;
+    }
+  }
+
+  input {
+    background-color: var(--background);
+    border: 1px solid var(--border-color-secondary);
+    border-radius: .5rem;
+    color: var(--foreground);
+    height: 2.5rem;
+    padding-left: .5rem;
+    width: 100%;
+    outline: none;
+  }
+}
+
+
+*::-webkit-scrollbar {
+  width: 0.3rem;
+  height: 0.3rem;
+}
+
+*::-webkit-scrollbar-thumb {
+  background-color: white;
+  border-radius: 2px;
+}
+
+*::-webkit-scrollbar-track {
+  background: transparent;
+}

@@ -1,0 +1,96 @@
+footer {
+  display: flex;
+  justify-content: space-between;
+  height: var(--header-height);
+  padding: 0.5rem;
+
+  .streamer-details-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+
+    .avatar {
+      height: 2.5rem;
+      width: 2.5rem;
+    }
+
+    .streamer-container {
+      display: flex;
+      flex-direction: column;
+      justify-content: space-evenly;
+      gap: 5px;
+
+      .streamer-name {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+      }
+
+      .streamer-details {
+        display: flex;
+        gap: 0.5rem;
+        margin: 0;
+        padding: 0;
+
+        li {
+          display: flex;
+          align-items: center;
+          height: 16px;
+          padding: 0 0.5rem;
+        }
+      }
+    }
+  }
+
+  .user-interaction-container {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 1rem;
+
+    .timer-container {
+      div {
+        align-items: center;
+        display: flex;
+        justify-content: flex-end;
+        gap: 0.5rem;
+      }
+    }
+
+    button {
+      width: 7.5rem;
+    }
+
+    .follower-button {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+      overflow: hidden;
+    }
+
+    .voting-button-group {
+      display: flex;
+      overflow: hidden;
+
+      button {
+        display: flex;
+        gap: 0.5rem;
+        width: 5rem;
+        overflow: hidden;
+      }
+    }
+  }
+
+  @media screen and (max-width: 920px) {
+    .user-interaction-container {
+      display: none;
+    }
+  }
+
+  @media screen and (max-width: 1100px) {
+    .user-interaction-container .voting-button-group {
+      display: none;
+    }
+  }
+}

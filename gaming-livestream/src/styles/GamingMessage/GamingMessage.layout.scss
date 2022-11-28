@@ -1,0 +1,78 @@
+.custom-message__wrapper {
+  display: flex;
+  flex-direction: column;
+  padding: 6px 10px 4px;
+
+  .custom-message__content {
+    display: flex;
+    align-items: flex-start;
+    gap: 4px;
+
+    .user-icon {
+      min-width: 16px;
+    }
+
+    .timestamp {
+      display: inline;
+      white-space: nowrap;
+    }
+
+    > .message-owner {
+      min-width: fit-content;
+    }
+
+    > .message {
+      word-break: break-word;
+    }
+  }
+
+  .custom-message__reaction-list {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 4px;
+
+    @mixin reaction-badge-layout {
+      display: flex;
+      align-items: center;
+      height: 20px;
+      padding-inline: 8px;
+    }
+
+    .custom-message__voting-stats {
+      @include reaction-badge-layout;
+      justify-content: space-evenly;
+      gap: 6px;
+      width: fit-content;
+      max-width: 100px;
+
+      > p {
+        display: inline;
+      }
+    }
+
+    .custom-message__reply-count {
+      @include reaction-badge-layout;
+    }
+  }
+
+  .custom-message__actions-wrapper {
+    position: absolute;
+    right: 4px;
+    top: 4px;
+    opacity: 0;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    height: 25px;
+    width: 86px;
+
+    button,
+    button:hover, button:active, button:focus {
+      padding: 0;
+      width: fit-content;
+      height: 15px;
+    }
+  }
+}
+

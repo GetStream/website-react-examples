@@ -1,0 +1,38 @@
+.str-chat__attachment-list {
+
+  .str-chat__message-attachment-card {
+    border: 8px solid var(--border-color);
+    border-radius: 16px;
+    color: var(--foreground);
+
+    .str-chat__message-attachment-card--header {
+      background: var(--background);
+    }
+
+    .str-chat__message-attachment-card--url {
+      color: var(--foreground);
+    }
+  }
+}
+
+.str-chat__message-attachment .str-chat__message-attachment-actions {
+  .str-chat__message-attachment-actions-form {
+    button {
+      background: var(--button-background);
+      border-radius: 999px;
+      border: none;
+      box-shadow: none;
+      font-size: 13px;
+      font-weight: normal;
+
+      &:hover {
+        background: var(--button-background-hover);
+      }
+
+      &:focus {
+        border: none;
+        box-shadow: none;
+      }
+    }
+  }
+}
