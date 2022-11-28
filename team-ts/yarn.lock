@@ -12354,10 +12354,10 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@^10.4.0:
-  version "10.4.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-10.4.0.tgz#ed7efe50e4d0b3d63b8c9ec68960a4d762133c85"
-  integrity sha512-7OXm7AEqmkCv9mpS2eqa490z1mvrUg2WpMbvs1dcG1FFlY+WpZAoiz8sO9YgqEbMx6MX6xf4dpDi4CXYqCELlg==
+stream-chat-react@^10.4.1:
+  version "10.4.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-10.4.1.tgz#8eb7592596113cb186ac7488d6d10a3eea2ab07a"
+  integrity sha512-4rapKNaNbl7Te7DsPb8RpLKKl4RjoxKRKFpRbseG+WY/iP4r5AGQ7R1bHvw+xjlZ8GeR2Qg7Xmz2Z2euq96pHg==
   dependencies:
     "@braintree/sanitize-url" "6.0.0"
     "@popperjs/core" "^2.11.5"
