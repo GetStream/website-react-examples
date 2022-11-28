@@ -4,47 +4,22 @@ import type { Channel, UserResponse } from 'stream-chat';
 import { useChatContext } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
-import './ChannelSearch.css';
-
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 import { ResultsDropdown } from './ResultsDropdown';
 
 import { SearchIcon } from '../../assets';
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+
+import type { StreamChatType } from '../../types';
 
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatType>();
 
   const [allChannels, setAllChannels] = useState<ConcatArray<ChannelOrUserType> | undefined>();
   const [teamChannels, setTeamChannels] = useState<
-    | Channel<
-        TeamAttachmentType,
-        TeamChannelType,
-        TeamCommandType,
-        TeamEventType,
-        TeamMessageType,
-        TeamReactionType,
-        TeamUserType
-      >[]
+    | Channel<StreamChatType>[]
     | undefined
   >();
-  const [directChannels, setDirectChannels] = useState<UserResponse<TeamUserType>[] | undefined>();
+  const [directChannels, setDirectChannels] = useState<UserResponse<StreamChatType>[] | undefined>();
 
   const [focused, setFocused] = useState<number>();
   const [focusedId, setFocusedId] = useState('');
@@ -105,15 +80,7 @@ export const ChannelSearch = () => {
   }, [allChannels, focused]);
 
   const setChannel = (
-    channel: Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >,
+    channel: Channel<StreamChatType>,
   ) => {
     setQuery('');
     setActiveChannel(channel);
@@ -175,7 +142,6 @@ export const ChannelSearch = () => {
           <SearchIcon />
         </div>
         <input
-          className='channel-search__input__text'
           onChange={onSearch}
           placeholder='Search'
           type='text'

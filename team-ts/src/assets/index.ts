@@ -23,24 +23,8 @@ import Avatar22 from '../assets/userImages/photo-1546967191-fdfb13ed6b1e.jpeg';
 import Avatar23 from '../assets/userImages/photo-1502937406922-305bb2789e95.jpeg';
 import Avatar24 from '../assets/userImages/photo-1552058544-f2b08422138a.jpeg';
 
-export { AddChannel } from './AddChannel';
-export { BoldIcon } from './BoldIcon';
-export { ChannelInfo } from './ChannelInfo';
-export { CloseCreateChannel } from './CloseCreateChannel';
-export { CloseThreadIcon } from './CloseThreadIcon';
-export { CodeSnippet } from './CodeSnippet';
-export { HashIcon } from './HashIcon';
-export { InviteIcon } from './InviteIcon';
-export { ItalicsIcon } from './ItalicsIcon';
-export { LightningBolt } from './LightningBolt';
-export { LightningBoltSmall } from './LightningBoltSmall';
 export { PinIcon } from './PinIcon';
 export { SearchIcon } from './SearchIcon';
-export { SendButton } from './SendButton';
-export { SideBarFlag } from './SideBarFlag';
-export { SideBarLogo } from './SideBarLogo';
-export { SmileyFace } from './SmileyFace';
-export { StrikeThroughIcon } from './StrikeThroughIcon';
 
 const randomImages = [
   Avatar1,

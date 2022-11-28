@@ -1,57 +1,28 @@
-import { useChannelActionContext, useChannelStateContext, Message, MessageTeam } from 'stream-chat-react';
+import { Message, useChannelStateContext } from 'stream-chat-react';
 
-import './PinnedMessageList.css';
+import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
+import type { StreamChatType } from '../../types';
+import { TeamMessage } from '../TeamMessage/TeamMessage';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import { useWorkspaceController } from '../../context/WorkspaceController';
 
-import { CloseThreadIcon } from '../../assets';
+export const PinnedMessageList = () => {
+  const { pinnedMessageListOpen, togglePinnedMessageListOpen } = useWorkspaceController();
+  const { channel } = useChannelStateContext<StreamChatType>();
 
-type Props = {
-  setPinsOpen?: React.Dispatch<React.SetStateAction<boolean>>;
-};
-
-export const PinnedMessageList: React.FC<Props> = (props) => {
-  const { setPinsOpen } = props;
-
-  const { closeThread } = useChannelActionContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
-
-  const { channel } = useChannelStateContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  if (!pinnedMessageListOpen) return null;
 
   return (
     <div className='pinned-messages__container'>
       <div className='pinned-messages__header'>
-        <p className='pinned-messages__header-text'>Pins</p>
-        <CloseThreadIcon {...{ closeThread, setPinsOpen }} />
+        <div className='workspace-header__title'>Pins</div>
+        <CloseThreadButton onClick={togglePinnedMessageListOpen} />
       </div>
       <div className='pinned-messages__list'>
         {channel.state.pinnedMessages.map((message) => (
           <Message
             groupStyles={['single']}
-            Message={MessageTeam}
+            Message={TeamMessage}
             key={message.id}
             message={message}
           />

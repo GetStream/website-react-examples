@@ -1,111 +1,68 @@
+import clsx from 'clsx';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 
 import type { Channel, UserResponse } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> & {
   result: ChannelOrUserType;
 };
 
-const SearchResult: React.FC<SearchResultProps> = (props) => {
+const SearchResult = (props: SearchResultProps) => {
   const { focusedId, result, setChannel } = props;
 
-  const { client, setActiveChannel } = useChatContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
+  const { client, setActiveChannel } = useChatContext<StreamChatType>();
 
   if (isChannel(result)) {
-    const channel = result as Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >;
+    const channel = result as Channel<StreamChatType>;
 
     return (
       <div
         onClick={() => setChannel(channel)}
-        className={
-          focusedId === channel.id
-            ? 'channel-search__result-container__focused'
-            : 'channel-search__result-container'
-        }
+        className={clsx(
+          'channel-search__result-container',
+          {highlighted: focusedId === channel.id}
+        )}
       >
         <div className='result-hashtag'>#</div>
         <p className='channel-search__result-text'>{channel?.data?.name}</p>
       </div>
     );
   } else {
-    const user = result as UserResponse<TeamUserType>;
+    const user = result as UserResponse<StreamChatType>;
 
     return (
       <div
-        onClick={async () => {
+        onClick={() => {
           channelByUser({ client, setActiveChannel, user });
         }}
-        className={
-          focusedId === user.id
-            ? 'channel-search__result-container__focused'
-            : 'channel-search__result-container'
-        }
+        className={clsx(
+          'channel-search__result-container',
+          {highlighted: focusedId === user.id}
+        )}
       >
-        <div className='channel-search__result-user'>
           <Avatar image={user.image} name={user.name || user.id} size={24} />
           <p className='channel-search__result-text'>{user.name || user.id || 'Johnny Blaze'}</p>
-        </div>
       </div>
     );
   }
 };
 
 type ResultsDropdownProps = {
-  teamChannels?: Channel<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >[];
-  directChannels?: UserResponse<TeamUserType>[];
+  teamChannels?: Channel<StreamChatType>[];
+  directChannels?: UserResponse<StreamChatType>[];
   focusedId: string;
   loading: boolean;
   setChannel: (
-    channel: Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >,
+    channel: Channel<StreamChatType>,
   ) => void;
   setQuery: React.Dispatch<React.SetStateAction<string>>;
 };
 
-export const ResultsDropdown: React.FC<ResultsDropdownProps> = (props) => {
+export const ResultsDropdown = (props: ResultsDropdownProps) => {
   const { teamChannels, directChannels, focusedId, loading, setChannel, setQuery } = props;
   document.addEventListener('click', () => setQuery(''));
 
@@ -137,7 +94,7 @@ export const ResultsDropdown: React.FC<ResultsDropdownProps> = (props) => {
           <i>No direct messages found</i>
         </p>
       ) : (
-        directChannels?.map((user: UserResponse<TeamUserType>, i) => (
+        directChannels?.map((user: UserResponse<StreamChatType>, i) => (
           <SearchResult result={user} focusedId={focusedId} key={i} setChannel={setChannel} />
         ))
       )}

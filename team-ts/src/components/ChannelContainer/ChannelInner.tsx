@@ -1,76 +1,42 @@
-import React, { useState } from 'react';
-import { MessageResponse, logChatPromiseExecution } from 'stream-chat';
-
+import React, { useCallback } from 'react';
+import { logChatPromiseExecution, MessageResponse } from 'stream-chat';
 import {
   defaultPinPermissions,
-  MessageList,
   MessageInput,
+  MessageList,
+  MessageToSend,
   PinEnabledUserRoles,
   Thread,
   useChannelActionContext,
   Window,
-  MessageToSend,
 } from 'stream-chat-react';
 
 import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamChannelHeader } from '../TeamChannelHeader/TeamChannelHeader';
 import { ThreadMessageInput } from '../TeamMessageInput/ThreadMessageInput';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
 
-type InnerProps = {
-  pinsOpen: boolean;
-  setIsEditing: React.Dispatch<React.SetStateAction<boolean>>;
-  setPinsOpen: React.Dispatch<React.SetStateAction<boolean>>;
-};
+import type { StreamChatType } from '../../types';
 
-type GiphyStateObj = {
-  giphyState: boolean;
-  setGiphyState: React.Dispatch<React.SetStateAction<boolean>>;
-};
+export const ChannelInner = () => {
+  const {inputHasGiphyMessage, clearGiphyFlag} = useGiphyInMessageContext();
+  const { sendMessage } = useChannelActionContext<StreamChatType>();
 
-export const GiphyContext = React.createContext<GiphyStateObj>({} as GiphyStateObj);
-
-export const ChannelInner: React.FC<InnerProps> = (props) => {
-  const { pinsOpen, setIsEditing, setPinsOpen } = props;
-
-  const [giphyState, setGiphyState] = useState(false);
-
-  const giphyStateObj = {
-    giphyState: giphyState,
-    setGiphyState,
-  };
-
-  const { sendMessage } = useChannelActionContext<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >();
-
+  // todo: migrate to channel capabilities once migration guide is available
   const teamPermissions: PinEnabledUserRoles = { ...defaultPinPermissions.team, user: true };
   const messagingPermissions: PinEnabledUserRoles = {
     ...defaultPinPermissions.messaging,
     user: true,
   };
+
   const pinnedPermissions = {
     ...defaultPinPermissions,
     team: teamPermissions,
     messaging: messagingPermissions,
   };
 
-  const overrideSubmitHandler = (message: MessageToSend) => {
+  const overrideSubmitHandler = useCallback((message: MessageToSend) => {
     let updatedMessage = {
       attachments: message.attachments,
       mentioned_users: message.mentioned_users,
@@ -79,7 +45,9 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
       text: message.text,
     };
 
-    if (giphyState) {
+    const isReply = !!updatedMessage.parent_id;
+
+    if (inputHasGiphyMessage(isReply)) {
       const updatedText = `/giphy ${message.text}`;
       updatedMessage = { ...updatedMessage, text: updatedText };
     }
@@ -87,21 +55,19 @@ export const ChannelInner: React.FC<InnerProps> = (props) => {
     if (sendMessage) {
       const sendMessagePromise = sendMessage(updatedMessage);
       logChatPromiseExecution(sendMessagePromise, 'send message');
-      setGiphyState(false);
+      clearGiphyFlag(isReply);
     }
-  };
+  }, [inputHasGiphyMessage, sendMessage, clearGiphyFlag]);
 
   return (
-    <GiphyContext.Provider value={giphyStateObj}>
-      <div style={{ display: 'flex', width: '100%' }}>
+      <>
         <Window>
-          <TeamChannelHeader {...{ setIsEditing, setPinsOpen }} />
+          <TeamChannelHeader />
           <MessageList disableQuotedMessages={true} pinPermissions={pinnedPermissions} />
           <MessageInput grow overrideSubmitHandler={overrideSubmitHandler} />
         </Window>
-        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
-        {pinsOpen && <PinnedMessageList setPinsOpen={setPinsOpen} />}
-      </div>
-    </GiphyContext.Provider>
+        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput, overrideSubmitHandler }} />
+        <PinnedMessageList />
+    </>
   );
 };

@@ -1,75 +1,27 @@
-import type { Channel, ChannelFilters, UserResponse, StreamChat } from 'stream-chat';
+import type { Channel, ChannelFilters, StreamChat, UserResponse } from 'stream-chat';
 
-import type {
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType,
-} from '../../App';
+import type { StreamChatType } from '../../types';
 
 export type ChannelOrUserType =
-  | Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >
-  | UserResponse<TeamUserType>;
+  | Channel<StreamChatType>
+  | UserResponse<StreamChatType>;
 
 export const isChannel = (
   channel: ChannelOrUserType,
-): channel is Channel<
-  TeamAttachmentType,
-  TeamChannelType,
-  TeamCommandType,
-  TeamEventType,
-  TeamMessageType,
-  TeamReactionType,
-  TeamUserType
-> =>
-  (channel as Channel<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >).cid !== undefined;
+): channel is Channel<StreamChatType> =>
+  (channel as Channel<StreamChatType>).cid !== undefined;
 
 type Props = {
-  client: StreamChat<
-    TeamAttachmentType,
-    TeamChannelType,
-    TeamCommandType,
-    TeamEventType,
-    TeamMessageType,
-    TeamReactionType,
-    TeamUserType
-  >;
+  client: StreamChat<StreamChatType>;
   setActiveChannel: (
-    newChannel?: Channel<
-      TeamAttachmentType,
-      TeamChannelType,
-      TeamCommandType,
-      TeamEventType,
-      TeamMessageType,
-      TeamReactionType,
-      TeamUserType
-    >,
+    newChannel?: Channel<StreamChatType>,
     watchers?: {
       limit?: number;
       offset?: number;
     },
     event?: React.SyntheticEvent,
   ) => void;
-  user: UserResponse<TeamUserType>;
+  user: UserResponse<StreamChatType>;
 };
 
 export const channelByUser = async (props: Props) => {
