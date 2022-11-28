@@ -1,5 +1,5 @@
 :root {
-  --primary-color: #005fff;
+  --primary-color: #005fffE6;
   --primary-color-alpha: #005fff1a;
   --static-background-color: #fff;
 
@@ -28,4 +28,5 @@
 
 .str-chat {
   --str-chat__font-family: var(--font-family);
+  --str-chat__avatar-background-color: var(--primary-color);
 }
