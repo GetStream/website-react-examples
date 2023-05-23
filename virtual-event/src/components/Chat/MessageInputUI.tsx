@@ -18,7 +18,6 @@ export const MessageInputUI = () => {
     cooldownInterval,
     cooldownRemaining,
     emojiPickerRef,
-    handleChange,
     handleSubmit,
     numberOfUploads,
     openCommandsList,
@@ -59,8 +58,6 @@ export const MessageInputUI = () => {
         event.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
-
-      handleChange(event);
     },
     [text, giphyState, numberOfUploads], // eslint-disable-line
   );
