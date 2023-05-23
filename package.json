@@ -14,7 +14,11 @@
     "build:gl": "cd gaming-livestream && yarn && yarn build && rm -rf ../docs/gaming-livestream/* && mv build/* ../docs/gaming-livestream",
     "build:js": "yarn build:cs && yarn build:sm && yarn build:ve && yarn build:t && yarn build:gl && yarn build:ve2",
     "lint": "eslint",
-    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\""
+    "format": "prettier --write \"**/*.{js,jsx,ts,tsx,json,md}\"",
+    "start:gaming-livestream": "cd gaming-livestream && yarn start",
+    "start:social-messenger-ts": "cd social-messenger-ts && yarn start",
+    "start:team-ts": "cd team-ts && yarn start",
+    "start:virtual-event": "cd virtual-event && yarn start"
   },
   "devDependencies": {
     "eslint": "^7.6.0",
