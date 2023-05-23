@@ -59,10 +59,9 @@ export const MessageInputUI = () => {
         event.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
-
-      handleChange(event);
+      handleChange(event)
     },
-    [text, giphyState, numberOfUploads], // eslint-disable-line
+    [text, giphyState, numberOfUploads, handleChange], // eslint-disable-line
   );
 
   const handleCommandsClick = () => {
