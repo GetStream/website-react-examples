@@ -9,6 +9,7 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@sentry/react": "^7.56.0",
     "clsx": "^1.2.1",
     "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",

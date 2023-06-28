@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/react": "^7.56.0",
     "lodash.debounce": "4.0.8",
     "react": "17.0.2",
     "react-color": "2.19.3",
