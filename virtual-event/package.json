@@ -4,6 +4,7 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@sentry/react": "^7.56.0",
     "framer-motion": "^7.5.0",
     "lottie-web": "^5.9.6",
     "postcss-normalize": "^10.0.1",
