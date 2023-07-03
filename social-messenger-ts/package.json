@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@sentry/react": "^7.56.0",
     "@stream-io/stream-chat-css": "^2.10.0",
     "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
