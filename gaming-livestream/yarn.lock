@@ -2354,10 +2354,10 @@
   resolved "https://registry.yarnpkg.com/@stream-io/escape-string-regexp/-/escape-string-regexp-5.0.1.tgz#362505c92799fea6afe4e369993fbbda8690cc37"
   integrity sha512-qIaSrzJXieZqo2fZSYTdzwSbZgHHsT3tkd646vvZhh4fr+9nO4NlvqGmPF43Y+OfZiWf+zYDFgNiPGG5+iZulQ==
 
-"@stream-io/stream-chat-css@^3.9.1":
-  version "3.9.1"
-  resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-3.9.1.tgz#6df29b8f77c2fcfe52dbb4ba7ed2e17a1874550b"
-  integrity sha512-MyBv5aTohtE2yrMroiNyk3F8Z1q/cCgQTzTnr6UDrq3JgDDcy+fmT7zrQvKeHa1L8a+ifbwOYpacqm8Znvb4kw==
+"@stream-io/stream-chat-css@^3.11.0":
+  version "3.11.0"
+  resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-3.11.0.tgz#46347bfd265d71ccec4e0bb3e00619a4fdbcc122"
+  integrity sha512-LIwSkCihlCQgh2HYbrsm8fJ6pgRWVlGUzxQJwPMolfwY+FhBi17QYg/V65JE9kK6GCHPn+v9o854pn8CHs+S0w==
 
 "@stream-io/transliterate@^1.5.5":
   version "1.5.5"
@@ -10833,10 +10833,10 @@ react-file-utils@^1.2.0:
   dependencies:
     react-dropzone "^12.0.5"
 
-react-image-gallery@^1.2.7:
-  version "1.2.11"
-  resolved "https://registry.yarnpkg.com/react-image-gallery/-/react-image-gallery-1.2.11.tgz#707331e71b02964f00c1f3ab98e9efe071ff9f15"
-  integrity sha512-YLMCdNSCf3YPhRmnjEOdEZGEXghTMx4o3dlAqd0rz0nAyebUvTz/xJnIHPActbPSHCvVJgt5A09EPHYbGqw++w==
+react-image-gallery@1.2.12:
+  version "1.2.12"
+  resolved "https://registry.yarnpkg.com/react-image-gallery/-/react-image-gallery-1.2.12.tgz#b08a633cc336bab2a5afdb96941e023925043c6a"
+  integrity sha512-JIh85lh0Av/yewseGJb/ycg00Y/weQiZEC/BQueC2Z5jnYILGB6mkxnrOevNhsM2NdZJpvcDekCluhy6uzEoTA==
 
 react-is@^16.13.1, react-is@^16.7.0, react-is@^16.8.1, react-is@^16.8.6:
   version "16.13.1"
@@ -12056,14 +12056,14 @@ stream-browserify@^2.0.1:
     inherits "~2.0.1"
     readable-stream "^2.0.2"
 
-stream-chat-react@^10.8.1:
-  version "10.8.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-10.8.1.tgz#5c8442ec48717ffa0b7e245fd386e0cd09c17d75"
-  integrity sha512-La+J1AxRrld+TherXJYpzAWtuFOcNUm3Iv9JvvhSk70JZq95fw8xcrM+nzXkO8hfGDnVGhdOIm23TEX6ep1xZg==
+stream-chat-react@^10.8.8:
+  version "10.8.8"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-10.8.8.tgz#e1d6b1f0d3f2f7e123d79ce4071e6610d051eb0d"
+  integrity sha512-YrmtnFGSTdbpEJMRhFDUOyCPBAV7g8GWFrzHpp23LYRaPw7dPNz68rN4dlIhXRyBg5UHbFadf8KZ+vKf4+M/LA==
   dependencies:
     "@braintree/sanitize-url" "^6.0.2"
     "@popperjs/core" "^2.11.5"
-    "@stream-io/stream-chat-css" "^3.9.1"
+    "@stream-io/stream-chat-css" "^3.11.0"
     clsx "^1.1.1"
     dayjs "^1.10.4"
     emoji-mart "3.0.1"
@@ -12081,7 +12081,7 @@ stream-chat-react@^10.8.1:
     react-dropzone "^14.2.2"
     react-fast-compare "^3.2.0"
     react-file-utils "^1.2.0"
-    react-image-gallery "^1.2.7"
+    react-image-gallery "1.2.12"
     react-is "^18.1.0"
     react-markdown "^8.0.3"
     react-player "2.10.1"
@@ -12096,10 +12096,10 @@ stream-chat-react@^10.8.1:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@8.5.0:
-  version "8.5.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.5.0.tgz#d10b13743bacbe3deb5c2c83985eab1ef2e74abf"
-  integrity sha512-DPzAaQZCIJfvEicSFLpkgujZJzCjW8twXTyh81lX4iE+/Mo6wQaHxtftzjrkETQ1y0epzRN03SzizaoDj6+3Xg==
+stream-chat@^8.10.1:
+  version "8.10.1"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.10.1.tgz#9575a2b3b139906b7ca3bd5cd26b32f2ba2413f1"
+  integrity sha512-6vhpr4pH0NuPaKPm6c8BcBIKZPu218c8kiT0oA1Io05k+nZ6bzAs0+6dx/4t5djjTI4RcXQdZ4bdfaSAEmjWcw==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"

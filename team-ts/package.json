@@ -20,8 +20,8 @@
     "react-popper": "^2.3.0",
     "react-scripts": "4.0.3",
     "sass": "^1.55.0",
-    "stream-chat": "8.5.0",
-    "stream-chat-react": "^10.8.1"
+    "stream-chat": "^8.10.1",
+    "stream-chat-react": "^10.8.8"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.9",
