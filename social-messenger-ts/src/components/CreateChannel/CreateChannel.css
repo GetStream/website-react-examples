@@ -142,7 +142,7 @@
   height: 56px;
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  gap: 1rem;
   margin: 0;
   padding: 8px 8px;
   cursor: pointer;
