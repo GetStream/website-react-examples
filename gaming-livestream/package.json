@@ -9,8 +9,8 @@
     "react-dom": "^18.2.0",
     "react-scripts": "4.0.3",
     "sass": "^1.56.1",
-    "stream-chat": "8.5.0",
-    "stream-chat-react": "^10.8.1"
+    "stream-chat": "^8.10.1",
+    "stream-chat-react": "^10.8.8"
   },
   "devDependencies": {
     "@types/react": "^18.0.25",
