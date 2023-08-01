@@ -26,7 +26,6 @@ export const useConnectUser = <SCG extends ExtendableGenerics = DefaultGenerics>
     const client = new StreamChat<SCG>(apiKey, {
       enableInsights: true,
       enableWSFallback: true,
-      timeout: 5000 // FIXME: Added to fix timeout in queryChannels request. The root cause of timeouts to be investigated.
     });
 
     // Under some circumstances, a "connectUser" operation might be interrupted
