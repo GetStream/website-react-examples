@@ -21,7 +21,7 @@ const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const noChannelNameFilter = urlParams.get('no_channel_name_filter') || false;
+const noChannelNameFilter = urlParams.get('no_channel_name_filter') || true;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
 const channelListOptions = getChannelListOptions(!!noChannelNameFilter, user);
