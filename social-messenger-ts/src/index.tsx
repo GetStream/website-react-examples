@@ -6,6 +6,7 @@ import './index.css';
 import App from './App';
 import { getImage } from './assets';
 import { getChannelListOptions } from './channelListOptions';
+import { ThemeContextProvider } from './context';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -19,7 +20,7 @@ const apiKey = process.env.REACT_APP_STREAM_KEY;
 const urlParams = new URLSearchParams(window.location.search);
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
-const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
+const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN as string;
 
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || true;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
@@ -35,13 +36,15 @@ const container = document.getElementById('root');
 const root = ReactDOM.createRoot(container!);
 root.render(
   <React.StrictMode>
-    <App
-      apiKey={apiKey!}
-      userToConnect={userToConnect}
-      userToken={userToken}
-      targetOrigin={targetOrigin!}
-      channelListOptions={channelListOptions}
-    />
+    <ThemeContextProvider targetOrigin={targetOrigin}>
+      <App
+        apiKey={apiKey!}
+        userToConnect={userToConnect}
+        userToken={userToken}
+        targetOrigin={targetOrigin!}
+        channelListOptions={channelListOptions}
+      />
+    </ThemeContextProvider>
   </React.StrictMode>,
 );
 
