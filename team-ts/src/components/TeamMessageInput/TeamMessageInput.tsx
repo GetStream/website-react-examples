@@ -3,15 +3,16 @@ import { useMemo } from 'react';
 import {
   AttachmentPreviewList,
   ChatAutoComplete,
-  EmojiPicker,
   SendButton,
-  useChannelStateContext, useComponentContext,
+  useChannelStateContext,
+  useComponentContext,
   useMessageInputContext,
 } from 'stream-chat-react';
 import { useDropzone } from 'react-dropzone';
 
 import { GiphyBadge } from './GiphyBadge';
 import { MessageInputControlButton } from './MessageInputControls';
+import { EmojiPicker } from './EmojiPicker';
 
 import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
 import { useMessageInputCompositionControls } from './hooks/useMessageInputCompositionControls';
@@ -19,23 +20,11 @@ import { useMessageInputCompositionControls } from './hooks/useMessageInputCompo
 import type { StreamChatType } from '../../types';
 
 export const TeamMessageInput = () => {
-  const {TypingIndicator} = useComponentContext();
+  const { TypingIndicator } = useComponentContext();
 
-  const {
-    acceptedFiles = [],
-    multipleUploads,
-  } = useChannelStateContext<StreamChatType>();
-  const {
-    handleSubmit,
-    numberOfUploads,
-    text,
-    uploadNewFiles,
-    maxFilesLeft,
-    isUploadEnabled,
-    openEmojiPicker,
-    closeEmojiPicker,
-    emojiPickerIsOpen,
-  } = useMessageInputContext<StreamChatType>();
+  const { acceptedFiles = [], multipleUploads } = useChannelStateContext<StreamChatType>();
+  const { handleSubmit, numberOfUploads, text, uploadNewFiles, maxFilesLeft, isUploadEnabled } =
+    useMessageInputContext<StreamChatType>();
   const { isComposingGiphyMessage } = useGiphyInMessageContext();
   const {
     formatting,
@@ -46,7 +35,6 @@ export const TeamMessageInput = () => {
     onChange,
     placeholder,
   } = useMessageInputCompositionControls();
-
 
   const accept = useMemo(
     () =>
@@ -64,7 +52,6 @@ export const TeamMessageInput = () => {
     noClick: true,
     onDrop: uploadNewFiles,
   });
-
 
   return (
     <div {...getRootProps({ className: clsx(`team-message-input__wrapper`) })}>
@@ -85,22 +72,34 @@ export const TeamMessageInput = () => {
             {isComposingGiphyMessage() && !numberOfUploads && <GiphyBadge />}
             <ChatAutoComplete onChange={onChange} placeholder={placeholder} />
 
-            <SendButton
-              disabled={!numberOfUploads && !text.length}
-              sendMessage={handleSubmit}
-            />
+            <SendButton disabled={!numberOfUploads && !text.length} sendMessage={handleSubmit} />
           </div>
         </div>
         <div className='team-message-input__bottom'>
-            <MessageInputControlButton type='emoji' onClick={emojiPickerIsOpen ? closeEmojiPicker : openEmojiPicker} />
-            <MessageInputControlButton type='bold' active={formatting === 'bold'} onClick={handleBoldButtonClick} />
-            <MessageInputControlButton type='italics' active={formatting === 'italics'} onClick={handleItalicsButtonClick} />
-            <MessageInputControlButton type='strike-through' active={formatting === 'strike-through'} onClick={handleStrikeThroughButtonClick} />
-            <MessageInputControlButton type='code' active={formatting === 'code'} onClick={handleCodeButtonClick} />
+          <EmojiPicker />
+          <MessageInputControlButton
+            type='bold'
+            active={formatting === 'bold'}
+            onClick={handleBoldButtonClick}
+          />
+          <MessageInputControlButton
+            type='italics'
+            active={formatting === 'italics'}
+            onClick={handleItalicsButtonClick}
+          />
+          <MessageInputControlButton
+            type='strike-through'
+            active={formatting === 'strike-through'}
+            onClick={handleStrikeThroughButtonClick}
+          />
+          <MessageInputControlButton
+            type='code'
+            active={formatting === 'code'}
+            onClick={handleCodeButtonClick}
+          />
         </div>
       </div>
       {TypingIndicator && <TypingIndicator />}
-      <EmojiPicker />
     </div>
   );
 };

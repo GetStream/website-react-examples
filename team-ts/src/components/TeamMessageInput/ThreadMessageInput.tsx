@@ -1,25 +1,19 @@
-import { useCallback, useState } from 'react';
-import { ChatAutoComplete, EmojiPicker, useMessageInputContext } from 'stream-chat-react';
-import { usePopper } from 'react-popper';
+import { useCallback } from 'react';
+import { ChatAutoComplete, useMessageInputContext } from 'stream-chat-react';
 
 import { GiphyBadge } from './GiphyBadge';
-import { MessageInputControlButton } from './MessageInputControls';
 import { SendButtonIcon } from './SendButtonIcon';
+import { EmojiPicker } from './EmojiPicker';
 
 import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
 
 import type { StreamChatType } from '../../types';
 
 export const ThreadMessageInput = () => {
-  const { isComposingGiphyReply, clearGiphyFlagThread, setComposeGiphyReplyFlag } = useGiphyInMessageContext();
+  const { isComposingGiphyReply, clearGiphyFlagThread, setComposeGiphyReplyFlag } =
+    useGiphyInMessageContext();
 
   const messageInput = useMessageInputContext<StreamChatType>();
-  const {openEmojiPicker, closeEmojiPicker, emojiPickerIsOpen} = messageInput;
-  const [referenceElement, setReferenceElement] = useState<HTMLButtonElement | null>(null);
-  const [popperElement, setPopperElement] = useState<HTMLDivElement | null>(null);
-  const { styles, attributes } = usePopper(referenceElement, popperElement, {
-    placement: 'top-end',
-  });
 
   const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
     (event) => {
@@ -46,11 +40,9 @@ export const ThreadMessageInput = () => {
     <div className='thread-message-input__wrapper'>
       <div className='thread-message-input__input'>
         {isComposingGiphyReply() && <GiphyBadge />}
-        <ChatAutoComplete
-          onChange={onChange}
-          placeholder='Reply'
-        />
-        <MessageInputControlButton type='emoji' onClick={emojiPickerIsOpen ? closeEmojiPicker : openEmojiPicker} ref={setReferenceElement} />
+        <ChatAutoComplete onChange={onChange} placeholder='Reply' />
+        <EmojiPicker />
+
         <button
           className='thread-message-input__send-button'
           disabled={!messageInput.numberOfUploads && !messageInput.text.length}
@@ -59,16 +51,6 @@ export const ThreadMessageInput = () => {
           <SendButtonIcon />
         </button>
       </div>
-      {emojiPickerIsOpen && (
-        <div
-          className='str-chat__message-textarea-emoji-picker-container'
-          style={styles.popper}
-          {...attributes.popper}
-          ref={setPopperElement}
-        >
-          <EmojiPicker />
-        </div>
-      )}
     </div>
   );
 };
