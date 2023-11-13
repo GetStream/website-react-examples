@@ -7,7 +7,9 @@
     border-radius: 8px;
     border: 1px solid $stroke;
     background: $card-alt-background;
-    transition: background 1s, border-color 0.2s;
+    transition:
+      background 1s,
+      border-color 0.2s;
 
     &:focus-within {
       border: 2px solid $primary-accent;
@@ -34,7 +36,17 @@
       }
     }
 
+    .input-ui-input-emoji-picker {
+      z-index: 1;
+    }
+
     .input-ui-input-emoji-picker-button {
+      background: none;
+      margin: unset;
+      padding: unset;
+      border: unset;
+      display: flex;
+
       &:hover {
         cursor: pointer;
       }
@@ -61,7 +73,7 @@
   }
 
   .input-ui-send-button {
-    transition: background .2s;
+    transition: background 0.2s;
     outline: none;
     border: none;
     border-radius: 8px;
@@ -149,7 +161,6 @@
     font-weight: 600;
     font-size: 18px;
     color: $text-high-emphasis;
-
 
     .suggestion-item-description {
       color: $text-mid-emphasis;

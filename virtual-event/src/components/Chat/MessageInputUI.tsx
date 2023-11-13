@@ -1,28 +1,20 @@
 import { useCallback, useEffect, useState } from 'react';
-import {
-  ChatAutoComplete,
-  CooldownTimer,
-  EmojiPicker,
-  useMessageInputContext,
-} from 'stream-chat-react';
+import { ChatAutoComplete, CooldownTimer, useMessageInputContext } from 'stream-chat-react';
 
-import { CommandBolt, EmojiPickerIcon, GiphyIcon, GiphySearch, SendArrow } from '../../assets';
+import { CommandBolt, GiphyIcon, GiphySearch, SendArrow } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 import { useGiphyContext } from '../../contexts/GiphyContext';
-
+import { EmojiPicker } from './EmojiPicker';
 
 export const MessageInputUI = () => {
-
   const {
     closeCommandsList,
     cooldownInterval,
     cooldownRemaining,
-    emojiPickerRef,
     handleChange,
     handleSubmit,
     numberOfUploads,
     openCommandsList,
-    openEmojiPicker,
     setCooldownRemaining,
     text,
   } = useMessageInputContext();
@@ -31,7 +23,6 @@ export const MessageInputUI = () => {
   const { giphyState, setGiphyState } = useGiphyContext();
 
   const [commandsOpen, setCommandsOpen] = useState(false);
-
 
   useEffect(() => {
     const handleClick = () => {
@@ -59,7 +50,7 @@ export const MessageInputUI = () => {
         event.target.value = value.replace('/giphy', '');
         setGiphyState(true);
       }
-      handleChange(event)
+      handleChange(event);
     },
     [text, giphyState, numberOfUploads, handleChange], // eslint-disable-line
   );
@@ -72,7 +63,6 @@ export const MessageInputUI = () => {
 
   return (
     <div className='input-ui-container'>
-      <EmojiPicker />
       <div className={`input-ui-input ${giphyState ? 'giphy' : ''}`}>
         {giphyState && !numberOfUploads && <GiphyIcon />}
         <ChatAutoComplete onChange={onChange} placeholder='Say something' />
@@ -85,17 +75,7 @@ export const MessageInputUI = () => {
             >
               <CommandBolt />
             </div>
-            {!giphyState && (
-              <div
-                className={`input-ui-input-emoji-picker-button ${
-                  cooldownRemaining ? 'cooldown' : ''
-                }`}
-                ref={emojiPickerRef}
-                onClick={cooldownRemaining ? () => null : openEmojiPicker}
-              >
-                <EmojiPickerIcon />
-              </div>
-            )}
+            {!giphyState && <EmojiPicker />}
           </>
         )}
       </div>

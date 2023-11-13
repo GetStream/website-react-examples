@@ -2,6 +2,10 @@ import React, { useState } from 'react';
 import { Channel as StreamChannel, UserResponse } from 'stream-chat';
 import { Channel, Chat } from 'stream-chat-react';
 
+import { SearchIndex } from 'emoji-mart';
+import { init } from 'emoji-mart';
+import data from '@emoji-mart/data';
+
 import { ChannelInner } from './ChannelInner';
 import { ChatHeader } from './ChatHeader';
 import { ChatSidebar } from './ChatSidebar';
@@ -24,6 +28,8 @@ import { useInitChat } from '../../hooks/useInitChat';
 
 import { StreamChatType } from '../../types';
 
+init({ data });
+
 // todo: remove AutocompleteSuggestionHeader prop
 export const ChatContainer = () => {
   const {
@@ -40,14 +46,8 @@ export const ChatContainer = () => {
   const [participantProfile, setParticipantProfile] = useState<UserResponse>();
   const [snackbar, setSnackbar] = useState(false);
 
-  const {
-    chatClient,
-    currentChannel,
-    dmUnread,
-    eventUnread,
-    globalUnread,
-    qaUnread,
-  } = useInitChat();
+  const { chatClient, currentChannel, dmUnread, eventUnread, globalUnread, qaUnread } =
+    useInitChat();
 
   if (!chatClient) return null;
 
@@ -119,6 +119,7 @@ export const ChatContainer = () => {
                   VirtualMessage={(props) => (
                     <MessageUI {...props} setMessageActionUser={setMessageActionUser} />
                   )}
+                  emojiSearchIndex={SearchIndex}
                 >
                   <ChannelInner />
                 </Channel>

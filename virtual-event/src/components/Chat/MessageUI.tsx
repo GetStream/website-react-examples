@@ -1,4 +1,4 @@
-import React, { BaseSyntheticEvent, Suspense, useCallback, useEffect, useState } from 'react';
+import React, { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react';
 import {
   Attachment,
   Avatar,
@@ -10,7 +10,6 @@ import {
   useChannelActionContext,
   useChannelStateContext,
   useChatContext,
-  useEmojiContext,
   useMessageContext,
 } from 'stream-chat-react';
 
@@ -108,18 +107,15 @@ type ReactionSelectorProps = {
 };
 
 const ReactionSelector = React.forwardRef<HTMLDivElement, ReactionSelectorProps>(
-  ({ isTopMessage, closeReactionSelector }, ref) => {
-    const { Emoji, emojiConfig } = useEmojiContext();
+  ({ isTopMessage }, ref) => {
     const { handleReaction } = useMessageContext();
 
     return (
       <div className={`message-ui-reaction-selector ${isTopMessage ? 'top' : ''}`} ref={ref}>
-        {customReactions.map((reaction, i) => (
-          <Suspense fallback={null} key={i}>
-            <div onClick={(event) => handleReaction(reaction.id, event)}>
-              <Emoji data={emojiConfig.emojiData} emoji={reaction} size={24} />
-            </div>
-          </Suspense>
+        {customReactions.map(({ Component, type }) => (
+          <div key={type} onClick={(event) => handleReaction(type, event)}>
+            <Component />
+          </div>
         ))}
       </div>
     );

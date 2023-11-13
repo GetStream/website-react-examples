@@ -32,7 +32,7 @@ export const useTheme = () => {
     }
   }, [mode, theme]);
 
-  return { setMode, setTheme };
+  return { setMode, setTheme, mode };
 };
 
 const themes: Themes = {
