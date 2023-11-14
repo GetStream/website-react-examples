@@ -1,24 +1,39 @@
 // colors
 #root {
-  --background: #000615;
-  --component-background: #010c29;
-  --button-background: #062471;
-  --button-background-hover: #0d47d9;
+  --background: rgb(0, 6, 21);
+  --component-background: rgb(1, 12, 41);
+  --button-background: rgb(6, 36, 113);
+  --button-background-hover: rgb(13, 71, 217);
 
-  --foreground: #fff;
+  --foreground: rgb(255, 255, 255);
 
-  --attendees: #00fc92;
-  
-  --border-color: #062471;
-  --border-color-secondary: #081e58;
+  --attendees: rgb(0, 252, 146);
+
+  --border-color: rgb(6, 36, 113);
+  --border-color-secondary: rgb(8, 30, 88);
 
   --header-height: 60px;
   --sidebar-width: 320px;
 
-  --btn-border-radius: .5rem;
+  --btn-border-radius: 0.5rem;
 
   --input-focused-box-shadow: 0 0 0 2px rgba(0, 108, 255, 0.36);
+
+  --em-rgb-color: var(--button-background);
 }
 
+em-emoji-picker {
+  --category-icon-size: 16px;
+  --font-size: 16px;
+  
+  --color-border-over: rgb(0, 108, 255);
+  --color-border: rgb(0, 6, 21);
+  
+  --rgb-background: 1, 12, 41;
+  --rgb-accent: 0, 108, 255;
+  --rgb-color: 255, 255, 255;
+  --rgb-input: 0, 6, 21;
+  --shadow: none;
 
-
+  border: 1px solid rgb(6, 36, 113);
+}
