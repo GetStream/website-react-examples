@@ -10,6 +10,7 @@ on:
       - virtual-event/**
       - virtual-event-old/**
       - customer-support/**
+      - .github/workflows/deploy.yml
 
 jobs:
   build:
@@ -22,6 +23,8 @@ jobs:
           node-version: 18
 
       - name: Build Apps
+        env:
+          REACT_APP_STREAM_KEY: ${{ vars.EXAMPLES_STREAM_API_KEY }}
         run: yarn build:js:public
 
       - name: Upload Pages Artifact
