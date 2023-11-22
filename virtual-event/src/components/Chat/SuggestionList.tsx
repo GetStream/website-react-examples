@@ -9,16 +9,15 @@ import {
 
 import { Ban, CommandBolt, Flag, Giphy, Mute, Unban, Unmute } from '../../assets';
 
-import type { BaseEmoji } from 'emoji-mart';
+type Emoji = { id: string; native: string; name: string };
 
-const isEmoji = (output: SuggestionItem): output is BaseEmoji =>
-  (output as BaseEmoji).native != null;
+const isEmoji = (output: SuggestionItem): output is Emoji => (output as Emoji).native != null;
 
 const isMention = (output: SuggestionItem): output is SuggestionUser =>
   (output as SuggestionUser).id != null && (output as SuggestionUser).native == null;
 
-const isEmojiOrMention = (output: SuggestionItem): output is BaseEmoji | SuggestionUser =>
-  (output as BaseEmoji | SuggestionUser).id != null;
+const isEmojiOrMention = (output: SuggestionItem): output is Emoji | SuggestionUser =>
+  (output as Emoji | SuggestionUser).id != null;
 
 export const SuggestionHeader: React.FC<SuggestionListHeaderProps> = (props) => {
   const { value } = props;
@@ -85,7 +84,7 @@ const getCommandIcon = (name?: string) => {
   return { description, Icon };
 };
 
-type SuggestionItem = BaseEmoji | SuggestionUser | SuggestionCommand;
+type SuggestionItem = Emoji | SuggestionUser | SuggestionCommand;
 
 export const SuggestionListItem = React.forwardRef(
   (props: SuggestionItemProps, ref: React.Ref<HTMLDivElement>) => {

@@ -1,20 +1,25 @@
-import React, {useEffect, useState} from 'react';
-import {Channel, Chat} from 'stream-chat-react';
+import React, { useEffect, useState } from 'react';
+import { Channel, Chat } from 'stream-chat-react';
 
-import {ChatUpgrades} from './ChatUpgrades';
-import {GamingChatInner} from './GamingChatInner';
-import {GamingChatNotification} from './GamingChatNotification';
-import {GamingParticipants} from './GamingParticipants';
-import {GamingThreadHeader} from './GamingThreadHeader';
+import { init, SearchIndex } from 'emoji-mart';
+import data from '@emoji-mart/data';
 
-import {getColor, getRandomUserRole, participants} from '../../assets/data';
-import {useChecklist} from '../../hooks/useChecklistTasks';
+import { ChatUpgrades } from './ChatUpgrades';
+import { GamingChatInner } from './GamingChatInner';
+import { GamingChatNotification } from './GamingChatNotification';
+import { GamingParticipants } from './GamingParticipants';
+import { GamingThreadHeader } from './GamingThreadHeader';
 
-import {useConnectUser} from '../../hooks/useConnectUser';
-import {useLayoutController} from '../../context/LayoutController';
-import type {Channel as ChannelT} from 'stream-chat';
-import type {StreamChatType} from '../../types';
-import {MessageTimestampController} from "../../context/MessageTimestampController";
+import { getColor, getRandomUserRole, participants } from '../../assets/data';
+import { useChecklist } from '../../hooks/useChecklistTasks';
+
+import { useConnectUser } from '../../hooks/useConnectUser';
+import { useLayoutController } from '../../context/LayoutController';
+import type { Channel as ChannelT } from 'stream-chat';
+import type { StreamChatType } from '../../types';
+import { MessageTimestampController } from '../../context/MessageTimestampController';
+
+init({ data });
 
 const urlParams = new URLSearchParams(window.location.search);
 const apiKey = urlParams.get('apikey') || process.env.REACT_APP_STREAM_KEY;
@@ -23,50 +28,55 @@ const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKE
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
 const userToConnect = {
-	id: userId!,
-	color: getColor(),
-	userRole: getRandomUserRole(),
+  id: userId!,
+  color: getColor(),
+  userRole: getRandomUserRole(),
 };
 
 export const GamingChat = () => {
-	const [channel, setChannel] = useState<ChannelT<StreamChatType> | null>(null);
-	const {memberListVisible, popUpText, upgradePanelVisible, chatVisible} = useLayoutController();
-	const chatClient = useConnectUser<StreamChatType>(apiKey!, userToConnect, userToken);
-	useChecklist({chatClient, targetOrigin});
+  const [channel, setChannel] = useState<ChannelT<StreamChatType> | null>(null);
+  const { memberListVisible, popUpText, upgradePanelVisible, chatVisible } = useLayoutController();
+  const chatClient = useConnectUser<StreamChatType>(apiKey!, userToConnect, userToken);
+  useChecklist({ chatClient, targetOrigin });
 
-	useEffect(() => {
-		if (!chatClient) return;
+  useEffect(() => {
+    if (!chatClient) return;
 
-		const loadChat = async () => {
-			const channel = chatClient.channel('gaming', 'gaming-demo', {name: 'Gaming Demo'});
-			await channel.watch();
-			setChannel(channel);
-		};
+    const loadChat = async () => {
+      const channel = chatClient.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });
+      await channel.watch();
+      setChannel(channel);
+    };
 
-		loadChat();
-	}, [chatClient]);
+    loadChat();
+  }, [chatClient]);
 
+  if (!chatClient) return null;
 
-	if (!chatClient) return null;
-
-	return (
-		<section
-			className={`sidebar ${memberListVisible} ${chatVisible} ${upgradePanelVisible ? 'show-upgrade' : ''}`}
-		>
-			{channel && (
-				<div className='chat-container'>
-					<Chat client={chatClient}>
-						<Channel channel={channel} ThreadHeader={GamingThreadHeader}>
-							<MessageTimestampController>
-								<GamingChatInner/>
-							</MessageTimestampController>
-						</Channel>
-					</Chat>
-					{popUpText && <GamingChatNotification text={popUpText}/>}
-				</div>
-			)}
-			<GamingParticipants participants={participants}/>
-			<ChatUpgrades/>
-		</section>
-	);
+  return (
+    <section
+      className={`sidebar ${memberListVisible} ${chatVisible} ${
+        upgradePanelVisible ? 'show-upgrade' : ''
+      }`}
+    >
+      {channel && (
+        <div className='chat-container'>
+          <Chat client={chatClient}>
+            <Channel
+              channel={channel}
+              ThreadHeader={GamingThreadHeader}
+              emojiSearchIndex={SearchIndex}
+            >
+              <MessageTimestampController>
+                <GamingChatInner />
+              </MessageTimestampController>
+            </Channel>
+          </Chat>
+          {popUpText && <GamingChatNotification text={popUpText} />}
+        </div>
+      )}
+      <GamingParticipants participants={participants} />
+      <ChatUpgrades />
+    </section>
+  );
 };

@@ -11,7 +11,12 @@ import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { GiphyInMessageFlagProvider } from '../../context/GiphyInMessageFlagContext';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
+import data from '@emoji-mart/data';
+import { init, SearchIndex } from 'emoji-mart';
+
 const LoadingIndicator = () => null;
+
+init({data})
 
 export const ChannelContainer = () => {
   const { activeWorkspace } = useWorkspaceController();
@@ -30,6 +35,7 @@ export const ChannelContainer = () => {
         ReactionsList={SimpleReactionsList}
         ThreadHeader={ThreadHeader}
         TypingIndicator={TeamTypingIndicator}
+        emojiSearchIndex={SearchIndex}
       >
         <GiphyInMessageFlagProvider>
           <ChannelInner />

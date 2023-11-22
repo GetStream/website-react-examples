@@ -1,0 +1,50 @@
+name: Deploy Demo Apps
+on:
+  push:
+    branches:
+      - master
+    paths:
+      - gaming-livestream/**
+      - social-messenger-ts/**
+      - team-ts/**
+      - virtual-event/**
+      - virtual-event-old/**
+      - customer-support/**
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Build Apps
+        run: yarn build:js:public
+
+      - name: Upload Pages Artifact
+        uses: actions/upload-pages-artifact@v1
+        with:
+          path: docs/
+          name: gh-pages-artifact
+
+  deploy:
+    needs: build
+    runs-on: ubuntu-latest
+
+    permissions:
+      pages: write
+      id-token: write
+
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+
+    steps:
+      - name: Deploy to Github Pages
+        id: deployment
+        uses: actions/deploy-pages@v1
+        with:
+          artifact_name: gh-pages-artifact

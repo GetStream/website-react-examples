@@ -9,8 +9,11 @@
     "eject": "react-scripts eject"
   },
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@sentry/react": "^7.56.0",
     "clsx": "^1.2.1",
+    "emoji-mart": "^5.5.2",
     "lodash.debounce": "^4.0.8",
     "react": "^18.2.0",
     "react-color": "2.19.3",
@@ -18,10 +21,10 @@
     "react-dropzone": "^14.2.3",
     "react-file-utils": "^1.2.0",
     "react-popper": "^2.3.0",
-    "react-scripts": "4.0.3",
+    "react-scripts": "^5.0.1",
     "sass": "^1.55.0",
     "stream-chat": "^8.10.1",
-    "stream-chat-react": "^10.8.8"
+    "stream-chat-react": "^11.0.0-rc.8"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.9",

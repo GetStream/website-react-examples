@@ -4,7 +4,10 @@
   "private": true,
   "homepage": "./",
   "dependencies": {
+    "@emoji-mart/data": "^1.1.2",
+    "@emoji-mart/react": "^1.1.1",
     "@sentry/react": "^7.56.0",
+    "emoji-mart": "^5.5.2",
     "framer-motion": "^7.5.0",
     "lottie-web": "^5.9.6",
     "postcss-normalize": "^10.0.1",
@@ -12,7 +15,7 @@
     "react-dom": "^18.2.0",
     "sass": "^1.55.0",
     "stream-chat": "^8.10.1",
-    "stream-chat-react": "^10.8.8"
+    "stream-chat-react": "^11.0.0-rc.8"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.8",

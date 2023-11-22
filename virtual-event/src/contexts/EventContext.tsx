@@ -30,6 +30,7 @@ type EventContextValue = {
   videoOpen: boolean;
   eventName?: string;
   userActionType?: UserActions;
+  mode: ModeOptions;
 };
 
 const EventContext = React.createContext({} as EventContextValue);
@@ -46,7 +47,7 @@ export const EventProvider = ({ children }: PropsWithChildrenOnly) => {
   const [userActionType, setUserActionType] = useState<UserActions>();
   const [videoOpen, setVideoOpen] = useState(true);
 
-  const { setMode, setTheme } = useTheme();
+  const { setMode, setTheme, mode } = useTheme();
 
   const value: EventContextValue = {
     actionsModalOpen,
@@ -71,6 +72,7 @@ export const EventProvider = ({ children }: PropsWithChildrenOnly) => {
     themeModalOpen,
     userActionType,
     videoOpen,
+    mode,
   };
 
   return <EventContext.Provider value={value}>{children}</EventContext.Provider>;
