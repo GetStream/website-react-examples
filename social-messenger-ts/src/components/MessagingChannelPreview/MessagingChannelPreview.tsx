@@ -51,12 +51,14 @@ type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
 };
 
 const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
-  const { channel, lastMessage, setActiveChannel, onClick } = props;
+  const { channel, setActiveChannel, onClick, latestMessage, } = props;
   const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
 
   const members = Object.values(channel.state.members).filter(
     ({ user }) => user?.id !== client.userID,
   );
+
+
 
   return (
     <div
@@ -78,7 +80,7 @@ const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
           </p>
           <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
         </div>
-        <p className='channel-preview__content-message'>{lastMessage?.text ?? 'Send a message'}</p>
+        <div className='channel-preview__content-message'>{latestMessage}</div>
       </div>
     </div>
   );

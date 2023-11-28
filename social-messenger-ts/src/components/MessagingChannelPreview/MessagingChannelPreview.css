@@ -82,6 +82,10 @@
   white-space: nowrap;
 }
 
+.channel-preview__content-message p {
+  margin: 0;
+}
+
 .channel-preview__container .str-chat__avatar {
   margin-right: 0;
 }
