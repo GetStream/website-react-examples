@@ -22,12 +22,12 @@ import {
   ReactionSelector,
   renderText as defaultRenderText,
   showMessageActionsBox,
-  SimpleReactionsList,
   ThreadIcon,
   useComponentContext,
   useMessageContext,
   useReactionClick,
   useTranslationContext,
+  ReactionsList,
 } from 'stream-chat-react';
 
 import { PinIndicator } from './PinIndicator';
@@ -228,7 +228,7 @@ const MessageTeamWithContext = (
               <Attachment actionHandler={handleAction} attachments={message.attachments} />
             ) : null}
             {message.latest_reactions?.length !== 0 && message.text !== '' && isReactionEnabled && (
-              <SimpleReactionsList />
+              <ReactionsList />
             )}
             {message.status === 'failed' && (
               <button
@@ -250,7 +250,7 @@ const MessageTeamWithContext = (
           {message.latest_reactions &&
             message.latest_reactions.length !== 0 &&
             message.text === '' &&
-            isReactionEnabled && <SimpleReactionsList />}
+            isReactionEnabled && <ReactionsList />}
           {!threadList && (
             <MessageRepliesCountButton
               onClick={handleOpenThread}

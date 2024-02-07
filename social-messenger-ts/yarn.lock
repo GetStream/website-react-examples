@@ -1116,6 +1116,13 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
+"@babel/runtime@^7.23.6":
+  version "7.23.9"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.9.tgz#47791a15e4603bb5f905bc0753801cf21d6345f7"
+  integrity sha512-0CX6F+BI2s9dkUqr08KFrAIZgNFj75rdBU/DjCyYLIaV/quFjkk6T+EJ2LkZHyZTbEV4L5p97mNkUsHl2wLFAw==
+  dependencies:
+    regenerator-runtime "^0.14.0"
+
 "@babel/template@^7.22.15", "@babel/template@^7.3.3":
   version "7.22.15"
   resolved "https://registry.yarnpkg.com/@babel/template/-/template-7.22.15.tgz#09576efc3830f0430f4548ef971dde1350ef2f38"
@@ -1786,11 +1793,6 @@
   version "2.11.0"
   resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-2.11.0.tgz#fdf0a3fd557f09ca02a344c7a6b70027df37068c"
   integrity sha512-lsPEWpsB3ygNSO0PrTULgcCyxrCH5NWg0WuCbWP/i7fF5Slqswrs+yF6uEx6tBMW+pBZmOBPvbhHTG+CK2iczg==
-
-"@stream-io/stream-chat-css@^4.0.0":
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/@stream-io/stream-chat-css/-/stream-chat-css-4.0.0.tgz#78328d73d63d944e56c47b2b73ff9c9c59745573"
-  integrity sha512-FhlrMxCvmd5i7Atpa72tngqT/U4P8mVmlLPdA6Xu0BgnbzVxC5p87zix/wmgxSxcUyL6WHImdWGnnNWwpGbxPA==
 
 "@stream-io/transliterate@^1.5.5":
   version "1.5.5"
@@ -8650,6 +8652,22 @@ react-is@^18.0.0, react-is@^18.1.0:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
 
+react-markdown@9.0.1:
+  version "9.0.1"
+  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-9.0.1.tgz#c05ddbff67fd3b3f839f8c648e6fb35d022397d1"
+  integrity sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==
+  dependencies:
+    "@types/hast" "^3.0.0"
+    devlop "^1.0.0"
+    hast-util-to-jsx-runtime "^2.0.0"
+    html-url-attributes "^3.0.0"
+    mdast-util-to-hast "^13.0.0"
+    remark-parse "^11.0.0"
+    remark-rehype "^11.0.0"
+    unified "^11.0.0"
+    unist-util-visit "^5.0.0"
+    vfile "^6.0.0"
+
 react-markdown@^5.0.3:
   version "5.0.3"
   resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-5.0.3.tgz#41040ea7a9324b564b328fb81dd6c04f2a5373ac"
@@ -8665,22 +8683,6 @@ react-markdown@^5.0.3:
     unified "^9.0.0"
     unist-util-visit "^2.0.0"
     xtend "^4.0.1"
-
-react-markdown@^9.0.0:
-  version "9.0.1"
-  resolved "https://registry.yarnpkg.com/react-markdown/-/react-markdown-9.0.1.tgz#c05ddbff67fd3b3f839f8c648e6fb35d022397d1"
-  integrity sha512-186Gw/vF1uRkydbsOIkcGXw7aHq0sZOCRFFjGrr7b9+nVZg4UfA4enXCaxm4fUzecU38sWfrNDitGhshuU7rdg==
-  dependencies:
-    "@types/hast" "^3.0.0"
-    devlop "^1.0.0"
-    hast-util-to-jsx-runtime "^2.0.0"
-    html-url-attributes "^3.0.0"
-    mdast-util-to-hast "^13.0.0"
-    remark-parse "^11.0.0"
-    remark-rehype "^11.0.0"
-    unified "^11.0.0"
-    unist-util-visit "^5.0.0"
-    vfile "^6.0.0"
 
 react-player@2.10.1:
   version "2.10.1"
@@ -9458,14 +9460,19 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^11.0.0:
-  version "11.0.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.0.0.tgz#ff40da6c0f41ff31c8531dcd8d9ddc3df973a31a"
-  integrity sha512-eKrjD6j4aSOuE0SzBpIfj1YvyQAFRdZmUZe4Npa0u/En3oH0YyJ5RXqEoL24BhLAk3GJi5HI6K7ZybthcVrY/w==
+stream-chat-css@^1.0.23:
+  version "1.0.23"
+  resolved "https://registry.yarnpkg.com/stream-chat-css/-/stream-chat-css-1.0.23.tgz#5016c6d34e2b210bc48893671740abd9be5bf8dd"
+  integrity sha512-ab7NFnFKbhAm8dbCzRPiSyfhGHXlbwro5Q/BxXhjLCdalEUN3dRvHOmW7mqWY7TdloJAs+3QTM9ORNxDTV7usg==
+
+stream-chat-react@^11.6.0:
+  version "11.6.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.6.0.tgz#853421b1bfe77398709e0d51925ed58c0987bd25"
+  integrity sha512-CCq0L2hKuH64SlmZYYvnmlObh4Dkfrb96LLDYsMWf2DAbtZ8tJ9l4TQOz/k8MrduQzq21N5DBd/H0jaE3olYqg==
   dependencies:
+    "@babel/runtime" "^7.23.6"
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
-    "@stream-io/stream-chat-css" "^4.0.0"
     clsx "^2.0.0"
     dayjs "^1.10.4"
     emoji-regex "^9.2.0"
@@ -9483,7 +9490,7 @@ stream-chat-react@^11.0.0:
     react-fast-compare "^3.2.2"
     react-image-gallery "1.2.12"
     react-is "^18.1.0"
-    react-markdown "^9.0.0"
+    react-markdown "9.0.1"
     react-player "2.10.1"
     react-popper "^2.3.0"
     react-textarea-autosize "^8.3.0"
@@ -9497,10 +9504,10 @@ stream-chat-react@^11.0.0:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.10.1:
-  version "8.14.1"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.14.1.tgz#f6560c2aa2ce754928d41d6059c61d7cfe770e0a"
-  integrity sha512-7ersgzFLrUlnV5q09SLcJSEkKMEFNl3E7C5Pk48hzzKuY/eRt8+ojka7t17/cRtF84g3XSW0dSl7C/yB9J5ieQ==
+stream-chat@^8.16.0:
+  version "8.16.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.16.0.tgz#3718812815251315b28f75c4002f0a0d62f73bb8"
+  integrity sha512-j5GDgCmae4k59titjzePvihfVoVSlRW8NvP7uXfxbfMlsmGfcbYl08IaAwSsW6NC44doZyIjOt7v/v2QyCcP4A==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"
