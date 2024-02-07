@@ -12,8 +12,9 @@
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "react-file-utils": "^1.2.0",
-    "stream-chat": "^8.10.1",
-    "stream-chat-react": "^11.0.0"
+    "stream-chat": "^8.16.0",
+    "stream-chat-css": "^1.0.23",
+    "stream-chat-react": "^11.6.0"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",
