@@ -9523,11 +9523,6 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-css@^1.0.23:
-  version "1.0.23"
-  resolved "https://registry.yarnpkg.com/stream-chat-css/-/stream-chat-css-1.0.23.tgz#5016c6d34e2b210bc48893671740abd9be5bf8dd"
-  integrity sha512-ab7NFnFKbhAm8dbCzRPiSyfhGHXlbwro5Q/BxXhjLCdalEUN3dRvHOmW7mqWY7TdloJAs+3QTM9ORNxDTV7usg==
-
 stream-chat-react@^11.10.0:
   version "11.10.0"
   resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.10.0.tgz#be7adf5db37935e8937a290ad2729fd0ac8cb21d"
