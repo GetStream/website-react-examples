@@ -60,7 +60,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
     setGiphyState(false);
   };
 
-  const actions = ['delete', 'edit', 'flag', 'mute', 'react', 'reply'];
+  const actions = ['delete', 'edit', 'flag', 'markUnread', 'mute', 'react', 'reply'];
 
   return (
     <>
