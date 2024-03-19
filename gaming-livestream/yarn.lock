@@ -9489,10 +9489,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^11.10.0:
-  version "11.10.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.10.0.tgz#be7adf5db37935e8937a290ad2729fd0ac8cb21d"
-  integrity sha512-liBDLM6njree4fgCRUOjWCpjRx059/md4NW7kRxaCT8iFVjPPpbfjMt0IrMlHx7kLe+8S+F0m5R8fRS+sXvLtw==
+stream-chat-react@^11.12.1:
+  version "11.12.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.12.1.tgz#c5e520347a6846becb488480504fa59f32b7a21e"
+  integrity sha512-nsV5LE2HXrgMxzNj1E0dcYMEvQBY+TDmYTdCi9lkWKz6Av+gDJL5yCWlgMswGUZdZAxwGcQ3OJcJWzN+nBRm7g==
   dependencies:
     "@babel/runtime" "^7.23.6"
     "@braintree/sanitize-url" "^6.0.4"
@@ -9530,10 +9530,10 @@ stream-chat-react@^11.10.0:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.18.2:
-  version "8.18.2"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.18.2.tgz#643b337a349ea07f8e55f450cf6f428d0ca75fde"
-  integrity sha512-eld8wcTQvuXavWYCuwL+gTeiy7ebVQ0PBo8f0iqZsxLu99BitkLWBnG0lIzfQm69c5b74R4ObPEhHuooq02naw==
+stream-chat@^8.24.0:
+  version "8.24.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.24.0.tgz#704e6d227fcf618cf2694103ffd7a913003ab885"
+  integrity sha512-D0UDUeR6ozovxPqwBn2N4kv/iGL8MQhM8bb0e+3JPAC+Xq3NhFtIcNT5KiFZ+b+yhqey2T+XqdCshYQ8sGFUjg==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"
