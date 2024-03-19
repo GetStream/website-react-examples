@@ -12,8 +12,8 @@
     "react-dom": "^18.2.0",
     "react-scripts": "^5.0.1",
     "sass": "^1.56.1",
-    "stream-chat": "^8.18.2",
-    "stream-chat-react": "^11.10.0"
+    "stream-chat": "^8.24.0",
+    "stream-chat-react": "^11.12.1"
   },
   "devDependencies": {
     "@types/react": "^18.2.37",

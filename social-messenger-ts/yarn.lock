@@ -9564,10 +9564,10 @@ stream-chat-react@^11.12.1:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.16.0:
-  version "8.16.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.16.0.tgz#3718812815251315b28f75c4002f0a0d62f73bb8"
-  integrity sha512-j5GDgCmae4k59titjzePvihfVoVSlRW8NvP7uXfxbfMlsmGfcbYl08IaAwSsW6NC44doZyIjOt7v/v2QyCcP4A==
+stream-chat@^8.24.0:
+  version "8.24.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.24.0.tgz#704e6d227fcf618cf2694103ffd7a913003ab885"
+  integrity sha512-D0UDUeR6ozovxPqwBn2N4kv/iGL8MQhM8bb0e+3JPAC+Xq3NhFtIcNT5KiFZ+b+yhqey2T+XqdCshYQ8sGFUjg==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"
