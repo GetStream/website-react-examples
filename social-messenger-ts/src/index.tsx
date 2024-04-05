@@ -16,11 +16,12 @@ if (process.env.NODE_ENV === 'production') {
   });
 }
 
-const apiKey = process.env.REACT_APP_STREAM_KEY;
 const urlParams = new URLSearchParams(window.location.search);
+const apiKey = urlParams.get('api_key') || process.env.REACT_APP_STREAM_KEY;
 const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
-const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN as string;
+const targetOrigin =
+  urlParams.get('target_origin') || (process.env.REACT_APP_TARGET_ORIGIN as string);
 
 const noChannelNameFilter = urlParams.get('no_channel_name_filter') || true;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
