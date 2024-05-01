@@ -9,6 +9,8 @@ export type EventType = UR;
 export type MessageType = UR;
 export type ReactionType = UR;
 export type UserType = { color: string; userRole: UserRole };
+export type PollOptionType = UR;
+export type PollType = UR;
 
 export type StreamChatType = {
   attachmentType: AttachmentType;
@@ -18,4 +20,6 @@ export type StreamChatType = {
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;
+  pollOptionType: PollOptionType;
+  pollType: PollType;
 };

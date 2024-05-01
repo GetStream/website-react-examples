@@ -7,6 +7,8 @@ import App from './App';
 import { getImage } from './assets';
 import { getChannelListOptions } from './channelListOptions';
 import { ThemeContextProvider } from './context';
+import { UserResponse } from 'stream-chat';
+import { StreamChatGenerics } from './types';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -27,10 +29,15 @@ const noChannelNameFilter = urlParams.get('no_channel_name_filter') || true;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
 const channelListOptions = getChannelListOptions(!!noChannelNameFilter, user);
-const userToConnect: { id: string; name?: string; image?: string } = {
+const userToConnect: UserResponse<StreamChatGenerics> = {
   id: user!,
   name: skipNameImageSet ? undefined : user!,
   image: skipNameImageSet ? undefined : getImage(user!),
+  privacy_settings: {
+    typing_indicators: {
+      enabled: false,
+    },
+  },
 };
 
 const container = document.getElementById('root');
