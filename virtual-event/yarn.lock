@@ -1105,6 +1105,11 @@
   resolved "https://registry.yarnpkg.com/@braintree/sanitize-url/-/sanitize-url-6.0.4.tgz#923ca57e173c6b232bbbb07347b1be982f03e783"
   integrity sha512-s3jaWicZd0pkP0jf5ysyHUI/RE7MHos6qlToFcGWXVp+ykHOy77OUMrfbgJ9it2C5bow7OIQwYYaHjk9XlBQ2A==
 
+"@breezystack/lamejs@^1.2.7":
+  version "1.2.7"
+  resolved "https://registry.yarnpkg.com/@breezystack/lamejs/-/lamejs-1.2.7.tgz#c4779f7f0b6b685da675ebbaaff85e52187a51ad"
+  integrity sha512-6wc7ck65ctA75Hq7FYHTtTvGnYs6msgdxiSUICQ+A01nVOWg6rqouZB8IdyteRlfpYYiFovkf67dIeOgWIUzTA==
+
 "@csstools/normalize.css@*":
   version "12.0.0"
   resolved "https://registry.yarnpkg.com/@csstools/normalize.css/-/normalize.css-12.0.0.tgz#a9583a75c3f150667771f30b60d9f059473e62c4"
@@ -1652,7 +1657,7 @@
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.11.6.tgz#cee20bd55e68a1720bdab363ecf0c821ded4cd45"
   integrity sha512-50/17A98tWUfQ176raKiOGXuYpLyyVMkxxG6oylzL3BPOlA6ADGdK7EYunSa4I064xerltq9TGXs8HmOk5E+vw==
 
-"@react-aria/focus@^3.16.1":
+"@react-aria/focus@^3":
   version "3.16.2"
   resolved "https://registry.yarnpkg.com/@react-aria/focus/-/focus-3.16.2.tgz#2285bc19e091233b4d52399c506ac8fa60345b44"
   integrity sha512-Rqo9ummmgotESfypzFjI3uh58yMpL+E+lJBbQuXkBM0u0cU2YYzu0uOrFrq3zcHk997udZvq1pGK/R+2xk9B7g==
@@ -4739,6 +4744,11 @@ find-up@^5.0.0:
     locate-path "^6.0.0"
     path-exists "^4.0.0"
 
+fix-webm-duration@^1.0.5:
+  version "1.0.5"
+  resolved "https://registry.yarnpkg.com/fix-webm-duration/-/fix-webm-duration-1.0.5.tgz#da4558a92196a677302bfc54780b494dd5336a96"
+  integrity sha512-b6oula3OfSknx0aWoLsxvp4DVIYbwsf+UAkr6EDAK3iuMYk/OSNKzmeSI61GXK0MmFTEuzle19BPvTxMIKjkZg==
+
 flat-cache@^3.0.4:
   version "3.0.4"
   resolved "https://registry.yarnpkg.com/flat-cache/-/flat-cache-3.0.4.tgz#61b0338302b2fe9f957dcc32fc2a87f1c3048b11"
@@ -6480,6 +6490,11 @@ lodash.merge@^4.6.2:
   version "4.6.2"
   resolved "https://registry.yarnpkg.com/lodash.merge/-/lodash.merge-4.6.2.tgz#558aa53b43b661e1925a0afdfa36a9a1085fe57a"
   integrity sha512-0KpjqXRVvrYyCsX1swR/XTK0va6VQkQM6MNo7PqW77ByjAhoARA8EfrP1N4+KlKj8YS0ZUCtRT/YUuhyYDujIQ==
+
+lodash.mergewith@^4.6.2:
+  version "4.6.2"
+  resolved "https://registry.yarnpkg.com/lodash.mergewith/-/lodash.mergewith-4.6.2.tgz#617121f89ac55f59047c7aec1ccd6654c6590f55"
+  integrity sha512-GK3g5RPZWTRSeLSpgP8Xhra+pnjBC56q9FZYe1d5RN3TJ35dbkGy3YqBSMbyCrlbi+CM9Z3Jk5yTL7RCsqboyQ==
 
 lodash.sortby@^4.7.0:
   version "4.7.0"
@@ -9212,28 +9227,30 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^11.12.1:
-  version "11.12.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.12.1.tgz#c5e520347a6846becb488480504fa59f32b7a21e"
-  integrity sha512-nsV5LE2HXrgMxzNj1E0dcYMEvQBY+TDmYTdCi9lkWKz6Av+gDJL5yCWlgMswGUZdZAxwGcQ3OJcJWzN+nBRm7g==
+stream-chat-react@^11.16.0:
+  version "11.16.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.16.1.tgz#c0b6bf912c1ddedb27deb7bf1cb7b052255780cc"
+  integrity sha512-MMmwicl+rI6t8rbp1usMp6gDd/aEWkwyev7O3R0D/9CiQnLTekAUGb5hBo0YslxJf3OaWBpOrgd/JiWx9Hivrg==
   dependencies:
     "@babel/runtime" "^7.23.6"
     "@braintree/sanitize-url" "^6.0.4"
+    "@breezystack/lamejs" "^1.2.7"
     "@popperjs/core" "^2.11.5"
-    "@react-aria/focus" "^3.16.1"
+    "@react-aria/focus" "^3"
     clsx "^2.0.0"
     dayjs "^1.10.4"
     emoji-regex "^9.2.0"
+    fix-webm-duration "^1.0.5"
     hast-util-find-and-replace "^5.0.1"
     i18next "^21.6.14"
     isomorphic-ws "^4.0.1"
     linkifyjs "^4.1.0"
     lodash.debounce "^4.0.8"
     lodash.defaultsdeep "^4.6.1"
+    lodash.mergewith "^4.6.2"
     lodash.throttle "^4.1.1"
     lodash.uniqby "^4.7.0"
     nanoid "^3.3.4"
-    pretty-bytes "^5.4.1"
     prop-types "^15.7.2"
     react-dropzone "^14.2.3"
     react-fast-compare "^3.2.2"
@@ -9253,10 +9270,10 @@ stream-chat-react@^11.12.1:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.24.0:
-  version "8.24.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.24.0.tgz#704e6d227fcf618cf2694103ffd7a913003ab885"
-  integrity sha512-D0UDUeR6ozovxPqwBn2N4kv/iGL8MQhM8bb0e+3JPAC+Xq3NhFtIcNT5KiFZ+b+yhqey2T+XqdCshYQ8sGFUjg==
+stream-chat@^8.30.0:
+  version "8.30.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.30.0.tgz#47cd05adee04ff7f7b170cac55698474e2819eb4"
+  integrity sha512-UNdCC9P9wM9DBn6hgVby1rSQuAwTovRpoZL5PdvUS3AEIpXCU4tj2zlwCbz2GFA/M9spDfyQsT/c+vbbr7eCAg==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"

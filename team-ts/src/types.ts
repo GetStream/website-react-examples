@@ -7,6 +7,8 @@ export type TeamEventType = UR;
 export type TeamMessageType = UR;
 export type TeamReactionType = UR;
 export type TeamUserType = { image?: string };
+export type TeamPollOptionType = UR;
+export type TeamPollType = UR;
 
 export type StreamChatType = {
   attachmentType: TeamAttachmentType;
@@ -16,4 +18,6 @@ export type StreamChatType = {
   messageType: TeamMessageType;
   reactionType: TeamReactionType;
   userType: TeamUserType;
+  pollOptionType: TeamPollOptionType;
+  pollType: TeamPollType;
 };

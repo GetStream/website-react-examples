@@ -16,4 +16,6 @@ export type StreamChatGenerics = {
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;
+  pollOptionType: Record<string, unknown>;
+  pollType: Record<string, unknown>;
 };

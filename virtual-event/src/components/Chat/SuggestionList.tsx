@@ -100,7 +100,7 @@ export const SuggestionListItem = React.forwardRef(
     return (
       <div
         className={`suggestion-item ${selected ? 'selected' : ''}`}
-        onClick={onClickHandler}
+        onClick={(event) => onClickHandler(event, item)}
         onMouseEnter={selectItem}
         ref={ref}
         role='button'
