@@ -74,6 +74,7 @@ const App = (props: AppProps) => {
         TypingIndicator={() => null}
         EmojiPicker={WrappedEmojiPicker}
         emojiSearchIndex={SearchIndex}
+        enrichURLForPreview
       >
         {isCreating && (
           <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />

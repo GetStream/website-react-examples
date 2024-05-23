@@ -9538,10 +9538,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^11.16.0:
-  version "11.16.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.16.0.tgz#525e38ffbbdae328e02898c67b175ddaf9f183c7"
-  integrity sha512-KLz2Qoiom79k+Q+XILNOQY9lnN0jKSui0unAraLNZEDTt6epzOZWcju2bHQh+IorDisVyEmYwEr+su/L7GUqOg==
+stream-chat-react@^11.19.0:
+  version "11.19.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-11.19.0.tgz#0280d3f72a28df9c2a94fc00c6f50b5af4812641"
+  integrity sha512-6TKJtg7xMz6BqE2SYdkiEKAAjNuU600K6I/KWwiiOlNfN+cig9pw8K09M+4ctqW63jK42Ic5MiaS1XPykDs7lQ==
   dependencies:
     "@babel/runtime" "^7.23.6"
     "@braintree/sanitize-url" "^6.0.4"

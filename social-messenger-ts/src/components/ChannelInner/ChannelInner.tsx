@@ -67,7 +67,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
         <MessageList messageActions={actions} />
-        <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} />
+        <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} audioRecordingEnabled asyncMessagesMultiSendEnabled />
       </Window>
       <Thread />
     </>
