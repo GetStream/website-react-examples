@@ -1,5 +1,5 @@
 import React, { PropsWithChildren } from 'react';
-import { EmptyStateIndicatorProps, useChannelStateContext } from 'stream-chat-react';
+import { EmptyStateIndicatorProps } from 'stream-chat-react';
 
 import { EmptyChatIcon, EmptyDMIcon, EmptyQAIcon } from '../../assets';
 import { ChatType, useEventContext } from '../../contexts/EventContext';
