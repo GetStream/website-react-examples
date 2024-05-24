@@ -44,8 +44,6 @@ textarea {
   }
 
   &:disabled {
-    background-color: var(--str-chat__message-send-disabled-background-color);
-
     svg path {
       fill: var(--str-chat__message-send-disabled-color);
     }

@@ -1,0 +1,13 @@
+.str-chat__channel-search {
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
+
+  .str-chat__channel-search-result-list.inline {
+    padding-bottom: 1rem;
+
+    .search-result {
+      padding-block: 0.5rem;
+    }
+  }
+}

@@ -40,10 +40,6 @@ const emptyStateIndicatorContents = ({ chatType, isDmChannel }: { chatType: Chat
 };
 
 export const EmptyStateIndicatorChannel = (props: PropsWithChildren<EmptyStateIndicatorProps & { isDmChannel?: boolean }>) => {
-  const { thread } = useChannelStateContext();
-
-  if (thread) return null;
-
   return <EmptyStateIndicators {...props}/>
 };
 
