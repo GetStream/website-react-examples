@@ -1,5 +1,9 @@
 import { ChannelList } from 'stream-chat-react';
 
+import {
+    EmptyDMChannelListIndicator,
+    EmptyGroupChannelListIndicator
+} from "./EmptyChannelListIndicator";
 import { ChannelSearch } from '../ChannelSearch/ChannelSearch';
 import { TeamChannelList } from '../TeamChannelList/TeamChannelList';
 import { ChannelPreview } from '../ChannelPreview/ChannelPreview';
@@ -40,6 +44,7 @@ const TeamChannelsList = () => (
     filters={filters[0]}
     options={options}
     sort={sort}
+    EmptyStateIndicator={EmptyGroupChannelListIndicator}
     List={(listProps) => (
       <TeamChannelList
         {...listProps}
@@ -62,6 +67,7 @@ const MessagingChannelsList = () => (
     options={options}
     sort={sort}
     setActiveChannelOnMount={false}
+    EmptyStateIndicator={EmptyDMChannelListIndicator}
     List={(listProps) => (
       <TeamChannelList
         {...listProps}
