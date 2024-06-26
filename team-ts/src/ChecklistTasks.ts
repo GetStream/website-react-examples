@@ -9,6 +9,7 @@ const notifyParent = (parent: string) => (message: any) => {
 };
 
 const YOUTUBE_LINK = 'https://youtu.be/Ujvy-DEA-UM';
+const YOUTUBE_LINK_RE = /^(http(s)?:\/\/)?(youtu.be\/Ujvy-DEA-UM\/?)$/;
 
 // We have to keep this task list up-to-date with the website's checklist
 const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_MESSAGE] = [
@@ -48,7 +49,8 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
           if (message?.attachments?.length) {
             if (
               message.attachments[0].type === 'video' &&
-              message.attachments[0].og_scrape_url === YOUTUBE_LINK
+              (message.attachments[0].og_scrape_url === YOUTUBE_LINK ||
+                YOUTUBE_LINK_RE.test(message.attachments[0].og_scrape_url as string))
             ) {
               notify(SEND_YOUTUBE);
               break;
