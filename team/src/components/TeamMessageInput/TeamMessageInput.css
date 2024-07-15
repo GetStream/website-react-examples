@@ -153,7 +153,7 @@ div.rfu-dropzone:focus {
   margin-bottom: 0;
 }
 
-div.rta__autocomplete.str-chat__emojisearch {
+div.str-chat__suggestion-list-container.str-chat__emojisearch {
   z-index: 10;
   position: relative;
   width: 100%;

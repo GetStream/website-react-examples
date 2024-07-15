@@ -2,7 +2,7 @@ import React from 'react';
 import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { CreateChannelIcon } from '../../assets';
-import streamLogo from '../../assets/stream.png';
+import streamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
 
 import type { StreamChatGenerics } from '../../types';
 
@@ -19,7 +19,7 @@ const MessagingChannelListHeader = React.memo((props: Props) => {
 
   return (
       <div className='messaging__channel-list__header'>
-        <Avatar image={image} name={name} size={40} />
+        <Avatar image={image} name={name} />
         <div className={`messaging__channel-list__header__name`}>{name || id}</div>
         <button
           className={`messaging__channel-list__header__button`}

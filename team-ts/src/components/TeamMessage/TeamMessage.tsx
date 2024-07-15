@@ -5,7 +5,6 @@ import {
   areMessageUIPropsEqual,
   Avatar,
   EditMessageForm,
-  ErrorIcon,
   isOnlyEmojis,
   MESSAGE_ACTIONS,
   MessageActions,
@@ -16,7 +15,6 @@ import {
   MessageStatus,
   MessageTimestamp,
   MessageUIComponentProps,
-  // QuotedMessage,
   ReactEventHandler,
   ReactionIcon,
   ReactionSelector,
@@ -35,6 +33,7 @@ import { PinIndicator } from './PinIndicator';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 import type { StreamChatType } from '../../types';
+import {ErrorIcon} from "./icons";
 
 
 type MessageTeamWithContextProps = MessageContextValue<StreamChatType> & {
@@ -110,7 +109,6 @@ const MessageTeamWithContext = (
               name={message.user?.name || message.user?.id}
               onClick={onUserClick}
               onMouseOver={onUserHover}
-              size={34}
             />
           </div>
         )}
@@ -150,7 +148,6 @@ const MessageTeamWithContext = (
               name={message.user?.name || message.user?.id}
               onClick={onUserClick}
               onMouseOver={onUserHover}
-              size={34}
             />
           ) : (
             <div data-testid='team-meta-spacer' style={{ marginRight: 0, width: 34 }} />

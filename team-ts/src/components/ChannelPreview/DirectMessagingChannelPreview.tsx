@@ -11,39 +11,39 @@ export const DirectMessagingChannelPreview = ({channel}: DirectMessagingChannelP
     ({ user }) => user?.id !== client.userID,
   );
   const defaultName = 'Johnny Blaze';
+  let displayText;
 
   if (!members.length || members.length === 1) {
     const member = members[0];
+    displayText = member?.user?.name || member?.user?.id || defaultName;
     return (
-      <div className='channel-preview__item single'>
+      <div className='channel-preview__item single' title={displayText}>
         <Avatar
           image={member.user?.image}
           name={member.user?.name || member.user?.id}
-          size={24}
         />
-        <p>{member?.user?.name || member?.user?.id || defaultName}</p>
+        <p>{displayText}</p>
       </div>
     );
   }
 
+  displayText = [
+      (members[0].user?.name || members[0].user?.id || defaultName),
+      (members[1].user?.name || members[1].user?.id || defaultName)
+  ].join(' ');
   return (
-    <div className='channel-preview__item multi'>
+    <div className='channel-preview__item multi' title={displayText}>
         <span>
           <Avatar
             image={members[0].user?.image}
             name={members[0].user?.name || members[0].user?.id}
-            size={18}
           />
         </span>
       <Avatar
         image={members[1].user?.image}
         name={members[1].user?.name || members[1].user?.id}
-        size={18}
       />
-      <p>
-        {members[0].user?.name || members[0].user?.id || defaultName},{' '}
-        {members[1].user?.name || members[1].user?.id || defaultName}
-      </p>
+      <p>{displayText}</p>
     </div>
   );
 };

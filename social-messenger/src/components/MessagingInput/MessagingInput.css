@@ -151,7 +151,7 @@ div.rfu-dropzone:focus {
   margin-bottom: 0;
 }
 
-div.rta__autocomplete.str-chat__emojisearch {
+div.str-chat__suggestion-list-container.str-chat__emojisearch {
   z-index: 10;
   position: absolute;
   width: 30%;
@@ -160,7 +160,7 @@ div.rta__autocomplete.str-chat__emojisearch {
   border-radius: 16px !important;
 }
 
-.str-chat__thread div.rta__autocomplete.str-chat__emojisearch {
+.str-chat__thread div.str-chat__suggestion-list-container.str-chat__emojisearch {
   width: 100%;
   left: -10px;
 }
@@ -199,7 +199,7 @@ div.rta__autocomplete.str-chat__emojisearch {
 }
 
 @media screen and (max-width: 640px) {
-  div.rta__autocomplete.str-chat__emojisearch {
+  div.str-chat__suggestion-list-container.str-chat__emojisearch {
     width: unset;
   }
 

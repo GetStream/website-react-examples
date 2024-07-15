@@ -91,10 +91,6 @@
   font-weight: normal;
 }
 
-.str-chat__avatar-image img.str-chat__avatar-image--loaded {
-  display: none;
-}
-
 .str-chat__message-attachment {
   margin-bottom: 0;
 }

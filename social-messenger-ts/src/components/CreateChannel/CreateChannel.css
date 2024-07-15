@@ -223,11 +223,11 @@
 }
 
 /* modifiers page structure */
-.str-chat-channel.messaging .messaging-create-channel + .str-chat__main-panel {
+.str-chat__channel.messaging .messaging-create-channel + .str-chat__main-panel {
   display: none;
 }
 
-.str-chat-channel.messaging .messaging-create-channel ~ .str-chat__thread {
+.str-chat__channel.messaging .messaging-create-channel ~ .str-chat__thread {
   display: none;
 }
 

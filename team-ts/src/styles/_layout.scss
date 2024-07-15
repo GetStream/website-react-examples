@@ -56,3 +56,27 @@ body {
   width: 30%;
   min-width: 300px;
 }
+
+.channel-empty__container {
+  .channel-empty__avatars {
+    --str-chat__avatar-size: 72px;
+    --str-chat__avatar-background-color: var(--str-chat__primary-color);
+  }
+}
+
+.channel-preview__item{
+  &.single .str-chat__avatar {
+    --str-chat__avatar-size: 24px;
+  }
+  &.multi .str-chat__avatar {
+    --str-chat__avatar-size: 18px;
+  }
+}
+
+.channel-search__result-container {
+  --str-chat__avatar-size: 24px;
+}
+
+.str-chat__message {
+  --str-chat__avatar-size: 34px;
+}

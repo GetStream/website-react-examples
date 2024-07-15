@@ -69,7 +69,7 @@
   padding: 0;
 }
 
-.str-chat__thread-list .str-chat__list.str-chat__list--thread {
+.str-chat__thread-list .str-chat__list.str-chat__thread-list {
   padding: 0 !important;
 }
 
@@ -95,7 +95,7 @@
   display: none;
 }
 
-.messaging.str-chat .str-chat__thread-list .str-chat__reverse-infinite-scroll {
+.messaging.str-chat .str-chat__thread-list .str-chat__message-list-scroll {
   padding-top: 20px;
 }
 

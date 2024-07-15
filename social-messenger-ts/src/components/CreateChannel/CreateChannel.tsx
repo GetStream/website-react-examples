@@ -11,7 +11,7 @@ import type { StreamChatGenerics } from '../../types';
 
 const UserResult = ({ user }: { user: UserResponse<StreamChatGenerics> }) => (
   <li className='messaging-create-channel__user-result'>
-    <Avatar image={user.image} name={user.name} size={40} />
+    <Avatar image={user.image} name={user.name} />
     {user.online && <div className='messaging-create-channel__user-result-online' />}
     <div className='messaging-create-channel__user-result__details'>
       <span>{user.name}</span>

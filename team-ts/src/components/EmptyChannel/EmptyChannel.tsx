@@ -12,18 +12,16 @@ export const EmptyChannel = () => {
   );
 
   const getAvatarGroup = () => {
-    if (!members.length) return <Avatar size={72} />;
+    if (!members.length) return <Avatar />;
 
     return (
       <div className='channel-empty__avatars'>
-        {members.map((member, i) => {
-          if (i > 2) return null;
+        {members.slice(0,2).map((member, i) => {
           return (
             <Avatar
               key={i}
               image={member.user?.image}
               name={member.user?.name || member.user?.id}
-              size={72}
             />
           );
         })}

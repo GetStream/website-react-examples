@@ -1,32 +1,31 @@
-import React, { useState } from 'react';
-import { Channel as StreamChannel, UserResponse } from 'stream-chat';
-import { Channel, Chat } from 'stream-chat-react';
+import React, {useState} from 'react';
+import {Channel as StreamChannel, UserResponse} from 'stream-chat';
+import {Channel, Chat} from 'stream-chat-react';
 
-import { SearchIndex } from 'emoji-mart';
-import { init } from 'emoji-mart';
+import {init, SearchIndex} from 'emoji-mart';
 import data from '@emoji-mart/data';
 
-import { ChannelInner } from './ChannelInner';
-import { ChatHeader } from './ChatHeader';
-import { ChatSidebar } from './ChatSidebar';
-import { DMChannelList } from './DMChannelList';
-import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
-import { GiphyPreview } from './GiphyPreview';
-import { MessageUI } from './MessageUI';
-import { MessageInputUI } from './MessageInputUI';
-import { ParticipantProfile } from './ParticipantProfile';
-import { ParticipantSearch } from './ParticipantSearch';
-import { Snackbar } from './Snackbar';
-import { SuggestionHeader, SuggestionListItem } from './SuggestionList';
-import { ThreadHeader } from './ThreadHeader';
-import { UserActionsModal } from './UserActionsModal';
+import {ChannelInner} from './ChannelInner';
+import {ChatHeader} from './ChatHeader';
+import {ChatSidebar} from './ChatSidebar';
+import {DMChannelList} from './DMChannelList';
+import {EmptyStateIndicatorChannel} from './EmptyStateIndicators';
+import {GiphyPreview} from './GiphyPreview';
+import {MessageUI} from './MessageUI';
+import {MessageInputUI} from './MessageInputUI';
+import {ParticipantProfile} from './ParticipantProfile';
+import {ParticipantSearch} from './ParticipantSearch';
+import {Snackbar} from './Snackbar';
+import {SuggestionListItem} from './SuggestionList';
+import {ThreadHeader} from './ThreadHeader';
+import {UserActionsModal} from './UserActionsModal';
 
-import { useEventContext } from '../../contexts/EventContext';
-import { GiphyContextProvider } from '../../contexts/GiphyContext';
+import {useEventContext} from '../../contexts/EventContext';
+import {GiphyContextProvider} from '../../contexts/GiphyContext';
 
-import { useInitChat } from '../../hooks/useInitChat';
+import {useInitChat} from '../../hooks/useInitChat';
 
-import { StreamChatType } from '../../types';
+import {StreamChatType} from '../../types';
 
 init({ data });
 
@@ -109,7 +108,6 @@ export const ChatContainer = () => {
             ) : (
               currentChannel && (
                 <Channel<StreamChatType>
-                  AutocompleteSuggestionHeader={SuggestionHeader}
                   AutocompleteSuggestionItem={SuggestionListItem}
                   channel={currentChannel}
                   EmptyStateIndicator={EmptyStateIndicatorChannel}

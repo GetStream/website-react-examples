@@ -1,18 +1,18 @@
 import React from 'react';
-import { Channel as StreamChannel } from 'stream-chat';
-import { Channel } from 'stream-chat-react';
+import {Channel as StreamChannel} from 'stream-chat';
+import {Channel} from 'stream-chat-react';
 
-import { ChannelInner } from './ChannelInner';
-import { EmptyStateIndicatorChannel } from './EmptyStateIndicators';
-import { GiphyPreview } from './GiphyPreview';
-import { MessageUI } from './MessageUI';
-import { MessageInputUI } from './MessageInputUI';
-import { SuggestionHeader, SuggestionListItem } from './SuggestionList';
-import { ThreadHeader } from './ThreadHeader';
-import { UserActionsDropdown } from './UserActionsDropdown';
-import { StreamChatType } from '../../types';
-import { useBoolState } from '../../hooks/useBoolState';
-import { ChannelHeader } from './ChannelHeader';
+import {ChannelInner} from './ChannelInner';
+import {EmptyStateIndicatorChannel} from './EmptyStateIndicators';
+import {GiphyPreview} from './GiphyPreview';
+import {MessageUI} from './MessageUI';
+import {MessageInputUI} from './MessageInputUI';
+import {SuggestionListItem} from './SuggestionList';
+import {ThreadHeader} from './ThreadHeader';
+import {UserActionsDropdown} from './UserActionsDropdown';
+import {StreamChatType} from '../../types';
+import {useBoolState} from '../../hooks/useBoolState';
+import {ChannelHeader} from './ChannelHeader';
 
 // todo: remove AutocompleteSuggestionHeader prop
 
@@ -49,7 +49,6 @@ export const DMChannel: React.FC<Props> = (props) => {
         />
       )}
       <Channel<StreamChatType>
-        AutocompleteSuggestionHeader={SuggestionHeader}
         AutocompleteSuggestionItem={SuggestionListItem}
         channel={dmChannel}
         EmptyStateIndicator={(props) => <EmptyStateIndicatorChannel {...props} isDmChannel />}

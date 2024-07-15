@@ -8,10 +8,12 @@ import {
   useChannelActionContext,
   Thread,
 } from 'stream-chat-react';
+import { encodeToMp3 } from 'stream-chat-react/mp3-encoder';
 
 import { MessagingChannelHeader } from '../../components';
 import { useGiphyContext } from '../../context';
 import type { StreamChatGenerics } from '../../types';
+import {MessageInputProps} from "stream-chat-react/dist/components/MessageInput/MessageInput";
 
 export type ChannelInnerProps = {
   toggleMobile: () => void;
@@ -24,7 +26,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
 
   const { sendMessage } = useChannelActionContext<StreamChatGenerics>();
 
-  const overrideSubmitHandler = (message: MessageToSend<StreamChatGenerics>) => {
+  const overrideSubmitHandler: MessageInputProps<StreamChatGenerics>['overrideSubmitHandler'] = (message, _, ...restSendParams) => {
     let updatedMessage;
 
     if (message.attachments?.length && message.text?.startsWith('/giphy')) {
@@ -53,7 +55,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
           : undefined,
       };
 
-      const sendMessagePromise = sendMessage(messageToSend);
+      const sendMessagePromise = sendMessage(messageToSend, ...restSendParams);
       logChatPromiseExecution(sendMessagePromise, 'send message');
     }
 
@@ -67,7 +69,10 @@ const ChannelInner = (props: ChannelInnerProps) => {
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
         <MessageList messageActions={actions} />
-        <MessageInput focus overrideSubmitHandler={overrideSubmitHandler} audioRecordingEnabled asyncMessagesMultiSendEnabled />
+        <MessageInput
+            focus
+            overrideSubmitHandler={overrideSubmitHandler}
+            audioRecordingConfig={{ transcoderConfig: { encoder: encodeToMp3 } }} audioRecordingEnabled asyncMessagesMultiSendEnabled />
       </Window>
       <Thread />
     </>
