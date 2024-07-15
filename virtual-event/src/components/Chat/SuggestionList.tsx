@@ -1,13 +1,7 @@
 import React from 'react';
-import {
-  Avatar,
-  SuggestionCommand,
-  SuggestionItemProps,
-  SuggestionListHeaderProps,
-  SuggestionUser,
-} from 'stream-chat-react';
+import {Avatar, SuggestionCommand, SuggestionItemProps, SuggestionUser,} from 'stream-chat-react';
 
-import { Ban, CommandBolt, Flag, Giphy, Mute, Unban, Unmute } from '../../assets';
+import {Ban, Flag, Giphy, Mute, Unban, Unmute} from '../../assets';
 
 type Emoji = { id: string; native: string; name: string };
 
@@ -18,35 +12,6 @@ const isMention = (output: SuggestionItem): output is SuggestionUser =>
 
 const isEmojiOrMention = (output: SuggestionItem): output is Emoji | SuggestionUser =>
   (output as Emoji | SuggestionUser).id != null;
-
-export const SuggestionHeader: React.FC<SuggestionListHeaderProps> = (props) => {
-  const { value } = props;
-  const initialCharacter = value[0];
-
-  switch (initialCharacter) {
-    case '@':
-      return (
-        <div className='suggestion-header'>
-          <span>@</span>
-          <div>People Matching</div>
-        </div>
-      );
-
-    case '/':
-      return (
-        <div className='suggestion-header'>
-          <CommandBolt />
-          <div>Commands Matching</div>
-        </div>
-      );
-
-    case ':':
-      return <div className='suggestion-header'>Emojis Matching</div>;
-
-    default:
-      return null;
-  }
-};
 
 const getCommandIcon = (name?: string) => {
   let description;
@@ -109,7 +74,7 @@ export const SuggestionListItem = React.forwardRef(
         {!isEmojiOrMention(item) && (
           <div className='suggestion-item-icon'>{Icon ? <Icon /> : null}</div>
         )}
-        {isMention(item) ? <Avatar image={item.image} size={24} /> : null}
+        {isMention(item) ? <Avatar image={item.image} /> : null}
         <div>{displayText}</div>
         <div className='suggestion-item-description'>{description}</div>
       </div>

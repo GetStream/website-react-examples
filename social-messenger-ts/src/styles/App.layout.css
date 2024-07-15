@@ -21,14 +21,21 @@ body {
 
 .str-chat__channel {
     flex: 1;
+    min-width: 0;
 }
 
 .str-chat__main-panel {
     flex: 1;
+    min-width: 0;
+}
+
+.str-chat__main-panel--thread-open {
+    display: none;
 }
 
 .str-chat__thread {
     flex: 0 1 var(--min-workspace-width);
+    max-width: 45%;
 }
 
 /* Mobile View */
@@ -38,7 +45,7 @@ body {
      * on some mobile browsers. The app-height variable is set dynamically
      * using javascript.
      */
-    .str-chat-channel {
+    .str-chat__channel {
         height: var(--app-height);
     }
 
@@ -62,7 +69,7 @@ body {
 
 /* To fix inherited styles (as per Team and Customer Support apps */
 @media screen and (max-width: 960px) {
-    .str-chat-channel-list {
+    .str-chat__channel-list {
         position: unset;
         left: unset;
         top: unset;
@@ -73,8 +80,11 @@ body {
     }
 
     .str-chat__thread {
+        flex: 1;
         position: absolute;
-        height: 100%;
-        width: 100%;
+        z-index: 1;
+        left: 0;
+        right: 0;
+        max-width: 100%;
     }
 }

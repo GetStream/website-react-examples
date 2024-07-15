@@ -29,3 +29,7 @@
 .str-chat.str-chat__theme-dark .str-chat__message--system__line {
     background: rgba(255, 255, 255, 0.1);
 }
+
+.str-chat__message-attachment-download-icon path {
+    fill: white;
+}

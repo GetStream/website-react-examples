@@ -19,11 +19,11 @@
   align-items: center;
   max-width: 220px;
   height: 100%;
-  width: 100%;
   padding-left: 26px;
 
   p {
     @include ellipsis-text;
+    text-align: start;
   }
 
   &.single .str-chat__avatar {
@@ -46,4 +46,12 @@
     z-index: 1;
     margin-bottom: 0;
   }
+}
+
+.team-channel-list--group .channel-preview__item p {
+  width: 180px;
+}
+
+.team-channel-list--dm .channel-preview__item p {
+  width: 150px;
 }

@@ -10,7 +10,7 @@
   z-index: 1;
 }
 
-.str-chat-channel .str-chat__main-panel:not(:last-child) .messaging__channel-header {
+.str-chat__channel .str-chat__main-panel:not(:last-child) .messaging__channel-header {
   border-radius: 10px 0 0 0;
 }
 

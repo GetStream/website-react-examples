@@ -1,15 +1,15 @@
-import { useEffect } from 'react';
-import { StreamChat } from 'stream-chat';
-import { Chat, enTranslations, Streami18n } from 'stream-chat-react';
+import {useEffect} from 'react';
+import {StreamChat} from 'stream-chat';
+import {Chat} from 'stream-chat-react';
 
-import { getRandomImage } from './assets';
-import { useChecklist } from './ChecklistTasks';
-import { ChannelContainer } from './components/ChannelContainer/ChannelContainer';
-import { Sidebar } from './components/Sidebar/Sidebar';
+import {getRandomImage} from './assets';
+import {useChecklist} from './ChecklistTasks';
+import {ChannelContainer} from './components/ChannelContainer/ChannelContainer';
+import {Sidebar} from './components/Sidebar/Sidebar';
 
-import { WorkspaceController } from './context/WorkspaceController';
+import {WorkspaceController} from './context/WorkspaceController';
 
-import type { StreamChatType } from './types';
+import type {StreamChatType} from './types';
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -18,13 +18,6 @@ const user = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const theme = urlParams.get('theme') || 'light';
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
-
-const i18nInstance = new Streami18n({
-  language: 'en',
-  translationsForLanguage: {
-    ...enTranslations,
-  },
-});
 
 const client = StreamChat.getInstance<StreamChatType>(apiKey!, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
@@ -51,7 +44,7 @@ const App = () => {
   return (
     <>
       <div className='app__wrapper str-chat'>
-        <Chat {...{ client, i18nInstance }} theme={`team ${theme}`}>
+        <Chat client={client } theme={`team ${theme}`}>
           <WorkspaceController>
             <Sidebar />
             <ChannelContainer />

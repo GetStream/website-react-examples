@@ -67,7 +67,7 @@ body::-webkit-scrollbar-thumb {
 }
 
 .str-chat-channel.messaging .str-chat__main-panel {
-  padding: 30px 30px 0 0px;
+  padding: 30px 30px 0 0;
 }
 
 .str-chat-channel.messaging .str-chat__main-panel:not(:last-child) {

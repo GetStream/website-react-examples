@@ -75,7 +75,7 @@ export const ParticipantProfile = (props: Props<StreamChatType>) => {
         {imgSrc ? (
           <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError} />
         ) : (
-          <Avatar name={name || id} shape='rounded' size={200} />
+          <Avatar name={name || id} />
         )}
         <div className='profile-details-top'>
           {online && <div className='profile-details-top-online' />}

@@ -130,7 +130,7 @@
   background-color: #1a1c1e;
 }
 
-div.rta__autocomplete.str-chat__emojisearch {
+div.str-chat__suggestion-list-container.str-chat__emojisearch {
   z-index: 10;
   display: flex;
   background: white;

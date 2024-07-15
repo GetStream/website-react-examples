@@ -7,6 +7,16 @@
     --str-chat__message-list-background-color: var(--str-chat__background-color);
 
     --messaging__header-shadow: 0 7px 9px rgba(0, 0, 0, 0.03), 0 1px 0 rgba(0, 0, 0, 0.03);
+
+    .avatar-subgroup.avatar-subgroup--split {
+        --str-chat__avatar-size: 20px;
+    }
+
+    .str-chat__message {
+        --str-chat__avatar-size: 32px;
+    }
+
+    --str-chat__avatar-size: 40px;
 }
 
 .str-chat.str-chat__theme-dark {

@@ -9,7 +9,7 @@ export const ChannelInner = () => {
 
   return (
     <>
-      <Window hideOnThread>
+      <Window>
         <VirtualizedMessageList
           additionalVirtuosoProps={{ alignToBottom: true }}
           hideDeletedMessages

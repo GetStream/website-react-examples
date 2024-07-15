@@ -1,26 +1,29 @@
-import React from 'react';
+import clsx from "clsx";
+import React, {ComponentProps} from 'react';
 import type { ChannelMemberResponse } from 'stream-chat';
 import { Avatar } from 'stream-chat-react';
 import { getCleanImage } from '../../assets';
 import './AvatarGroup.css';
-import StreamLogo from '../../assets/stream.png';
+import StreamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
+
+const AvatarSubgroup = (props: ComponentProps<'div'>) => <div {...props} className={clsx('avatar-subgroup', {['avatar-subgroup--split']: React.Children.toArray(props.children).length > 1})}/>
 
 export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
-  let content = <Avatar image={StreamLogo} shape='square' size={40} />;
+  let content = <Avatar image={StreamLogo} />;
 
   if (members.length === 1) {
-    content = <Avatar image={getCleanImage(members[0])} size={40} />;
+    content = <Avatar image={getCleanImage(members[0])} />;
   }
 
   if (members.length === 2) {
     content = (
       <>
-        <div>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </div>
-        <div>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={40} />
-        </div>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[0])} />
+        </AvatarSubgroup>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[1])} />
+        </AvatarSubgroup>
       </>
     );
   }
@@ -28,13 +31,13 @@ export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) =
   if (members.length === 3) {
     content = (
       <>
-        <div>
-          <Avatar image={getCleanImage(members[0])} shape='square' size={40} />
-        </div>
-        <div>
-          <Avatar image={getCleanImage(members[1])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[2])} shape='square' size={20} />
-        </div>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[0])} />
+        </AvatarSubgroup>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[1])} />
+          <Avatar image={getCleanImage(members[2])} />
+        </AvatarSubgroup>
       </>
     );
   }
@@ -42,14 +45,14 @@ export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) =
   if (members.length >= 4) {
     content = (
       <>
-        <div>
-          <Avatar image={getCleanImage(members[members.length - 4])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 3])} shape='square' size={20} />
-        </div>
-        <div>
-          <Avatar image={getCleanImage(members[members.length - 2])} shape='square' size={20} />
-          <Avatar image={getCleanImage(members[members.length - 1])} shape='square' size={20} />
-        </div>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[members.length - 4])} />
+          <Avatar image={getCleanImage(members[members.length - 3])} />
+        </AvatarSubgroup>
+        <AvatarSubgroup>
+          <Avatar image={getCleanImage(members[members.length - 2])} />
+          <Avatar image={getCleanImage(members[members.length - 1])} />
+        </AvatarSubgroup>
       </>
     );
   }

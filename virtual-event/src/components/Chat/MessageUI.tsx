@@ -170,7 +170,7 @@ const UpvoteButton = () => {
 };
 
 const OpenInThreadButton = (props: React.ComponentProps<'button'>) => (
-  <div className='str-chat__message-simple-reply-button str-chat__message-replies-count-button-wrapper'>
+  <div className='str-chat__message-replies-count-button-wrapper'>
     <button
       className='str-chat__message-replies-count-button'
       data-testid='replies-count-button'
@@ -295,7 +295,6 @@ export const MessageUI: React.FC<
       <Avatar
         image={message.user.image}
         name={message.user.name || message.user.id}
-        shape='circle'
       />
       <div className='message-ui-content'>
         <div className='message-ui-content-top'>

@@ -8,7 +8,16 @@
   top: 0;
   z-index: 1;
 
-  .str-chat-channel {
+  .str-chat__channel {
     height: calc(100vh - 56px); // height of dm header
   }
+}
+
+.str-chat__main-panel--thread-open {
+  display: none;
+}
+
+.str-chat__main-panel--thread-open + .str-chat__thread {
+  // occupy the whole space previously occupied by the main message list container
+  flex: 1;
 }

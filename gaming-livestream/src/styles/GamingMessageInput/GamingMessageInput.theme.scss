@@ -7,7 +7,7 @@
   --str-chat__mention-list-emoji-item-color: var(--foreground);
 }
 
-.rta__autocomplete.str-chat__suggestion-list-container {
+.str-chat__textarea .str-chat__suggestion-list-container {
   border: 3px solid var(--border-color);
   border-radius: 16px;
   color: var(--foreground);
