@@ -6,7 +6,7 @@ import { getCleanImage } from '../../assets';
 import './AvatarGroup.css';
 import StreamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
 
-const AvatarSubgroup = (props: ComponentProps<'div'>) => <div {...props} className={clsx('avatar-subgroup', {['avatar-subgroup--split']: React.Children.toArray(props.children).length > 1})}/>
+const AvatarSubgroup = (props: ComponentProps<'div'>) => <div {...props} className={clsx('avatar-subgroup', {'avatar-subgroup--split': React.Children.toArray(props.children).length > 1})}/>
 
 export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
   let content = <Avatar image={StreamLogo} />;

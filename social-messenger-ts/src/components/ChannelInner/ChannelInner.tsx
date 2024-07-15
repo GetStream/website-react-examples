@@ -1,18 +1,11 @@
 import React from 'react';
-import { logChatPromiseExecution } from 'stream-chat';
-import {
-  MessageList,
-  MessageInput,
-  MessageToSend,
-  Window,
-  useChannelActionContext,
-  Thread,
-} from 'stream-chat-react';
-import { encodeToMp3 } from 'stream-chat-react/mp3-encoder';
+import {logChatPromiseExecution} from 'stream-chat';
+import {MessageInput, MessageList, Thread, useChannelActionContext, Window,} from 'stream-chat-react';
+import {encodeToMp3} from 'stream-chat-react/mp3-encoder';
 
-import { MessagingChannelHeader } from '../../components';
-import { useGiphyContext } from '../../context';
-import type { StreamChatGenerics } from '../../types';
+import {MessagingChannelHeader} from '../../components';
+import {useGiphyContext} from '../../context';
+import type {StreamChatGenerics} from '../../types';
 import {MessageInputProps} from "stream-chat-react/dist/components/MessageInput/MessageInput";
 
 export type ChannelInnerProps = {
