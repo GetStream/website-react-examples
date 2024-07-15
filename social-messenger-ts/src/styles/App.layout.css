@@ -21,14 +21,21 @@ body {
 
 .str-chat__channel {
     flex: 1;
+    min-width: 0;
 }
 
 .str-chat__main-panel {
     flex: 1;
+    min-width: 0;
+}
+
+.str-chat__main-panel--thread-open {
+    display: none;
 }
 
 .str-chat__thread {
     flex: 0 1 var(--min-workspace-width);
+    max-width: 45%;
 }
 
 /* Mobile View */
@@ -73,8 +80,11 @@ body {
     }
 
     .str-chat__thread {
+        flex: 1;
         position: absolute;
-        height: 100%;
-        width: 100%;
+        z-index: 1;
+        left: 0;
+        right: 0;
+        max-width: 100%;
     }
 }
