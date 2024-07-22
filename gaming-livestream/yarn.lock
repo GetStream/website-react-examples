@@ -9774,10 +9774,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@12.0.0-rc.5:
-  version "12.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.0.0-rc.5.tgz#e47e471e19103eafbca625f7288162415ecad238"
-  integrity sha512-mN8DY3+1pHkLJVxCg9Cjx7Hl5qjhgX60JlBW0Yu+AIGJ8fp858aI6LoKkjb+V7JQRzMTS5EDF5DSm2nK0aJmlQ==
+stream-chat-react@12.0.0-rc.6:
+  version "12.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.0.0-rc.6.tgz#2229f5b1fe0c87694738010d6208309173e68444"
+  integrity sha512-b0ZvwDhx5pUZcvErgT7F2Ca0qVuqRfP/OgYT5minVPhTKM6lBf258WXFdkQZUyc1iGGc25fwu50s0EHA17h9Yw==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"

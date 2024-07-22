@@ -9215,10 +9215,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@12.0.0-rc.5:
-  version "12.0.0-rc.5"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.0.0-rc.5.tgz#e47e471e19103eafbca625f7288162415ecad238"
-  integrity sha512-mN8DY3+1pHkLJVxCg9Cjx7Hl5qjhgX60JlBW0Yu+AIGJ8fp858aI6LoKkjb+V7JQRzMTS5EDF5DSm2nK0aJmlQ==
+stream-chat-react@12.0.0-rc.6:
+  version "12.0.0-rc.6"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.0.0-rc.6.tgz#2229f5b1fe0c87694738010d6208309173e68444"
+  integrity sha512-b0ZvwDhx5pUZcvErgT7F2Ca0qVuqRfP/OgYT5minVPhTKM6lBf258WXFdkQZUyc1iGGc25fwu50s0EHA17h9Yw==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
