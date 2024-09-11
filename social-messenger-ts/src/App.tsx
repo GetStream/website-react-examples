@@ -1,6 +1,14 @@
 import React, { useState } from 'react';
 import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
-import { Channel, Chat } from 'stream-chat-react';
+import {
+  Channel,
+  Chat,
+  ChatView,
+  Thread,
+  ThreadList,
+  useCreateChatClient,
+} from 'stream-chat-react';
+import clsx from 'clsx';
 import { EmojiPicker } from 'stream-chat-react/emojis';
 
 import data from '@emoji-mart/data';
@@ -19,7 +27,7 @@ import {
 
 import { GiphyContextProvider, useThemeContext } from './context';
 
-import { useConnectUser, useChecklist, useMobileView, useUpdateAppHeightOnResize } from './hooks';
+import { useChecklist, useMobileView, useUpdateAppHeightOnResize } from './hooks';
 
 import type { StreamChatGenerics } from './types';
 
@@ -37,7 +45,7 @@ type AppProps = {
   };
 };
 
-const WrappedEmojiPicker = () => {
+const EmojiPickerWithTheme = () => {
   const { theme } = useThemeContext();
 
   return <EmojiPicker pickerProps={{ theme }} />;
@@ -47,7 +55,11 @@ const App = (props: AppProps) => {
   const { apiKey, userToConnect, userToken, targetOrigin, channelListOptions } = props;
   const [isCreating, setIsCreating] = useState(false);
 
-  const chatClient = useConnectUser<StreamChatGenerics>(apiKey, userToConnect, userToken);
+  const chatClient = useCreateChatClient<StreamChatGenerics>({
+    apiKey,
+    userData: userToConnect,
+    tokenOrProvider: userToken,
+  });
   const toggleMobile = useMobileView();
   const { themeClassName } = useThemeContext();
 
@@ -59,30 +71,41 @@ const App = (props: AppProps) => {
   }
 
   return (
-    <Chat client={chatClient} theme={`messaging ${themeClassName}`}>
-      <MessagingSidebar
-        channelListOptions={channelListOptions}
-        onClick={toggleMobile}
-        onCreateChannel={() => setIsCreating(!isCreating)}
-        onPreviewSelect={() => setIsCreating(false)}
-      />
-      <Channel
-        maxNumberOfFiles={10}
-        multipleUploads={true}
-        SendButton={SendButton}
-        ThreadHeader={MessagingThreadHeader}
-        TypingIndicator={() => null}
-        EmojiPicker={WrappedEmojiPicker}
-        emojiSearchIndex={SearchIndex}
-        enrichURLForPreview
-      >
-        {isCreating && (
-          <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
-        )}
-        <GiphyContextProvider>
-          <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
-        </GiphyContextProvider>
-      </Channel>
+    <Chat client={chatClient} theme={clsx('messaging', themeClassName)}>
+      <ChatView>
+        <ChatView.Selector />
+        <ChatView.Channels>
+          <MessagingSidebar
+            channelListOptions={channelListOptions}
+            onClick={toggleMobile}
+            onCreateChannel={() => setIsCreating(!isCreating)}
+            onPreviewSelect={() => setIsCreating(false)}
+          />
+          <Channel
+            maxNumberOfFiles={10}
+            multipleUploads={true}
+            SendButton={SendButton}
+            ThreadHeader={MessagingThreadHeader}
+            TypingIndicator={() => null}
+            EmojiPicker={EmojiPickerWithTheme}
+            emojiSearchIndex={SearchIndex}
+            enrichURLForPreview
+          >
+            {isCreating && (
+              <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+            )}
+            <GiphyContextProvider>
+              <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
+            </GiphyContextProvider>
+          </Channel>
+        </ChatView.Channels>
+        <ChatView.Threads>
+          <ThreadList />
+          <ChatView.ThreadAdapter>
+            <Thread virtualized />
+          </ChatView.ThreadAdapter>
+        </ChatView.Threads>
+      </ChatView>
     </Chat>
   );
 };
