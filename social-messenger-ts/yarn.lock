@@ -9490,10 +9490,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^12.0.0-rc.14:
-  version "12.0.0-rc.14"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.0.0-rc.14.tgz#627e84c1f21b18e251c4306903456b4f698ab3a9"
-  integrity sha512-5rRMu8WYqC2DVQugB8XqfdCdvjsOnw22xV3AVWeo+RvnqBgJVNhbwJN32w9KzDljEtVZBBH//uIsnmvj7YyksQ==
+stream-chat-react@^12.5.0:
+  version "12.5.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.5.0.tgz#a612cd5f77333fad449e885971d63b36ee5c9111"
+  integrity sha512-rTQd7MC+YCoLl665MJWKst7TJ8Lps9SiX07b1fcjzRu5j2XwL8diaxGuvovTEI/vuBvsJMTxdNelqfZAMKx0LQ==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9530,10 +9530,10 @@ stream-chat-react@^12.0.0-rc.14:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.40.7:
-  version "8.40.7"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.40.7.tgz#411ce2ed11c64842d4b1386e744631539bba7760"
-  integrity sha512-pVFa3lmYLBdoI4I6hDRFqLjyOKMNpDVwYY87MtP9ur2Lo5afTc7unGQ7hdQS5VHTiE0Rb1RXATlkAQb7+J0CgA==
+stream-chat@^8.42.0:
+  version "8.42.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.42.0.tgz#124ea2c10c6e8f7990304e1101c66751daf63e6c"
+  integrity sha512-8xZz+fmdHSOa3L1rHUOC4Wah+ipvLvdiOmeOfGK6uXnLOKlSHMOblwmQErrOoFM4SKfX9Bea3V8viaKUu6bPng==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"
