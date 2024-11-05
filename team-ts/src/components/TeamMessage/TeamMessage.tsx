@@ -1,75 +1,53 @@
 import clsx from 'clsx';
-import React, { useMemo, useRef } from 'react';
-import type { TranslationLanguages } from 'stream-chat';
+import React, {ElementRef, useMemo, useRef} from 'react';
+import type {TranslationLanguages} from 'stream-chat';
 import {
-  areMessageUIPropsEqual,
   Avatar,
   EditMessageForm,
   isOnlyEmojis,
   MESSAGE_ACTIONS,
   MessageActions,
-  MessageContextValue,
   MessageDeleted,
   MessageInput,
   MessageRepliesCountButton,
   MessageStatus,
   MessageTimestamp,
-  MessageUIComponentProps,
-  ReactEventHandler,
   ReactionIcon,
+  ReactionsList,
   ReactionSelector,
   renderText as defaultRenderText,
   showMessageActionsBox,
   ThreadIcon,
   useComponentContext,
   useMessageContext,
-  useReactionClick,
-  useTranslationContext,
-  ReactionsList,
+  useTranslationContext, DialogAnchor, useDialog, useDialogIsOpen,
 } from 'stream-chat-react';
 
-import { PinIndicator } from './PinIndicator';
+import {PinIndicator} from './PinIndicator';
 
-import { useWorkspaceController } from '../../context/WorkspaceController';
+import {useWorkspaceController} from '../../context/WorkspaceController';
 
-import type { StreamChatType } from '../../types';
+import type {StreamChatType} from '../../types';
 import {ErrorIcon} from "./icons";
 
-
-type MessageTeamWithContextProps = MessageContextValue<StreamChatType> & {
-  isReactionEnabled: boolean;
-  messageWrapperRef: React.MutableRefObject<HTMLDivElement | null>;
-  onReactionListClick: ReactEventHandler;
-  reactionSelectorRef: React.MutableRefObject<HTMLDivElement | null>;
-  showDetailedReactions: boolean;
-};
-
-const MessageTeamWithContext = (
-  props: MessageTeamWithContextProps,
-) => {
+export const TeamMessage = () => {
   const {
     clearEditingState,
     editing,
     getMessageActions,
     groupStyles,
     handleAction,
-    handleOpenThread,
+    handleOpenThread: handleOpenThreadContext,
     handleRetry,
     initialMessage,
-    isReactionEnabled,
     message,
-    messageWrapperRef,
     onMentionsClickMessage,
     onMentionsHoverMessage,
-    onReactionListClick,
     onUserClick,
     onUserHover,
-    reactionSelectorRef,
     renderText = defaultRenderText,
-    showDetailedReactions,
     threadList,
-  } = props;
-
+  } = useMessageContext<StreamChatType>('MessageTeam');
   const { Attachment } = useComponentContext<StreamChatType>('MessageTeam');
 
   const { t, userLanguage } = useTranslationContext('MessageTeam');
@@ -78,6 +56,7 @@ const MessageTeamWithContext = (
   const showActionsBox = showMessageActionsBox(messageActions);
 
   const shouldShowReplies = messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1 && !threadList;
+  const canReact =  messageActions.indexOf(MESSAGE_ACTIONS.react) > -1;
 
   const messageTextToRender =
     message.i18n?.[`${userLanguage}_text` as `${TranslationLanguages}_text`] || message.text;
@@ -90,7 +69,19 @@ const MessageTeamWithContext = (
     renderText,
   ]);
 
+  const { closePinnedMessageListOpen } = useWorkspaceController();
+  const handleOpenThread = (event: React.BaseSyntheticEvent) => {
+    closePinnedMessageListOpen();
+    handleOpenThreadContext(event);
+  };
+
   const firstGroupStyle = groupStyles ? groupStyles[0] : 'single';
+
+  const buttonRef = useRef<ElementRef<'button'>>(null);
+  const reactionSelectorDialogId = `reaction-selector--${message.id}`;
+  const reactionSelectorDialog = useDialog({ id: reactionSelectorDialogId });
+  const reactionSelectorDialogIsOpen = useDialogIsOpen(reactionSelectorDialogId);
+  const messageActionsDialogIsOpen = useDialogIsOpen(`message-actions--${message.id}`);
 
   if (message.deleted_at) {
     return <MessageDeleted message={message} />;
@@ -134,12 +125,11 @@ const MessageTeamWithContext = (
   );
 
   return (
-    <>
-      {message.pinned && <PinIndicator message={message} />}
+    <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
+      {message.pinned && <PinIndicator message={message}/>}
       <div
         className={rootClass}
         data-testid='message-team'
-        ref={messageWrapperRef}
       >
         <div className='avatar-host'>
           {firstGroupStyle === 'top' || firstGroupStyle === 'single' || initialMessage ? (
@@ -150,7 +140,7 @@ const MessageTeamWithContext = (
               onMouseOver={onUserHover}
             />
           ) : (
-            <div data-testid='team-meta-spacer' style={{ marginRight: 0, width: 34 }} />
+            <div data-testid='team-meta-spacer' style={{marginRight: 0, width: 34}}/>
           )}
         </div>
         <div className='str-chat__message-team-group'>
@@ -185,30 +175,42 @@ const MessageTeamWithContext = (
               message.type !== 'ephemeral' &&
               message.type !== 'error' && (
                 <div
-                  className={`str-chat__message-team-actions`}
+                  className={clsx(`str-chat__message-team-actions`, {'str-chat__message-team-actions--active': reactionSelectorDialogIsOpen || messageActionsDialogIsOpen})}
                   data-testid='message-team-actions'
                 >
-                  {showDetailedReactions && <ReactionSelector ref={reactionSelectorRef} />}
-                  {isReactionEnabled && (
-                    <span
-                      data-testid='message-team-reaction-icon'
-                      onClick={onReactionListClick}
-                      title='Reactions'
-                    >
-                      <ReactionIcon />
-                    </span>
-                  )}
+                  {canReact && (
+                    <>
+                      <DialogAnchor
+                        id={reactionSelectorDialogId}
+                        placement='top-end'
+                        referenceElement={buttonRef.current}
+                        trapFocus
+                      >
+                        <ReactionSelector />
+                      </DialogAnchor>
+                      <button
+                        aria-expanded={reactionSelectorDialogIsOpen}
+                        aria-label={t('aria/Open Reaction Selector')}
+                        className='str-chat__message-reactions-button'
+                        data-testid='message-reaction-action'
+                        onClick={() => reactionSelectorDialog?.toggle()}
+                        ref={buttonRef}
+                      >
+                        <ReactionIcon className='str-chat__message-action-icon' />
+                      </button>
+                    </>
+                    )}
                   {shouldShowReplies && (
                     <span
                       data-testid='message-team-thread-icon'
                       onClick={handleOpenThread}
                       title='Start a thread'
                     >
-                      <ThreadIcon />
+                      <ThreadIcon/>
                     </span>
                   )}
                   {showActionsBox && (
-                    <MessageActions inline messageWrapperRef={messageWrapperRef} />
+                    <MessageActions inline/>
                   )}
                 </div>
               )}
@@ -221,11 +223,11 @@ const MessageTeamWithContext = (
                 {messageText}
               </div>
             )}
-            {!message.text && message.attachments?.length ? (
-              <Attachment actionHandler={handleAction} attachments={message.attachments} />
+            {!message.text && message.attachments?.length && Attachment ? (
+              <Attachment actionHandler={handleAction} attachments={message.attachments}/>
             ) : null}
-            {message.latest_reactions?.length !== 0 && message.text !== '' && isReactionEnabled && (
-              <ReactionsList />
+            {message.latest_reactions?.length !== 0 && message.text !== '' && canReact && (
+              <ReactionsList/>
             )}
             {message.status === 'failed' && (
               <button
@@ -233,21 +235,21 @@ const MessageTeamWithContext = (
                 data-testid='message-team-failed'
                 onClick={message.errorStatusCode !== 403 ? () => handleRetry(message) : undefined}
               >
-                <ErrorIcon />
+                <ErrorIcon/>
                 {message.errorStatusCode !== 403
                   ? t<string>('Message Failed · Click to try again')
                   : t<string>('Message Failed · Unauthorized')}
               </button>
             )}
           </div>
-          <MessageStatus messageType='team' />
-          {message.text && message.attachments?.length ? (
-            <Attachment actionHandler={handleAction} attachments={message.attachments} />
+          <MessageStatus messageType='team'/>
+          {message.text && message.attachments?.length && Attachment ? (
+            <Attachment actionHandler={handleAction} attachments={message.attachments}/>
           ) : null}
           {message.latest_reactions &&
             message.latest_reactions.length !== 0 &&
             message.text === '' &&
-            isReactionEnabled && <ReactionsList />}
+            canReact && <ReactionsList/>}
           {!threadList && (
             <MessageRepliesCountButton
               onClick={handleOpenThread}
@@ -256,50 +258,6 @@ const MessageTeamWithContext = (
           )}
         </div>
       </div>
-    </>
-  );
-};
-
-const MemoizedMessageTeam = React.memo(
-  MessageTeamWithContext,
-  areMessageUIPropsEqual,
-) as typeof MessageTeamWithContext;
-
-
-export const TeamMessage = (
-  props: MessageUIComponentProps<StreamChatType>,
-) => {
-  const messageContext = useMessageContext<StreamChatType>('MessageTeam');
-  const { closePinnedMessageListOpen } = useWorkspaceController();
-
-  const reactionSelectorRef = useRef<HTMLDivElement | null>(null);
-  const messageWrapperRef = useRef<HTMLDivElement | null>(null);
-
-  const message = props.message || messageContext.message;
-
-  const { isReactionEnabled, onReactionListClick, showDetailedReactions } = useReactionClick(
-    message,
-    reactionSelectorRef,
-    messageWrapperRef,
-  );
-
-  const handleOpenThreadOverride = (event: React.BaseSyntheticEvent) => {
-    closePinnedMessageListOpen();
-    messageContext.handleOpenThread(event);
-  };
-
-  return (
-    <div className={message.pinned ? 'pinned-message' : 'unpinned-message'}>
-    <MemoizedMessageTeam
-      {...messageContext}
-      isReactionEnabled={isReactionEnabled}
-      messageWrapperRef={messageWrapperRef}
-      onReactionListClick={onReactionListClick}
-      reactionSelectorRef={reactionSelectorRef}
-      showDetailedReactions={showDetailedReactions}
-      handleOpenThread={handleOpenThreadOverride}
-      {...props}
-    />
     </div>
   );
 };

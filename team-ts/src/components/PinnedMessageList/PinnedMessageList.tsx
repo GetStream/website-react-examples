@@ -1,4 +1,4 @@
-import { Message, useChannelStateContext } from 'stream-chat-react';
+import {DialogManagerProvider, Message, useChannelStateContext } from 'stream-chat-react';
 
 import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
 import type { StreamChatType } from '../../types';
@@ -13,6 +13,7 @@ export const PinnedMessageList = () => {
   if (!pinnedMessageListOpen) return null;
 
   return (
+    <DialogManagerProvider id='pinned-message-list-dialog-manager'>
     <div className='pinned-messages__container'>
       <div className='pinned-messages__header'>
         <div className='workspace-header__title'>Pins</div>
@@ -29,5 +30,6 @@ export const PinnedMessageList = () => {
         ))}
       </div>
     </div>
+    </DialogManagerProvider>
   );
 };
