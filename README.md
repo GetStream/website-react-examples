@@ -1,5 +1,10 @@
 # website-react-examples
 
+Check out our:
+- ⭐ [Chat API](https://getstream.io/chat/)
+- 📱 [Video API](https://getstream.io/video/)
+- 🔔 [Activity Feeds](https://getstream.io/activity-feeds/)
+
 ## Apps
 
 - [customer-support](https://getstream.github.io/website-react-examples/customer-support/)
