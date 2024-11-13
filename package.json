@@ -19,7 +19,11 @@
     "start:gaming-livestream": "cd gaming-livestream && yarn start",
     "start:social-messenger-ts": "cd social-messenger-ts && yarn start",
     "start:team-ts": "cd team-ts && yarn start",
-    "start:virtual-event": "cd virtual-event && yarn start"
+    "start:virtual-event": "cd virtual-event && yarn start",
+    "upgrade:gaming-livestream": "cd gaming-livestream && yarn add stream-chat-react stream-chat",
+    "upgrade:social-messenger-ts": "cd social-messenger-ts && yarn add stream-chat-react stream-chat",
+    "upgrade:team-ts": "cd team-ts && yarn add stream-chat-react stream-chat",
+    "upgrade:virtual-event": "cd virtual-event && yarn add stream-chat-react stream-chat"
   },
   "devDependencies": {
     "eslint": "^7.6.0",

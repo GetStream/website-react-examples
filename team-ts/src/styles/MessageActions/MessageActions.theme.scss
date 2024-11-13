@@ -19,6 +19,10 @@
     }
   }
 
+  button {
+    cursor: pointer;
+  }
+
   .str-chat__message-actions-box-button {
     @include reset-button-style;
   }
