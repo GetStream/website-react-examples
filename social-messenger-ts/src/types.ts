@@ -4,6 +4,7 @@ export type AttachmentType = {};
 export type ChannelType = { demo?: string };
 export type CommandType = LiteralStringForUnion;
 export type EventType = {};
+export type MemberType = {};
 export type MessageType = {};
 export type ReactionType = {};
 export type UserType = { image?: string };
@@ -13,6 +14,7 @@ export type StreamChatGenerics = {
   channelType: ChannelType;
   commandType: CommandType;
   eventType: EventType;
+  memberType: MemberType;
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;

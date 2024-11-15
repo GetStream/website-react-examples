@@ -6,6 +6,7 @@ type AttachmentType = UR;
 type ChannelType = UR;
 type CommandType = LiteralStringForUnion;
 type EventType = UR;
+type MemberType = UR;
 type MessageType = UR & { up_votes?: string[]; show_in_channel?: boolean };
 type ReactionType = UR;
 export type UserType = UR & { image?: string; title?: string };
@@ -17,6 +18,7 @@ export type StreamChatType = {
   channelType: ChannelType;
   commandType: CommandType;
   eventType: EventType;
+  memberType: MemberType;
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;
