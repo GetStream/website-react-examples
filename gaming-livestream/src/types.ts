@@ -6,6 +6,7 @@ export type AttachmentType = UR;
 export type ChannelType = UR;
 export type CommandType = LiteralStringForUnion;
 export type EventType = UR;
+export type MemberType = UR;
 export type MessageType = UR;
 export type ReactionType = UR;
 export type UserType = { color: string; userRole: UserRole };
@@ -17,6 +18,7 @@ export type StreamChatType = {
   channelType: ChannelType;
   commandType: CommandType;
   eventType: EventType;
+  memberType: MemberType;
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;
