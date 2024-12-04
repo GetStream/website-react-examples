@@ -1,23 +1,21 @@
-import React, { useEffect, useState } from 'react';
-import { Channel, Chat } from 'stream-chat-react';
+import React, {useState} from 'react';
+import {Chat} from 'stream-chat-react';
 
-import { init, SearchIndex } from 'emoji-mart';
+import {init} from 'emoji-mart';
 import data from '@emoji-mart/data';
 
-import { ChatUpgrades } from './ChatUpgrades';
-import { GamingChatInner } from './GamingChatInner';
-import { GamingChatNotification } from './GamingChatNotification';
-import { GamingParticipants } from './GamingParticipants';
-import { GamingThreadHeader } from './GamingThreadHeader';
+import {ChatUpgrades} from './ChatUpgrades';
+import {GamingChatNotification} from './GamingChatNotification';
+import {GamingParticipants} from './GamingParticipants';
 
-import { getColor, getRandomUserRole, participants } from '../../assets/data';
-import { useChecklist } from '../../hooks/useChecklistTasks';
+import {getColor, getRandomUserRole, participants} from '../../assets/data';
+import {useChecklist} from '../../hooks/useChecklistTasks';
 
-import { useConnectUser } from '../../hooks/useConnectUser';
-import { useLayoutController } from '../../context/LayoutController';
-import type { Channel as ChannelT } from 'stream-chat';
-import type { StreamChatType } from '../../types';
-import { MessageTimestampController } from '../../context/MessageTimestampController';
+import {useConnectUser} from '../../hooks/useConnectUser';
+import {useLayoutController} from '../../context/LayoutController';
+import type {Channel as ChannelT} from 'stream-chat';
+import type {StreamChatType} from '../../types';
+import {ChannelContainer} from "./ChannelContainer";
 
 init({ data });
 
@@ -34,22 +32,9 @@ const userToConnect = {
 };
 
 export const GamingChat = () => {
-  const [channel, setChannel] = useState<ChannelT<StreamChatType> | null>(null);
   const { memberListVisible, popUpText, upgradePanelVisible, chatVisible } = useLayoutController();
   const chatClient = useConnectUser<StreamChatType>(apiKey!, userToConnect, userToken);
   useChecklist({ chatClient, targetOrigin });
-
-  useEffect(() => {
-    if (!chatClient) return;
-
-    const loadChat = async () => {
-      const channel = chatClient.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });
-      await channel.watch();
-      setChannel(channel);
-    };
-
-    loadChat();
-  }, [chatClient]);
 
   if (!chatClient) return null;
 
@@ -59,22 +44,12 @@ export const GamingChat = () => {
         upgradePanelVisible ? 'show-upgrade' : ''
       }`}
     >
-      {channel && (
-        <div className='chat-container'>
-          <Chat client={chatClient}>
-            <Channel
-              channel={channel}
-              ThreadHeader={GamingThreadHeader}
-              emojiSearchIndex={SearchIndex}
-            >
-              <MessageTimestampController>
-                <GamingChatInner />
-              </MessageTimestampController>
-            </Channel>
-          </Chat>
-          {popUpText && <GamingChatNotification text={popUpText} />}
-        </div>
-      )}
+      <div className='chat-container'>
+        <Chat client={chatClient}>
+          <ChannelContainer/>
+        </Chat>
+        {popUpText && <GamingChatNotification text={popUpText} />}
+      </div>
       <GamingParticipants participants={participants} />
       <ChatUpgrades />
     </section>

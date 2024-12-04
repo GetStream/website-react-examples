@@ -18,7 +18,7 @@ export type StreamChatType = {
   channelType: ChannelType;
   commandType: CommandType;
   eventType: EventType;
-  memberType: MessageType;
+  memberType: MemberType;
   messageType: MessageType;
   reactionType: ReactionType;
   userType: UserType;

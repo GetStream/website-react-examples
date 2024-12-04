@@ -1,10 +1,10 @@
-import type { LiteralStringForUnion } from 'stream-chat';
+import type { LiteralStringForUnion, UR } from 'stream-chat';
 
 export type AttachmentType = {};
 export type ChannelType = { demo?: string };
 export type CommandType = LiteralStringForUnion;
 export type EventType = {};
-export type MemberType = {};
+export type MemberType = UR;
 export type MessageType = {};
 export type ReactionType = {};
 export type UserType = { image?: string };
