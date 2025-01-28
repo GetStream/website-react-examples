@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React from 'react';
 import {Chat} from 'stream-chat-react';
 
 import {init} from 'emoji-mart';
@@ -13,7 +13,6 @@ import {useChecklist} from '../../hooks/useChecklistTasks';
 
 import {useConnectUser} from '../../hooks/useConnectUser';
 import {useLayoutController} from '../../context/LayoutController';
-import type {Channel as ChannelT} from 'stream-chat';
 import type {StreamChatType} from '../../types';
 import {ChannelContainer} from "./ChannelContainer";
 
