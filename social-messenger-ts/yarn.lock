@@ -8678,7 +8678,7 @@ react-is@^17.0.1:
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-17.0.2.tgz#e691d4a8e9c789365655539ab372762b0efb54f0"
   integrity sha512-w2GsyukL62IJnlaff/nRegPQR94C/XXamvMWmSHRJ4y7Ts/4ocGRmTHvOs8PSE6pB3dWOrD/nueuU5sduBsQ4w==
 
-react-is@^18.0.0, react-is@^18.1.0:
+react-is@^18.0.0:
   version "18.2.0"
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-18.2.0.tgz#199431eeaaa2e09f86427efbb4f1473edb47609b"
   integrity sha512-xWGDIW6x921xtzPkhiULtthJHoJvBbF3q26fzloPCK0hsvxtPVelvftw3zjbHWSkR2km9Z+4uxbDDK/6Zw9B8w==
@@ -9490,10 +9490,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^12.6.2:
-  version "12.6.2"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.6.2.tgz#81a3c7f683fceda4bbbbd358678e1b1cf68e75ee"
-  integrity sha512-8Ln7TiQVrwGA5jkxgevu2pgELt+qxrHOOldq5ROUu2ptpsbda12+SxZlbXK0hbHaWZLXy4DC8uZl1nAmsiXv6w==
+stream-chat-react@^12.10.0:
+  version "12.10.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-12.10.0.tgz#a93c35ddad1f5e94c95bc2d32e1c54840429c3dc"
+  integrity sha512-eFCt2PqYl7BZ8HcHVzL1E/8OlrgPk96vv4LVL1z5CzOZ0dQhjGOYmchXIV1JEJJIj3octfRnHrN4N9aMwSZqUQ==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9515,7 +9515,6 @@ stream-chat-react@^12.6.2:
     react-dropzone "^14.2.3"
     react-fast-compare "^3.2.2"
     react-image-gallery "1.2.12"
-    react-is "^18.1.0"
     react-markdown "^8.0.7"
     react-player "2.10.1"
     react-popper "^2.3.0"
@@ -9526,14 +9525,15 @@ stream-chat-react@^12.6.2:
     tslib "^2.6.2"
     unist-builder "^3.0.0"
     unist-util-visit "^5.0.0"
+    use-sync-external-store "^1.4.0"
   optionalDependencies:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@^8.45.3:
-  version "8.45.3"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.45.3.tgz#1db8652760c670a1b6fb1b744767771fb79e4a74"
-  integrity sha512-cAHHBj2TOHtrDs7gfZdzk/wQy6dsoCtOvloQpMWSUabb+iuVQ32aAfRvGZEmgjypAhkLyT0Y8nvvhv3fT/cLbg==
+stream-chat@^8.52.3:
+  version "8.52.3"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-8.52.3.tgz#877e69556d0328ef64bdc6876fd566ac35c70375"
+  integrity sha512-lqwMvh+IbuC2eRey+tjEZUkdrAWauDYQU91o1HS2Ld6yCSCf8+f5Kn9QRyWrL67Bo7yVQdRyEAu0e1PRPP9GrQ==
   dependencies:
     "@babel/runtime" "^7.16.3"
     "@types/jsonwebtoken" "~9.0.0"
@@ -10351,6 +10351,11 @@ use-latest@^1.2.1:
   integrity sha512-xA+AVm/Wlg3e2P/JiItTziwS7FK92LWrDB0p+hgXloIMuVCeJJ8v6f0eeHyPZaJrM+usM1FkFfbNCrJGs8A/zw==
   dependencies:
     use-isomorphic-layout-effect "^1.1.1"
+
+use-sync-external-store@^1.4.0:
+  version "1.4.0"
+  resolved "https://registry.yarnpkg.com/use-sync-external-store/-/use-sync-external-store-1.4.0.tgz#adbc795d8eeb47029963016cefdf89dc799fcebc"
+  integrity sha512-9WXSPC5fMv61vaupRkCKCxsPxBocVnwakBEkMIHHpkTTg6icbJtg6jzgtLDm4bl3cSHAca52rYWih0k4K3PfHw==
 
 util-deprecate@^1.0.1, util-deprecate@^1.0.2, util-deprecate@~1.0.1:
   version "1.0.2"
