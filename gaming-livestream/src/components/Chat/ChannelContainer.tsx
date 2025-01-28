@@ -17,7 +17,7 @@ export const ChannelContainer = () => {
     };
 
     loadChat();
-  }, [client]);
+  }, [client, setActiveChannel]);
 
   if (!channel) return null;
 
