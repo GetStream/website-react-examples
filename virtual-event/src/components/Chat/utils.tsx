@@ -51,10 +51,10 @@ type EmEmojiProps = {
   skin: string;
 };
 
-declare global {
+declare module "react" {
   namespace JSX {
     interface IntrinsicElements {
-      ['em-emoji']: CustomElement<EmEmojiProps>;
+      'em-emoji': CustomElement<EmEmojiProps>;
     }
   }
 }

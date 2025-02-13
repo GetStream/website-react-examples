@@ -1,4 +1,4 @@
-import React, { PropsWithChildren } from 'react';
+import React, {PropsWithChildren, ReactNode} from 'react';
 import type {
   Channel as StreamChannel,
   ChannelFilters,
@@ -69,7 +69,7 @@ type PreviewUIProps = ChannelPreviewUIComponentProps & {
 };
 
 const PreviewUI = (props: PreviewUIProps) => {
-  const { channel, displayImage, displayTitle, latestMessage, setDmChannel, unread } = props;
+  const { channel, displayImage, displayTitle, latestMessagePreview, setDmChannel, unread } = props;
 
   const { client } = useChatContext();
 
@@ -94,7 +94,7 @@ const PreviewUI = (props: PreviewUIProps) => {
           <div>{displayTitle}</div>
           <div>{formattedTime}</div>
         </div>
-        <div className={`dm-list-preview-bottom ${unread ? 'unread' : ''}`}>{latestMessage}</div>
+        <div className={`dm-list-preview-bottom ${unread ? 'unread' : ''}`}>{latestMessagePreview as ReactNode}</div>
       </div>
       <ClickDMIcon />
     </div>
