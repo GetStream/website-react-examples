@@ -1,11 +1,11 @@
 import { useChatContext, useTypingContext } from 'stream-chat-react';
 
-import type { StreamChatType } from '../../types';
+
 
 export const TeamTypingIndicator = () => {
-  const { client } = useChatContext<StreamChatType>();
+  const { client } = useChatContext();
 
-  const { typing } = useTypingContext<StreamChatType>();
+  const { typing } = useTypingContext();
 
   if (!client || !typing) return null;
 

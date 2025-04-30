@@ -1,7 +1,5 @@
 import { useEffect, useState } from 'react';
 import {
-  DefaultGenerics,
-  ExtendableGenerics,
   OwnUserResponse,
   StreamChat,
   TokenOrProvider,
@@ -16,14 +14,14 @@ import {
  * @param userToConnect the user information.
  * @param userTokenOrProvider the user's token.
  */
-export const useConnectUser = <SCG extends ExtendableGenerics = DefaultGenerics>(
+export const useConnectUser = (
   apiKey: string,
-  userToConnect: OwnUserResponse<SCG> | UserResponse<SCG>,
+  userToConnect: OwnUserResponse | UserResponse,
   userTokenOrProvider: TokenOrProvider,
 ) => {
-  const [chatClient, setChatClient] = useState<StreamChat<SCG> | null>(null);
+  const [chatClient, setChatClient] = useState<StreamChat | null>(null);
   useEffect(() => {
-    const client = new StreamChat<SCG>(apiKey, {
+    const client = new StreamChat(apiKey, {
       enableInsights: true,
       enableWSFallback: true,
     });

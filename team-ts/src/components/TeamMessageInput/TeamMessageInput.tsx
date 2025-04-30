@@ -1,40 +1,52 @@
 import clsx from 'clsx';
-import { useMemo } from 'react';
+import {useMemo} from 'react';
 import {
   AttachmentPreviewList,
-  ChatAutoComplete,
   SendButton,
-  useChannelStateContext,
+  TextareaComposer,
+  useAttachmentManagerState,
   useComponentContext,
+  useMessageComposer,
+  useMessageComposerHasSendableData,
   useMessageInputContext,
+  useStateStore,
 } from 'stream-chat-react';
-import { useDropzone } from 'react-dropzone';
+import {useDropzone} from 'react-dropzone';
 
-import { GiphyBadge } from './GiphyBadge';
-import { MessageInputControlButton } from './MessageInputControls';
-import { EmojiPicker } from './EmojiPicker';
+import {GiphyBadge} from './GiphyBadge';
+import {MessageInputControlButton} from './MessageInputControls';
+import {EmojiPicker} from './EmojiPicker';
+import {useMessageInputCompositionControls} from './hooks/useMessageInputCompositionControls';
+import type {CustomDataManagerState, MessageComposerConfig} from "stream-chat";
+import {SendButtonIcon} from "./SendButtonIcon";
 
-import { useGiphyInMessageContext } from '../../context/GiphyInMessageFlagContext';
-import { useMessageInputCompositionControls } from './hooks/useMessageInputCompositionControls';
+const attachmentManagerConfigStateSelector = (state: MessageComposerConfig) => ({
+  acceptedFiles: state.attachments.acceptedFiles,
+  multipleUploads: state.attachments.maxNumberOfFilesPerMessage > 1,
+});
 
-import type { StreamChatType } from '../../types';
+const customComposerDataSelector = (state: CustomDataManagerState) => ({
+  activeFormatting: state.custom.activeFormatting,
+  isComposingGiphyText: state.custom.command === 'giphy',
+});
 
 export const TeamMessageInput = () => {
   const { TypingIndicator } = useComponentContext();
 
-  const { acceptedFiles = [], multipleUploads } = useChannelStateContext<StreamChatType>();
-  const { handleSubmit, numberOfUploads, text, uploadNewFiles, maxFilesLeft, isUploadEnabled } =
-    useMessageInputContext<StreamChatType>();
-  const { isComposingGiphyMessage } = useGiphyInMessageContext();
+  const { handleSubmit } = useMessageInputContext();
   const {
-    formatting,
-    handleBoldButtonClick,
-    handleCodeButtonClick,
-    handleItalicsButtonClick,
-    handleStrikeThroughButtonClick,
-    onChange,
+    formatter,
     placeholder,
   } = useMessageInputCompositionControls();
+  const messageComposer = useMessageComposer();
+  const { acceptedFiles, multipleUploads } = useStateStore(
+    messageComposer.configState,
+    attachmentManagerConfigStateSelector,
+  );
+  const { activeFormatting, isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
+  const {isUploadEnabled } =  useAttachmentManagerState();
+  const hasSendableData = useMessageComposerHasSendableData();
+
 
   const accept = useMemo(
     () =>
@@ -47,12 +59,11 @@ export const TeamMessageInput = () => {
 
   const { getRootProps, isDragActive, isDragReject } = useDropzone({
     accept,
-    disabled: !isUploadEnabled || maxFilesLeft === 0,
+    disabled: !isUploadEnabled,
     multiple: multipleUploads,
     noClick: true,
-    onDrop: uploadNewFiles,
+    onDrop: messageComposer.attachmentManager.uploadFiles,
   });
-
   return (
     <div {...getRootProps({ className: clsx(`team-message-input__wrapper`) })}>
       {isDragActive && (
@@ -67,39 +78,63 @@ export const TeamMessageInput = () => {
       )}
       <div className='team-message-input__input'>
         <div className='team-message-input__top'>
-          {!!numberOfUploads && <AttachmentPreviewList />}
+          <AttachmentPreviewList />
           <div className='team-message-input__form'>
-            {isComposingGiphyMessage() && !numberOfUploads && <GiphyBadge />}
-            <ChatAutoComplete onChange={onChange} placeholder={placeholder} />
+            {isComposingGiphyText && <GiphyBadge />}
+            <TextareaComposer placeholder={placeholder} />
 
-            <SendButton disabled={!numberOfUploads && !text.length} sendMessage={handleSubmit} />
+            <SendButton disabled={!hasSendableData} sendMessage={handleSubmit} />
           </div>
         </div>
         <div className='team-message-input__bottom'>
           <EmojiPicker />
           <MessageInputControlButton
             type='bold'
-            active={formatting === 'bold'}
-            onClick={handleBoldButtonClick}
+            active={activeFormatting === 'bold'}
+            onClick={formatter.bold}
           />
           <MessageInputControlButton
             type='italics'
-            active={formatting === 'italics'}
-            onClick={handleItalicsButtonClick}
+            active={activeFormatting === 'italics'}
+            onClick={formatter.italics}
           />
           <MessageInputControlButton
-            type='strike-through'
-            active={formatting === 'strike-through'}
-            onClick={handleStrikeThroughButtonClick}
+            type='strikethrough'
+            active={activeFormatting === 'strikethrough'}
+            onClick={formatter['strikethrough']}
           />
           <MessageInputControlButton
             type='code'
-            active={formatting === 'code'}
-            onClick={handleCodeButtonClick}
+            active={activeFormatting === 'code'}
+            onClick={formatter.code}
           />
         </div>
       </div>
       {TypingIndicator && <TypingIndicator />}
+    </div>
+  );
+};
+
+export const ThreadMessageInput = () => {
+  const { handleSubmit } = useMessageInputContext();
+  const messageComposer = useMessageComposer();
+  const hasSendableData = useMessageComposerHasSendableData();
+  const { isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
+  return (
+    <div className='thread-message-input__wrapper'>
+      <div className='thread-message-input__input'>
+        {isComposingGiphyText && <GiphyBadge/>}
+        <TextareaComposer placeholder='Reply'/>
+        <EmojiPicker/>
+
+        <button
+          className='thread-message-input__send-button'
+          disabled={!hasSendableData}
+          onClick={handleSubmit}
+        >
+          <SendButtonIcon/>
+        </button>
+      </div>
     </div>
   );
 };

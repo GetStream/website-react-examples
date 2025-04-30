@@ -1,6 +1,8 @@
 import React, { forwardRef, MouseEventHandler } from 'react';
 import clsx from 'clsx';
-import { MessageInputControlType } from './hooks/useMessageInputCompositionControls';
+
+
+import {MessageInputControlType} from "../../types.stream";
 
 type MessageInputControlButtonProps = {
   onClick: MouseEventHandler<HTMLButtonElement>;
@@ -85,7 +87,7 @@ const ControlsIcons: Record<MessageInputControlType, React.ComponentType> = {
   code: CodeSnippetIcon,
   emoji: EmojiIcon,
   italics: ItalicsIcon,
-  'strike-through': StrikeThroughIcon,
+  'strikethrough': StrikeThroughIcon,
 };
 
 

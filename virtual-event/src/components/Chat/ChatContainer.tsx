@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Channel as StreamChannel, UserResponse} from 'stream-chat';
 import {Channel, Chat} from 'stream-chat-react';
 
@@ -16,16 +16,19 @@ import {MessageInputUI} from './MessageInputUI';
 import {ParticipantProfile} from './ParticipantProfile';
 import {ParticipantSearch} from './ParticipantSearch';
 import {Snackbar} from './Snackbar';
-import {SuggestionListItem} from './SuggestionList';
 import {ThreadHeader} from './ThreadHeader';
 import {UserActionsModal} from './UserActionsModal';
 
 import {useEventContext} from '../../contexts/EventContext';
-import {GiphyContextProvider} from '../../contexts/GiphyContext';
 
 import {useInitChat} from '../../hooks/useInitChat';
+import {
+  createDraftGiphyCommandInjectionMiddleware,
+  createGiphyCommandInjectionMiddleware
+} from "../../middleware/composition/giphyCommandInjectionMiddleware";
+import {createGiphyCommandControlMiddleware} from "../../middleware/textComposition/giphyCommandControl";
+import {CustomSuggestionList} from "./SuggestionList";
 
-import {StreamChatType} from '../../types';
 
 init({ data });
 
@@ -48,6 +51,31 @@ export const ChatContainer = () => {
   const { chatClient, currentChannel, dmUnread, eventUnread, globalUnread, qaUnread } =
     useInitChat();
 
+  useEffect(() => {
+    if (!chatClient) return;
+
+    chatClient.setMessageComposerSetupFunction(({ composer }) => {
+      composer.compositionMiddlewareExecutor.insert({
+        middleware: [
+          createGiphyCommandInjectionMiddleware(composer)
+        ],
+        position: {after: 'stream-io/message-composer-middleware/attachments'}
+      });
+      composer.draftCompositionMiddlewareExecutor.insert({
+        middleware: [
+          createDraftGiphyCommandInjectionMiddleware(composer)
+        ],
+        position: {after: 'stream-io/message-composer-middleware/draft-attachments'}
+      });
+      composer.textComposer.middlewareExecutor.insert({
+        middleware: [
+          createGiphyCommandControlMiddleware(composer),
+        ],
+        position: {before: 'stream-io/text-composer/pre-validation-middleware'}
+      })
+    });
+  }, [chatClient]);
+
   if (!chatClient) return null;
 
   return (
@@ -66,7 +94,6 @@ export const ChatContainer = () => {
       )}
       <div className={`chat-components ${isFullScreen ? 'full-screen' : ''}`}>
         <Chat client={chatClient}>
-          <GiphyContextProvider>
             {searching && (
               <ParticipantSearch
                 setDmChannel={setDmChannel}
@@ -107,8 +134,8 @@ export const ChatContainer = () => {
               />
             ) : (
               currentChannel && (
-                <Channel<StreamChatType>
-                  AutocompleteSuggestionItem={SuggestionListItem}
+                <Channel
+                  AutocompleteSuggestionList={CustomSuggestionList}
                   channel={currentChannel}
                   EmptyStateIndicator={EmptyStateIndicatorChannel}
                   GiphyPreviewMessage={GiphyPreview}
@@ -123,7 +150,6 @@ export const ChatContainer = () => {
                 </Channel>
               )
             )}
-          </GiphyContextProvider>
         </Chat>
       </div>
     </div>

@@ -7,10 +7,10 @@ import {EmptyStateIndicatorChannel} from './EmptyStateIndicators';
 import {GiphyPreview} from './GiphyPreview';
 import {MessageUI} from './MessageUI';
 import {MessageInputUI} from './MessageInputUI';
-import {SuggestionListItem} from './SuggestionList';
+import {CustomSuggestionList} from './SuggestionList';
 import {ThreadHeader} from './ThreadHeader';
 import {UserActionsDropdown} from './UserActionsDropdown';
-import {StreamChatType} from '../../types';
+
 import {useBoolState} from '../../hooks/useBoolState';
 import {ChannelHeader} from './ChannelHeader';
 
@@ -48,8 +48,8 @@ export const DMChannel: React.FC<Props> = (props) => {
           closeDropdown={closeDropdown}
         />
       )}
-      <Channel<StreamChatType>
-        AutocompleteSuggestionItem={SuggestionListItem}
+      <Channel
+        AutocompleteSuggestionList={CustomSuggestionList}
         channel={dmChannel}
         EmptyStateIndicator={(props) => <EmptyStateIndicatorChannel {...props} isDmChannel />}
         GiphyPreviewMessage={GiphyPreview}

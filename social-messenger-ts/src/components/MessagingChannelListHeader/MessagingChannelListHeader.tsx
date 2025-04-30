@@ -4,8 +4,6 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 import { CreateChannelIcon } from '../../assets';
 import streamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
 
-import type { StreamChatGenerics } from '../../types';
-
 type Props = {
   onCreateChannel?: () => void;
 };
@@ -13,7 +11,7 @@ type Props = {
 const MessagingChannelListHeader = React.memo((props: Props) => {
   const { onCreateChannel } = props;
 
-  const { client } = useChatContext<StreamChatGenerics>();
+  const { client } = useChatContext();
 
   const { id, image = streamLogo as string, name = 'Example User' } = client.user || {};
 

@@ -6,7 +6,6 @@ import {
   MessageRepliesCountButton,
   MessageUIComponentProps,
   SimpleReactionsList,
-  StreamMessage,
   useChannelActionContext,
   useChannelStateContext,
   useChatContext,
@@ -21,8 +20,9 @@ import { useEventContext } from '../../contexts/EventContext';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { useBoolState } from '../../hooks/useBoolState';
+import {formatMessage, LocalMessage} from "stream-chat";
 
-import { StreamChatType } from '../../types';
+
 
 type OptionsProps = {
   dropdownOpen: boolean;
@@ -123,8 +123,8 @@ const ReactionSelector = React.forwardRef<HTMLDivElement, ReactionSelectorProps>
 );
 
 const UpvoteButton = () => {
-  const { client } = useChatContext<StreamChatType>();
-  const { message } = useMessageContext<StreamChatType>();
+  const { client } = useChatContext();
+  const { message } = useMessageContext();
 
   const userUpVoted = client.userID && message.up_votes?.includes(client.userID);
 
@@ -132,25 +132,18 @@ const UpvoteButton = () => {
     async (event: React.MouseEvent) => {
       event.stopPropagation();
 
-      const mentionIDs = message.mentioned_users?.map(({ id }) => id);
-      let updatedUpVotes;
-
-      if (!message.up_votes) {
+      if (!message.up_votes && client.userID) {
         return await client.updateMessage({
           ...message,
-          mentioned_users: mentionIDs,
           up_votes: [client.userID],
         });
-      } else if (client.userID && message.up_votes.includes(client.userID)) {
-        updatedUpVotes = message.up_votes.filter((userID: string) => userID !== client.userID);
-      } else {
-        updatedUpVotes = [...message.up_votes, client.userID];
       }
 
       const updatedMessage = {
         ...message,
-        mentioned_users: mentionIDs,
-        up_votes: updatedUpVotes,
+        up_votes: (client.userID && message.up_votes.includes(client.userID)
+          ? message.up_votes.filter((userID: string) => userID !== client.userID)
+          :  [...message.up_votes, client.userID]) as string[],
       };
 
       return await client.updateMessage(updatedMessage);
@@ -186,8 +179,8 @@ const searchRequestLock = Promise.resolve();
 const OpenThreadButton = () => {
   const { openThread } = useChannelActionContext();
   const { channel, thread } = useChannelStateContext();
-  const { handleOpenThread, message } = useMessageContext<StreamChatType>();
-  const [threadParent, setThreadParent] = useState<StreamMessage>();
+  const { handleOpenThread, message } = useMessageContext();
+  const [threadParent, setThreadParent] = useState<LocalMessage>();
 
   const customOpenThread = useCallback(
     (event: BaseSyntheticEvent) => {
@@ -205,7 +198,7 @@ const OpenThreadButton = () => {
         const foundMessage = results[0]?.message;
 
         if (foundMessage) {
-          setThreadParent(foundMessage);
+          setThreadParent(formatMessage(foundMessage));
         }
       } catch (err) {
         console.log(err);
@@ -233,7 +226,7 @@ const OpenThreadButton = () => {
 };
 
 export const MessageUI: React.FC<
-  MessageUIComponentProps<StreamChatType> & {
+  MessageUIComponentProps & {
     setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>>;
   }
 > = (props) => {
@@ -241,7 +234,7 @@ export const MessageUI: React.FC<
 
   const { messages } = useChannelStateContext();
   const { chatType, themeModalOpen } = useEventContext();
-  const { message } = useMessageContext<StreamChatType>();
+  const { message } = useMessageContext();
 
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [showOptions, setShowOptions] = useState(false);
@@ -304,7 +297,7 @@ export const MessageUI: React.FC<
         </div>
         <div className='message-ui-content-bottom'>{message.text}</div>
         {!!message.attachments?.length && (
-          <Attachment<StreamChatType> attachments={message.attachments} />
+          <Attachment attachments={message.attachments} />
         )}
         <OpenThreadButton />
         <SimpleReactionsList reactionOptions={customReactions} />

@@ -3,7 +3,6 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import type { UserResponse } from 'stream-chat';
 
-import type { StreamChatType } from '../../types';
 import { useAdminPanelFormState } from './context/AdminPanelFormContext';
 import { ValidationError } from './ValidationError';
 
@@ -30,7 +29,7 @@ const ListContainer = (props: { children: React.ReactNode }) => {
 
 type UserItemProps = {
   index: number;
-  user: UserResponse<StreamChatType>;
+  user: UserResponse;
 };
 
 const MOCKED_LAST_ACTIVE_STRINGS = [
@@ -73,10 +72,10 @@ const LOAD_STATE_NOTIFICATION: Record<UserListLoadState, string> = {
 
 
 export const UserList = () => {
-  const { client, channel } = useChatContext<StreamChatType>();
+  const { client, channel } = useChatContext();
   const { createChannelType } = useAdminPanelFormState();
   const [loadState, setLoadState] = useState<UserListLoadState | null>(null);
-  const [users, setUsers] = useState<UserResponse<StreamChatType>[] | undefined>();
+  const [users, setUsers] = useState<UserResponse[] | undefined>();
 
   const channelMembers = useMemo(() => channel?.state.members
       ? Object.keys(channel.state.members)
@@ -91,6 +90,8 @@ export const UserList = () => {
 
       try {
         const response = await client.queryUsers(
+          // FIXME: How to query non-member users?
+        // @ts-ignore
           { id: { $nin: channelMembers } },
           { id: 1 },
           { limit: 8 },

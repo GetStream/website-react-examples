@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper';
 import { useMessageInputContext } from 'stream-chat-react';
 import Picker from '@emoji-mart/react';
 
-import { StreamChatType } from '../../types';
+
 import { EmojiPickerIcon } from '../../assets';
 import { useEventContext } from '../../contexts/EventContext';
 
@@ -16,7 +16,7 @@ export const EmojiPicker = () => {
     placement: 'top-end',
   });
   const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(false);
-  const { insertText, textareaRef, cooldownRemaining } = useMessageInputContext<StreamChatType>();
+  const { insertText, textareaRef, cooldownRemaining } = useMessageInputContext();
   const { mode } = useEventContext();
 
   useEffect(() => {
@@ -39,6 +39,7 @@ export const EmojiPicker = () => {
       {emojiPickerIsOpen && (
         <div
           className='input-ui-input-emoji-picker'
+  // @ts-ignore
           style={styles.popper}
           {...attributes.popper}
           ref={setPopperElement}

@@ -5,8 +5,6 @@ import { getRandomTitle } from '../components/Chat/utils';
 import { ChatType, useEventContext } from '../contexts/EventContext';
 import { useCheckList } from './useCheckList';
 
-import { StreamChatType } from '../types';
-
 const urlParams = new URLSearchParams(window.location.search);
 
 const apiKey = urlParams.get('apikey') || (process.env.REACT_APP_STREAM_KEY as string);
@@ -96,7 +94,7 @@ export const useInitChat = () => {
 
   useEffect(() => {
     const initChat = async () => {
-      const client = StreamChat.getInstance<StreamChatType>(apiKey);
+      const client = StreamChat.getInstance(apiKey);
 
       if (process.env.REACT_APP_CHAT_SERVER_ENDPOINT) {
         client.setBaseURL(process.env.REACT_APP_CHAT_SERVER_ENDPOINT);

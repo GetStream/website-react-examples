@@ -13,14 +13,14 @@ import { CompanyLogo } from './icons';
 import type { Channel, ChannelFilters } from 'stream-chat';
 import { ChannelSort } from 'stream-chat';
 
-import { StreamChatType } from '../../types';
+
 
 const filters: ChannelFilters[] = [
   { type: 'team', demo: 'team' },
   { type: 'messaging', demo: 'team' },
 ];
 const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort: ChannelSort<StreamChatType> = { last_message_at: -1, updated_at: -1 };
+const sort: ChannelSort = { last_message_at: -1, updated_at: -1 };
 
 const FakeCompanySelectionBar = () => (
   <div className='sidebar__company-selection-bar'>

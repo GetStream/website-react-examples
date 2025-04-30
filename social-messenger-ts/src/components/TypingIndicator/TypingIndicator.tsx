@@ -2,12 +2,10 @@ import { useChatContext, useTypingContext } from 'stream-chat-react';
 
 import './TypingIndicator.css';
 
-import type { StreamChatGenerics } from '../../types';
-
 export const TypingIndicator = () => {
-  const { client } = useChatContext<StreamChatGenerics>();
+  const { client } = useChatContext();
 
-  const {typing} = useTypingContext<StreamChatGenerics>();
+  const {typing} = useTypingContext();
   if (!client || !typing || !Object.values(typing).length ) return null;
 
   const users = Object.values(typing)

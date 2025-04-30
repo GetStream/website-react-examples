@@ -1,7 +1,5 @@
 import type { ChannelMemberResponse } from 'stream-chat';
 
-import type { StreamChatGenerics } from '../types';
-
 import avatar1 from './userImages/photo-1438761681033-6461ffad8d80.jpeg';
 import avatar2 from './userImages/photo-1463453091185-61582044d556.jpeg';
 import avatar3 from './userImages/photo-1503467913725-8484b65b0715.jpeg';
@@ -72,7 +70,7 @@ export const getImage = (userId: string) => {
   return staticImages[index];
 };
 
-export const getCleanImage = (member: ChannelMemberResponse<StreamChatGenerics>) => {
+export const getCleanImage = (member: ChannelMemberResponse) => {
   let cleanImage = member.user?.image || '';
   const cleanIndex = staticImages.indexOf(cleanImage);
   if (cleanIndex === -1) {

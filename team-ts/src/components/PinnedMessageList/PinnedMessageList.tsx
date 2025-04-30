@@ -1,14 +1,14 @@
 import {DialogManagerProvider, Message, useChannelStateContext } from 'stream-chat-react';
 
 import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
-import type { StreamChatType } from '../../types';
+
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 export const PinnedMessageList = () => {
   const { pinnedMessageListOpen, togglePinnedMessageListOpen } = useWorkspaceController();
-  const { channel } = useChannelStateContext<StreamChatType>();
+  const { channel } = useChannelStateContext();
 
   if (!pinnedMessageListOpen) return null;
 

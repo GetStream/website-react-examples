@@ -27,7 +27,6 @@ import {PinIndicator} from './PinIndicator';
 
 import {useWorkspaceController} from '../../context/WorkspaceController';
 
-import type {StreamChatType} from '../../types';
 import {ErrorIcon} from "./icons";
 
 export const TeamMessage = () => {
@@ -47,8 +46,8 @@ export const TeamMessage = () => {
     onUserHover,
     renderText = defaultRenderText,
     threadList,
-  } = useMessageContext<StreamChatType>('MessageTeam');
-  const { Attachment } = useComponentContext<StreamChatType>('MessageTeam');
+  } = useMessageContext('MessageTeam');
+  const { Attachment } = useComponentContext('MessageTeam');
 
   const { t, userLanguage } = useTranslationContext('MessageTeam');
 
@@ -106,7 +105,6 @@ export const TeamMessage = () => {
         <MessageInput
           clearEditingState={clearEditingState}
           Input={EditMessageForm}
-          message={message}
         />
       </div>
     );
@@ -233,10 +231,10 @@ export const TeamMessage = () => {
               <button
                 className='str-chat__message-team-failed'
                 data-testid='message-team-failed'
-                onClick={message.errorStatusCode !== 403 ? () => handleRetry(message) : undefined}
+                onClick={message.error?.status !== 403 ? () => handleRetry(message) : undefined}
               >
                 <ErrorIcon/>
-                {message.errorStatusCode !== 403
+                {message.error?.status !== 403
                   ? t<string>('Message Failed · Click to try again')
                   : t<string>('Message Failed · Unauthorized')}
               </button>

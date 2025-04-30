@@ -1,5 +1,5 @@
 import React, { useCallback, useState } from 'react';
-import type { Channel, UserResponse, ExtendableGenerics } from 'stream-chat';
+import type { Channel, UserResponse } from 'stream-chat';
 import { Avatar, ReactEventHandler, useChatContext } from 'stream-chat-react';
 
 import { UserActionsDropdown } from './UserActionsDropdown';
@@ -9,15 +9,15 @@ import { useEventContext } from '../../contexts/EventContext';
 
 import { useBoolState } from '../../hooks/useBoolState';
 
-import { StreamChatType } from '../../types';
 
-type Props<StreamChatType extends ExtendableGenerics> = {
-  participantProfile: UserResponse<StreamChatType>;
+
+type Props = {
+  participantProfile: UserResponse;
   setDmChannel: React.Dispatch<React.SetStateAction<Channel | undefined>>;
   setParticipantProfile: React.Dispatch<React.SetStateAction<UserResponse | undefined>>;
 };
 
-export const ParticipantProfile = (props: Props<StreamChatType>) => {
+export const ParticipantProfile = (props: Props) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
   const { id, image, name, online, title } = participantProfile;
 

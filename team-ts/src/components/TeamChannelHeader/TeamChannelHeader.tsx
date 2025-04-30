@@ -6,13 +6,13 @@ import { PinIcon } from '../../assets';
 import { ChannelInfoIcon } from './ChannelInfoIcon';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
-import type { StreamChatType } from '../../types';
+
 
 export const TeamChannelHeader = () => {
   const { displayWorkspace } = useWorkspaceController();
-  const { client } = useChatContext<StreamChatType>();
-  const { channel, watcher_count } = useChannelStateContext<StreamChatType>();
-  const { closeThread } = useChannelActionContext<StreamChatType>();
+  const { client } = useChatContext();
+  const { channel, watcher_count } = useChannelStateContext();
+  const { closeThread } = useChannelActionContext();
   const { togglePinnedMessageListOpen } = useWorkspaceController();
 
   const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;

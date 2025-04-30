@@ -1,9 +1,8 @@
 import type { MouseEventHandler } from 'react';
 
 import type { ThreadHeaderProps } from 'stream-chat-react';
-import type { StreamChatType } from '../../types';
 
-type GamingThreadHeaderProps = Pick<ThreadHeaderProps<StreamChatType>, 'closeThread' | 'thread'>
+type GamingThreadHeaderProps = Pick<ThreadHeaderProps, 'closeThread' | 'thread'>
 
 export const GamingThreadHeader = ({ closeThread, thread }: GamingThreadHeaderProps) => {
   const onCloseThread: MouseEventHandler<HTMLButtonElement> = (event) => {

@@ -1,11 +1,9 @@
 import { Avatar, ChannelPreviewUIComponentProps, useChatContext } from 'stream-chat-react';
 
-import { StreamChatType } from '../../types';
-
-type DirectMessagingChannelPreviewProps = Pick<ChannelPreviewUIComponentProps<StreamChatType>, 'channel'>;
+type DirectMessagingChannelPreviewProps = Pick<ChannelPreviewUIComponentProps, 'channel'>;
 
 export const DirectMessagingChannelPreview = ({channel}: DirectMessagingChannelPreviewProps) => {
-  const { client } = useChatContext<StreamChatType>();
+  const { client } = useChatContext();
 
   const members = Object.values(channel.state.members).filter(
     ({ user }) => user?.id !== client.userID,

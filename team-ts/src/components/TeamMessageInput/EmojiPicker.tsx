@@ -3,7 +3,7 @@ import { usePopper } from 'react-popper';
 import { useMessageInputContext } from 'stream-chat-react';
 import Picker from '@emoji-mart/react';
 
-import { StreamChatType } from '../../types';
+
 import { MessageInputControlButton } from './MessageInputControls';
 
 // similar to EmojiPicker from "stream-chat-react/emojis"
@@ -15,7 +15,7 @@ export const EmojiPicker = () => {
     placement: 'bottom-start',
   });
   const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(false);
-  const { insertText, textareaRef } = useMessageInputContext<StreamChatType>();
+  const { insertText, textareaRef } = useMessageInputContext();
 
   useEffect(() => {
     if (!popperElement || !referenceElement) return;

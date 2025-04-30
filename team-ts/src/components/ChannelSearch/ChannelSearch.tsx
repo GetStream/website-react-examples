@@ -9,17 +9,15 @@ import { ResultsDropdown } from './ResultsDropdown';
 
 import { SearchIcon } from '../../assets';
 
-import type { StreamChatType } from '../../types';
-
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useChatContext<StreamChatType>();
+  const { client, setActiveChannel } = useChatContext();
 
   const [allChannels, setAllChannels] = useState<ConcatArray<ChannelOrUserType> | undefined>();
   const [teamChannels, setTeamChannels] = useState<
-    | Channel<StreamChatType>[]
+    | Channel[]
     | undefined
   >();
-  const [directChannels, setDirectChannels] = useState<UserResponse<StreamChatType>[] | undefined>();
+  const [directChannels, setDirectChannels] = useState<UserResponse[] | undefined>();
 
   const [focused, setFocused] = useState<number>();
   const [focusedId, setFocusedId] = useState('');
@@ -80,7 +78,7 @@ export const ChannelSearch = () => {
   }, [allChannels, focused]);
 
   const setChannel = (
-    channel: Channel<StreamChatType>,
+    channel: Channel,
   ) => {
     setQuery('');
     setActiveChannel(channel);
@@ -98,21 +96,16 @@ export const ChannelSearch = () => {
       );
 
       const userResponse = client.queryUsers(
-        {
-          id: { $ne: client.userID || '' },
-          $and: [
-            { name: { $autocomplete: text } },
-          ],
-        },
+        { name: { $autocomplete: text } },
         { id: 1 },
         { limit: 5 },
       );
 
       const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
-
+      const otherUsers = users.filter((user) => user.id !== client.userID);
       if (channels.length) setTeamChannels(channels);
-      if (users.length) setDirectChannels(users);
-      setAllChannels([...channels, ...users]);
+      if (otherUsers.length) setDirectChannels(otherUsers);
+      setAllChannels([...channels, ...otherUsers]);
     } catch (event) {
       setQuery('');
     }

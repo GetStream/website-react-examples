@@ -13,7 +13,6 @@ import {useChecklist} from '../../hooks/useChecklistTasks';
 
 import {useConnectUser} from '../../hooks/useConnectUser';
 import {useLayoutController} from '../../context/LayoutController';
-import type {StreamChatType} from '../../types';
 import {ChannelContainer} from "./ChannelContainer";
 
 init({ data });
@@ -32,7 +31,7 @@ const userToConnect = {
 
 export const GamingChat = () => {
   const { memberListVisible, popUpText, upgradePanelVisible, chatVisible } = useLayoutController();
-  const chatClient = useConnectUser<StreamChatType>(apiKey!, userToConnect, userToken);
+  const chatClient = useConnectUser(apiKey!, userToConnect, userToken);
   useChecklist({ chatClient, targetOrigin });
 
   if (!chatClient) return null;

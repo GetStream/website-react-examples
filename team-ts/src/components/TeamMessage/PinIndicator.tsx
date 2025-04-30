@@ -1,11 +1,10 @@
-import { StreamMessage } from 'stream-chat-react';
-
 import { PinIcon } from '../../assets';
+import type {LocalMessage} from "stream-chat";
 
-import { StreamChatType } from '../../types';
+
 
 export type PinIndicatorProps = {
-  message?: StreamMessage<StreamChatType>;
+  message?: LocalMessage;
 };
 
 export const PinIndicator = ({ message }: PinIndicatorProps) => {

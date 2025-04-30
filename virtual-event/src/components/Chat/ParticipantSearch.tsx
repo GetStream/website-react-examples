@@ -13,7 +13,7 @@ import { SkeletonLoader } from './DMChannelList';
 import { SearchResult } from './SearchResult';
 
 import { ClearSearchButton, CloseX, SearchIcon } from '../../assets';
-import { StreamChatType } from '../../types';
+
 
 type ParticipantSearchProps = {
   setDmChannel: React.Dispatch<React.SetStateAction<Channel | undefined>>;
@@ -40,12 +40,12 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
 
       try {
         const { users } = await client.queryUsers(
-          { id: { $ne: client.userID || '' } },
+          { },
           { id: 1, last_active: -1 },
           { limit: 10 },
         );
-
-        if (users.length) setParticipants(users);
+        const otherParticipants = users.filter((user) => user.id !== client.userID);
+        if (otherParticipants.length) setParticipants(otherParticipants);
       } catch (err) {
         console.log(err);
       }
@@ -63,8 +63,8 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
   };
 
   const onSelectResult = (
-    params: ChannelSearchFunctionParams<StreamChatType>,
-    result: ChannelOrUserResponse<StreamChatType>,
+    params: ChannelSearchFunctionParams,
+    result: ChannelOrUserResponse,
   ) => handleSelectResult(result);
 
   const extraParams: ChannelSearchProps['searchQueryParams'] = {
