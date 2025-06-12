@@ -1,57 +1,57 @@
-import type {
-  MessageComposer,
-  MessageComposerMiddlewareValueState,
-  MessageDraftComposerMiddlewareValueState,
+import {
+  MessageComposer, MessageComposerMiddlewareState,
+  type MessageDraftComposerMiddlewareValueState,
   MiddlewareHandlerParams
 } from "stream-chat";
 
 export const createGiphyCommandInjectionMiddleware = (composer: MessageComposer) => ({
-  id: 'demo-team/message-composer-middleware/giphy-command-injection',
-  compose: ({
-    input,
-    nextHandler,
-  }: MiddlewareHandlerParams<MessageComposerMiddlewareValueState>) => {
-    const {custom: {command}} = composer.customDataManager.state.getLatestValue();
-    const {attachments, text} = input.state.localMessage;
-    const injection = command && `/${command}`;
-    if (command !== 'giphy' || !injection || text?.startsWith(injection) || attachments?.length) return nextHandler(input);
-    const enrichedText = `${injection} ${text}`
-    return nextHandler({
-      ...input,
-      state: {
-        ...input.state,
+  id: 'demo-virtual-event/message-composer-middleware/giphy-command-injection',
+  handlers: {
+    compose: ({
+                forward,
+                next,
+                state,
+              }: MiddlewareHandlerParams<MessageComposerMiddlewareState>) => {
+      const {custom: {command}} = composer.customDataManager.state.getLatestValue();
+      const {attachments, text} = state.localMessage;
+      const injection = command && `/${command}`;
+      if (command !== 'giphy' || !injection || text?.startsWith(injection) || attachments?.length) return forward();
+      const enrichedText = `${injection} ${text}`
+      return next({
+        ...state,
         localMessage: {
-          ...input.state.localMessage,
+          ...state.localMessage,
           text: enrichedText,
         },
         message: {
-          ...input.state.message,
+          ...state.message,
           text: enrichedText,
         },
-      },
-    });
+      });
+    }
   }
 });
 export const createDraftGiphyCommandInjectionMiddleware = (composer: MessageComposer) => ({
   id: 'demo-team/message-composer-middleware/draft-giphy-command-injection',
-  compose: ({
-    input,
-    nextHandler,
-  }: MiddlewareHandlerParams<MessageDraftComposerMiddlewareValueState>) => {
-    const {custom: {command}} = composer.customDataManager.state.getLatestValue();
-    const text = input.state.draft.text;
-    const injection = command && `/${command}`;
-    if (command !== 'giphy' || !injection || text?.startsWith(injection)) return nextHandler(input);
-    const enrichedText = `${injection} ${text}`
-    return nextHandler({
-      ...input,
-      state: {
-        ...input.state,
+  handlers: {
+    compose: ({
+                forward,
+                next,
+                state,
+              }: MiddlewareHandlerParams<MessageDraftComposerMiddlewareValueState>) => {
+      const {custom: {command}} = composer.customDataManager.state.getLatestValue();
+      const text = state.draft.text;
+      const injection = command && `/${command}`;
+      if (command !== 'giphy' || !injection || text?.startsWith(injection)) return forward();
+      const enrichedText = `${injection} ${text}`
+      return next({
+        ...state,
         draft: {
-          ...input.state.draft,
+          ...state.draft,
           text: enrichedText,
         },
-      },
-    });
+      });
+    }
   }
+
 });

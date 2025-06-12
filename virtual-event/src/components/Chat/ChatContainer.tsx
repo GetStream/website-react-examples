@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import {Channel as StreamChannel, UserResponse} from 'stream-chat';
+import {Channel as StreamChannel, TextComposerMiddleware, UserResponse} from 'stream-chat';
 import {Channel, Chat} from 'stream-chat-react';
 
 import {init, SearchIndex} from 'emoji-mart';
@@ -69,7 +69,7 @@ export const ChatContainer = () => {
       });
       composer.textComposer.middlewareExecutor.insert({
         middleware: [
-          createGiphyCommandControlMiddleware(composer),
+          createGiphyCommandControlMiddleware(composer) as TextComposerMiddleware,
         ],
         position: {before: 'stream-io/text-composer/pre-validation-middleware'}
       })

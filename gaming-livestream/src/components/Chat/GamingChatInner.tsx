@@ -53,7 +53,8 @@ export const GamingChatInner = () => {
         <MessageList Message={GamingMessage} />
         <MessageInput
           focus
-          grow
+          minRows={1}
+          maxRows={8}
           Input={GamingMessageInput}
           overrideSubmitHandler={overrideSubmitHandler}
         />

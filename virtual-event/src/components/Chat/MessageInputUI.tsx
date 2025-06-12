@@ -10,7 +10,7 @@ import {
 import {CommandBolt, GiphyIcon, GiphySearch, SendArrow} from '../../assets';
 import {useEventContext} from '../../contexts/EventContext';
 import {EmojiPicker} from './EmojiPicker';
-import {CommandSearchSource, type CustomDataManagerState, TextComposerState} from "stream-chat";
+import {CommandSearchSource, type CustomDataManagerState, SearchSource, TextComposerState} from "stream-chat";
 
 const textComposerStateSelector = (state: TextComposerState) => ({
   text: state.text,
@@ -87,10 +87,9 @@ export const MessageInputUI = () => {
               className={`input-ui-input-commands-button ${cooldownRemaining ? 'cooldown' : ''}`}
               disabled={!!cooldownRemaining}
               onClick={() => {
-                textComposer.setText('/');
                 commandSearchSource.resetStateAndActivate();
                 commandSearchSource.search();
-                textComposer.setSuggestions({query: '', searchSource: commandSearchSource, trigger: '/'})
+                textComposer.setSuggestions({query: '', searchSource: commandSearchSource as SearchSource, trigger: '/'})
               }}
             >
               <CommandBolt />

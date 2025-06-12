@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {StreamChat} from 'stream-chat';
+import {StreamChat, TextComposerMiddleware} from 'stream-chat';
 import {Chat} from 'stream-chat-react';
 
 import {getRandomImage} from './assets';
@@ -48,7 +48,7 @@ const App = () => {
       });
       composer.textComposer.middlewareExecutor.insert({
         middleware: [
-          createGiphyCommandControlMiddleware(composer),
+          createGiphyCommandControlMiddleware(composer) as TextComposerMiddleware,
         ],
         position: {before: 'stream-io/text-composer/pre-validation-middleware'}
       })

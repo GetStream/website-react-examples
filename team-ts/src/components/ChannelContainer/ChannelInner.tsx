@@ -31,9 +31,9 @@ export const ChannelInner = () => {
         <Window>
           <TeamChannelHeader />
           <MessageList disableQuotedMessages={true} pinPermissions={pinnedPermissions} />
-          <MessageInput grow />
+          <MessageInput minRows={1} maxRows={8} />
         </Window>
-        <Thread additionalMessageInputProps={{ grow: true, Input: ThreadMessageInput }} />
+        <Thread additionalMessageInputProps={{ maxRows: 8, minRows: 1, Input: ThreadMessageInput }} />
         <PinnedMessageList />
     </>
   );

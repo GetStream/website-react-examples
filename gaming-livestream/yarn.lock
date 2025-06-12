@@ -1125,12 +1125,17 @@
   dependencies:
     regenerator-runtime "^0.14.0"
 
-"@babel/runtime@^7.16.3", "@babel/runtime@^7.17.2", "@babel/runtime@^7.20.13":
+"@babel/runtime@^7.16.3", "@babel/runtime@^7.20.13":
   version "7.23.2"
   resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.23.2.tgz#062b0ac103261d68a966c4c7baf2ae3e62ec3885"
   integrity sha512-mM8eg4yl5D6i3lu2QKPuPH4FArvJ8KhTofbE7jwMUv9KX5mBvwPAqnV3MlyBNqdp9RyRKP6Yck8TrfYrPvX3bg==
   dependencies:
     regenerator-runtime "^0.14.0"
+
+"@babel/runtime@^7.27.1":
+  version "7.27.6"
+  resolved "https://registry.yarnpkg.com/@babel/runtime/-/runtime-7.27.6.tgz#ec4070a04d76bae8ddbb10770ba55714a417b7c6"
+  integrity sha512-vbavdySgbTTrmFE+EsiqUTzlOr5bzlnJtUv9PynGCAKvfQqjIXbvFdumPM/GxMDfyuGMJaJAU6TO4zc1Jf1i8Q==
 
 "@babel/template@^7.24.7", "@babel/template@^7.3.3":
   version "7.24.7"
@@ -5650,12 +5655,12 @@ human-signals@^2.1.0:
   resolved "https://registry.yarnpkg.com/human-signals/-/human-signals-2.1.0.tgz#dc91fcba42e4d06e4abaed33b3e7a3c02f514ea0"
   integrity sha512-B4FFZ6q/T2jhhksgkbEW3HBvWIfDW85snkQgawt07S7J5QXTk6BkNV+0yAeZrM5QpMAdYlocGoljn0sJ/WQkFw==
 
-i18next@^21.6.14:
-  version "21.10.0"
-  resolved "https://registry.yarnpkg.com/i18next/-/i18next-21.10.0.tgz#85429af55fdca4858345d0e16b584ec29520197d"
-  integrity sha512-YeuIBmFsGjUfO3qBmMOc0rQaun4mIpGKET5WDwvu8lU7gvwpcariZLNtL0Fzj+zazcHUrlXHiptcFhBMFaxzfg==
+i18next@^25.2.1:
+  version "25.2.1"
+  resolved "https://registry.yarnpkg.com/i18next/-/i18next-25.2.1.tgz#23cf8794904f551f577558d93c84b0fb6cd489a2"
+  integrity sha512-+UoXK5wh+VlE1Zy5p6MjcvctHXAhRwQKCxiJD8noKZzIXmnAX8gdHX5fLPA3MEVxEN4vbZkQFy8N0LyD9tUqPw==
   dependencies:
-    "@babel/runtime" "^7.17.2"
+    "@babel/runtime" "^7.27.1"
 
 ical-expander@^3.1.0:
   version "3.1.0"
@@ -9898,10 +9903,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@13.0.0-rc.2:
-  version "13.0.0-rc.2"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.0.0-rc.2.tgz#4e48ade6b66b816827fdacecf02632b23f7ff254"
-  integrity sha512-HYEjojijcwvucCfDebX1veWaMWmb5jI0/F7GNmALooy2eBt5ChBV2rM53SqjjN/AbSE4VGgLYWm3jLKH6AIHQQ==
+stream-chat-react@^13.1.0:
+  version "13.1.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.1.0.tgz#5b4475a59b3db1824d1a948a5850a8407031ef62"
+  integrity sha512-cjsgga2jjSgN+2TchaHzh3zkC4cMTdceR3QjNZd1taTsf+IXD6LpG5ZHlM/498QAXtMr/qJ8Qewyxa6Z7suRRQ==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9911,7 +9916,7 @@ stream-chat-react@13.0.0-rc.2:
     emoji-regex "^9.2.0"
     fix-webm-duration "^1.0.5"
     hast-util-find-and-replace "^5.0.1"
-    i18next "^21.6.14"
+    i18next "^25.2.1"
     linkifyjs "^4.1.0"
     lodash.debounce "^4.0.8"
     lodash.defaultsdeep "^4.6.1"
@@ -9919,7 +9924,6 @@ stream-chat-react@13.0.0-rc.2:
     lodash.throttle "^4.1.1"
     lodash.uniqby "^4.7.0"
     nanoid "^3.3.4"
-    prop-types "^15.7.2"
     react-dropzone "^14.2.3"
     react-fast-compare "^3.2.2"
     react-image-gallery "1.2.12"
@@ -9929,7 +9933,6 @@ stream-chat-react@13.0.0-rc.2:
     react-textarea-autosize "^8.3.0"
     react-virtuoso "^2.16.5"
     remark-gfm "^4.0.1"
-    textarea-caret "^3.1.0"
     tslib "^2.6.2"
     unist-builder "^4.0.0"
     unist-util-visit "^5.0.0"
@@ -9938,10 +9941,10 @@ stream-chat-react@13.0.0-rc.2:
     "@stream-io/transliterate" "^1.5.5"
     mml-react "^0.4.7"
 
-stream-chat@9.0.0-rc.15:
-  version "9.0.0-rc.15"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.0.0-rc.15.tgz#6a35f27c38be2e021a3e62abcffa40aaef84fc0a"
-  integrity sha512-n8IftP103jp8IVOUZA4mnOvEIbyzGTVjoL3rDm42apk8DRHz2/vdvgyTYUJysDNYh+Oxu5HwWObToKv1c/Bxdw==
+stream-chat@^9.6.0:
+  version "9.6.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.6.0.tgz#d281e0c6a440d9590ae344883a9a74caac13caf2"
+  integrity sha512-up2PmyVKeuxe28SC1piEgagwNsMYEi4Xz3PN6oKsiLa7FXzNhgvjuGXQtgGNuo2Qwg39UsrdkhOxvAPwkvi5Kw==
   dependencies:
     "@types/jsonwebtoken" "^9.0.8"
     "@types/ws" "^8.5.14"
@@ -10337,11 +10340,6 @@ text-table@^0.2.0:
   resolved "https://registry.yarnpkg.com/text-table/-/text-table-0.2.0.tgz#7f5ee823ae805207c00af2df4a84ec3fcfa570b4"
   integrity sha512-N+8UisAXDGk8PFXP4HAzVR9nbfmVJ3zYLAWiTIoqC5v5isinhr+r5uaO8+7r3BMfuNIufIsA7RdpVgacC2cSpw==
 
-textarea-caret@^3.1.0:
-  version "3.1.0"
-  resolved "https://registry.yarnpkg.com/textarea-caret/-/textarea-caret-3.1.0.tgz#5d5a35bb035fd06b2ff0e25d5359e97f2655087f"
-  integrity sha512-cXAvzO9pP5CGa6NKx0WYHl+8CHKZs8byMkt3PCJBCmq2a34YA9pO1NrQET5pzeqnBjBdToF5No4rrmkDUgQC2Q==
-
 thenify-all@^1.0.0:
   version "1.6.0"
   resolved "https://registry.yarnpkg.com/thenify-all/-/thenify-all-1.6.0.tgz#1a1918d402d8fc3f98fbf234db0bcc8cc10e9726"
@@ -10562,10 +10560,10 @@ typedarray-to-buffer@^3.1.5:
   dependencies:
     is-typedarray "^1.0.0"
 
-typescript@^4.8.4:
-  version "4.9.5"
-  resolved "https://registry.yarnpkg.com/typescript/-/typescript-4.9.5.tgz#095979f9bcc0d09da324d58d03ce8f8374cbe65a"
-  integrity sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==
+typescript@^5.8.3:
+  version "5.8.3"
+  resolved "https://registry.yarnpkg.com/typescript/-/typescript-5.8.3.tgz#92f8a3e5e3cf497356f4178c34cd65a7f5e8440e"
+  integrity sha512-p1diW6TqL9L07nNxvRMM7hMMw4c5XOo/1ibL4aAIGmSAt9slTE1Xgw5KWuof2uTOvCg9BY7ZRi+GaF+7sfgPeQ==
 
 unbox-primitive@^1.0.2:
   version "1.0.2"

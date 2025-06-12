@@ -2,6 +2,7 @@ import clsx from 'clsx';
 import React, {ElementRef, useMemo, useRef} from 'react';
 import type {TranslationLanguages} from 'stream-chat';
 import {
+  Attachment,
   Avatar,
   EditMessageForm,
   isOnlyEmojis,
@@ -47,8 +48,6 @@ export const TeamMessage = () => {
     renderText = defaultRenderText,
     threadList,
   } = useMessageContext('MessageTeam');
-  const { Attachment } = useComponentContext('MessageTeam');
-
   const { t, userLanguage } = useTranslationContext('MessageTeam');
 
   const messageActions = getMessageActions();
@@ -152,7 +151,7 @@ export const TeamMessage = () => {
                 <strong>{message.user?.name || message.user?.id}</strong>
                 {message.type === 'error' && (
                   <div className='str-chat__message-team-error-header'>
-                    {t<string>('Only visible to you')}
+                    {t('Only visible to you')}
                   </div>
                 )}
               </div>
@@ -235,8 +234,8 @@ export const TeamMessage = () => {
               >
                 <ErrorIcon/>
                 {message.error?.status !== 403
-                  ? t<string>('Message Failed · Click to try again')
-                  : t<string>('Message Failed · Unauthorized')}
+                  ? t('Message Failed · Click to try again')
+                  : t('Message Failed · Unauthorized')}
               </button>
             )}
           </div>
