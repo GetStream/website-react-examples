@@ -1,21 +1,28 @@
-import { useCallback, useMemo, useState } from 'react';
-import { useChannelStateContext, useChatContext, useMessageInputContext } from 'stream-chat-react';
+import {useCallback, useMemo} from 'react';
+import {useChannelStateContext, useChatContext, useMessageComposer, useMessageInputContext} from 'stream-chat-react';
+import type {MessageInputFormattingType} from "../../../types.stream";
 
-import { useGiphyInMessageContext } from '../../../context/GiphyInMessageFlagContext';
+const mdToFormattingType: Record<string, MessageInputFormattingType> = {
+  '**': 'bold',
+  '*': 'italics',
+  '~~': 'strikethrough',
+  '``': 'code',
+}
 
-import { StreamChatType } from '../../../types';
-
-export type MessageInputControlType = 'emoji' | 'bold' | 'italics' | 'code' | 'strike-through';
+export const formattingTypeToMarkdown: Record<MessageInputFormattingType, string> = {
+  bold: '**',
+  code: '`',
+  italics: '*',
+  strikethrough: '~~',
+}
 
 export const useMessageInputCompositionControls = () => {
-  const { client } = useChatContext<StreamChatType>();
+  const { client } = useChatContext();
   const {
     channel,
-  } = useChannelStateContext<StreamChatType>();
-  const messageInput = useMessageInputContext<StreamChatType>();
-  const { isComposingGiphyMessage, clearGiphyFlagMainInput, setComposeGiphyMessageFlag } = useGiphyInMessageContext();
-  const [formatting, setFormatting] = useState<MessageInputControlType | null>(null);
-
+  } = useChannelStateContext();
+  const {customDataManager, textComposer} = useMessageComposer();
+  const {textareaRef} = useMessageInputContext();
   const placeholder = useMemo(() => {
     let dynamicPart = 'the group';
 
@@ -36,83 +43,44 @@ export const useMessageInputCompositionControls = () => {
 
   }, [channel.type, channel.state.members, channel?.data?.id, channel?.data?.name, client.userID]);
 
-  const onChange: React.ChangeEventHandler<HTMLTextAreaElement> = useCallback(
-    (event) => {
-      const { value } = event.target;
+  const handleFormattingButtonClick = useCallback((wrappingMarkdown: string) => {
+    const textarea = textareaRef.current;
+    if (!textarea) return;
 
-      const deletePressed =
-        event.nativeEvent instanceof InputEvent &&
-        event.nativeEvent.inputType === 'deleteContentBackward';
+    const {activeFormatting} = customDataManager.customComposerData;
+    if (!activeFormatting) {
+      textComposer.wrapSelection({head: wrappingMarkdown, tail: wrappingMarkdown});
+      customDataManager.setCustomData({activeFormatting: mdToFormattingType[wrappingMarkdown]});
+      textarea.selectionStart = textComposer.selection.start;
+      textarea.selectionEnd = textComposer.selection.end;
+      textarea.focus();
+      return;
+    }
+    const activeMarkdown = formattingTypeToMarkdown[activeFormatting];
+    const newSelection = {
+      start: textComposer.selection.start + activeMarkdown.length,
+      end: textComposer.selection.end + + activeMarkdown.length,
+    };
+    textarea.selectionStart = newSelection.start;
+    textarea.selectionEnd = newSelection.end;
+    if (wrappingMarkdown === activeMarkdown) {
+      customDataManager.setCustomData({activeFormatting: null});
+    } else {
+      customDataManager.setCustomData({activeFormatting: mdToFormattingType[wrappingMarkdown]});
+      textComposer.wrapSelection({head: wrappingMarkdown, selection: newSelection, tail: wrappingMarkdown});
+    }
+    textarea.focus();
+  }, [customDataManager, textareaRef, textComposer])
 
-      if (messageInput.text.length === 1 && deletePressed) {
-        clearGiphyFlagMainInput();
-      }
-
-      if (!isComposingGiphyMessage() && messageInput.text.startsWith('/giphy') && !messageInput.numberOfUploads) {
-        event.target.value = value.replace('/giphy', '');
-        setComposeGiphyMessageFlag();
-      }
-
-      if (formatting === 'bold') {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 2)}**`;
-        } else {
-          event.target.value = `**${value.replace(/\**/g, '')}**`;
-        }
-      } else if (formatting === 'code') {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 1)}\``;
-        } else {
-          event.target.value = `\`${value.replace(/`/g, '')}\``;
-        }
-      } else if (formatting === 'italics') {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 1)}*`;
-        } else {
-          event.target.value = `*${value.replace(/\*/g, '')}*`;
-        }
-      } else if (formatting === 'strike-through') {
-        if (deletePressed) {
-          event.target.value = `${value.slice(0, value.length - 2)}~~`;
-        } else {
-          event.target.value = `~~${value.replace(/~~/g, '')}~~`;
-        }
-      }
-
-      messageInput.handleChange(event);
-    },
-    [
-      formatting,
-      messageInput,
-      clearGiphyFlagMainInput,
-      isComposingGiphyMessage,
-      setComposeGiphyMessageFlag,
-    ],
-  );
-
-  const handleBoldButtonClick = useCallback(() => {
-    setFormatting((prev) => prev === 'bold' ? null : 'bold');
-  }, []);
-
-  const handleItalicsButtonClick = useCallback(() => {
-    setFormatting((prev) => prev === 'italics' ? null : 'italics')
-  }, []);
-
-  const handleStrikeThroughButtonClick = useCallback(() => {
-    setFormatting((prev) => prev === 'strike-through' ? null : 'strike-through')
-  }, []);
-
-  const handleCodeButtonClick = useCallback(() => {
-    setFormatting((prev) => prev === 'code' ? null : 'code')
-  }, []);
+  const formatter = useMemo<Record<MessageInputFormattingType, () => void>>(() => ({
+    bold: () => handleFormattingButtonClick('**'),
+    italics: () => handleFormattingButtonClick('*'),
+    'strikethrough': () => handleFormattingButtonClick('~~'),
+    code: () => handleFormattingButtonClick('`'),
+  }), [handleFormattingButtonClick]);
 
   return {
-    formatting,
-    handleBoldButtonClick,
-    handleCodeButtonClick,
-    handleItalicsButtonClick,
-    handleStrikeThroughButtonClick,
+    formatter,
     placeholder,
-    onChange,
   }
 }

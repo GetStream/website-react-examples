@@ -2,10 +2,8 @@ import { Avatar, useChatContext } from 'stream-chat-react';
 
 import { HashIcon } from './HashIcon';
 
-import type { StreamChatType } from '../../types';
-
 export const EmptyChannel = () => {
-  const { channel, client } = useChatContext<StreamChatType>();
+  const { channel, client } = useChatContext();
 
   const members = Object.values(channel?.state?.members || {}).filter(
     ({ user }) => user?.id !== client.userID,

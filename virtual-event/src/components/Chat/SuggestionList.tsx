@@ -1,17 +1,14 @@
 import React from 'react';
-import {Avatar, SuggestionCommand, SuggestionItemProps, SuggestionUser,} from 'stream-chat-react';
+import type {CommandResponse} from "stream-chat";
+import {
+  Avatar,
+  EmojiSearchIndexResult,
+  SuggestionList,
+  type SuggestionListItemComponentProps, SuggestionListProps, UserItemProps,
+} from 'stream-chat-react';
 
 import {Ban, Flag, Giphy, Mute, Unban, Unmute} from '../../assets';
 
-type Emoji = { id: string; native: string; name: string };
-
-const isEmoji = (output: SuggestionItem): output is Emoji => (output as Emoji).native != null;
-
-const isMention = (output: SuggestionItem): output is SuggestionUser =>
-  (output as SuggestionUser).id != null && (output as SuggestionUser).native == null;
-
-const isEmojiOrMention = (output: SuggestionItem): output is Emoji | SuggestionUser =>
-  (output as Emoji | SuggestionUser).id != null;
 
 const getCommandIcon = (name?: string) => {
   let description;
@@ -49,35 +46,51 @@ const getCommandIcon = (name?: string) => {
   return { description, Icon };
 };
 
-type SuggestionItem = Emoji | SuggestionUser | SuggestionCommand;
 
-export const SuggestionListItem = React.forwardRef(
-  (props: SuggestionItemProps, ref: React.Ref<HTMLDivElement>) => {
-    const { item, onClickHandler, onSelectHandler, selected } = props;
+const CommandSuggestionItemComponent = (props: SuggestionListItemComponentProps) => {
+  const entity = props.entity as CommandResponse;
+  if (!entity) return null;
 
-    const selectItem = () => onSelectHandler(item);
+  const { description, Icon } = getCommandIcon(entity.name);
+  return (
+    <div className='suggestion-item'>
+      {Icon && <div className='suggestion-item-icon'><Icon/></div>}
+      <div>{entity.name}</div>
+      <div className='suggestion-item-description'>{description}</div>
+    </div>
+  );
+}
 
-    const { description, Icon } = getCommandIcon(item.name);
+const MentionSuggestionItemComponent = (props: SuggestionListItemComponentProps) => {
+  const entity = props.entity as UserItemProps['entity'];
+  if (!entity) return null;
 
-    const itemName = isEmojiOrMention(item) ? item.name || item.id : item.name;
-    const displayText = isEmoji(item) ? `${item.native}- ${itemName}` : itemName;
+  return (
+    <div className='suggestion-item'>
+      <Avatar image={entity.image} />
+      <div>{entity.name}</div>
+    </div>
+  );
+}
 
-    return (
-      <div
-        className={`suggestion-item ${selected ? 'selected' : ''}`}
-        onClick={(event) => onClickHandler(event, item)}
-        onMouseEnter={selectItem}
-        ref={ref}
-        role='button'
-        tabIndex={0}
-      >
-        {!isEmojiOrMention(item) && (
-          <div className='suggestion-item-icon'>{Icon ? <Icon /> : null}</div>
-        )}
-        {isMention(item) ? <Avatar image={item.image} /> : null}
-        <div>{displayText}</div>
-        <div className='suggestion-item-description'>{description}</div>
-      </div>
-    );
-  },
-);
+const EmojiSuggestionItemComponent = (props: SuggestionListItemComponentProps) => {
+  const entity = props.entity as EmojiSearchIndexResult;
+  if (!entity) return null;
+  const displayText = `${entity.native} ${entity.name || entity.id};`;
+  return (
+    <div className='suggestion-item'>
+      <div>{displayText}</div>
+    </div>
+  );
+}
+
+const suggestionItemComponents: Record<
+  string,
+  React.ComponentType<SuggestionListItemComponentProps>
+> = {
+  '/': CommandSuggestionItemComponent,
+  ':': EmojiSuggestionItemComponent,
+  '@': MentionSuggestionItemComponent,
+}
+
+export const CustomSuggestionList = (props: SuggestionListProps) => <SuggestionList {...props} suggestionItemComponents={suggestionItemComponents}/>

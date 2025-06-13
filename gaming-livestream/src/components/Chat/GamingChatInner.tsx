@@ -1,6 +1,6 @@
 import React, {useCallback} from 'react';
-import {logChatPromiseExecution} from 'stream-chat';
-import {MessageInput, MessageList, MessageToSend, useChannelActionContext, Window} from 'stream-chat-react';
+import {type LocalMessage, logChatPromiseExecution, type Message, type SendMessageOptions} from 'stream-chat';
+import {MessageInput, MessageList, useChannelActionContext, Window} from 'stream-chat-react';
 
 import {GamingChatHeader} from './GamingChatHeader';
 import {GamingMessage} from './GamingMessage';
@@ -9,8 +9,6 @@ import {GamingThread} from './GamingThread';
 
 import {useLayoutController} from '../../context/LayoutController';
 import {useMessageTimestamp} from "../../context/MessageTimestampController";
-
-import type {StreamChatType} from '../../types';
 
 const NOTIFICATION_TEXT_FOR_COMMAND: Record<string, string> = {
   '/ban': 'User banned',
@@ -33,10 +31,15 @@ export const GamingChatInner = () => {
   const { publishAppNotification } = useLayoutController();
   const {timestampEnabled, toggleTimestamp} = useMessageTimestamp();
 
-  const overrideSubmitHandler = useCallback((message: MessageToSend<StreamChatType>) => {
+  const overrideSubmitHandler = useCallback(({localMessage, message, sendOptions}: {
+    cid: string;
+    localMessage: LocalMessage;
+    message: Message;
+    sendOptions: SendMessageOptions;
+  }) => {
     const { text } = message;
     publishAppNotification(getNotificationText(text))
-    const sendMessagePromise = sendMessage(message);
+    const sendMessagePromise = sendMessage({localMessage, message, options: sendOptions});
     logChatPromiseExecution(sendMessagePromise, 'send message');
   }, [publishAppNotification, sendMessage]);
 
@@ -50,7 +53,8 @@ export const GamingChatInner = () => {
         <MessageList Message={GamingMessage} />
         <MessageInput
           focus
-          grow
+          minRows={1}
+          maxRows={8}
           Input={GamingMessageInput}
           overrideSubmitHandler={overrideSubmitHandler}
         />

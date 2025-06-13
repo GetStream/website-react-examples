@@ -10,7 +10,6 @@ import {
 } from 'react';
 import { Workspace } from '../../../context/WorkspaceController';
 import { useChatContext } from 'stream-chat-react';
-import { StreamChatType } from '../../../types';
 
 type UpsertChannelParams = { name: string, members: string[] };
 
@@ -63,7 +62,7 @@ const getUpsertAction = (workspace: Workspace): UpsertAction | undefined => {
 };
 
 export const AdminPanelForm = ({ children, defaultValues, workspace, onSubmit }: PropsWithChildren<AdminPanelFormProps>) => {
-  const { client, channel, setActiveChannel } = useChatContext<StreamChatType>();
+  const { client, channel, setActiveChannel } = useChatContext();
   const [name, setChannelName] = useState<string>(defaultValues.name);
   const [members, setMembers] = useState<string[]>(defaultValues.members);
   const [errors, setErrors] = useState<FormErrors>({ name: null, members: null });

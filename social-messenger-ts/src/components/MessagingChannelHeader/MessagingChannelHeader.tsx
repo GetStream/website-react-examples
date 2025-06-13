@@ -6,8 +6,6 @@ import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
 import { ChannelInfoIcon, ChannelSaveIcon, HamburgerIcon } from '../../assets';
 import { AvatarGroup } from '../';
 
-import type { StreamChatGenerics } from '../../types';
-
 type Props = {
   theme: string;
   toggleMobile: () => void;
@@ -15,8 +13,8 @@ type Props = {
 
 const MessagingChannelHeader = (props: Props) => {
   const { theme, toggleMobile } = props;
-  const { client } = useChatContext<StreamChatGenerics>();
-  const { channel } = useChannelStateContext<StreamChatGenerics>();
+  const { client } = useChatContext();
+  const { channel } = useChannelStateContext();
   const [channelName, setChannelName] = useState(channel.data?.name || '');
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState('');

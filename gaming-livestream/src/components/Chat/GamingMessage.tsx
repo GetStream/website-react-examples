@@ -10,11 +10,9 @@ import ReactionUpVote from '../../assets/icons/ReactionUpVote';
 import {getColor} from '../../assets/data';
 
 import {TimestampContextValue, useMessageTimestamp} from "../../context/MessageTimestampController";
+import type {LocalMessage} from "stream-chat";
 
-import type {StreamMessage} from 'stream-chat-react/dist/context/ChannelStateContext';
-import type {StreamChatType} from '../../types';
-
-const getTimeStamp = (messageCreatedAt?: StreamMessage<StreamChatType>['created_at']) => {
+const getTimeStamp = (messageCreatedAt?: LocalMessage['created_at']) => {
 	if (!messageCreatedAt) return '';
 
 	const createdAt = new Date(messageCreatedAt);
@@ -91,10 +89,10 @@ const MessageActions = ({downVote, upVote, onOpenThread}: MessageActionsProps) =
 
 type ReactionListProps = VotingStatsProps
 	& Pick<MessageActionsProps, 'onOpenThread'>
-	& Pick<StreamMessage<StreamChatType>, 'reply_count'>;
+	& Pick<LocalMessage, 'reply_count'>;
 
 const ReactionList = ({upVotes, downVotes, onOpenThread}: ReactionListProps) => {
-	const {message} = useMessageContext<StreamChatType>();
+	const {message} = useMessageContext();
 	return (
 		<div className='custom-message__reaction-list'>
 			<VotingStats upVotes={upVotes} downVotes={downVotes}/>
@@ -108,7 +106,7 @@ const ReactionList = ({upVotes, downVotes, onOpenThread}: ReactionListProps) => 
 }
 
 type MessageContentProps = {color?: string}
-	& Pick<MessageContextValue<StreamChatType>, 'message' | 'handleAction'>
+	& Pick<MessageContextValue, 'message' | 'handleAction'>
 	& Pick<TimestampContextValue, 'timestampEnabled'>;
 
 const MessageContent = ({color, message, handleAction, timestampEnabled}: MessageContentProps) => {
@@ -132,8 +130,8 @@ const MessageContent = ({color, message, handleAction, timestampEnabled}: Messag
 }
 
 export const GamingMessage = () => {
-	const {openThread} = useChannelActionContext<StreamChatType>();
-	const {handleAction, message} = useMessageContext<StreamChatType>();
+	const {openThread} = useChannelActionContext();
+	const {handleAction, message} = useMessageContext();
 	const {timestampEnabled} = useMessageTimestamp();
 	const [downVotes, setDownVotes] = useState(0);
 	const [upVotes, setUpVotes] = useState(0);

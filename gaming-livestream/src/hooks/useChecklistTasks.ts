@@ -2,9 +2,6 @@ import { useEffect } from 'react';
 
 import type { Event, StreamChat } from 'stream-chat';
 
-import type { StreamChatType } from '../types';
-
-
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
 };
@@ -22,7 +19,7 @@ const [REACT_TO_MESSAGE, RUN_GIPHY, SEND_YOUTUBE, DRAG_DROP, START_THREAD, SEND_
 ];
 
 type ChecklistTaskProps = {
-  chatClient: StreamChat<StreamChatType> | null;
+  chatClient: StreamChat | null;
   targetOrigin?: string;
 };
 
@@ -34,7 +31,7 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
     const notify = notifyParent(targetOrigin);
 
     const handleNewEvent = (
-      props: Event<StreamChatType>,
+      props: Event,
     ) => {
       const { message, type } = props;
 

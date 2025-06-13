@@ -1,5 +1,5 @@
-import React, { useState } from 'react';
-import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
+import React, {useEffect, useState} from 'react';
+import type { ChannelFilters, ChannelOptions, ChannelSort, TextComposerMiddleware } from 'stream-chat';
 import {
   Channel,
   Chat,
@@ -9,7 +9,7 @@ import {
   useCreateChatClient,
 } from 'stream-chat-react';
 import clsx from 'clsx';
-import { EmojiPicker } from 'stream-chat-react/emojis';
+import { createTextComposerEmojiMiddleware, EmojiPicker } from 'stream-chat-react/emojis';
 
 import data from '@emoji-mart/data';
 import { init, SearchIndex } from 'emoji-mart';
@@ -25,11 +25,10 @@ import {
   SendButton,
 } from './components';
 
-import { GiphyContextProvider, useThemeContext } from './context';
+import { useThemeContext } from './context';
 
 import { useChecklist, useMobileView, useUpdateAppHeightOnResize } from './hooks';
 
-import type { StreamChatGenerics } from './types';
 
 init({ data });
 
@@ -45,6 +44,8 @@ type AppProps = {
   };
 };
 
+const noop = () => null;
+
 const EmojiPickerWithTheme = () => {
   const { theme } = useThemeContext();
 
@@ -55,7 +56,7 @@ const App = (props: AppProps) => {
   const { apiKey, userToConnect, userToken, targetOrigin, channelListOptions } = props;
   const [isCreating, setIsCreating] = useState(false);
 
-  const chatClient = useCreateChatClient<StreamChatGenerics>({
+  const chatClient = useCreateChatClient({
     apiKey,
     userData: userToConnect,
     tokenOrProvider: userToken,
@@ -65,6 +66,23 @@ const App = (props: AppProps) => {
 
   useChecklist(chatClient, targetOrigin);
   useUpdateAppHeightOnResize();
+
+  useEffect(() => {
+    if (!chatClient) return;
+
+    chatClient.setMessageComposerSetupFunction(({ composer }) => {
+      composer.textComposer.middlewareExecutor.insert({
+        middleware: [
+          createTextComposerEmojiMiddleware(SearchIndex) as TextComposerMiddleware,
+        ],
+        position: { before: 'stream-io/text-composer/mentions-middleware' },
+        unique: true,
+      });
+      composer.updateConfig({
+        linkPreviews: {enabled: true},
+      });
+    });
+  }, [chatClient]);
 
   if (!chatClient) {
     return null; // render nothing until connection to the backend is established
@@ -82,21 +100,16 @@ const App = (props: AppProps) => {
             onPreviewSelect={() => setIsCreating(false)}
           />
           <Channel
-            maxNumberOfFiles={10}
-            multipleUploads={true}
             SendButton={SendButton}
             ThreadHeader={MessagingThreadHeader}
-            TypingIndicator={() => null}
+            TypingIndicator={noop}
             EmojiPicker={EmojiPickerWithTheme}
             emojiSearchIndex={SearchIndex}
-            enrichURLForPreview
           >
             {isCreating && (
               <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
             )}
-            <GiphyContextProvider>
-              <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
-            </GiphyContextProvider>
+            <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
           </Channel>
         </ChatView.Channels>
         <ChatView.Threads>

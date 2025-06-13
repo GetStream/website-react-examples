@@ -1,15 +1,17 @@
-import React, { useCallback, useEffect, useRef, useState } from 'react';
-import { Avatar, useChatContext } from 'stream-chat-react';
-import type { UserResponse } from 'stream-chat';
-import _debounce from 'lodash.debounce';
+import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
+import {Avatar, useChatContext, useStateStore} from 'stream-chat-react';
+import {SearchSourceState, UserResponse, UserSearchSource} from 'stream-chat';
 
-import { XButton, XButtonBackground } from '../../assets';
+import {XButton, XButtonBackground} from '../../assets';
 
 import './CreateChannel.css';
 
-import type { StreamChatGenerics } from '../../types';
+const searchSourceStateSelector = (state: SearchSourceState<UserResponse>) => ({
+  searchQuery: state.searchQuery,
+  users: state.items,
+})
 
-const UserResult = ({ user }: { user: UserResponse<StreamChatGenerics> }) => (
+const UserResult = ({ user }: { user: UserResponse }) => (
   <li className='messaging-create-channel__user-result'>
     <Avatar image={user.image} name={user.name} />
     {user.online && <div className='messaging-create-channel__user-result-online' />}
@@ -27,72 +29,23 @@ type Props = {
 const CreateChannel = (props: Props) => {
   const { onClose, toggleMobile } = props;
 
-  const { client, setActiveChannel } = useChatContext<StreamChatGenerics>();
+  const { client, setActiveChannel } = useChatContext();
 
   const [focusedUser, setFocusedUser] = useState<number>();
-  const [inputText, setInputText] = useState('');
-  const [resultsOpen, setResultsOpen] = useState(false);
-  const [searchEmpty, setSearchEmpty] = useState(false);
-  const [searching, setSearching] = useState(false);
-  const [selectedUsers, setSelectedUsers] = useState<UserResponse<StreamChatGenerics>[]>([]);
-  const [users, setUsers] = useState<UserResponse<StreamChatGenerics>[]>([]);
+  const [selectedUsers, setSelectedUsers] = useState<UserResponse[]>([]);
 
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const clearState = () => {
-    setInputText('');
-    setResultsOpen(false);
-    setSearchEmpty(false);
-  };
+  const searchSource = useMemo<UserSearchSource>(
+    () => {
+      const source = new UserSearchSource(client, {debounceMs: 100, pageSize: 6});
+      source.activate();
+      return source;
+    },
+    [client],
+  );
 
-  useEffect(() => {
-    const clickListener = () => {
-      if (resultsOpen) clearState();
-    };
-
-    document.addEventListener('click', clickListener);
-
-    return () => document.removeEventListener('click', clickListener);
-  }, [resultsOpen]);
-
-  const findUsers = async () => {
-    if (searching) return;
-    setSearching(true);
-
-    try {
-      const response = await client.queryUsers(
-        {
-          id: { $ne: client.userID as string },
-          $and: [{ name: { $autocomplete: inputText } }],
-        },
-        { id: 1 },
-        { limit: 6 },
-      );
-
-      if (!response.users.length) {
-        setSearchEmpty(true);
-      } else {
-        setSearchEmpty(false);
-        setUsers(response.users);
-      }
-
-      setResultsOpen(true);
-    } catch (error) {
-      console.log({ error });
-    }
-
-    setSearching(false);
-  };
-
-  const findUsersDebounce = _debounce(findUsers, 100, {
-    trailing: true,
-  });
-
-  useEffect(() => {
-    if (inputText) {
-      findUsersDebounce();
-    }
-  }, [inputText]); // eslint-disable-line react-hooks/exhaustive-deps
+  const {searchQuery, users} = useStateStore(searchSource.state, searchSourceStateSelector)
 
   const createChannel = async () => {
     const selectedUsersIds = selectedUsers.map((u) => u.id);
@@ -107,32 +60,34 @@ const CreateChannel = (props: Props) => {
 
     setActiveChannel?.(conversation);
     setSelectedUsers([]);
-    setUsers([]);
+    searchSource.resetStateAndActivate();
     onClose();
   };
 
-  const addUser = (addedUser: UserResponse<StreamChatGenerics>) => {
-    const isAlreadyAdded = selectedUsers.find((user) => user.id === addedUser.id);
-    if (isAlreadyAdded) return;
+  const addUser = useCallback((addedUser: UserResponse) => {
+    setSelectedUsers((selected) => {
+      const alreadyPresent = selected.find((user) => user.id === addedUser.id);
+      if (alreadyPresent) return selected;
+      inputRef.current?.focus();
+      searchSource.resetStateAndActivate();
+      return [...selected, addedUser]
+    });
+  }, [searchSource]);
 
-    setSelectedUsers([...selectedUsers, addedUser]);
-    setResultsOpen(false);
-    setInputText('');
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
+  const removeUser =  useCallback((user: UserResponse) => {
+    setSelectedUsers((selected) => {
+      inputRef.current?.focus();
+      return selected.filter((item) => item.id !== user.id);
 
-  const removeUser = (user: UserResponse<StreamChatGenerics>) => {
-    const newUsers = selectedUsers.filter((item) => item.id !== user.id);
-    setSelectedUsers(newUsers);
-    if (inputRef.current) {
-      inputRef.current.focus();
-    }
-  };
+    });
+  }, []);
 
-  const handleKeyDown = useCallback(
-    (event: KeyboardEvent) => {
+  // todo: where to activate searchSource?
+
+
+  useEffect(() => {
+    const handleKeyDown = (event: KeyboardEvent) => {
+      const users: UserResponse[] = searchSource.items ?? []
       // check for up(ArrowUp) or down(ArrowDown) key
       if (event.key === 'ArrowUp') {
         setFocusedUser((prevFocused) => {
@@ -148,19 +103,15 @@ const CreateChannel = (props: Props) => {
       }
       if (event.key === 'Enter') {
         event.preventDefault();
-        if (focusedUser !== undefined) {
-          addUser(users[focusedUser]);
-          return setFocusedUser(undefined);
-        }
+        setFocusedUser((focuseUser) => {
+          if (focuseUser) addUser(users[focuseUser]);
+          return undefined
+        });
       }
-    },
-    [users, focusedUser], // eslint-disable-line
-  );
-
-  useEffect(() => {
+    }
     document.addEventListener('keydown', handleKeyDown, false);
     return () => document.removeEventListener('keydown', handleKeyDown);
-  }, [handleKeyDown]);
+  }, [addUser, searchSource]);
 
   return (
     <div className='messaging-create-channel'>
@@ -186,8 +137,8 @@ const CreateChannel = (props: Props) => {
               <input
                 autoFocus
                 ref={inputRef}
-                value={inputText}
-                onChange={(e) => setInputText(e.target.value)}
+                value={searchQuery}
+                onChange={(e) => searchSource.search(e.target.value)}
                 placeholder={!selectedUsers.length ? 'Start typing for suggestions' : ''}
                 type='text'
                 className='messaging-create-channel__input'
@@ -202,10 +153,10 @@ const CreateChannel = (props: Props) => {
           Start chat
         </button>
       </header>
-      {inputText && (
+      {searchQuery && (
         <main>
           <ul className='messaging-create-channel__user-results'>
-            {!!users?.length && !searchEmpty && (
+            {!!users?.length ? (
               <div>
                 {users.map((user, i) => (
                   <div
@@ -219,12 +170,11 @@ const CreateChannel = (props: Props) => {
                   </div>
                 ))}
               </div>
-            )}
-            {searchEmpty && (
+            ) : (
               <div
                 onClick={() => {
                   inputRef.current?.focus();
-                  clearState();
+                  searchSource.resetStateAndActivate();
                 }}
                 className='messaging-create-channel__user-result empty'
               >

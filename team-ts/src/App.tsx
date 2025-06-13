@@ -1,5 +1,5 @@
 import {useEffect} from 'react';
-import {StreamChat} from 'stream-chat';
+import {StreamChat, TextComposerMiddleware} from 'stream-chat';
 import {Chat} from 'stream-chat-react';
 
 import {getRandomImage} from './assets';
@@ -9,7 +9,12 @@ import {Sidebar} from './components/Sidebar/Sidebar';
 
 import {WorkspaceController} from './context/WorkspaceController';
 
-import type {StreamChatType} from './types';
+import {
+  createDraftGiphyCommandInjectionMiddleware,
+  createGiphyCommandInjectionMiddleware
+} from "./middleware/composition/giphyCommandInjectionMiddleware";
+import {createGiphyCommandControlMiddleware} from "./middleware/textComposition/giphyCommandControl";
+import {createFormattingMarkdownInjectionMiddleware} from "./middleware/textComposition/formattingMarkdownInjection";
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -19,11 +24,42 @@ const theme = urlParams.get('theme') || 'light';
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const client = StreamChat.getInstance<StreamChatType>(apiKey!, { enableInsights: true, enableWSFallback: true });
+const client = StreamChat.getInstance(apiKey!, { enableInsights: true, enableWSFallback: true });
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
   useChecklist({ chatClient: client, targetOrigin: targetOrigin! });
+
+  useEffect(() => {
+    if (!client) return;
+
+    client.setMessageComposerSetupFunction(({ composer }) => {
+      composer.compositionMiddlewareExecutor.insert({
+        middleware: [
+          createGiphyCommandInjectionMiddleware(composer)
+        ],
+        position: {after: 'stream-io/message-composer-middleware/attachments'}
+      });
+      composer.draftCompositionMiddlewareExecutor.insert({
+        middleware: [
+          createDraftGiphyCommandInjectionMiddleware(composer)
+        ],
+        position: {after: 'stream-io/message-composer-middleware/draft-attachments'}
+      });
+      composer.textComposer.middlewareExecutor.insert({
+        middleware: [
+          createGiphyCommandControlMiddleware(composer) as TextComposerMiddleware,
+        ],
+        position: {before: 'stream-io/text-composer/pre-validation-middleware'}
+      })
+      composer.textComposer.middlewareExecutor.insert({
+        middleware: [
+          createFormattingMarkdownInjectionMiddleware(composer),
+        ],
+        position: {after: 'stream-io/text-composer/pre-validation-middleware'}
+      })
+    });
+  }, []);
 
   useEffect(() => {
     const handleColorChange = (color: string) => {

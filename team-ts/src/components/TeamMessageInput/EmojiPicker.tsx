@@ -1,9 +1,9 @@
 import { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
-import { useMessageInputContext } from 'stream-chat-react';
+import {useMessageComposer, useMessageInputContext} from 'stream-chat-react';
 import Picker from '@emoji-mart/react';
 
-import { StreamChatType } from '../../types';
+
 import { MessageInputControlButton } from './MessageInputControls';
 
 // similar to EmojiPicker from "stream-chat-react/emojis"
@@ -14,8 +14,9 @@ export const EmojiPicker = () => {
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'bottom-start',
   });
+  const { textComposer } = useMessageComposer();
   const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(false);
-  const { insertText, textareaRef } = useMessageInputContext<StreamChatType>();
+  const { textareaRef } = useMessageInputContext();
 
   useEffect(() => {
     if (!popperElement || !referenceElement) return;
@@ -45,8 +46,10 @@ export const EmojiPicker = () => {
             theme='light'
             data={async () => (await import('@emoji-mart/data')).default}
             onEmojiSelect={(e: { native: string }) => {
-              insertText(e.native);
-              textareaRef.current?.focus();
+              const textarea = textareaRef.current;
+              if (!textarea) return;
+              textComposer.insertText({ text: e.native });
+              textarea.focus();
             }}
           />
         </div>

@@ -1,27 +1,27 @@
 import type { Channel, ChannelFilters, StreamChat, UserResponse } from 'stream-chat';
 
-import type { StreamChatType } from '../../types';
+
 
 export type ChannelOrUserType =
-  | Channel<StreamChatType>
-  | UserResponse<StreamChatType>;
+  | Channel
+  | UserResponse;
 
 export const isChannel = (
   channel: ChannelOrUserType,
-): channel is Channel<StreamChatType> =>
-  (channel as Channel<StreamChatType>).cid !== undefined;
+): channel is Channel =>
+  (channel as Channel).cid !== undefined;
 
 type Props = {
-  client: StreamChat<StreamChatType>;
+  client: StreamChat;
   setActiveChannel: (
-    newChannel?: Channel<StreamChatType>,
+    newChannel?: Channel,
     watchers?: {
       limit?: number;
       offset?: number;
     },
     event?: React.SyntheticEvent,
   ) => void;
-  user: UserResponse<StreamChatType>;
+  user: UserResponse;
 };
 
 export const channelByUser = async (props: Props) => {

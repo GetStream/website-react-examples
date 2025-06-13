@@ -4,10 +4,9 @@ import { AdminPanelForm, FormValues } from './context/AdminPanelFormContext';
 import { CreateChannel } from './CreateChannel';
 import { EditChannel } from './EditChannel';
 import { useChatContext } from 'stream-chat-react';
-import { StreamChatType } from '../../types';
 
 export const AdminPanel = () => {
-  const { client, channel } = useChatContext<StreamChatType>();
+  const { client, channel } = useChatContext();
   const { displayWorkspace, activeWorkspace } = useWorkspaceController();
   const onSubmit = useCallback(() => displayWorkspace('Chat'), [displayWorkspace]);
 

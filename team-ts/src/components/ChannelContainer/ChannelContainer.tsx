@@ -8,7 +8,6 @@ import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
 import { ThreadHeader } from '../TeamChannelHeader/ThreadHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 
-import { GiphyInMessageFlagProvider } from '../../context/GiphyInMessageFlagContext';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 import data from '@emoji-mart/data';
@@ -37,9 +36,7 @@ export const ChannelContainer = () => {
         TypingIndicator={TeamTypingIndicator}
         emojiSearchIndex={SearchIndex}
       >
-        <GiphyInMessageFlagProvider>
           <ChannelInner />
-        </GiphyInMessageFlagProvider>
       </Channel>
     </div>
   );

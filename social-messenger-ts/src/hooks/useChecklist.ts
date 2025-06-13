@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import type { Event, StreamChat } from 'stream-chat';
-import type { StreamChatGenerics } from '../types';
 
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
@@ -23,7 +22,7 @@ export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (props: Event<StreamChatGenerics>) => {
+    const handleNewEvent = (props: Event) => {
       const { message, type } = props;
 
       switch (type) {

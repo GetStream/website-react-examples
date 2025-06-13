@@ -4,11 +4,10 @@ import {MessageTimestampController} from "../../context/MessageTimestampControll
 import {GamingChatInner} from "./GamingChatInner";
 import {Channel, useChatContext} from "stream-chat-react";
 import React, {useEffect} from "react";
-import {StreamChatType} from "../../types";
 
 
 export const ChannelContainer = () => {
-  const {channel, client, setActiveChannel} = useChatContext<StreamChatType>();
+  const {channel, client, setActiveChannel} = useChatContext();
   useEffect(() => {
     const loadChat = async () => {
       const channel = client.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });

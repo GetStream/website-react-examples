@@ -1,19 +1,18 @@
 import React from 'react';
 import {
-  ChatAutoComplete,
+  TextareaComposer,
   useChannelStateContext,
+  useMessageComposerHasSendableData,
   useMessageInputContext,
   useTypingContext,
 } from 'stream-chat-react';
-import { EmojiPicker } from 'stream-chat-react/emojis';
+import {EmojiPicker} from 'stream-chat-react/emojis';
 
 import SendIcon from '../../assets/icons/SendIcon';
 import StarIcon from '../../assets/icons/StarIcon';
 import EmojiIcon from '../../assets/icons/EmojiIcon';
 
-import { useLayoutController } from '../../context/LayoutController';
-
-import type { StreamChatType } from '../../types';
+import {useLayoutController} from '../../context/LayoutController';
 
 const TypingIndicator = () => (
   <div className='typing-indicator'>
@@ -26,16 +25,29 @@ const TypingIndicator = () => (
   </div>
 );
 
+const SendMessageButton = () => {
+  const {handleSubmit} = useMessageInputContext();
+  const hasSendableData = useMessageComposerHasSendableData();
+  return (
+    <button
+      className='send-message-button'
+      disabled={!hasSendableData}
+      onClick={handleSubmit}
+    >
+      <SendIcon/>
+    </button>
+  );
+};
+
 export const GamingMessageInput = React.memo(() => {
   const { showUpgradePanel } = useLayoutController();
-  const { thread } = useChannelStateContext<StreamChatType>();
-  const { typing } = useTypingContext<StreamChatType>();
-  const messageInput = useMessageInputContext<StreamChatType>();
+  const { thread } = useChannelStateContext();
+  const { typing } = useTypingContext();
 
   return (
     <div className='channel-footer'>
       <div className='channel-footer__top'>
-        <ChatAutoComplete rows={1} placeholder='Say something' />
+        <TextareaComposer rows={1} placeholder='Say something' />
         {!thread && (
           <EmojiPicker
             popperOptions={{ placement: 'top-end', strategy: 'fixed' }}
@@ -51,13 +63,7 @@ export const GamingMessageInput = React.memo(() => {
           <p>68</p>
         </button>
         {typing && !!Object.keys(typing).length && <TypingIndicator />}
-        <button
-          className='send-message-button'
-          disabled={!messageInput.text}
-          onClick={messageInput.handleSubmit}
-        >
-          <SendIcon />
-        </button>
+        <SendMessageButton/>
       </div>
     </div>
   );

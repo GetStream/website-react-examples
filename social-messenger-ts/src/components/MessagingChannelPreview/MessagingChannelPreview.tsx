@@ -8,7 +8,6 @@ import { AvatarGroup } from '../';
 
 import type { MouseEventHandler} from 'react';
 import type { Channel, ChannelMemberResponse } from 'stream-chat';
-import type { StreamChatGenerics } from '../../types';
 
 const getTimeStamp = (channel: Channel) => {
   let lastHours = channel.state.last_message_at?.getHours();
@@ -52,7 +51,7 @@ type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
 
 const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
   const { channel, setActiveChannel, onClick, latestMessage, } = props;
-  const { channel: activeChannel, client } = useChatContext<StreamChatGenerics>();
+  const { channel: activeChannel, client } = useChatContext();
 
   const members = Object.values(channel.state.members).filter(
     ({ user }) => user?.id !== client.userID,

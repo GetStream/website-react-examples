@@ -7,14 +7,12 @@ import { TeamChannelPreview } from './TeamChannelPreview';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
-import type { StreamChatType } from '../../types';
-
-type TeamChannelPreviewProps = ChannelPreviewUIComponentProps<StreamChatType> & {
+type TeamChannelPreviewProps = ChannelPreviewUIComponentProps & {
   type: string;
 };
 
 export const ChannelPreview = ({ channel, type }: TeamChannelPreviewProps) => {
-  const { channel: activeChannel, setActiveChannel } = useChatContext<StreamChatType>();
+  const { channel: activeChannel, setActiveChannel } = useChatContext();
   const { displayWorkspace } = useWorkspaceController();
 
   const handleClick = useCallback(() => {
