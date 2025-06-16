@@ -4,6 +4,7 @@ import type {TranslationLanguages} from 'stream-chat';
 import {
   Attachment,
   Avatar,
+  DialogAnchor,
   EditMessageForm,
   isOnlyEmojis,
   MESSAGE_ACTIONS,
@@ -14,14 +15,15 @@ import {
   MessageStatus,
   MessageTimestamp,
   ReactionIcon,
-  ReactionsList,
   ReactionSelector,
+  ReactionsList,
   renderText as defaultRenderText,
   showMessageActionsBox,
   ThreadIcon,
-  useComponentContext,
+  useDialog,
+  useDialogIsOpen,
   useMessageContext,
-  useTranslationContext, DialogAnchor, useDialog, useDialogIsOpen,
+  useTranslationContext,
 } from 'stream-chat-react';
 
 import {PinIndicator} from './PinIndicator';
