@@ -10,8 +10,8 @@
     "emoji-mart": "^5.5.2",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stream-chat": "^9.6.0",
-    "stream-chat-react": "^13.1.0"
+    "stream-chat": "^9.17.0",
+    "stream-chat-react": "^13.5.1"
   },
   "devDependencies": {
     "@types/react": "^19.0.8",

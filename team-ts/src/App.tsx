@@ -14,7 +14,6 @@ import {
   createGiphyCommandInjectionMiddleware
 } from "./middleware/composition/giphyCommandInjectionMiddleware";
 import {createGiphyCommandControlMiddleware} from "./middleware/textComposition/giphyCommandControl";
-import {createFormattingMarkdownInjectionMiddleware} from "./middleware/textComposition/formattingMarkdownInjection";
 
 const urlParams = new URLSearchParams(window.location.search);
 
@@ -51,12 +50,6 @@ const App = () => {
           createGiphyCommandControlMiddleware(composer) as TextComposerMiddleware,
         ],
         position: {before: 'stream-io/text-composer/pre-validation-middleware'}
-      })
-      composer.textComposer.middlewareExecutor.insert({
-        middleware: [
-          createFormattingMarkdownInjectionMiddleware(composer),
-        ],
-        position: {after: 'stream-io/text-composer/pre-validation-middleware'}
       })
     });
   }, []);
