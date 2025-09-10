@@ -9493,10 +9493,10 @@ statuses@2.0.1:
   resolved "https://registry.yarnpkg.com/statuses/-/statuses-1.5.0.tgz#161c7dac177659fd9811f43771fa99381478628c"
   integrity sha512-OpZ3zP+jT1PI7I8nemJX4AKmAX070ZkYPVWV/AaKTJl+tXCTGyVdC1a4SL8RUQYEwk/f34ZX8UTykN68FwrqAA==
 
-stream-chat-react@^13.5.1:
-  version "13.5.1"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.5.1.tgz#7c43081fc6d23bf982990b25ea7fd82b54a3a3f7"
-  integrity sha512-T+FYtzwhAgU2q7vEmx1BjxjBuIO7ysX93nW0Wk/SDtwWPLdSIwCh/bQQHD9hlNBcVRdodnwgKQ13g3ywEFugbg==
+stream-chat-react@^13.6.2:
+  version "13.6.2"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.6.2.tgz#5710b7721d8fd1f041106c2b71d5b167d6fc29fa"
+  integrity sha512-BZ5EbDjQ/CLxllsQsKAFxN7WrXft0vRcNZ6qIKklGRlmx4LYRJmwgeT/TKtzFXxRT8TXQUDVN1mg9Al0gCGqig==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9530,10 +9530,10 @@ stream-chat-react@^13.5.1:
   optionalDependencies:
     "@stream-io/transliterate" "^1.5.5"
 
-stream-chat@^9.17.0:
-  version "9.17.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.17.0.tgz#540cf1ea03b08a394d6140696aae8528e9ba9ce2"
-  integrity sha512-ys6K73wIVWs5+qsfPJ9wumEUtgbMXYVbH1dhmAZ1oYtQ01dY/avsvt25PYDakVjKeyrnT+y8T/xEzfeF/WDJsg==
+stream-chat@^9.19.0:
+  version "9.19.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.19.0.tgz#8a2055be0f7c073ee8ca10cbc40af7d36648c476"
+  integrity sha512-ooRLubHPWxVr8Ws3fZvR30BFhVNM1xcrEgRnGGBxNINYYH/Wq+uc6AWONYIeu+n8crwRp3NSrtNfGWpWhLSy7Q==
   dependencies:
     "@types/jsonwebtoken" "^9.0.8"
     "@types/ws" "^8.5.14"
