@@ -9844,10 +9844,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@^13.6.4:
-  version "13.6.4"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.6.4.tgz#051799b3d9f91f8c270719910046121eff7b8a67"
-  integrity sha512-3hlh5jt/oj1ZHuP4jLIbecJKP1bDb4R4ws+ifw9XsVK6xYcV8NJu9oAFogTeNHFI9XT9/fsLAjfnEHAwVA+JLw==
+stream-chat-react@^13.7.0:
+  version "13.7.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.7.0.tgz#d61a4eb484188df1110b95952a7522487e04ae26"
+  integrity sha512-OpqQBY5uOqRyQa6pgh9h8zeXUAZeiyYGq+GBMWUr2KpobDnV0J/ehdZiRx5COoTDcxfx1ykj5QzOTyD5bYt/lQ==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9881,10 +9881,10 @@ stream-chat-react@^13.6.4:
   optionalDependencies:
     "@stream-io/transliterate" "^1.5.5"
 
-stream-chat@^9.19.0:
-  version "9.19.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.19.0.tgz#8a2055be0f7c073ee8ca10cbc40af7d36648c476"
-  integrity sha512-ooRLubHPWxVr8Ws3fZvR30BFhVNM1xcrEgRnGGBxNINYYH/Wq+uc6AWONYIeu+n8crwRp3NSrtNfGWpWhLSy7Q==
+stream-chat@^9.20.0:
+  version "9.20.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.20.0.tgz#58813f1dad642daf62c439469e01f935b0987e04"
+  integrity sha512-DGl3etjkG1/GxXbyUZQHPT6Z3bOwm5ppUNqrrWNYqRqf30UWqotmsRf8HwnilXtvZ8/p/ANZ11nHxbdy72jVZg==
   dependencies:
     "@types/jsonwebtoken" "^9.0.8"
     "@types/ws" "^8.5.14"

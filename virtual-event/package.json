@@ -12,8 +12,8 @@
     "lottie-web": "^5.9.6",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stream-chat": "^9.19.0",
-    "stream-chat-react": "^13.6.4"
+    "stream-chat": "^9.20.0",
+    "stream-chat-react": "^13.7.0"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.8",
