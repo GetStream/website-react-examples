@@ -75,6 +75,7 @@ export const MessageInputUI = () => {
   const commandSearchSource = useMemo(() => new CommandSearchSource(textComposer.channel),
     [textComposer]
   );
+  const hasSendableData = useMessageComposerHasSendableData();
 
   return (
     <div className='input-ui-container'>
@@ -85,7 +86,7 @@ export const MessageInputUI = () => {
           <>
             <button
               className={`input-ui-input-commands-button ${cooldownRemaining ? 'cooldown' : ''}`}
-              disabled={!!cooldownRemaining}
+              disabled={!!cooldownRemaining || !hasSendableData}
               onClick={() => {
                 commandSearchSource.resetStateAndActivate();
                 commandSearchSource.search();
