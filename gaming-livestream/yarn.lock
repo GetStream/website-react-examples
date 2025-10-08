@@ -2980,13 +2980,13 @@ axe-core@^4.9.1:
   resolved "https://registry.yarnpkg.com/axe-core/-/axe-core-4.9.1.tgz#fcd0f4496dad09e0c899b44f6c4bb7848da912ae"
   integrity sha512-QbUdXJVTpvUTHU7871ppZkdOLBeGUKBQWHkHrvN2V9IQWGMt61zf3B45BtzjxEJzYuj0JBjBZP/hmYS/R9pmAw==
 
-axios@^1.6.0:
-  version "1.6.1"
-  resolved "https://registry.yarnpkg.com/axios/-/axios-1.6.1.tgz#76550d644bf0a2d469a01f9244db6753208397d7"
-  integrity sha512-vfBmhDpKafglh0EldBEbVuoe7DyAavGSLWhuSm5ZSEKQnHhBf0xAAwybbNH1IkrJNGnS/VG4I5yxig1pCEXE4g==
+axios@^1.12.2:
+  version "1.12.2"
+  resolved "https://registry.yarnpkg.com/axios/-/axios-1.12.2.tgz#6c307390136cf7a2278d09cec63b136dfc6e6da7"
+  integrity sha512-vMJzPewAlRyOgxV2dU0Cuz2O8zzzx9VYtbJOaBgXFeLc4IV/Eg50n4LowmehOOR61S8ZMpc2K5Sa7g6A4jfkUw==
   dependencies:
-    follow-redirects "^1.15.0"
-    form-data "^4.0.0"
+    follow-redirects "^1.15.6"
+    form-data "^4.0.4"
     proxy-from-env "^1.1.0"
 
 axobject-query@~3.1.1:
@@ -5044,10 +5044,10 @@ follow-redirects@^1.0.0:
   resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.6.tgz#7f815c0cda4249c74ff09e95ef97c23b5fd0399b"
   integrity sha512-wWN62YITEaOpSK584EZXJafH1AGpO8RVgElfkuXbTOrPX4fIfOyEpW/CsiNd8JdYrAoOvafRTOEnvsO++qCqFA==
 
-follow-redirects@^1.15.0:
-  version "1.15.3"
-  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.3.tgz#fe2f3ef2690afce7e82ed0b44db08165b207123a"
-  integrity sha512-1VzOtuEM8pC9SFU1E+8KfTjZyMztRsgEfwQl44z8A25uy13jSzTj6dyK2Df52iV0vgHCfBwLhDWevLn95w5v6Q==
+follow-redirects@^1.15.6:
+  version "1.15.11"
+  resolved "https://registry.yarnpkg.com/follow-redirects/-/follow-redirects-1.15.11.tgz#777d73d72a92f8ec4d2e410eb47352a56b8e8340"
+  integrity sha512-deG2P0JfjrTxl50XGCDyfI97ZGVCxIpfKYmfyrQ54n5FO/0gfIES8C/Psl6kWVDolizcaaxZJnTS0QSMxvnsBQ==
 
 for-each@^0.3.3:
   version "0.3.3"
@@ -5087,15 +5087,6 @@ form-data@^3.0.0:
   version "3.0.1"
   resolved "https://registry.yarnpkg.com/form-data/-/form-data-3.0.1.tgz#ebd53791b78356a99af9a300d4282c4d5eb9755f"
   integrity sha512-RHkBKtLWUVwd7SqRIvCZMEvAMoGUp0XU+seQiZejj0COz3RI3hWP4sCv3gZWWLjJTd7rGwcsF5eKZGii0r/hbg==
-  dependencies:
-    asynckit "^0.4.0"
-    combined-stream "^1.0.8"
-    mime-types "^2.1.12"
-
-form-data@^4.0.0:
-  version "4.0.0"
-  resolved "https://registry.yarnpkg.com/form-data/-/form-data-4.0.0.tgz#93919daeaf361ee529584b9b31664dc12c9fa452"
-  integrity sha512-ETEklSGi5t0QMZuiXoA/Q6vcnxcLQP5vdugSpuAyi6SVGi2clPPp+xgEhuMaHC+zGgn31Kd235W35f7Hykkaww==
   dependencies:
     asynckit "^0.4.0"
     combined-stream "^1.0.8"
@@ -9745,10 +9736,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@^13.7.0:
-  version "13.7.0"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.7.0.tgz#d61a4eb484188df1110b95952a7522487e04ae26"
-  integrity sha512-OpqQBY5uOqRyQa6pgh9h8zeXUAZeiyYGq+GBMWUr2KpobDnV0J/ehdZiRx5COoTDcxfx1ykj5QzOTyD5bYt/lQ==
+stream-chat-react@^13.8.1:
+  version "13.8.1"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-13.8.1.tgz#a83b95139275e9354bed568c5e9fa32eab06ae99"
+  integrity sha512-rn8gGOl1dJG+du9yx5hOwMwzZZIX+7mtFZ+U8PaTapzKKmRe00qZbPMwNMMq4DPyREZ/c1xPpnM5hefvJ6ju0w==
   dependencies:
     "@braintree/sanitize-url" "^6.0.4"
     "@popperjs/core" "^2.11.5"
@@ -9782,14 +9773,14 @@ stream-chat-react@^13.7.0:
   optionalDependencies:
     "@stream-io/transliterate" "^1.5.5"
 
-stream-chat@^9.20.0:
-  version "9.20.0"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.20.0.tgz#58813f1dad642daf62c439469e01f935b0987e04"
-  integrity sha512-DGl3etjkG1/GxXbyUZQHPT6Z3bOwm5ppUNqrrWNYqRqf30UWqotmsRf8HwnilXtvZ8/p/ANZ11nHxbdy72jVZg==
+stream-chat@^9.21.0:
+  version "9.21.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-9.21.0.tgz#cff516630e5234161a2bdc84510ff79723fc5850"
+  integrity sha512-0k/lEsVG1LqZxPHK7C69FLm54EgxshXpNuE6MXHnyV/ke07gbhM5/RdOacXMPfJ8TbWkZg7NyijdEF7Cbct+2A==
   dependencies:
     "@types/jsonwebtoken" "^9.0.8"
     "@types/ws" "^8.5.14"
-    axios "^1.6.0"
+    axios "^1.12.2"
     base64-js "^1.5.1"
     form-data "^4.0.4"
     isomorphic-ws "^5.0.0"
