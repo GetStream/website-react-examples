@@ -12,6 +12,10 @@ on:
       - customer-support/**
       - .github/workflows/deploy.yml
 
+permissions:
+  contents: read
+  id-token: write
+
 jobs:
   build:
     runs-on: ubuntu-latest
