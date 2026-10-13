@@ -1,3 +1,5 @@
+> **This is an old JavaScript copy on stream-chat-react 6 and is no longer maintained.** Use [team-ts](../team-ts/) instead.
+
 # Stream Chat Team Example App
 
 Increase engagement in your community or replace email for your team with chat in your app. Stream’s chat SDK allows you to build anything from a simple chat to your own Slack competitor. Powerful slash commands, Giphy integration and message attachments provide the building blocks of an engaging chat experience.

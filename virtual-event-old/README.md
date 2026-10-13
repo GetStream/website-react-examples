@@ -1,3 +1,5 @@
+> **This is an old JavaScript copy on stream-chat-react 6 and is no longer maintained.** Use [virtual-event](../virtual-event/) instead.
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

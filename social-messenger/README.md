@@ -1,3 +1,5 @@
+> **This is an old JavaScript copy on stream-chat-react 10 and is no longer maintained.** Use [social-messenger-ts](../social-messenger-ts/) instead.
+
 # Stream Chat Messaging Example App
 
 Is your core product something that would benefit from the increased engagement that comes from in-app chat? With Stream Chat, your users can send messages and exchange photos, links, videos, audio, and files, as well as react to other users' messages and interact with bots.

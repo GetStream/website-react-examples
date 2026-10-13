@@ -1,3 +1,5 @@
+> **This is an old JavaScript copy on stream-chat-react 6 and is no longer maintained.**
+
 # Stream Chat Customer Support Example App
 
 Support teams require reliable chat that is available for every visitor. Build engaging chat with an infrastructure as a service you can trust to make sure every question gets an answer, and every visitor can convert to a customer.
