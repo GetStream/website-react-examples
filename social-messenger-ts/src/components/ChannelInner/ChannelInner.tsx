@@ -1,5 +1,5 @@
 import React from 'react';
-import { MessageInput, MessageList, Thread, Window } from 'stream-chat-react';
+import { MessageComposer, MessageList, Thread, Window } from 'stream-chat-react';
 import { encodeToMp3 } from 'stream-chat-react/mp3-encoder';
 
 import { MessagingChannelHeader} from '../../components';
@@ -19,7 +19,7 @@ const ChannelInner = (props: ChannelInnerProps) => {
       <Window>
         <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
         <MessageList messageActions={actions} />
-        <MessageInput
+        <MessageComposer
           focus
           audioRecordingConfig={{ transcoderConfig: { encoder: encodeToMp3 } }}
           audioRecordingEnabled

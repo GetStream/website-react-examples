@@ -1,5 +1,6 @@
 .messaging__sidebar {
-    background: var(--str-chat__channel-list-background-color);
+    /* only the light theme sets the variable; v13 supplied the dark value, stream-chat-react 14 does not */
+    background: var(--str-chat__channel-list-background-color, var(--str-chat__background-core-elevation-1));
 }
 
 .str-chat.str-chat__theme-dark .messaging__channel-list__message {

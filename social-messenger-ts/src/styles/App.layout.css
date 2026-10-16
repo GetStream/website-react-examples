@@ -79,6 +79,15 @@ body {
     min-height: unset;
     overflow-y: unset;
     transition: unset;
+    /* stream-chat-react 14 hides the list on narrow screens until its own open state; the app slides #mobile-channel-list instead */
+    visibility: visible;
+    pointer-events: auto;
+    transform: none;
+  }
+
+  .str-chat__chat-view .str-chat__channel-list {
+    inset-inline-start: unset;
+    width: 100%;
   }
 
   .str-chat__chat-view__channels .str-chat__thread {

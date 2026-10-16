@@ -2,27 +2,32 @@ import clsx from 'clsx';
 import {useMemo} from 'react';
 import {
   AttachmentPreviewList,
-  SendButton,
+  QuotedMessagePreviewUI,
   TextareaComposer,
   useAttachmentManagerState,
-  useComponentContext,
-  useMessageComposer,
+  useMessageComposerContext,
+  useMessageComposerController,
   useMessageComposerHasSendableData,
-  useMessageInputContext,
   useStateStore,
+  useTranslationContext,
 } from 'stream-chat-react';
 import {useDropzone} from 'react-dropzone';
 
 import {GiphyBadge} from './GiphyBadge';
+import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
 import {MessageInputControlButton} from './MessageInputControls';
 import {EmojiPicker} from './EmojiPicker';
 import {useMessageInputCompositionControls} from './hooks/useMessageInputCompositionControls';
-import type {CustomDataManagerState, MessageComposerConfig} from "stream-chat";
+import type {CustomDataManagerState, MessageComposerConfig, MessageComposerState} from "stream-chat";
 import {SendButtonIcon} from "./SendButtonIcon";
 
 const attachmentManagerConfigStateSelector = (state: MessageComposerConfig) => ({
   acceptedFiles: state.attachments.acceptedFiles,
   multipleUploads: state.attachments.maxNumberOfFilesPerMessage > 1,
+});
+
+const editedMessageSelector = (state: MessageComposerState) => ({
+  editedMessage: state.editedMessage,
 });
 
 const customComposerDataSelector = (state: CustomDataManagerState) => ({
@@ -31,19 +36,19 @@ const customComposerDataSelector = (state: CustomDataManagerState) => ({
 });
 
 export const TeamMessageInput = () => {
-  const { TypingIndicator } = useComponentContext();
-
-  const { handleSubmit } = useMessageInputContext();
+  const { handleSubmit } = useMessageComposerContext();
   const {
     formatter,
     placeholder,
   } = useMessageInputCompositionControls();
-  const messageComposer = useMessageComposer();
+  const messageComposer = useMessageComposerController();
   const { acceptedFiles, multipleUploads } = useStateStore(
     messageComposer.configState,
     attachmentManagerConfigStateSelector,
   );
   const { activeFormatting, isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
+  const { editedMessage } = useStateStore(messageComposer.state, editedMessageSelector);
+  const { t } = useTranslationContext();
   const {isUploadEnabled } =  useAttachmentManagerState();
   const hasSendableData = useMessageComposerHasSendableData();
 
@@ -78,12 +83,27 @@ export const TeamMessageInput = () => {
       )}
       <div className='team-message-input__input'>
         <div className='team-message-input__top'>
+          {editedMessage && (
+            <QuotedMessagePreviewUI
+              authorLabel={t('Edit Message')}
+              onRemove={() => messageComposer.clear()}
+              quotedMessage={editedMessage}
+            />
+          )}
           <AttachmentPreviewList />
           <div className='team-message-input__form'>
             {isComposingGiphyText && <GiphyBadge />}
             <TextareaComposer placeholder={placeholder} />
 
-            <SendButton disabled={!hasSendableData} sendMessage={handleSubmit} />
+            <button
+              aria-label='Send'
+              className='str-chat__send-button'
+              disabled={!hasSendableData}
+              onClick={handleSubmit}
+              type='button'
+            >
+              <SendButtonIcon />
+            </button>
           </div>
         </div>
         <div className='team-message-input__bottom'>
@@ -110,14 +130,14 @@ export const TeamMessageInput = () => {
           />
         </div>
       </div>
-      {TypingIndicator && <TypingIndicator />}
+      <TeamTypingIndicator />
     </div>
   );
 };
 
 export const ThreadMessageInput = () => {
-  const { handleSubmit } = useMessageInputContext();
-  const messageComposer = useMessageComposer();
+  const { handleSubmit } = useMessageComposerContext();
+  const messageComposer = useMessageComposerController();
   const hasSendableData = useMessageComposerHasSendableData();
   const { isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
   return (

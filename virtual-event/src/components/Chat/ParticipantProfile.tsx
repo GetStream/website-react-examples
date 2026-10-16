@@ -75,7 +75,7 @@ export const ParticipantProfile = (props: Props) => {
         {imgSrc ? (
           <img src={imgSrc} alt={imgSrc} onError={handleImageLoadError} />
         ) : (
-          <Avatar name={name || id} />
+          <Avatar size={null} userName={name || id} />
         )}
         <div className='profile-details-top'>
           {online && <div className='profile-details-top-online' />}

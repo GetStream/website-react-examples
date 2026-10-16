@@ -1,5 +1,7 @@
 .str-chat__channel-list {
   height: fit-content;
+  flex: 0 0 auto;
+  min-width: 0;
 }
 
 .str-chat__load-more-button {

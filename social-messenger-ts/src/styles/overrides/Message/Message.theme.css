@@ -6,11 +6,17 @@
     --str-chat__message-bubble-border-block-end: var(--str-chat__message-bubble-border);
     --str-chat__message-bubble-border-inline-start: var(--str-chat__message-bubble-border);
     --str-chat__message-bubble-border-inline-end: var(--str-chat__message-bubble-border);
+    --str-chat__chat-bg-outgoing: var(--str-chat__own-message-bubble-background-color);
+    --str-chat__chat-bg-incoming: var(--str-chat__message-bubble-background-color);
+    --str-chat__chat-text-outgoing: var(--str-chat__text-primary);
 }
 
 .str-chat__theme-dark {
     --str-chat__own-message-bubble-background-color: #00000066;
     --str-chat__message-bubble-background-color: var(--str-chat__secondary-surface-color);
+    --str-chat__chat-bg-outgoing: var(--str-chat__own-message-bubble-background-color);
+    --str-chat__chat-bg-incoming: var(--str-chat__message-bubble-background-color);
+    --str-chat__chat-text-outgoing: var(--str-chat__text-primary);
 }
 
 

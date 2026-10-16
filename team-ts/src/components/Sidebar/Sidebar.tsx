@@ -1,4 +1,9 @@
-import { ChannelList } from 'stream-chat-react';
+import {
+  ChannelList,
+  type ChannelListItemUIProps,
+  type ChannelListUIProps,
+  WithComponents,
+} from 'stream-chat-react';
 
 import {
     EmptyDMChannelListIndicator,
@@ -38,49 +43,64 @@ const customChannelMessagingFilter = (channels: Channel[]) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
+// stream-chat-react 14 renders a "Chats" header in every ChannelList; the sidebar has its own section headers
+const NoChannelListHeader = () => null;
+
+const teamChannelsOverrides = {
+  ChannelListHeader: NoChannelListHeader,
+  ChannelListUI: (listProps: ChannelListUIProps) => (
+    <TeamChannelList
+      {...listProps}
+      type='team'
+    />
+  ),
+  ChannelListItemUI: (previewProps: ChannelListItemUIProps) => (
+    <ChannelPreview
+      {...previewProps}
+      type='team'
+    />
+  ),
+};
+
+const messagingChannelsOverrides = {
+  ChannelListHeader: NoChannelListHeader,
+  ChannelListUI: (listProps: ChannelListUIProps) => (
+    <TeamChannelList
+      {...listProps}
+      type='messaging'
+    />
+  ),
+  ChannelListItemUI: (previewProps: ChannelListItemUIProps) => (
+    <ChannelPreview
+      {...previewProps}
+      type='messaging'
+    />
+  ),
+};
+
 const TeamChannelsList = () => (
-  <ChannelList
-    channelRenderFilterFn={customChannelTeamFilter}
-    filters={filters[0]}
-    options={options}
-    sort={sort}
-    EmptyStateIndicator={EmptyGroupChannelListIndicator}
-    List={(listProps) => (
-      <TeamChannelList
-        {...listProps}
-        type='team'
-      />
-    )}
-    Preview={(previewProps) => (
-      <ChannelPreview
-        {...previewProps}
-        type='team'
-      />
-    )}
-  />
+  <WithComponents overrides={teamChannelsOverrides}>
+    <ChannelList
+      channelRenderFilterFn={customChannelTeamFilter}
+      filters={filters[0]}
+      options={options}
+      sort={sort}
+      EmptyStateIndicator={EmptyGroupChannelListIndicator}
+    />
+  </WithComponents>
 );
 
 const MessagingChannelsList = () => (
-  <ChannelList
-    channelRenderFilterFn={customChannelMessagingFilter}
-    filters={filters[1]}
-    options={options}
-    sort={sort}
-    setActiveChannelOnMount={false}
-    EmptyStateIndicator={EmptyDMChannelListIndicator}
-    List={(listProps) => (
-      <TeamChannelList
-        {...listProps}
-        type='messaging'
-      />
-    )}
-    Preview={(previewProps) => (
-      <ChannelPreview
-        {...previewProps}
-        type='messaging'
-      />
-    )}
-  />
+  <WithComponents overrides={messagingChannelsOverrides}>
+    <ChannelList
+      channelRenderFilterFn={customChannelMessagingFilter}
+      filters={filters[1]}
+      options={options}
+      sort={sort}
+      setActiveChannelOnMount={false}
+      EmptyStateIndicator={EmptyDMChannelListIndicator}
+    />
+  </WithComponents>
 )
 
 export const Sidebar = () => {

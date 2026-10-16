@@ -1,0 +1,254 @@
+// ParticipantSearch reuses the ChannelSearch markup from stream-chat-react 13, which 14 no longer
+// styles. These are the v13 rules, in the SDK's layer, with v13-only variables resolved.
+@layer default-chat-sdk {
+  .str-chat__channel-search {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+  }
+
+  .str-chat__channel-search.str-chat__channel-search--active.str-chat__channel-search--inline,
+  .str-chat__channel-search.str-chat__channel-search--with-results.str-chat__channel-search--inline {
+    height: 100%;
+  }
+
+  .str-chat__channel-search.str-chat__channel-search--inline {
+    min-height: 0;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0.625rem;
+    height: 65px;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-bar-button {
+    background: none;
+    border: none;
+    width: calc(1px*40);
+    height: calc(1px*40);
+    padding: 0.625rem;
+    cursor: pointer;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper {
+    display: flex;
+    align-items: center;
+    flex: 1;
+    padding: 0.625rem;
+    min-width: 0;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper .str-chat__channel-search-input--icon,
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper .str-chat__channel-search-input--clear-button {
+    display: inline-flex;
+    padding: 0 0.625rem;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper .str-chat__channel-search-input--clear-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper .str-chat__channel-search-input--clear-button:disabled {
+    cursor: default;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-bar .str-chat__channel-search-input--wrapper input {
+    flex: 1;
+    min-width: 0;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-container-searching {
+    width: 100%;
+    padding: 1.25rem 1rem;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-results-header {
+    width: 100%;
+    padding: 1.25rem 1rem;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list {
+    display: flex;
+    flex-direction: column;
+    overflow-y: auto;
+    overflow-x: hidden;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list.inline {
+    flex: 1;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list.popup {
+    position: absolute;
+    left: 0;
+    right: 0;
+    top: 65px;
+    height: 400px;
+    z-index: 1;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list .str-chat__channel-search-container-empty {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    padding: 1.25rem 1rem;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list .str-chat__channel-search-container-empty svg {
+    height: calc(1px*90 + var(--str-chat__spacing-20));
+    width: calc(1px*90);
+    padding: 2.5rem 0;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list .str-chat__channel-search-result {
+    background: none;
+    border: none;
+    display: flex;
+    align-items: center;
+    width: 100%;
+    column-gap: 0.5rem;
+    padding: 0.75rem 0.5rem;
+  }
+
+  .str-chat__channel-search .str-chat__channel-search-result-list .str-chat__channel-search-result .channel-search__result-text,
+  .str-chat__channel-search .str-chat__channel-search-result-list .str-chat__channel-search-result .str-chat__channel-search-result--display-name {
+    white-space: nowrap;
+    overflow-y: visible;
+    overflow-x: hidden;
+    overflow-x: clip;
+    text-overflow: ellipsis;
+    overflow-y: hidden;
+  }
+
+  .str-chat__channel-search-input--wrapper {
+    background: transparent;
+    color: var(--str-chat__channel-search-input-wrapper-color);
+    box-shadow: var(--str-chat__channel-search-input-wrapper-box-shadow);
+    border-radius: 20px;
+    border-block-start: #dbdde1 1px solid;
+    border-block-end: #dbdde1 1px solid;
+    border-inline-start: #dbdde1 1px solid;
+    border-inline-end: #dbdde1 1px solid;
+  }
+
+  .str-chat__channel-search-input--wrapper input {
+    background: var(--str-chat__channel-search-input-background-color);
+    color: var(--str-chat__text-color);
+    box-shadow: var(--str-chat__channel-search-input-box-shadow);
+    border-radius: var(--str-chat__channel-search-input-border-radius);
+    border-block-start: none;
+    border-block-end: none;
+    border-inline-start: none;
+    border-inline-end: none;
+    outline: none;
+    font: 1rem/1.25 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  }
+
+  .str-chat__channel-search-input--wrapper .str-chat__channel-search-input--clear-button svg path {
+    fill: rgba(0,0,0,0);
+  }
+
+  .str-chat__channel-search-input--wrapper-active {
+    background: transparent;
+    color: var(--str-chat__channel-search-input-wrapper-active-color);
+    box-shadow: var(--str-chat__channel-search-input-wrapper-active-box-shadow);
+    border-radius: 20px;
+    border-block-start: var(--str-chat__primary-color) 1px solid;
+    border-block-end: var(--str-chat__primary-color) 1px solid;
+    border-inline-start: var(--str-chat__primary-color) 1px solid;
+    border-inline-end: var(--str-chat__primary-color) 1px solid;
+  }
+
+  .str-chat__channel-search-input--wrapper-active .str-chat__channel-search-input--icon svg path {
+    fill: var(--str-chat__primary-color);
+  }
+
+  .str-chat__channel-search-input--wrapper-active .str-chat__channel-search-input--clear-button svg path {
+    fill: var(--str-chat__text-low-emphasis-color);
+  }
+
+  .str-chat__channel-search-results-header {
+    background: var(--str-chat__background-color);
+    color: var(--str-chat__channel-search-results-header-color);
+    box-shadow: var(--str-chat__channel-search-results-header-box-shadow);
+    border-radius: var(--str-chat__channel-search-results-header-border-radius);
+    border-block-start: none;
+    border-block-end: #dbdde1 1px solid;
+    border-inline-start: none;
+    border-inline-end: none;
+    font: 1rem/1.25 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  }
+
+  .str-chat__channel-search-result-list {
+    background: var(--str-chat__channel-search-result-list-background-color);
+    color: var(--str-chat__text-color);
+    box-shadow: var(--str-chat__channel-search-result-list-box-shadow);
+    border-radius: var(--str-chat__channel-search-result-list-border-radius);
+    border-block-start: none;
+    border-block-end: none;
+    border-inline-start: none;
+    border-inline-end: none;
+  }
+
+  .str-chat__channel-search-result-list.popup {
+    box-shadow: 0 4px 4px var(--str-chat__box-shadow-color);
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-container-searching {
+    background: var(--str-chat__background-color);
+    color: var(--str-chat__text-low-emphasis-color);
+    box-shadow: var(--str-chat__channel-search-results-loading-indicator-box-shadow);
+    border-radius: var(--str-chat__channel-search-results-loading-indicator-border-radius);
+    border-block-start: none;
+    border-block-end: #dbdde1 1px solid;
+    border-inline-start: none;
+    border-inline-end: none;
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-container-empty {
+    background: var(--str-chat__background-color);
+    color: var(--str-chat__text-low-emphasis-color);
+    box-shadow: var(--str-chat__channel-search-results-empty-box-shadow);
+    border-radius: var(--str-chat__channel-search-results-empty-border-radius);
+    border-block-start: none;
+    border-block-end: none;
+    border-inline-start: none;
+    border-inline-end: none;
+    font: 500 1.25rem/1.2 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-container-empty svg path {
+    fill: var(--str-chat__disabled-color);
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-result {
+    background: transparent;
+    color: var(--str-chat__channel-search-result-color);
+    box-shadow: var(--str-chat__channel-search-result-box-shadow);
+    border-radius: var(--str-chat__channel-search-result-border-radius);
+    border-block-start: none;
+    border-block-end: none;
+    border-inline-start: none;
+    border-inline-end: none;
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-result .str-chat__channel-search-result--display-name {
+    font: 500 1rem/1.25 -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen-Sans, Ubuntu, Cantarell, Helvetica Neue, sans-serif;
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-preview-messenger--active {
+    background-color: #dbdde1;
+  }
+
+  .str-chat__channel-search-result-list .str-chat__channel-search-result:hover,
+  .str-chat__channel-search-result-list .str-chat__channel-search-result--focused {
+    background-color: #e9eaed;
+  }
+}

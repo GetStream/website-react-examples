@@ -4,10 +4,10 @@ import { AddChannelButton } from './AddChannelButton';
 
 import { useWorkspaceController, Workspace } from '../../context/WorkspaceController';
 
-import type { ChannelListMessengerProps } from 'stream-chat-react';
+import type { ChannelListUIProps } from 'stream-chat-react';
 import clsx from "clsx";
 
-export type TeamChannelListProps = ChannelListMessengerProps & {
+export type TeamChannelListProps = ChannelListUIProps & {
   type: string;
 };
 

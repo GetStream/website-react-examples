@@ -49,7 +49,7 @@ const UserItem = ({ index, user }: UserItemProps) => {
     <label htmlFor={user.id} title={title} className='user-list__row'>
       <div className='user-list__column-block'>
         <div className='user-list__column--user-data'>
-          <Avatar image={user.image} name={title} />
+          <Avatar imageUrl={user.image} size='md' userName={title} />
           <p className='user-item__name'>{title}</p>
         </div>
         <p className='user-list__column--last-active'>{lastActive}</p>

@@ -1,6 +1,6 @@
 import React from 'react';
 import {Channel as StreamChannel} from 'stream-chat';
-import {Channel} from 'stream-chat-react';
+import {Channel, type EmptyStateIndicatorProps, WithComponents} from 'stream-chat-react';
 
 import {ChannelInner} from './ChannelInner';
 import {EmptyStateIndicatorChannel} from './EmptyStateIndicators';
@@ -15,6 +15,19 @@ import {useBoolState} from '../../hooks/useBoolState';
 import {ChannelHeader} from './ChannelHeader';
 
 // todo: remove AutocompleteSuggestionHeader prop
+
+const EmptyStateIndicatorDMChannel = (props: EmptyStateIndicatorProps) => (
+  <EmptyStateIndicatorChannel {...props} isDmChannel />
+);
+
+const dmChannelOverrides = {
+  AutocompleteSuggestionList: CustomSuggestionList,
+  EmptyStateIndicator: EmptyStateIndicatorDMChannel,
+  GiphyPreviewMessage: GiphyPreview,
+  MessageComposerUI: MessageInputUI,
+  ThreadHeader,
+  VirtualMessage: MessageUI,
+};
 
 type Props = {
   dmChannel: StreamChannel;
@@ -48,17 +61,11 @@ export const DMChannel: React.FC<Props> = (props) => {
           closeDropdown={closeDropdown}
         />
       )}
-      <Channel
-        AutocompleteSuggestionList={CustomSuggestionList}
-        channel={dmChannel}
-        EmptyStateIndicator={(props) => <EmptyStateIndicatorChannel {...props} isDmChannel />}
-        GiphyPreviewMessage={GiphyPreview}
-        Input={MessageInputUI}
-        ThreadHeader={ThreadHeader}
-        VirtualMessage={MessageUI}
-      >
-        <ChannelInner />
-      </Channel>
+      <WithComponents overrides={dmChannelOverrides}>
+        <Channel channel={dmChannel}>
+          <ChannelInner />
+        </Channel>
+      </WithComponents>
     </div>
   );
 };

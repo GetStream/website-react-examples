@@ -3,7 +3,7 @@ import {
   TextareaComposer,
   useChannelStateContext,
   useMessageComposerHasSendableData,
-  useMessageInputContext,
+  useMessageComposerContext,
   useTypingContext,
 } from 'stream-chat-react';
 import {EmojiPicker} from 'stream-chat-react/emojis';
@@ -26,7 +26,7 @@ const TypingIndicator = () => (
 );
 
 const SendMessageButton = () => {
-  const {handleSubmit} = useMessageInputContext();
+  const {handleSubmit} = useMessageComposerContext();
   const hasSendableData = useMessageComposerHasSendableData();
   return (
     <button
@@ -50,7 +50,7 @@ export const GamingMessageInput = React.memo(() => {
         <TextareaComposer rows={1} placeholder='Say something' />
         {!thread && (
           <EmojiPicker
-            popperOptions={{ placement: 'top-end', strategy: 'fixed' }}
+            placement='top-end'
             pickerProps={{ theme: 'auto', perLine: 7 }}
             ButtonIconComponent={EmojiIcon}
             buttonClassName='emoji-button'

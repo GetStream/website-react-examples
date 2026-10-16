@@ -1,5 +1,4 @@
-import { ReactionOptions } from 'stream-chat-react';
-import { DOMAttributes } from 'react';
+import { ComponentType, DOMAttributes } from 'react';
 
 import {
   avatar1,
@@ -59,7 +58,8 @@ declare module "react" {
   }
 }
 
-export const customReactions: ReactionOptions = [
+// The array form of stream-chat-react's ReactionOptions, which this demo also maps over
+export const customReactions: Array<{ Component: ComponentType; name: string; type: string }> = [
   {
     type: 'heart',
     name: 'Heavy Red Heart',

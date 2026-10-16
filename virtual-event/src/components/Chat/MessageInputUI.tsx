@@ -2,8 +2,10 @@ import {useMemo} from 'react';
 import {
   CooldownTimer,
   TextareaComposer,
-  useMessageComposer, useMessageComposerHasSendableData,
-  useMessageInputContext,
+  useCooldownRemaining,
+  useMessageComposerContext,
+  useMessageComposerController,
+  useMessageComposerHasSendableData,
   useStateStore
 } from 'stream-chat-react';
 
@@ -21,19 +23,15 @@ const customComposerDataSelector = (state: CustomDataManagerState) => ({
 });
 
 const CharacterCounter = () => {
-  const {textComposer} = useMessageComposer();
+  const {textComposer} = useMessageComposerController();
   const {text} = useStateStore(textComposer.state, textComposerStateSelector);
   return <div>{269 - text.length}</div>;
 }
 
 const SendButton = () => {
-  const {
-    cooldownInterval,
-    cooldownRemaining,
-    handleSubmit,
-    setCooldownRemaining,
-  } = useMessageInputContext();
-  const {customDataManager, textComposer} = useMessageComposer();
+  const { handleSubmit } = useMessageComposerContext();
+  const cooldownRemaining = useCooldownRemaining();
+  const {customDataManager, textComposer} = useMessageComposerController();
   const hasSendableData = useMessageComposerHasSendableData();
   const {text} = useStateStore(textComposer.state, textComposerStateSelector);
   const {isComposingGiphyText} = useStateStore(customDataManager.state, customComposerDataSelector);
@@ -49,10 +47,7 @@ const SendButton = () => {
         <GiphySearch />
       ) : cooldownRemaining ? (
         <div className='input-ui-send-cooldown'>
-          <CooldownTimer
-            cooldownInterval={cooldownInterval}
-            setCooldownRemaining={setCooldownRemaining}
-          />
+          <CooldownTimer />
         </div>
       ) : (
         <>
@@ -65,11 +60,9 @@ const SendButton = () => {
 }
 
 export const MessageInputUI = () => {
-  const {
-    cooldownRemaining,
-  } = useMessageInputContext();
+  const cooldownRemaining = useCooldownRemaining();
   const { chatType } = useEventContext();
-  const {customDataManager, textComposer} = useMessageComposer();
+  const {customDataManager, textComposer} = useMessageComposerController();
 
   const {isComposingGiphyText} = useStateStore(customDataManager.state, customComposerDataSelector);
   const commandSearchSource = useMemo(() => new CommandSearchSource(textComposer.channel),

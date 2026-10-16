@@ -1,4 +1,4 @@
-import React, {PropsWithChildren, ReactNode} from 'react';
+import React, {PropsWithChildren, ReactNode, useMemo} from 'react';
 import type {
   Channel as StreamChannel,
   ChannelFilters,
@@ -9,9 +9,10 @@ import type {
 import {
   Avatar,
   ChannelList,
-  ChannelListMessengerProps,
-  ChannelPreviewUIComponentProps,
+  ChannelListItemUIProps,
+  ChannelListUIProps,
   useChatContext,
+  WithComponents,
 } from 'stream-chat-react';
 
 import { DMChannel } from './DMChannel';
@@ -42,7 +43,7 @@ const ListWrapper = ({ children }: PropsWithChildrenOnly) => {
   return <div className='dm-list'>{children}</div>;
 };
 
-const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListMessengerProps>) => {
+const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListUIProps>) => {
   if (loading) {
     return (
       <ListWrapper>
@@ -64,7 +65,7 @@ const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListMesse
   return <ListWrapper>{children}</ListWrapper>;
 };
 
-type PreviewUIProps = ChannelPreviewUIComponentProps & {
+type PreviewUIProps = ChannelListItemUIProps & {
   setDmChannel: React.Dispatch<React.SetStateAction<StreamChannel | undefined>>;
 };
 
@@ -88,7 +89,7 @@ const PreviewUI = (props: PreviewUIProps) => {
 
   return (
     <div className='dm-list-preview' onClick={handleClick}>
-      <Avatar image={displayImage} name={fallbackName} />
+      <Avatar imageUrl={displayImage} size='md' userName={fallbackName} />
       <div>
         <div className='dm-list-preview-top'>
           <div>{displayTitle}</div>
@@ -107,6 +108,8 @@ type Props = {
   dmChannel?: StreamChannel;
 };
 
+const NoChannelListHeader = () => null;
+
 export const DMChannelList: React.FC<Props> = (props) => {
   const { dmChannel, setParticipantProfile, setDmChannel } = props;
 
@@ -121,6 +124,18 @@ export const DMChannelList: React.FC<Props> = (props) => {
   const options: ChannelOptions = { state: true, presence: true, limit: 10 };
   const sort: ChannelSort = { last_message_at: -1 };
 
+  const channelListOverrides = useMemo(
+    () => ({
+      // The DM tab has no header; hide the "Chats" header stream-chat-react 14 adds
+      ChannelListHeader: NoChannelListHeader,
+      ChannelListUI: ListUI,
+      ChannelListItemUI: (props: ChannelListItemUIProps) => (
+        <PreviewUI {...props} setDmChannel={setDmChannel} />
+      ),
+    }),
+    [setDmChannel],
+  );
+
   return (
     <>
       {searching && (
@@ -132,15 +147,15 @@ export const DMChannelList: React.FC<Props> = (props) => {
       )}
       <div className='dm'>
         {dmChannel && <DMChannel dmChannel={dmChannel} setDmChannel={setDmChannel} />}
-        <ChannelList
-          EmptyStateIndicator={EmptyStateIndicators}
-          filters={filters}
-          List={ListUI}
-          options={options}
-          Preview={(props) => <PreviewUI {...props} setDmChannel={setDmChannel} />}
-          setActiveChannelOnMount={false}
-          sort={sort}
-        />
+        <WithComponents overrides={channelListOverrides}>
+          <ChannelList
+            EmptyStateIndicator={EmptyStateIndicators}
+            filters={filters}
+            options={options}
+            setActiveChannelOnMount={false}
+            sort={sort}
+          />
+        </WithComponents>
         <div className='start-chat'>
           <div className='start-chat-button' onClick={() => setSearching(true)}>
             Start a chat

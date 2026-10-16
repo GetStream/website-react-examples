@@ -1,5 +1,5 @@
 import {useCallback, useMemo} from 'react';
-import {useChannelStateContext, useChatContext, useMessageComposer, useMessageInputContext} from 'stream-chat-react';
+import {useChannelStateContext, useChatContext, useMessageComposerController, useMessageComposerContext} from 'stream-chat-react';
 import type {MessageInputFormattingType} from "../../../types.stream";
 
 const mdToFormattingType: Record<string, MessageInputFormattingType> = {
@@ -21,8 +21,8 @@ export const useMessageInputCompositionControls = () => {
   const {
     channel,
   } = useChannelStateContext();
-  const {customDataManager, textComposer} = useMessageComposer();
-  const {textareaRef} = useMessageInputContext();
+  const {customDataManager, textComposer} = useMessageComposerController();
+  const {textareaRef} = useMessageComposerContext();
   const placeholder = useMemo(() => {
     let dynamicPart = 'the group';
 

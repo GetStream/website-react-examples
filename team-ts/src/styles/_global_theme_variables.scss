@@ -29,4 +29,21 @@
 .str-chat {
   --str-chat__font-family: var(--font-family);
   --str-chat__avatar-background-color: var(--primary-color);
+
+  // stream-chat-react 14 no longer defines these v13 variables, which the app's styles still use
+  --str-chat__border-radius-circle: 999px;
+  --str-chat__dropzone-container-backdrop-filter: blur(3px);
+  --str-chat__dropzone-container-background-color: rgba(0, 95, 255, 0.6);
+  --str-chat__dropzone-container-color: #ffffff;
+  --str-chat__message-send-background-color: transparent;
+  --str-chat__message-send-border-block-end: 0;
+  --str-chat__message-send-border-block-start: 0;
+  --str-chat__message-send-border-inline-end: 0;
+  --str-chat__message-send-border-inline-start: 0;
+  --str-chat__message-send-box-shadow: none;
+  --str-chat__message-send-color: #005fff;
+  --str-chat__message-send-disabled-color: #b4b7bb;
+  --str-chat__primary-color: #005fff;
+  --str-chat__spacing-px: 1px;
+  --str-chat__subtitle-text: 1rem/1.25 var(--str-chat__font-family);
 }

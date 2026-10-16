@@ -1,6 +1,6 @@
 import './MessagingChannelPreview.css';
 import {
-  ChannelPreviewUIComponentProps,
+  ChannelListItemUIProps,
   ChatContextValue,
   useChatContext,
 } from 'stream-chat-react';
@@ -43,14 +43,14 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
   return `${members[0]?.user?.name || defaultName}, ${members[1]?.user?.name || defaultName}`;
 };
 
-type MessagingChannelPreviewProps = ChannelPreviewUIComponentProps & {
+type MessagingChannelPreviewProps = ChannelListItemUIProps & {
   channel: Channel;
   onClick: MouseEventHandler;
   setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
 const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
-  const { channel, setActiveChannel, onClick, latestMessage, } = props;
+  const { channel, setActiveChannel, onClick, latestMessagePreview } = props;
   const { channel: activeChannel, client } = useChatContext();
 
   const members = Object.values(channel.state.members).filter(
@@ -79,7 +79,7 @@ const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
           </p>
           <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
         </div>
-        <div className='channel-preview__content-message'>{latestMessage}</div>
+        <div className='channel-preview__content-message'>{latestMessagePreview}</div>
       </div>
     </div>
   );

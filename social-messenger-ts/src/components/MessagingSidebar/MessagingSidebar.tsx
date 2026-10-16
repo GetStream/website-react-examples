@@ -1,5 +1,10 @@
-import type { MouseEventHandler } from 'react';
-import { ChannelList, ChannelListProps } from 'stream-chat-react';
+import { type MouseEventHandler, useMemo } from 'react';
+import {
+  ChannelList,
+  type ChannelListItemUIProps,
+  type ChannelListProps,
+  WithComponents,
+} from 'stream-chat-react';
 
 import { MessagingChannelListHeader, MessagingChannelPreview } from '../index';
 import { useThemeContext } from '../../context';
@@ -15,6 +20,8 @@ type MessagingSidebarProps = {
   onPreviewSelect: MouseEventHandler;
 };
 
+const NoChannelListHeader = () => null;
+
 const MessagingSidebar = ({
   channelListOptions,
   onClick,
@@ -22,6 +29,16 @@ const MessagingSidebar = ({
   onPreviewSelect,
 }: MessagingSidebarProps) => {
   const { themeClassName } = useThemeContext();
+  const overrides = useMemo(
+    () => ({
+      // The sidebar has its own header, so hide the "Chats" header stream-chat-react 14 adds
+      ChannelListHeader: NoChannelListHeader,
+      ChannelListItemUI: (props: ChannelListItemUIProps) => (
+        <MessagingChannelPreview {...props} onClick={onPreviewSelect} />
+      ),
+    }),
+    [onPreviewSelect],
+  );
 
   return (
     <div
@@ -30,10 +47,9 @@ const MessagingSidebar = ({
       onClick={onClick}
     >
       <MessagingChannelListHeader onCreateChannel={onCreateChannel} />
-      <ChannelList
-        {...channelListOptions}
-        Preview={(props) => <MessagingChannelPreview {...props} onClick={onPreviewSelect} />}
-      />
+      <WithComponents overrides={overrides}>
+        <ChannelList {...channelListOptions} />
+      </WithComponents>
     </div>
   );
 };

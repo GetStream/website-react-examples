@@ -20,6 +20,15 @@
     --str-chat__message-textarea-color: rgba(255, 255, 255, 0.9);
 }
 
+/* stream-chat-react 14 composer: same colours as the v13 message input */
+.str-chat .str-chat__message-composer-container {
+    background: var(--str-chat__message-input-background-color);
+}
+
+.str-chat__theme-dark .str-chat__message-composer-compose-area {
+    --composer-bg: var(--str-chat__message-textarea-background-color);
+}
+
 .str-chat__message-input .str-chat__message-textarea-container:focus-within {
     border-block-start: var(--str-chat__message-textarea-border-active);
     border-block-end: var(--str-chat__message-textarea-border-active);

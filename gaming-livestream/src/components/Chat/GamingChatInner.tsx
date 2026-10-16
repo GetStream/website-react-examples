@@ -1,10 +1,9 @@
 import React, {useCallback} from 'react';
 import {type LocalMessage, logChatPromiseExecution, type Message, type SendMessageOptions} from 'stream-chat';
-import {MessageInput, MessageList, useChannelActionContext, Window} from 'stream-chat-react';
+import {MessageComposer, MessageList, useChannelActionContext, Window} from 'stream-chat-react';
 
 import {GamingChatHeader} from './GamingChatHeader';
 import {GamingMessage} from './GamingMessage';
-import {GamingMessageInput} from './GamingMessageInput';
 import {GamingThread} from './GamingThread';
 
 import {useLayoutController} from '../../context/LayoutController';
@@ -51,11 +50,10 @@ export const GamingChatInner = () => {
           timestampEnabled={timestampEnabled}
         />
         <MessageList Message={GamingMessage} />
-        <MessageInput
+        <MessageComposer
           focus
           minRows={1}
           maxRows={8}
-          Input={GamingMessageInput}
           overrideSubmitHandler={overrideSubmitHandler}
         />
       </Window>

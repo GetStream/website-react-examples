@@ -6,6 +6,12 @@
     --str-chat__channel-list-background-color: #fafafa;
 }
 
+/* stream-chat-react 14 reads neither variable above, so apply them directly */
+.str-chat__channel-list {
+    border-inline-end: var(--str-chat__channel-list-border-inline-end);
+    background: var(--str-chat__channel-list-background-color, var(--str-chat__background-core-elevation-1));
+}
+
 /* To fix inherited styles (as per Team and Customer Support apps */
 @media screen and (max-width: 960px) {
     .str-chat__channel-list {
