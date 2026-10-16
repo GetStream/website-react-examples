@@ -31,6 +31,8 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
   const { t } = useTranslationContext();
 
   const [participants, setParticipants] = useState<UserResponse[]>();
+  // the search source updates searchQuery only after its debounce, so the input keeps its own value
+  const [query, setQuery] = useState('');
   const [querying, setQuerying] = useState(false);
 
   // stream-chat-react 14 dropped ChannelSearch; this searches users the way it did
@@ -86,7 +88,7 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
           <div
             className={clsx(
               'str-chat__channel-search-input--wrapper',
-              searchQuery && 'str-chat__channel-search-input--wrapper-active',
+              query && 'str-chat__channel-search-input--wrapper-active',
             )}
           >
             <div className='str-chat__channel-search-input--icon'>
@@ -94,15 +96,21 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
             </div>
             <input
               className='str-chat__channel-search-input'
-              onChange={(event) => searchSource.search(event.target.value)}
+              onChange={(event) => {
+                setQuery(event.target.value);
+                searchSource.search(event.target.value);
+              }}
               placeholder={t('Search')}
               type='text'
-              value={searchQuery}
+              value={query}
             />
             <button
               className='str-chat__channel-search-input--clear-button'
-              disabled={!searchQuery}
-              onClick={() => searchSource.resetStateAndActivate()}
+              disabled={!query}
+              onClick={() => {
+                setQuery('');
+                searchSource.resetStateAndActivate();
+              }}
             >
               <ClearSearchButton />
             </button>
@@ -113,14 +121,19 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
             {isLoading ? (
               <SearchLoading />
             ) : users?.length ? (
-              users.map((user, i) => (
-                <SearchResult
-                  index={i}
-                  key={user.id}
-                  result={user}
-                  selectResult={handleSelectResult}
-                />
-              ))
+              <>
+                <div className='str-chat__channel-search-results-header'>
+                  {users.length === 1 ? '1 result' : `${users.length} results`}
+                </div>
+                {users.map((user, i) => (
+                  <SearchResult
+                    index={i}
+                    key={user.id}
+                    result={user}
+                    selectResult={handleSelectResult}
+                  />
+                ))}
+              </>
             ) : (
               <SearchEmpty />
             )}

@@ -8,6 +8,11 @@
     display: none;
   }
 
+  // stream-chat-react 14 adds a date separator above the parent message
+  .str-chat__date-separator {
+    display: none;
+  }
+
   .str-chat__message-replies-count-button {
     display: none;
   }

@@ -108,6 +108,8 @@ type Props = {
   dmChannel?: StreamChannel;
 };
 
+const NoChannelListHeader = () => null;
+
 export const DMChannelList: React.FC<Props> = (props) => {
   const { dmChannel, setParticipantProfile, setDmChannel } = props;
 
@@ -124,6 +126,8 @@ export const DMChannelList: React.FC<Props> = (props) => {
 
   const channelListOverrides = useMemo(
     () => ({
+      // The DM tab has no header; hide the "Chats" header stream-chat-react 14 adds
+      ChannelListHeader: NoChannelListHeader,
       ChannelListUI: ListUI,
       ChannelListItemUI: (props: ChannelListItemUIProps) => (
         <PreviewUI {...props} setDmChannel={setDmChannel} />
