@@ -4,10 +4,19 @@
   width: var(--sidebar-width);
   max-width: var(--sidebar-width);
 
-  .str-chat__thread-list {
+  .str-chat__date-separator {
+    display: none;
+  }
+
+  .str-chat__message-list {
     padding: 0;
 
     .str-chat__parent-message-li {
+      margin: 0;
+      padding: 0;
+    }
+
+    .str-chat__li {
       margin: 0;
       padding: 0;
     }
