@@ -43,7 +43,11 @@ const customChannelMessagingFilter = (channels: Channel[]) => {
   return channels.filter((channel) => channel.type === 'messaging');
 };
 
+// stream-chat-react 14 renders a "Chats" header in every ChannelList; the sidebar has its own section headers
+const NoChannelListHeader = () => null;
+
 const teamChannelsOverrides = {
+  ChannelListHeader: NoChannelListHeader,
   ChannelListUI: (listProps: ChannelListUIProps) => (
     <TeamChannelList
       {...listProps}
@@ -59,6 +63,7 @@ const teamChannelsOverrides = {
 };
 
 const messagingChannelsOverrides = {
+  ChannelListHeader: NoChannelListHeader,
   ChannelListUI: (listProps: ChannelListUIProps) => (
     <TeamChannelList
       {...listProps}

@@ -137,7 +137,8 @@ export const TeamMessage = () => {
                   </div>
                 )}
               </div>
-              <MessageTimestamp />
+              {/* v14 defaults to HH:mm; v13 showed calendar dates ("Today at 9:44 PM") */}
+              <MessageTimestamp calendar />
             </div>
           )}
           <div

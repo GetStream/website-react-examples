@@ -2,13 +2,14 @@ import clsx from 'clsx';
 import {useMemo} from 'react';
 import {
   AttachmentPreviewList,
-  SendButton,
+  QuotedMessagePreviewUI,
   TextareaComposer,
   useAttachmentManagerState,
   useMessageComposerContext,
   useMessageComposerController,
   useMessageComposerHasSendableData,
   useStateStore,
+  useTranslationContext,
 } from 'stream-chat-react';
 import {useDropzone} from 'react-dropzone';
 
@@ -17,12 +18,16 @@ import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
 import {MessageInputControlButton} from './MessageInputControls';
 import {EmojiPicker} from './EmojiPicker';
 import {useMessageInputCompositionControls} from './hooks/useMessageInputCompositionControls';
-import type {CustomDataManagerState, MessageComposerConfig} from "stream-chat";
+import type {CustomDataManagerState, MessageComposerConfig, MessageComposerState} from "stream-chat";
 import {SendButtonIcon} from "./SendButtonIcon";
 
 const attachmentManagerConfigStateSelector = (state: MessageComposerConfig) => ({
   acceptedFiles: state.attachments.acceptedFiles,
   multipleUploads: state.attachments.maxNumberOfFilesPerMessage > 1,
+});
+
+const editedMessageSelector = (state: MessageComposerState) => ({
+  editedMessage: state.editedMessage,
 });
 
 const customComposerDataSelector = (state: CustomDataManagerState) => ({
@@ -42,6 +47,8 @@ export const TeamMessageInput = () => {
     attachmentManagerConfigStateSelector,
   );
   const { activeFormatting, isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
+  const { editedMessage } = useStateStore(messageComposer.state, editedMessageSelector);
+  const { t } = useTranslationContext();
   const {isUploadEnabled } =  useAttachmentManagerState();
   const hasSendableData = useMessageComposerHasSendableData();
 
@@ -76,12 +83,27 @@ export const TeamMessageInput = () => {
       )}
       <div className='team-message-input__input'>
         <div className='team-message-input__top'>
+          {editedMessage && (
+            <QuotedMessagePreviewUI
+              authorLabel={t('Edit Message')}
+              onRemove={() => messageComposer.clear()}
+              quotedMessage={editedMessage}
+            />
+          )}
           <AttachmentPreviewList />
           <div className='team-message-input__form'>
             {isComposingGiphyText && <GiphyBadge />}
             <TextareaComposer placeholder={placeholder} />
 
-            <SendButton disabled={!hasSendableData} sendMessage={handleSubmit} />
+            <button
+              aria-label='Send'
+              className='str-chat__send-button'
+              disabled={!hasSendableData}
+              onClick={handleSubmit}
+              type='button'
+            >
+              <SendButtonIcon />
+            </button>
           </div>
         </div>
         <div className='team-message-input__bottom'>
