@@ -2,7 +2,8 @@ import {GamingThreadHeader} from "./GamingThreadHeader";
 import {SearchIndex} from "emoji-mart";
 import {MessageTimestampController} from "../../context/MessageTimestampController";
 import {GamingChatInner} from "./GamingChatInner";
-import {Channel, useChatContext} from "stream-chat-react";
+import {GamingMessageInput} from "./GamingMessageInput";
+import {Channel, useChatContext, WithComponents} from "stream-chat-react";
 import React, {useEffect} from "react";
 
 
@@ -21,14 +22,18 @@ export const ChannelContainer = () => {
   if (!channel) return null;
 
   return (
-    <Channel
-      channel={channel}
-      ThreadHeader={GamingThreadHeader}
-      emojiSearchIndex={SearchIndex}
+    <WithComponents
+      overrides={{
+        emojiSearchIndex: SearchIndex,
+        MessageComposerUI: GamingMessageInput,
+        ThreadHeader: GamingThreadHeader,
+      }}
     >
-      <MessageTimestampController>
-        <GamingChatInner />
-      </MessageTimestampController>
-    </Channel>
+      <Channel channel={channel}>
+        <MessageTimestampController>
+          <GamingChatInner />
+        </MessageTimestampController>
+      </Channel>
+    </WithComponents>
   );
 };
