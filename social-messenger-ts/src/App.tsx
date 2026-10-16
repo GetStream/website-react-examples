@@ -4,6 +4,7 @@ import {
   Channel,
   Chat,
   ChatView,
+  Streami18n,
   Thread,
   ThreadList,
   useCreateChatClient,
@@ -48,6 +49,14 @@ type AppProps = {
 
 const noop = () => null;
 
+// stream-chat-react 14 shows message times as HH:mm; keep the v13 calendar format ("Today at 9:44 PM")
+const i18nInstance = new Streami18n({
+  language: 'en',
+  translationsForLanguage: {
+    'timestamp/MessageTimestamp': '{{ timestamp | timestampFormatter(calendar: true) }}',
+  },
+});
+
 const EmojiPickerWithTheme = () => {
   const { theme } = useThemeContext();
 
@@ -91,7 +100,7 @@ const App = (props: AppProps) => {
   }
 
   return (
-    <Chat client={chatClient} theme={clsx('messaging', themeClassName)}>
+    <Chat client={chatClient} i18nInstance={i18nInstance} theme={clsx('messaging', themeClassName)}>
       <ChatView>
         <ChatView.Selector iconOnly={false} />
         <ChatView.Channels>

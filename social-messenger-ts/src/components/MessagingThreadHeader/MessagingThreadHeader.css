@@ -2,6 +2,12 @@
 .str-chat {
   --str-chat__thread-head-start-border-block-end-color: var(--str-chat__secondary-background-color)
 }
+
+/* stream-chat-react 14 draws a "N replies" bar under the parent message; v13 only drew a separator line */
+.str-chat__parent-message-li .str-chat__thread-start {
+  background: transparent;
+  border-block-end: 1px solid var(--str-chat__thread-head-start-border-block-end-color);
+}
 .messaging.str-chat .str-chat__thread {
   margin: 0;
 }

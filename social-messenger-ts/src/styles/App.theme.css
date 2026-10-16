@@ -17,6 +17,20 @@
     }
 
     --str-chat__avatar-size: 40px;
+
+    /* stream-chat-react 14 reads these tokens instead of the v13 variables above */
+    --str-chat__background-core-app: var(--str-chat__background-color);
+    --str-chat__background-core-elevation-1: var(--str-chat__secondary-background-color);
+
+    /* v13 variables the app's styles still use; stream-chat-react 14 no longer defines them */
+    --str-chat__active-primary-color: #004ccc;
+    --str-chat__body-text: 0.875rem/1.2 var(--str-chat__font-family);
+    --str-chat__box-shadow-color: rgba(0, 0, 0, 0.18);
+    --str-chat__caption-text: 0.75rem/1.3 var(--str-chat__font-family);
+    --str-chat__spacing-1: 0.25rem;
+    --str-chat__spacing-10: 2.5rem;
+    --str-chat__spacing-px: 1px;
+    --str-chat__text-color: #080707;
 }
 
 .str-chat.str-chat__theme-dark {
@@ -24,6 +38,9 @@
     --str-chat__secondary-background-color: #212326;
     --str-chat__primary-surface-color: #18191b;
     --str-chat__secondary-surface-color: #343434;
+
+    --str-chat__box-shadow-color: rgba(0, 0, 0, 0.8);
+    --str-chat__text-color: #ffffff;
 }
 
 :root {

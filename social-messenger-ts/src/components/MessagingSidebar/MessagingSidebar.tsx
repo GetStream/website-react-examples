@@ -20,6 +20,8 @@ type MessagingSidebarProps = {
   onPreviewSelect: MouseEventHandler;
 };
 
+const NoChannelListHeader = () => null;
+
 const MessagingSidebar = ({
   channelListOptions,
   onClick,
@@ -29,6 +31,8 @@ const MessagingSidebar = ({
   const { themeClassName } = useThemeContext();
   const overrides = useMemo(
     () => ({
+      // The sidebar has its own header, so hide the "Chats" header stream-chat-react 14 adds
+      ChannelListHeader: NoChannelListHeader,
       ChannelListItemUI: (props: ChannelListItemUIProps) => (
         <MessagingChannelPreview {...props} onClick={onPreviewSelect} />
       ),
