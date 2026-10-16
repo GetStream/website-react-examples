@@ -9,20 +9,20 @@ import StreamLogo from '../../assets/ProfilePic_LogoMark_GrdntOnWt.png';
 const AvatarSubgroup = (props: ComponentProps<'div'>) => <div {...props} className={clsx('avatar-subgroup', {'avatar-subgroup--split': React.Children.toArray(props.children).length > 1})}/>
 
 export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) => {
-  let content = <Avatar image={StreamLogo} />;
+  let content = <Avatar imageUrl={StreamLogo} size='lg' />;
 
   if (members.length === 1) {
-    content = <Avatar image={getCleanImage(members[0])} />;
+    content = <Avatar imageUrl={getCleanImage(members[0])} size='lg' />;
   }
 
   if (members.length === 2) {
     content = (
       <>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[0])} />
+          <Avatar imageUrl={getCleanImage(members[0])} size='lg' />
         </AvatarSubgroup>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[1])} />
+          <Avatar imageUrl={getCleanImage(members[1])} size='lg' />
         </AvatarSubgroup>
       </>
     );
@@ -32,11 +32,11 @@ export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) =
     content = (
       <>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[0])} />
+          <Avatar imageUrl={getCleanImage(members[0])} size='lg' />
         </AvatarSubgroup>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[1])} />
-          <Avatar image={getCleanImage(members[2])} />
+          <Avatar imageUrl={getCleanImage(members[1])} size='xs' />
+          <Avatar imageUrl={getCleanImage(members[2])} size='xs' />
         </AvatarSubgroup>
       </>
     );
@@ -46,12 +46,12 @@ export const AvatarGroup = ({ members }: { members: ChannelMemberResponse[] }) =
     content = (
       <>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[members.length - 4])} />
-          <Avatar image={getCleanImage(members[members.length - 3])} />
+          <Avatar imageUrl={getCleanImage(members[members.length - 4])} size='xs' />
+          <Avatar imageUrl={getCleanImage(members[members.length - 3])} size='xs' />
         </AvatarSubgroup>
         <AvatarSubgroup>
-          <Avatar image={getCleanImage(members[members.length - 2])} />
-          <Avatar image={getCleanImage(members[members.length - 1])} />
+          <Avatar imageUrl={getCleanImage(members[members.length - 2])} size='xs' />
+          <Avatar imageUrl={getCleanImage(members[members.length - 1])} size='xs' />
         </AvatarSubgroup>
       </>
     );

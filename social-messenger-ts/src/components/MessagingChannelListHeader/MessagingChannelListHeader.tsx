@@ -17,7 +17,7 @@ const MessagingChannelListHeader = React.memo((props: Props) => {
 
   return (
       <div className='messaging__channel-list__header'>
-        <Avatar image={image} name={name} />
+        <Avatar imageUrl={image} size='lg' userName={name} />
         <div className={`messaging__channel-list__header__name`}>{name || id}</div>
         <button
           className={`messaging__channel-list__header__button`}

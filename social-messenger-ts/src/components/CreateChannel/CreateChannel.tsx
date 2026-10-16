@@ -13,7 +13,7 @@ const searchSourceStateSelector = (state: SearchSourceState<UserResponse>) => ({
 
 const UserResult = ({ user }: { user: UserResponse }) => (
   <li className='messaging-create-channel__user-result'>
-    <Avatar image={user.image} name={user.name} />
+    <Avatar imageUrl={user.image} size='lg' userName={user.name} />
     {user.online && <div className='messaging-create-channel__user-result-online' />}
     <div className='messaging-create-channel__user-result__details'>
       <span>{user.name}</span>

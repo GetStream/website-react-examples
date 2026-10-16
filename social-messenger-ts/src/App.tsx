@@ -7,6 +7,7 @@ import {
   Thread,
   ThreadList,
   useCreateChatClient,
+  WithComponents,
 } from 'stream-chat-react';
 import clsx from 'clsx';
 import { createTextComposerEmojiMiddleware, EmojiPicker } from 'stream-chat-react/emojis';
@@ -14,7 +15,8 @@ import { createTextComposerEmojiMiddleware, EmojiPicker } from 'stream-chat-reac
 import data from '@emoji-mart/data';
 import { init, SearchIndex } from 'emoji-mart';
 
-import 'stream-chat-react/dist/css/v2/index.css';
+import 'stream-chat-react/dist/css/index.css';
+import 'stream-chat-react/dist/css/emoji-picker.css';
 import './styles/index.css';
 
 import {
@@ -91,7 +93,7 @@ const App = (props: AppProps) => {
   return (
     <Chat client={chatClient} theme={clsx('messaging', themeClassName)}>
       <ChatView>
-        <ChatView.Selector />
+        <ChatView.Selector iconOnly={false} />
         <ChatView.Channels>
           <MessagingSidebar
             channelListOptions={channelListOptions}
@@ -99,18 +101,22 @@ const App = (props: AppProps) => {
             onCreateChannel={() => setIsCreating(!isCreating)}
             onPreviewSelect={() => setIsCreating(false)}
           />
-          <Channel
-            SendButton={SendButton}
-            ThreadHeader={MessagingThreadHeader}
-            TypingIndicator={noop}
-            EmojiPicker={EmojiPickerWithTheme}
-            emojiSearchIndex={SearchIndex}
+          <WithComponents
+            overrides={{
+              SendButton,
+              ThreadHeader: MessagingThreadHeader,
+              TypingIndicator: noop,
+              EmojiPicker: EmojiPickerWithTheme,
+              emojiSearchIndex: SearchIndex,
+            }}
           >
-            {isCreating && (
-              <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
-            )}
-            <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
-          </Channel>
+            <Channel>
+              {isCreating && (
+                <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+              )}
+              <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
+            </Channel>
+          </WithComponents>
         </ChatView.Channels>
         <ChatView.Threads>
           <ThreadList />

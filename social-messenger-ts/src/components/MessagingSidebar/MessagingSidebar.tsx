@@ -1,5 +1,10 @@
-import type { MouseEventHandler } from 'react';
-import { ChannelList, ChannelListProps } from 'stream-chat-react';
+import { type MouseEventHandler, useMemo } from 'react';
+import {
+  ChannelList,
+  type ChannelListItemUIProps,
+  type ChannelListProps,
+  WithComponents,
+} from 'stream-chat-react';
 
 import { MessagingChannelListHeader, MessagingChannelPreview } from '../index';
 import { useThemeContext } from '../../context';
@@ -22,6 +27,14 @@ const MessagingSidebar = ({
   onPreviewSelect,
 }: MessagingSidebarProps) => {
   const { themeClassName } = useThemeContext();
+  const overrides = useMemo(
+    () => ({
+      ChannelListItemUI: (props: ChannelListItemUIProps) => (
+        <MessagingChannelPreview {...props} onClick={onPreviewSelect} />
+      ),
+    }),
+    [onPreviewSelect],
+  );
 
   return (
     <div
@@ -30,10 +43,9 @@ const MessagingSidebar = ({
       onClick={onClick}
     >
       <MessagingChannelListHeader onCreateChannel={onCreateChannel} />
-      <ChannelList
-        {...channelListOptions}
-        Preview={(props) => <MessagingChannelPreview {...props} onClick={onPreviewSelect} />}
-      />
+      <WithComponents overrides={overrides}>
+        <ChannelList {...channelListOptions} />
+      </WithComponents>
     </div>
   );
 };
