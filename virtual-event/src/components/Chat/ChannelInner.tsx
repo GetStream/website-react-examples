@@ -1,4 +1,4 @@
-import {MessageInput, VirtualizedMessageList, Window} from 'stream-chat-react';
+import {MessageComposer, VirtualizedMessageList, Window} from 'stream-chat-react';
 
 import {ThreadInner} from './ThreadInner';
 
@@ -11,7 +11,7 @@ export const ChannelInner = () => {
           hideDeletedMessages
           separateGiphyPreview
         />
-        <MessageInput maxRows={2} grow />
+        <MessageComposer maxRows={2} />
       </Window>
       <ThreadInner />
     </>

@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 import { usePopper } from 'react-popper';
-import {useMessageComposer, useMessageInputContext} from 'stream-chat-react';
+import {useCooldownRemaining, useMessageComposerContext, useMessageComposerController} from 'stream-chat-react';
 import Picker from '@emoji-mart/react';
 
 
@@ -15,9 +15,10 @@ export const EmojiPicker = () => {
   const { styles, attributes } = usePopper(referenceElement, popperElement, {
     placement: 'top-end',
   });
-  const { textComposer } = useMessageComposer();
+  const { textComposer } = useMessageComposerController();
   const [emojiPickerIsOpen, setEmojiPickerIsOpen] = useState(false);
-  const { textareaRef, cooldownRemaining } = useMessageInputContext();
+  const { textareaRef } = useMessageComposerContext();
+  const cooldownRemaining = useCooldownRemaining();
   const { mode } = useEventContext();
 
   useEffect(() => {

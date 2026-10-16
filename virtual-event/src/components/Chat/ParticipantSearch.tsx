@@ -1,13 +1,7 @@
-import React, { useEffect, useState } from 'react';
-import { Channel, UserResponse } from 'stream-chat';
-import {
-  ChannelSearch,
-  ChannelSearchProps,
-  ChannelOrUserResponse,
-  isChannel,
-  useChatContext,
-} from 'stream-chat-react';
-import { ChannelSearchFunctionParams } from 'stream-chat-react/dist/components/ChannelSearch/hooks/useChannelSearch';
+import React, { useEffect, useMemo, useState } from 'react';
+import clsx from 'clsx';
+import { Channel, SearchSourceState, UserResponse, UserSearchSource } from 'stream-chat';
+import { useChatContext, useStateStore, useTranslationContext } from 'stream-chat-react';
 
 import { SkeletonLoader } from './DMChannelList';
 import { SearchResult } from './SearchResult';
@@ -24,14 +18,32 @@ type ParticipantSearchProps = {
 const SearchLoading: React.FC = () => <div className='search-loading'>Loading participants...</div>;
 const SearchEmpty: React.FC = () => <div className='search-empty'>No participants found</div>;
 
+const searchSourceStateSelector = (state: SearchSourceState<UserResponse>) => ({
+  isLoading: state.isLoading,
+  searchQuery: state.searchQuery,
+  users: state.items,
+});
+
 export const ParticipantSearch = (props: ParticipantSearchProps) => {
   const { setParticipantProfile, setSearching } = props;
 
   const { client } = useChatContext();
+  const { t } = useTranslationContext();
 
   const [participants, setParticipants] = useState<UserResponse[]>();
   const [querying, setQuerying] = useState(false);
-  const [showingSearchResults, setShowingSearchResults] = useState(false);
+
+  // stream-chat-react 14 dropped ChannelSearch; this searches users the way it did
+  const searchSource = useMemo(() => {
+    const source = new UserSearchSource(client, { debounceMs: 300, pageSize: 20 });
+    source.activate();
+    return source;
+  }, [client]);
+  const { isLoading, searchQuery, users } = useStateStore(
+    searchSource.state,
+    searchSourceStateSelector,
+  );
+  const showingSearchResults = !!searchQuery;
 
   useEffect(() => {
     const getParticipants = async () => {
@@ -56,21 +68,9 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
     getParticipants();
   }, []); // eslint-disable-line
 
-  const handleSelectResult = async (result: Channel | UserResponse) => {
-    if (isChannel(result)) return;
+  const handleSelectResult = (result: UserResponse) => {
     setParticipantProfile(result);
     setSearching(false);
-  };
-
-  const onSelectResult = (
-    params: ChannelSearchFunctionParams,
-    result: ChannelOrUserResponse,
-  ) => handleSelectResult(result);
-
-  const extraParams: ChannelSearchProps['searchQueryParams'] = {
-    userFilters: {
-      options: { limit: 20 },
-    },
   };
 
   return (
@@ -81,19 +81,52 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
         </div>
         <div className='search-header-title'>Participants</div>
       </div>
-      <ChannelSearch
-        // @ts-ignore todo: setChannels value should be ChannelOrUser
-        setChannels={setParticipants}
-        onSelectResult={onSelectResult}
-        searchQueryParams={extraParams}
-        SearchEmpty={SearchEmpty}
-        SearchLoading={SearchLoading}
-        SearchResultItem={SearchResult}
-        ClearInputIcon={ClearSearchButton}
-        SearchInputIcon={SearchIcon}
-        onSearch={() => setShowingSearchResults(true)}
-        onSearchExit={() => setShowingSearchResults(false)}
-      />
+      <div className='str-chat__channel-search'>
+        <div className='str-chat__channel-search-bar'>
+          <div
+            className={clsx(
+              'str-chat__channel-search-input--wrapper',
+              searchQuery && 'str-chat__channel-search-input--wrapper-active',
+            )}
+          >
+            <div className='str-chat__channel-search-input--icon'>
+              <SearchIcon />
+            </div>
+            <input
+              className='str-chat__channel-search-input'
+              onChange={(event) => searchSource.search(event.target.value)}
+              placeholder={t('Search')}
+              type='text'
+              value={searchQuery}
+            />
+            <button
+              className='str-chat__channel-search-input--clear-button'
+              disabled={!searchQuery}
+              onClick={() => searchSource.resetStateAndActivate()}
+            >
+              <ClearSearchButton />
+            </button>
+          </div>
+        </div>
+        {showingSearchResults && (
+          <div className='str-chat__channel-search-result-list'>
+            {isLoading ? (
+              <SearchLoading />
+            ) : users?.length ? (
+              users.map((user, i) => (
+                <SearchResult
+                  index={i}
+                  key={user.id}
+                  result={user}
+                  selectResult={handleSelectResult}
+                />
+              ))
+            ) : (
+              <SearchEmpty />
+            )}
+          </div>
+        )}
+      </div>
       {querying ? (
         <SkeletonLoader />
       ) : showingSearchResults ? null : (

@@ -67,7 +67,7 @@ const MentionSuggestionItemComponent = (props: SuggestionListItemComponentProps)
 
   return (
     <div className='suggestion-item'>
-      <Avatar image={entity.image} />
+      <Avatar imageUrl={entity.image} size='sm' />
       <div>{entity.name}</div>
     </div>
   );

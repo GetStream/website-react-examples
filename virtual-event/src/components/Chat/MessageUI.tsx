@@ -3,13 +3,14 @@ import {
   Attachment,
   Avatar,
   isDate,
+  MessageReactions,
   MessageRepliesCountButton,
   MessageUIComponentProps,
-  SimpleReactionsList,
   useChannelActionContext,
   useChannelStateContext,
   useChatContext,
   useMessageContext,
+  WithComponents,
 } from 'stream-chat-react';
 
 import { UserActionsDropdown } from './UserActionsDropdown';
@@ -21,6 +22,8 @@ import { useEventContext } from '../../contexts/EventContext';
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { useBoolState } from '../../hooks/useBoolState';
 import {formatMessage, LocalMessage} from "stream-chat";
+
+const reactionOverrides = { reactionOptions: customReactions };
 
 
 
@@ -286,8 +289,9 @@ export const MessageUI: React.FC<
         />
       )}
       <Avatar
-        image={message.user.image}
-        name={message.user.name || message.user.id}
+        imageUrl={message.user.image}
+        size='md'
+        userName={message.user.name || message.user.id}
       />
       <div className='message-ui-content'>
         <div className='message-ui-content-top'>
@@ -300,7 +304,9 @@ export const MessageUI: React.FC<
           <Attachment attachments={message.attachments} />
         )}
         <OpenThreadButton />
-        <SimpleReactionsList reactionOptions={customReactions} />
+        <WithComponents overrides={reactionOverrides}>
+          <MessageReactions />
+        </WithComponents>
       </div>
       {isQA && <UpvoteButton />}
     </div>

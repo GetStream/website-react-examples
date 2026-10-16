@@ -1,6 +1,6 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import {Channel as StreamChannel, TextComposerMiddleware, UserResponse} from 'stream-chat';
-import {Channel, Chat} from 'stream-chat-react';
+import {Channel, Chat, type MessageUIComponentProps, WithComponents} from 'stream-chat-react';
 
 import {init, SearchIndex} from 'emoji-mart';
 import data from '@emoji-mart/data';
@@ -50,6 +50,21 @@ export const ChatContainer = () => {
 
   const { chatClient, currentChannel, dmUnread, eventUnread, globalUnread, qaUnread } =
     useInitChat();
+
+  const channelOverrides = useMemo(
+    () => ({
+      AutocompleteSuggestionList: CustomSuggestionList,
+      EmptyStateIndicator: EmptyStateIndicatorChannel,
+      GiphyPreviewMessage: GiphyPreview,
+      MessageComposerUI: MessageInputUI,
+      ThreadHeader,
+      VirtualMessage: (props: MessageUIComponentProps) => (
+        <MessageUI {...props} setMessageActionUser={setMessageActionUser} />
+      ),
+      emojiSearchIndex: SearchIndex,
+    }),
+    [],
+  );
 
   useEffect(() => {
     if (!chatClient) return;
@@ -134,20 +149,11 @@ export const ChatContainer = () => {
               />
             ) : (
               currentChannel && (
-                <Channel
-                  AutocompleteSuggestionList={CustomSuggestionList}
-                  channel={currentChannel}
-                  EmptyStateIndicator={EmptyStateIndicatorChannel}
-                  GiphyPreviewMessage={GiphyPreview}
-                  Input={MessageInputUI}
-                  ThreadHeader={ThreadHeader}
-                  VirtualMessage={(props) => (
-                    <MessageUI {...props} setMessageActionUser={setMessageActionUser} />
-                  )}
-                  emojiSearchIndex={SearchIndex}
-                >
-                  <ChannelInner />
-                </Channel>
+                <WithComponents overrides={channelOverrides}>
+                  <Channel channel={currentChannel}>
+                    <ChannelInner />
+                  </Channel>
+                </WithComponents>
               )
             )}
         </Chat>

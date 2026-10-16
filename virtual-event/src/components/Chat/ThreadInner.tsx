@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Thread, useChannelStateContext } from 'stream-chat-react';
+import { Thread, useChannelStateContext, WithComponents } from 'stream-chat-react';
 
 import { ThreadMessageInputUI } from './ThreadMessageInputUI';
 
@@ -20,14 +20,15 @@ export const ThreadInner = () => {
 
   return (
     <ThreadInputContext.Provider value={{footerChecked: checked, toggleCheckedFooter}}>
-      <Thread
-        additionalVirtualizedMessageListProps={{
-          additionalVirtuosoProps: { alignToBottom: true },
-          separateGiphyPreview: true,
-        }}
-        Input={ThreadMessageInputUI}
-        virtualized
-      />
+      <WithComponents overrides={{ MessageComposerUI: ThreadMessageInputUI }}>
+        <Thread
+          additionalVirtualizedMessageListProps={{
+            additionalVirtuosoProps: { alignToBottom: true },
+            separateGiphyPreview: true,
+          }}
+          virtualized
+        />
+      </WithComponents>
     </ThreadInputContext.Provider>
   );
 };
