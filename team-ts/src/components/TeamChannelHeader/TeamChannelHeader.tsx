@@ -35,7 +35,7 @@ export const TeamChannelHeader = () => {
     if (!members.length) {
       return (
         <div className='workspace-header__block'>
-          <Avatar />
+          <Avatar size='md' />
           <p className='team-channel-header__name user'>Johnny Blaze</p>
         </div>
       );
@@ -47,7 +47,7 @@ export const TeamChannelHeader = () => {
           if (i > 2) return null;
           return (
             <div key={i} className='workspace-header__block-item'>
-              <Avatar image={user?.image} name={user?.name || user?.id} />
+              <Avatar imageUrl={user?.image} size='md' userName={user?.name || user?.id} />
               <p className='team-channel-header__name user'>
                 {user?.name || user?.id || 'Johnny Blaze'}
               </p>

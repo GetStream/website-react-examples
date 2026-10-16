@@ -42,7 +42,7 @@ const SearchResult = (props: SearchResultProps) => {
           {highlighted: focusedId === user.id}
         )}
       >
-          <Avatar image={user.image} name={user.name || user.id} />
+          <Avatar imageUrl={user.image} size='sm' userName={user.name || user.id} />
           <p className='channel-search__result-text'>{user.name || user.id || 'Johnny Blaze'}</p>
       </div>
     );

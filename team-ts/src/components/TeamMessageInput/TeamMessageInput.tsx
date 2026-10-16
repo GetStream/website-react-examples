@@ -5,15 +5,15 @@ import {
   SendButton,
   TextareaComposer,
   useAttachmentManagerState,
-  useComponentContext,
-  useMessageComposer,
+  useMessageComposerContext,
+  useMessageComposerController,
   useMessageComposerHasSendableData,
-  useMessageInputContext,
   useStateStore,
 } from 'stream-chat-react';
 import {useDropzone} from 'react-dropzone';
 
 import {GiphyBadge} from './GiphyBadge';
+import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
 import {MessageInputControlButton} from './MessageInputControls';
 import {EmojiPicker} from './EmojiPicker';
 import {useMessageInputCompositionControls} from './hooks/useMessageInputCompositionControls';
@@ -31,14 +31,12 @@ const customComposerDataSelector = (state: CustomDataManagerState) => ({
 });
 
 export const TeamMessageInput = () => {
-  const { TypingIndicator } = useComponentContext();
-
-  const { handleSubmit } = useMessageInputContext();
+  const { handleSubmit } = useMessageComposerContext();
   const {
     formatter,
     placeholder,
   } = useMessageInputCompositionControls();
-  const messageComposer = useMessageComposer();
+  const messageComposer = useMessageComposerController();
   const { acceptedFiles, multipleUploads } = useStateStore(
     messageComposer.configState,
     attachmentManagerConfigStateSelector,
@@ -110,14 +108,14 @@ export const TeamMessageInput = () => {
           />
         </div>
       </div>
-      {TypingIndicator && <TypingIndicator />}
+      <TeamTypingIndicator />
     </div>
   );
 };
 
 export const ThreadMessageInput = () => {
-  const { handleSubmit } = useMessageInputContext();
-  const messageComposer = useMessageComposer();
+  const { handleSubmit } = useMessageComposerContext();
+  const messageComposer = useMessageComposerController();
   const hasSendableData = useMessageComposerHasSendableData();
   const { isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
   return (

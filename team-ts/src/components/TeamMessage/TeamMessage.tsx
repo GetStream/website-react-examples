@@ -4,22 +4,20 @@ import type {TranslationLanguages} from 'stream-chat';
 import {
   Attachment,
   Avatar,
+  defaultMessageActionSet,
   DialogAnchor,
-  EditMessageForm,
-  isOnlyEmojis,
+  IconEmoji,
+  IconThread,
   MESSAGE_ACTIONS,
   MessageActions,
-  MessageDeleted,
-  MessageInput,
+  MessageDeletedBubble,
+  MessageReactions,
   MessageRepliesCountButton,
   MessageStatus,
   MessageTimestamp,
-  ReactionIcon,
+  messageTextHasEmojisOnly,
   ReactionSelector,
-  ReactionsList,
   renderText as defaultRenderText,
-  showMessageActionsBox,
-  ThreadIcon,
   useDialog,
   useDialogIsOpen,
   useMessageContext,
@@ -32,10 +30,15 @@ import {useWorkspaceController} from '../../context/WorkspaceController';
 
 import {ErrorIcon} from "./icons";
 
+// TeamMessage renders its own reaction and thread buttons, so MessageActions only adds the dropdown menu
+const dropdownMessageActionSet = defaultMessageActionSet.filter(
+  (action) =>
+    action.placement === 'quick-dropdown-toggle' ||
+    (action.placement === 'dropdown' && action.type !== 'react' && action.type !== 'reply'),
+);
+
 export const TeamMessage = () => {
   const {
-    clearEditingState,
-    editing,
     getMessageActions,
     groupStyles,
     handleAction,
@@ -53,7 +56,6 @@ export const TeamMessage = () => {
   const { t, userLanguage } = useTranslationContext('MessageTeam');
 
   const messageActions = getMessageActions();
-  const showActionsBox = showMessageActionsBox(messageActions);
 
   const shouldShowReplies = messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1 && !threadList;
   const canReact =  messageActions.indexOf(MESSAGE_ACTIONS.react) > -1;
@@ -81,35 +83,12 @@ export const TeamMessage = () => {
   const reactionSelectorDialogId = `reaction-selector--${message.id}`;
   const reactionSelectorDialog = useDialog({ id: reactionSelectorDialogId });
   const reactionSelectorDialogIsOpen = useDialogIsOpen(reactionSelectorDialogId);
-  const messageActionsDialogIsOpen = useDialogIsOpen(`message-actions--${message.id}`);
+  const messageActionsDialogIsOpen = useDialogIsOpen(MessageActions.getDialogId({ messageId: message.id }));
 
   if (message.deleted_at) {
-    return <MessageDeleted message={message} />;
+    return <MessageDeletedBubble />;
   }
 
-  if (editing) {
-    return (
-      <div
-        className={`str-chat__message-team str-chat__message-team--${firstGroupStyle} str-chat__message-team--editing`}
-        data-testid='message-team-edit'
-      >
-        {(firstGroupStyle === 'top' || firstGroupStyle === 'single') && (
-          <div className='str-chat__message-team-meta'>
-            <Avatar
-              image={message.user?.image}
-              name={message.user?.name || message.user?.id}
-              onClick={onUserClick}
-              onMouseOver={onUserHover}
-            />
-          </div>
-        )}
-        <MessageInput
-          clearEditingState={clearEditingState}
-          Input={EditMessageForm}
-        />
-      </div>
-    );
-  }
   const rootClass = clsx(
     'str-chat__message',
     'str-chat__message-team',
@@ -133,10 +112,11 @@ export const TeamMessage = () => {
         <div className='avatar-host'>
           {firstGroupStyle === 'top' || firstGroupStyle === 'single' || initialMessage ? (
             <Avatar
-              image={message.user?.image}
-              name={message.user?.name || message.user?.id}
+              imageUrl={message.user?.image}
               onClick={onUserClick}
               onMouseOver={onUserHover}
+              size='md'
+              userName={message.user?.name || message.user?.id}
             />
           ) : (
             <div data-testid='team-meta-spacer' style={{marginRight: 0, width: 34}}/>
@@ -185,7 +165,7 @@ export const TeamMessage = () => {
                         referenceElement={buttonRef.current}
                         trapFocus
                       >
-                        <ReactionSelector />
+                        <ReactionSelector dialogId={reactionSelectorDialogId} />
                       </DialogAnchor>
                       <button
                         aria-expanded={reactionSelectorDialogIsOpen}
@@ -195,7 +175,7 @@ export const TeamMessage = () => {
                         onClick={() => reactionSelectorDialog?.toggle()}
                         ref={buttonRef}
                       >
-                        <ReactionIcon className='str-chat__message-action-icon' />
+                        <IconEmoji className='str-chat__message-action-icon' />
                       </button>
                     </>
                     )}
@@ -205,16 +185,14 @@ export const TeamMessage = () => {
                       onClick={handleOpenThread}
                       title='Start a thread'
                     >
-                      <ThreadIcon/>
+                      <IconThread/>
                     </span>
                   )}
-                  {showActionsBox && (
-                    <MessageActions inline/>
-                  )}
+                  <MessageActions messageActionSet={dropdownMessageActionSet}/>
                 </div>
               )}
             {message.text && (<div
-                className={clsx('str-chat__message-team-text', {'str-chat__message-team-text--is-emoji': isOnlyEmojis(message.text)})}
+                className={clsx('str-chat__message-team-text', {'str-chat__message-team-text--is-emoji': messageTextHasEmojisOnly(message)})}
                 data-testid='message-team-message'
                 onClick={onMentionsClickMessage}
                 onMouseOver={onMentionsHoverMessage}
@@ -226,7 +204,7 @@ export const TeamMessage = () => {
               <Attachment actionHandler={handleAction} attachments={message.attachments}/>
             ) : null}
             {message.latest_reactions?.length !== 0 && message.text !== '' && canReact && (
-              <ReactionsList/>
+              <MessageReactions/>
             )}
             {message.status === 'failed' && (
               <button
@@ -248,7 +226,7 @@ export const TeamMessage = () => {
           {message.latest_reactions &&
             message.latest_reactions.length !== 0 &&
             message.text === '' &&
-            canReact && <ReactionsList/>}
+            canReact && <MessageReactions/>}
           {!threadList && (
             <MessageRepliesCountButton
               onClick={handleOpenThread}

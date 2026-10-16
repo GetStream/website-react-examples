@@ -1,13 +1,13 @@
 import clsx from 'clsx';
 import { useCallback } from 'react';
-import { ChannelPreviewUIComponentProps, useChatContext } from 'stream-chat-react';
+import { ChannelListItemUIProps, useChatContext } from 'stream-chat-react';
 
 import { DirectMessagingChannelPreview } from './DirectMessagingChannelPreview';
 import { TeamChannelPreview } from './TeamChannelPreview';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
-type TeamChannelPreviewProps = ChannelPreviewUIComponentProps & {
+type TeamChannelPreviewProps = ChannelListItemUIProps & {
   type: string;
 };
 

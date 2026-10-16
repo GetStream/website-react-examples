@@ -1,6 +1,6 @@
-import { Avatar, ChannelPreviewUIComponentProps, useChatContext } from 'stream-chat-react';
+import { Avatar, ChannelListItemUIProps, useChatContext } from 'stream-chat-react';
 
-type DirectMessagingChannelPreviewProps = Pick<ChannelPreviewUIComponentProps, 'channel'>;
+type DirectMessagingChannelPreviewProps = Pick<ChannelListItemUIProps, 'channel'>;
 
 export const DirectMessagingChannelPreview = ({channel}: DirectMessagingChannelPreviewProps) => {
   const { client } = useChatContext();
@@ -17,8 +17,9 @@ export const DirectMessagingChannelPreview = ({channel}: DirectMessagingChannelP
     return (
       <div className='channel-preview__item single' title={displayText}>
         <Avatar
-          image={member.user?.image}
-          name={member.user?.name || member.user?.id}
+          imageUrl={member.user?.image}
+          size='sm'
+          userName={member.user?.name || member.user?.id}
         />
         <p>{displayText}</p>
       </div>
@@ -33,13 +34,15 @@ export const DirectMessagingChannelPreview = ({channel}: DirectMessagingChannelP
     <div className='channel-preview__item multi' title={displayText}>
         <span>
           <Avatar
-            image={members[0].user?.image}
-            name={members[0].user?.name || members[0].user?.id}
+            imageUrl={members[0].user?.image}
+            size='xs'
+            userName={members[0].user?.name || members[0].user?.id}
           />
         </span>
       <Avatar
-        image={members[1].user?.image}
-        name={members[1].user?.name || members[1].user?.id}
+        imageUrl={members[1].user?.image}
+        size='xs'
+        userName={members[1].user?.name || members[1].user?.id}
       />
       <p>{displayText}</p>
     </div>

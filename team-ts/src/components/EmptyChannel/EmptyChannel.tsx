@@ -10,7 +10,7 @@ export const EmptyChannel = () => {
   );
 
   const getAvatarGroup = () => {
-    if (!members.length) return <Avatar />;
+    if (!members.length) return <Avatar size='2xl' />;
 
     return (
       <div className='channel-empty__avatars'>
@@ -18,8 +18,9 @@ export const EmptyChannel = () => {
           return (
             <Avatar
               key={i}
-              image={member.user?.image}
-              name={member.user?.name || member.user?.id}
+              imageUrl={member.user?.image}
+              size='2xl'
+              userName={member.user?.name || member.user?.id}
             />
           );
         })}

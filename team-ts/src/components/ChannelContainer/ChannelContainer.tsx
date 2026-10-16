@@ -1,4 +1,4 @@
-import { Channel, SimpleReactionsList } from 'stream-chat-react';
+import { Channel, WithComponents } from 'stream-chat-react';
 
 import { AdminPanel } from '../AdminPanel/AdminPanel';
 import { ChannelInner } from './ChannelInner';
@@ -26,18 +26,21 @@ export const ChannelContainer = () => {
 
   return (
     <div className='channel__container'>
-      <Channel
-        EmptyStateIndicator={EmptyChannel}
-        LoadingIndicator={LoadingIndicator}
-        Input={TeamMessageInput}
-        Message={TeamMessage}
-        ReactionsList={SimpleReactionsList}
-        ThreadHeader={ThreadHeader}
-        TypingIndicator={TeamTypingIndicator}
-        emojiSearchIndex={SearchIndex}
+      <WithComponents
+        overrides={{
+          EmptyStateIndicator: EmptyChannel,
+          LoadingIndicator,
+          MessageComposerUI: TeamMessageInput,
+          Message: TeamMessage,
+          ThreadHeader,
+          TypingIndicator: TeamTypingIndicator,
+          emojiSearchIndex: SearchIndex,
+        }}
       >
+        <Channel>
           <ChannelInner />
-      </Channel>
+        </Channel>
+      </WithComponents>
     </div>
   );
 };
