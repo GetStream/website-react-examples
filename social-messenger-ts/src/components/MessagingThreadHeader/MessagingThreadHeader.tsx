@@ -1,14 +1,21 @@
-import type { ThreadHeaderProps } from 'stream-chat-react';
+import type { ThreadState } from 'stream-chat';
+import { useCloseThread, useStateStore, useThreadContext } from 'stream-chat-react';
 
 import './MessagingThreadHeader.css';
 
 import { CloseThreadIcon } from '../../assets';
 
-const MessagingThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
+const replyCountSelector = ({ replyCount }: ThreadState) => ({ replyCount });
+
+const MessagingThreadHeader = () => {
+  const thread = useThreadContext();
+  const { replyCount } = useStateStore(thread?.state, replyCountSelector) ?? {};
+  const closeThread = useCloseThread();
+
   const getReplyCount = () => {
-    if (!thread?.reply_count) return '';
-    if (thread.reply_count === 1) return '1 reply';
-    return `${thread.reply_count} Replies`;
+    if (!replyCount) return '';
+    if (replyCount === 1) return '1 reply';
+    return `${replyCount} Replies`;
   };
 
   return (
@@ -17,7 +24,7 @@ const MessagingThreadHeader = ({ closeThread, thread }: ThreadHeaderProps) => {
         <p className='custom-thread-header__left-title'>Thread</p>
         <p className='custom-thread-header__left-count'>{getReplyCount()}</p>
       </div>
-      <CloseThreadIcon closeThread={closeThread} />
+      <CloseThreadIcon closeThread={() => closeThread()} />
     </div>
   );
 };

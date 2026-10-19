@@ -1,34 +1,30 @@
 import clsx from 'clsx';
-import { useCallback } from 'react';
-import { ChannelListItemUIProps, useChatContext } from 'stream-chat-react';
+import { type MouseEvent, useCallback } from 'react';
+import { ChannelListItemUIProps, useWorkspaceNavigation } from 'stream-chat-react';
 
 import { DirectMessagingChannelPreview } from './DirectMessagingChannelPreview';
 import { TeamChannelPreview } from './TeamChannelPreview';
-
-import { useWorkspaceController } from '../../context/WorkspaceController';
 
 type TeamChannelPreviewProps = ChannelListItemUIProps & {
   type: string;
 };
 
-export const ChannelPreview = ({ channel, type }: TeamChannelPreviewProps) => {
-  const { channel: activeChannel, setActiveChannel } = useChatContext();
-  const { displayWorkspace } = useWorkspaceController();
+export const ChannelPreview = ({ active, channel, type }: TeamChannelPreviewProps) => {
+  // opening a channel also switches the workspace back to 'Chat' (see WorkspaceController)
+  const { openChannel } = useWorkspaceNavigation();
 
-  const handleClick = useCallback(() => {
-    displayWorkspace('Chat');
-    if (setActiveChannel) {
-      setActiveChannel(channel);
-    }
-  }, [channel, displayWorkspace, setActiveChannel])
+  const handleClick = useCallback(
+    (event: MouseEvent) => openChannel(channel, { event }),
+    [channel, openChannel],
+  );
 
   return (
     <button
-      className={clsx('channel-preview', {selected: channel?.id === activeChannel?.id})}
+      className={clsx('channel-preview', {selected: active})}
       onClick={handleClick}
     >
       {type === 'team'
-        ? <TeamChannelPreview name={channel?.data?.name || channel?.data?.id as string || 'random'}/>
+        ? <TeamChannelPreview name={channel?.data?.custom?.name || channel?.data?.id as string || 'random'}/>
         : <DirectMessagingChannelPreview channel={channel}/>
       }
     </button>

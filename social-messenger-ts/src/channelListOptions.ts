@@ -1,4 +1,4 @@
-import type { ChannelFilters, ChannelOptions, ChannelSort } from 'stream-chat';
+import type { ChannelFilters, ChannelPaginatorRequestOptions, SortParamRequest } from 'stream-chat';
 
 /**
  * Exports few channel list configuration options. See the docs for more information:
@@ -13,18 +13,22 @@ export const getChannelListOptions = (
 ) => {
   const filters: ChannelFilters = disableChannelNameFilter
     ? { type: 'messaging', members: { $in: [user!] } }
-    : { type: 'messaging', name: 'Social Demo', demo: 'social' };
+    : { type: 'messaging', name: 'Social Demo', 'custom.demo': 'social' };
 
-  const options: ChannelOptions = { state: true, watch: true, presence: true, limit: 8 };
+  const requestOptions: ChannelPaginatorRequestOptions = { state: true, watch: true, presence: true };
+  const pageSize = 8;
 
-  const sort: ChannelSort = {
-    last_message_at: -1,
-    updated_at: -1,
-  };
+  const sort: SortParamRequest[] = [
+    { field: 'last_message_at', direction: -1 },
+    { field: 'updated_at', direction: -1 },
+  ];
 
   return {
     filters,
-    options,
+    pageSize,
+    requestOptions,
     sort,
   };
 };
+
+export type ChannelListOptions = ReturnType<typeof getChannelListOptions>;

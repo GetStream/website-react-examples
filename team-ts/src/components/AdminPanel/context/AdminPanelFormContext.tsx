@@ -9,7 +9,7 @@ import {
   useState,
 } from 'react';
 import { Workspace } from '../../../context/WorkspaceController';
-import { useChatContext } from 'stream-chat-react';
+import { useChatContext, useWorkspaceNavigation } from 'stream-chat-react';
 
 type UpsertChannelParams = { name: string, members: string[] };
 
@@ -62,7 +62,8 @@ const getUpsertAction = (workspace: Workspace): UpsertAction | undefined => {
 };
 
 export const AdminPanelForm = ({ children, defaultValues, workspace, onSubmit }: PropsWithChildren<AdminPanelFormProps>) => {
-  const { client, channel, setActiveChannel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannel, openChannels: [channel] } = useWorkspaceNavigation();
   const [name, setChannelName] = useState<string>(defaultValues.name);
   const [members, setMembers] = useState<string[]>(defaultValues.members);
   const [errors, setErrors] = useState<FormErrors>({ name: null, members: null });
@@ -73,23 +74,24 @@ export const AdminPanelForm = ({ children, defaultValues, workspace, onSubmit }:
   const createChannel = useCallback(async ({ name, members }: UpsertChannelParams) => {
     if (!createChannelType || members.length === 0) return;
 
-    const newChannel = await client.channel(createChannelType, name, {
-      name,
-      members,
-      demo: 'team',
+    const newChannel = client.channel(createChannelType, name || null, {
+      custom: { name, demo: 'team' },
+      members: members.map((user_id) => ({ user_id })),
     });
 
-    await newChannel.watch();
+    await newChannel.ensureWatched();
 
-    setActiveChannel(newChannel);
-  }, [createChannelType, setActiveChannel, client]);
+    client.channelManager.ingestChannel(newChannel);
+    openChannel(newChannel);
+  }, [createChannelType, openChannel, client]);
 
   const updateChannel = useCallback(async ({ name, members }: UpsertChannelParams) => {
-    if (name !== (channel?.data?.name || channel?.data?.id)) {
-      await channel?.update(
-        { name },
-        { text: `Channel name changed to ${name}` },
-      );
+    if (name !== (channel?.data?.custom?.name || channel?.data?.id)) {
+      // update() replaces custom data, so keep the other custom fields (e.g. `demo`)
+      await channel?.update({
+        data: { custom: { ...channel.data?.custom, name } },
+        message: { text: `Channel name changed to ${name}` },
+      });
     }
 
     if (members?.length) {

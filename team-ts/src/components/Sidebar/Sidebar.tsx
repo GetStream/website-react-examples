@@ -1,7 +1,16 @@
+import { useEffect, useMemo, useRef } from 'react';
 import {
-  ChannelList,
+  type ChannelFilters,
+  ChannelPaginator,
+  type ChannelPaginatorState,
+  type SortParamRequest,
+  type StreamChat,
+} from 'stream-chat';
+import {
   type ChannelListItemUIProps,
-  type ChannelListUIProps,
+  useChatContext,
+  useStateStore,
+  useWorkspaceNavigation,
   WithComponents,
 } from 'stream-chat-react';
 
@@ -15,17 +24,16 @@ import { ChannelPreview } from '../ChannelPreview/ChannelPreview';
 
 import { CompanyLogo } from './icons';
 
-import type { Channel, ChannelFilters } from 'stream-chat';
-import { ChannelSort } from 'stream-chat';
-
-
-
 const filters: ChannelFilters[] = [
-  { type: 'team', demo: 'team' },
-  { type: 'messaging', demo: 'team' },
+  { type: 'team', 'custom.demo': 'team' },
+  { type: 'messaging', 'custom.demo': 'team' },
 ];
-const options = { state: true, watch: true, presence: true, limit: 3 };
-const sort: ChannelSort = { last_message_at: -1, updated_at: -1 };
+const requestOptions = { state: true, watch: true, presence: true };
+const pageSize = 3;
+const sort: SortParamRequest[] = [
+  { field: 'last_message_at', direction: -1 },
+  { field: 'updated_at', direction: -1 },
+];
 
 const FakeCompanySelectionBar = () => (
   <div className='sidebar__company-selection-bar'>
@@ -35,25 +43,41 @@ const FakeCompanySelectionBar = () => (
   </div>
 );
 
-const customChannelTeamFilter = (channels: Channel[]) => {
-  return channels.filter((channel) => channel.type === 'team');
+const createPaginator = (client: StreamChat, id: string, filters: ChannelFilters) =>
+  new ChannelPaginator({ client, filters, id, paginatorOptions: { pageSize }, requestOptions, sort });
+
+/** Registers the paginator with the ChannelManager so it receives WebSocket updates. */
+const useRegisteredPaginator = (id: string, filters: ChannelFilters) => {
+  const { client } = useChatContext();
+  const paginator = useMemo(() => createPaginator(client, id, filters), [client, id, filters]);
+
+  useEffect(() => {
+    client.channelManager.insertPaginator({ paginator });
+    return () => {
+      client.channelManager.removePaginator(paginator);
+    };
+  }, [client, paginator]);
+
+  return paginator;
 };
 
-const customChannelMessagingFilter = (channels: Channel[]) => {
-  return channels.filter((channel) => channel.type === 'messaging');
-};
+const firstChannelSelector = ({ items }: ChannelPaginatorState) => ({ firstChannel: items?.[0] });
 
-// stream-chat-react 14 renders a "Chats" header in every ChannelList; the sidebar has its own section headers
-const NoChannelListHeader = () => null;
+/** stream-chat-react 14's ChannelList opened the first channel on mount; v15 leaves that to the app. */
+const useOpenFirstChannel = (paginator: ChannelPaginator) => {
+  const { openChannel, openChannels } = useWorkspaceNavigation();
+  const { firstChannel } = useStateStore(paginator.state, firstChannelSelector);
+  const opened = useRef(false);
+
+  useEffect(() => {
+    if (opened.current || !firstChannel) return;
+    opened.current = true;
+    if (!openChannels.length) openChannel(firstChannel);
+  }, [firstChannel, openChannel, openChannels.length]);
+};
 
 const teamChannelsOverrides = {
-  ChannelListHeader: NoChannelListHeader,
-  ChannelListUI: (listProps: ChannelListUIProps) => (
-    <TeamChannelList
-      {...listProps}
-      type='team'
-    />
-  ),
+  EmptyListIndicator: EmptyGroupChannelListIndicator,
   ChannelListItemUI: (previewProps: ChannelListItemUIProps) => (
     <ChannelPreview
       {...previewProps}
@@ -63,13 +87,7 @@ const teamChannelsOverrides = {
 };
 
 const messagingChannelsOverrides = {
-  ChannelListHeader: NoChannelListHeader,
-  ChannelListUI: (listProps: ChannelListUIProps) => (
-    <TeamChannelList
-      {...listProps}
-      type='messaging'
-    />
-  ),
+  EmptyListIndicator: EmptyDMChannelListIndicator,
   ChannelListItemUI: (previewProps: ChannelListItemUIProps) => (
     <ChannelPreview
       {...previewProps}
@@ -78,30 +96,26 @@ const messagingChannelsOverrides = {
   ),
 };
 
-const TeamChannelsList = () => (
-  <WithComponents overrides={teamChannelsOverrides}>
-    <ChannelList
-      channelRenderFilterFn={customChannelTeamFilter}
-      filters={filters[0]}
-      options={options}
-      sort={sort}
-      EmptyStateIndicator={EmptyGroupChannelListIndicator}
-    />
-  </WithComponents>
-);
+const TeamChannelsList = () => {
+  const paginator = useRegisteredPaginator('team-channels', filters[0]);
+  useOpenFirstChannel(paginator);
 
-const MessagingChannelsList = () => (
-  <WithComponents overrides={messagingChannelsOverrides}>
-    <ChannelList
-      channelRenderFilterFn={customChannelMessagingFilter}
-      filters={filters[1]}
-      options={options}
-      sort={sort}
-      setActiveChannelOnMount={false}
-      EmptyStateIndicator={EmptyDMChannelListIndicator}
-    />
-  </WithComponents>
-)
+  return (
+    <WithComponents overrides={teamChannelsOverrides}>
+      <TeamChannelList paginator={paginator} type='team' />
+    </WithComponents>
+  );
+};
+
+const MessagingChannelsList = () => {
+  const paginator = useRegisteredPaginator('team-direct-messages', filters[1]);
+
+  return (
+    <WithComponents overrides={messagingChannelsOverrides}>
+      <TeamChannelList paginator={paginator} type='messaging' />
+    </WithComponents>
+  );
+};
 
 export const Sidebar = () => {
   return (

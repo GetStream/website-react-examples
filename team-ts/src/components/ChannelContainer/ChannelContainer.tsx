@@ -1,11 +1,10 @@
-import { Channel, WithComponents } from 'stream-chat-react';
+import { ChannelPlaceholder, useWorkspaceNavigation, WithComponents } from 'stream-chat-react';
 
 import { AdminPanel } from '../AdminPanel/AdminPanel';
 import { ChannelInner } from './ChannelInner';
 import { EmptyChannel } from '../EmptyChannel/EmptyChannel';
 import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
-import { ThreadHeader } from '../TeamChannelHeader/ThreadHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
@@ -19,6 +18,9 @@ init({data})
 
 export const ChannelContainer = () => {
   const { activeWorkspace } = useWorkspaceController();
+  const { openChannels, openThreads } = useWorkspaceNavigation();
+  const [channel] = openChannels;
+  const [thread] = openThreads;
 
   if (activeWorkspace.match('Admin')) {
     return <AdminPanel/>;
@@ -31,15 +33,18 @@ export const ChannelContainer = () => {
           EmptyStateIndicator: EmptyChannel,
           LoadingIndicator,
           MessageComposerUI: TeamMessageInput,
-          Message: TeamMessage,
-          ThreadHeader,
+          MessageUI: TeamMessage,
           TypingIndicator: TeamTypingIndicator,
           emojiSearchIndex: SearchIndex,
         }}
       >
-        <Channel>
-          <ChannelInner />
-        </Channel>
+        {channel ? (
+          <ChannelInner channel={channel} thread={thread} />
+        ) : (
+          <ChannelPlaceholder>
+            <EmptyChannel />
+          </ChannelPlaceholder>
+        )}
       </WithComponents>
     </div>
   );

@@ -1,8 +1,8 @@
 import React from 'react';
-import { MessageComposer, MessageList, Thread, Window } from 'stream-chat-react';
+import { MessageComposer, MessageList } from 'stream-chat-react';
 import { encodeToMp3 } from 'stream-chat-react/mp3-encoder';
 
-import { MessagingChannelHeader} from '../../components';
+import { MessagingChannelHeader } from '../../components';
 
 export type ChannelInnerProps = {
   toggleMobile: () => void;
@@ -12,21 +12,16 @@ export type ChannelInnerProps = {
 const ChannelInner = (props: ChannelInnerProps) => {
   const { theme, toggleMobile } = props;
 
-  const actions = ['delete', 'edit', 'flag', 'markUnread', 'mute', 'react', 'reply'];
-
   return (
     <>
-      <Window>
-        <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
-        <MessageList messageActions={actions} />
-        <MessageComposer
-          focus
-          audioRecordingConfig={{ transcoderConfig: { encoder: encodeToMp3 } }}
-          audioRecordingEnabled
-          asyncMessagesMultiSendEnabled
-        />
-      </Window>
-      <Thread />
+      <MessagingChannelHeader theme={theme} toggleMobile={toggleMobile} />
+      <MessageList />
+      <MessageComposer
+        focus
+        audioRecordingConfig={{ transcoderConfig: { encoder: encodeToMp3 } }}
+        audioRecordingEnabled
+        asyncMessagesMultiSendEnabled
+      />
     </>
   );
 };

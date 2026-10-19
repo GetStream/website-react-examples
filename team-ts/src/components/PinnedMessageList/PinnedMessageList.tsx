@@ -1,4 +1,11 @@
-import {DialogManagerProvider, Message, useChannelStateContext } from 'stream-chat-react';
+import type { Channel, MessagePaginatorState } from 'stream-chat';
+import {
+  ChannelInstanceProvider,
+  DialogManagerProvider,
+  Message,
+  useStateStore,
+  WithComponents,
+} from 'stream-chat-react';
 
 import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
 
@@ -6,9 +13,11 @@ import { TeamMessage } from '../TeamMessage/TeamMessage';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
-export const PinnedMessageList = () => {
+const pinnedMessagesSelector = ({ items }: MessagePaginatorState) => ({ pinnedMessages: items });
+
+export const PinnedMessageList = ({ channel }: { channel: Channel }) => {
   const { pinnedMessageListOpen, togglePinnedMessageListOpen } = useWorkspaceController();
-  const { channel } = useChannelStateContext();
+  const { pinnedMessages } = useStateStore(channel.pinnedMessagesPaginator.state, pinnedMessagesSelector);
 
   if (!pinnedMessageListOpen) return null;
 
@@ -20,14 +29,18 @@ export const PinnedMessageList = () => {
         <CloseThreadButton onClick={togglePinnedMessageListOpen} />
       </div>
       <div className='pinned-messages__list'>
-        {channel.state.pinnedMessages.map((message) => (
-          <Message
-            groupStyles={['single']}
-            Message={TeamMessage}
-            key={message.id}
-            message={message}
-          />
-        ))}
+        {/* rendered outside <Channel>, so Message needs the channel in context */}
+        <ChannelInstanceProvider value={{ channel }}>
+          <WithComponents overrides={{ MessageUI: TeamMessage }}>
+            {pinnedMessages?.map((message) => (
+              <Message
+                groupStyles={['single']}
+                key={message.id}
+                message={message}
+              />
+            ))}
+          </WithComponents>
+        </ChannelInstanceProvider>
       </div>
     </div>
     </DialogManagerProvider>

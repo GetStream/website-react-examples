@@ -1,15 +1,24 @@
-import React, {useEffect, useState} from 'react';
-import type { ChannelFilters, ChannelOptions, ChannelSort, TextComposerMiddleware } from 'stream-chat';
+import React, { useEffect, useState } from 'react';
+import type { TextComposerMiddleware } from 'stream-chat';
 import {
-  Channel,
+  ChannelPlaceholder,
   Chat,
-  ChatView,
+  MessageComposer,
+  MessageList,
   Streami18n,
-  Thread,
+  ThreadHeader,
   ThreadList,
   useCreateChatClient,
+  VirtualizedMessageList,
   WithComponents,
 } from 'stream-chat-react';
+import {
+  ChannelSlot,
+  ChatView,
+  type LayoutDescriptor,
+  Slot,
+  ThreadSlot,
+} from 'stream-chat-react/slot-layout';
 import clsx from 'clsx';
 import { createTextComposerEmojiMiddleware, EmojiPicker } from 'stream-chat-react/emojis';
 
@@ -20,6 +29,7 @@ import 'stream-chat-react/dist/css/index.css';
 import 'stream-chat-react/dist/css/emoji-picker.css';
 import './styles/index.css';
 
+import type { ChannelListOptions } from './channelListOptions';
 import {
   ChannelInner,
   CreateChannel,
@@ -40,11 +50,7 @@ type AppProps = {
   userToConnect: { id: string; name?: string; image?: string };
   userToken: string | undefined;
   targetOrigin: string;
-  channelListOptions: {
-    options: ChannelOptions;
-    filters: ChannelFilters;
-    sort: ChannelSort;
-  };
+  channelListOptions: ChannelListOptions;
 };
 
 const noop = () => null;
@@ -53,9 +59,16 @@ const noop = () => null;
 const i18nInstance = new Streami18n({
   language: 'en',
   translationsForLanguage: {
-    'timestamp/MessageTimestamp': '{{ timestamp | timestampFormatter(calendar: true) }}',
+    'timestamp.MessageTimestamp': '{{ timestamp | timestampFormatter(calendar: true) }}',
   },
 });
+
+// Both views keep their own slot state; a channel opens in "channel", a thread in "thread".
+// Module scope: ChatView needs a referentially stable layout list.
+const layouts: LayoutDescriptor[] = [
+  { id: 'channels', slots: ['channel', 'thread'] },
+  { id: 'threads', slots: ['thread'] },
+];
 
 const EmojiPickerWithTheme = () => {
   const { theme } = useThemeContext();
@@ -99,40 +112,61 @@ const App = (props: AppProps) => {
     return null; // render nothing until connection to the backend is established
   }
 
+  const createChannel = isCreating && (
+    <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+  );
+
+  const channelsView = (
+    <WithComponents
+      overrides={{
+        SendButton,
+        TypingIndicator: noop,
+        EmojiPicker: EmojiPickerWithTheme,
+        emojiSearchIndex: SearchIndex,
+      }}
+    >
+      <MessagingSidebar
+        channelListOptions={channelListOptions}
+        onClick={toggleMobile}
+        onCreateChannel={() => setIsCreating(!isCreating)}
+        onPreviewSelect={() => setIsCreating(false)}
+      />
+      <Slot slot='channel'>
+        <ChannelSlot
+          slot='channel'
+          fallback={<ChannelPlaceholder>{createChannel}</ChannelPlaceholder>}
+        >
+          {createChannel}
+          <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
+        </ChannelSlot>
+      </Slot>
+      <Slot slot='thread'>
+        <ThreadSlot slot='thread'>
+          <MessagingThreadHeader />
+          <MessageList withDateSeparator={false} />
+          <MessageComposer focus />
+        </ThreadSlot>
+      </Slot>
+    </WithComponents>
+  );
+
+  const threadsView = (
+    <>
+      <ThreadList />
+      <Slot slot='thread'>
+        <ThreadSlot slot='thread'>
+          <ThreadHeader />
+          <VirtualizedMessageList />
+          <MessageComposer focus />
+        </ThreadSlot>
+      </Slot>
+    </>
+  );
+
   return (
     <Chat client={chatClient} i18nInstance={i18nInstance} theme={clsx('messaging', themeClassName)}>
-      <ChatView>
+      <ChatView layouts={layouts} views={{ channels: channelsView, threads: threadsView }}>
         <ChatView.Selector iconOnly={false} />
-        <ChatView.Channels>
-          <MessagingSidebar
-            channelListOptions={channelListOptions}
-            onClick={toggleMobile}
-            onCreateChannel={() => setIsCreating(!isCreating)}
-            onPreviewSelect={() => setIsCreating(false)}
-          />
-          <WithComponents
-            overrides={{
-              SendButton,
-              ThreadHeader: MessagingThreadHeader,
-              TypingIndicator: noop,
-              EmojiPicker: EmojiPickerWithTheme,
-              emojiSearchIndex: SearchIndex,
-            }}
-          >
-            <Channel>
-              {isCreating && (
-                <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
-              )}
-              <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
-            </Channel>
-          </WithComponents>
-        </ChatView.Channels>
-        <ChatView.Threads>
-          <ThreadList />
-          <ChatView.ThreadAdapter>
-            <Thread virtualized />
-          </ChatView.ThreadAdapter>
-        </ChatView.Threads>
       </ChatView>
     </Chat>
   );

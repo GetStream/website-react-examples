@@ -1,5 +1,6 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { useChannelStateContext, useChatContext } from 'stream-chat-react';
+import React, { useEffect, useMemo, useRef, useState } from 'react';
+import type { ChannelStateData } from 'stream-chat';
+import { useChannel, useChatContext, useStateStore } from 'stream-chat-react';
 import './MessagingChannelHeader.css';
 
 import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
@@ -11,25 +12,41 @@ type Props = {
   toggleMobile: () => void;
 };
 
+const channelStateSelector = ({ data, members }: ChannelStateData) => ({ data, members });
+
 const MessagingChannelHeader = (props: Props) => {
   const { theme, toggleMobile } = props;
   const { client } = useChatContext();
-  const { channel } = useChannelStateContext();
-  const [channelName, setChannelName] = useState(channel.data?.name || '');
+  const channel = useChannel();
+  const { data, members: membersById } = useStateStore(channel.state, channelStateSelector);
+  const savedChannelName = data?.custom?.name || '';
+  const [channelName, setChannelName] = useState(savedChannelName);
   const [isEditing, setIsEditing] = useState(false);
-  const [title, setTitle] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const members = Object.values(channel.state.members || {}).filter(
-    (member) => member.user?.id !== client?.user?.id,
+  // Channel keeps this header mounted when the channel changes, so reset the local edit state
+  useEffect(() => {
+    setChannelName(savedChannelName);
+    setIsEditing(false);
+  }, [channel, savedChannelName]);
+
+  const members = useMemo(
+    () => Object.values(membersById).filter((member) => member.user?.id !== client?.user?.id),
+    [client, membersById],
+  );
+
+  const title = useMemo(
+    () =>
+      members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '),
+    [members],
   );
 
   const updateChannel = async () => {
-    if (channelName && channelName !== channel.data?.name) {
-      await channel.update(
-        { name: channelName },
-        { text: `Channel name changed to ${channelName}` },
-      );
+    if (channelName && channelName !== savedChannelName) {
+      await channel.update({
+        data: { custom: { ...data?.custom, name: channelName } },
+        message: { text: `Channel name changed to ${channelName}` },
+      });
     }
 
     setIsEditing(false);
@@ -40,14 +57,6 @@ const MessagingChannelHeader = (props: Props) => {
       inputRef?.current.focus();
     }
   }, [isEditing]);
-
-  useEffect(() => {
-    if (!channelName) {
-      setTitle(
-        members.map((member) => member.user?.name || member.user?.id || 'Unnamed User').join(', '),
-      );
-    }
-  }, [channelName, members]);
 
   const EditHeader = () => (
     <form

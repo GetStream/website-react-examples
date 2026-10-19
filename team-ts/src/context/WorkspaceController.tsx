@@ -1,4 +1,11 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { type Channel as StreamChannel, Thread as StreamThread } from 'stream-chat';
+import {
+  defaultWorkspaceNavigation,
+  useChatContext,
+  type WorkspaceNavigation,
+  WorkspaceNavigationProvider,
+} from 'stream-chat-react';
 
 const noop = () => Promise.resolve();
 
@@ -24,8 +31,11 @@ const WorkspaceControllerContext = React.createContext<WorkspaceContext>({
 
 
 export const WorkspaceController = ({ children }: { children: React.ReactNode }) => {
+  const { client } = useChatContext();
   const [activeWorkspace, setActiveWorkspace] = useState<Workspace>('Chat');
   const [pinnedMessageListOpen, setPinnedMessageListOpen] = useState(false);
+  const [activeChannel, setActiveChannel] = useState<StreamChannel>();
+  const [activeThread, setActiveThread] = useState<StreamThread>();
 
   const displayWorkspace: WorkspaceContext['displayWorkspace'] = useCallback((workspace) => {
     setActiveWorkspace(workspace);
@@ -39,6 +49,34 @@ export const WorkspaceController = ({ children }: { children: React.ReactNode })
   const togglePinnedMessageListOpen = useCallback(() => setPinnedMessageListOpen((prev) => !prev), []);
   const closePinnedMessageListOpen = useCallback(() => setPinnedMessageListOpen(false), []);
 
+  // stream-chat-react 15 selects channels and opens threads through workspace navigation;
+  // without ChatView, the app owns what is open and provides it here.
+  const navigation = useMemo<WorkspaceNavigation>(
+    () => ({
+      ...defaultWorkspaceNavigation,
+      closeThread: () => setActiveThread(undefined),
+      isChannelActive: (cid) => !!cid && cid === activeChannel?.cid,
+      isThreadActive: (threadId) => !!threadId && threadId === activeThread?.id,
+      isThreadDismissable: () => !!activeThread,
+      openChannel: (channel) => {
+        setActiveChannel(channel);
+        setActiveThread(undefined);
+        displayWorkspace('Chat');
+      },
+      openChannels: activeChannel ? [activeChannel] : [],
+      openThread: (target) => {
+        setPinnedMessageListOpen(false);
+        setActiveThread(
+          target instanceof StreamThread
+            ? target
+            : client.threads.ensure({ channel: target.channel, parentMessage: target.message }),
+        );
+      },
+      openThreads: activeThread ? [activeThread] : [],
+    }),
+    [activeChannel, activeThread, client, displayWorkspace],
+  );
+
   return (
     <WorkspaceControllerContext.Provider value={{
       activeWorkspace,
@@ -48,7 +86,9 @@ export const WorkspaceController = ({ children }: { children: React.ReactNode })
       closePinnedMessageListOpen,
       togglePinnedMessageListOpen,
     }}>
-      {children}
+      <WorkspaceNavigationProvider value={navigation}>
+        {children}
+      </WorkspaceNavigationProvider>
     </WorkspaceControllerContext.Provider>
   );
 };

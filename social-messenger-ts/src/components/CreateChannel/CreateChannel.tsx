@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Avatar, useChatContext, useStateStore} from 'stream-chat-react';
+import {Avatar, useChatContext, useStateStore, useWorkspaceNavigation} from 'stream-chat-react';
 import {SearchSourceState, UserResponse, UserSearchSource} from 'stream-chat';
 
 import {XButton, XButtonBackground} from '../../assets';
@@ -29,7 +29,8 @@ type Props = {
 const CreateChannel = (props: Props) => {
   const { onClose, toggleMobile } = props;
 
-  const { client, setActiveChannel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannel } = useWorkspaceNavigation();
 
   const [focusedUser, setFocusedUser] = useState<number>();
   const [selectedUsers, setSelectedUsers] = useState<UserResponse[]>([]);
@@ -52,13 +53,15 @@ const CreateChannel = (props: Props) => {
 
     if (!selectedUsersIds.length || !client.userID) return;
 
-    const conversation = client.channel('messaging', {
-      members: [...selectedUsersIds, client.userID],
-    });
+    const conversation = await client.channelManager
+      .ensure({
+        data: { members: [...selectedUsersIds, client.userID].map((user_id) => ({ user_id })) },
+        type: 'messaging',
+      })
+      .ensureWatched();
 
-    await conversation.watch();
-
-    setActiveChannel?.(conversation);
+    client.channelManager.ingestChannel(conversation);
+    openChannel(conversation);
     setSelectedUsers([]);
     searchSource.resetStateAndActivate();
     onClose();

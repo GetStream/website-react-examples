@@ -20,8 +20,8 @@
     "react-dom": "^19.0.0",
     "react-dropzone": "^14.2.3",
     "react-popper": "^2.3.0",
-    "stream-chat": "^9.54.0",
-    "stream-chat-react": "^14.13.2"
+    "stream-chat": "10.0.0-rc.22",
+    "stream-chat-react": "15.0.0-rc.2"
   },
   "devDependencies": {
     "@types/emoji-mart": "^3.0.9",
