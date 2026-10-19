@@ -1,6 +1,6 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Channel as StreamChannel, TextComposerMiddleware, UserResponse} from 'stream-chat';
-import {Channel, Chat, type MessageUIComponentProps, WithComponents} from 'stream-chat-react';
+import {Chat, type MessageUIComponentProps, WithComponents} from 'stream-chat-react';
 
 import {init, SearchIndex} from 'emoji-mart';
 import data from '@emoji-mart/data';
@@ -16,7 +16,6 @@ import {MessageInputUI} from './MessageInputUI';
 import {ParticipantProfile} from './ParticipantProfile';
 import {ParticipantSearch} from './ParticipantSearch';
 import {Snackbar} from './Snackbar';
-import {ThreadHeader} from './ThreadHeader';
 import {UserActionsModal} from './UserActionsModal';
 
 import {useEventContext} from '../../contexts/EventContext';
@@ -57,7 +56,6 @@ export const ChatContainer = () => {
       EmptyStateIndicator: EmptyStateIndicatorChannel,
       GiphyPreviewMessage: GiphyPreview,
       MessageComposerUI: MessageInputUI,
-      ThreadHeader,
       VirtualMessage: (props: MessageUIComponentProps) => (
         <MessageUI {...props} setMessageActionUser={setMessageActionUser} />
       ),
@@ -150,9 +148,7 @@ export const ChatContainer = () => {
             ) : (
               currentChannel && (
                 <WithComponents overrides={channelOverrides}>
-                  <Channel channel={currentChannel}>
-                    <ChannelInner />
-                  </Channel>
+                  <ChannelInner channel={currentChannel} />
                 </WithComponents>
               )
             )}

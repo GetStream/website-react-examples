@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { Channel as StreamChannel, Event, StreamChat } from 'stream-chat';
+import { Channel as StreamChannel, type EventPayload, StreamChat } from 'stream-chat';
 
 import { getRandomTitle } from '../components/Chat/utils';
 import { ChatType, useEventContext } from '../contexts/EventContext';
@@ -63,16 +63,16 @@ export const useInitChat = () => {
     const channelIsEvent = type === 'main-event' || type === 'room';
 
     const channelId = event && channelIsEvent ? `${type}-${event}` : type;
-    const newChannel = chatClient.channel('livestream', channelId);
-
-    await newChannel.watch({ watchers: { limit: 100 } });
+    const newChannel = await chatClient
+      .channel('livestream', channelId)
+      .ensureWatched({ watchers: { limit: 100 } });
 
     setUnreadStatus(channelId, false);
     setCurrentChannel(newChannel);
   };
 
   useEffect(() => {
-    const handleMessage = (event: Event) => {
+    const handleMessage = (event: EventPayload<'message.new'>) => {
       if (!currentChannel?.id || !event.channel_id) return;
 
       if (currentChannel.id !== event.channel_id) {
@@ -80,14 +80,16 @@ export const useInitChat = () => {
       }
     };
 
-    if (chatClient && currentChannel) {
-      chatClient.on('message.new', handleMessage);
-    }
+    if (!chatClient || !currentChannel) return;
 
-    return () => chatClient?.off('message.new', handleMessage);
+    // `off(type, handler)` does not accept a handler narrowed by `on(type, ...)`; use the returned unsubscribe
+    const { unsubscribe } = chatClient.on('message.new', handleMessage);
+    return unsubscribe;
   }, [chatClient, currentChannel]);
 
-  const handleDmMessages = (event: Event) => {
+  const handleDmMessages = (
+    event: EventPayload<'message.new'> | EventPayload<'notification.message_new'>,
+  ) => {
     if (event.channel_type !== 'messaging') return;
     setDmUnread(true);
   };
@@ -111,13 +113,14 @@ export const useInitChat = () => {
           id: userId,
           name: userName,
           image: `https://getstream.io/random_svg/?name=${userName}`,
-          title: userId === 'daddy' ? 'Admin' : getRandomTitle(),
+          custom: { title: userId === 'daddy' ? 'Admin' : getRandomTitle() },
         },
         userToken,
       );
 
-      const globalChannel = client.channel('livestream', 'global-ve2', { name: 'global' });
-      await globalChannel.watch({ watchers: { limit: 100 } });
+      const globalChannel = await client
+        .channel('livestream', 'global-ve2', { custom: { name: 'global' } })
+        .ensureWatched({ watchers: { limit: 100 } });
 
       client.on('message.new', handleDmMessages);
       client.on('notification.message_new', handleDmMessages);

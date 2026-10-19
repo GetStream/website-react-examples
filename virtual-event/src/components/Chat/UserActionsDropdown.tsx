@@ -41,7 +41,7 @@ export const UserActionsDropdown: React.FC<Props> = (props) => {
         user?.id ||
         Object.keys(dmChannel?.state.members || []).filter((member) => member !== client.userID)[0];
 
-      const actionUserIsMuted = mutes.some((mute) => mute.target.id === actionUserId);
+      const actionUserIsMuted = mutes.some((mute) => mute.target?.id === actionUserId);
       setIsUserMuted(actionUserIsMuted);
     }
   }, [mutes.length]); // eslint-disable-line

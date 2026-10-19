@@ -1,7 +1,7 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import clsx from 'clsx';
 import { Channel, SearchSourceState, UserResponse, UserSearchSource } from 'stream-chat';
-import { useChatContext, useStateStore, useTranslationContext } from 'stream-chat-react';
+import { asDynamicKey, useChatContext, useStateStore, useTranslationContext } from 'stream-chat-react';
 
 import { SkeletonLoader } from './DMChannelList';
 import { SearchResult } from './SearchResult';
@@ -53,11 +53,16 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
       setQuerying(true);
 
       try {
-        const { users } = await client.queryUsers(
-          { },
-          { id: 1, last_active: -1 },
-          { limit: 10 },
-        );
+        const { users } = await client.queryUsers({
+          payload: {
+            filter_conditions: {},
+            sort: [
+              { field: 'id', direction: 1 },
+              { field: 'last_active', direction: -1 },
+            ],
+            limit: 10,
+          },
+        });
         const otherParticipants = users.filter((user) => user.id !== client.userID);
         if (otherParticipants.length) setParticipants(otherParticipants);
       } catch (err) {
@@ -100,7 +105,7 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
                 setQuery(event.target.value);
                 searchSource.search(event.target.value);
               }}
-              placeholder={t('Search')}
+              placeholder={t(asDynamicKey('virtualEvent.participantSearch.placeholder'), 'Search')}
               type='text'
               value={query}
             />

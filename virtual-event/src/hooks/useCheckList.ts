@@ -20,13 +20,14 @@ export const useCheckList = ({ chatClient, targetOrigin }: UseCheckList) => {
         window?.parent?.postMessage(message, targetOrigin);
       }
     };
-    const handleNewEvent = ({ type, message }: Event) => {
-      switch (type) {
+    // v10's Event is a discriminated union: narrow on `event.type` before reading `message`
+    const handleNewEvent = (event: Event) => {
+      switch (event.type) {
         case 'reaction.new':
           notifyParent(Task.Reaction);
           break;
         case 'message.new':
-          if (message?.command === 'giphy') {
+          if (event.message?.command === 'giphy') {
             notifyParent(Task.Giphy);
             break;
           }

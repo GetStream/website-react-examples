@@ -1,15 +1,16 @@
-import React, { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Attachment,
   Avatar,
-  isDate,
   MessageReactions,
   MessageRepliesCountButton,
   MessageUIComponentProps,
-  useChannelActionContext,
-  useChannelStateContext,
+  useChannel,
   useChatContext,
   useMessageContext,
+  useStateStore,
+  useThreadContext,
+  useWorkspaceNavigation,
   WithComponents,
 } from 'stream-chat-react';
 
@@ -21,9 +22,11 @@ import { useEventContext } from '../../contexts/EventContext';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { useBoolState } from '../../hooks/useBoolState';
-import {formatMessage, LocalMessage} from "stream-chat";
+import {formatMessage, type LocalMessage, type MessagePaginatorState, nsToMs} from "stream-chat";
 
 const reactionOverrides = { reactionOptions: customReactions };
+
+const paginatorItemsSelector = ({ items }: MessagePaginatorState) => ({ messages: items });
 
 
 
@@ -48,7 +51,7 @@ const MessageOptions: React.FC<OptionsProps> = (props) => {
     showReactionSelector,
   } = props;
 
-  const { thread } = useChannelStateContext();
+  const thread = useThreadContext();
   const { handleOpenThread, isMyMessage, message } = useMessageContext();
 
   const hideActions = (thread && isMyMessage()) || (!thread && message.show_in_channel);
@@ -129,29 +132,25 @@ const UpvoteButton = () => {
   const { client } = useChatContext();
   const { message } = useMessageContext();
 
-  const userUpVoted = client.userID && message.up_votes?.includes(client.userID);
+  const upVotes = message.custom?.up_votes;
+  const userUpVoted = client.userID && upVotes?.includes(client.userID);
 
   const handleClick = useCallback(
     async (event: React.MouseEvent) => {
       event.stopPropagation();
+      if (!client.userID) return;
 
-      if (!message.up_votes && client.userID) {
-        return await client.updateMessage({
-          ...message,
-          up_votes: [client.userID],
-        });
-      }
+      const nextUpVotes = upVotes?.includes(client.userID)
+        ? upVotes.filter((userID) => userID !== client.userID)
+        : [...(upVotes ?? []), client.userID];
 
-      const updatedMessage = {
-        ...message,
-        up_votes: (client.userID && message.up_votes.includes(client.userID)
-          ? message.up_votes.filter((userID: string) => userID !== client.userID)
-          :  [...message.up_votes, client.userID]) as string[],
-      };
-
-      return await client.updateMessage(updatedMessage);
+      // v10: a partial update addresses custom fields as `custom.<field>`; `set: { custom }` is rejected
+      return await client.updateMessagePartial(
+        { id: message.id },
+        { set: { 'custom.up_votes': nextUpVotes } },
+      );
     },
-    [client, message],
+    [client, message.id, upVotes],
   );
 
   return (
@@ -160,7 +159,7 @@ const UpvoteButton = () => {
       onClick={handleClick}
     >
       <UpvoteThumb />
-      <div className='message-ui-upvote-button-text'>{message.up_votes?.length || 0}</div>
+      <div className='message-ui-upvote-button-text'>{upVotes?.length || 0}</div>
     </div>
   );
 };
@@ -180,16 +179,18 @@ const OpenInThreadButton = (props: React.ComponentProps<'button'>) => (
 const searchRequestLock = Promise.resolve();
 
 const OpenThreadButton = () => {
-  const { openThread } = useChannelActionContext();
-  const { channel, thread } = useChannelStateContext();
+  const { client } = useChatContext();
+  const { openThread } = useWorkspaceNavigation();
+  const channel = useChannel();
+  const thread = useThreadContext();
   const { handleOpenThread, message } = useMessageContext();
   const [threadParent, setThreadParent] = useState<LocalMessage>();
 
   const customOpenThread = useCallback(
-    (event: BaseSyntheticEvent) => {
-      return threadParent ? openThread(threadParent, event) : handleOpenThread(event);
+    (event: React.MouseEvent) => {
+      return threadParent ? openThread({ channel, message: threadParent }, { event }) : handleOpenThread(event);
     },
-    [threadParent, openThread, handleOpenThread],
+    [channel, threadParent, openThread, handleOpenThread],
   );
 
   useEffect(() => {
@@ -197,8 +198,9 @@ const OpenThreadButton = () => {
       if (threadParent || (thread && message.type === 'reply')) return;
 
       try {
-        const { results } = await channel.search({ id: { $eq: message.parent_id || '' } });
-        const foundMessage = results[0]?.message;
+        // v10 removed channel.search; fetch the parent directly
+        if (!message.parent_id) return;
+        const { message: foundMessage } = await client.getMessage({ id: message.parent_id });
 
         if (foundMessage) {
           setThreadParent(formatMessage(foundMessage));
@@ -235,7 +237,9 @@ export const MessageUI: React.FC<
 > = (props) => {
   const { setMessageActionUser } = props;
 
-  const { messages } = useChannelStateContext();
+  const channel = useChannel();
+  const thread = useThreadContext();
+  const { messages } = useStateStore((thread ?? channel).messagePaginator.state, paginatorItemsSelector);
   const { chatType, themeModalOpen } = useEventContext();
   const { message } = useMessageContext();
 
@@ -252,20 +256,20 @@ export const MessageUI: React.FC<
   const getTimeSinceMessage = useCallback(() => {
     if (!message.created_at) return null;
 
-    const secondsSinceLastMessage = isDate(message.created_at)
-      ? (Date.now() - message.created_at.getTime()) / 1000
-      : 0;
+    // v10 timestamps are unix nanoseconds, not Dates
+    const secondsSinceLastMessage = (Date.now() - nsToMs(message.created_at)) / 1000;
 
     return getFormattedTime(secondsSinceLastMessage);
   }, [message]);
 
   const isRecentMessage =
-    messages?.[messages.length - 1].id === message.id ||
+    messages?.[messages.length - 1]?.id === message.id ||
     messages?.[messages.length - 2]?.id === message.id;
 
-  const isTopMessage = messages?.[0].id === message.id;
+  const isTopMessage = messages?.[0]?.id === message.id;
 
-  const showTitle = message.user?.title === 'Admin' || message.user?.title === 'Moderator';
+  const title = message.user?.custom?.title;
+  const showTitle = title === 'Admin' || title === 'Moderator';
 
   const isQA = chatType === 'qa';
 
@@ -296,7 +300,7 @@ export const MessageUI: React.FC<
       <div className='message-ui-content'>
         <div className='message-ui-content-top'>
           <div className='message-ui-content-top-name'>{message.user.name || message.user.id}</div>
-          {showTitle && <div className='message-ui-content-top-title'>{message.user.title}</div>}
+          {showTitle && <div className='message-ui-content-top-title'>{title}</div>}
           <div className='message-ui-content-top-time'>{getTimeSinceMessage()}</div>
         </div>
         <div className='message-ui-content-bottom'>{message.text}</div>

@@ -1,11 +1,11 @@
 # stream-chat-react v14 → v15.0.0-rc.2 migration log
 
-Two demo apps (`social-messenger-ts`, `team-ts`) were upgraded from `stream-chat-react@14.13.2` + `stream-chat@9.54` to `stream-chat-react@15.0.0-rc.2` + `stream-chat@10.0.0-rc.22`. These guides were followed:
+Four demo apps (`social-messenger-ts`, `team-ts`, `gaming-livestream`, `virtual-event`) were upgraded from `stream-chat-react@14.13.2` + `stream-chat@9.54` to `stream-chat-react@15.0.0-rc.2` + `stream-chat@10.0.0-rc.22`. These guides were followed:
 
 - React: [`ai-migration-v14-v15.md` @ 0a88ad8](https://github.com/GetStream/stream-chat-react/blob/0a88ad866f33649d1c952c175bfdd1962f21fb0e/ai-docs/ai-migration-v14-v15.md)
 - JS: [`v10-breaking-changes.md` @ 7934c61](https://github.com/GetStream/stream-chat-js/blob/7934c610e9e4cad40617aa41ee9080b019e74bd7/ai-docs/v10-breaking-changes.md)
 
-Both apps typecheck, build in CRA's CI mode, and were exercised live against the staging app (user `v15-tester`, data seeded with a `stream-chat@10` script).
+All four apps typecheck, build in CRA's CI mode, and were exercised live against the staging app (user `v15-tester`, data seeded with `stream-chat@10` scripts). Where behavior looked suspicious, it was compared against the unmodified v14 app running side by side.
 
 Each entry is tagged:
 
@@ -15,31 +15,36 @@ Each entry is tagged:
 
 ## Summary
 
-The guides are strong on compile-time breaks. Every TypeScript error in both apps (35 + 76) mapped to a guide section, often with a near copy-paste fix. The "Without `ChatView`" `WorkspaceNavigationProvider` snippet worked on the first try. The JS guide's per-entry v9 → v10 → migrate format made the `stream-chat` changes mechanical.
+The guides are strong on compile-time breaks. Nearly every TypeScript error across the four apps (35 + 76 + 27 + 43) mapped to a guide section, often with a near copy-paste fix. The "Without `ChatView`" `WorkspaceNavigationProvider` snippet worked on the first try. The JS guide's per-entry v9 → v10 → migrate format made the `stream-chat` changes mechanical.
 
-What slipped is mostly runtime and layout behavior, plus one factual error:
+What slipped is mostly runtime and layout behavior, plus one factual error and one missing server-side prerequisite:
 
 | # | Finding | Kind | Where it bit |
 | - | ------- | ---- | ------------ |
-| 1 | The React guide says `enableWSFallback`, `wsUrlParams`, `recoverStateOnReconnect` and `isLocalUnreadCountEnabled` "have no `client` key". All four exist (`client.wsConnection.enableWSFallback`, `client.wsConnection.urlParams`, `client.connectionRecovery.enabled`, `channel.readEvents.localUnreadCountEnabled`), and the JS guide maps them correctly. An agent following the React guide drops WS fallback. | GAP (wrong) | team-ts `App.tsx` |
-| 2 | v14 `ChannelList` defaulted `setActiveChannelOnMount = true`. v15 opens nothing on load, silently. It's missing from the silent-break table. | GAP | both apps |
-| 3 | Layout CSS: v14's `.str-chat__channel` was the flex **row** holding `Window` + `Thread`. In v15 it's a column, and a sibling `<Thread>` stacks *below* the channel unless the app's container becomes a row. Inside `ChatView`, v14 sizing rules on `.str-chat__thread` now apply inside `flex: 1 1 0` slots and crush the panel. | GAP | both apps |
-| 4 | A custom `MessageUI` that gated its own react/reply buttons on `getMessageActions()` has no stated replacement. `useUserRole(message).canReact / .canReply` works. | GAP | team-ts `TeamMessage` |
-| 5 | `queryChannelsAndHydrate(request)` without `stateOptions` is typed as the `withResponse: true` overload (`QueryChannelsResponseWithChannels`), but returns `Channel[]` at runtime. The JS guide's own example hits this. The SDK passes `{ withResponse: false }` internally to avoid it. | SDK typing bug | team-ts search |
-| 6 | The linked docs (`i18n-v15-key-map.json`, `i18n-v15-migration.md`, `instance-configuration.md`, `examples/vite/...`) are relative links that don't ship in npm. The guide says to verify against installed packages, so an agent in a consumer repo can't reach them. | GAP | i18n keys, ChatView |
-| 7 | Rebuilding a channels + threads `ChatView`: the threads half and the slot-assignment rules are only "see examples/vite". I had to read `dist/es` to learn where an opened entity lands. | UNCLEAR | social-messenger-ts |
-| 8 | Channel `name` (and `image`) now live under `custom` on responses, but `name` stays a top-level *filter* key. Neither guide calls out the most common read, `channel.data.name`. | UNCLEAR | both apps |
-| 9 | The Node `>=22.18` engine requirement (Yarn 1 hard-fails) is only in the JS guide. The React guide's install step should repeat it, since CI is the first thing to break. | UNCLEAR | `deploy.yml`, `.nvmrc` |
-| 10 | `ChannelList.options.limit` → `paginatorOptions.pageSize` isn't stated; the guide says "check the installed stream-chat". | UNCLEAR | both apps |
+| 1 | User mute and flag only exist as v2 moderation endpoints in v10 (`client.moderation.mute` / `unmuteUser` / `flagUser` / `flagMessage`). On the staging app every one fails with "this endpoint needs a feature flag, contact support to get it enabled". v15's **default** Mute and Flag message actions call the same endpoints, so they break with no app code change. Neither guide mentions the requirement. | GAP (runtime, high) | virtual-event; every app using default message actions |
+| 2 | The React guide says `enableWSFallback`, `wsUrlParams`, `recoverStateOnReconnect` and `isLocalUnreadCountEnabled` "have no `client` key". All four exist (`client.wsConnection.enableWSFallback`, `client.wsConnection.urlParams`, `client.connectionRecovery.enabled`, `channel.readEvents.localUnreadCountEnabled`), and the JS guide maps them correctly. An agent following the React guide drops WS fallback. | GAP (wrong) | team-ts `App.tsx` |
+| 3 | v14 `ChannelList` defaulted `setActiveChannelOnMount = true`. v15 opens nothing on load, silently. It's missing from the silent-break table. | GAP | social-messenger-ts, team-ts |
+| 4 | Layout CSS: v14's `.str-chat__channel` was the flex **row** holding `Window` + `Thread`. In v15 it's a column, and a sibling `<Thread>` stacks *below* the channel unless the app's container becomes a row. Inside `ChatView`, v14 sizing rules on `.str-chat__thread` now apply inside `flex: 1 1 0` slots and crush the panel. | GAP | all four apps (team-ts, gaming-livestream and virtual-event without `ChatView`) |
+| 5 | A custom `MessageUI` that gated its own react/reply buttons on `getMessageActions()` has no stated replacement. `useUserRole(message).canReact / .canReply` works. | GAP | team-ts `TeamMessage` |
+| 6 | `queryChannelsAndHydrate(request)` without `stateOptions` is typed as the `withResponse: true` overload (`QueryChannelsResponseWithChannels`), but returns `Channel[]` at runtime. The JS guide's own example hits this. The SDK passes `{ withResponse: false }` internally to avoid it. | SDK typing bug | team-ts search |
+| 7 | The linked docs (`i18n-v15-key-map.json`, `i18n-v15-migration.md`, `instance-configuration.md`, `examples/vite/...`) are relative links that don't ship in npm. The guide says to verify against installed packages, so an agent in a consumer repo can't reach them. | GAP | i18n keys, ChatView |
+| 8 | Rebuilding a channels + threads `ChatView`: the threads half and the slot-assignment rules are only "see examples/vite". I had to read `dist/es` to learn where an opened entity lands. | UNCLEAR | social-messenger-ts |
+| 9 | Channel `name` (and `image`) now live under `custom` on responses, but `name` stays a top-level *filter* key. Neither guide calls out the most common read, `channel.data.name`. | UNCLEAR | all four apps |
+| 10 | The Node `>=22.18` engine requirement (Yarn 1 hard-fails) is only in the JS guide. The React guide's install step should repeat it, since CI is the first thing to break. | UNCLEAR | `deploy.yml`, `.nvmrc` |
+| 11 | `ChannelList.options.limit` → `paginatorOptions.pageSize` isn't stated; the guide says "check the installed stream-chat". | UNCLEAR | social-messenger-ts, team-ts, virtual-event |
+| 12 | Partial updates of custom fields: `updateMessagePartial({ id }, { set: { custom: { up_votes } } })` is rejected ("field `custom` is reserved"). `set: { 'custom.up_votes': ... }` (or the bare key) works. The guides' "custom data goes under `custom`" rule is wrong for partial updates, and `set` is typed `Record<string, any>`, so nothing catches it. | GAP | virtual-event Q&A upvotes |
+| 13 | Built-in fields that an app had also declared in a `Custom*Data` augmentation (here `show_in_channel`) must *not* move under `custom`. Following "move every augmented field under `custom`" literally breaks them. | UNCLEAR | virtual-event |
+| 14 | `client.on('message.new', h)` narrows `h`, but `client.off('message.new', h)` takes the un-narrowed `EventHandler` and rejects it. The guide recommends narrowed handlers without mentioning this; use the `{ unsubscribe }` that `on()` returns. | SDK typing | virtual-event |
 
 Suggested fixes, in order of value:
 
-- Fix the wrong "no `client` key" sentence (1).
-- Add (2) and (3) to "Breaks that do not fail to compile".
-- Make all links absolute and pinned (6).
-- Add a channels + threads `ChatView` example with a paragraph on slot targeting (7).
-- Add one-row mappings for (4), (8) and (10).
-- Fix the `queryChannelsAndHydrate` overload (5): make `stateOptions` required in the `withResponse: true` overload.
+- Call out the v2 moderation feature flag (1) in both guides, and in v15's own release notes for the default Mute/Flag actions.
+- Fix the wrong "no `client` key" sentence (2).
+- Add (3) and (4) to "Breaks that do not fail to compile".
+- Make all links absolute and pinned (7).
+- Add a channels + threads `ChatView` example with a paragraph on slot targeting (8).
+- Add one-row mappings for (5), (9), (11), (12) and (13).
+- Fix the `queryChannelsAndHydrate` overload (6) and the `client.off` handler type (14).
 
 ## Log (chronological)
 
@@ -114,6 +119,36 @@ Verified: both lists (team + DMs) with auto-open of the first team channel, the 
 
 - **Observation (dev only, worth a note):** after a hot reload re-ran the app's module-level `connectUser`, the old `App` cleanup's `disconnectUser()` disposed the channels. Fast Refresh kept the stale `Channel` instance in `WorkspaceController` state, and `MessageList` threw "Channel … is pending disposal and cannot be used" on render (white screen). v9 also threw from `getClient()` after a disconnect, so this isn't new. But the section 4 snippet keeps channels in app state, so a sentence on dropping held channels on `disconnectUser` (or re-`ensure`-ing them) would save confusion on logout or user switch.
 - **Unverified:** after an admin-panel rename, the header's watcher count showed 0 until reload. Every event carrying `watcher_count` overwrites the count (v9 had the same handler), so it most likely reflects what the server sent on the rename events. Not investigated further.
+
+### gaming-livestream
+
+Initial `tsc`: 27 errors. A single livestream channel with a custom message UI, a custom composer, and a thread that *replaces* the channel.
+
+- **OK: `overrideSubmitHandler` → `sendMessageRequest`.** The section 13 recipe worked as written. The app's handler only published an in-app notification for `/ban`, `/mute` and similar, then sent. It became `client.config.set({ channel: { requestHandlers: { sendMessageRequest } } })` calling `defaultRequest(params)`. Verified live: the "User muted" notification still fires.
+- **UNCLEAR: registering handlers from a component.** "Registration is per client" is clear, but there's no word on unregistering, or on handlers that need React state. Here the handler needs a function from React context, so it closes over a ref. A short "register in an effect; read React state through a ref; how to remove it" note would help.
+- **OK: custom user fields.** `CustomUserData { color, userRole }` → `user.custom.color`; `connectUser({ id, custom: { ... } })`.
+- **OK (compile-time):** `new Date(message.created_at).getHours()` failed via the global `DateConstructor` guard (`ERROR_use_SDKs_nsToDate_helper_instead`) → `convertTimestampToDate`.
+- **GAP: imperative DOM queries on removed classes.** The app hid the channel while a thread was open with `document.querySelector('.str-chat__main-panel').style.display = 'none'`. That silently matches nothing in v15. The guide's "grep for removed classes" advice is framed around CSS; it should say "CSS *and* JS selectors". Replaced with state: the channel wrapper gets `hidden` while a thread is open.
+- **GAP (layout, same family as summary #4):** the v14 thread CSS was `position: absolute`, positioned relative to v14's channel container. As a sibling of `Channel` in v15, the autofocused thread composer scrolled the whole page 338px sideways. v14, run side by side, didn't scroll. Fixed by letting the thread flow in place of the hidden channel.
+- **Environment, not v15:** `gaming` channels can't be created by users on the staging app, so the live run temporarily used a `livestream` stand-in channel (reverted).
+
+### virtual-event
+
+Initial `tsc`: 43 errors. Several `livestream` channels plus DMs, a Q&A tab with upvotes, a custom message UI, participant search, and moderation actions.
+
+- **GAP (high, runtime): moderation needs a feature flag.** `client.muteUser` / `unmuteUser` / `flagUser` → `client.moderation.mute({ target_ids })` / `.unmuteUser(id)` / `.flagUser(id)`, exactly per the JS guide table. All three fail on the staging app with "this endpoint needs a feature flag, contact support to get it enabled". There's no non-v2 user mute left in `stream-chat@10` (only `muteChannel`). v15's default message actions (`useMuteHandler`, `useFlagHandler`) call the same endpoints, so **every app's default Mute/Flag action stops working** on apps without the flag. The app's own UI showed "User successfully muted" because it swallows errors; the server confirmed no mute was stored.
+- **GAP: partial updates of custom fields.** The Q&A upvote used `client.updateMessage({ ...message, up_votes })`. In v10 the natural rewrite, `updateMessagePartial({ id }, { set: { custom: { up_votes } } })`, is rejected by the API ("field `custom` is reserved and cannot be updated"). Probed against staging: `set: { 'custom.up_votes': [...] }` and `set: { up_votes: [...] }` both work and land in `message.custom.up_votes`. Neither guide says how to address custom fields in `set` / `unset`, and the parameter is untyped.
+- **UNCLEAR: built-in fields declared as custom.** The app's v9 augmentation listed `show_in_channel` in `CustomMessageData`, though it's a built-in message field (`MessageResponse.show_in_channel`). The guide's rule "move every read/write of augmented fields under `.custom`" would break it. The guide should say to check each augmented key against the generated response type first.
+- **UNCLEAR: silent date break through `isDate`.** `isDate(message.created_at) ? (Date.now() - created_at.getTime()) : 0` compiles in v10 (`isDate` takes `unknown`). It silently returns `false` for nanosecond numbers, so every message would read "Less than 1 min" forever. The guide's not-caught list covers date libraries and `new Date(ts ?? ...)`, but a type-guard branch is a third pattern worth listing. Fixed with `nsToMs`.
+- **SDK typing: `client.off(type, handler)`.** After annotating handlers as `EventPayload<'message.new'>` (as the guide recommends), `client.off('message.new', handler)` fails to type-check: `off` takes the un-narrowed `EventHandler`. The returned `{ unsubscribe }` from `client.on(...)` is the clean replacement and worth a mention.
+- **OK:** `channel.search` removed (JS guide) → `client.getMessage({ id })` + `formatMessage` to open a show-in-channel reply's parent thread. `CommandResponse` → `Command`. `client.queryUsers` → `{ payload }`. `ChannelListUI` → `useChannelPaginatorState` for the DM list's skeleton and error states. `ChannelList.EmptyStateIndicator` → the `EmptyListIndicator` slot.
+- **OK:** "No remount per channel". v14 closed an open thread whenever the user switched event channels, because `Channel` remounted. In v15 the app's thread state resets on `channel` change explicitly.
+- **i18n:** `t('Search')` has no v15 key (only `common.search.ariaLabel`), so it became an `asDynamicKey` app string.
+
+#### gaming-livestream and virtual-event: live run
+
+- **gaming-livestream:** messages with custom user colors, sending via the custom send button, the `sendMessageRequest` hook (notification), opening a thread from the custom message action (the channel is hidden and the thread takes its place, with no page scroll, matching v14), thread reply, live reply count, closing the thread.
+- **virtual-event:** global channel with live messages, `custom.title` badges, "Show in thread" for a show-in-channel reply (parent fetched with `getMessage`), thread reply and close (position identical to v14), Q&A upvote toggle via `updateMessagePartial` with `'custom.up_votes'` (on the user's own question; upvoting others' messages hits a staging permission 403, which v14's `updateMessage` would hit too), DM list from a `ChannelPaginator` with empty state, participant search and profile, creating a DM (ingested into the list), sending in it, a reply arriving live with the list preview updated, and mute via the header menu (fails server-side, see above).
 
 ### SDK nits spotted on the way
 

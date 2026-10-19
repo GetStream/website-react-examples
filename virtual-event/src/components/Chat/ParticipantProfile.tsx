@@ -19,7 +19,8 @@ type Props = {
 
 export const ParticipantProfile = (props: Props) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
-  const { id, image, name, online, title } = participantProfile;
+  const { custom, id, image, name, online } = participantProfile;
+  const title = custom?.title;
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
@@ -35,12 +36,16 @@ export const ParticipantProfile = (props: Props) => {
     if (!client.userID) return;
 
     try {
-      const newChannel = client.channel('messaging', {
-        demo: 'virtual-event',
-        members: [client.userID, id],
-      });
-
-      await newChannel.watch();
+      const newChannel = await client.channelManager
+        .ensure({
+          data: {
+            custom: { demo: 'virtual-event' },
+            members: [{ user_id: client.userID }, { user_id: id }],
+          },
+          type: 'messaging',
+        })
+        .ensureWatched();
+      client.channelManager.ingestChannel(newChannel);
 
       setChatType('direct');
       setShowChannelList(true);

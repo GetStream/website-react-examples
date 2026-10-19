@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import type { Event, StreamChat } from 'stream-chat';
+import type { EventPayload, StreamChat } from 'stream-chat';
 
 const notifyParent = (parent: string) => (message: any) => {
   window.parent.postMessage(message, parent);
@@ -30,46 +30,38 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
     if (!targetOrigin) return;
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (
-      props: Event,
-    ) => {
-      const { message, type } = props;
-
-      switch (type) {
-        case 'reaction.new':
-          notify(REACT_TO_MESSAGE);
-          break;
-        case 'message.new':
-          if (message?.command === 'giphy') {
-            notify(RUN_GIPHY);
-            break;
-          }
-          if (message?.attachments?.length) {
-            if (
-              message.attachments[0].type === 'video' &&
-              message.attachments[0].og_scrape_url === YOUTUBE_LINK
-            ) {
-              notify(SEND_YOUTUBE);
-              break;
-            }
-            if (message.attachments[0].type === 'image') {
-              notify(DRAG_DROP);
-              break;
-            }
-          }
-          if (message?.parent_id) {
-            notify(START_THREAD);
-            break;
-          }
-          notify(SEND_MESSAGE);
-          break;
-        default:
-          break;
+    const handleNewMessage = ({ message }: EventPayload<'message.new'>) => {
+      if (message?.command === 'giphy') {
+        notify(RUN_GIPHY);
+        return;
       }
+      if (message?.attachments?.length) {
+        if (
+          message.attachments[0].type === 'video' &&
+          message.attachments[0].og_scrape_url === YOUTUBE_LINK
+        ) {
+          notify(SEND_YOUTUBE);
+          return;
+        }
+        if (message.attachments[0].type === 'image') {
+          notify(DRAG_DROP);
+          return;
+        }
+      }
+      if (message?.parent_id) {
+        notify(START_THREAD);
+        return;
+      }
+      notify(SEND_MESSAGE);
     };
-    if (chatClient) {
-      chatClient.on(handleNewEvent);
-    }
-    return () => chatClient?.off(handleNewEvent);
+
+    const subscriptions = chatClient
+      ? [
+          chatClient.on('reaction.new', () => notify(REACT_TO_MESSAGE)),
+          chatClient.on('message.new', handleNewMessage),
+        ]
+      : [];
+
+    return () => subscriptions.forEach(({ unsubscribe }) => unsubscribe());
   }, [chatClient, targetOrigin]);
 };
