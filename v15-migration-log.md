@@ -35,6 +35,8 @@ What slipped is mostly runtime and layout behavior, plus one factual error and o
 | 12 | Partial updates of custom fields: `updateMessagePartial({ id }, { set: { custom: { up_votes } } })` is rejected ("field `custom` is reserved"). `set: { 'custom.up_votes': ... }` (or the bare key) works. The guides' "custom data goes under `custom`" rule is wrong for partial updates, and `set` is typed `Record<string, any>`, so nothing catches it. | GAP | virtual-event Q&A upvotes |
 | 13 | Built-in fields that an app had also declared in a `Custom*Data` augmentation (here `show_in_channel`) must *not* move under `custom`. Following "move every augmented field under `custom`" literally breaks them. | UNCLEAR | virtual-event |
 | 14 | `client.on('message.new', h)` narrows `h`, but `client.off('message.new', h)` takes the un-narrowed `EventHandler` and rejects it. The guide recommends narrowed handlers without mentioning this; use the `{ unsubscribe }` that `on()` returns. | SDK typing | virtual-event |
+| 15 | Members-only channels: `client.channel(type, { members })` + `await channel.watch()` (v14's DM pattern) leaves the app holding an instance the store can **supersede** once the server assigns the id: `supersededBy` set, `watchStatus: NotWatching`, no events. Outside `ChatView` (which swaps superseded channels), a just-created DM silently stops updating. Use the instance `ensureWatched()` resolves with. The JS guide documents supersession only inside the channel-store entry. The React guide's example uses `ensureWatched()`'s result but never says why, so `watch()` looks like an equivalent, simpler choice. Channels created **with an id** are fine with `watch()`. | GAP (runtime) | team-ts search DMs, virtual-event DMs |
+| 16 | The React guide over-prescribes: section 5 tells agents to rewrite every self-created channel into `channelManager.ensure(...).ensureWatched()` and to `ingestChannel` new channels. In practice only members-only channels need `ensureWatched()`'s instance (#15). `client.channel(type, id)` + `watch()` is unchanged, and new channels reach matching lists through event routing without `ingestChannel` (verified in three apps). | UNCLEAR | all four apps |
 
 Suggested fixes, in order of value:
 
@@ -45,6 +47,7 @@ Suggested fixes, in order of value:
 - Add a channels + threads `ChatView` example with a paragraph on slot targeting (8).
 - Add one-row mappings for (5), (9), (11), (12) and (13).
 - Fix the `queryChannelsAndHydrate` overload (6) and the `client.off` handler type (14).
+- In section 5, split guidance by channel kind: unchanged `watch()` for channels with an id, `ensureWatched()`'s returned instance for members-only channels, with the supersession reason spelled out (15, 16).
 
 ## Log (chronological)
 
@@ -82,7 +85,7 @@ After these changes, `tsc` is clean and `react-scripts build` compiles.
 
 #### social-messenger-ts: live run
 
-Verified in the browser: list + previews + timestamps, auto-opening the first channel, the group name from `custom.name`, sending (the list re-sorts and the preview updates), mark-read, opening a thread from the reply count, the custom thread header with live reply count, closing the thread, the Threads view (list → virtualized thread, active row), switching views (each view keeps its slot state), creating a DM (`channelManager.ensure` + `ensureWatched` + `ingestChannel` + `openChannel`), renaming through `channel.update({ data: { custom } })`, and the header resetting when switching channels.
+Verified in the browser: list + previews + timestamps, auto-opening the first channel, the group name from `custom.name`, sending (the list re-sorts and the preview updates), mark-read, opening a thread from the reply count, the custom thread header with live reply count, closing the thread, the Threads view (list → virtualized thread, active row), switching views (each view keeps its slot state), creating a DM (`client.channel(...).ensureWatched()` + `openChannel`; it reaches the list through the client's event routing, no `ingestChannel` needed), renaming through `channel.update({ data: { custom } })`, and the header resetting when switching channels.
 
 - **OK (confirmed on the wire):** a `stream-chat@10` client creating a channel with `{ custom: { name } }` gets back `channel.custom.name` with no top-level `name`. Reads must use `channel.data.custom.name`.
 - **GAP: CSS for `ChatView` slots.** After v15, the thread panel rendered as a ~120px column with text wrapping per character. App CSS written for v14 (`.str-chat__chat-view__channels .str-chat__thread { flex: 0 1 330px; max-width: 45% }`) now applies *inside* a `section.str-chat__chat-view__slot`, which is `flex: 1 1 0`. So the 45% cap is taken of the slot and compounds. The guide's CSS table covers `str-chat__main-panel` and the view wrappers, but not that sizing rules on `.str-chat__thread` / `.str-chat__channel` must move to the slot (`[data-slot=...]`), or that slots are `flex: 1 1 0` siblings by default. One row ("panel sizing → target `.str-chat__chat-view__slot[data-slot]`") plus the default slot CSS would cover it.
@@ -149,6 +152,16 @@ Initial `tsc`: 43 errors. Several `livestream` channels plus DMs, a Q&A tab with
 
 - **gaming-livestream:** messages with custom user colors, sending via the custom send button, the `sendMessageRequest` hook (notification), opening a thread from the custom message action (the channel is hidden and the thread takes its place, with no page scroll, matching v14), thread reply, live reply count, closing the thread.
 - **virtual-event:** global channel with live messages, `custom.title` badges, "Show in thread" for a show-in-channel reply (parent fetched with `getMessage`), thread reply and close (position identical to v14), Q&A upvote toggle via `updateMessagePartial` with `'custom.up_votes'` (on the user's own question; upvoting others' messages hits a staging permission 403, which v14's `updateMessage` would hit too), DM list from a `ChannelPaginator` with empty state, participant search and profile, creating a DM (ingested into the list), sending in it, a reply arriving live with the list preview updated, and mute via the header menu (fails server-side, see above).
+
+### Revisiting channel creation (after review)
+
+Review pushed back on the `channelManager.ensure(...).ensureWatched()` + `ingestChannel` rewrites. v14's `client.channel(...)` + `watch()` looked like it should still work, so I reverted all seven sites to the minimal form and re-verified live with fresh users:
+
+- **Channels with an id** (gaming's `gaming-demo`, virtual-event's livestream channels, team-ts admin channels with a name): `client.channel(type, id, ...)` + `watch()` works unchanged. They now use that.
+- **`ingestChannel` was unnecessary.** New channels appeared in their matching lists (social-messenger, team-ts, virtual-event) through the client's event routing.
+- **Members-only channels broke with `watch()`.** In team-ts, a DM created from a user search with `client.channel('messaging', { members })` + `watch()` rendered, but a message sent by the other user never arrived. On reload it was there. An A/B with fresh users reproduced it every time with `watch()`, and never with `ensureWatched()`. Instrumenting the held instance showed `supersededBy: <same cid>`, `watchStatus: notWatching`, while the store's instance for that cid was `watching`. A bare Node script didn't reproduce it; it needs the app's live event routing to store the cid first. social-messenger was unaffected only because `ChatView` swaps superseded channels.
+- **Fix:** `const channel = await client.channel(type, { members }).ensureWatched()`. This keeps `client.channel()` and renders the instance `ensureWatched()` resolves with. Applied to the four members-only sites (social-messenger `CreateChannel`, team-ts `channelByUser` and admin-panel DMs, virtual-event `ParticipantProfile`). Verified live: team-ts and virtual-event DMs receive messages right after creation.
+- `team-ts` search went back to v14's default (results watched by the query) instead of `watch: false` + `ensureWatched()` on open.
 
 ### SDK nits spotted on the way
 

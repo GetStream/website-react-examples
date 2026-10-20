@@ -82,8 +82,7 @@ export const ChannelSearch = () => {
     channel: Channel,
   ) => {
     setQuery('');
-    // search results are queried with watch: false; watch before opening
-    channel.ensureWatched().then(() => openChannel(channel));
+    openChannel(channel);
   };
 
   const getChannels = async (text: string) => {
@@ -92,7 +91,6 @@ export const ChannelSearch = () => {
         {
           filter_conditions: { type: 'team', name: { $autocomplete: text } },
           limit: 5,
-          watch: false,
         },
         // without stateOptions the call resolves to the `withResponse: true` overload's type
         { withResponse: false },

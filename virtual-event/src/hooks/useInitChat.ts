@@ -63,9 +63,9 @@ export const useInitChat = () => {
     const channelIsEvent = type === 'main-event' || type === 'room';
 
     const channelId = event && channelIsEvent ? `${type}-${event}` : type;
-    const newChannel = await chatClient
-      .channel('livestream', channelId)
-      .ensureWatched({ watchers: { limit: 100 } });
+    const newChannel = chatClient.channel('livestream', channelId);
+
+    await newChannel.watch({ watchers: { limit: 100 } });
 
     setUnreadStatus(channelId, false);
     setCurrentChannel(newChannel);
@@ -118,9 +118,8 @@ export const useInitChat = () => {
         userToken,
       );
 
-      const globalChannel = await client
-        .channel('livestream', 'global-ve2', { custom: { name: 'global' } })
-        .ensureWatched({ watchers: { limit: 100 } });
+      const globalChannel = client.channel('livestream', 'global-ve2', { custom: { name: 'global' } });
+      await globalChannel.watch({ watchers: { limit: 100 } });
 
       client.on('message.new', handleDmMessages);
       client.on('notification.message_new', handleDmMessages);

@@ -36,16 +36,13 @@ export const ParticipantProfile = (props: Props) => {
     if (!client.userID) return;
 
     try {
-      const newChannel = await client.channelManager
-        .ensure({
-          data: {
-            custom: { demo: 'virtual-event' },
-            members: [{ user_id: client.userID }, { user_id: id }],
-          },
-          type: 'messaging',
+      // members-only channel: use the instance ensureWatched() resolves with, the created one can be superseded
+      const newChannel = await client
+        .channel('messaging', {
+          custom: { demo: 'virtual-event' },
+          members: [{ user_id: client.userID }, { user_id: id }],
         })
         .ensureWatched();
-      client.channelManager.ingestChannel(newChannel);
 
       setChatType('direct');
       setShowChannelList(true);

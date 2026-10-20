@@ -53,14 +53,13 @@ const CreateChannel = (props: Props) => {
 
     if (!selectedUsersIds.length || !client.userID) return;
 
-    const conversation = await client.channelManager
-      .ensure({
-        data: { members: [...selectedUsersIds, client.userID].map((user_id) => ({ user_id })) },
-        type: 'messaging',
+    // members-only channel: use the instance ensureWatched() resolves with, the created one can be superseded
+    const conversation = await client
+      .channel('messaging', {
+        members: [...selectedUsersIds, client.userID].map((user_id) => ({ user_id })),
       })
       .ensureWatched();
 
-    client.channelManager.ingestChannel(conversation);
     openChannel(conversation);
     setSelectedUsers([]);
     searchSource.resetStateAndActivate();

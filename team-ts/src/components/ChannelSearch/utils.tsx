@@ -37,11 +37,11 @@ export const channelByUser = async (props: Props) => {
     return openChannel(existingChannel);
   }
 
-  // stream-chat-react 15's Channel no longer watches the channel it is given
-  const newChannel = await client.channelManager
-    .ensure({
-      data: { members: [{ user_id: user.id }, { user_id: client.userID || '' }] },
-      type: 'messaging',
+  // v15's Channel no longer watches. For a members-only channel, use the instance ensureWatched()
+  // resolves with: the one you created can be superseded once the server assigns the id.
+  const newChannel = await client
+    .channel('messaging', {
+      members: [{ user_id: user.id as string }, { user_id: client.userID || '' }],
     })
     .ensureWatched();
   return openChannel(newChannel);

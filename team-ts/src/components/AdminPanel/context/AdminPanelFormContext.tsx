@@ -74,14 +74,15 @@ export const AdminPanelForm = ({ children, defaultValues, workspace, onSubmit }:
   const createChannel = useCallback(async ({ name, members }: UpsertChannelParams) => {
     if (!createChannelType || members.length === 0) return;
 
-    const newChannel = client.channel(createChannelType, name || null, {
-      custom: { name, demo: 'team' },
-      members: members.map((user_id) => ({ user_id })),
-    });
+    // without a name this is a members-only channel: use the instance ensureWatched() resolves with,
+    // the created one can be superseded once the server assigns the id
+    const newChannel = await client
+      .channel(createChannelType, name || null, {
+        custom: { name, demo: 'team' },
+        members: members.map((user_id) => ({ user_id })),
+      })
+      .ensureWatched();
 
-    await newChannel.ensureWatched();
-
-    client.channelManager.ingestChannel(newChannel);
     openChannel(newChannel);
   }, [createChannelType, openChannel, client]);
 

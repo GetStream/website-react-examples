@@ -26,10 +26,8 @@ export const ChannelContainer = () => {
 
   useEffect(() => {
     const loadChat = async () => {
-      // stream-chat-react 15's Channel no longer watches the channel it is given
-      const channel = await client
-        .channel('gaming', 'gaming-demo', { custom: { name: 'Gaming Demo' } })
-        .ensureWatched();
+      const channel = client.channel('gaming', 'gaming-demo', { custom: { name: 'Gaming Demo' } });
+      await channel.watch();
       setChannel(channel);
     };
 
