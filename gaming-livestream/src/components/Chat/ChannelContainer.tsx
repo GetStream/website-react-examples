@@ -2,38 +2,80 @@ import {GamingThreadHeader} from "./GamingThreadHeader";
 import {SearchIndex} from "emoji-mart";
 import {MessageTimestampController} from "../../context/MessageTimestampController";
 import {GamingChatInner} from "./GamingChatInner";
+import {GamingMessage} from "./GamingMessage";
 import {GamingMessageInput} from "./GamingMessageInput";
-import {Channel, useChatContext, WithComponents} from "stream-chat-react";
-import React, {useEffect} from "react";
+import {
+  Channel,
+  defaultWorkspaceNavigation,
+  MessageComposer,
+  MessageList,
+  Thread,
+  useChatContext,
+  type WorkspaceNavigation,
+  WorkspaceNavigationProvider,
+  WithComponents,
+} from "stream-chat-react";
+import {type Channel as StreamChannel, Thread as StreamThread} from "stream-chat";
+import React, {useEffect, useMemo, useState} from "react";
 
 
 export const ChannelContainer = () => {
-  const {channel, client, setActiveChannel} = useChatContext();
+  const {client} = useChatContext();
+  const [channel, setChannel] = useState<StreamChannel>();
+  const [thread, setThread] = useState<StreamThread>();
+
   useEffect(() => {
     const loadChat = async () => {
-      const channel = client.channel('gaming', 'gaming-demo', { name: 'Gaming Demo' });
+      const channel = client.channel('gaming', 'gaming-demo', { custom: { name: 'Gaming Demo' } });
       await channel.watch();
-      setActiveChannel(channel);
+      setChannel(channel);
     };
 
     loadChat();
-  }, [client, setActiveChannel]);
+  }, [client]);
+
+  // Without ChatView, opening and closing threads goes through the app's own navigation
+  const navigation = useMemo<WorkspaceNavigation>(() => ({
+    ...defaultWorkspaceNavigation,
+    closeThread: () => setThread(undefined),
+    isThreadActive: (threadId) => !!threadId && threadId === thread?.id,
+    isThreadDismissable: () => !!thread,
+    openThread: (target) =>
+      setThread(
+        target instanceof StreamThread
+          ? target
+          : client.threads.ensure({ channel: target.channel, parentMessage: target.message }),
+      ),
+    openThreads: thread ? [thread] : [],
+  }), [client, thread]);
 
   if (!channel) return null;
 
   return (
-    <WithComponents
-      overrides={{
-        emojiSearchIndex: SearchIndex,
-        MessageComposerUI: GamingMessageInput,
-        ThreadHeader: GamingThreadHeader,
-      }}
-    >
-      <Channel channel={channel}>
+    <WorkspaceNavigationProvider value={navigation}>
+      <WithComponents
+        overrides={{
+          emojiSearchIndex: SearchIndex,
+          MessageComposerUI: GamingMessageInput,
+          MessageUI: GamingMessage,
+        }}
+      >
         <MessageTimestampController>
-          <GamingChatInner />
+          {/* the thread replaces the channel; keep the channel mounted so its scroll position survives */}
+          <div className='gaming-chat__channel' hidden={!!thread}>
+            <Channel channel={channel}>
+              <GamingChatInner />
+            </Channel>
+          </div>
+          {thread && (
+            <Thread thread={thread}>
+              <GamingThreadHeader />
+              <MessageList withDateSeparator={false} />
+              <MessageComposer focus />
+            </Thread>
+          )}
         </MessageTimestampController>
-      </Channel>
-    </WithComponents>
+      </WithComponents>
+    </WorkspaceNavigationProvider>
   );
 };

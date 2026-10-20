@@ -1,4 +1,5 @@
 import React from 'react';
+import type {ClientUser} from 'stream-chat';
 import {Chat} from 'stream-chat-react';
 
 import {init} from 'emoji-mart';
@@ -23,10 +24,12 @@ const userId = urlParams.get('user') || process.env.REACT_APP_USER_ID;
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const userToConnect = {
+const userToConnect: ClientUser = {
   id: userId!,
-  color: getColor(),
-  userRole: getRandomUserRole(),
+  custom: {
+    color: getColor(),
+    userRole: getRandomUserRole(),
+  },
 };
 
 export const GamingChat = () => {

@@ -5,9 +5,9 @@ import {
   QuotedMessagePreviewUI,
   TextareaComposer,
   useAttachmentManagerState,
-  useMessageComposerContext,
   useMessageComposerController,
   useMessageComposerHasSendableData,
+  useMessageComposerSubmitFn,
   useStateStore,
   useTranslationContext,
 } from 'stream-chat-react';
@@ -36,7 +36,7 @@ const customComposerDataSelector = (state: CustomDataManagerState) => ({
 });
 
 export const TeamMessageInput = () => {
-  const { handleSubmit } = useMessageComposerContext();
+  const submit = useMessageComposerSubmitFn();
   const {
     formatter,
     placeholder,
@@ -85,7 +85,7 @@ export const TeamMessageInput = () => {
         <div className='team-message-input__top'>
           {editedMessage && (
             <QuotedMessagePreviewUI
-              authorLabel={t('Edit Message')}
+              authorLabel={t('common.editMessage.text', 'Edit Message')}
               onRemove={() => messageComposer.clear()}
               quotedMessage={editedMessage}
             />
@@ -99,7 +99,7 @@ export const TeamMessageInput = () => {
               aria-label='Send'
               className='str-chat__send-button'
               disabled={!hasSendableData}
-              onClick={handleSubmit}
+              onClick={() => submit()}
               type='button'
             >
               <SendButtonIcon />
@@ -136,7 +136,7 @@ export const TeamMessageInput = () => {
 };
 
 export const ThreadMessageInput = () => {
-  const { handleSubmit } = useMessageComposerContext();
+  const submit = useMessageComposerSubmitFn();
   const messageComposer = useMessageComposerController();
   const hasSendableData = useMessageComposerHasSendableData();
   const { isComposingGiphyText } = useStateStore(messageComposer.customDataManager.state, customComposerDataSelector)
@@ -150,7 +150,7 @@ export const ThreadMessageInput = () => {
         <button
           className='thread-message-input__send-button'
           disabled={!hasSendableData}
-          onClick={handleSubmit}
+          onClick={() => submit()}
         >
           <SendButtonIcon/>
         </button>

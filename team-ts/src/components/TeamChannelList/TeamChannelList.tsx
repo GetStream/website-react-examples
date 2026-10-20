@@ -1,23 +1,21 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { useCallback } from 'react';
+import type { ChannelPaginator } from 'stream-chat';
+import { ChannelList, useChannelPaginatorState } from 'stream-chat-react';
 
 import { AddChannelButton } from './AddChannelButton';
 
 import { useWorkspaceController, Workspace } from '../../context/WorkspaceController';
 
-import type { ChannelListUIProps } from 'stream-chat-react';
 import clsx from "clsx";
 
-export type TeamChannelListProps = ChannelListUIProps & {
+export type TeamChannelListProps = {
+  paginator: ChannelPaginator;
   type: string;
 };
 
-const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
-  const {
-    children,
-    error = false,
-    loading,
-    type,
-  } = props;
+const ChannelListSection = (props: TeamChannelListProps) => {
+  const { paginator, type } = props;
+  const { channels, isLoading, lastQueryError } = useChannelPaginatorState(paginator);
 
   const { displayWorkspace } = useWorkspaceController();
 
@@ -25,7 +23,7 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
     displayWorkspace(`Admin-Admin-Channel-Create__${type}` as Workspace);
   }, [type, displayWorkspace]);
 
-  if (error) {
+  if (lastQueryError) {
     return type === 'team' ? (
       <div className='team-channel-list'>
         <p className='team-channel-list__message'>
@@ -35,7 +33,7 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
     ) : null;
   }
 
-  if (loading) {
+  if (isLoading && !channels) {
     return (
       <div className='team-channel-list'>
         <p className='team-channel-list__message loading'>
@@ -54,9 +52,9 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
         <AddChannelButton onClick={handleAddChannelClick}
         />
       </div>
-      {children}
+      <ChannelList paginator={paginator} />
     </div>
   );
 };
 
-export const TeamChannelList = React.memo(ChannelList);
+export const TeamChannelList = React.memo(ChannelListSection);

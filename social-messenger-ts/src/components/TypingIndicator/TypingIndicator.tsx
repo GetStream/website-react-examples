@@ -1,16 +1,21 @@
-import { useChatContext, useTypingContext } from 'stream-chat-react';
+import type { ChannelStateData } from 'stream-chat';
+import { useChannel, useChatContext, useStateStore } from 'stream-chat-react';
 
 import './TypingIndicator.css';
 
+const typingSelector = ({ typing }: ChannelStateData) => ({ typing });
+
 export const TypingIndicator = () => {
   const { client } = useChatContext();
+  const channel = useChannel();
+  const { typing } = useStateStore(channel.state, typingSelector);
 
-  const {typing} = useTypingContext();
-  if (!client || !typing || !Object.values(typing).length ) return null;
+  if (!client || !typing || !Object.values(typing).length) return null;
 
   const users = Object.values(typing)
-    .filter(({ user }) => user?.id !== client.user?.id)
-    .map(({ user }) => user?.name || user?.id);
+    .map((event) => ('user' in event ? event.user : undefined))
+    .filter((user) => user?.id !== client.user?.id)
+    .map((user) => user?.name || user?.id);
 
   let text = '';
 

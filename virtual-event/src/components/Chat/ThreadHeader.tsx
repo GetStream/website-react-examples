@@ -1,13 +1,17 @@
 import React from 'react';
-import { useChannelActionContext, useChannelStateContext } from 'stream-chat-react';
+import type { ThreadState } from 'stream-chat';
+import { useCloseThread, useStateStore, useThreadContext } from 'stream-chat-react';
 import { ChannelHeader } from './ChannelHeader';
 
+const parentMessageSelector = ({ parentMessage }: ThreadState) => ({ parentMessage });
+
 export const ThreadHeader: React.FC = () => {
-  const { thread } = useChannelStateContext();
-  const { closeThread } = useChannelActionContext();
+  const thread = useThreadContext();
+  const { parentMessage } = useStateStore(thread?.state, parentMessageSelector) ?? {};
+  const closeThread = useCloseThread();
 
   if (!thread) return null;
 
-  const text = thread.user?.name || thread.user?.id || '';
-  return <ChannelHeader onClose={closeThread} subtitle={`with ${text}`} title='Thread Reply' />;
+  const text = parentMessage?.user?.name || parentMessage?.user?.id || '';
+  return <ChannelHeader onClose={() => closeThread()} subtitle={`with ${text}`} title='Thread Reply' />;
 };

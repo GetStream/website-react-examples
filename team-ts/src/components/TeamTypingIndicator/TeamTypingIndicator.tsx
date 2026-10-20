@@ -1,17 +1,19 @@
-import { useChatContext, useTypingContext } from 'stream-chat-react';
+import type { ChannelStateData } from 'stream-chat';
+import { useChannel, useChatContext, useStateStore } from 'stream-chat-react';
 
-
+const typingSelector = ({ typing }: ChannelStateData) => ({ typing });
 
 export const TeamTypingIndicator = () => {
   const { client } = useChatContext();
-
-  const { typing } = useTypingContext();
+  const channel = useChannel();
+  const { typing } = useStateStore(channel.state, typingSelector);
 
   if (!client || !typing) return null;
 
   const users = Object.values(typing)
-    .filter(({ user }) => user?.id !== client.user?.id)
-    .map(({ user }) => user?.name || user?.id);
+    .map((event) => ('user' in event ? event.user : undefined))
+    .filter((user) => user?.id !== client.user?.id)
+    .map((user) => user?.name || user?.id);
 
   if (!users.length) return null;
 

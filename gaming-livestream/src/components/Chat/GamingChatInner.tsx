@@ -1,10 +1,7 @@
-import React, {useCallback} from 'react';
-import {type LocalMessage, logChatPromiseExecution, type Message, type SendMessageOptions} from 'stream-chat';
-import {MessageComposer, MessageList, useChannelActionContext, Window} from 'stream-chat-react';
+import React, {useEffect, useRef} from 'react';
+import {MessageComposer, MessageList, useChatContext} from 'stream-chat-react';
 
 import {GamingChatHeader} from './GamingChatHeader';
-import {GamingMessage} from './GamingMessage';
-import {GamingThread} from './GamingThread';
 
 import {useLayoutController} from '../../context/LayoutController';
 import {useMessageTimestamp} from "../../context/MessageTimestampController";
@@ -26,38 +23,39 @@ const getNotificationText = (messageText?: string): string | null => {
 }
 
 export const GamingChatInner = () => {
-  const { sendMessage } = useChannelActionContext();
+  const { client } = useChatContext();
   const { publishAppNotification } = useLayoutController();
   const {timestampEnabled, toggleTimestamp} = useMessageTimestamp();
 
-  const overrideSubmitHandler = useCallback(({localMessage, message, sendOptions}: {
-    cid: string;
-    localMessage: LocalMessage;
-    message: Message;
-    sendOptions: SendMessageOptions;
-  }) => {
-    const { text } = message;
-    publishAppNotification(getNotificationText(text))
-    const sendMessagePromise = sendMessage({localMessage, message, options: sendOptions});
-    logChatPromiseExecution(sendMessagePromise, 'send message');
-  }, [publishAppNotification, sendMessage]);
+  const publishAppNotificationRef = useRef(publishAppNotification);
+  publishAppNotificationRef.current = publishAppNotification;
+
+  // v15 replaces MessageComposer's overrideSubmitHandler with a client-level request handler
+  useEffect(() => {
+    client.config.set({
+      channel: {
+        requestHandlers: {
+          sendMessageRequest: (params, defaultRequest) => {
+            publishAppNotificationRef.current(getNotificationText(params.message?.text));
+            return defaultRequest(params);
+          },
+        },
+      },
+    });
+  }, [client]);
 
   return (
     <>
-      <Window>
-        <GamingChatHeader
-          toggleTimestamp={toggleTimestamp}
-          timestampEnabled={timestampEnabled}
-        />
-        <MessageList Message={GamingMessage} />
-        <MessageComposer
-          focus
-          minRows={1}
-          maxRows={8}
-          overrideSubmitHandler={overrideSubmitHandler}
-        />
-      </Window>
-      <GamingThread />
+      <GamingChatHeader
+        toggleTimestamp={toggleTimestamp}
+        timestampEnabled={timestampEnabled}
+      />
+      <MessageList />
+      <MessageComposer
+        focus
+        minRows={1}
+        maxRows={8}
+      />
     </>
   );
 };

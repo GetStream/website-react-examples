@@ -13,11 +13,18 @@
   }
 }
 
-.str-chat__main-panel--thread-open {
-  display: none;
-}
+// stream-chat-react 15 removed Window (.str-chat__main-panel); ChannelInner hides this wrapper
+// while a thread is open, and the thread takes its place
+.channel-inner__channel {
+  display: flex;
+  height: 100%;
 
-.str-chat__main-panel--thread-open + .str-chat__thread {
-  // occupy the whole space previously occupied by the main message list container
-  flex: 1;
+  &[hidden] {
+    display: none;
+  }
+
+  > .str-chat__channel {
+    flex: 1;
+    min-width: 0;
+  }
 }

@@ -1,5 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
-import { Avatar, useChatContext } from 'stream-chat-react';
+import { Avatar, useChatContext, useWorkspaceNavigation } from 'stream-chat-react';
 
 import type { UserResponse } from 'stream-chat';
 
@@ -72,7 +72,8 @@ const LOAD_STATE_NOTIFICATION: Record<UserListLoadState, string> = {
 
 
 export const UserList = () => {
-  const { client, channel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannels: [channel] } = useWorkspaceNavigation();
   const { createChannelType } = useAdminPanelFormState();
   const [loadState, setLoadState] = useState<UserListLoadState | null>(null);
   const [users, setUsers] = useState<UserResponse[] | undefined>();
@@ -89,13 +90,13 @@ export const UserList = () => {
       setLoadState('loading');
 
       try {
-        const response = await client.queryUsers(
-          // FIXME: How to query non-member users?
-        // @ts-ignore
-          { id: { $nin: channelMembers } },
-          { id: 1 },
-          { limit: 8 },
-        );
+        const response = await client.queryUsers({
+          payload: {
+            filter_conditions: { id: { $nin: channelMembers } },
+            sort: [{ field: 'id', direction: 1 }],
+            limit: 8,
+          },
+        });
 
         if (response.users.length) {
           setUsers(response.users);

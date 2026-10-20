@@ -19,7 +19,8 @@ type Props = {
 
 export const ParticipantProfile = (props: Props) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
-  const { id, image, name, online, title } = participantProfile;
+  const { custom, id, image, name, online } = participantProfile;
+  const title = custom?.title;
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
@@ -35,12 +36,13 @@ export const ParticipantProfile = (props: Props) => {
     if (!client.userID) return;
 
     try {
-      const newChannel = client.channel('messaging', {
-        demo: 'virtual-event',
-        members: [client.userID, id],
-      });
-
-      await newChannel.watch();
+      // members-only channel: use the instance ensureWatched() resolves with, the created one can be superseded
+      const newChannel = await client
+        .channel('messaging', {
+          custom: { demo: 'virtual-event' },
+          members: [{ user_id: client.userID }, { user_id: id }],
+        })
+        .ensureWatched();
 
       setChatType('direct');
       setShowChannelList(true);

@@ -8,7 +8,8 @@ section.sidebar {
   .chat-container {
     width: 100%;
 
-    .str-chat__main-panel {
+    /* stream-chat-react 15 removed Window (.str-chat__main-panel); Channel's root is the column now */
+    .str-chat__channel {
       padding: 0;
 
       .str-chat__main-panel-inner {
@@ -37,5 +38,19 @@ section.sidebar {
 
   .str-chat__message-list-scroll {
     padding: 0;
+  }
+}
+/* wraps Channel so the thread can replace it (v14 hid .str-chat__main-panel imperatively) */
+.gaming-chat__channel {
+  display: flex;
+  height: 100%;
+
+  &[hidden] {
+    display: none;
+  }
+
+  > .str-chat__channel {
+    flex: 1;
+    min-width: 0;
   }
 }

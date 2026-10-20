@@ -7,7 +7,7 @@ import App from './App';
 import { getImage } from './assets';
 import { getChannelListOptions } from './channelListOptions';
 import { ThemeContextProvider } from './context';
-import { UserResponse } from 'stream-chat';
+import type { ClientUser } from 'stream-chat';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
@@ -28,7 +28,7 @@ const noChannelNameFilter = urlParams.get('no_channel_name_filter') || true;
 const skipNameImageSet = urlParams.get('skip_name_image_set') || false;
 
 const channelListOptions = getChannelListOptions(!!noChannelNameFilter, user);
-const userToConnect: UserResponse = {
+const userToConnect: ClientUser = {
   id: user!,
   name: skipNameImageSet ? undefined : user!,
   image: skipNameImageSet ? undefined : getImage(user!),

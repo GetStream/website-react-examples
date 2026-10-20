@@ -1,14 +1,19 @@
+import type { ThreadState } from 'stream-chat';
+import { useCloseThread, useStateStore, useThreadContext } from 'stream-chat-react';
+
 import { CloseThreadButton } from './CloseThreadButton';
-import { ThreadHeaderProps } from 'stream-chat-react';
 
+const replyCountSelector = ({ replyCount }: ThreadState) => ({ replyCount });
 
-export const ThreadHeader = (props: ThreadHeaderProps) => {
-  const { closeThread, thread } = props;
+export const ThreadHeader = () => {
+  const thread = useThreadContext();
+  const { replyCount } = useStateStore(thread?.state, replyCountSelector) ?? {};
+  const closeThread = useCloseThread();
 
   const getReplyCount = () => {
-    if (!thread?.reply_count) return '';
-    if (thread.reply_count === 1) return '1 reply';
-    return `${thread.reply_count} replies`;
+    if (!replyCount) return '';
+    if (replyCount === 1) return '1 reply';
+    return `${replyCount} replies`;
   };
 
   return (
@@ -17,7 +22,7 @@ export const ThreadHeader = (props: ThreadHeaderProps) => {
         <div className='workspace-header__title'>Thread</div>
         <div className='workspace-header__subtitle'>{getReplyCount()}</div>
       </div>
-      <CloseThreadButton onClick={closeThread} />
+      <CloseThreadButton onClick={(event) => closeThread({ event })} />
     </div>
   );
 };

@@ -49,6 +49,13 @@ body {
   width: 100%;
   min-width: 0;
   flex: 1;
+  /* stream-chat-react 15: Channel is a column, and Thread / pins render beside it */
+  display: flex;
+
+  > .str-chat__channel {
+    flex: 1;
+    min-width: 0;
+  }
 }
 
 .str-chat__thread,

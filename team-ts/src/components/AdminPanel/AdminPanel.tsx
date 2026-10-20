@@ -3,10 +3,11 @@ import { useWorkspaceController } from '../../context/WorkspaceController';
 import { AdminPanelForm, FormValues } from './context/AdminPanelFormContext';
 import { CreateChannel } from './CreateChannel';
 import { EditChannel } from './EditChannel';
-import { useChatContext } from 'stream-chat-react';
+import { useChatContext, useWorkspaceNavigation } from 'stream-chat-react';
 
 export const AdminPanel = () => {
-  const { client, channel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannels: [channel] } = useWorkspaceNavigation();
   const { displayWorkspace, activeWorkspace } = useWorkspaceController();
   const onSubmit = useCallback(() => displayWorkspace('Chat'), [displayWorkspace]);
 
@@ -17,7 +18,7 @@ export const AdminPanel = () => {
     defaultFormValues = { members: client.userID ? [client.userID] : [], name: '', };
     Form = CreateChannel;
   } else if (activeWorkspace.match('Channel-Edit')) {
-    defaultFormValues= { members: [], name: channel?.data?.name || (channel?.data?.id as string), };
+    defaultFormValues= { members: [], name: channel?.data?.custom?.name || (channel?.data?.id as string), };
     Form = EditChannel;
   }
   return (

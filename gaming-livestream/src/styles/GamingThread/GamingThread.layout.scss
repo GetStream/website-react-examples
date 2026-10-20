@@ -1,5 +1,7 @@
 .str-chat__thread {
-  position: absolute;
+  /* v15: the thread replaces the hidden channel instead of overlaying it */
+  position: relative;
+  height: 100%;
   margin: 0;
   width: var(--sidebar-width);
   max-width: var(--sidebar-width);
