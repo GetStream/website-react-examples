@@ -6,13 +6,13 @@ declare module 'stream-chat' {
     demo?: string;
   }
 
+  // stream-chat v10 nests these under `custom`; optional so request and fixture objects can omit them
   interface CustomUserData {
-    title: string;
+    title?: string;
   }
 
   interface CustomMessageData {
-    show_in_channel: boolean;
-    up_votes: string[]
+    up_votes?: string[];
   }
 
   interface CustomMessageComposerData {

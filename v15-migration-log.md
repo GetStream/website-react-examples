@@ -1,12 +1,16 @@
 # stream-chat-react v14 → v15.0.0-rc.3 migration log
 
-Apps: `social-messenger-ts` (uses `ChatView`) and `team-ts` (custom layout, no `ChatView`).
+Apps:
+
+- Round 1: `social-messenger-ts` (uses `ChatView`) and `team-ts` (custom layout, no `ChatView`).
+- Round 2: `gaming-livestream` (one channel, thread replaces it in place) and `virtual-event` (several livestream channels + a DM list, thread replaces the channel in place). See [round 2](#round-2-gaming-livestream-and-virtual-event).
+
 Installed: `stream-chat-react@15.0.0-rc.3`, `stream-chat@10.0.0-rc.26`.
 
 Guides tested:
 
-- React: [`ai-migration-v14-v15.md`](https://github.com/GetStream/stream-chat-react/blob/master/ai-docs/ai-migration-v14-v15.md) (master)
-- JS: [`v10-breaking-changes.md`](https://github.com/GetStream/stream-chat-js/blob/release-v10/ai-docs/v10-breaking-changes.md) (release-v10)
+- React: [`ai-migration-v14-v15.md`](https://github.com/GetStream/stream-chat-react/blob/master/ai-docs/ai-migration-v14-v15.md) (master; round 2 used `cf7a9f14`, which already folds in the round 1 gaps)
+- JS: [`v10-breaking-changes.md`](https://github.com/GetStream/stream-chat-js/blob/release-v10/ai-docs/v10-breaking-changes.md) (release-v10; round 2 used `acb23450`)
 
 Severity:
 
@@ -138,3 +142,94 @@ team-ts (custom `WorkspaceNavigationProvider`):
 Not exercised: mobile breakpoints, sending a message that fails, the admin "create channel" submit (it would create data on staging), and drag-and-drop uploads.
 
 Environment noise, not SDK: the first `UserSearchSource` query timed out at axios's 3 s default on staging and succeeded on retry.
+
+## Round 2: gaming-livestream and virtual-event
+
+Both apps went from 27 (gaming-livestream) and 43 (virtual-event) compile errors to zero, plus a second wave (gap 18), pass `CI=true yarn build`, and were exercised against staging. virtual-event was compared with a v14 baseline built from `master`.
+
+### Round 1 gaps now covered by the guide
+
+Re-reading the updated React guide (`cf7a9f14`): gaps 1, 3, 4, 5, 6, 7, 8, 9, 10 and 11 are now addressed. These include the `ChatView` remount row in the silent-break table, the combinator grep in §19, the typing type guard, the stale `useState` example, `isThreadDismissable` in the "Without `ChatView`" example, the `ThreadHead` warning, the `useCloseThread` event type, the `getMessageActions` lead-in, the `asDynamicKey` flow and `setMessageComposerSetupFunction`. The §1 peer-version literal is gone too. In this round they all held up: the §4 navigation example, the §7 `ThreadHeader` rewrite and the §13 `handleSubmit` replacement applied without changes.
+
+### New gaps (round 2)
+
+12. **User mute, unmute and flag fail at runtime on an app without the v2 moderation flag.** **gap, highest impact**. The JS guide maps `client.muteUser` / `unmuteUser` / `flagUser` to `client.moderation.mute({ target_ids })` / `unmuteUser(id)` / `flagUser({ user_id })`. On the staging app all three return `403 ... V2Mute failed with error: "this endpoint needs a feature flag, contact support to get it enabled"` (`V2Unmute` and `V2Flag` likewise). v10 has no other user-mute call; `ChatApi` only has `muteChannel`. The code compiles and virtual-event's modal catches the error and still shows "User successfully muted". Neither guide mentions that these endpoints need to be enabled per app. Every app that mutes or flags users, including the SDK's own message actions if they use the same calls, breaks on upgrade unless the flag is on. This needs either a loud note in both guides or a server-side default.
+13. **Partial message updates take custom fields flat, not under `custom`.** **gap**. Reads moved to `message.custom.up_votes`, so the natural write is `client.updateMessagePartial({ id }, { set: { custom: { ...message.custom, up_votes } } })`. The server rejects it with `403: field \`custom\` is reserved and cannot be updated`. What works is `set: { up_votes }`. `UpdateMessagePartialRequest.set` is `Record<string, any>`, so nothing catches this at compile time. The JS guide's custom-data section says writes go under `custom`, which is true for `MessageRequest` / `ChannelInput`. It hints at the flat form only for `channel.updatePartial({ set: { name } })`. A line in the custom-data section ("partial updates (`updateMessagePartial`, `channel.updatePartial`, `partialUpdateUser`) set custom fields as top-level keys; `custom` itself is reserved") would have saved a round trip to the server.
+14. **Stale override keys in a pre-built object compile fine.** **inaccurate**. React §10: "A stale key in `WithComponents overrides` is a compile error (`TS2353` / `TS2561`)". That holds only for an inline object literal. virtual-event builds its overrides in a `useMemo` (`ChatContainer`) and in a module-level `const` (`DMChannel`). TypeScript skips excess-property checks for those, so `ThreadHeader` stayed in both with no error and would have been silently ignored. Suggest: "grep for the removed slot names (`ThreadHeader`, `Message`, `HeaderStartContent`, `ChannelListUI`, `LoadingErrorIndicator`), or annotate override objects with `satisfies Partial<ComponentContextValue>`".
+15. **`isDate(message.created_at)` is silently `false`.** **gap**. `isDate` is still exported from `stream-chat-react`. virtual-event's message UI computed "time since" with `isDate(message.created_at) ? Date.now() - created_at.getTime() : 0`. On v10's nanosecond numbers the guard is always false, so every message showed no time, with no compile error. The JS guide's silent-failure list (`dayjs(ns)`, `ts > Date.now()`, `if (!created_at)`) should add `isDate(x)` / `x instanceof Date` guards. React §16 could add it next to the `isDateSeparatorMessage` note.
+16. **`overrideSubmitHandler` used for a UI side effect.** **friction**. gaming-livestream's override only published an in-app notification for `/ban`, `/mute`, … and then called `sendMessage`. React §13 maps the override to a per-client `sendMessageRequest` handler, which works (the notification fires and `defaultRequest(params)` sends). The guide doesn't say how to tie a handler to a component:
+    - `client.config.set` deep-merges, and there is no per-handler removal; cleanup is `client.config.reset('channel')`, which also drops any other channel config.
+    - The handler outlives renders, so it has to read React callbacks through a ref.
+
+    A short "registering from a component" snippet with an effect, a ref and the reset caveat would cover it.
+17. **"The thread replaces the channel" layout.** **friction**. Both apps show a thread *in place of* the channel. gaming-livestream did it from TSX (`document.querySelector('.str-chat__main-panel').style.display = 'none'` in the message UI and the thread header). virtual-event did it in SCSS (`.str-chat__main-panel--thread-open { display: none }`). §19's grep is CSS-only; it mentions searching `.ts` for CSS-in-JS, but not DOM queries. §19 "Panel layout" covers beside and below but not "instead of". The pattern used here: an app-owned wrapper around the list and composer inside `<Channel>`, hidden (not unmounted) while a thread is open, with `<Thread>` as its sibling. It also replaces the removed `.str-chat__main-panel`'s flex-column styles. Worth one paragraph.
+18. **Errors arrive in waves.** **nit**. A removed import (`useChannelStateContext`) types its values as `any`, so later breaks hide behind it. In virtual-event, `channel.search(...)` only failed to compile after `useChannelStateContext` was replaced by `useChannel()`. The "How to migrate" intro could say to expect a second wave of errors once the removed hooks are gone.
+19. **Event handlers annotated `(event: Event)`.** **nit**. JS §5 says `client.on('message.new', (e) => …)` infers the member. v14 code usually declares the handler separately as `(event: Event) => …`, which defeats the inference (`channel_id` / `channel_type` then fail to compile). The guide offers `EventPayload<'…'>` typing; it could say explicitly that an existing `Event` annotation is what blocks the inference.
+
+### Good (round 2)
+
+- JS custom data: `connectUser({ id, custom: { color, userRole } })` and `client.channel(type, id, { custom: { name } })` mapped directly. The note that required augmentation members become required in every `custom` object explained why virtual-event's `CustomMessageData { show_in_channel: boolean }` (a built-in field wrongly declared as custom) had to go.
+- React §4 "Without `ChatView`": both apps needed only the example's navigation object, scoped to a channel component.
+- React §2: `new StreamChat(key, { enableInsights, enableWSFallback })` → `{ client: { wsConnection: { enableWSFallback } } }`, `enableInsights` dropped.
+- JS `channel.search` removed: covered. I used `client.getMessage({ id })` instead, since the code only fetched one message by id.
+- JS `state.last_message_at` → `messagePaginator.latestMessageAt` + `nsToMs`, for the DM list's "time since last message".
+
+### gaming-livestream
+
+| Break (tsc) | Where the fix was | Notes |
+| --- | --- | --- |
+| `useChatContext().channel` / `setActiveChannel` for its single channel | React §2, §5 | Holds the channel in its own state: `client.channel('gaming', 'gaming-demo', { custom: { name } }).watch().then(setChannel)`. |
+| `ThreadHeader` override; `<Thread Message={...}>` | React §7, §10 | The header became a child of `<Thread>`; `MessageUI: GamingMessage` covers both lists. |
+| `useChannelActionContext().openThread(message, event)` | React §4, §9 | `handleOpenThread` from the message context, with an app `WorkspaceNavigationProvider` (no `ChatView`). |
+| `Window`; the `.str-chat__main-panel` DOM toggle | React §3, §19 | See gap 17. |
+| `overrideSubmitHandler` | React §13, §14 | See gap 16. |
+| `handleSubmit`, `useTypingContext`, `useChannelStateContext().thread` | React §13, §9 | `useMessageComposerSubmitFn`, `useStateStore(channel.state, typingSelector)`, `useThreadContext()`. |
+| `new Date(message.created_at).getHours()` | JS timestamps | `TS2339 ... ERROR_use_SDKs_nsToDate_helper_instead`: a clear message. → `convertTimestampToDate`. |
+| `message.user.color` / `userRole` | JS custom data | `message.user.custom.*`, written via `connectUser({ custom })`. |
+| `Event` destructuring in `useChecklist` | JS §5 | Narrow first, as in round 1. |
+
+### virtual-event
+
+| Break (tsc) | Where the fix was | Notes |
+| --- | --- | --- |
+| `ChannelList` with `filters`, `options`, `sort`, `EmptyStateIndicator`, `setActiveChannelOnMount={false}` + `ChannelListUI` (loading/error wrapper) | React §6 | A `ChannelPaginator` with `'custom.demo'`, created where the DM tab mounts (v14 re-queried on every mount too). `FirstPageLoadingIndicator` / `EmptyListIndicator` slots, and the error read from `useChannelPaginatorState(paginator).lastQueryError`. Same wrapper shape as team-ts. |
+| `latestMessagePreview`, `channel.state.last_message_at` | React §6, JS §7 | `SummarizedMessagePreview`; `messagePaginator.latestMessageAt`. |
+| `useChannelStateContext().messages` in the message UI (top / recent checks) | React §9 | `useMessagePaginator()` (new in v15) + a selector returning only the end ids, so messages don't re-render on every list change. |
+| `useChannelActionContext().openThread(parent, event)` for "Show in thread" | React §4 | `useWorkspaceNavigation().openThread({ channel, message }, { event })`. |
+| `channel.search({ id })` | JS | See Good. |
+| `client.updateMessage({ ...message, up_votes })` | JS raw `updateMessage` | See gap 13. |
+| `client.muteUser` / `unmuteUser` / `flagUser` | JS moderation table | See gap 12. |
+| `mute.target.id` | JS | `target` is optional on `UserMuteResponse`. |
+| `queryUsers(filter, sort, options)` | JS §3 | `{ payload }`. |
+| `t('Search')` | React §18 key map | `common.search.ariaLabel`, used here as a placeholder; the key name suggests aria-only, but it is the only match. |
+| `CommandResponse` | React §17 | `Command`. |
+| `ThreadHeader` override (no error) | React §10 | See gap 14. |
+| `isDate(created_at)` (no error) | none | See gap 15. |
+| `<Thread virtualized additionalVirtualizedMessageListProps>` | React §7 | Composed `ThreadHeader` + `VirtualizedMessageList` + `<MessageComposer focus />`. |
+| Thread per channel surface (event channel and DM) | React §4, §5 | `ChannelWithThread` holds the open thread and provides navigation. A thread from another channel is dropped by comparing `thread.channel.cid`, which replaces v14's per-channel remount. |
+
+### Runtime verification (staging, user `v15-tester`)
+
+gaming-livestream. The demo's `gaming:gaming-demo` channel doesn't exist on staging, and `v15-tester` can't create it (403 `CreateChannel` in scope `gaming`), so this was tested with a temporary `messaging` channel and the change reverted:
+
+- Messages send with Enter and with the custom send button.
+- The timestamp toggle shows `11:34 AM` (`nsToDate` path).
+- The thread opens in place of the channel with the header count, the parent and a focused composer. A reply raises the count, and close restores the channel list where it was.
+- `/unmute …` shows the "User unmuted" notification through the `sendMessageRequest` handler.
+- Name colours come from `user.custom.color`.
+
+virtual-event:
+
+- Global chat renders with the Moderator title from `custom.title` and relative times.
+- "N replies" opens the thread in place of the channel; replies load, a reply raises the count, and close returns.
+- "Show in thread" fetches the parent with `getMessage` and opens its thread.
+- Switching to a room closes the open thread and shows the room's empty state.
+- Q&A upvote toggles after the gap 13 fix.
+- Reactions work.
+- The DM list (paginator, previews, times) works; opening a DM and sending works.
+- Participant search → profile → "Start a chat" opens the existing DM using the instance `watch()` resolves with.
+- Mute fails as described in gap 12.
+
+Pre-existing in v14 as well, not migration: the participants list renders below the viewport, because the app's `.str-chat__channel-search { height: 100% }` pushes it down; two `ParticipantSearch` panels mount at once; and the scroll-to-latest button shows on first load.
+
+Not exercised: typing indicators (they need a second user), giphy, the theme modal and mobile layouts. The round 1 ResizeObserver overlay (gap 2) did not appear in either app.

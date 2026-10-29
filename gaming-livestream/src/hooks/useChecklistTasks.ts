@@ -30,16 +30,14 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
     if (!targetOrigin) return;
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (
-      props: Event,
-    ) => {
-      const { message, type } = props;
-
-      switch (type) {
+    const handleNewEvent = (event: Event) => {
+      // Event is a discriminated union in stream-chat v10: narrow on type before reading message
+      switch (event.type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
-        case 'message.new':
+        case 'message.new': {
+          const { message } = event;
           if (message?.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
@@ -63,6 +61,7 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
           }
           notify(SEND_MESSAGE);
           break;
+        }
         default:
           break;
       }

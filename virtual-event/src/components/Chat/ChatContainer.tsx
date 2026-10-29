@@ -1,11 +1,11 @@
 import React, {useEffect, useMemo, useState} from 'react';
 import {Channel as StreamChannel, TextComposerMiddleware, UserResponse} from 'stream-chat';
-import {Channel, Chat, type MessageUIComponentProps, WithComponents} from 'stream-chat-react';
+import {Chat, WithComponents} from 'stream-chat-react';
 
 import {init, SearchIndex} from 'emoji-mart';
 import data from '@emoji-mart/data';
 
-import {ChannelInner} from './ChannelInner';
+import {ChannelWithThread} from './ChannelWithThread';
 import {ChatHeader} from './ChatHeader';
 import {ChatSidebar} from './ChatSidebar';
 import {DMChannelList} from './DMChannelList';
@@ -16,7 +16,6 @@ import {MessageInputUI} from './MessageInputUI';
 import {ParticipantProfile} from './ParticipantProfile';
 import {ParticipantSearch} from './ParticipantSearch';
 import {Snackbar} from './Snackbar';
-import {ThreadHeader} from './ThreadHeader';
 import {UserActionsModal} from './UserActionsModal';
 
 import {useEventContext} from '../../contexts/EventContext';
@@ -57,10 +56,8 @@ export const ChatContainer = () => {
       EmptyStateIndicator: EmptyStateIndicatorChannel,
       GiphyPreviewMessage: GiphyPreview,
       MessageComposerUI: MessageInputUI,
-      ThreadHeader,
-      VirtualMessage: (props: MessageUIComponentProps) => (
-        <MessageUI {...props} setMessageActionUser={setMessageActionUser} />
-      ),
+      // the ThreadHeader slot is gone (ThreadInner renders the header); a message UI gets no props
+      VirtualMessage: () => <MessageUI setMessageActionUser={setMessageActionUser} />,
       emojiSearchIndex: SearchIndex,
     }),
     [],
@@ -69,7 +66,7 @@ export const ChatContainer = () => {
   useEffect(() => {
     if (!chatClient) return;
 
-    chatClient.setMessageComposerSetupFunction(({ composer }) => {
+    chatClient.config.setSetupFunction('messageComposer', ({ composer }) => {
       composer.compositionMiddlewareExecutor.insert({
         middleware: [
           createGiphyCommandInjectionMiddleware(composer)
@@ -150,9 +147,7 @@ export const ChatContainer = () => {
             ) : (
               currentChannel && (
                 <WithComponents overrides={channelOverrides}>
-                  <Channel channel={currentChannel}>
-                    <ChannelInner />
-                  </Channel>
+                  <ChannelWithThread channel={currentChannel} />
                 </WithComponents>
               )
             )}

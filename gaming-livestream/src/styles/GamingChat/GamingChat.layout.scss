@@ -8,11 +8,16 @@ section.sidebar {
   .chat-container {
     width: 100%;
 
-    .str-chat__main-panel {
+    // v15 removed Window's .str-chat__main-panel; the app wraps the channel content itself
+    .gaming-channel-main {
+      display: flex;
+      flex-direction: column;
+      flex: 1;
+      min-height: 0;
       padding: 0;
 
-      .str-chat__main-panel-inner {
-        flex: 1;
+      &[hidden] {
+        display: none;
       }
 
       .str-chat__date-separator {

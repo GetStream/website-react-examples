@@ -2,7 +2,7 @@ import { CloseX, Ellipse } from '../../assets';
 import React from 'react';
 
 type ChannelHeaderProps = {
-  onClose: (e: React.BaseSyntheticEvent) => void;
+  onClose: (e: React.MouseEvent) => void;
   title: string;
   subtitle?: string;
   menuOpen?: boolean;
