@@ -23,7 +23,10 @@ const theme = urlParams.get('theme') || 'light';
 const userToken = urlParams.get('user_token') || process.env.REACT_APP_USER_TOKEN;
 const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TARGET_ORIGIN;
 
-const client = StreamChat.getInstance(apiKey!, { enableInsights: true, enableWSFallback: true });
+// stream-chat 10 takes a config tree; `enableInsights` was removed with no replacement
+const client = StreamChat.getInstance(apiKey!, {
+  client: { wsConnection: { enableWSFallback: true } },
+});
 client.connectUser({ id: user!, name: user, image: getRandomImage() }, userToken);
 
 const App = () => {
@@ -32,7 +35,7 @@ const App = () => {
   useEffect(() => {
     if (!client) return;
 
-    client.setMessageComposerSetupFunction(({ composer }) => {
+    client.config.setSetupFunction('messageComposer', ({ composer }) => {
       composer.compositionMiddlewareExecutor.insert({
         middleware: [
           createGiphyCommandInjectionMiddleware(composer)

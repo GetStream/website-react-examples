@@ -1,17 +1,19 @@
 import './MessagingChannelPreview.css';
 import {
   ChannelListItemUIProps,
-  ChatContextValue,
+  SummarizedMessagePreview,
   useChatContext,
+  useWorkspaceNavigation,
 } from 'stream-chat-react';
 import { AvatarGroup } from '../';
 
 import type { MouseEventHandler} from 'react';
-import type { Channel, ChannelMemberResponse } from 'stream-chat';
+import { type ChannelMemberResponse, type TimestampNS, convertTimestampToDate } from 'stream-chat';
 
-const getTimeStamp = (channel: Channel) => {
-  let lastHours = channel.state.last_message_at?.getHours();
-  let lastMinutes: string | number | undefined = channel.state.last_message_at?.getMinutes();
+const getTimeStamp = (timestamp: TimestampNS | undefined) => {
+  const date = convertTimestampToDate(timestamp);
+  let lastHours = date?.getHours();
+  let lastMinutes: string | number | undefined = date?.getMinutes();
   let half = 'AM';
 
   if (lastHours === undefined || lastMinutes === undefined) {
@@ -44,14 +46,13 @@ const getChannelName = (members: ChannelMemberResponse[]) => {
 };
 
 type MessagingChannelPreviewProps = ChannelListItemUIProps & {
-  channel: Channel;
   onClick: MouseEventHandler;
-  setActiveChannel?: ChatContextValue['setActiveChannel'];
 };
 
 const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
-  const { channel, setActiveChannel, onClick, latestMessagePreview } = props;
-  const { channel: activeChannel, client } = useChatContext();
+  const { active, channel, onClick, messageDeliveryStatus, previewedMessage } = props;
+  const { client } = useChatContext();
+  const { openChannel } = useWorkspaceNavigation();
 
   const members = Object.values(channel.state.members).filter(
     ({ user }) => user?.id !== client.userID,
@@ -62,24 +63,31 @@ const MessagingChannelPreview = (props: MessagingChannelPreviewProps) => {
   return (
     <div
       className={
-        channel?.id === activeChannel?.id
+        active
           ? 'channel-preview__container selected'
           : 'channel-preview__container'
       }
       onClick={(e) => {
         onClick(e);
-        setActiveChannel?.(channel);
+        openChannel(channel, { event: e });
       }}
     >
       <AvatarGroup members={members} />
       <div className='channel-preview__content-wrapper'>
         <div className='channel-preview__content-top'>
           <p className='channel-preview__content-name'>
-            {channel.data?.name || getChannelName(members)}
+            {channel.data?.custom?.name || getChannelName(members)}
           </p>
-          <p className='channel-preview__content-time'>{getTimeStamp(channel)}</p>
+          <p className='channel-preview__content-time'>
+            {getTimeStamp(previewedMessage?.created_at)}
+          </p>
         </div>
-        <div className='channel-preview__content-message'>{latestMessagePreview}</div>
+        <div className='channel-preview__content-message'>
+          <SummarizedMessagePreview
+            latestMessage={previewedMessage}
+            messageDeliveryStatus={messageDeliveryStatus}
+          />
+        </div>
       </div>
     </div>
   );

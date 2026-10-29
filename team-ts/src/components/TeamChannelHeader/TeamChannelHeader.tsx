@@ -1,5 +1,12 @@
 import { MouseEventHandler, useCallback } from 'react';
-import { Avatar, useChannelActionContext, useChannelStateContext, useChatContext } from 'stream-chat-react';
+import type { ChannelStateData } from 'stream-chat';
+import {
+  Avatar,
+  useChannel,
+  useChatContext,
+  useStateStore,
+  useWorkspaceNavigation,
+} from 'stream-chat-react';
 
 import { PinIcon } from '../../assets';
 
@@ -7,27 +14,33 @@ import { ChannelInfoIcon } from './ChannelInfoIcon';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 
+const channelStateSelector = ({ data, members, watcherCount }: ChannelStateData) => ({
+  data,
+  members,
+  watcherCount,
+});
 
 export const TeamChannelHeader = () => {
   const { displayWorkspace } = useWorkspaceController();
   const { client } = useChatContext();
-  const { channel, watcher_count } = useChannelStateContext();
-  const { closeThread } = useChannelActionContext();
+  const channel = useChannel();
+  const { data, members: membersById, watcherCount } = useStateStore(channel.state, channelStateSelector);
+  const { closeThread } = useWorkspaceNavigation();
   const { togglePinnedMessageListOpen } = useWorkspaceController();
 
-  const teamHeader = `# ${channel?.data?.name || channel?.data?.id || 'random'}`;
+  const teamHeader = `# ${data?.custom?.name || data?.id || 'random'}`;
 
   const openChannelEditPanel = useCallback(() => {
     displayWorkspace('Admin-Channel-Edit');
   }, [displayWorkspace]);
 
-  const onPinIconClick: MouseEventHandler = useCallback((event) => {
-    closeThread?.(event);
+  const onPinIconClick: MouseEventHandler = useCallback(() => {
+    closeThread();
     togglePinnedMessageListOpen();
   }, [closeThread, togglePinnedMessageListOpen])
 
   const getMessagingHeader = () => {
-    const members = Object.values(channel.state.members).filter(
+    const members = Object.values(membersById).filter(
       ({ user }) => user?.id !== client.userID,
     );
     const additionalMembers = members.length - 3;
@@ -80,7 +93,7 @@ export const TeamChannelHeader = () => {
         </div>
       )}
       <div className='workspace-header__block'>
-        <div className='workspace-header__subtitle'>{getWatcherText(watcher_count)}</div>
+        <div className='workspace-header__subtitle'>{getWatcherText(watcherCount)}</div>
         <button
           className='workspace-header__subtitle'
           onClick={onPinIconClick}

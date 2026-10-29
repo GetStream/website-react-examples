@@ -1,7 +1,7 @@
 export const CloseThreadIcon = ({
   closeThread,
 }: {
-  closeThread?: (event: React.BaseSyntheticEvent) => void;
+  closeThread?: (event: React.MouseEvent) => void;
 }) => (
   <svg
     width='40'
