@@ -1,10 +1,5 @@
 import { useEffect, useState } from 'react';
-import {
-  OwnUserResponse,
-  StreamChat,
-  TokenOrProvider,
-  UserResponse,
-} from 'stream-chat';
+import { type ClientUser, StreamChat, type TokenOrProvider } from 'stream-chat';
 
 /**
  * A hook which handles the process of connecting/disconnecting a user
@@ -16,14 +11,13 @@ import {
  */
 export const useConnectUser = (
   apiKey: string,
-  userToConnect: OwnUserResponse | UserResponse,
+  userToConnect: ClientUser,
   userTokenOrProvider: TokenOrProvider,
 ) => {
   const [chatClient, setChatClient] = useState<StreamChat | null>(null);
   useEffect(() => {
     const client = new StreamChat(apiKey, {
-      enableInsights: true,
-      enableWSFallback: true,
+      client: { wsConnection: { enableWSFallback: true } },
     });
 
     // Under some circumstances, a "connectUser" operation might be interrupted

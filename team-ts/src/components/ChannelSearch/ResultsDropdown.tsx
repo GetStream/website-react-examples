@@ -1,5 +1,5 @@
 import clsx from 'clsx';
-import { Avatar, useChatContext } from 'stream-chat-react';
+import { Avatar, useChatContext, useWorkspaceNavigation } from 'stream-chat-react';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
 
@@ -12,7 +12,8 @@ type SearchResultProps = Pick<ResultsDropdownProps, 'focusedId' | 'setChannel'> 
 const SearchResult = (props: SearchResultProps) => {
   const { focusedId, result, setChannel } = props;
 
-  const { client, setActiveChannel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannel } = useWorkspaceNavigation();
 
   if (isChannel(result)) {
     const channel = result as Channel;
@@ -26,7 +27,7 @@ const SearchResult = (props: SearchResultProps) => {
         )}
       >
         <div className='result-hashtag'>#</div>
-        <p className='channel-search__result-text'>{channel?.data?.name}</p>
+        <p className='channel-search__result-text'>{channel?.data?.custom?.name}</p>
       </div>
     );
   } else {
@@ -35,7 +36,7 @@ const SearchResult = (props: SearchResultProps) => {
     return (
       <div
         onClick={() => {
-          channelByUser({ client, setActiveChannel, user });
+          channelByUser({ client, openChannel, user });
         }}
         className={clsx(
           'channel-search__result-container',

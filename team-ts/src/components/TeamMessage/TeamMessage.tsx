@@ -1,14 +1,13 @@
 import clsx from 'clsx';
 import React, {ElementRef, useMemo, useRef} from 'react';
-import type {TranslationLanguages} from 'stream-chat';
 import {
+  asDynamicKey,
   Attachment,
   Avatar,
   defaultMessageActionSet,
   DialogAnchor,
   IconEmoji,
   IconThread,
-  MESSAGE_ACTIONS,
   MessageActions,
   MessageDeletedBubble,
   MessageReactions,
@@ -22,6 +21,7 @@ import {
   useDialogIsOpen,
   useMessageContext,
   useTranslationContext,
+  useUserRole,
 } from 'stream-chat-react';
 
 import {PinIndicator} from './PinIndicator';
@@ -39,7 +39,6 @@ const dropdownMessageActionSet = defaultMessageActionSet.filter(
 
 export const TeamMessage = () => {
   const {
-    getMessageActions,
     groupStyles,
     handleAction,
     handleOpenThread: handleOpenThreadContext,
@@ -52,16 +51,14 @@ export const TeamMessage = () => {
     onUserHover,
     renderText = defaultRenderText,
     threadList,
-  } = useMessageContext('MessageTeam');
-  const { t, userLanguage } = useTranslationContext('MessageTeam');
+  } = useMessageContext();
+  const { t, userLanguage } = useTranslationContext();
 
-  const messageActions = getMessageActions();
+  // getMessageActions() / MESSAGE_ACTIONS are gone in stream-chat-react 15; read permissions from the user role
+  const { canReact, canReply } = useUserRole(message);
+  const shouldShowReplies = canReply && !threadList;
 
-  const shouldShowReplies = messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1 && !threadList;
-  const canReact =  messageActions.indexOf(MESSAGE_ACTIONS.react) > -1;
-
-  const messageTextToRender =
-    message.i18n?.[`${userLanguage}_text` as `${TranslationLanguages}_text`] || message.text;
+  const messageTextToRender = message.i18n?.[`${userLanguage}_text`] || message.text;
 
   const messageMentionedUsersItem = message.mentioned_users;
 
@@ -133,7 +130,7 @@ export const TeamMessage = () => {
                 <strong>{message.user?.name || message.user?.id}</strong>
                 {message.type === 'error' && (
                   <div className='str-chat__message-team-error-header'>
-                    {t('Only visible to you')}
+                    {t('attachment.visibilityDisclaimer.onlyVisible.text', 'Only visible to you')}
                   </div>
                 )}
               </div>
@@ -170,7 +167,7 @@ export const TeamMessage = () => {
                       </DialogAnchor>
                       <button
                         aria-expanded={reactionSelectorDialogIsOpen}
-                        aria-label={t('aria/Open Reaction Selector')}
+                        aria-label={t('common.openReactionSelector.ariaLabel', 'Open Reaction Selector')}
                         className='str-chat__message-reactions-button'
                         data-testid='message-reaction-action'
                         onClick={() => reactionSelectorDialog?.toggle()}
@@ -215,8 +212,8 @@ export const TeamMessage = () => {
               >
                 <ErrorIcon/>
                 {message.error?.status !== 403
-                  ? t('Message Failed · Click to try again')
-                  : t('Message Failed · Unauthorized')}
+                  ? t(asDynamicKey('teamDemo.message.failedRetry.text'), 'Message Failed · Click to try again')
+                  : t(asDynamicKey('teamDemo.message.failedUnauthorized.text'), 'Message Failed · Unauthorized')}
               </button>
             )}
           </div>

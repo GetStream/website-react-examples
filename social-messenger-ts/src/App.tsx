@@ -1,15 +1,21 @@
-import React, {useEffect, useState} from 'react';
-import type { ChannelFilters, ChannelOptions, ChannelSort, TextComposerMiddleware } from 'stream-chat';
+import React, {useEffect, useMemo, useState} from 'react';
+import { ChannelPaginator, type TextComposerMiddleware } from 'stream-chat';
 import {
-  Channel,
   Chat,
-  ChatView,
+  ChannelPlaceholder,
   Streami18n,
   Thread,
   ThreadList,
   useCreateChatClient,
   WithComponents,
 } from 'stream-chat-react';
+import {
+  ChannelSlot,
+  ChatView,
+  type ChatViewSlotRenderers,
+  Slot,
+  ThreadSlot,
+} from 'stream-chat-react/slot-layout';
 import clsx from 'clsx';
 import { createTextComposerEmojiMiddleware, EmojiPicker } from 'stream-chat-react/emojis';
 
@@ -24,10 +30,11 @@ import {
   ChannelInner,
   CreateChannel,
   MessagingSidebar,
-  MessagingThreadHeader,
   SendButton,
+  ThreadInner,
 } from './components';
 
+import { getChannelListOptions } from './channelListOptions';
 import { useThemeContext } from './context';
 
 import { useChecklist, useMobileView, useUpdateAppHeightOnResize } from './hooks';
@@ -40,11 +47,7 @@ type AppProps = {
   userToConnect: { id: string; name?: string; image?: string };
   userToken: string | undefined;
   targetOrigin: string;
-  channelListOptions: {
-    options: ChannelOptions;
-    filters: ChannelFilters;
-    sort: ChannelSort;
-  };
+  channelListOptions: ReturnType<typeof getChannelListOptions>;
 };
 
 const noop = () => null;
@@ -53,9 +56,24 @@ const noop = () => null;
 const i18nInstance = new Streami18n({
   language: 'en',
   translationsForLanguage: {
-    'timestamp/MessageTimestamp': '{{ timestamp | timestampFormatter(calendar: true) }}',
+    'timestamp.MessageTimestamp': '{{ timestamp | timestampFormatter(calendar: true) }}',
   },
 });
+
+// Module scope: ChatView requires referentially stable layouts and renderers
+const layouts = [
+  { id: 'channels' as const, slots: ['channel', 'channel-thread'] },
+  { id: 'threads' as const, slots: ['thread'] },
+];
+
+// Used by <Slot> elements without children (the thread opened beside a channel)
+const slotRenderers: ChatViewSlotRenderers = {
+  thread: ({ source }) => (
+    <Thread thread={source}>
+      <ThreadInner />
+    </Thread>
+  ),
+};
 
 const EmojiPickerWithTheme = () => {
   const { theme } = useThemeContext();
@@ -78,10 +96,34 @@ const App = (props: AppProps) => {
   useChecklist(chatClient, targetOrigin);
   useUpdateAppHeightOnResize();
 
+  // Created above ChatView: views unmount when switching, and the list should not re-query each time
+  const channelPaginator = useMemo(
+    () =>
+      chatClient &&
+      new ChannelPaginator({
+        client: chatClient,
+        filters: channelListOptions.filters,
+        id: 'social-messenger:channels',
+        paginatorOptions: { pageSize: channelListOptions.pageSize },
+        requestOptions: channelListOptions.requestOptions,
+        sort: channelListOptions.sort,
+      }),
+    [chatClient, channelListOptions],
+  );
+
+  useEffect(() => {
+    if (!chatClient || !channelPaginator) return;
+    // registered so the list receives WebSocket updates
+    chatClient.channelManager.insertPaginator({ paginator: channelPaginator });
+    return () => {
+      chatClient.channelManager.removePaginator(channelPaginator);
+    };
+  }, [chatClient, channelPaginator]);
+
   useEffect(() => {
     if (!chatClient) return;
 
-    chatClient.setMessageComposerSetupFunction(({ composer }) => {
+    chatClient.config.setSetupFunction('messageComposer', ({ composer }) => {
       composer.textComposer.middlewareExecutor.insert({
         middleware: [
           createTextComposerEmojiMiddleware(SearchIndex) as TextComposerMiddleware,
@@ -95,45 +137,58 @@ const App = (props: AppProps) => {
     });
   }, [chatClient]);
 
-  if (!chatClient) {
+  if (!chatClient || !channelPaginator) {
     return null; // render nothing until connection to the backend is established
   }
 
   return (
     <Chat client={chatClient} i18nInstance={i18nInstance} theme={clsx('messaging', themeClassName)}>
-      <ChatView>
-        <ChatView.Selector iconOnly={false} />
-        <ChatView.Channels>
-          <MessagingSidebar
-            channelListOptions={channelListOptions}
-            onClick={toggleMobile}
-            onCreateChannel={() => setIsCreating(!isCreating)}
-            onPreviewSelect={() => setIsCreating(false)}
-          />
-          <WithComponents
-            overrides={{
-              SendButton,
-              ThreadHeader: MessagingThreadHeader,
-              TypingIndicator: noop,
-              EmojiPicker: EmojiPickerWithTheme,
-              emojiSearchIndex: SearchIndex,
-            }}
-          >
-            <Channel>
-              {isCreating && (
-                <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
-              )}
-              <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
-            </Channel>
-          </WithComponents>
-        </ChatView.Channels>
-        <ChatView.Threads>
-          <ThreadList />
-          <ChatView.ThreadAdapter>
-            <Thread virtualized />
-          </ChatView.ThreadAdapter>
-        </ChatView.Threads>
-      </ChatView>
+      <WithComponents
+        overrides={{
+          SendButton,
+          TypingIndicator: noop,
+          EmojiPicker: EmojiPickerWithTheme,
+          emojiSearchIndex: SearchIndex,
+        }}
+      >
+        <ChatView
+          layouts={layouts}
+          slotRenderers={slotRenderers}
+          views={{
+            channels: (
+              <>
+                <MessagingSidebar
+                  paginator={channelPaginator}
+                  onClick={toggleMobile}
+                  onCreateChannel={() => setIsCreating(!isCreating)}
+                  onPreviewSelect={() => setIsCreating(false)}
+                />
+                <Slot slot='channel'>
+                  {isCreating && (
+                    <CreateChannel toggleMobile={toggleMobile} onClose={() => setIsCreating(false)} />
+                  )}
+                  <ChannelSlot fallback={<ChannelPlaceholder />} slot='channel'>
+                    <ChannelInner theme={themeClassName} toggleMobile={toggleMobile} />
+                  </ChannelSlot>
+                </Slot>
+                <Slot slot='channel-thread' />
+              </>
+            ),
+            threads: (
+              <>
+                <ThreadList />
+                <Slot slot='thread'>
+                  <ThreadSlot slot='thread'>
+                    <ThreadInner />
+                  </ThreadSlot>
+                </Slot>
+              </>
+            ),
+          }}
+        >
+          <ChatView.Selector iconOnly={false} />
+        </ChatView>
+      </WithComponents>
     </Chat>
   );
 };

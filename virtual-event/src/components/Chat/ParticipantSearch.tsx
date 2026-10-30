@@ -53,11 +53,16 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
       setQuerying(true);
 
       try {
-        const { users } = await client.queryUsers(
-          { },
-          { id: 1, last_active: -1 },
-          { limit: 10 },
-        );
+        const { users } = await client.queryUsers({
+          payload: {
+            filter_conditions: {},
+            limit: 10,
+            sort: [
+              { direction: 1, field: 'id' },
+              { direction: -1, field: 'last_active' },
+            ],
+          },
+        });
         const otherParticipants = users.filter((user) => user.id !== client.userID);
         if (otherParticipants.length) setParticipants(otherParticipants);
       } catch (err) {
@@ -100,7 +105,7 @@ export const ParticipantSearch = (props: ParticipantSearchProps) => {
                 setQuery(event.target.value);
                 searchSource.search(event.target.value);
               }}
-              placeholder={t('Search')}
+              placeholder={t('common.search.ariaLabel', 'Search')}
               type='text'
               value={query}
             />

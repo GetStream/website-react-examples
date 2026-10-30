@@ -31,15 +31,14 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
     const notify = notifyParent(targetOrigin);
 
     const handleNewEvent = (
-      props: Event,
+      event: Event,
     ) => {
-      const { message, type } = props;
-
-      switch (type) {
+      switch (event.type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
-        case 'message.new':
+        case 'message.new': {
+          const { message } = event;
           if (message?.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
@@ -64,6 +63,7 @@ export const useChecklist = (props: ChecklistTaskProps): void => {
           }
           notify(SEND_MESSAGE);
           break;
+        }
         default:
           break;
       }

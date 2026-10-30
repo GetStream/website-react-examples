@@ -13,19 +13,12 @@ export const isChannel = (
 
 type Props = {
   client: StreamChat;
-  setActiveChannel: (
-    newChannel?: Channel,
-    watchers?: {
-      limit?: number;
-      offset?: number;
-    },
-    event?: React.SyntheticEvent,
-  ) => void;
+  openChannel: (channel: Channel) => void;
   user: UserResponse;
 };
 
 export const channelByUser = async (props: Props) => {
-  const { client, setActiveChannel, user } = props;
+  const { client, openChannel, user } = props;
 
   const filters: ChannelFilters = {
     type: 'messaging',
@@ -33,14 +26,17 @@ export const channelByUser = async (props: Props) => {
     members: { $eq: [user.id as string, client.userID || ''] },
   };
 
-  const [existingChannel] = await client.queryChannels(filters);
+  const [existingChannel] = await client.queryChannelsAndHydrate({ filter_conditions: filters });
 
   if (existingChannel) {
-    return setActiveChannel(existingChannel);
+    return openChannel(existingChannel);
   }
 
-  const newChannel = client.channel('messaging', {
-    members: [user.id as string, client.userID || ''],
-  });
-  return setActiveChannel(newChannel);
+  // <Channel> no longer watches; watch() resolves with the surviving instance for the new cid
+  const newChannel = await client
+    .channel('messaging', {
+      members: [user.id as string, client.userID || ''].map((user_id) => ({ user_id })),
+    })
+    .watch();
+  return openChannel(newChannel);
 };

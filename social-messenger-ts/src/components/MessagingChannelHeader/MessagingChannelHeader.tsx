@@ -1,10 +1,13 @@
 import React, { useEffect, useRef, useState } from 'react';
-import { useChannelStateContext, useChatContext } from 'stream-chat-react';
+import type { ChannelStateData } from 'stream-chat';
+import { useChannel, useChatContext, useStateStore } from 'stream-chat-react';
 import './MessagingChannelHeader.css';
 
 import { TypingIndicator } from '../TypingIndicator/TypingIndicator';
 import { ChannelInfoIcon, ChannelSaveIcon, HamburgerIcon } from '../../assets';
 import { AvatarGroup } from '../';
+
+const channelStateSelector = ({ data, members }: ChannelStateData) => ({ data, members });
 
 type Props = {
   theme: string;
@@ -14,22 +17,30 @@ type Props = {
 const MessagingChannelHeader = (props: Props) => {
   const { theme, toggleMobile } = props;
   const { client } = useChatContext();
-  const { channel } = useChannelStateContext();
-  const [channelName, setChannelName] = useState(channel.data?.name || '');
+  const channel = useChannel();
+  const { data, members: membersById } = useStateStore(channel.state, channelStateSelector);
+  const savedName = data?.custom?.name || '';
+  const [channelName, setChannelName] = useState(savedName);
   const [isEditing, setIsEditing] = useState(false);
   const [title, setTitle] = useState('');
   const inputRef = useRef<HTMLInputElement>(null);
 
-  const members = Object.values(channel.state.members || {}).filter(
+  // <Channel> no longer remounts its children when the channel changes
+  useEffect(() => {
+    setChannelName(savedName);
+    setIsEditing(false);
+  }, [channel, savedName]);
+
+  const members = Object.values(membersById || {}).filter(
     (member) => member.user?.id !== client?.user?.id,
   );
 
   const updateChannel = async () => {
-    if (channelName && channelName !== channel.data?.name) {
-      await channel.update(
-        { name: channelName },
-        { text: `Channel name changed to ${channelName}` },
-      );
+    if (channelName && channelName !== savedName) {
+      await channel.update({
+        data: { custom: { ...data?.custom, name: channelName } },
+        message: { text: `Channel name changed to ${channelName}` },
+      });
     }
 
     setIsEditing(false);

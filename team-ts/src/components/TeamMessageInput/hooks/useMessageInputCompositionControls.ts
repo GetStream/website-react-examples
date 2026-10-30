@@ -1,5 +1,6 @@
 import {useCallback, useMemo} from 'react';
-import {useChannelStateContext, useChatContext, useMessageComposerController, useMessageComposerContext} from 'stream-chat-react';
+import type {ChannelStateData} from 'stream-chat';
+import {useChannel, useChatContext, useMessageComposerController, useMessageComposerContext, useStateStore} from 'stream-chat-react';
 import type {MessageInputFormattingType} from "../../../types.stream";
 
 const mdToFormattingType: Record<string, MessageInputFormattingType> = {
@@ -16,22 +17,23 @@ export const formattingTypeToMarkdown: Record<MessageInputFormattingType, string
   strikethrough: '~~',
 }
 
+const channelStateSelector = ({ data, members }: ChannelStateData) => ({ data, members });
+
 export const useMessageInputCompositionControls = () => {
   const { client } = useChatContext();
-  const {
-    channel,
-  } = useChannelStateContext();
+  const channel = useChannel();
+  const { data, members: membersById } = useStateStore(channel.state, channelStateSelector);
   const {customDataManager, textComposer} = useMessageComposerController();
   const {textareaRef} = useMessageComposerContext();
   const placeholder = useMemo(() => {
     let dynamicPart = 'the group';
 
     if (channel.type === 'team') {
-      dynamicPart = `#${channel?.data?.name || channel?.data?.id || 'random'}`;
+      dynamicPart = `#${data?.custom?.name || data?.id || 'random'}`;
 
     }
 
-    const members = Object.values(channel.state.members).filter(
+    const members = Object.values(membersById).filter(
       ({ user }) => user?.id !== client.userID,
     );
     if (!members.length || members.length === 1) {
@@ -41,7 +43,7 @@ export const useMessageInputCompositionControls = () => {
 
     return `Message ${dynamicPart}`;
 
-  }, [channel.type, channel.state.members, channel?.data?.id, channel?.data?.name, client.userID]);
+  }, [channel.type, membersById, data?.id, data?.custom?.name, client.userID]);
 
   const handleFormattingButtonClick = useCallback((wrappingMarkdown: string) => {
     const textarea = textareaRef.current;

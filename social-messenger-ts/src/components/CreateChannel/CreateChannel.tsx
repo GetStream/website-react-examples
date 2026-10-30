@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useMemo, useRef, useState} from 'react';
-import {Avatar, useChatContext, useStateStore} from 'stream-chat-react';
+import {Avatar, useChatContext, useStateStore, useWorkspaceNavigation} from 'stream-chat-react';
 import {SearchSourceState, UserResponse, UserSearchSource} from 'stream-chat';
 
 import {XButton, XButtonBackground} from '../../assets';
@@ -29,7 +29,8 @@ type Props = {
 const CreateChannel = (props: Props) => {
   const { onClose, toggleMobile } = props;
 
-  const { client, setActiveChannel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannel } = useWorkspaceNavigation();
 
   const [focusedUser, setFocusedUser] = useState<number>();
   const [selectedUsers, setSelectedUsers] = useState<UserResponse[]>([]);
@@ -52,13 +53,14 @@ const CreateChannel = (props: Props) => {
 
     if (!selectedUsersIds.length || !client.userID) return;
 
-    const conversation = client.channel('messaging', {
-      members: [...selectedUsersIds, client.userID],
-    });
+    // watch() resolves with the surviving instance; the created members-only one can be superseded
+    const conversation = await client
+      .channel('messaging', {
+        members: [...selectedUsersIds, client.userID].map((user_id) => ({ user_id })),
+      })
+      .watch();
 
-    await conversation.watch();
-
-    setActiveChannel?.(conversation);
+    openChannel(conversation);
     setSelectedUsers([]);
     searchSource.resetStateAndActivate();
     onClose();

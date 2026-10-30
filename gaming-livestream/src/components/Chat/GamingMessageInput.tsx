@@ -1,10 +1,12 @@
 import React from 'react';
+import type { ChannelStateData } from 'stream-chat';
 import {
   TextareaComposer,
-  useChannelStateContext,
+  useChannel,
   useMessageComposerHasSendableData,
-  useMessageComposerContext,
-  useTypingContext,
+  useMessageComposerSubmitFn,
+  useStateStore,
+  useThreadContext,
 } from 'stream-chat-react';
 import {EmojiPicker} from 'stream-chat-react/emojis';
 
@@ -25,8 +27,10 @@ const TypingIndicator = () => (
   </div>
 );
 
+const typingSelector = ({ typing }: ChannelStateData) => ({ typing });
+
 const SendMessageButton = () => {
-  const {handleSubmit} = useMessageComposerContext();
+  const handleSubmit = useMessageComposerSubmitFn();
   const hasSendableData = useMessageComposerHasSendableData();
   return (
     <button
@@ -41,8 +45,8 @@ const SendMessageButton = () => {
 
 export const GamingMessageInput = React.memo(() => {
   const { showUpgradePanel } = useLayoutController();
-  const { thread } = useChannelStateContext();
-  const { typing } = useTypingContext();
+  const thread = useThreadContext();
+  const { typing } = useStateStore(useChannel().state, typingSelector);
 
   return (
     <div className='channel-footer'>

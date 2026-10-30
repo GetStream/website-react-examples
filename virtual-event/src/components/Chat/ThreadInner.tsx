@@ -1,33 +1,26 @@
-import React, { useEffect } from 'react';
-import { Thread, useChannelStateContext, WithComponents } from 'stream-chat-react';
+import React from 'react';
+import type { Thread as StreamThread } from 'stream-chat';
+import { MessageComposer, Thread, VirtualizedMessageList, WithComponents } from 'stream-chat-react';
 
+import { ThreadHeader } from './ThreadHeader';
 import { ThreadMessageInputUI } from './ThreadMessageInputUI';
 
 import { ThreadInputContext } from '../../contexts/ThreadInputContext';
 import { useBoolState } from '../../hooks/useBoolState';
 
-export const ThreadInner = () => {
-  const { thread } = useChannelStateContext();
-
-  const {state: checked, off: uncheck, toggle: toggleCheckedFooter} = useBoolState();
-
-  useEffect(() => {
-    if (!thread) {
-      uncheck();
-    }
-  }, [thread, uncheck]);
-
+// mounted only while a thread is open, so the footer checkbox resets when the thread closes
+export const ThreadInner = ({ thread }: { thread: StreamThread }) => {
+  const {state: checked, toggle: toggleCheckedFooter} = useBoolState();
 
   return (
     <ThreadInputContext.Provider value={{footerChecked: checked, toggleCheckedFooter}}>
       <WithComponents overrides={{ MessageComposerUI: ThreadMessageInputUI }}>
-        <Thread
-          additionalVirtualizedMessageListProps={{
-            additionalVirtuosoProps: { alignToBottom: true },
-            separateGiphyPreview: true,
-          }}
-          virtualized
-        />
+        <Thread thread={thread}>
+          <ThreadHeader />
+          <VirtualizedMessageList additionalVirtuosoProps={{ alignToBottom: true }} separateGiphyPreview />
+          {/* v14 Thread focused its composer by default */}
+          <MessageComposer focus />
+        </Thread>
       </WithComponents>
     </ThreadInputContext.Provider>
   );

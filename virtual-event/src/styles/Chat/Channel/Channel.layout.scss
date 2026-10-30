@@ -13,11 +13,19 @@
   }
 }
 
-.str-chat__main-panel--thread-open {
-  display: none;
+// v15 removed Window's .str-chat__main-panel; the app wraps the channel's list and composer itself
+.channel-main {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  min-height: 0;
+
+  // hidden while a thread is open; the thread takes its place
+  &[hidden] {
+    display: none;
+  }
 }
 
-.str-chat__main-panel--thread-open + .str-chat__thread {
-  // occupy the whole space previously occupied by the main message list container
+.channel-main[hidden] + .str-chat__thread {
   flex: 1;
 }

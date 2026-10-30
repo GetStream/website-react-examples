@@ -1,9 +1,10 @@
-import { Avatar, useChatContext } from 'stream-chat-react';
+import { Avatar, useChannel, useChatContext } from 'stream-chat-react';
 
 import { HashIcon } from './HashIcon';
 
 export const EmptyChannel = () => {
-  const { channel, client } = useChatContext();
+  const { client } = useChatContext();
+  const channel = useChannel();
 
   const members = Object.values(channel?.state?.members || {}).filter(
     ({ user }) => user?.id !== client.userID,
@@ -64,7 +65,7 @@ export const EmptyChannel = () => {
       <p className='channel-empty__main-description'>
         This is the beginning of your chat history
         {channel?.type === 'team' ? ' in ' : ' with '}
-        {channel?.type === 'team' ? `#${channel?.data?.name || channel?.data?.id}` : getUserText()}.
+        {channel?.type === 'team' ? `#${channel?.data?.custom?.name || channel?.data?.id}` : getUserText()}.
       </p>
       <p className='channel-empty__secondary-description'>Send messages, attachments, links, emojis, and more.</p>
     </div>
