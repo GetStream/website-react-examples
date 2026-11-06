@@ -2,7 +2,7 @@ import React, {useEffect, useMemo, useState} from 'react';
 import {Channel as StreamChannel, TextComposerMiddleware, UserResponse} from 'stream-chat';
 import {Chat, WithComponents} from 'stream-chat-react';
 
-import {init, SearchIndex} from 'emoji-mart';
+import {init} from 'emoji-mart';
 import data from '@emoji-mart/data';
 
 import {ChannelWithThread} from './ChannelWithThread';
@@ -58,7 +58,6 @@ export const ChatContainer = () => {
       MessageComposerUI: MessageInputUI,
       // the ThreadHeader slot is gone (ThreadInner renders the header); a message UI gets no props
       VirtualMessage: () => <MessageUI setMessageActionUser={setMessageActionUser} />,
-      emojiSearchIndex: SearchIndex,
     }),
     [],
   );

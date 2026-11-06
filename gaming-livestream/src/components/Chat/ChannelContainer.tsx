@@ -1,4 +1,3 @@
-import {SearchIndex} from "emoji-mart";
 import {MessageTimestampController} from "../../context/MessageTimestampController";
 import {GamingChatInner} from "./GamingChatInner";
 import {GamingMessageInput} from "./GamingMessageInput";
@@ -54,7 +53,6 @@ export const ChannelContainer = () => {
   return (
     <WithComponents
       overrides={{
-        emojiSearchIndex: SearchIndex,
         MessageComposerUI: GamingMessageInput,
         MessageUI: GamingMessage,
       }}

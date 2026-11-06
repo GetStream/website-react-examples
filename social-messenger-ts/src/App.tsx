@@ -148,7 +148,6 @@ const App = (props: AppProps) => {
           SendButton,
           TypingIndicator: noop,
           EmojiPicker: EmojiPickerWithTheme,
-          emojiSearchIndex: SearchIndex,
         }}
       >
         <ChatView

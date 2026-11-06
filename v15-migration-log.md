@@ -5,7 +5,7 @@ Apps:
 - Round 1: `social-messenger-ts` (uses `ChatView`) and `team-ts` (custom layout, no `ChatView`).
 - Round 2: `gaming-livestream` (one channel, thread replaces it in place) and `virtual-event` (several livestream channels + a DM list, thread replaces the channel in place). See [round 2](#round-2-gaming-livestream-and-virtual-event).
 
-Installed: `stream-chat-react@15.0.0-rc.3`, `stream-chat@10.0.0-rc.26`.
+Installed: `stream-chat-react@15.0.0-rc.3`, `stream-chat@10.0.0-rc.26`; bumped to `15.0.0-rc.4` / `10.0.0-rc.34` afterwards ([rc.4 bump](#rc4-bump-all-four-apps)).
 
 Guides tested:
 
@@ -233,3 +233,46 @@ virtual-event:
 Pre-existing in v14 as well, not migration: the participants list renders below the viewport, because the app's `.str-chat__channel-search { height: 100% }` pushes it down; two `ParticipantSearch` panels mount at once; and the scroll-to-latest button shows on first load.
 
 Not exercised: typing indicators (they need a second user), giphy, the theme modal and mobile layouts. The round 1 ResizeObserver overlay (gap 2) did not appear in either app.
+
+## rc.4 bump (all four apps)
+
+`stream-chat-react@15.0.0-rc.4` needs `stream-chat@^10.0.0-rc.34`. Its new peers (`@a2ui/*`, `@openuidev/*`, `modern-normalize`) are all optional. `@stream-io/state-store` resolves to one copy (1.2.0) in every app. Guide used: the `v15.0.0-rc.4` tag of `ai-migration-v14-v15.md`.
+
+### Compile errors and fixes
+
+| App | Break | Fix (guide section) |
+| --- | --- | --- |
+| social-messenger-ts, team-ts, gaming-livestream | `emojiSearchIndex` override key removed (`TS2353`) | Dropped it (§13). social-messenger already registers `createTextComposerEmojiMiddleware`, and `:` autocomplete still works. In the other apps the key never turned anything on, so behavior is unchanged. |
+| virtual-event | Same `emojiSearchIndex` key, **no compile error** | Its overrides live in a `useMemo` object (round 2 gap 14 again). Found by the §13 grep. **good**: the per-section greps the rc.4 guide added catch exactly this. |
+| team-ts | `useUserRole` → `useMessagePermissions` | Renamed (§12). |
+| team-ts | `useMessageContext().initialMessage` / `.threadList` | `useIsRenderedAsThreadParent()` / `!!useThreadContext()` (§12, §11). Both are named explicitly. |
+| team-ts | `renderText(text, mentionedUsers)` | `renderText(text, { messageMentionEntities: getRenderTextMentionEntities(message) })` (§12). Mentions now render with `data-user-id` and `data-mention-type="user"`. |
+| team-ts | `<MessageList disableQuotedMessages />` | Dropped. **good**: §12 says v14's default actions ignored it, so nothing changes on screen. |
+| all | `CustomChannelData.name` declared by the app (no error) | Removed per the rc.4 release notes: the SDK now declares `name` / `image`. gaming-livestream declared `name: string` (required), which under `skipLibCheck` silently overrides the SDK's optional type. **friction**: nothing flags it; only the release notes and the §17 note say so. |
+
+### Smoke tests (staging, user `v15-tester`)
+
+- **social-messenger-ts:**
+  - The first channel opens on load; switching channels works.
+  - `:smil` shows emoji suggestions, and picking one and sending works.
+  - The thread opens beside the channel.
+  - Threads → Channels keeps the open channel.
+  - No ResizeObserver overlay on load. An rc.3 baseline built from `HEAD` *does* show it, so round 1's gap 2 looks fixed for this case.
+- **team-ts:**
+  - `#general` opens on load.
+  - An @mention picks from suggestions and renders as a mention.
+  - The thread icon opens the thread: the parent keeps its avatar and replies get the `threadList` class. A reply raises the count.
+  - Pins lists the pinned message; channel switching works.
+  - **The ResizeObserver overlay is back** (several entries) when the mention suggestion list opens. So gap 2 isn't fully fixed: the suggestion list or context-menu positioning still triggers it.
+- **gaming-livestream** (temporary `messaging` channel, reverted): sending works; `/mute` shows the notification; the thread opens in place, a reply raises the count, and close works.
+- **virtual-event:**
+  - Global chat and the thread (replies load) work.
+  - The Q&A upvote toggles 1 → 0 → 1.
+  - The DM list and DM view work.
+- **virtual-event moderation:** `client.moderation.mute` **still returns 403 "this endpoint needs a feature flag"** on `stream-chat@10.0.0-rc.34` (gap 12 is unchanged).
+
+Not a regression, though it looks like one: at a 1024px viewport, with social-messenger's 330px sidebar and a thread open, the channel slot is 252px. The message grid gives a bubble about 63px, so text wraps a word per line. The rc.3 baseline renders identically.
+
+### Round 2 gaps still open in the rc.4 guides
+
+Gaps 12 (moderation feature flag), 13 (`custom` is reserved in partial updates), 15 (`isDate` on nanosecond timestamps), 16 (registering a request handler from a component), 17 (thread in place of the channel) and 18 (errors in waves) have no matches in the rc.4 React guide or the current release-v10 JS guide. Gap 14 (stale keys in pre-built override objects) is mitigated by the new per-section greps, although §10's claim that a stale key is a compile error is still there.

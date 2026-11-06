@@ -6,6 +6,7 @@ import {
   Avatar,
   defaultMessageActionSet,
   DialogAnchor,
+  getRenderTextMentionEntities,
   IconEmoji,
   IconThread,
   MessageActions,
@@ -19,9 +20,11 @@ import {
   renderText as defaultRenderText,
   useDialog,
   useDialogIsOpen,
+  useIsRenderedAsThreadParent,
   useMessageContext,
+  useMessagePermissions,
+  useThreadContext,
   useTranslationContext,
-  useUserRole,
 } from 'stream-chat-react';
 
 import {PinIndicator} from './PinIndicator';
@@ -43,30 +46,32 @@ export const TeamMessage = () => {
     handleAction,
     handleOpenThread: handleOpenThreadContext,
     handleRetry,
-    initialMessage,
     message,
     onMentionsClickMessage,
     onMentionsHoverMessage,
     onUserClick,
     onUserHover,
     renderText = defaultRenderText,
-    threadList,
   } = useMessageContext();
   const { t, userLanguage } = useTranslationContext();
+  // rc.4 removed MessageContext's threadList and initialMessage; both are derived from the thread context
+  const threadList = !!useThreadContext();
+  const initialMessage = useIsRenderedAsThreadParent();
 
-  // getMessageActions() / MESSAGE_ACTIONS are gone in stream-chat-react 15; read permissions from the user role
-  const { canReact, canReply } = useUserRole(message);
+  // getMessageActions() / MESSAGE_ACTIONS are gone in stream-chat-react 15; read the message permissions
+  const { canReact, canReply } = useMessagePermissions(message);
   const shouldShowReplies = canReply && !threadList;
 
   const messageTextToRender = message.i18n?.[`${userLanguage}_text`] || message.text;
 
-  const messageMentionedUsersItem = message.mentioned_users;
-
-  const messageText = useMemo(() => renderText(messageTextToRender, messageMentionedUsersItem), [
-    messageMentionedUsersItem,
-    messageTextToRender,
-    renderText,
-  ]);
+  // renderText takes (text, options); mentions are passed as entities
+  const messageText = useMemo(
+    () =>
+      renderText(messageTextToRender, {
+        messageMentionEntities: getRenderTextMentionEntities(message),
+      }),
+    [message, messageTextToRender, renderText],
+  );
 
   const { closePinnedMessageListOpen } = useWorkspaceController();
   const handleOpenThread = (event: React.BaseSyntheticEvent) => {

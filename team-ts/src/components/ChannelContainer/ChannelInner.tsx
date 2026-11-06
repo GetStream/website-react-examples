@@ -15,7 +15,8 @@ export const ChannelInner = () => {
   return (
       <>
         <TeamChannelHeader />
-        <MessageList disableQuotedMessages={true} />
+        {/* disableQuotedMessages is removed; v14's default actions ignored it and showed Quote anyway */}
+        <MessageList />
         <MessageComposer minRows={1} maxRows={8} />
     </>
   );

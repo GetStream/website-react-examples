@@ -11,7 +11,7 @@ import { TeamMessage } from '../TeamMessage/TeamMessage';
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 import data from '@emoji-mart/data';
-import { init, SearchIndex } from 'emoji-mart';
+import { init } from 'emoji-mart';
 
 const LoadingIndicator = () => null;
 
@@ -33,7 +33,6 @@ export const ChannelContainer = () => {
           MessageComposerUI: TeamMessageInput,
           MessageUI: TeamMessage,
           TypingIndicator: TeamTypingIndicator,
-          emojiSearchIndex: SearchIndex,
         }}
       >
         {activeChannel ? (

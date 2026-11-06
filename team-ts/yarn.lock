@@ -2025,38 +2025,25 @@
   dependencies:
     "@sinonjs/commons" "^1.7.0"
 
-"@stream-io/escape-string-regexp@^5.0.1":
-  version "5.0.1"
-  resolved "https://registry.yarnpkg.com/@stream-io/escape-string-regexp/-/escape-string-regexp-5.0.1.tgz#362505c92799fea6afe4e369993fbbda8690cc37"
-  integrity sha512-qIaSrzJXieZqo2fZSYTdzwSbZgHHsT3tkd646vvZhh4fr+9nO4NlvqGmPF43Y+OfZiWf+zYDFgNiPGG5+iZulQ==
-
-"@stream-io/i18n@^1.0.2":
-  version "1.0.2"
-  resolved "https://registry.yarnpkg.com/@stream-io/i18n/-/i18n-1.0.2.tgz#7bad0b4bc9a296c7cc7c71d9fb8c047a68461df5"
-  integrity sha512-MEHITOnNFM7wOAoX1kdnZqTRGBl4J4aAfLPESueG6vY4s+SeyUyQ90BLqsveMIc/G0nFFOAkOr4SCNoiU9KGeA==
+"@stream-io/i18n@^1.1.0":
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/@stream-io/i18n/-/i18n-1.1.0.tgz#fad5e917172a470600e8a35977f2296795a71091"
+  integrity sha512-gi3ELTvNP1EIBPJGjSsxW7fkrVokDj9gUZfWpU6z6EFqJi5Kmnw/9PxPEPOk19dDYC3C3QSVr/Xh0/wDhOcOzw==
   dependencies:
-    "@stream-io/state-store" "^1.1.6"
+    "@stream-io/state-store" "^1.2.0"
     dayjs "^1.11.23"
     i18next "^26.4.2"
     use-sync-external-store "^1.7.0"
 
-"@stream-io/logger@^2.0.0":
-  version "2.0.0"
-  resolved "https://registry.yarnpkg.com/@stream-io/logger/-/logger-2.0.0.tgz#05db1cdf4fd5743935a85183bf1d3875e88aff97"
-  integrity sha512-cH9Gi/lAeDjLWB2J9xhPtiNOyRNNO9M46uT7507wT3MCouZNdlXDu/vgiGVhu3I/Tg7sG4ePlG5aHefJ6xjgmw==
+"@stream-io/logger@^2.1.0":
+  version "2.1.0"
+  resolved "https://registry.yarnpkg.com/@stream-io/logger/-/logger-2.1.0.tgz#c58659c13b663096f622c900f524f95b9945fd0f"
+  integrity sha512-JN4qgxK2J83Vs4sU/eoHwY3X1fIjoh+hfReuwZhwQBoOTPwNicgivAZTI47jGH3lzlHu2l5PvvpyhLO46HO0Gw==
 
-"@stream-io/state-store@^1.1.6":
-  version "1.1.6"
-  resolved "https://registry.yarnpkg.com/@stream-io/state-store/-/state-store-1.1.6.tgz#4a2bcbbfd93c5a43eb9021f7af46539adbc4ea10"
-  integrity sha512-4jZ7vub9EBh+zrNsA8cyW/4U2EuiCkO3T9FgZrbgorO2iBE4k8gP9GAl6w8Ikv+ZcO5jR53CeG+AA48UG3LOVQ==
-
-"@stream-io/transliterate@^1.5.5":
-  version "1.5.5"
-  resolved "https://registry.yarnpkg.com/@stream-io/transliterate/-/transliterate-1.5.5.tgz#38ef7710f0dc85ed3d4e976a00810fd4e00897c7"
-  integrity sha512-r6Qp0HylAZhHNWHxU1nGfRI2Dtkbs1iqLCnOp1bvKhv8yj0/sEUigN0dk0LGPbE4I7zDO3tppyd7PaTPBvvJkg==
-  dependencies:
-    "@stream-io/escape-string-regexp" "^5.0.1"
-    lodash.deburr "^4.1.0"
+"@stream-io/state-store@^1.2.0":
+  version "1.2.0"
+  resolved "https://registry.yarnpkg.com/@stream-io/state-store/-/state-store-1.2.0.tgz#6125ac222e78f2e89d30f433d1ffcba270ec60bf"
+  integrity sha512-cl5Sp6IVoV5lKNK2RtUnvJS+kvgxFbC7j9gXQHnprInXlz5r/XJMi0h6KZghEVMDd2NSDxvaaUU4a5RdlsAn+g==
 
 "@surma/rollup-plugin-off-main-thread@^2.2.3":
   version "2.2.3"
@@ -7220,11 +7207,6 @@ lodash.debounce@^4.0.8:
   resolved "https://registry.yarnpkg.com/lodash.debounce/-/lodash.debounce-4.0.8.tgz#82d79bff30a67c4005ffd5e2515300ad9ca4d7af"
   integrity sha512-FT1yDzDYEoYWhnSGnpE/4Kj1fLZkDFyqRb7fNt6FdYOSxlUWAtp42Eh6Wb0rGIv/m9Bgo7x4GhQbm5Ys4SG5ow==
 
-lodash.deburr@^4.1.0:
-  version "4.1.0"
-  resolved "https://registry.yarnpkg.com/lodash.deburr/-/lodash.deburr-4.1.0.tgz#ddb1bbb3ef07458c0177ba07de14422cb033ff9b"
-  integrity sha512-m/M1U1f3ddMCs6Hq2tAsYThTBDaAKFDX3dwDo97GEYzamXi9SqUpjWi/Rrj/gf3X2n8ktwgZrlP1z6E3v/IExQ==
-
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -10110,16 +10092,16 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@15.0.0-rc.3:
-  version "15.0.0-rc.3"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-15.0.0-rc.3.tgz#665d6fcb6a26e1c4755ffea05a3b0fff6a3c0936"
-  integrity sha512-YFmlH/Nb7Z9yUX0Uc9Jw9wIJg3CzKXTizs9vC2KrzpUglXUFmRag8wHbg63okPKvj6PtyZ14+i+NJIWNJ899Lg==
+stream-chat-react@15.0.0-rc.4:
+  version "15.0.0-rc.4"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-15.0.0-rc.4.tgz#41493548d3ae5b04766c994cf402d43ed7b9730e"
+  integrity sha512-8awbv4H8xKskNNPAL/25WD8OdreTj7SbUMGfYNURIY1j8Ux9DHQoq66ECj6IhOcxnBTu4U5xpZLTy/ZCm8KGtw==
   dependencies:
     "@braintree/sanitize-url" "^7.1.2"
     "@floating-ui/react" "^0.27.19"
     "@react-aria/focus" "^3.22.0"
-    "@stream-io/i18n" "^1.0.2"
-    "@stream-io/state-store" "^1.1.6"
+    "@stream-io/i18n" "^1.1.0"
+    "@stream-io/state-store" "^1.2.0"
     chart.js "^4.5.1"
     clsx "^2.1.1"
     emoji-regex "^9.2.2"
@@ -10146,17 +10128,15 @@ stream-chat-react@15.0.0-rc.3:
     unist-builder "^4.0.0"
     unist-util-visit "^5.1.0"
     use-sync-external-store "^1.7.0"
-    zod "^4.1.12"
-  optionalDependencies:
-    "@stream-io/transliterate" "^1.5.5"
+    zod "^4.2.0"
 
-stream-chat@10.0.0-rc.26:
-  version "10.0.0-rc.26"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-10.0.0-rc.26.tgz#45337e88351a137ffea5fe3923044a12944f7d7f"
-  integrity sha512-jr0LHOPip3Vo+KShSWvlL9Dx2gauHyXr8FK3kXcB2fkObzBkaiDlFg8So20FelOz0ITi04wD1DKa5OpMlaXtFg==
+stream-chat@10.0.0-rc.34:
+  version "10.0.0-rc.34"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-10.0.0-rc.34.tgz#1282ee1f5c85b6ee2d747fc3e23d3934997cdbef"
+  integrity sha512-7jZggC1LGLNfCaQqeTo/GVFpxpIdiNxepRwLIG27XBwY/IX3jbj5Crxwh90yfIrsGgB8xmnacClK9Ofmy3UGnA==
   dependencies:
-    "@stream-io/logger" "^2.0.0"
-    "@stream-io/state-store" "^1.1.6"
+    "@stream-io/logger" "^2.1.0"
+    "@stream-io/state-store" "^1.2.0"
     axios "^1.19.0"
     linkifyjs "^4.3.3"
 
@@ -11585,7 +11565,7 @@ yocto-queue@^0.1.0:
   resolved "https://registry.yarnpkg.com/yocto-queue/-/yocto-queue-0.1.0.tgz#0294eb3dee05028d31ee1a5fa2c556a6aaf10a1b"
   integrity sha512-rVksvsnNCdJ/ohGc6xgPwyN8eheCxsiLM8mxuE/t/mOVqJewPuO1miLpTHQiRgTKCLexL4MeAFVagts7HmNZ2Q==
 
-zod@^4.1.12:
+zod@^4.2.0:
   version "4.6.7"
   resolved "https://registry.yarnpkg.com/zod/-/zod-4.6.7.tgz#e806cf64a7f4e37635ce9f2f52c04c3766f75e5b"
   integrity sha512-g8W2D2kU6a8untc053fX1uVBKzM7yqAxW/3zwk83+6RyF2+SKOuV+c0wBDhUwzV1PaGapmZH+rmcUzPf+3CGwg==
