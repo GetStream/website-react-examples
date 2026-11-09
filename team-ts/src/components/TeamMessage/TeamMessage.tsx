@@ -1,14 +1,14 @@
 import clsx from 'clsx';
 import React, {ElementRef, useMemo, useRef} from 'react';
-import type {TranslationLanguages} from 'stream-chat';
 import {
+  asDynamicKey,
   Attachment,
   Avatar,
   defaultMessageActionSet,
   DialogAnchor,
+  getRenderTextMentionEntities,
   IconEmoji,
   IconThread,
-  MESSAGE_ACTIONS,
   MessageActions,
   MessageDeletedBubble,
   MessageReactions,
@@ -20,7 +20,10 @@ import {
   renderText as defaultRenderText,
   useDialog,
   useDialogIsOpen,
+  useIsRenderedAsThreadParent,
   useMessageContext,
+  useMessagePermissions,
+  useThreadContext,
   useTranslationContext,
 } from 'stream-chat-react';
 
@@ -39,37 +42,36 @@ const dropdownMessageActionSet = defaultMessageActionSet.filter(
 
 export const TeamMessage = () => {
   const {
-    getMessageActions,
     groupStyles,
     handleAction,
     handleOpenThread: handleOpenThreadContext,
     handleRetry,
-    initialMessage,
     message,
     onMentionsClickMessage,
     onMentionsHoverMessage,
     onUserClick,
     onUserHover,
     renderText = defaultRenderText,
-    threadList,
-  } = useMessageContext('MessageTeam');
-  const { t, userLanguage } = useTranslationContext('MessageTeam');
+  } = useMessageContext();
+  const { t, userLanguage } = useTranslationContext();
+  // rc.4 removed MessageContext's threadList and initialMessage; both are derived from the thread context
+  const threadList = !!useThreadContext();
+  const initialMessage = useIsRenderedAsThreadParent();
 
-  const messageActions = getMessageActions();
+  // getMessageActions() / MESSAGE_ACTIONS are gone in stream-chat-react 15; read the message permissions
+  const { canReact, canReply } = useMessagePermissions(message);
+  const shouldShowReplies = canReply && !threadList;
 
-  const shouldShowReplies = messageActions.indexOf(MESSAGE_ACTIONS.reply) > -1 && !threadList;
-  const canReact =  messageActions.indexOf(MESSAGE_ACTIONS.react) > -1;
+  const messageTextToRender = message.i18n?.[`${userLanguage}_text`] || message.text;
 
-  const messageTextToRender =
-    message.i18n?.[`${userLanguage}_text` as `${TranslationLanguages}_text`] || message.text;
-
-  const messageMentionedUsersItem = message.mentioned_users;
-
-  const messageText = useMemo(() => renderText(messageTextToRender, messageMentionedUsersItem), [
-    messageMentionedUsersItem,
-    messageTextToRender,
-    renderText,
-  ]);
+  // renderText takes (text, options); mentions are passed as entities
+  const messageText = useMemo(
+    () =>
+      renderText(messageTextToRender, {
+        messageMentionEntities: getRenderTextMentionEntities(message),
+      }),
+    [message, messageTextToRender, renderText],
+  );
 
   const { closePinnedMessageListOpen } = useWorkspaceController();
   const handleOpenThread = (event: React.BaseSyntheticEvent) => {
@@ -133,7 +135,7 @@ export const TeamMessage = () => {
                 <strong>{message.user?.name || message.user?.id}</strong>
                 {message.type === 'error' && (
                   <div className='str-chat__message-team-error-header'>
-                    {t('Only visible to you')}
+                    {t('attachment.visibilityDisclaimer.onlyVisible.text', 'Only visible to you')}
                   </div>
                 )}
               </div>
@@ -170,7 +172,7 @@ export const TeamMessage = () => {
                       </DialogAnchor>
                       <button
                         aria-expanded={reactionSelectorDialogIsOpen}
-                        aria-label={t('aria/Open Reaction Selector')}
+                        aria-label={t('common.openReactionSelector.ariaLabel', 'Open Reaction Selector')}
                         className='str-chat__message-reactions-button'
                         data-testid='message-reaction-action'
                         onClick={() => reactionSelectorDialog?.toggle()}
@@ -215,8 +217,8 @@ export const TeamMessage = () => {
               >
                 <ErrorIcon/>
                 {message.error?.status !== 403
-                  ? t('Message Failed · Click to try again')
-                  : t('Message Failed · Unauthorized')}
+                  ? t(asDynamicKey('teamDemo.message.failedRetry.text'), 'Message Failed · Click to try again')
+                  : t(asDynamicKey('teamDemo.message.failedUnauthorized.text'), 'Message Failed · Unauthorized')}
               </button>
             )}
           </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import type {CommandResponse} from "stream-chat";
+import type {Command} from "stream-chat";
 import {
   Avatar,
   EmojiSearchIndexResult,
@@ -48,7 +48,7 @@ const getCommandIcon = (name?: string) => {
 
 
 const CommandSuggestionItemComponent = (props: SuggestionListItemComponentProps) => {
-  const entity = props.entity as CommandResponse;
+  const entity = props.entity as Command;
   if (!entity) return null;
 
   const { description, Icon } = getCommandIcon(entity.name);

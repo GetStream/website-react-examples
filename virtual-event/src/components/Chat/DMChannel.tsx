@@ -1,14 +1,13 @@
 import React from 'react';
 import {Channel as StreamChannel} from 'stream-chat';
-import {Channel, type EmptyStateIndicatorProps, WithComponents} from 'stream-chat-react';
+import {type EmptyStateIndicatorProps, WithComponents} from 'stream-chat-react';
 
-import {ChannelInner} from './ChannelInner';
+import {ChannelWithThread} from './ChannelWithThread';
 import {EmptyStateIndicatorChannel} from './EmptyStateIndicators';
 import {GiphyPreview} from './GiphyPreview';
 import {MessageUI} from './MessageUI';
 import {MessageInputUI} from './MessageInputUI';
 import {CustomSuggestionList} from './SuggestionList';
-import {ThreadHeader} from './ThreadHeader';
 import {UserActionsDropdown} from './UserActionsDropdown';
 
 import {useBoolState} from '../../hooks/useBoolState';
@@ -25,8 +24,8 @@ const dmChannelOverrides = {
   EmptyStateIndicator: EmptyStateIndicatorDMChannel,
   GiphyPreviewMessage: GiphyPreview,
   MessageComposerUI: MessageInputUI,
-  ThreadHeader,
-  VirtualMessage: MessageUI,
+  // a message UI receives no props in v15
+  VirtualMessage: () => <MessageUI />,
 };
 
 type Props = {
@@ -62,9 +61,7 @@ export const DMChannel: React.FC<Props> = (props) => {
         />
       )}
       <WithComponents overrides={dmChannelOverrides}>
-        <Channel channel={dmChannel}>
-          <ChannelInner />
-        </Channel>
+        <ChannelWithThread channel={dmChannel} />
       </WithComponents>
     </div>
   );

@@ -1,24 +1,24 @@
-import { Channel, WithComponents } from 'stream-chat-react';
+import { Channel, ChannelPlaceholder, WithComponents } from 'stream-chat-react';
 
 import { AdminPanel } from '../AdminPanel/AdminPanel';
-import { ChannelInner } from './ChannelInner';
+import { ChannelInner, ThreadInner } from './ChannelInner';
 import { EmptyChannel } from '../EmptyChannel/EmptyChannel';
+import { PinnedMessageList } from '../PinnedMessageList/PinnedMessageList';
 import { TeamMessageInput } from '../TeamMessageInput/TeamMessageInput';
 import {TeamTypingIndicator} from '../TeamTypingIndicator/TeamTypingIndicator';
-import { ThreadHeader } from '../TeamChannelHeader/ThreadHeader';
 import { TeamMessage } from '../TeamMessage/TeamMessage';
 
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
 import data from '@emoji-mart/data';
-import { init, SearchIndex } from 'emoji-mart';
+import { init } from 'emoji-mart';
 
 const LoadingIndicator = () => null;
 
 init({data})
 
 export const ChannelContainer = () => {
-  const { activeWorkspace } = useWorkspaceController();
+  const { activeChannel, activeThread, activeWorkspace } = useWorkspaceController();
 
   if (activeWorkspace.match('Admin')) {
     return <AdminPanel/>;
@@ -31,15 +31,20 @@ export const ChannelContainer = () => {
           EmptyStateIndicator: EmptyChannel,
           LoadingIndicator,
           MessageComposerUI: TeamMessageInput,
-          Message: TeamMessage,
-          ThreadHeader,
+          MessageUI: TeamMessage,
           TypingIndicator: TeamTypingIndicator,
-          emojiSearchIndex: SearchIndex,
         }}
       >
-        <Channel>
-          <ChannelInner />
-        </Channel>
+        {activeChannel ? (
+          <Channel channel={activeChannel}>
+            <ChannelInner />
+          </Channel>
+        ) : (
+          <ChannelPlaceholder />
+        )}
+        {/* v15 <Channel> no longer lays out the thread beside itself; .channel__container is the row */}
+        {activeThread && <ThreadInner thread={activeThread} />}
+        {activeChannel && <PinnedMessageList channel={activeChannel} />}
       </WithComponents>
     </div>
   );

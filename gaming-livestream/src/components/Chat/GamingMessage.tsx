@@ -1,5 +1,5 @@
 import React, {MouseEventHandler, useCallback, useMemo, useState} from 'react';
-import {Attachment, MessageContextValue, useChannelActionContext, useMessageContext} from 'stream-chat-react';
+import {Attachment, MessageContextValue, useMessageContext} from 'stream-chat-react';
 
 import {UserIcon} from './UserIcon';
 import ActionDownVote from '../../assets/icons/ActionDownVote';
@@ -10,12 +10,13 @@ import ReactionUpVote from '../../assets/icons/ReactionUpVote';
 import {getColor} from '../../assets/data';
 
 import {TimestampContextValue, useMessageTimestamp} from "../../context/MessageTimestampController";
-import type {LocalMessage} from "stream-chat";
+import {convertTimestampToDate, type LocalMessage} from "stream-chat";
 
 const getTimeStamp = (messageCreatedAt?: LocalMessage['created_at']) => {
-	if (!messageCreatedAt) return '';
+	// unix nanoseconds in stream-chat v10
+	const createdAt = convertTimestampToDate(messageCreatedAt);
+	if (!createdAt) return '';
 
-	const createdAt = new Date(messageCreatedAt);
 	let lastHours: number | string = createdAt.getHours();
 	let lastMinutes: number | string = createdAt.getMinutes();
 	let half = 'AM';
@@ -113,7 +114,7 @@ const MessageContent = ({color, message, handleAction, timestampEnabled}: Messag
 	return (
 		<>
 			<div className='custom-message__content'>
-				<UserIcon type={message.user?.userRole}/>
+				<UserIcon type={message.user?.custom?.userRole}/>
 				{timestampEnabled && <span className='timestamp'>
             {getTimeStamp(message.created_at)}
           </span>}
@@ -130,17 +131,13 @@ const MessageContent = ({color, message, handleAction, timestampEnabled}: Messag
 }
 
 export const GamingMessage = () => {
-	const {openThread} = useChannelActionContext();
-	const {handleAction, message} = useMessageContext();
+	const {handleAction, handleOpenThread, message} = useMessageContext();
 	const {timestampEnabled} = useMessageTimestamp();
 	const [downVotes, setDownVotes] = useState(0);
 	const [upVotes, setUpVotes] = useState(0);
 
-	const onOpenThread: MouseEventHandler<HTMLElement> = useCallback((event) => {
-		const chatPanel = document.querySelector<HTMLDivElement>('.str-chat__main-panel');
-		if (chatPanel) chatPanel.style.display = 'none';
-		openThread(message, event);
-	}, [openThread, message]);
+	// opens through workspace navigation; ChannelContainer swaps the channel for the thread
+	const onOpenThread: MouseEventHandler<HTMLElement> = handleOpenThread;
 
 	const downVote: MouseEventHandler<HTMLButtonElement> = useCallback(() => {
 		setDownVotes((prev) => prev + 1)
@@ -151,7 +148,7 @@ export const GamingMessage = () => {
 	}, []);
 
 	const color = useMemo(() => {
-		return message.user?.color || getColor();
+		return message.user?.custom?.color || getColor();
 	}, [message?.id]); // eslint-disable-line
 
 	return (

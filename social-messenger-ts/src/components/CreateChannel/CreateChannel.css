@@ -222,12 +222,13 @@
   background: #3e3e41;
 }
 
-/* modifiers page structure */
-.str-chat__channel.messaging .messaging-create-channel + .str-chat__main-panel {
+/* modifiers page structure: the create panel replaces the channel and its thread */
+.str-chat__chat-view__slot .messaging-create-channel + .str-chat__channel {
   display: none;
 }
 
-.str-chat__channel.messaging .messaging-create-channel ~ .str-chat__thread {
+.str-chat__chat-view__channels:has(.messaging-create-channel)
+  .str-chat__chat-view__slot[data-slot='channel-thread'] {
   display: none;
 }
 

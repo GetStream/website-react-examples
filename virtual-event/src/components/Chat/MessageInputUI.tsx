@@ -3,9 +3,9 @@ import {
   CooldownTimer,
   TextareaComposer,
   useCooldownRemaining,
-  useMessageComposerContext,
   useMessageComposerController,
   useMessageComposerHasSendableData,
+  useMessageComposerSubmitFn,
   useStateStore
 } from 'stream-chat-react';
 
@@ -29,7 +29,7 @@ const CharacterCounter = () => {
 }
 
 const SendButton = () => {
-  const { handleSubmit } = useMessageComposerContext();
+  const handleSubmit = useMessageComposerSubmitFn();
   const cooldownRemaining = useCooldownRemaining();
   const {customDataManager, textComposer} = useMessageComposerController();
   const hasSendableData = useMessageComposerHasSendableData();

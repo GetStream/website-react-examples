@@ -24,16 +24,12 @@ body {
   min-width: 0;
 }
 
-.str-chat__main-panel {
-  flex: 1;
+.str-chat__chat-view__slot {
   min-width: 0;
 }
 
-.str-chat__chat-view__channels .str-chat__main-panel--thread-open {
-  display: none;
-}
-
-.str-chat__chat-view__channels .str-chat__thread {
+/* stream-chat-react 15: ChatView slots are equal-width siblings; size the thread panel by its slot */
+.str-chat__chat-view__slot[data-slot='channel-thread'] {
   flex: 0 1 var(--min-workspace-width);
   max-width: 45%;
 }
@@ -90,7 +86,7 @@ body {
     width: 100%;
   }
 
-  .str-chat__chat-view__channels .str-chat__thread {
+  .str-chat__chat-view__slot[data-slot='channel-thread'] {
     flex: 1;
     position: absolute;
     z-index: 1;

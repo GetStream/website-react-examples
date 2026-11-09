@@ -22,7 +22,7 @@ export const SearchResult: React.FC<SearchResultProps> = (props) => {
       <Avatar imageUrl={result.image} size='md' userName={result.name || result.id} />
       <div className='search-result-info'>
         <div className='search-result-info-name'>{result.name || result.id}</div>
-        <div className='search-result-info-title'>{result.title || 'Attendee'}</div>
+        <div className='search-result-info-title'>{result.custom?.title || 'Attendee'}</div>
       </div>
     </div>
   );

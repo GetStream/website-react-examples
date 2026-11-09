@@ -58,12 +58,13 @@ export const UserActionsModal: React.FC<Props> = (props) => {
     if (!actionUserId) return;
 
     try {
+      // stream-chat v10 moved these to client.moderation
       if (action === 'mute') {
-        await client.muteUser(actionUserId);
+        await client.moderation.mute({ target_ids: [actionUserId] });
       } else if (action === 'unmute') {
-        await client.unmuteUser(actionUserId);
+        await client.moderation.unmuteUser(actionUserId);
       } else if (action === 'flag') {
-        await client.flagUser(actionUserId);
+        await client.moderation.flagUser({ user_id: actionUserId });
       }
     } catch (err) {
       console.log(err);

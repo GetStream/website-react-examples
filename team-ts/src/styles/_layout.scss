@@ -45,6 +45,8 @@ body {
 }
 
 .channel__container {
+  /* stream-chat-react 15: the thread and pins panels are siblings of <Channel>, not inside it */
+  display: flex;
   height: 100%;
   width: 100%;
   min-width: 0;

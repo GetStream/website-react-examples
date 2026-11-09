@@ -2,17 +2,17 @@ import 'stream-chat';
 
 declare module 'stream-chat' {
   interface CustomChannelData {
-    name?: string;
+    // `name` / `image` are declared by stream-chat-react since 15.0.0-rc.4
     demo?: string;
   }
 
+  // stream-chat v10 nests these under `custom`; optional so request and fixture objects can omit them
   interface CustomUserData {
-    title: string;
+    title?: string;
   }
 
   interface CustomMessageData {
-    show_in_channel: boolean;
-    up_votes: string[]
+    up_votes?: string[];
   }
 
   interface CustomMessageComposerData {

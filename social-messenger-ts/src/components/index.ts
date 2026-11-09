@@ -8,3 +8,4 @@ export { default as MessagingSidebar } from './MessagingSidebar/MessagingSidebar
 export { default as MessagingThreadHeader } from './MessagingThreadHeader/MessagingThreadHeader';
 export {default as SendButton} from './SendButton/SendButton';
 export { default as WindowControls } from './WindowControls/WindowControls';
+export { default as ThreadInner } from './ThreadInner/ThreadInner';

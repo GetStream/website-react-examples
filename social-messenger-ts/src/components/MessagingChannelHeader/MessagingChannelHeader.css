@@ -10,7 +10,8 @@
   z-index: 1;
 }
 
-.str-chat__channel .str-chat__main-panel:not(:last-child) .messaging__channel-header {
+.str-chat__chat-view__channels:has(.str-chat__chat-view__slot[data-slot='channel-thread'] .str-chat__thread)
+  .messaging__channel-header {
   border-radius: 10px 0 0 0;
 }
 

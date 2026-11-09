@@ -1,18 +1,30 @@
-import {DialogManagerProvider, Message, useChannelStateContext } from 'stream-chat-react';
+import type { Channel, MessagePaginatorState } from 'stream-chat';
+import {
+  ChannelInstanceProvider,
+  DialogManagerProvider,
+  Message,
+  useStateStore,
+} from 'stream-chat-react';
 
 import { CloseThreadButton } from '../TeamChannelHeader/CloseThreadButton';
 
-import { TeamMessage } from '../TeamMessage/TeamMessage';
-
 import { useWorkspaceController } from '../../context/WorkspaceController';
 
-export const PinnedMessageList = () => {
+const pinnedMessagesSelector = ({ items }: MessagePaginatorState) => ({ items });
+
+// Rendered beside <Channel>, so the messages get their channel from ChannelInstanceProvider;
+// TeamMessage comes from the MessageUI override in ChannelContainer
+export const PinnedMessageList = ({ channel }: { channel: Channel }) => {
   const { pinnedMessageListOpen, togglePinnedMessageListOpen } = useWorkspaceController();
-  const { channel } = useChannelStateContext();
+  const { items: pinnedMessages } = useStateStore(
+    channel.pinnedMessagesPaginator.state,
+    pinnedMessagesSelector,
+  );
 
   if (!pinnedMessageListOpen) return null;
 
   return (
+    <ChannelInstanceProvider value={{ channel }}>
     <DialogManagerProvider id='pinned-message-list-dialog-manager'>
     <div className='pinned-messages__container'>
       <div className='pinned-messages__header'>
@@ -20,10 +32,9 @@ export const PinnedMessageList = () => {
         <CloseThreadButton onClick={togglePinnedMessageListOpen} />
       </div>
       <div className='pinned-messages__list'>
-        {channel.state.pinnedMessages.map((message) => (
+        {pinnedMessages?.map((message) => (
           <Message
             groupStyles={['single']}
-            Message={TeamMessage}
             key={message.id}
             message={message}
           />
@@ -31,5 +42,6 @@ export const PinnedMessageList = () => {
       </div>
     </div>
     </DialogManagerProvider>
+    </ChannelInstanceProvider>
   );
 };

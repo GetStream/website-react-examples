@@ -22,14 +22,13 @@ export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string
   useEffect(() => {
     const notify = notifyParent(targetOrigin);
 
-    const handleNewEvent = (props: Event) => {
-      const { message, type } = props;
-
-      switch (type) {
+    const handleNewEvent = (event: Event) => {
+      switch (event.type) {
         case 'reaction.new':
           notify(REACT_TO_MESSAGE);
           break;
-        case 'message.new':
+        case 'message.new': {
+          const { message } = event;
           if (message && message.command === 'giphy') {
             notify(RUN_GIPHY);
             break;
@@ -55,6 +54,7 @@ export const useChecklist = (chatClient: StreamChat | null, targetOrigin: string
           }
           notify(SEND_MESSAGE);
           break;
+        }
         default:
           break;
       }

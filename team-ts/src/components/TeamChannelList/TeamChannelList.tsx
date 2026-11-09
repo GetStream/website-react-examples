@@ -1,31 +1,43 @@
-import React, { PropsWithChildren, useCallback } from 'react';
+import React, { useCallback } from 'react';
 
 import { AddChannelButton } from './AddChannelButton';
 
 import { useWorkspaceController, Workspace } from '../../context/WorkspaceController';
 
-import type { ChannelListUIProps } from 'stream-chat-react';
+import type { ChannelPaginator } from 'stream-chat';
+import { ChannelList, useChannelPaginatorState, WithComponents } from 'stream-chat-react';
 import clsx from "clsx";
 
-export type TeamChannelListProps = ChannelListUIProps & {
+export type TeamChannelListProps = {
+  EmptyListIndicator: React.ComponentType;
+  paginator: ChannelPaginator;
   type: string;
 };
 
-const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
+// stream-chat-react 15 removed the ChannelListUI slot, so the section wraps the list instead
+const ChannelListSection = (props: TeamChannelListProps) => {
   const {
-    children,
-    error = false,
-    loading,
+    EmptyListIndicator,
+    paginator,
     type,
   } = props;
 
   const { displayWorkspace } = useWorkspaceController();
+  const { lastQueryError } = useChannelPaginatorState(paginator);
 
   const handleAddChannelClick = useCallback(() => {
     displayWorkspace(`Admin-Admin-Channel-Create__${type}` as Workspace);
   }, [type, displayWorkspace]);
 
-  if (error) {
+  const FirstPageLoadingIndicator = useCallback(() => (
+    <div className='team-channel-list'>
+      <p className='team-channel-list__message loading'>
+        {type === 'team' ? 'Channels' : 'Messages'} loading....
+      </p>
+    </div>
+  ), [type]);
+
+  if (lastQueryError) {
     return type === 'team' ? (
       <div className='team-channel-list'>
         <p className='team-channel-list__message'>
@@ -33,16 +45,6 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
         </p>
       </div>
     ) : null;
-  }
-
-  if (loading) {
-    return (
-      <div className='team-channel-list'>
-        <p className='team-channel-list__message loading'>
-          {type === 'team' ? 'Channels' : 'Messages'} loading....
-        </p>
-      </div>
-    );
   }
 
   return (
@@ -54,9 +56,11 @@ const ChannelList = (props: PropsWithChildren<TeamChannelListProps>) => {
         <AddChannelButton onClick={handleAddChannelClick}
         />
       </div>
-      {children}
+      <WithComponents overrides={{ EmptyListIndicator, FirstPageLoadingIndicator }}>
+        <ChannelList paginator={paginator} />
+      </WithComponents>
     </div>
   );
 };
 
-export const TeamChannelList = React.memo(ChannelList);
+export const TeamChannelList = React.memo(ChannelListSection);

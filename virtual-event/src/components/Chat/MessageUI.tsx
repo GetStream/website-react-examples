@@ -1,15 +1,16 @@
-import React, { BaseSyntheticEvent, useCallback, useEffect, useState } from 'react';
+import React, { useCallback, useEffect, useState } from 'react';
 import {
   Attachment,
   Avatar,
-  isDate,
   MessageReactions,
   MessageRepliesCountButton,
-  MessageUIComponentProps,
-  useChannelActionContext,
-  useChannelStateContext,
+  useChannel,
   useChatContext,
   useMessageContext,
+  useMessagePaginator,
+  useStateStore,
+  useThreadContext,
+  useWorkspaceNavigation,
   WithComponents,
 } from 'stream-chat-react';
 
@@ -21,9 +22,16 @@ import { useEventContext } from '../../contexts/EventContext';
 
 import { useOnClickOutside } from '../../hooks/useOnClickOutside';
 import { useBoolState } from '../../hooks/useBoolState';
-import {formatMessage, LocalMessage} from "stream-chat";
+import {convertTimestampToDate, formatMessage, type LocalMessage, type MessagePaginatorState} from "stream-chat";
 
 const reactionOverrides = { reactionOptions: customReactions };
+
+// ids only, so a message re-renders when the list's ends change, not on every list update
+const listEndsSelector = ({ items }: MessagePaginatorState) => ({
+  firstId: items?.[0]?.id,
+  lastId: items?.[items.length - 1]?.id,
+  secondLastId: items?.[items.length - 2]?.id,
+});
 
 
 
@@ -48,7 +56,7 @@ const MessageOptions: React.FC<OptionsProps> = (props) => {
     showReactionSelector,
   } = props;
 
-  const { thread } = useChannelStateContext();
+  const thread = useThreadContext();
   const { handleOpenThread, isMyMessage, message } = useMessageContext();
 
   const hideActions = (thread && isMyMessage()) || (!thread && message.show_in_channel);
@@ -129,29 +137,23 @@ const UpvoteButton = () => {
   const { client } = useChatContext();
   const { message } = useMessageContext();
 
-  const userUpVoted = client.userID && message.up_votes?.includes(client.userID);
+  const upVotes = message.custom?.up_votes;
+  const userUpVoted = client.userID && upVotes?.includes(client.userID);
 
   const handleClick = useCallback(
     async (event: React.MouseEvent) => {
       event.stopPropagation();
+      if (!client.userID) return;
 
-      if (!message.up_votes && client.userID) {
-        return await client.updateMessage({
-          ...message,
-          up_votes: [client.userID],
-        });
-      }
+      const up_votes = upVotes?.includes(client.userID)
+        ? upVotes.filter((userID) => userID !== client.userID)
+        : [...(upVotes ?? []), client.userID];
 
-      const updatedMessage = {
-        ...message,
-        up_votes: (client.userID && message.up_votes.includes(client.userID)
-          ? message.up_votes.filter((userID: string) => userID !== client.userID)
-          :  [...message.up_votes, client.userID]) as string[],
-      };
-
-      return await client.updateMessage(updatedMessage);
+      // reads come from message.custom in stream-chat v10, but a partial update sets custom fields
+      // as top-level keys: the server rejects `set: { custom }` ("field `custom` is reserved")
+      return await client.updateMessagePartial({ id: message.id }, { set: { up_votes } });
     },
-    [client, message],
+    [client, message, upVotes],
   );
 
   return (
@@ -160,7 +162,7 @@ const UpvoteButton = () => {
       onClick={handleClick}
     >
       <UpvoteThumb />
-      <div className='message-ui-upvote-button-text'>{message.up_votes?.length || 0}</div>
+      <div className='message-ui-upvote-button-text'>{upVotes?.length || 0}</div>
     </div>
   );
 };
@@ -180,25 +182,29 @@ const OpenInThreadButton = (props: React.ComponentProps<'button'>) => (
 const searchRequestLock = Promise.resolve();
 
 const OpenThreadButton = () => {
-  const { openThread } = useChannelActionContext();
-  const { channel, thread } = useChannelStateContext();
+  const { client } = useChatContext();
+  const { openThread } = useWorkspaceNavigation();
+  const channel = useChannel();
+  const thread = useThreadContext();
   const { handleOpenThread, message } = useMessageContext();
   const [threadParent, setThreadParent] = useState<LocalMessage>();
 
   const customOpenThread = useCallback(
-    (event: BaseSyntheticEvent) => {
-      return threadParent ? openThread(threadParent, event) : handleOpenThread(event);
+    (event: React.MouseEvent) => {
+      return threadParent
+        ? openThread({ channel, message: threadParent }, { event })
+        : handleOpenThread(event);
     },
-    [threadParent, openThread, handleOpenThread],
+    [channel, threadParent, openThread, handleOpenThread],
   );
 
   useEffect(() => {
     const getMessage = async () => {
-      if (threadParent || (thread && message.type === 'reply')) return;
+      if (threadParent || (thread && message.type === 'reply') || !message.parent_id) return;
 
       try {
-        const { results } = await channel.search({ id: { $eq: message.parent_id || '' } });
-        const foundMessage = results[0]?.message;
+        // channel.search() is removed in stream-chat v10; fetch the parent by id
+        const { message: foundMessage } = await client.getMessage({ id: message.parent_id });
 
         if (foundMessage) {
           setThreadParent(formatMessage(foundMessage));
@@ -228,14 +234,13 @@ const OpenThreadButton = () => {
   );
 };
 
-export const MessageUI: React.FC<
-  MessageUIComponentProps & {
-    setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>>;
-  }
-> = (props) => {
+export const MessageUI: React.FC<{
+  setMessageActionUser?: React.Dispatch<React.SetStateAction<string | undefined>>;
+}> = (props) => {
   const { setMessageActionUser } = props;
 
-  const { messages } = useChannelStateContext();
+  // the thread's paginator inside a thread, the channel's otherwise
+  const { firstId, lastId, secondLastId } = useStateStore(useMessagePaginator().state, listEndsSelector);
   const { chatType, themeModalOpen } = useEventContext();
   const { message } = useMessageContext();
 
@@ -250,22 +255,21 @@ export const MessageUI: React.FC<
   }, []);
 
   const getTimeSinceMessage = useCallback(() => {
-    if (!message.created_at) return null;
+    // unix nanoseconds in stream-chat v10; v14's isDate() check would now always be false
+    const createdAt = convertTimestampToDate(message.created_at);
+    if (!createdAt) return null;
 
-    const secondsSinceLastMessage = isDate(message.created_at)
-      ? (Date.now() - message.created_at.getTime()) / 1000
-      : 0;
+    const secondsSinceLastMessage = (Date.now() - createdAt.getTime()) / 1000;
 
     return getFormattedTime(secondsSinceLastMessage);
   }, [message]);
 
-  const isRecentMessage =
-    messages?.[messages.length - 1].id === message.id ||
-    messages?.[messages.length - 2]?.id === message.id;
+  const isRecentMessage = lastId === message.id || secondLastId === message.id;
 
-  const isTopMessage = messages?.[0].id === message.id;
+  const isTopMessage = firstId === message.id;
 
-  const showTitle = message.user?.title === 'Admin' || message.user?.title === 'Moderator';
+  const userTitle = message.user?.custom?.title;
+  const showTitle = userTitle === 'Admin' || userTitle === 'Moderator';
 
   const isQA = chatType === 'qa';
 
@@ -296,7 +300,7 @@ export const MessageUI: React.FC<
       <div className='message-ui-content'>
         <div className='message-ui-content-top'>
           <div className='message-ui-content-top-name'>{message.user.name || message.user.id}</div>
-          {showTitle && <div className='message-ui-content-top-title'>{message.user.title}</div>}
+          {showTitle && <div className='message-ui-content-top-title'>{userTitle}</div>}
           <div className='message-ui-content-top-time'>{getTimeSinceMessage()}</div>
         </div>
         <div className='message-ui-content-bottom'>{message.text}</div>

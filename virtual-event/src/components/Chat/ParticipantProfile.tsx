@@ -19,7 +19,7 @@ type Props = {
 
 export const ParticipantProfile = (props: Props) => {
   const { participantProfile, setDmChannel, setParticipantProfile } = props;
-  const { id, image, name, online, title } = participantProfile;
+  const { custom, id, image, name, online } = participantProfile;
 
   const { client } = useChatContext();
   const { setChatType, setShowChannelList } = useEventContext();
@@ -35,12 +35,13 @@ export const ParticipantProfile = (props: Props) => {
     if (!client.userID) return;
 
     try {
-      const newChannel = client.channel('messaging', {
-        demo: 'virtual-event',
-        members: [client.userID, id],
-      });
-
-      await newChannel.watch();
+      // watch() resolves with the instance the client keeps for the new cid; render that one
+      const newChannel = await client
+        .channel('messaging', {
+          custom: { demo: 'virtual-event' },
+          members: [{ user_id: client.userID }, { user_id: id }],
+        })
+        .watch();
 
       setChatType('direct');
       setShowChannelList(true);
@@ -81,7 +82,7 @@ export const ParticipantProfile = (props: Props) => {
           {online && <div className='profile-details-top-online' />}
           <div className='profile-details-top-name'>{name || id}</div>
         </div>
-        <div className='profile-details-title'>{title || 'Attendee'}</div>
+        <div className='profile-details-title'>{custom?.title || 'Attendee'}</div>
         <div className='profile-details-logos'>
           <TwitterLogo />
           <LinkedInLogo />

@@ -1,10 +1,19 @@
-import React, { useCallback, useContext, useState } from 'react';
+import React, { useCallback, useContext, useMemo, useState } from 'react';
+import { type Channel, Thread } from 'stream-chat';
+import {
+  defaultWorkspaceNavigation,
+  useChatContext,
+  type WorkspaceNavigation,
+  WorkspaceNavigationProvider,
+} from 'stream-chat-react';
 
 const noop = () => Promise.resolve();
 
 export type Workspace = 'Chat' | 'Admin-Channel-Edit' | 'Admin-Channel-Create__team' | 'Admin-Channel-Create__messaging';
 
 type WorkspaceContext = {
+  activeChannel?: Channel;
+  activeThread?: Thread;
   activeWorkspace: Workspace;
   closeAdminPanel: () => void;
   displayWorkspace: (w: Workspace) => void;
@@ -24,8 +33,12 @@ const WorkspaceControllerContext = React.createContext<WorkspaceContext>({
 
 
 export const WorkspaceController = ({ children }: { children: React.ReactNode }) => {
+  const { client } = useChatContext();
   const [activeWorkspace, setActiveWorkspace] = useState<Workspace>('Chat');
   const [pinnedMessageListOpen, setPinnedMessageListOpen] = useState(false);
+  // stream-chat-react 15 no longer tracks the active channel in ChatContext; the app owns it
+  const [activeChannel, setActiveChannel] = useState<Channel>();
+  const [activeThread, setActiveThread] = useState<Thread>();
 
   const displayWorkspace: WorkspaceContext['displayWorkspace'] = useCallback((workspace) => {
     setActiveWorkspace(workspace);
@@ -39,8 +52,36 @@ export const WorkspaceController = ({ children }: { children: React.ReactNode })
   const togglePinnedMessageListOpen = useCallback(() => setPinnedMessageListOpen((prev) => !prev), []);
   const closePinnedMessageListOpen = useCallback(() => setPinnedMessageListOpen(false), []);
 
+  // Channel list rows, search results and a message's reply button open through workspace navigation
+  const navigation = useMemo<WorkspaceNavigation>(
+    () => ({
+      ...defaultWorkspaceNavigation,
+      closeThread: () => setActiveThread(undefined),
+      isChannelActive: (cid) => !!cid && cid === activeChannel?.cid,
+      isThreadActive: (threadId) => !!threadId && threadId === activeThread?.id,
+      isThreadDismissable: (threadId) => !!threadId && threadId === activeThread?.id,
+      openChannel: (channel) => {
+        setActiveChannel(channel);
+        setActiveThread(undefined);
+      },
+      openChannels: activeChannel ? [activeChannel] : [],
+      openThread: (target) => {
+        setPinnedMessageListOpen(false);
+        setActiveThread(
+          target instanceof Thread
+            ? target
+            : client.threads.ensure({ channel: target.channel, parentMessage: target.message }),
+        );
+      },
+      openThreads: activeThread ? [activeThread] : [],
+    }),
+    [activeChannel, activeThread, client],
+  );
+
   return (
     <WorkspaceControllerContext.Provider value={{
+      activeChannel,
+      activeThread,
       activeWorkspace,
       closeAdminPanel,
       displayWorkspace,
@@ -48,7 +89,9 @@ export const WorkspaceController = ({ children }: { children: React.ReactNode })
       closePinnedMessageListOpen,
       togglePinnedMessageListOpen,
     }}>
-      {children}
+      <WorkspaceNavigationProvider value={navigation}>
+        {children}
+      </WorkspaceNavigationProvider>
     </WorkspaceControllerContext.Provider>
   );
 };

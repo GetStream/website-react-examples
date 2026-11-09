@@ -25,8 +25,11 @@ const targetOrigin = urlParams.get('target_origin') || process.env.REACT_APP_TAR
 
 const userToConnect = {
   id: userId!,
-  color: getColor(),
-  userRole: getRandomUserRole(),
+  // custom user fields are nested under `custom` in stream-chat v10
+  custom: {
+    color: getColor(),
+    userRole: getRandomUserRole(),
+  },
 };
 
 export const GamingChat = () => {

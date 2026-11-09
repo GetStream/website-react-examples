@@ -1,16 +1,18 @@
-import React, {PropsWithChildren, ReactNode, useMemo} from 'react';
-import type {
-  Channel as StreamChannel,
-  ChannelFilters,
-  ChannelOptions,
-  ChannelSort,
-  UserResponse,
+import React, {useEffect, useMemo} from 'react';
+import {
+  type Channel as StreamChannel,
+  type ChannelFilters,
+  ChannelPaginator,
+  nsToMs,
+  type SortParamRequest,
+  type UserResponse,
 } from 'stream-chat';
 import {
   Avatar,
   ChannelList,
   ChannelListItemUIProps,
-  ChannelListUIProps,
+  SummarizedMessagePreview,
+  useChannelPaginatorState,
   useChatContext,
   WithComponents,
 } from 'stream-chat-react';
@@ -43,26 +45,13 @@ const ListWrapper = ({ children }: PropsWithChildrenOnly) => {
   return <div className='dm-list'>{children}</div>;
 };
 
-const ListUI = ({ children, error, loading }: PropsWithChildren<ChannelListUIProps>) => {
-  if (loading) {
-    return (
-      <ListWrapper>
-        <SkeletonLoader />
-      </ListWrapper>
-    );
-  }
-
-  if (error) {
-    return (
-      <ListWrapper>
-        <div className='dm-error'>
-          Error fetching direct messages, please try again momentarily.
-        </div>
-      </ListWrapper>
-    );
-  }
-
-  return <ListWrapper>{children}</ListWrapper>;
+// ChannelListUI is gone: the list renders the loading slot itself, and query errors are read from the paginator
+const ListError = ({ paginator }: { paginator: ChannelPaginator }) => {
+  const { lastQueryError } = useChannelPaginatorState(paginator);
+  if (!lastQueryError) return null;
+  return (
+    <div className='dm-error'>Error fetching direct messages, please try again momentarily.</div>
+  );
 };
 
 type PreviewUIProps = ChannelListItemUIProps & {
@@ -70,12 +59,14 @@ type PreviewUIProps = ChannelListItemUIProps & {
 };
 
 const PreviewUI = (props: PreviewUIProps) => {
-  const { channel, displayImage, displayTitle, latestMessagePreview, setDmChannel, unread } = props;
+  const { channel, displayImage, displayTitle, previewedMessage, setDmChannel, unread } = props;
 
   const { client } = useChatContext();
 
-  const secondsSinceLastMessage = channel.state?.last_message_at
-    ? (Date.now() - channel.state.last_message_at.getTime()) / 1000
+  // channel.state.last_message_at moved to the message paginator (unix nanoseconds)
+  const latestMessageAt = channel.messagePaginator.latestMessageAt;
+  const secondsSinceLastMessage = latestMessageAt
+    ? (Date.now() - nsToMs(latestMessageAt)) / 1000
     : 0;
 
   const formattedTime = getFormattedTime(secondsSinceLastMessage);
@@ -95,7 +86,9 @@ const PreviewUI = (props: PreviewUIProps) => {
           <div>{displayTitle}</div>
           <div>{formattedTime}</div>
         </div>
-        <div className={`dm-list-preview-bottom ${unread ? 'unread' : ''}`}>{latestMessagePreview as ReactNode}</div>
+        <div className={`dm-list-preview-bottom ${unread ? 'unread' : ''}`}>
+          <SummarizedMessagePreview latestMessage={previewedMessage} />
+        </div>
       </div>
       <ClickDMIcon />
     </div>
@@ -116,19 +109,38 @@ export const DMChannelList: React.FC<Props> = (props) => {
   const { client } = useChatContext();
   const { searching, setSearching } = useEventContext();
 
-  const filters: ChannelFilters = {
-    type: 'messaging',
-    demo: 'virtual-event',
-    members: { $in: [client.userID || ''] },
-  };
-  const options: ChannelOptions = { state: true, presence: true, limit: 10 };
-  const sort: ChannelSort = { last_message_at: -1 };
+  // v14 ChannelList queried on mount; this list mounts with the DM tab, so the paginator lives here too
+  const paginator = useMemo(() => {
+    const filters: ChannelFilters = {
+      type: 'messaging',
+      'custom.demo': 'virtual-event',
+      members: { $in: [client.userID || ''] },
+    };
+    const sort: SortParamRequest[] = [{ direction: -1, field: 'last_message_at' }];
+    return new ChannelPaginator({
+      client,
+      filters,
+      id: 'virtual-event:dms',
+      paginatorOptions: { pageSize: 10 },
+      requestOptions: { presence: true, state: true },
+      sort,
+    });
+  }, [client]);
+
+  useEffect(() => {
+    // registered so the list receives WebSocket updates
+    client.channelManager.insertPaginator({ paginator });
+    return () => {
+      client.channelManager.removePaginator(paginator);
+    };
+  }, [client, paginator]);
 
   const channelListOverrides = useMemo(
     () => ({
       // The DM tab has no header; hide the "Chats" header stream-chat-react 14 adds
       ChannelListHeader: NoChannelListHeader,
-      ChannelListUI: ListUI,
+      EmptyListIndicator: EmptyStateIndicators,
+      FirstPageLoadingIndicator: SkeletonLoader,
       ChannelListItemUI: (props: ChannelListItemUIProps) => (
         <PreviewUI {...props} setDmChannel={setDmChannel} />
       ),
@@ -148,13 +160,10 @@ export const DMChannelList: React.FC<Props> = (props) => {
       <div className='dm'>
         {dmChannel && <DMChannel dmChannel={dmChannel} setDmChannel={setDmChannel} />}
         <WithComponents overrides={channelListOverrides}>
-          <ChannelList
-            EmptyStateIndicator={EmptyStateIndicators}
-            filters={filters}
-            options={options}
-            setActiveChannelOnMount={false}
-            sort={sort}
-          />
+          <ListWrapper>
+            <ListError paginator={paginator} />
+            <ChannelList paginator={paginator} />
+          </ListWrapper>
         </WithComponents>
         <div className='start-chat'>
           <div className='start-chat-button' onClick={() => setSearching(true)}>

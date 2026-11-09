@@ -73,7 +73,7 @@ export const useInitChat = () => {
 
   useEffect(() => {
     const handleMessage = (event: Event) => {
-      if (!currentChannel?.id || !event.channel_id) return;
+      if (event.type !== 'message.new' || !currentChannel?.id || !event.channel_id) return;
 
       if (currentChannel.id !== event.channel_id) {
         setUnreadStatus(event.channel_id, true);
@@ -88,6 +88,7 @@ export const useInitChat = () => {
   }, [chatClient, currentChannel]);
 
   const handleDmMessages = (event: Event) => {
+    if (event.type !== 'message.new' && event.type !== 'notification.message_new') return;
     if (event.channel_type !== 'messaging') return;
     setDmUnread(true);
   };
@@ -111,12 +112,12 @@ export const useInitChat = () => {
           id: userId,
           name: userName,
           image: `https://getstream.io/random_svg/?name=${userName}`,
-          title: userId === 'daddy' ? 'Admin' : getRandomTitle(),
+          custom: { title: userId === 'daddy' ? 'Admin' : getRandomTitle() },
         },
         userToken,
       );
 
-      const globalChannel = client.channel('livestream', 'global-ve2', { name: 'global' });
+      const globalChannel = client.channel('livestream', 'global-ve2', { custom: { name: 'global' } });
       await globalChannel.watch({ watchers: { limit: 100 } });
 
       client.on('message.new', handleDmMessages);

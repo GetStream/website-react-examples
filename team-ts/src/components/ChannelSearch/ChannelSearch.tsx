@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useState } from 'react';
 
 import type { Channel, UserResponse } from 'stream-chat';
-import { useChatContext } from 'stream-chat-react';
+import { useChatContext, useWorkspaceNavigation } from 'stream-chat-react';
 import _debounce from 'lodash.debounce';
 
 import { channelByUser, ChannelOrUserType, isChannel } from './utils';
@@ -10,7 +10,8 @@ import { ResultsDropdown } from './ResultsDropdown';
 import { SearchIcon } from '../../assets';
 
 export const ChannelSearch = () => {
-  const { client, setActiveChannel } = useChatContext();
+  const { client } = useChatContext();
+  const { openChannel } = useWorkspaceNavigation();
 
   const [allChannels, setAllChannels] = useState<ConcatArray<ChannelOrUserType> | undefined>();
   const [teamChannels, setTeamChannels] = useState<
@@ -43,9 +44,9 @@ export const ChannelSearch = () => {
           const channelToCheck = allChannels[focused];
 
           if (isChannel(channelToCheck)) {
-            setActiveChannel(channelToCheck);
+            setChannel(channelToCheck);
           } else {
-            channelByUser({ client, setActiveChannel, user: channelToCheck });
+            channelByUser({ client, openChannel, user: channelToCheck });
           }
         }
 
@@ -54,7 +55,7 @@ export const ChannelSearch = () => {
         setQuery('');
       }
     },
-    [allChannels, client, focused, setActiveChannel], // eslint-disable-line react-hooks/exhaustive-deps
+    [allChannels, client, focused, openChannel], // eslint-disable-line react-hooks/exhaustive-deps
   );
 
   useEffect(() => {
@@ -81,25 +82,27 @@ export const ChannelSearch = () => {
     channel: Channel,
   ) => {
     setQuery('');
-    setActiveChannel(channel);
+    // a no-op for a channel that is already watched and loaded
+    channel.watch().then(openChannel);
   };
 
   const getChannels = async (text: string) => {
     try {
-      const channelResponse = client.queryChannels(
-        {
+      const channelResponse = client.queryChannelsAndHydrate({
+        filter_conditions: {
           type: 'team',
           name: { $autocomplete: text },
         },
-        {},
-        { limit: 5 },
-      );
+        limit: 5,
+      });
 
-      const userResponse = client.queryUsers(
-        { name: { $autocomplete: text } },
-        { id: 1 },
-        { limit: 5 },
-      );
+      const userResponse = client.queryUsers({
+        payload: {
+          filter_conditions: { name: { $autocomplete: text } },
+          limit: 5,
+          sort: [{ field: 'id', direction: 1 }],
+        },
+      });
 
       const [channels, { users }] = await Promise.all([channelResponse, userResponse]);
       const otherUsers = users.filter((user) => user.id !== client.userID);
