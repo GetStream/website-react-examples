@@ -9959,10 +9959,10 @@ stop-iteration-iterator@^1.0.0:
   dependencies:
     internal-slot "^1.0.4"
 
-stream-chat-react@15.0.0-rc.4:
-  version "15.0.0-rc.4"
-  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-15.0.0-rc.4.tgz#41493548d3ae5b04766c994cf402d43ed7b9730e"
-  integrity sha512-8awbv4H8xKskNNPAL/25WD8OdreTj7SbUMGfYNURIY1j8Ux9DHQoq66ECj6IhOcxnBTu4U5xpZLTy/ZCm8KGtw==
+stream-chat-react@^15.0.0:
+  version "15.0.0"
+  resolved "https://registry.yarnpkg.com/stream-chat-react/-/stream-chat-react-15.0.0.tgz#9aaa7f92b01f2354f8ac29d3e65b28c9f0d2d760"
+  integrity sha512-XuO9hddCcIW/BBNMtnYkZJtjzX1y3n4Aw1WDsEOzlwq4qU+yoCqkirMMUk1/h8Yh+1o25dGDAC7kS+mzBuzlOg==
   dependencies:
     "@braintree/sanitize-url" "^7.1.2"
     "@floating-ui/react" "^0.27.19"
@@ -9997,10 +9997,10 @@ stream-chat-react@15.0.0-rc.4:
     use-sync-external-store "^1.7.0"
     zod "^4.2.0"
 
-stream-chat@10.0.0-rc.34:
-  version "10.0.0-rc.34"
-  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-10.0.0-rc.34.tgz#1282ee1f5c85b6ee2d747fc3e23d3934997cdbef"
-  integrity sha512-7jZggC1LGLNfCaQqeTo/GVFpxpIdiNxepRwLIG27XBwY/IX3jbj5Crxwh90yfIrsGgB8xmnacClK9Ofmy3UGnA==
+stream-chat@^10.0.0:
+  version "10.0.0"
+  resolved "https://registry.yarnpkg.com/stream-chat/-/stream-chat-10.0.0.tgz#4ad2e288ae6ae7c6d90d616a0922573a907af273"
+  integrity sha512-JWRhl8GXWhR5+DgJbtSfs1y7YGtOPJrKsegMK3NUMkAO/giMPy15ztEXXJqeggvLOScTdQz8JwytXAX0SCXoVA==
   dependencies:
     "@stream-io/logger" "^2.1.0"
     "@stream-io/state-store" "^1.2.0"

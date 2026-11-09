@@ -12,8 +12,8 @@
     "lodash.debounce": "^4.0.8",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
-    "stream-chat": "10.0.0-rc.34",
-    "stream-chat-react": "15.0.0-rc.4"
+    "stream-chat": "^10.0.0",
+    "stream-chat-react": "^15.0.0"
   },
   "devDependencies": {
     "@types/jest": "^27.5.2",

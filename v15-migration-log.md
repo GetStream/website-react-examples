@@ -5,7 +5,7 @@ Apps:
 - Round 1: `social-messenger-ts` (uses `ChatView`) and `team-ts` (custom layout, no `ChatView`).
 - Round 2: `gaming-livestream` (one channel, thread replaces it in place) and `virtual-event` (several livestream channels + a DM list, thread replaces the channel in place). See [round 2](#round-2-gaming-livestream-and-virtual-event).
 
-Installed: `stream-chat-react@15.0.0-rc.3`, `stream-chat@10.0.0-rc.26`; bumped to `15.0.0-rc.4` / `10.0.0-rc.34` afterwards ([rc.4 bump](#rc4-bump-all-four-apps)).
+Installed: `stream-chat-react@15.0.0-rc.3`, `stream-chat@10.0.0-rc.26`; bumped to `15.0.0-rc.4` / `10.0.0-rc.34`, then to the stable `15.0.0` / `10.0.0` ([rc.4 bump](#rc4-bump-all-four-apps), [stable release](#stable-release-1500--1000)).
 
 Guides tested:
 
@@ -276,3 +276,21 @@ Not a regression, though it looks like one: at a 1024px viewport, with social-me
 ### Round 2 gaps still open in the rc.4 guides
 
 Gaps 12 (moderation feature flag), 13 (`custom` is reserved in partial updates), 15 (`isDate` on nanosecond timestamps), 16 (registering a request handler from a component), 17 (thread in place of the channel) and 18 (errors in waves) have no matches in the rc.4 React guide or the current release-v10 JS guide. Gap 14 (stale keys in pre-built override objects) is mitigated by the new per-section greps, although §10's claim that a stale key is a compile error is still there.
+
+## Stable release (15.0.0 / 10.0.0)
+
+All four apps now depend on `stream-chat-react@^15.0.0` and `stream-chat@^10.0.0`. Installed: 15.0.0 / 10.0.0, with one `@stream-io/state-store` (1.2.0).
+
+- **No code changes.** Between `v15.0.0-rc.4` and `v15.0.0` the React SDK only changed docs and the release tag. stream-chat `rc.34` → `10.0.0` brings fixes (token refresh on reconnect, poll and pagination fixes) and an API spec update. All four apps typecheck unchanged, and `CI=true yarn build:js:public` passes.
+- **Guides:** the stable release links the React guide at the `v15.0.0` tag, and the JS guide is now `ai-migration-v9-to-v10.md` (at `v10.0.0`). stream-chat-js #2006 documents three findings from round 2:
+  - the moderation v2 feature flag (gap 12),
+  - flat custom keys in partial-update `set` (gap 13),
+  - `Date` guards on nanosecond timestamps (gap 15).
+- **Smoke tests (staging):**
+  - social-messenger-ts: emoji autocomplete, send, and a thread reply.
+  - team-ts: an @mention renders as a user mention, and the thread opens.
+  - gaming-livestream (temporary `messaging` channel, reverted): send, the `/flag` notification, and the thread.
+  - virtual-event: the thread, the Q&A upvote toggle and the DM list.
+- **Still open:**
+  - team-ts shows the ResizeObserver dev overlay when the mention suggestion list opens.
+  - On the staging app, `client.moderation.mute` still returns 403 "this endpoint needs a feature flag". That's app configuration and is now documented, but the app needs the flag before mute and flag work.
